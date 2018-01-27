@@ -3,11 +3,11 @@
  * @author StormTiberius
  */
 
-package cde.tropics;
+package cde.world.tropics;
 
-public class BiomeGenTropicsBeach extends BiomeGenTropics
+public class BiomeGenTropicsIsland extends BiomeGenTropics
 {
-    public BiomeGenTropicsBeach(int id)
+    public BiomeGenTropicsIsland(int id)
     {
         super(id);
         

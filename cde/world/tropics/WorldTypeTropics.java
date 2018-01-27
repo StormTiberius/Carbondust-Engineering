@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.tropics;
+package cde.world.tropics;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;

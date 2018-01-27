@@ -5,10 +5,10 @@
 
 package cde;
 
-import cde.tropics.BiomeGenTropicsBeach;
-import cde.tropics.BiomeGenTropicsIsland;
-import cde.tropics.BiomeGenTropicsOcean;
-import cde.tropics.WorldTypeTropics;
+import cde.world.tropics.BiomeGenTropicsBeach;
+import cde.world.tropics.BiomeGenTropicsIsland;
+import cde.world.tropics.BiomeGenTropicsOcean;
+import cde.world.tropics.WorldTypeTropics;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -28,7 +28,7 @@ import net.minecraftforge.common.Configuration;
 
 @Mod(modid="CDE|Tropics", name="Tropics", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
-public class TropicsCore
+public class WorldCore
 {
     private static Configuration cfg;
     private static int islandSize,islandScarcity,islandId,beachId,oceanId,tropicsId;

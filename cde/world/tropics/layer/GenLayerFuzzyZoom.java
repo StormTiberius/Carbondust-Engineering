@@ -1,4 +1,4 @@
-package cde.tropics.layer;
+package cde.world.tropics.layer;
 
 public class GenLayerFuzzyZoom extends GenLayer
 {
