@@ -19,8 +19,6 @@ public abstract class TileEntityWithSound extends TileEntity
     
     private boolean init,playing,active,flag;
     
-    private int counter;
-    
     public boolean isPlaying()
     {
         return playing;
@@ -59,19 +57,6 @@ public abstract class TileEntityWithSound extends TileEntity
                     {
                         active = flag;
                         SoundHelper.updateTileSound(this, active);
-                        counter = 0;
-                    }
-                    else if(isPlaying())
-                    {
-                        if(counter < 100)
-                        {
-                            counter++;
-                        }
-                        else
-                        {
-                            SoundHelper.resumeIfNeeded(this);
-                            counter = 0;
-                        }
                     }
                 }
             }
