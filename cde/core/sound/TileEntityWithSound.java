@@ -122,6 +122,6 @@ public abstract class TileEntityWithSound extends TileEntity
     
     public SoundSource getSoundSource()
     {
-        return new SoundSource(false, getSourceName(), getUrl(), getSoundFileName(), true, 0.5F + xCoord, 0.5F + yCoord, 0.5F + zCoord, getAttModel(), getDistOrRoll());
+        return new SoundSource(true, getSourceName(), getUrl(), getSoundFileName(), true, 0.5F + xCoord, 0.5F + yCoord, 0.5F + zCoord, getAttModel(), getDistOrRoll());
     }
 }
