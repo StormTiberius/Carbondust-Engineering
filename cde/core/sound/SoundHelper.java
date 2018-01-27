@@ -49,6 +49,16 @@ public class SoundHelper
         }
     }
     
+    public static void resumeIfNeeded(TileEntityWithSound te)
+    {
+        String s = te.getSourceName();
+        
+        if(!sndSystem.playing(s))
+        {
+            sndSystem.play(s);
+        }
+    }
+    
     public static void updateTileSound(TileEntityWithSound te, boolean active)
     {
         if(active)

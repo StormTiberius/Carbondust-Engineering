@@ -47,9 +47,15 @@ public class TileEntitySpeaker extends TileEntityWithSound
     {
         if(worldObj.isRemote)
         {
+            int i = index;
+            
             readFromNBT(pkt.customParam1);
-            SoundHelper.removeSource(this);
-            SoundHelper.addSource(this);
+            
+            if(i != index)
+            {
+                SoundHelper.removeSource(this);
+                SoundHelper.addSource(this);
+            }
         }
     }
     
