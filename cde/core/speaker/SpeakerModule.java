@@ -30,6 +30,7 @@ public class SpeakerModule
     "boiler.ogg",
     "chemical-plant.ogg",
     "electric-furnace.ogg",
+    "electric-mining-drill.ogg",
     "furnace.ogg",
     "lab.ogg",
     "oil-refinery.ogg",
@@ -40,8 +41,8 @@ public class SpeakerModule
     "substation.ogg",
     "train-engine.ogg"};
     
-    private static final int[] DEFAULT_VOLUMES = {20, 20, 20, 20, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
-    private static final int[] DEFAULT_PITCHS = {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100};
+    private static final int[] DEFAULT_VOLUMES = {20, 20, 20, 20, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
+    private static final int[] DEFAULT_PITCHS = {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100};
     
     protected static String[] sounds;
     protected static int[] volumes,pitchs;
