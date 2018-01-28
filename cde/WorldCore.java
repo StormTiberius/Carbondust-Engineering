@@ -7,10 +7,10 @@ package cde;
 
 import cde.world.atlantic.BiomeGenAtlantic;
 import cde.world.atlantic.WorldProviderAtlantic;
-import cde.world.tropics.BiomeGenPacificBeach;
-import cde.world.tropics.BiomeGenPacificIsland;
-import cde.world.tropics.BiomeGenPacificOcean;
-import cde.world.tropics.WorldProviderPacific;
+import cde.world.pacific.BiomeGenPacificBeach;
+import cde.world.pacific.BiomeGenPacificIsland;
+import cde.world.pacific.BiomeGenPacificOcean;
+import cde.world.pacific.WorldProviderPacific;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;

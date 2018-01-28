@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.world.tropics;
+package cde.world.pacific;
 
 import java.util.Random;
 import net.minecraft.block.Block;

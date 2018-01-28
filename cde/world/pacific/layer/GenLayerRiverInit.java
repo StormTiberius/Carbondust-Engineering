@@ -1,4 +1,4 @@
-package cde.world.tropics.layer;
+package cde.world.pacific.layer;
 
 public class GenLayerRiverInit extends GenLayer
 {

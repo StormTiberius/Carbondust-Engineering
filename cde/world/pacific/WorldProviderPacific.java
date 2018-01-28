@@ -1,4 +1,4 @@
-package cde.world.tropics;
+package cde.world.pacific;
 
 import cde.WorldCore;
 import cpw.mods.fml.relauncher.Side;
