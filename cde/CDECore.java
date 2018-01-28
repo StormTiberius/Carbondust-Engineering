@@ -7,7 +7,6 @@ package cde;
 
 import cde.core.CommonProxy;
 import cde.core.network.PacketHandler;
-import cde.core.resource.ResourceModule;
 import cde.core.sound.SoundTickHandler;
 import cde.core.speaker.SpeakerModule;
 import cpw.mods.fml.common.Mod;
@@ -58,7 +57,6 @@ public class CDECore
             TickRegistry.registerTickHandler(new SoundTickHandler(), Side.CLIENT);
         }
         
-        ResourceModule.preInit(event);
         SpeakerModule.preInit(event);
     }
     
@@ -67,7 +65,6 @@ public class CDECore
     {   
         proxy.preloadTextures();
         
-        ResourceModule.load(event);
         SpeakerModule.load(event);
     }
 

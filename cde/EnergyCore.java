@@ -5,7 +5,6 @@
 
 package cde;
 
-import cde.energy.BlockParticleFountain;
 import cde.energy.BlockGenerator;
 import cde.energy.BlockGrate;
 import cde.energy.BlockHeater;
@@ -15,7 +14,6 @@ import cde.energy.BlockSolarPanel;
 import cde.energy.BlockTransformer;
 import cde.energy.BlockTurbine;
 import cde.energy.ItemGoggles;
-import cde.energy.TileEntityParticleFountain;
 import cde.energy.TileEntityGenerator;
 import cde.energy.TileEntityHeater;
 import cde.energy.TileEntityMixer;
@@ -51,11 +49,11 @@ public class EnergyCore
 {
     private static final int ID_SHIFT = 256;
     public static Item goggles;
-    public static Block generator,turbine,heater,pump,mixer,solarPanel,transformer,grate,particleFountain;
-    private static int generatorId,turbineId,heaterId,pumpId,mixerId,solarPanelId,transformerId,grateId,gogglesId,particleFountainId;
+    public static Block generator,turbine,heater,pump,mixer,solarPanel,transformer,grate;
+    private static int generatorId,turbineId,heaterId,pumpId,mixerId,solarPanelId,transformerId,grateId,gogglesId;
     private static int ironGearId,goldGearId,diamondGearId,tankBlockId,batteryEmptyId,batteryFullId,indigoDyeId;
-    public static int generatorVolume,heaterVolume,mixerVolume,pumpVolume,solarVolume,transformerVolume,turbineVolume,particleFountainVolume;
-    public static int generatorPitch,heaterPitch,mixerPitch,pumpPitch,solarPitch,transformerPitch,turbinePitch,particleFountainPitch;
+    public static int generatorVolume,heaterVolume,mixerVolume,pumpVolume,solarVolume,transformerVolume,turbineVolume;
+    public static int generatorPitch,heaterPitch,mixerPitch,pumpPitch,solarPitch,transformerPitch,turbinePitch;
     private static Configuration cfg;
     
     @PreInit
@@ -64,7 +62,6 @@ public class EnergyCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/energy.cfg"));
         cfg.load();
         
-        particleFountainId = cfg.get(Configuration.CATEGORY_BLOCK, "particlefountain", 191).getInt();
         generatorId = cfg.get(Configuration.CATEGORY_BLOCK, "generator", 183).getInt();
         turbineId = cfg.get(Configuration.CATEGORY_BLOCK, "turbine", 184).getInt();
         heaterId = cfg.get(Configuration.CATEGORY_BLOCK, "heater", 185).getInt();
@@ -82,7 +79,6 @@ public class EnergyCore
         int defaultPitch = 100;
         
         // Volume
-        particleFountainVolume = cfg.get(Configuration.CATEGORY_GENERAL, "particlefountainvolume", 40, "ParticleFountain Volume").getInt();
         generatorVolume = cfg.get(Configuration.CATEGORY_GENERAL, "generatorvolume", defaultVolume, "Generator Volume").getInt();
         heaterVolume = cfg.get(Configuration.CATEGORY_GENERAL, "heatervolume", defaultVolume, "Heater Volume").getInt();
         mixerVolume = cfg.get(Configuration.CATEGORY_GENERAL, "mixervolume", defaultVolume, "Mixer Volume").getInt();
@@ -92,7 +88,6 @@ public class EnergyCore
         turbineVolume = cfg.get(Configuration.CATEGORY_GENERAL, "turbinevolume", defaultVolume, "Turbine Volume").getInt();
         
         // Pitch
-        particleFountainPitch = cfg.get(Configuration.CATEGORY_GENERAL, "particlefountainpitch", defaultPitch, "ParticleFountain Pitch").getInt();
         generatorPitch = cfg.get(Configuration.CATEGORY_GENERAL, "generatorpitch", defaultPitch, "Generator Pitch").getInt();
         heaterPitch = cfg.get(Configuration.CATEGORY_GENERAL, "heaterpitch", defaultPitch, "Heater Pitch").getInt();
         mixerPitch = cfg.get(Configuration.CATEGORY_GENERAL, "mixerpitch", defaultPitch, "Mixer Pitch").getInt();
@@ -108,24 +103,6 @@ public class EnergyCore
     public void load(FMLInitializationEvent event) 
     {   
         setupIds();
-
-        if(particleFountainId > 0 && ironGearId > 0 && goldGearId > 0 && diamondGearId > 0)
-        {
-            particleFountain = new BlockParticleFountain(particleFountainId).setBlockName("cdeParticleFountain").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
-            GameRegistry.registerBlock(particleFountain, "cdeParticleFountain");
-            LanguageRegistry.addName(particleFountain, "Particle Fountain");
-            GameRegistry.registerTileEntity(TileEntityParticleFountain.class, "cdeParticleFountainTile");
-            
-            Ic2Recipes.addCraftingRecipe(new ItemStack(particleFountain.blockID, 1, 0),
-            "xxx",
-            "yay",
-            "zbz",
-            'a', new ItemStack(Item.redstone.itemID, 1, 0),
-            'b', new ItemStack(Item.pickaxeDiamond.itemID, 1, 0),
-            'x', new ItemStack(ironGearId, 1, 0),
-            'y', new ItemStack(goldGearId, 1, 0),
-            'z', new ItemStack(diamondGearId, 1, 0));
-        }
         
         if(gogglesId > 0)
         {

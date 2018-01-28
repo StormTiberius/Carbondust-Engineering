@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core.resource;
+package cde.core.util;
 
 import java.util.Collection;
 import java.util.Iterator;
