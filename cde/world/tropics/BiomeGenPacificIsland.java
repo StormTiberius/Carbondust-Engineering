@@ -5,9 +5,9 @@
 
 package cde.world.tropics;
 
-public class BiomeGenTropicsBeach extends BiomeGenTropics
+public class BiomeGenPacificIsland extends BiomeGenPacific
 {
-    public BiomeGenTropicsBeach(int id)
+    public BiomeGenPacificIsland(int id)
     {
         super(id);
         

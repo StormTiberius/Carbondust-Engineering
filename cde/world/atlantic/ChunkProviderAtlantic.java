@@ -1,4 +1,4 @@
-package cde.world.tropics;
+package cde.world.atlantic;
 
 import java.util.List;
 import java.util.Random;
@@ -18,6 +18,8 @@ import net.minecraft.world.gen.MapGenCaves;
 import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.feature.MapGenScatteredFeature;
+import net.minecraft.world.gen.feature.WorldGenDungeons;
+import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
@@ -28,7 +30,7 @@ import net.minecraftforge.common.*;
 import net.minecraftforge.event.Event.*;
 import net.minecraftforge.event.terraingen.*;
 
-public class ChunkProviderTropics implements IChunkProvider
+public class ChunkProviderAtlantic implements IChunkProvider
 {
     /** RNG. */
     private Random rand;
@@ -109,7 +111,7 @@ public class ChunkProviderTropics implements IChunkProvider
         ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
     }
 
-    public ChunkProviderTropics(World par1World, long par2, boolean par4)
+    public ChunkProviderAtlantic(World par1World, long par2, boolean par4)
     {
         this.worldObj = par1World;
         this.mapFeaturesEnabled = par4;
@@ -326,11 +328,11 @@ public class ChunkProviderTropics implements IChunkProvider
         this.generateTerrain(par1, par2, var3);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
         this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
+        this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
+        this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
 
         if (this.mapFeaturesEnabled)
         {
-            this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
-            this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
             this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
             this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
             this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
@@ -541,12 +543,47 @@ public class ChunkProviderTropics implements IChunkProvider
         int var13;
         int var14;
 
+        if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAKE) && 
+                !var11 && this.rand.nextInt(4) == 0)
+        {
+            var12 = var4 + this.rand.nextInt(16) + 8;
+            var13 = this.rand.nextInt(128);
+            var14 = var5 + this.rand.nextInt(16) + 8;
+            (new WorldGenLakes(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
+        }
+
+        if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAVA) &&
+                !var11 && this.rand.nextInt(8) == 0)
+        {
+            var12 = var4 + this.rand.nextInt(16) + 8;
+            var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
+            var14 = var5 + this.rand.nextInt(16) + 8;
+
+            if (var13 < 63 || this.rand.nextInt(10) == 0)
+            {
+                (new WorldGenLakes(Block.lavaStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
+            }
+        }
+
+        boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, DUNGEON);
+        for (var12 = 0; doGen && var12 < 8; ++var12)
+        {
+            var13 = var4 + this.rand.nextInt(16) + 8;
+            var14 = this.rand.nextInt(128);
+            int var15 = var5 + this.rand.nextInt(16) + 8;
+
+            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
+            {
+                ;
+            }
+        }
+
         var6.decorate(this.worldObj, this.rand, var4, var5);
         SpawnerAnimals.performWorldGenSpawning(this.worldObj, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
         var4 += 8;
         var5 += 8;
 
-        boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, ICE);
+        doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, ICE);
         for (var12 = 0; doGen && var12 < 16; ++var12)
         {
             for (var13 = 0; var13 < 16; ++var13)
