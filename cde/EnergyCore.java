@@ -51,7 +51,7 @@ public class EnergyCore
     public static Item goggles;
     public static Block generator,turbine,heater,pump,mixer,solarPanel,transformer,grate;
     private static int generatorId,turbineId,heaterId,pumpId,mixerId,solarPanelId,transformerId,grateId,gogglesId;
-    private static int ironGearId,goldGearId,diamondGearId,tankBlockId,batteryEmptyId,batteryFullId,indigoDyeId;
+    private static int ironGearId,tankBlockId,batteryEmptyId,batteryFullId,indigoDyeId;
     public static int generatorVolume,heaterVolume,mixerVolume,pumpVolume,solarVolume,transformerVolume,turbineVolume;
     public static int generatorPitch,heaterPitch,mixerPitch,pumpPitch,solarPitch,transformerPitch,turbinePitch;
     private static Configuration cfg;
@@ -62,14 +62,14 @@ public class EnergyCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/energy.cfg"));
         cfg.load();
         
-        generatorId = cfg.get(Configuration.CATEGORY_BLOCK, "generator", 183).getInt();
-        turbineId = cfg.get(Configuration.CATEGORY_BLOCK, "turbine", 184).getInt();
-        heaterId = cfg.get(Configuration.CATEGORY_BLOCK, "heater", 185).getInt();
-        pumpId = cfg.get(Configuration.CATEGORY_BLOCK, "pump", 186).getInt();
-        mixerId = cfg.get(Configuration.CATEGORY_BLOCK, "mixer", 187).getInt();
-        solarPanelId = cfg.get(Configuration.CATEGORY_BLOCK, "solarpanel", 188).getInt();
-        transformerId = cfg.get(Configuration.CATEGORY_BLOCK, "transformer", 189).getInt();
-        grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grate", 190).getInt();
+        generatorId = cfg.get(Configuration.CATEGORY_BLOCK, "generator", 180).getInt();
+        turbineId = cfg.get(Configuration.CATEGORY_BLOCK, "turbine", 181).getInt();
+        heaterId = cfg.get(Configuration.CATEGORY_BLOCK, "heater", 182).getInt();
+        pumpId = cfg.get(Configuration.CATEGORY_BLOCK, "pump", 183).getInt();
+        mixerId = cfg.get(Configuration.CATEGORY_BLOCK, "mixer", 184).getInt();
+        solarPanelId = cfg.get(Configuration.CATEGORY_BLOCK, "solarpanel", 185).getInt();
+        transformerId = cfg.get(Configuration.CATEGORY_BLOCK, "transformer", 186).getInt();
+        grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grate", 187).getInt();
         
         gogglesId = cfg.get(Configuration.CATEGORY_ITEM, "goggles", 500).getInt() - ID_SHIFT;
         
@@ -280,16 +280,6 @@ public class EnergyCore
             if(item.getItemName().equalsIgnoreCase("item.ironGearItem"))
             {
                 ironGearId = item.itemID;
-            }
-            
-            else if(item.getItemName().equalsIgnoreCase("item.goldGearItem"))
-            {
-                goldGearId = item.itemID;
-            }
-            
-            else if(item.getItemName().equalsIgnoreCase("item.diamondGearItem"))
-            {
-                diamondGearId = item.itemID;
             }
         }
         
