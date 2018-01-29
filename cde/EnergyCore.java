@@ -62,14 +62,14 @@ public class EnergyCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/energy.cfg"));
         cfg.load();
         
-        generatorId = cfg.get(Configuration.CATEGORY_BLOCK, "generator", 180).getInt();
-        turbineId = cfg.get(Configuration.CATEGORY_BLOCK, "turbine", 181).getInt();
-        heaterId = cfg.get(Configuration.CATEGORY_BLOCK, "heater", 182).getInt();
-        pumpId = cfg.get(Configuration.CATEGORY_BLOCK, "pump", 183).getInt();
-        mixerId = cfg.get(Configuration.CATEGORY_BLOCK, "mixer", 184).getInt();
-        solarPanelId = cfg.get(Configuration.CATEGORY_BLOCK, "solarpanel", 185).getInt();
-        transformerId = cfg.get(Configuration.CATEGORY_BLOCK, "transformer", 186).getInt();
-        grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grate", 187).getInt();
+        generatorId = cfg.get(Configuration.CATEGORY_BLOCK, "generator", 182).getInt();
+        turbineId = cfg.get(Configuration.CATEGORY_BLOCK, "turbine", 183).getInt();
+        heaterId = cfg.get(Configuration.CATEGORY_BLOCK, "heater", 184).getInt();
+        pumpId = cfg.get(Configuration.CATEGORY_BLOCK, "pump", 185).getInt();
+        mixerId = cfg.get(Configuration.CATEGORY_BLOCK, "mixer", 186).getInt();
+        solarPanelId = cfg.get(Configuration.CATEGORY_BLOCK, "solarpanel", 187).getInt();
+        transformerId = cfg.get(Configuration.CATEGORY_BLOCK, "transformer", 188).getInt();
+        grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grate", 189).getInt();
         
         gogglesId = cfg.get(Configuration.CATEGORY_ITEM, "goggles", 500).getInt() - ID_SHIFT;
         
