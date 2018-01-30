@@ -21,8 +21,8 @@ public class BlockGrate extends Block
     {
         switch(side)
         {
-            case 0: return 20;
-            case 1: return 21;
+            case 0: return 19;
+            case 1: return 19;
             case 2: return 18;
             case 3: return 18;
             case 4: return 18;

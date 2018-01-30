@@ -5,13 +5,13 @@
 
 package cde.core.speaker;
 
+import cde.CDECore;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -55,7 +55,7 @@ public class SpeakerModule
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/speaker.cfg"));
         cfg.load();
         
-        speakerId = cfg.get(Configuration.CATEGORY_BLOCK, "speaker", 192).getInt();
+        speakerId = cfg.get(Configuration.CATEGORY_BLOCK, "speaker", 190).getInt();
         
         sounds = cfg.get(Configuration.CATEGORY_GENERAL, "sounds", DEFAULT_SOUNDS, "Sound File Names").valueList;
         volumes = cfg.get(Configuration.CATEGORY_GENERAL, "volumes", DEFAULT_VOLUMES, "Sound Volumes").getIntList();
@@ -68,7 +68,7 @@ public class SpeakerModule
     {   
         if(speakerId > 0)
         {
-            speaker = new BlockSpeaker(speakerId).setBlockName("cdeSpeaker").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            speaker = new BlockSpeaker(speakerId).setBlockName("cdeSpeaker").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(speaker, "cdeSpeaker");
             LanguageRegistry.addName(speaker, "Speaker");
             GameRegistry.registerTileEntity(TileEntitySpeaker.class, "cdeSpeakerTile");

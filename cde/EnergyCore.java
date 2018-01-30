@@ -37,7 +37,6 @@ import ic2.api.Ic2Recipes;
 import ic2.api.Items;
 import java.io.File;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -106,7 +105,7 @@ public class EnergyCore
         
         if(gogglesId > 0)
         {
-            goggles = new ItemGoggles(gogglesId);
+            goggles = new ItemGoggles(gogglesId).setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerItem(goggles, "goggles");
             LanguageRegistry.addName(goggles, "Nightvision Goggles");
             
@@ -124,7 +123,7 @@ public class EnergyCore
         
         if(generatorId > 0 && ironGearId > 0)
         {
-            generator = new BlockGenerator(generatorId).setBlockName("cdeGenerator").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            generator = new BlockGenerator(generatorId).setBlockName("cdeGenerator").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(generator, "cdeGenerator");
             LanguageRegistry.addName(generator, "Generator");
             GameRegistry.registerTileEntity(TileEntityGenerator.class, "cdeGeneratorTile");
@@ -142,7 +141,7 @@ public class EnergyCore
         
         if(turbineId > 0)
         {
-            turbine = new BlockTurbine(turbineId).setBlockName("cdeTurbine").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            turbine = new BlockTurbine(turbineId).setBlockName("cdeTurbine").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(turbine, "cdeTurbine");
             LanguageRegistry.addName(turbine, "Turbine");
             GameRegistry.registerTileEntity(TileEntityTurbine.class, "cdeTurbineTile");
@@ -160,7 +159,7 @@ public class EnergyCore
         
         if(heaterId > 0)
         {
-            heater = new BlockHeater(heaterId).setBlockName("cdeHeater").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            heater = new BlockHeater(heaterId).setBlockName("cdeHeater").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(heater, "cdeHeater");
             LanguageRegistry.addName(heater, "Heater");
             GameRegistry.registerTileEntity(TileEntityHeater.class, "cdeHeaterTile");
@@ -178,7 +177,7 @@ public class EnergyCore
         
         if(pumpId > 0 && grateId > 0 && tankBlockId > 0)
         {
-            pump = new BlockPump(pumpId).setBlockName("cdePump").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            pump = new BlockPump(pumpId).setBlockName("cdePump").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(pump, "cdePump");
             LanguageRegistry.addName(pump, "Pump");
             GameRegistry.registerTileEntity(TileEntityPump.class, "cdePumpTile");
@@ -196,7 +195,7 @@ public class EnergyCore
         
         if(mixerId > 0)
         {
-            mixer = new BlockMixer(mixerId).setBlockName("cdeMixer").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            mixer = new BlockMixer(mixerId).setBlockName("cdeMixer").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(mixer, "cdeMixer");
             LanguageRegistry.addName(mixer, "Mixer");
             GameRegistry.registerTileEntity(TileEntityMixer.class, "cdeMixerTile");
@@ -214,7 +213,7 @@ public class EnergyCore
         
         if(solarPanelId > 0)
         {
-            solarPanel = new BlockSolarPanel(solarPanelId).setBlockName("cdeSolarPanel").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            solarPanel = new BlockSolarPanel(solarPanelId).setBlockName("cdeSolarPanel").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(solarPanel, "cdeSolarPanel");
             LanguageRegistry.addName(solarPanel, "Solar Panel");
             GameRegistry.registerTileEntity(TileEntitySolarPanel.class, "cdeSolarPanelTile");
@@ -231,7 +230,7 @@ public class EnergyCore
                 
         if(transformerId > 0)
         {
-            transformer = new BlockTransformer(transformerId).setBlockName("cdeTransformer").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            transformer = new BlockTransformer(transformerId).setBlockName("cdeTransformer").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(transformer, "cdeTransformer");
             LanguageRegistry.addName(transformer, "Transformer");
             GameRegistry.registerTileEntity(TileEntityTransformer.class, "cdeTransformerTile");
@@ -249,7 +248,7 @@ public class EnergyCore
         
         if(grateId > 0)
         {
-            grate = new BlockGrate(grateId).setBlockName("cdeGrate").setCreativeTab(CreativeTabs.tabRedstone).setHardness(0.5F);
+            grate = new BlockGrate(grateId).setBlockName("cdeGrate").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(grate, "cdeGrate");
             LanguageRegistry.addName(grate, "Grate");
             

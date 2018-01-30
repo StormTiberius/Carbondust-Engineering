@@ -68,13 +68,13 @@ public class BlockSpeaker extends BlockContainer
     {
         switch(side)
         {
-            case 0: return 25;
-            case 1: return 25;
-            case 2: return 26;
-            case 3: return 26;
-            case 4: return 26;
-            case 5: return 26;
-            default: return 26;
+            case 0: return 16;
+            case 1: return 16;
+            case 2: return 17;
+            case 3: return 17;
+            case 4: return 17;
+            case 5: return 17;
+            default: return 16;
         }
     }
 }

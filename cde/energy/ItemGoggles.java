@@ -7,7 +7,6 @@ package cde.energy;
 
 import ic2.api.ElectricItem;
 import ic2.api.IElectricItem;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,7 +24,6 @@ public class ItemGoggles extends Item implements IElectricItem
         this.setMaxDamage(13);
         this.setMaxStackSize(1);
         this.setNoRepair();
-        this.setCreativeTab(CreativeTabs.tabRedstone);
     }
     
     @Override
