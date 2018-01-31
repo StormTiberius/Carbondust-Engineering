@@ -99,7 +99,7 @@ public class EnergyCore
     }
 
     @Init
-    public void load(FMLInitializationEvent event) 
+    public void init(FMLInitializationEvent event) 
     {   
         setupIds();
         

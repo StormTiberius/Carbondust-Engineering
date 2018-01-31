@@ -57,7 +57,7 @@ public class CompatCore
     }
 
     @Init
-    public void load(FMLInitializationEvent event) 
+    public void init(FMLInitializationEvent event) 
     {
 
     }

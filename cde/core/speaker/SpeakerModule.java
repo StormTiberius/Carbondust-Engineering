@@ -64,7 +64,7 @@ public class SpeakerModule
         cfg.save();
     }
 
-    public static void load(FMLInitializationEvent event) 
+    public static void init(FMLInitializationEvent event) 
     {   
         if(speakerId > 0)
         {

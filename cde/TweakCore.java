@@ -85,7 +85,7 @@ public class TweakCore
     }
 
     @Init
-    public void load(FMLInitializationEvent event) 
+    public void init(FMLInitializationEvent event) 
     {   
         if(FLAGS[14] || FLAGS[15] || FLAGS[34])
         {

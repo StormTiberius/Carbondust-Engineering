@@ -70,7 +70,7 @@ public class WorldCore
     }
 
     @Init
-    public void load(FMLInitializationEvent event) 
+    public void init(FMLInitializationEvent event) 
     {   
         BiomeManager.addSpawnBiome(island);
         BiomeManager.addSpawnBiome(beach);
