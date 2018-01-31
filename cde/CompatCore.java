@@ -83,7 +83,7 @@ public class CompatCore
         {   
             ironNuggetId = Config.getInt("items.base.nuggets.id");
             ironNuggetId += 256;
-            FurnaceRecipes.smelting().addSmelting(ironNuggetId, new ItemStack(ItemRegistry.getItem("nugget.steel", 1).itemID, 1, 1), 0.1F);
+            FurnaceRecipes.smelting().addSmelting(ironNuggetId, 0, new ItemStack(ItemRegistry.getItem("nugget.steel", 1).itemID, 1, 1), 0.1F);
         }
         
         if(Loader.isModLoaded("IC2"))
