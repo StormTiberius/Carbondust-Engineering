@@ -15,6 +15,7 @@ import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
 import cde.core.sound.SoundTickHandler;
 import cde.core.speaker.SpeakerModule;
+import cde.core.worldgen.WorldGenModule;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -55,18 +56,20 @@ public class CDECore
     private static Configuration cfg;
     private static int networkUpdateRate,oreBlockId,storageBlockId;
     private static boolean sounds,altRainSounds;
-    
+     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
     {
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/core.cfg"));
         cfg.load();
+        
         networkUpdateRate = cfg.get(Configuration.CATEGORY_GENERAL, "networkupdaterate", 40, "Network Update Rate").getInt();
         sounds = cfg.get(Configuration.CATEGORY_GENERAL, "sounds", true, "Enable/Disable CDE Sounds").getBoolean(false);
         altRainSounds = cfg.get(Configuration.CATEGORY_GENERAL, "rain", true, "MC 1.9 Rain Sounds").getBoolean(false);
         
         oreBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "oreblockid", 180).getInt();
         storageBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "storageblockid", 181).getInt();
+        
         cfg.save();
         
         initBlocks();
@@ -78,14 +81,16 @@ public class CDECore
         }
         
         SpeakerModule.preInit(event);
+        WorldGenModule.preInit(event);
     }
     
     @Init
-    public void load(FMLInitializationEvent event) 
+    public void init(FMLInitializationEvent event) 
     {   
         proxy.preloadTextures();
         
-        SpeakerModule.load(event);
+        SpeakerModule.init(event);
+        WorldGenModule.init(event);
     }
 
     @PostInit
