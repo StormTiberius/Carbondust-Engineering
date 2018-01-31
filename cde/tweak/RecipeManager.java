@@ -27,7 +27,7 @@ public class RecipeManager
         // Stonebrick smelting recipe
         if(flags[0])
         {
-            FurnaceRecipes.smelting().addSmelting(Block.stoneBrick.blockID, new ItemStack(Block.stoneBrick.blockID, 1, 2), 0.1F);
+            FurnaceRecipes.smelting().addSmelting(Block.stoneBrick.blockID, 0, new ItemStack(Block.stoneBrick.blockID, 1, 2), 0.1F);
         }
         
         // Glowstone dust smelting recipe
@@ -62,7 +62,7 @@ public class RecipeManager
             // Iron nugget smelting recipe
             if(flags[5])
             {
-                FurnaceRecipes.smelting().addSmelting(ItemRegistry.getItem("nugget.iron", 1).itemID, new ItemStack(ItemRegistry.getItem("nugget.steel", 1).itemID, 1, 1), 0.1F);
+                FurnaceRecipes.smelting().addSmelting(ItemRegistry.getItem("nugget.iron", 1).itemID, 0, new ItemStack(ItemRegistry.getItem("nugget.steel", 1).itemID, 1, 1), 0.1F);
             }
             
             // Reactor vent steel recipe
