@@ -7,10 +7,12 @@ package cde;
 
 import cde.core.CommonProxy;
 import cde.core.CreativeTabCDE;
+import cde.core.FuelManager;
 import cde.core.Namings;
 import cde.core.block.BlockOre;
 import cde.core.block.BlockStorage;
 import cde.core.item.ItemOre;
+import cde.core.item.ItemParts;
 import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
 import cde.core.sound.SoundTickHandler;
@@ -50,11 +52,14 @@ public class CDECore
     @SidedProxy(clientSide = "cde.core.ClientProxy", serverSide = "cde.core.CommonProxy")
     
     public static CommonProxy proxy;
+    public static final int ID_SHIFT = -256;
     public static final String CDE_BLOCKS = "/cde/blocks.png";
+    public static final String CDE_ITEMS = "/cde/items.png";
     public static final CreativeTabs TAB_CDE = new CreativeTabCDE("carbondustengineering");
     public static Block oreBlock,storageBlock;
+    public static Item partsItem;
     private static Configuration cfg;
-    private static int networkUpdateRate,oreBlockId,storageBlockId;
+    private static int networkUpdateRate,oreBlockId,storageBlockId,partsItemId;
     private static boolean sounds,altRainSounds;
      
     @PreInit
@@ -70,8 +75,11 @@ public class CDECore
         oreBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "oreblockid", 180).getInt();
         storageBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "storageblockid", 181).getInt();
         
+        partsItemId = cfg.get(Configuration.CATEGORY_ITEM, "partsitemid", 501).getInt() + ID_SHIFT;
+        
         cfg.save();
         
+        initItems();
         initBlocks();
         
         if(playSounds())
@@ -91,6 +99,8 @@ public class CDECore
         
         SpeakerModule.init(event);
         WorldGenModule.init(event);
+        
+        GameRegistry.registerFuelHandler(new FuelManager());
     }
 
     @PostInit
@@ -104,6 +114,26 @@ public class CDECore
     {
         
     }
+        
+    private static void initItems()
+    {
+        if(partsItemId > 0)
+        {
+            partsItem = (new ItemParts(partsItemId)).setItemName("parts").setCreativeTab(TAB_CDE);
+            
+            GameRegistry.registerItem(partsItem, "parts");
+            
+            for(int i = 0; i < Namings.EXTERNAL_PART_ITEM_NAMES.length; i++)
+            {              
+                ItemStack is = new ItemStack(partsItem.itemID, 1, i);
+                LanguageRegistry.addName(is, Namings.EXTERNAL_PART_ITEM_NAMES[i]);
+                OreDictionary.registerOre(is.getItemName(), is);
+            }
+            
+            OreDictionary.registerOre("ingotQuartz", new ItemStack(partsItem.itemID, 1, 42));
+            OreDictionary.registerOre("dropUranium", new ItemStack(partsItem.itemID, 1, 53));
+        }
+    }
     
     private static void initBlocks()
     {
@@ -115,7 +145,7 @@ public class CDECore
             
             for(int i = 0; i < Namings.EXTERNAL_ORE_BLOCK_NAMES.length; i++)
             {              
-                ItemStack is = new ItemStack(oreBlock, 1, i);
+                ItemStack is = new ItemStack(oreBlock.blockID, 1, i);
                 LanguageRegistry.addName(is, Namings.EXTERNAL_ORE_BLOCK_NAMES[i]);
                 OreDictionary.registerOre(is.getItemName(), is);
             }
@@ -129,7 +159,7 @@ public class CDECore
             
             for(int i = 0; i < Namings.EXTERNAL_STORAGE_BLOCK_NAMES.length; i++)
             {                
-                ItemStack is = new ItemStack(storageBlock, 1, i);
+                ItemStack is = new ItemStack(storageBlock.blockID, 1, i);
                 LanguageRegistry.addName(is, Namings.EXTERNAL_STORAGE_BLOCK_NAMES[i]);
                 OreDictionary.registerOre(is.getItemName(), is);
             }

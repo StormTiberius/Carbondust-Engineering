@@ -46,7 +46,6 @@ import railcraft.common.api.core.items.ItemRegistry;
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class EnergyCore
 {
-    private static final int ID_SHIFT = 256;
     public static Item goggles;
     public static Block generator,turbine,heater,pump,mixer,solarPanel,transformer,grate;
     private static int generatorId,turbineId,heaterId,pumpId,mixerId,solarPanelId,transformerId,grateId,gogglesId;
@@ -70,7 +69,7 @@ public class EnergyCore
         transformerId = cfg.get(Configuration.CATEGORY_BLOCK, "transformer", 188).getInt();
         grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grate", 189).getInt();
         
-        gogglesId = cfg.get(Configuration.CATEGORY_ITEM, "goggles", 500).getInt() - ID_SHIFT;
+        gogglesId = cfg.get(Configuration.CATEGORY_ITEM, "goggles", 500).getInt() + CDECore.ID_SHIFT;
         
         // Individual Machine Sound Settings.
         
