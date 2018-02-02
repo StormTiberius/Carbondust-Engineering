@@ -43,6 +43,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid="CDE|Core", name="Core", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:IC2;required-after:BuildCraft|Core;required-after:Forestry;required-after:Railcraft")
@@ -149,6 +150,19 @@ public class CDECore
                 LanguageRegistry.addName(is, Namings.EXTERNAL_ORE_BLOCK_NAMES[i]);
                 OreDictionary.registerOre(is.getItemName(), is);
             }
+            
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 0, "pickaxe", 1); // Copper
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 1, "pickaxe", 1); // Tin
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 2, "pickaxe", 1); // Silver
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 3, "pickaxe", 2); // Lead
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 4, "pickaxe", 2); // Uranium
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 5, "pickaxe", 2); // Sulfur
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 6, "pickaxe", 2); // Saltpeter
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 7, "pickaxe", 0); // Quartz
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 8, "pickaxe", 2); // Ruby
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 9, "pickaxe", 2); // Jade
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 10, "pickaxe", 2); // Sapphire
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 11, "pickaxe", 1); // Apatite
         }
         
         if(storageBlockId > 0)

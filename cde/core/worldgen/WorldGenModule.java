@@ -6,6 +6,7 @@
 package cde.core.worldgen;
 
 import cde.CDECore;
+import cde.core.Defaults;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -27,18 +28,18 @@ public class WorldGenModule
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "worldgen", true, "Enable/Disable Worldgen").getBoolean(true);
         
-        ARRAY[0] = cfg.get(Configuration.CATEGORY_GENERAL, "copper", new int[]{1,8,10,20,55}, DESCRIPTION).getIntList();
-        ARRAY[1] = cfg.get(Configuration.CATEGORY_GENERAL, "tin", new int[]{1,8,7,20,55}, DESCRIPTION).getIntList();
-        ARRAY[2] = cfg.get(Configuration.CATEGORY_GENERAL, "silver", new int[]{1,8,3,5,30}, DESCRIPTION).getIntList();
-        ARRAY[3] = cfg.get(Configuration.CATEGORY_GENERAL, "lead", new int[]{1,8,4,10,35}, DESCRIPTION).getIntList();
-        ARRAY[4] = cfg.get(Configuration.CATEGORY_GENERAL, "uranium", new int[]{1,3,20,0,64}, DESCRIPTION).getIntList();
-        ARRAY[5] = cfg.get(Configuration.CATEGORY_GENERAL, "sulfur", new int[]{1,6,1,10,16}, DESCRIPTION).getIntList();
-        ARRAY[6] = cfg.get(Configuration.CATEGORY_GENERAL, "saltpeter", new int[]{1,6,1,16,32}, DESCRIPTION).getIntList();
-        ARRAY[7] = cfg.get(Configuration.CATEGORY_GENERAL, "quartz", new int[]{1,4,7,12,62}, DESCRIPTION).getIntList();
-        ARRAY[8] = cfg.get(Configuration.CATEGORY_GENERAL, "ruby", new int[]{1,7,2,0,48}, DESCRIPTION).getIntList();
-        ARRAY[9] = cfg.get(Configuration.CATEGORY_GENERAL, "jade", new int[]{1,7,2,0,48}, DESCRIPTION).getIntList();
-        ARRAY[10] = cfg.get(Configuration.CATEGORY_GENERAL, "sapphire", new int[]{1,7,2,0,48}, DESCRIPTION).getIntList();
-        ARRAY[11] = cfg.get(Configuration.CATEGORY_GENERAL, "apatite", new int[]{1,6,1,0,64}, DESCRIPTION).getIntList();
+        ARRAY[0] = cfg.get(Configuration.CATEGORY_GENERAL, "copper", Defaults.ORE_GEN_DEFAULTS[0], DESCRIPTION).getIntList();
+        ARRAY[1] = cfg.get(Configuration.CATEGORY_GENERAL, "tin", Defaults.ORE_GEN_DEFAULTS[1], DESCRIPTION).getIntList();
+        ARRAY[2] = cfg.get(Configuration.CATEGORY_GENERAL, "silver", Defaults.ORE_GEN_DEFAULTS[2], DESCRIPTION).getIntList();
+        ARRAY[3] = cfg.get(Configuration.CATEGORY_GENERAL, "lead", Defaults.ORE_GEN_DEFAULTS[3], DESCRIPTION).getIntList();
+        ARRAY[4] = cfg.get(Configuration.CATEGORY_GENERAL, "uranium", Defaults.ORE_GEN_DEFAULTS[4], DESCRIPTION).getIntList();
+        ARRAY[5] = cfg.get(Configuration.CATEGORY_GENERAL, "sulfur", Defaults.ORE_GEN_DEFAULTS[5], DESCRIPTION).getIntList();
+        ARRAY[6] = cfg.get(Configuration.CATEGORY_GENERAL, "saltpeter", Defaults.ORE_GEN_DEFAULTS[6], DESCRIPTION).getIntList();
+        ARRAY[7] = cfg.get(Configuration.CATEGORY_GENERAL, "quartz", Defaults.ORE_GEN_DEFAULTS[7], DESCRIPTION).getIntList();
+        ARRAY[8] = cfg.get(Configuration.CATEGORY_GENERAL, "ruby", Defaults.ORE_GEN_DEFAULTS[8], DESCRIPTION).getIntList();
+        ARRAY[9] = cfg.get(Configuration.CATEGORY_GENERAL, "jade", Defaults.ORE_GEN_DEFAULTS[9], DESCRIPTION).getIntList();
+        ARRAY[10] = cfg.get(Configuration.CATEGORY_GENERAL, "sapphire", Defaults.ORE_GEN_DEFAULTS[10], DESCRIPTION).getIntList();
+        ARRAY[11] = cfg.get(Configuration.CATEGORY_GENERAL, "apatite", Defaults.ORE_GEN_DEFAULTS[11], DESCRIPTION).getIntList();
         
         cfg.save();
     }

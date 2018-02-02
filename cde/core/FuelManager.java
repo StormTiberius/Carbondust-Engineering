@@ -18,9 +18,9 @@ public class FuelManager implements IFuelHandler
         {
             switch(fuel.getItemDamage())
             {
-                case 8: return 6500;
-                case 9: return 7000;
-                case 52: return 6400;
+                case 8: return Defaults.PEAT_FUEL_VALUE;
+                case 9: return Defaults.BITUMINOUS_PEAT_FUEL_VALUE;
+                case 52: return Defaults.COKE_FUEL_VALUE;
             }
         }
         
