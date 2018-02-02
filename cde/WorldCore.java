@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.world.WorldEventManager;
 import cde.world.atlantic.BiomeGenAtlantic;
 import cde.world.atlantic.WorldProviderAtlantic;
 import cde.world.pacific.BiomeGenPacificBeach;
@@ -26,6 +27,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid="CDE|World", name="World", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
@@ -33,7 +35,7 @@ public class WorldCore
 {
     private static Configuration cfg;
     private static int islandSize,islandScarcity,islandId,beachId,oceanId,atlanticId,pacificDimId,atlanticDimId;
-    private static boolean pacificDimension,atlanticDimension,pacificDayMode,atlanticDayMode;
+    private static boolean pacificDimension,atlanticDimension,pacificDayMode,atlanticDayMode,pacificFeatures;
     
     public static BiomeGenBase island,beach,ocean,atlantic;
     
@@ -61,6 +63,8 @@ public class WorldCore
         pacificDayMode = cfg.get(Configuration.CATEGORY_GENERAL, "pacificdaymode", false, "Always day in Pacific").getBoolean(false);
         atlanticDayMode = cfg.get(Configuration.CATEGORY_GENERAL, "atlanticdaymode", false, "Always day in Atlantic").getBoolean(false);
         
+        pacificFeatures = cfg.get(Configuration.CATEGORY_GENERAL, "pacificfeatures", true, "Prevent custom features from generating in the Pacific such as BC oil").getBoolean(true);
+        
         cfg.save();
       
         island = (new BiomeGenPacificIsland(islandId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
@@ -72,6 +76,11 @@ public class WorldCore
     @Init
     public void init(FMLInitializationEvent event) 
     {   
+        if(pacificFeatures)
+        {
+            MinecraftForge.TERRAIN_GEN_BUS.register(new WorldEventManager());
+        }
+        
         BiomeManager.addSpawnBiome(island);
         BiomeManager.addSpawnBiome(beach);
         BiomeManager.addStrongholdBiome(atlantic);
