@@ -42,14 +42,14 @@ public class WorldGenManager implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
-        MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Pre(world, random, chunkX, chunkZ));
-        
         int xCoord = chunkX * 16;
         int zCoord = chunkZ * 16;
         
+        MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Pre(world, random, xCoord, zCoord));
+        
         int xPos,yPos,zPos;
         
-        if(cfg[0][0] == 1 && TerrainGen.generateOre(world, random, copper, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[0][0] == 1 && TerrainGen.generateOre(world, random, copper, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[0][2]; i++)
             {
@@ -61,7 +61,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
         
-        if(cfg[1][0] == 1 && TerrainGen.generateOre(world, random, tin, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[1][0] == 1 && TerrainGen.generateOre(world, random, tin, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[1][2]; i++)
             {
@@ -73,7 +73,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
                 
-        if(cfg[2][0] == 1 && TerrainGen.generateOre(world, random, silver, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[2][0] == 1 && TerrainGen.generateOre(world, random, silver, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[2][2]; i++)
             {
@@ -85,7 +85,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
                         
-        if(cfg[3][0] == 1 && TerrainGen.generateOre(world, random, lead, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[3][0] == 1 && TerrainGen.generateOre(world, random, lead, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[3][2]; i++)
             {
@@ -97,7 +97,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
         
-        if(cfg[4][0] == 1 && TerrainGen.generateOre(world, random, uranium, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[4][0] == 1 && TerrainGen.generateOre(world, random, uranium, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[4][2]; i++)
             {
@@ -109,7 +109,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
         
-        if(cfg[5][0] == 1 && TerrainGen.generateOre(world, random, sulfur, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[5][0] == 1 && TerrainGen.generateOre(world, random, sulfur, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[5][2]; i++)
             {
@@ -121,7 +121,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
                         
-        if(cfg[6][0] == 1 && TerrainGen.generateOre(world, random, saltpeter, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[6][0] == 1 && TerrainGen.generateOre(world, random, saltpeter, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[6][2]; i++)
             {
@@ -133,7 +133,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
         
-        if(cfg[7][0] == 1 && TerrainGen.generateOre(world, random, quartz, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[7][0] == 1 && TerrainGen.generateOre(world, random, quartz, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[7][2]; i++)
             {
@@ -145,7 +145,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
                                                                         
-        if(cfg[8][0] == 1 && TerrainGen.generateOre(world, random, ruby, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[8][0] == 1 && TerrainGen.generateOre(world, random, ruby, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[8][2]; i++)
             {
@@ -157,7 +157,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
         
-        if(cfg[9][0] == 1 && TerrainGen.generateOre(world, random, jade, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[9][0] == 1 && TerrainGen.generateOre(world, random, jade, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[9][2]; i++)
             {
@@ -169,7 +169,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
         
-        if(cfg[10][0] == 1 && TerrainGen.generateOre(world, random, sapphire, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[10][0] == 1 && TerrainGen.generateOre(world, random, sapphire, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[10][2]; i++)
             {
@@ -181,7 +181,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
         
-        if(cfg[11][0] == 1 && TerrainGen.generateOre(world, random, apatite, chunkX, chunkZ, EventType.CUSTOM))
+        if(cfg[11][0] == 1 && TerrainGen.generateOre(world, random, apatite, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[11][2]; i++)
             {
@@ -193,6 +193,6 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
         
-        MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Post(world, random, chunkX, chunkZ));
+        MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Post(world, random, xCoord, zCoord));
     }
 }

@@ -32,11 +32,31 @@ public class ItemParts extends Item
     }
     
     @Override
-    public int getMetadata(int i)
+    public int getMetadata(int meta)
     {
-        return i;
+        return meta;
     }
 
+    @Override
+    public String getItemNameIS(ItemStack is)
+    {
+        if(is.getItemDamage() > Namings.INTERNAL_PART_ITEM_NAMES.length - 1)
+        {
+            return "NONAME";
+        }
+        
+        return Namings.INTERNAL_PART_ITEM_NAMES[is.getItemDamage()];
+    }
+
+    @Override
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    {
+        for (int i = 0; i < Namings.INTERNAL_PART_ITEM_NAMES.length; i++)
+        {   
+            par3List.add(new ItemStack(par1, 1, i));
+        }
+    }
+    
     @Override
     public int getIconFromDamage(int i)
     {
@@ -72,26 +92,6 @@ public class ItemParts extends Item
         }
 
         return i + offset;
-    }
-    
-    @Override
-    public String getItemNameIS(ItemStack is)
-    {
-        if(is.getItemDamage() > Namings.INTERNAL_PART_ITEM_NAMES.length - 1)
-        {
-            return "NONAME";
-        }
-        
-        return Namings.INTERNAL_PART_ITEM_NAMES[is.getItemDamage()];
-    }
-
-    @Override
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-        for (int i = 0; i < Namings.INTERNAL_PART_ITEM_NAMES.length; i++)
-        {   
-            par3List.add(new ItemStack(par1, 1, i));
-        }
     }
     
     @Override

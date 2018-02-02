@@ -38,7 +38,7 @@ public class WorldGenModule
         ARRAY[8] = cfg.get(Configuration.CATEGORY_GENERAL, "ruby", new int[]{1,7,2,0,48}, DESCRIPTION).getIntList();
         ARRAY[9] = cfg.get(Configuration.CATEGORY_GENERAL, "jade", new int[]{1,7,2,0,48}, DESCRIPTION).getIntList();
         ARRAY[10] = cfg.get(Configuration.CATEGORY_GENERAL, "sapphire", new int[]{1,7,2,0,48}, DESCRIPTION).getIntList();
-        ARRAY[11] = cfg.get(Configuration.CATEGORY_GENERAL, "apatite", new int[]{1,6,7,0,64}, DESCRIPTION).getIntList();
+        ARRAY[11] = cfg.get(Configuration.CATEGORY_GENERAL, "apatite", new int[]{1,6,1,0,64}, DESCRIPTION).getIntList();
         
         cfg.save();
     }

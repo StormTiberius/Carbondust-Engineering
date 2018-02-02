@@ -31,15 +31,9 @@ public class ItemOre extends ItemBlock
     }
     
     @Override
-    public int getMetadata(int i)
+    public int getMetadata(int meta)
     {
-        return i;
-    }
-
-    @Override
-    public int getIconFromDamage(int i)
-    {
-        return 0;
+        return meta;
     }
 
     @Override

@@ -14,11 +14,37 @@ public class BlockOre extends Block
     }
 
     @Override
-    public int idDropped(int par1, Random par2Random, int par3)
+    public int idDropped(int meta, Random random, int fortune)
     {
+        if(meta > 3)
+        {
+            return CDECore.partsItem.itemID;
+        }
+        
         return blockID;
     }
 
+    @Override
+    public int damageDropped(int meta)
+    {
+        if(meta > 3)
+        {
+            switch(meta)
+            {
+                case 4: return 53;
+                case 5: return 20;
+                case 6: return 21;
+                case 7: return 42;
+                case 8: return 39;
+                case 9: return 40;
+                case 10: return 41;
+                case 11: return 43;
+            }
+        }
+                
+        return meta;
+    }
+    
     @Override
     public int quantityDropped(Random par1Random)
     {
@@ -57,22 +83,16 @@ public class BlockOre extends Block
             this.dropXpOnBlockBreak(par1World, par2, par3, par4, var8);
         }
     }
-
+    
     @Override
-    public int damageDropped(int i)
+    public int getBlockTextureFromSideAndMetadata(int side, int meta)
     {
-        return i;
+        return 32 + meta;
     }
     
     @Override
     public String getTextureFile()
     {
         return CDECore.CDE_BLOCKS;
-    }
-    
-    @Override
-    public int getBlockTextureFromSideAndMetadata(int side, int meta)
-    {
-        return 32 + meta;
     }
 }

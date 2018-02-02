@@ -12,14 +12,20 @@ public class BlockStorage extends Block
     }
 
     @Override
-    public String getTextureFile()
+    public int damageDropped(int i)
     {
-        return CDECore.CDE_BLOCKS;
+        return i;
     }
     
     @Override
     public int getBlockTextureFromSideAndMetadata(int side, int meta)
     {
         return 48 + meta;
+    }
+    
+    @Override
+    public String getTextureFile()
+    {
+        return CDECore.CDE_BLOCKS;
     }
 }

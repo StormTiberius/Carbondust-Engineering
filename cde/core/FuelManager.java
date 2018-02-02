@@ -7,8 +7,6 @@ package cde.core;
 
 import cde.CDECore;
 import cpw.mods.fml.common.IFuelHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class FuelManager implements IFuelHandler
@@ -16,9 +14,14 @@ public class FuelManager implements IFuelHandler
     @Override
     public int getBurnTime(ItemStack fuel)
     {
-        if(fuel.itemID == CDECore.partsItem.itemID && fuel.getItemDamage() == 52)
+        if(fuel.itemID == CDECore.partsItem.itemID)
         {
-            return GameRegistry.getFuelValue(new ItemStack(Item.coal.itemID, 1, 0)) * 2;
+            switch(fuel.getItemDamage())
+            {
+                case 8: return 6500;
+                case 9: return 7000;
+                case 52: return 6400;
+            }
         }
         
         return 0;
