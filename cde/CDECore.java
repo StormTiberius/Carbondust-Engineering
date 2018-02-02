@@ -9,6 +9,7 @@ import cde.core.CommonProxy;
 import cde.core.CreativeTabCDE;
 import cde.core.FuelManager;
 import cde.core.Namings;
+import cde.core.RecipeManager;
 import cde.core.block.BlockOre;
 import cde.core.block.BlockStorage;
 import cde.core.item.ItemOre;
@@ -102,6 +103,8 @@ public class CDECore
         WorldGenModule.init(event);
         
         GameRegistry.registerFuelHandler(new FuelManager());
+        
+        RecipeManager.addRecipes();
     }
 
     @PostInit
@@ -133,6 +136,7 @@ public class CDECore
             
             OreDictionary.registerOre("ingotQuartz", new ItemStack(partsItem.itemID, 1, 42));
             OreDictionary.registerOre("dropUranium", new ItemStack(partsItem.itemID, 1, 53));
+            OreDictionary.registerOre("brickPeat", new ItemStack(partsItem.itemID, 1, 8));
         }
     }
     
