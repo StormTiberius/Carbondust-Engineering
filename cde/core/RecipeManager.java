@@ -6,6 +6,8 @@
 package cde.core;
 
 import cde.CDECore;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -33,5 +35,32 @@ public class RecipeManager
         FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 19, new ItemStack(CDECore.partsItem.itemID, 1, 5), 1.0F);
         
         // TODO AE SILICON FROM QUARTZ DUST
+        
+        for(int i = 0; i < 8; i++)
+        {
+            GameRegistry.addRecipe(new ItemStack(CDECore.storageBlock.blockID, 1, i), 
+            "xxx",
+            "xxx",
+            "xxx",
+            'x', new ItemStack(CDECore.partsItem.itemID, 1, i));
+        }
+        
+        GameRegistry.addRecipe(new ItemStack(CDECore.storageBlock.blockID, 1, 8), 
+        "xxx",
+        "xxx",
+        "xxx",
+        'x', new ItemStack(CDECore.partsItem.itemID, 1, 39));
+        
+        GameRegistry.addRecipe(new ItemStack(CDECore.storageBlock.blockID, 1, 9), 
+        "xxx",
+        "xxx",
+        "xxx",
+        'x', new ItemStack(CDECore.partsItem.itemID, 1, 40));
+        
+        GameRegistry.addRecipe(new ItemStack(CDECore.storageBlock.blockID, 1, 10), 
+        "xxx",
+        "xxx",
+        "xxx",
+        'x', new ItemStack(CDECore.partsItem.itemID, 1, 41));
     }
 }
