@@ -7,14 +7,9 @@ package cde;
 
 import cde.core.CommonProxy;
 import cde.core.CreativeTabCDE;
-import cde.core.FuelManager;
 import cde.core.Namings;
-import cde.core.RecipeManager;
 import cde.core.block.BlockOre;
-import cde.core.block.BlockStorage;
 import cde.core.item.ItemOre;
-import cde.core.item.ItemParts;
-import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
 import cde.core.sound.SoundTickHandler;
 import cde.core.speaker.SpeakerModule;
@@ -38,14 +33,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.block.Block;
-import static net.minecraft.block.Block.soundMetalFootstep;
 import static net.minecraft.block.Block.soundStoneFootstep;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid="CDE|Core", name="Core", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:IC2;required-after:BuildCraft|Core;required-after:Forestry;required-after:Railcraft")
 @NetworkMod(channels = { "CDE" }, packetHandler = PacketHandler.class, clientSideRequired=true, serverSideRequired=true)
@@ -56,12 +49,10 @@ public class CDECore
     public static CommonProxy proxy;
     public static final int ID_SHIFT = -256;
     public static final String CDE_BLOCKS = "/cde/blocks.png";
-    public static final String CDE_ITEMS = "/cde/items.png";
     public static final CreativeTabs TAB_CDE = new CreativeTabCDE("carbondustengineering");
-    public static Block oreBlock,storageBlock;
-    public static Item partsItem;
+    public static Block oreBlock;
     private static Configuration cfg;
-    private static int networkUpdateRate,oreBlockId,storageBlockId,partsItemId;
+    private static int networkUpdateRate,oreBlockId;
     private static boolean sounds,altRainSounds;
      
     @PreInit
@@ -75,13 +66,9 @@ public class CDECore
         altRainSounds = cfg.get(Configuration.CATEGORY_GENERAL, "rain", true, "MC 1.9 Rain Sounds").getBoolean(false);
         
         oreBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "oreblockid", 180).getInt();
-        storageBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "storageblockid", 181).getInt();
-        
-        partsItemId = cfg.get(Configuration.CATEGORY_ITEM, "partsitemid", 501).getInt() + ID_SHIFT;
         
         cfg.save();
         
-        initItems();
         initBlocks();
         
         if(playSounds())
@@ -101,10 +88,6 @@ public class CDECore
         
         SpeakerModule.init(event);
         WorldGenModule.init(event);
-        
-        GameRegistry.registerFuelHandler(new FuelManager());
-        
-        RecipeManager.addRecipes();
     }
 
     @PostInit
@@ -117,27 +100,6 @@ public class CDECore
     public void serverStarting(FMLServerStartingEvent event)
     {
         
-    }
-        
-    private static void initItems()
-    {
-        if(partsItemId > 0)
-        {
-            partsItem = (new ItemParts(partsItemId)).setItemName("parts").setCreativeTab(TAB_CDE);
-            
-            GameRegistry.registerItem(partsItem, "parts");
-            
-            for(int i = 0; i < Namings.EXTERNAL_PART_ITEM_NAMES.length; i++)
-            {              
-                ItemStack is = new ItemStack(partsItem.itemID, 1, i);
-                LanguageRegistry.addName(is, Namings.EXTERNAL_PART_ITEM_NAMES[i]);
-                OreDictionary.registerOre(is.getItemName(), is);
-            }
-            
-            OreDictionary.registerOre("ingotQuartz", new ItemStack(partsItem.itemID, 1, 42));
-            OreDictionary.registerOre("dropUranium", new ItemStack(partsItem.itemID, 1, 53));
-            OreDictionary.registerOre("brickPeat", new ItemStack(partsItem.itemID, 1, 8));
-        }
     }
     
     private static void initBlocks()
@@ -152,7 +114,6 @@ public class CDECore
             {              
                 ItemStack is = new ItemStack(oreBlock.blockID, 1, i);
                 LanguageRegistry.addName(is, Namings.EXTERNAL_ORE_BLOCK_NAMES[i]);
-                OreDictionary.registerOre(is.getItemName(), is);
             }
             
             MinecraftForge.setBlockHarvestLevel(oreBlock, 0, "pickaxe", 1); // Copper
@@ -167,20 +128,6 @@ public class CDECore
             MinecraftForge.setBlockHarvestLevel(oreBlock, 9, "pickaxe", 2); // Jade
             MinecraftForge.setBlockHarvestLevel(oreBlock, 10, "pickaxe", 2); // Sapphire
             MinecraftForge.setBlockHarvestLevel(oreBlock, 11, "pickaxe", 1); // Apatite
-        }
-        
-        if(storageBlockId > 0)
-        {
-            storageBlock = (new BlockStorage(storageBlockId)).setHardness(3.0F).setResistance(10.0F).setStepSound(soundMetalFootstep).setBlockName("cdeStorageBlock").setCreativeTab(TAB_CDE);
-            
-            GameRegistry.registerBlock(storageBlock, ItemStorage.class, "cdeStorageBlock");
-            
-            for(int i = 0; i < Namings.EXTERNAL_STORAGE_BLOCK_NAMES.length; i++)
-            {                
-                ItemStack is = new ItemStack(storageBlock.blockID, 1, i);
-                LanguageRegistry.addName(is, Namings.EXTERNAL_STORAGE_BLOCK_NAMES[i]);
-                OreDictionary.registerOre(is.getItemName(), is);
-            }
         }
     }
     
