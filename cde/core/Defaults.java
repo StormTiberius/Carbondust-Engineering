@@ -15,7 +15,7 @@ public class Defaults
     {    
         new int[]{1,8,10,20,55},
         new int[]{1,8,7,20,55},
-        new int[]{1,8,4,10,35},
+        new int[]{1,4,2,5,20},
         new int[]{1,8,3,5,30},
         new int[]{1,8,4,10,35},
         new int[]{1,3,20,0,64},

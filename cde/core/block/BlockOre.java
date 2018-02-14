@@ -19,7 +19,7 @@ public class BlockOre extends Block
     {
         if(meta > 4)
         {
-            return CDECore.partsItem.itemID;
+            return CDECore.materialsItem.itemID;
         }
         
         return blockID;

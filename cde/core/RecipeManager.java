@@ -17,22 +17,23 @@ public class RecipeManager
     public static void addRecipes()
     {
         // Blocks
-        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 0, new ItemStack(CDECore.partsItem.itemID, 1, 0), 0.5F);
-        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 1, new ItemStack(CDECore.partsItem.itemID, 1, 1), 0.5F);
-        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 2, new ItemStack(CDECore.partsItem.itemID, 1, 2), 0.8F);
-        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 3, new ItemStack(CDECore.partsItem.itemID, 1, 3), 0.8F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 0, new ItemStack(CDECore.materialsItem.itemID, 1, 0), 0.5F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 1, new ItemStack(CDECore.materialsItem.itemID, 1, 1), 0.5F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 2, new ItemStack(CDECore.materialsItem.itemID, 1, 2), 0.8F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 3, new ItemStack(CDECore.materialsItem.itemID, 1, 3), 0.8F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.oreBlock.blockID, 4, new ItemStack(CDECore.materialsItem.itemID, 1, 4), 0.8F);
         
         // Items
-        FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 12, new ItemStack(Item.ingotIron.itemID, 1, 0), 0.7F);
-        FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 13, new ItemStack(Item.ingotGold.itemID, 1, 0), 1.0F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 12, new ItemStack(Item.ingotIron.itemID, 1, 0), 0.7F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 13, new ItemStack(Item.ingotGold.itemID, 1, 0), 1.0F);
         
-        FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 14, new ItemStack(CDECore.partsItem.itemID, 1, 0), 0.7F);
-        FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 15, new ItemStack(CDECore.partsItem.itemID, 1, 1), 0.7F);
-        FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 16, new ItemStack(CDECore.partsItem.itemID, 1, 2), 1.0F);
-        FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 17, new ItemStack(CDECore.partsItem.itemID, 1, 3), 1.0F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 14, new ItemStack(CDECore.materialsItem.itemID, 1, 0), 0.7F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 15, new ItemStack(CDECore.materialsItem.itemID, 1, 1), 0.7F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 16, new ItemStack(CDECore.materialsItem.itemID, 1, 2), 1.0F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 17, new ItemStack(CDECore.materialsItem.itemID, 1, 3), 1.0F);
         
-        FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 18, new ItemStack(CDECore.partsItem.itemID, 1, 4), 1.0F);
-        FurnaceRecipes.smelting().addSmelting(CDECore.partsItem.itemID, 19, new ItemStack(CDECore.partsItem.itemID, 1, 5), 1.0F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 18, new ItemStack(CDECore.materialsItem.itemID, 1, 4), 1.0F);
+        FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 19, new ItemStack(CDECore.materialsItem.itemID, 1, 5), 1.0F);
         
         // TODO AE SILICON FROM QUARTZ DUST
         
@@ -42,25 +43,25 @@ public class RecipeManager
             "xxx",
             "xxx",
             "xxx",
-            'x', new ItemStack(CDECore.partsItem.itemID, 1, i));
+            'x', new ItemStack(CDECore.materialsItem.itemID, 1, i));
         }
         
         GameRegistry.addRecipe(new ItemStack(CDECore.storageBlock.blockID, 1, 8), 
         "xxx",
         "xxx",
         "xxx",
-        'x', new ItemStack(CDECore.partsItem.itemID, 1, 39));
+        'x', new ItemStack(CDECore.materialsItem.itemID, 1, 39));
         
         GameRegistry.addRecipe(new ItemStack(CDECore.storageBlock.blockID, 1, 9), 
         "xxx",
         "xxx",
         "xxx",
-        'x', new ItemStack(CDECore.partsItem.itemID, 1, 40));
+        'x', new ItemStack(CDECore.materialsItem.itemID, 1, 40));
         
         GameRegistry.addRecipe(new ItemStack(CDECore.storageBlock.blockID, 1, 10), 
         "xxx",
         "xxx",
         "xxx",
-        'x', new ItemStack(CDECore.partsItem.itemID, 1, 41));
+        'x', new ItemStack(CDECore.materialsItem.itemID, 1, 41));
     }
 }

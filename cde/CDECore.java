@@ -13,7 +13,7 @@ import cde.core.RecipeManager;
 import cde.core.block.BlockOre;
 import cde.core.block.BlockStorage;
 import cde.core.item.ItemOre;
-import cde.core.item.ItemParts;
+import cde.core.item.ItemMaterial;
 import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
 import cde.core.sound.SoundTickHandler;
@@ -59,9 +59,9 @@ public class CDECore
     public static final String CDE_ITEMS = "/cde/items.png";
     public static final CreativeTabs TAB_CDE = new CreativeTabCDE("carbondustengineering");
     public static Block oreBlock,storageBlock;
-    public static Item partsItem;
+    public static Item materialsItem;
     private static Configuration cfg;
-    private static int networkUpdateRate,oreBlockId,storageBlockId,partsItemId;
+    private static int networkUpdateRate,oreBlockId,storageBlockId,materialsItemId;
     private static boolean sounds,altRainSounds;
      
     @PreInit
@@ -77,7 +77,7 @@ public class CDECore
         oreBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "oreblockid", 180).getInt();
         storageBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "storageblockid", 181).getInt();
         
-        partsItemId = cfg.get(Configuration.CATEGORY_ITEM, "partsitemid", 501).getInt() + ID_SHIFT;
+        materialsItemId = cfg.get(Configuration.CATEGORY_ITEM, "materialsitemid", 501).getInt() + ID_SHIFT;
         
         cfg.save();
         
@@ -121,22 +121,22 @@ public class CDECore
         
     private static void initItems()
     {
-        if(partsItemId > 0)
+        if(materialsItemId > 0)
         {
-            partsItem = (new ItemParts(partsItemId)).setItemName("parts").setCreativeTab(TAB_CDE);
+            materialsItem = (new ItemMaterial(materialsItemId)).setItemName("parts").setCreativeTab(TAB_CDE);
             
-            GameRegistry.registerItem(partsItem, "parts");
+            GameRegistry.registerItem(materialsItem, "materials");
             
             for(int i = 0; i < Namings.EXTERNAL_PART_ITEM_NAMES.length; i++)
             {              
-                ItemStack is = new ItemStack(partsItem.itemID, 1, i);
+                ItemStack is = new ItemStack(materialsItem.itemID, 1, i);
                 LanguageRegistry.addName(is, Namings.EXTERNAL_PART_ITEM_NAMES[i]);
                 OreDictionary.registerOre(is.getItemName(), is);
             }
             
-            OreDictionary.registerOre("ingotQuartz", new ItemStack(partsItem.itemID, 1, 42));
-            OreDictionary.registerOre("dropUranium", new ItemStack(partsItem.itemID, 1, 53));
-            OreDictionary.registerOre("brickPeat", new ItemStack(partsItem.itemID, 1, 8));
+            OreDictionary.registerOre("ingotQuartz", new ItemStack(materialsItem.itemID, 1, 42));
+            OreDictionary.registerOre("dropUranium", new ItemStack(materialsItem.itemID, 1, 53));
+            OreDictionary.registerOre("brickPeat", new ItemStack(materialsItem.itemID, 1, 8));
         }
     }
     
@@ -157,16 +157,17 @@ public class CDECore
             
             MinecraftForge.setBlockHarvestLevel(oreBlock, 0, "pickaxe", 1); // Copper
             MinecraftForge.setBlockHarvestLevel(oreBlock, 1, "pickaxe", 1); // Tin
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 2, "pickaxe", 1); // Silver
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 3, "pickaxe", 2); // Lead
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 4, "pickaxe", 2); // Uranium
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 5, "pickaxe", 2); // Sulfur
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 6, "pickaxe", 2); // Saltpeter
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 7, "pickaxe", 0); // Quartz
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 8, "pickaxe", 2); // Ruby
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 9, "pickaxe", 2); // Jade
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 10, "pickaxe", 2); // Sapphire
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 11, "pickaxe", 1); // Apatite
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 2, "pickaxe", 2); // Zinc
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 3, "pickaxe", 1); // Silver
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 4, "pickaxe", 2); // Lead
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 5, "pickaxe", 2); // Uranium
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 6, "pickaxe", 2); // Sulfur
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 7, "pickaxe", 2); // Saltpeter
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 8, "pickaxe", 0); // Quartz
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 9, "pickaxe", 2); // Ruby
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 10, "pickaxe", 2); // Jade
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 11, "pickaxe", 2); // Sapphire
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 12, "pickaxe", 1); // Apatite
         }
         
         if(storageBlockId > 0)

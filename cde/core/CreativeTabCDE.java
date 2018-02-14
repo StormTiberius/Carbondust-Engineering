@@ -14,7 +14,7 @@ public class CreativeTabCDE extends CreativeTabs
     @Override
     public ItemStack getIconItemStack()
     {
-        return new ItemStack(CDECore.partsItem.itemID, 1, 11);
+        return new ItemStack(CDECore.materialsItem.itemID, 1, 11);
     }
 	
     @Override

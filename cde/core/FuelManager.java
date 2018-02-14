@@ -14,7 +14,7 @@ public class FuelManager implements IFuelHandler
     @Override
     public int getBurnTime(ItemStack fuel)
     {
-        if(fuel.itemID == CDECore.partsItem.itemID)
+        if(fuel.itemID == CDECore.materialsItem.itemID)
         {
             switch(fuel.getItemDamage())
             {
