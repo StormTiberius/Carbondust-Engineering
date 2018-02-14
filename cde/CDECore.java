@@ -134,9 +134,9 @@ public class CDECore
                 OreDictionary.registerOre(is.getItemName(), is);
             }
             
-            OreDictionary.registerOre("ingotQuartz", new ItemStack(materialsItem.itemID, 1, 42));
-            OreDictionary.registerOre("dropUranium", new ItemStack(materialsItem.itemID, 1, 53));
-            OreDictionary.registerOre("brickPeat", new ItemStack(materialsItem.itemID, 1, 8));
+            OreDictionary.registerOre("ingotQuartz", new ItemStack(materialsItem.itemID, 1, 39));
+            OreDictionary.registerOre("dropUranium", new ItemStack(materialsItem.itemID, 1, 42));
+            OreDictionary.registerOre("brickPeat", new ItemStack(materialsItem.itemID, 1, 9));
         }
     }
     

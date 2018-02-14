@@ -14,10 +14,10 @@ public class Namings
         "ingotZinc",
         "ingotSilver",
         "ingotLead",
+        "ingotUranium",
         "ingotBronze",
         "ingotBrass",
         "ingotSteel",
-        "ingotUranium",
         "fuelPeat",
         "fuelBituminousPeat",
         
@@ -65,10 +65,10 @@ public class Namings
         "Zinc Ingot",
         "Silver Ingot",
         "Lead Ingot",
+        "Uranium Ingot",
         "Bronze Ingot",
         "Brass Ingot",
         "Steel Ingot",
-        "Uranium Ingot",
         "Peat",
         "Bituminous Peat",
         
