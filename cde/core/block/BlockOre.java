@@ -1,9 +1,11 @@
 package cde.core.block;
 
 import cde.CDECore;
+import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -53,6 +55,46 @@ public class BlockOre extends Block
     }
     
     @Override
+    public int quantityDropped(int meta, int fortune, Random random)
+    {
+        switch(meta)
+        {
+            case 6: return 2 + random.nextInt(4) + random.nextInt(fortune + 1);
+            case 7: return 1 + random.nextInt(2) + random.nextInt(fortune + 1);
+            case 8: return 1 + Math.abs(random.nextInt()) % (1 + fortune);
+            case 9:
+            case 10:
+
+            case 11:
+                int i = random.nextInt(fortune + 2) - 1;
+            
+                if(i < 0)
+                {
+                    i = 0;
+                }
+
+                return i + 1;
+
+            case 12:
+                int fortmod = random.nextInt(fortune + 2) - 1;
+            
+                if(fortmod < 0)
+                {
+                    fortmod = 0;
+                }
+
+                int amount = (1 + random.nextInt(5)) * (fortmod + 1);
+
+                if(amount > 0)
+                {
+                    return amount;
+                }
+                
+            default: return quantityDroppedWithBonus(fortune, random);
+        }
+    }
+    
+    @Override
     public int quantityDropped(Random par1Random)
     {
         return 1;
@@ -81,8 +123,29 @@ public class BlockOre extends Block
     @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
     {
-        super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
+        if (!par1World.isRemote)
+        {
+            ArrayList<ItemStack> items = getBlockDropped(par1World, par2, par3, par4, par5, par7);
 
+            if(par5 == 8)
+            {
+                int amount = Math.abs(par1World.rand.nextInt()) % (3 + par7);
+                
+                if(amount > 0)
+                {
+                    items.add(new ItemStack(CDECore.materialsItem.itemID, amount, 24));
+                }
+            }
+            
+            for (ItemStack item : items)
+            {
+                if (par1World.rand.nextFloat() <= par6)
+                {
+                    this.dropBlockAsItem_do(par1World, par2, par3, par4, item);
+                }
+            }
+        }
+        
         if (par5 > 4)
         {
             int var8 = 0;
