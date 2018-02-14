@@ -8,7 +8,7 @@ public class BlockStorage extends Block
 {
     public BlockStorage(int par1)
     {
-        super(par1,Material.iron);
+        super(par1, Material.iron);
     }
 
     @Override

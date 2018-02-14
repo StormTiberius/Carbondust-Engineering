@@ -18,7 +18,7 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class WorldGenManager implements IWorldGenerator
 {
-    private final WorldGenerator copper,tin,silver,lead,uranium,sulfur,saltpeter,quartz,ruby,jade,sapphire,apatite;
+    private final WorldGenerator copper,tin,zinc,silver,lead,uranium,sulfur,saltpeter,quartz,ruby,jade,sapphire,apatite;
     private final int[][] cfg;
     
     public WorldGenManager(int id, int[][] config)
@@ -27,16 +27,17 @@ public class WorldGenManager implements IWorldGenerator
         
         copper = new WorldGenMinable(id, 0, cfg[0][1]);
         tin = new WorldGenMinable(id, 1, cfg[1][1]);
-        silver = new WorldGenMinable(id, 2, cfg[2][1]);
-        lead = new WorldGenMinable(id, 3, cfg[3][1]);
-        uranium = new WorldGenMinable(id, 4, cfg[4][1]);
-        sulfur = new WorldGenMinable(id, 5, cfg[5][1]);
-        saltpeter = new WorldGenMinable(id, 6, cfg[6][1]);
-        quartz = new WorldGenMinable(id, 7, cfg[7][1]);
-        ruby = new WorldGenMinable(id, 8, cfg[8][1]);
-        jade = new WorldGenMinable(id, 9, cfg[9][1]);
-        sapphire = new WorldGenMinable(id, 10, cfg[10][1]);
-        apatite = new WorldGenMinable(id, 11, cfg[11][1]);
+        zinc = new WorldGenMinable(id, 2, cfg[2][1]);
+        silver = new WorldGenMinable(id, 3, cfg[3][1]);
+        lead = new WorldGenMinable(id, 4, cfg[4][1]);
+        uranium = new WorldGenMinable(id, 5, cfg[5][1]);
+        sulfur = new WorldGenMinable(id, 6, cfg[6][1]);
+        saltpeter = new WorldGenMinable(id, 7, cfg[7][1]);
+        quartz = new WorldGenMinable(id, 8, cfg[8][1]);
+        ruby = new WorldGenMinable(id, 9, cfg[9][1]);
+        jade = new WorldGenMinable(id, 10, cfg[10][1]);
+        sapphire = new WorldGenMinable(id, 11, cfg[11][1]);
+        apatite = new WorldGenMinable(id, 12, cfg[12][1]);
     }
     
     @Override
@@ -73,7 +74,7 @@ public class WorldGenManager implements IWorldGenerator
             }
         }
                 
-        if(cfg[2][0] == 1 && TerrainGen.generateOre(world, random, silver, xCoord, zCoord, EventType.CUSTOM))
+        if(cfg[2][0] == 1 && TerrainGen.generateOre(world, random, zinc, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[2][2]; i++)
             {
@@ -81,11 +82,11 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[2][3] + random.nextInt(cfg[2][4] - cfg[2][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                silver.generate(world, random, xPos, yPos, zPos);
+                zinc.generate(world, random, xPos, yPos, zPos);
             }
         }
-                        
-        if(cfg[3][0] == 1 && TerrainGen.generateOre(world, random, lead, xCoord, zCoord, EventType.CUSTOM))
+        
+        if(cfg[3][0] == 1 && TerrainGen.generateOre(world, random, silver, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[3][2]; i++)
             {
@@ -93,11 +94,11 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[3][3] + random.nextInt(cfg[3][4] - cfg[3][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                lead.generate(world, random, xPos, yPos, zPos);
+                silver.generate(world, random, xPos, yPos, zPos);
             }
         }
-        
-        if(cfg[4][0] == 1 && TerrainGen.generateOre(world, random, uranium, xCoord, zCoord, EventType.CUSTOM))
+                        
+        if(cfg[4][0] == 1 && TerrainGen.generateOre(world, random, lead, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[4][2]; i++)
             {
@@ -105,11 +106,11 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[4][3] + random.nextInt(cfg[4][4] - cfg[4][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                uranium.generate(world, random, xPos, yPos, zPos);
+                lead.generate(world, random, xPos, yPos, zPos);
             }
         }
         
-        if(cfg[5][0] == 1 && TerrainGen.generateOre(world, random, sulfur, xCoord, zCoord, EventType.CUSTOM))
+        if(cfg[5][0] == 1 && TerrainGen.generateOre(world, random, uranium, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[5][2]; i++)
             {
@@ -117,11 +118,11 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[5][3] + random.nextInt(cfg[5][4] - cfg[5][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                sulfur.generate(world, random, xPos, yPos, zPos);
+                uranium.generate(world, random, xPos, yPos, zPos);
             }
         }
-                        
-        if(cfg[6][0] == 1 && TerrainGen.generateOre(world, random, saltpeter, xCoord, zCoord, EventType.CUSTOM))
+        
+        if(cfg[6][0] == 1 && TerrainGen.generateOre(world, random, sulfur, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[6][2]; i++)
             {
@@ -129,11 +130,11 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[6][3] + random.nextInt(cfg[6][4] - cfg[6][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                saltpeter.generate(world, random, xPos, yPos, zPos);
+                sulfur.generate(world, random, xPos, yPos, zPos);
             }
         }
-        
-        if(cfg[7][0] == 1 && TerrainGen.generateOre(world, random, quartz, xCoord, zCoord, EventType.CUSTOM))
+                        
+        if(cfg[7][0] == 1 && TerrainGen.generateOre(world, random, saltpeter, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[7][2]; i++)
             {
@@ -141,11 +142,11 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[7][3] + random.nextInt(cfg[7][4] - cfg[7][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                quartz.generate(world, random, xPos, yPos, zPos);
+                saltpeter.generate(world, random, xPos, yPos, zPos);
             }
         }
-                                                                        
-        if(cfg[8][0] == 1 && TerrainGen.generateOre(world, random, ruby, xCoord, zCoord, EventType.CUSTOM))
+        
+        if(cfg[8][0] == 1 && TerrainGen.generateOre(world, random, quartz, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[8][2]; i++)
             {
@@ -153,11 +154,11 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[8][3] + random.nextInt(cfg[8][4] - cfg[8][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                ruby.generate(world, random, xPos, yPos, zPos);
+                quartz.generate(world, random, xPos, yPos, zPos);
             }
         }
-        
-        if(cfg[9][0] == 1 && TerrainGen.generateOre(world, random, jade, xCoord, zCoord, EventType.CUSTOM))
+                                                                        
+        if(cfg[9][0] == 1 && TerrainGen.generateOre(world, random, ruby, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[9][2]; i++)
             {
@@ -165,11 +166,11 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[9][3] + random.nextInt(cfg[9][4] - cfg[9][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                jade.generate(world, random, xPos, yPos, zPos);
+                ruby.generate(world, random, xPos, yPos, zPos);
             }
         }
         
-        if(cfg[10][0] == 1 && TerrainGen.generateOre(world, random, sapphire, xCoord, zCoord, EventType.CUSTOM))
+        if(cfg[10][0] == 1 && TerrainGen.generateOre(world, random, jade, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[10][2]; i++)
             {
@@ -177,16 +178,28 @@ public class WorldGenManager implements IWorldGenerator
                 yPos = cfg[10][3] + random.nextInt(cfg[10][4] - cfg[10][3]);
                 zPos = zCoord + random.nextInt(16);
 
-                sapphire.generate(world, random, xPos, yPos, zPos);
+                jade.generate(world, random, xPos, yPos, zPos);
             }
         }
         
-        if(cfg[11][0] == 1 && TerrainGen.generateOre(world, random, apatite, xCoord, zCoord, EventType.CUSTOM))
+        if(cfg[11][0] == 1 && TerrainGen.generateOre(world, random, sapphire, xCoord, zCoord, EventType.CUSTOM))
         {
             for(int i = 0; i < cfg[11][2]; i++)
             {
                 xPos = xCoord + random.nextInt(16);
                 yPos = cfg[11][3] + random.nextInt(cfg[11][4] - cfg[11][3]);
+                zPos = zCoord + random.nextInt(16);
+
+                sapphire.generate(world, random, xPos, yPos, zPos);
+            }
+        }
+        
+        if(cfg[12][0] == 1 && TerrainGen.generateOre(world, random, apatite, xCoord, zCoord, EventType.CUSTOM))
+        {
+            for(int i = 0; i < cfg[12][2]; i++)
+            {
+                xPos = xCoord + random.nextInt(16);
+                yPos = cfg[12][3] + random.nextInt(cfg[12][4] - cfg[12][3]);
                 zPos = zCoord + random.nextInt(16);
 
                 apatite.generate(world, random, xPos, yPos, zPos);

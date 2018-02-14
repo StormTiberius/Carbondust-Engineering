@@ -62,33 +62,21 @@ public class ItemParts extends Item
     {
         int offset;
         
-        if(i < 10)
+        if(i < 11)
         {
             offset = 0;
         }
-        else if(i < 25)
+        else if(i < 36)
         {
-            offset = 6;
+            offset = 5;
         }
-        else if(i < 32)
+        else if(i < 41)
         {
-            offset = 7;
-        }
-        else if(i < 39)
-        {
-            offset = 16;
-        }
-        else if(i < 44)
-        {
-            offset = 25;
-        }
-        else if(i < 52)
-        {
-            offset = 36;
+            offset = 12;
         }
         else
         {
-            offset = 44;
+            offset = 23;
         }
 
         return i + offset;
