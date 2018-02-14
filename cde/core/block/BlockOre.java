@@ -30,22 +30,18 @@ public class BlockOre extends Block
     @Override
     public int damageDropped(int meta)
     {
-        if(meta > 4)
+        switch(meta)
         {
-            switch(meta)
-            {
-                case 5: return 42;
-                case 6: return 22;
-                case 7: return 23;
-                case 8: return 39;
-                case 9: return 36;
-                case 10: return 37;
-                case 11: return 38;
-                case 12: return 40;
-            }
+            case 5: return 42;
+            case 6: return 22;
+            case 7: return 23;
+            case 8: return 39;
+            case 9: return 36;
+            case 10: return 37;
+            case 11: return 38;
+            case 12: return 40;
+            default: return meta;
         }
-                
-        return meta;
     }
     
     @Override
