@@ -4,7 +4,6 @@ import cde.CDECore;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 
 public class BlockOre extends Block
@@ -17,9 +16,9 @@ public class BlockOre extends Block
     @Override
     public int idDropped(int meta, Random random, int fortune)
     {
-        if(meta == 0 && ModLoader.isModLoaded(""))
+        if(meta > 3)
         {
-            
+            return CDECore.partsItem.itemID;
         }
         
         return blockID;
@@ -28,11 +27,21 @@ public class BlockOre extends Block
     @Override
     public int damageDropped(int meta)
     {
-        if(meta == 0 && ModLoader.isModLoaded(""))
+        if(meta > 3)
         {
-            
+            switch(meta)
+            {
+                case 4: return 53;
+                case 5: return 20;
+                case 6: return 21;
+                case 7: return 42;
+                case 8: return 39;
+                case 9: return 40;
+                case 10: return 41;
+                case 11: return 43;
+            }
         }
-        
+                
         return meta;
     }
     

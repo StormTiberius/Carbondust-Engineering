@@ -7,6 +7,10 @@ package cde.core;
 
 public class Defaults
 {
+    public static final int PEAT_FUEL_VALUE = 2000;
+    public static final int BITUMINOUS_PEAT_FUEL_VALUE = 4200;
+    public static final int COKE_FUEL_VALUE = 6400;
+    
     public static final int[][] ORE_GEN_DEFAULTS =
     {    
         new int[]{1,8,10,20,55},
