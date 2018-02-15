@@ -139,6 +139,7 @@ public class RecipeManager
             Ic2Recipes.addMaceratorRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 4), new ItemStack(CDECore.materialsItem.itemID, 1, 19));
             
             addCompressorRecipes();
+            addAERecipes();
         }
         
         if(ModLoader.isModLoaded("Railcraft"))
@@ -160,6 +161,19 @@ public class RecipeManager
             
             RailcraftCraftingManager.rockCrusher.addRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 2), zd);
             RailcraftCraftingManager.rockCrusher.addRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 4), ld);
+        }
+    }
+    
+    public static void addAERecipes()
+    {
+        if(ModLoader.isModLoaded("AppliedEnergistics") && appeng.api.Materials.matSilicon != null)
+        {
+            FurnaceRecipes.smelting().addSmelting(CDECore.materialsItem.itemID, 24, appeng.api.Materials.matSilicon, 0.2F);
+        
+            Ic2Recipes.addCompressorRecipe(new ItemStack(CDECore.materialsItem.itemID, 4, 24), new ItemStack(CDECore.materialsItem.itemID, 1, 39));
+
+            Ic2Recipes.addMaceratorRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 39), new ItemStack(CDECore.materialsItem.itemID, 4, 24));
+            Ic2Recipes.addMaceratorRecipe(new ItemStack(CDECore.oreBlock.blockID, 1, 8), new ItemStack(CDECore.materialsItem.itemID, 10, 24));
         }
     }
     
