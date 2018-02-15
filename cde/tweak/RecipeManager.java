@@ -11,12 +11,16 @@ import forestry.api.core.ItemInterface;
 import ic2.api.Ic2Recipes;
 import ic2.api.Items;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.oredict.OreDictionary;
 import railcraft.common.api.core.items.ItemRegistry;
 import railcraft.common.api.crafting.RailcraftCraftingManager;
 
@@ -107,6 +111,11 @@ public class RecipeManager
             if(flags[10])
             {
                 FurnaceRecipes.smelting().addSmelting(Items.getItem("scrapBox").itemID, new ItemStack(Item.coal.itemID, 2, 1), 0.1F);
+            }
+            
+            if(flags[35])
+            {
+                dcpFix();
             }
         }
         
@@ -254,6 +263,32 @@ public class RecipeManager
             {
                 rl.remove(i);
             }
+        }
+    }
+    
+    private static void dcpFix()
+    {
+        ItemStack dcp = new ItemStack(Items.getItem("denseCopperPlate").itemID, 1, 0);
+        
+        List recipes = Ic2Recipes.getCompressorRecipes();
+        
+        for(Iterator<Entry> iterator = recipes.iterator(); iterator.hasNext();)
+        {
+            Entry entry = iterator.next();
+            
+            ItemStack is = (ItemStack)entry.getValue();
+            
+            if(ItemStack.areItemStacksEqual(dcp, is))
+            {
+                iterator.remove();
+            }
+        }
+        
+        ArrayList<ItemStack> al = OreDictionary.getOres("blockCopper");
+        
+        for(ItemStack is : al)
+        {
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 1, is.getItemDamage()), dcp);
         }
     }
 }

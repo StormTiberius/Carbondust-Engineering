@@ -26,12 +26,12 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import railcraft.common.api.fuel.FuelManager;
 
-@Mod(modid="CDE|Tweak", name="Tweak", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|Tweak", name="Tweak", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core;after:CDE|Compat")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TweakCore
 {
     private static Configuration cfg;
-    private static final boolean[] FLAGS = new boolean[35];
+    private static final boolean[] FLAGS = new boolean[36];
     private static int lavaHeatValue;
     
     @PreInit
@@ -79,6 +79,8 @@ public class TweakCore
         FLAGS[33] = cfg.get(Configuration.CATEGORY_GENERAL, "rubber", true, "Rubber sapling grow").getBoolean(false);
         
         FLAGS[34] = cfg.get(Configuration.CATEGORY_GENERAL, "nightvision", true, "Disable nightvision fading").getBoolean(false);
+        
+        FLAGS[35] = cfg.get(Configuration.CATEGORY_GENERAL, "dcpfix", true, "Alternate recipe for Dense Copper Plate").getBoolean(false);
         
         cfg.save();
       

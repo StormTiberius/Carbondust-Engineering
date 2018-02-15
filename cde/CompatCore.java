@@ -64,7 +64,13 @@ public class CompatCore
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
-    {      
+    {   
+        storageId = Config.getInt("blocks.world.storage.id");
+        
+        OreDictionary.registerOre("blockCopper", new ItemStack(storageId, 1, 5));
+        OreDictionary.registerOre("blockTin", new ItemStack(storageId, 1, 4));
+        OreDictionary.registerOre("blockSilver", new ItemStack(storageId, 1, 3));
+        
         if(backPlane)
         {
             ioexpanderId = Config.getInt("blocks.control.peripheralFlat.id");
@@ -90,8 +96,6 @@ public class CompatCore
         {
             if(storageBlock)
             {
-                storageId = Config.getInt("blocks.world.storage.id");
-
                 ArrayList<ItemStack> copperIngots = OreDictionary.getOres("ingotCopper");
                 for(ItemStack is : copperIngots)
                 {
