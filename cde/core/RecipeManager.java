@@ -164,7 +164,7 @@ public class RecipeManager
         }
     }
     
-    public static void addAERecipes()
+    private static void addAERecipes()
     {
         if(ModLoader.isModLoaded("AppliedEnergistics") && appeng.api.Materials.matSilicon != null)
         {
@@ -177,7 +177,7 @@ public class RecipeManager
         }
     }
     
-    public static void addCompressorRecipes()
+    private static void addCompressorRecipes()
     {
         // ArrayList copper = OreDictionary.getOres("ingotCopper");
         // ArrayList tin = OreDictionary.getOres("ingotTin");
