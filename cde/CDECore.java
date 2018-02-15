@@ -34,6 +34,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import forestry.api.core.ItemInterface;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ import static net.minecraft.block.Block.soundStoneFootstep;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -63,7 +65,8 @@ public class CDECore
     private static Configuration cfg;
     private static int networkUpdateRate,oreBlockId,storageBlockId,materialsItemId;
     private static boolean sounds,altRainSounds;
-     
+    public static int apatiteId,apatiteMeta;
+    
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
     {
@@ -78,6 +81,9 @@ public class CDECore
         storageBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "storageblockid", 181).getInt();
         
         materialsItemId = cfg.get(Configuration.CATEGORY_ITEM, "materialsitemid", 501).getInt() + ID_SHIFT;
+        
+        apatiteId = materialsItemId;
+        apatiteMeta = 40;
         
         cfg.save();
         
@@ -110,7 +116,16 @@ public class CDECore
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
-
+        if(ModLoader.isModLoaded("Forestry"))
+        {
+            ItemStack is = ItemInterface.getItem("apatite");
+            
+            if(is != null)
+            {
+                apatiteId = is.itemID;
+                apatiteMeta = is.getItemDamage();
+            }
+        }
     }
 
     @ServerStarting

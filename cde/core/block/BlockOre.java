@@ -19,12 +19,18 @@ public class BlockOre extends Block
     @Override
     public int idDropped(int meta, Random random, int fortune)
     {
-        if(meta > 4)
+        if(meta == 12)
+        {
+            return CDECore.apatiteId;
+        }
+        else if(meta > 4)
         {
             return CDECore.materialsItem.itemID;
         }
-        
-        return blockID;
+        else
+        {
+            return blockID;
+        }
     }
     
     @Override
@@ -39,7 +45,7 @@ public class BlockOre extends Block
             case 9: return 36;
             case 10: return 37;
             case 11: return 38;
-            case 12: return 40;
+            case 12: return CDECore.apatiteMeta;
             default: return meta;
         }
     }
