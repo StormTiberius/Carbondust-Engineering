@@ -8,11 +8,13 @@ package cde.core;
 import cde.CDECore;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.Ic2Recipes;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.src.ModLoader;
+import net.minecraftforge.oredict.OreDictionary;
 import railcraft.common.api.crafting.RailcraftCraftingManager;
 
 public class RecipeManager
@@ -134,7 +136,9 @@ public class RecipeManager
             Ic2Recipes.addMaceratorRecipe(new ItemStack(CDECore.oreBlock.blockID, 1, 4), new ItemStack(CDECore.materialsItem.itemID, 2, 19));
             
             Ic2Recipes.addMaceratorRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 2), new ItemStack(CDECore.materialsItem.itemID, 1, 17));
-            Ic2Recipes.addMaceratorRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 4), new ItemStack(CDECore.materialsItem.itemID, 1, 19)); 
+            Ic2Recipes.addMaceratorRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 4), new ItemStack(CDECore.materialsItem.itemID, 1, 19));
+            
+            addCompressorRecipes();
         }
         
         if(ModLoader.isModLoaded("Railcraft"))
@@ -156,6 +160,106 @@ public class RecipeManager
             
             RailcraftCraftingManager.rockCrusher.addRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 2), zd);
             RailcraftCraftingManager.rockCrusher.addRecipe(new ItemStack(CDECore.materialsItem.itemID, 1, 4), ld);
+        }
+    }
+    
+    public static void addCompressorRecipes()
+    {
+        // ArrayList copper = OreDictionary.getOres("ingotCopper");
+        // ArrayList tin = OreDictionary.getOres("ingotTin");
+        ArrayList zinc = OreDictionary.getOres("ingotZinc");
+        // ArrayList silver = OreDictionary.getOres("ingotSilver");
+        ArrayList lead = OreDictionary.getOres("ingotLead");
+        // ArrayList uranium = OreDictionary.getOres("ingotUranium");
+        ArrayList bronze = OreDictionary.getOres("ingotBronze");
+        ArrayList brass = OreDictionary.getOres("ingotBrass");
+        ArrayList steel = OreDictionary.getOres("ingotSteel");
+        ArrayList ruby = OreDictionary.getOres("gemRuby");
+        ArrayList jade = OreDictionary.getOres("gemJade");
+        ArrayList sapphire = OreDictionary.getOres("gemSapphire");
+        
+        // for(Object o : copper)
+        // {
+        //     ItemStack is = ((ItemStack)o).copy();
+        //     
+        //     Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 0));
+        // }
+        
+        // for(Object o : tin)
+        // {
+        //     ItemStack is = (ItemStack)o;
+        //     
+        //     Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 1));
+        // }
+        
+        for(Object o : zinc)
+        {
+            ItemStack is = ((ItemStack)o).copy();
+            
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 2));
+        }
+        
+        // for(Object o : silver)
+        // {
+        //     ItemStack is = ((ItemStack)o).copy();
+        //     
+        //     Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 3));
+        // }
+        
+        for(Object o : lead)
+        {
+            ItemStack is = ((ItemStack)o).copy();
+            
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 4));
+        }
+        
+        // for(Object o : uranium)
+        // {
+        //     ItemStack is = ((ItemStack)o).copy();
+        //     
+        //     Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 5));
+        // }
+        
+        for(Object o : bronze)
+        {
+            ItemStack is = ((ItemStack)o).copy();
+            
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 6));
+        }
+        
+        for(Object o : brass)
+        {
+            ItemStack is = ((ItemStack)o).copy();
+            
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 7));
+        }
+        
+        for(Object o : steel)
+        {
+            ItemStack is = ((ItemStack)o).copy();
+            
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 8));
+        }
+        
+        for(Object o : ruby)
+        {
+            ItemStack is = ((ItemStack)o).copy();
+            
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 9));
+        }
+                
+        for(Object o : jade)
+        {
+            ItemStack is = ((ItemStack)o).copy();
+            
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 10));
+        }
+                        
+        for(Object o : sapphire)
+        {
+            ItemStack is = ((ItemStack)o).copy();
+            
+            Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 9, is.getItemDamage()), new ItemStack(CDECore.storageBlock.blockID, 1, 11));
         }
     }
 }
