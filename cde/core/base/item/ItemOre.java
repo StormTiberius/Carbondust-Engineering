@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core.item;
+package cde.core.base.item;
 
 import cde.core.Namings;
 import java.util.List;
@@ -11,9 +11,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemStorage extends ItemBlock
+public class ItemOre extends ItemBlock
 {    
-    public ItemStorage(int id)
+    public ItemOre(int id)
     {
         super(id);
     }
@@ -39,18 +39,18 @@ public class ItemStorage extends ItemBlock
     @Override
     public String getItemNameIS(ItemStack is)
     {
-        if(is.getItemDamage() > Namings.INTERNAL_STORAGE_BLOCK_NAMES.length - 1)
+        if(is.getItemDamage() > Namings.INTERNAL_ORE_BLOCK_NAMES.length - 1)
         {
             return "NONAME";
         }
         
-        return Namings.INTERNAL_STORAGE_BLOCK_NAMES[is.getItemDamage()];
+        return Namings.INTERNAL_ORE_BLOCK_NAMES[is.getItemDamage()];
     }
 
     @Override
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-        for (int i = 0; i < Namings.INTERNAL_STORAGE_BLOCK_NAMES.length; i++)
+        for (int i = 0; i < Namings.INTERNAL_ORE_BLOCK_NAMES.length; i++)
         {   
             par3List.add(new ItemStack(par1, 1, i));
         }

@@ -1,4 +1,4 @@
-package cde.core.block;
+package cde.core.base.block;
 
 import cde.CDECore;
 import net.minecraft.block.Block;
