@@ -37,6 +37,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import railcraft.common.api.core.items.ItemRegistry;
 
 @Mod(modid="CDE|Machinery", name="Machinery", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
@@ -50,6 +51,7 @@ public class MachineryCore
     public static Item goggles;
     public static Block machineAlpha,grate;
     private static int ironGearId,tankBlockId,batteryEmptyId,batteryFullId,indigoDyeId;
+    private final boolean[] CRAFTABLE = new boolean[9];
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -86,6 +88,17 @@ public class MachineryCore
         transformerPitch = cfg.get(Configuration.CATEGORY_GENERAL, "transformerpitch", defaultPitch, "Transformer Pitch").getInt();
         turbinePitch = cfg.get(Configuration.CATEGORY_GENERAL, "turbinepitch", defaultPitch, "Turbine Pitch").getInt();
         
+        CRAFTABLE[0] = cfg.get(Configuration.CATEGORY_GENERAL, "recipegenerator", true, "Enable/Disable Crafting recipe for Generator").getBoolean(true);
+        CRAFTABLE[1] = cfg.get(Configuration.CATEGORY_GENERAL, "recipeturbine", true, "Enable/Disable Crafting recipe for Turbine").getBoolean(true);
+        CRAFTABLE[2] = cfg.get(Configuration.CATEGORY_GENERAL, "recipeheater", true, "Enable/Disable Crafting recipe for Heater").getBoolean(true);
+        CRAFTABLE[3] = cfg.get(Configuration.CATEGORY_GENERAL, "recipepump", true, "Enable/Disable Crafting recipe for Pump").getBoolean(true);
+        CRAFTABLE[4] = cfg.get(Configuration.CATEGORY_GENERAL, "recipemixer", true, "Enable/Disable Crafting recipe for Mixer").getBoolean(true);
+        CRAFTABLE[5] = cfg.get(Configuration.CATEGORY_GENERAL, "recipesolarpanel", true, "Enable/Disable Crafting recipe for Solar Panel").getBoolean(true);
+        CRAFTABLE[6] = cfg.get(Configuration.CATEGORY_GENERAL, "recipetransformer", true, "Enable/Disable Crafting recipe for Transformer").getBoolean(true);
+        
+        CRAFTABLE[7] = cfg.get(Configuration.CATEGORY_GENERAL, "recipegrate", true, "Enable/Disable Crafting recipe for Grate").getBoolean(true);
+        CRAFTABLE[8] = cfg.get(Configuration.CATEGORY_GENERAL, "recipegoggles", true, "Enable/Disable Crafting recipe for Nightvision Goggles").getBoolean(true);
+        
         cfg.save();
     }
 
@@ -94,184 +107,202 @@ public class MachineryCore
     {   
         setupIds();
         
+        ItemStack is;
+        
         if(gogglesId > 0)
         {
             goggles = new ItemGoggles(gogglesId).setCreativeTab(CDECore.TAB_CDE);
-            GameRegistry.registerItem(goggles, "goggles");
-            LanguageRegistry.addName(goggles, "Nightvision Goggles");
+            GameRegistry.registerItem(goggles, Namings.INTERNAL_GOGGLES_NAME);
+            LanguageRegistry.addName(goggles, Namings.EXTERNAL_GOGGLES_NAME);
             
-            ItemStack is = new ItemStack(goggles.itemID, 1, 0);
+            is = new ItemStack(goggles.itemID, 1, 0);
             
             cde.api.Items.goggles = is;
             
-            Ic2Recipes.addCraftingRecipe(is,
-            "xyx",
-            "aza",
-            "bcb",
-            'x', new ItemStack(Items.getItem("reactorHeatSwitchDiamond").itemID, 1, 0),
-            'y', new ItemStack(Items.getItem("reBattery").itemID, 1, 0),
-            'z', new ItemStack(Items.getItem("reinforcedGlass").itemID, 1, 0),
-            'a', new ItemStack(Items.getItem("luminator").itemID, 1, 0),
-            'b', new ItemStack(Items.getItem("rubber").itemID, 1, 0),
-            'c', new ItemStack(Items.getItem("advancedCircuit").itemID, 1, 0));
+            if(CRAFTABLE[8])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                "xyx",
+                "aza",
+                "bcb",
+                'x', new ItemStack(Items.getItem("reactorHeatSwitchDiamond").itemID, 1, 0),
+                'y', new ItemStack(Items.getItem("reBattery").itemID, 1, 0),
+                'z', new ItemStack(Items.getItem("reinforcedGlass").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("luminator").itemID, 1, 0),
+                'b', new ItemStack(Items.getItem("rubber").itemID, 1, 0),
+                'c', new ItemStack(Items.getItem("advancedCircuit").itemID, 1, 0));
+            }
         }
         
         if(machineAlphaId > 0)
         {
             machineAlpha = new BlockMachineAlpha(machineAlphaId).setBlockName("cdeMachineAlpha").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
             GameRegistry.registerBlock(machineAlpha, ItemMachineAlpha.class, "cdeMachineAlpha");
-        }
-        
-        if(machineAlphaId > 0 && ironGearId > 0)
-        {
-            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 0);
+
+            MinecraftForge.setBlockHarvestLevel(machineAlpha, "pickaxe", 1);
+            
+            // Generator
+            is = new ItemStack(machineAlpha.blockID, 1, 0);
             
             cde.api.Blocks.machineGenerator = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[0]);
             GameRegistry.registerTileEntity(TileEntityGenerator.class, "cdeGeneratorTile");
             
-            Ic2Recipes.addCraftingRecipe(is,
-            "xxx",
-            "byb",
-            "aza",
-            'x', new ItemStack(ironGearId, 1, 0),
-            'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
-            'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
-            'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
-            'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
-        }
-        
-        if(machineAlphaId > 0)
-        {
-            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 1);
+            if(CRAFTABLE[0])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                "xxx",
+                "byb",
+                "aza",
+                'x', new ItemStack(ironGearId, 1, 0),
+                'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
+                'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
+                'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
+            }
+            // Turbine
+            is = new ItemStack(machineAlpha.blockID, 1, 1);
             
             cde.api.Blocks.machineTurbine = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[1]);
             GameRegistry.registerTileEntity(TileEntityTurbine.class, "cdeTurbineTile");
             
-            Ic2Recipes.addCraftingRecipe(is,
-            "xxx",
-            "byb",
-            "aza",
-            'x', new ItemStack(ItemRegistry.getItem("part.turbine.disk", 1).itemID, 1, 0),
-            'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
-            'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
-            'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
-            'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
-        }
+            if(CRAFTABLE[1])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                "xxx",
+                "byb",
+                "aza",
+                'x', new ItemStack(ItemRegistry.getItem("part.turbine.disk", 1).itemID, 1, 0),
+                'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
+                'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
+                'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
+            }
         
-        if(machineAlphaId > 0)
-        {
-            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 2);
+            // Heater
+            is = new ItemStack(machineAlpha.blockID, 1, 2);
             
             cde.api.Blocks.machineHeater = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[2]);
             GameRegistry.registerTileEntity(TileEntityHeater.class, "cdeHeaterTile");
             
-            Ic2Recipes.addCraftingRecipe(is,
-            "xxx",
-            "byb",
-            "aza",
-            'x', new ItemStack(Item.blazeRod.itemID, 1, 0),
-            'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
-            'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
-            'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
-            'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
-        }
+            if(CRAFTABLE[2])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                "xxx",
+                "byb",
+                "aza",
+                'x', new ItemStack(Item.blazeRod.itemID, 1, 0),
+                'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
+                'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
+                'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
+            }
         
-        if(machineAlphaId > 0 && grateId > 0 && tankBlockId > 0)
-        {
-            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 3);
+            // Pump
+            is = new ItemStack(machineAlpha.blockID, 1, 3);
             
             cde.api.Blocks.machinePump = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[3]);
             GameRegistry.registerTileEntity(TileEntityPump.class, "cdePumpTile");
             
-            Ic2Recipes.addCraftingRecipe(is,
-            "xxx",
-            "byb",
-            "aza",
-            'x', new ItemStack(tankBlockId, 1, 0),
-            'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
-            'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
-            'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
-            'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
-        }
+            if(CRAFTABLE[3])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                "xxx",
+                "byb",
+                "aza",
+                'x', new ItemStack(tankBlockId, 1, 0),
+                'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
+                'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
+                'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
+            }
         
-        if(machineAlphaId > 0)
-        {
-            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 4);
+            // Mixer
+            is = new ItemStack(machineAlpha.blockID, 1, 4);
             
             cde.api.Blocks.machineMixer = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[4]);
             GameRegistry.registerTileEntity(TileEntityMixer.class, "cdeMixerTile");
             
-            Ic2Recipes.addCraftingRecipe(is,
-            "xxx",
-            "byb",
-            "aza",
-            'x', new ItemStack(Items.getItem("carbonPlate").itemID, 1, 0),
-            'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
-            'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
-            'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
-            'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
-        }
-        
-        if(machineAlphaId > 0)
-        {
-            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 5);
+            if(CRAFTABLE[4])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                "xxx",
+                "byb",
+                "aza",
+                'x', new ItemStack(Items.getItem("carbonPlate").itemID, 1, 0),
+                'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
+                'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
+                'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
+            }
+            
+            // Solar Panel
+            is = new ItemStack(machineAlpha.blockID, 1, 5);
             
             cde.api.Blocks.machineSolarPanel = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[5]);
             GameRegistry.registerTileEntity(TileEntitySolarPanel.class, "cdeSolarPanelTile");
             
-            Ic2Recipes.addCraftingRecipe(is,
-            "aba",
-            "bab",
-            "cdc",
-            'a', new ItemStack(Block.glass.blockID, 1, 0),
-            'b', new ItemStack(Items.getItem("coalDust").itemID, 1, 0),
-            'c', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
-            'd', new ItemStack(Items.getItem("generator").itemID, 1, 0));
-        }
-                
-        if(machineAlphaId > 0)
-        {
-            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 6);
+            if(CRAFTABLE[5])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                "aba",
+                "bab",
+                "cdc",
+                'a', new ItemStack(Block.glass.blockID, 1, 0),
+                'b', new ItemStack(Items.getItem("coalDust").itemID, 1, 0),
+                'c', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
+                'd', new ItemStack(Items.getItem("generator").itemID, 1, 0));
+            }
+        
+            // Transformer
+            is = new ItemStack(machineAlpha.blockID, 1, 6);
             
             cde.api.Blocks.machineTransformer = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[6]);
             GameRegistry.registerTileEntity(TileEntityTransformer.class, "cdeTransformerTile");
             
-            Ic2Recipes.addCraftingRecipe(is,
-            "xxx",
-            "byb",
-            "aza",
-            'x', new ItemStack(Items.getItem("tinCableItem").itemID, 1, 10),
-            'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
-            'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
-            'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
-            'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
+            if(CRAFTABLE[6])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                "xxx",
+                "byb",
+                "aza",
+                'x', new ItemStack(Items.getItem("tinCableItem").itemID, 1, 10),
+                'y', new ItemStack(Items.getItem("machine").itemID, 1, 0),
+                'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
+                'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
+            }
         }
         
         if(grateId > 0)
         {
-            grate = new BlockGrate(grateId).setBlockName("cdeGrate").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
-            GameRegistry.registerBlock(grate, "cdeGrate");
-            LanguageRegistry.addName(grate, "Grate");
+            grate = new BlockGrate(grateId).setBlockName(Namings.INTERNAL_GRATE_NAME).setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
+            GameRegistry.registerBlock(grate, Namings.INTERNAL_GRATE_NAME);
+            LanguageRegistry.addName(grate, Namings.EXTERNAL_GRATE_NAME);
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(grate.blockID, 1, 0),
-            "xxx",
-            "x x",
-            "xxx",
-            'x', new ItemStack(Block.fenceIron.blockID, 1, 0));
+            MinecraftForge.setBlockHarvestLevel(grate, "pickaxe", 1);
+            
+            if(CRAFTABLE[7])
+            {
+                Ic2Recipes.addCraftingRecipe(new ItemStack(grate.blockID, 1, 0),
+                "xxx",
+                "x x",
+                "xxx",
+                'x', new ItemStack(Block.fenceIron.blockID, 1, 0));
+            }
         }
     }
 

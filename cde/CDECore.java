@@ -260,6 +260,8 @@ public class CDECore
             
             GameRegistry.registerBlock(storageBlock, ItemStorage.class, "cdeStorageBlock");
             
+            MinecraftForge.setBlockHarvestLevel(storageBlock, "pickaxe", 1);
+            
             for(int i = 0; i < Namings.EXTERNAL_STORAGE_BLOCK_NAMES.length; i++)
             {                
                 ItemStack is = new ItemStack(storageBlock.blockID, 1, i);

@@ -206,4 +206,10 @@ public class Namings
         "Solar Panel",
         "Transformer"
     };
+    
+    public static final String INTERNAL_GOGGLES_NAME = "goggles";
+    public static final String EXTERNAL_GOGGLES_NAME = "Nightvision Goggles";
+    
+    public static final String INTERNAL_GRATE_NAME = "cdeGrate";
+    public static final String EXTERNAL_GRATE_NAME= "Grate";
 }
