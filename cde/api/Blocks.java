@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core.base;
+package cde.api;
 
 import net.minecraft.block.Block;
 
