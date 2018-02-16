@@ -26,7 +26,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import railcraft.common.api.fuel.FuelManager;
 
-@Mod(modid="CDE|Tweak", name="Tweak", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core;after:CDE|Compat")
+@Mod(modid="CDE|Tweak", name="Tweak", version="1.0.3", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core;after:CDE|Compat")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TweakCore
 {

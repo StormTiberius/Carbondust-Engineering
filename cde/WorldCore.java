@@ -29,7 +29,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid="CDE|World", name="World", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|World", name="World", version="1.0.3", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class WorldCore
 {

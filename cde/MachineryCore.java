@@ -40,7 +40,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import railcraft.common.api.core.items.ItemRegistry;
 
-@Mod(modid="CDE|Machinery", name="Machinery", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|Machinery", name="Machinery", version="1.0.3", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class MachineryCore
 {
