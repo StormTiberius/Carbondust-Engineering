@@ -43,4 +43,8 @@ public class Blocks
     public static ItemStack machineMixer;
     public static ItemStack machineSolarPanel;
     public static ItemStack machineTransformer;
+    
+    public static ItemStack blockGrate;
+    
+    public static ItemStack machineSpeaker;
 }

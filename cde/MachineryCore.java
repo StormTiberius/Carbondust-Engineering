@@ -295,9 +295,13 @@ public class MachineryCore
             
             MinecraftForge.setBlockHarvestLevel(grate, "pickaxe", 1);
             
+            is = new ItemStack(grate.blockID, 1, 0);
+            
+            cde.api.Blocks.blockGrate = is;
+            
             if(CRAFTABLE[7])
             {
-                Ic2Recipes.addCraftingRecipe(new ItemStack(grate.blockID, 1, 0),
+                Ic2Recipes.addCraftingRecipe(is,
                 "xxx",
                 "x x",
                 "xxx",

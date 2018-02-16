@@ -76,7 +76,11 @@ public class SpeakerModule
             GameRegistry.registerTileEntity(TileEntitySpeaker.class, "cdeSpeakerTile");
             MinecraftForge.setBlockHarvestLevel(speaker, "axe", 1);
             
-            GameRegistry.addRecipe(new ShapedOreRecipe(speaker,
+            ItemStack is = new ItemStack(speaker.blockID, 1, 0);
+            
+            cde.api.Blocks.machineSpeaker = is;
+            
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "xxx",
             "xyx",
             "xxx",
