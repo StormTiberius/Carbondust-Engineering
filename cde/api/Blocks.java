@@ -35,4 +35,12 @@ public class Blocks
     public static ItemStack blockRuby;
     public static ItemStack blockJade;
     public static ItemStack blockSapphire;
+    
+    public static ItemStack machineGenerator;
+    public static ItemStack machineTurbine;
+    public static ItemStack machineHeater;
+    public static ItemStack machinePump;
+    public static ItemStack machineMixer;
+    public static ItemStack machineSolarPanel;
+    public static ItemStack machineTransformer;
 }

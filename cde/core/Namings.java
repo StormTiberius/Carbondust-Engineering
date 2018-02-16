@@ -184,4 +184,26 @@ public class Namings
     {
         "Block of Concrete"
     };
+    
+    public static final String[] INTERNAL_MACHINE_ALPHA_BLOCK_NAMES =
+    {
+        "cdeMachineGenerator",
+        "cdeMachineTurbine",
+        "cdeMachineHeater",
+        "cdeMachinePump",
+        "cdeMachineMixer",
+        "cdeMachineSolarPanel",
+        "cdeMachineTransformer"
+    };
+    
+    public static final String[] EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES =
+    {
+        "Generator",
+        "Turbine",
+        "Heater",
+        "Pump",
+        "Mixer",
+        "Solar Panel",
+        "Transformer"
+    };
 }

@@ -5,15 +5,11 @@
 
 package cde;
 
-import cde.energy.BlockGenerator;
+import cde.core.Namings;
+import cde.energy.BlockMachineAlpha;
 import cde.energy.BlockGrate;
-import cde.energy.BlockHeater;
-import cde.energy.BlockMixer;
-import cde.energy.BlockPump;
-import cde.energy.BlockSolarPanel;
-import cde.energy.BlockTransformer;
-import cde.energy.BlockTurbine;
 import cde.energy.ItemGoggles;
+import cde.energy.ItemMachineAlpha;
 import cde.energy.TileEntityGenerator;
 import cde.energy.TileEntityHeater;
 import cde.energy.TileEntityMixer;
@@ -46,13 +42,13 @@ import railcraft.common.api.core.items.ItemRegistry;
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class EnergyCore
 {
-    public static Item goggles;
-    public static Block generator,turbine,heater,pump,mixer,solarPanel,transformer,grate;
-    private static int generatorId,turbineId,heaterId,pumpId,mixerId,solarPanelId,transformerId,grateId,gogglesId;
-    private static int ironGearId,tankBlockId,batteryEmptyId,batteryFullId,indigoDyeId;
+    private static Configuration cfg;
+    private static int machineAlphaId,grateId,gogglesId;
     public static int generatorVolume,heaterVolume,mixerVolume,pumpVolume,solarVolume,transformerVolume,turbineVolume;
     public static int generatorPitch,heaterPitch,mixerPitch,pumpPitch,solarPitch,transformerPitch,turbinePitch;
-    private static Configuration cfg;
+    public static Item goggles;
+    public static Block machineAlpha,grate;
+    private static int ironGearId,tankBlockId,batteryEmptyId,batteryFullId,indigoDyeId;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -60,16 +56,11 @@ public class EnergyCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/energy.cfg"));
         cfg.load();
         
-        generatorId = cfg.get(Configuration.CATEGORY_BLOCK, "generator", 182).getInt();
-        turbineId = cfg.get(Configuration.CATEGORY_BLOCK, "turbine", 183).getInt();
-        heaterId = cfg.get(Configuration.CATEGORY_BLOCK, "heater", 184).getInt();
-        pumpId = cfg.get(Configuration.CATEGORY_BLOCK, "pump", 185).getInt();
-        mixerId = cfg.get(Configuration.CATEGORY_BLOCK, "mixer", 186).getInt();
-        solarPanelId = cfg.get(Configuration.CATEGORY_BLOCK, "solarpanel", 187).getInt();
-        transformerId = cfg.get(Configuration.CATEGORY_BLOCK, "transformer", 188).getInt();
-        grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grate", 189).getInt();
+        machineAlphaId = cfg.get(Configuration.CATEGORY_BLOCK, "machinealphaid", 182).getInt();
         
-        gogglesId = cfg.get(Configuration.CATEGORY_ITEM, "goggles", 500).getInt() + CDECore.ID_SHIFT;
+        grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grateid", 189).getInt();
+        
+        gogglesId = cfg.get(Configuration.CATEGORY_ITEM, "gogglesid", 500).getInt() + CDECore.ID_SHIFT;
         
         // Individual Machine Sound Settings.
         
@@ -108,7 +99,11 @@ public class EnergyCore
             GameRegistry.registerItem(goggles, "goggles");
             LanguageRegistry.addName(goggles, "Nightvision Goggles");
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(goggles.itemID, 1, 0),
+            ItemStack is = new ItemStack(goggles.itemID, 1, 0);
+            
+            cde.api.Items.goggles = is;
+            
+            Ic2Recipes.addCraftingRecipe(is,
             "xyx",
             "aza",
             "bcb",
@@ -120,14 +115,22 @@ public class EnergyCore
             'c', new ItemStack(Items.getItem("advancedCircuit").itemID, 1, 0));
         }
         
-        if(generatorId > 0 && ironGearId > 0)
+        if(machineAlphaId > 0)
         {
-            generator = new BlockGenerator(generatorId).setBlockName("cdeGenerator").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
-            GameRegistry.registerBlock(generator, "cdeGenerator");
-            LanguageRegistry.addName(generator, "Generator");
+            machineAlpha = new BlockMachineAlpha(machineAlphaId).setBlockName("cdeMachineAlpha").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
+            GameRegistry.registerBlock(machineAlpha, ItemMachineAlpha.class, "cdeMachineAlpha");
+        }
+        
+        if(machineAlphaId > 0 && ironGearId > 0)
+        {
+            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 0);
+            
+            cde.api.Blocks.machineGenerator = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[0]);
             GameRegistry.registerTileEntity(TileEntityGenerator.class, "cdeGeneratorTile");
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(generator.blockID, 1, 0),
+            Ic2Recipes.addCraftingRecipe(is,
             "xxx",
             "byb",
             "aza",
@@ -138,14 +141,16 @@ public class EnergyCore
             'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
         }
         
-        if(turbineId > 0)
+        if(machineAlphaId > 0)
         {
-            turbine = new BlockTurbine(turbineId).setBlockName("cdeTurbine").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
-            GameRegistry.registerBlock(turbine, "cdeTurbine");
-            LanguageRegistry.addName(turbine, "Turbine");
+            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 1);
+            
+            cde.api.Blocks.machineTurbine = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[1]);
             GameRegistry.registerTileEntity(TileEntityTurbine.class, "cdeTurbineTile");
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(turbine.blockID, 1, 0),
+            Ic2Recipes.addCraftingRecipe(is,
             "xxx",
             "byb",
             "aza",
@@ -156,14 +161,16 @@ public class EnergyCore
             'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
         }
         
-        if(heaterId > 0)
+        if(machineAlphaId > 0)
         {
-            heater = new BlockHeater(heaterId).setBlockName("cdeHeater").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
-            GameRegistry.registerBlock(heater, "cdeHeater");
-            LanguageRegistry.addName(heater, "Heater");
+            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 2);
+            
+            cde.api.Blocks.machineHeater = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[2]);
             GameRegistry.registerTileEntity(TileEntityHeater.class, "cdeHeaterTile");
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(heater.blockID, 1, 0),
+            Ic2Recipes.addCraftingRecipe(is,
             "xxx",
             "byb",
             "aza",
@@ -174,14 +181,16 @@ public class EnergyCore
             'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
         }
         
-        if(pumpId > 0 && grateId > 0 && tankBlockId > 0)
+        if(machineAlphaId > 0 && grateId > 0 && tankBlockId > 0)
         {
-            pump = new BlockPump(pumpId).setBlockName("cdePump").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
-            GameRegistry.registerBlock(pump, "cdePump");
-            LanguageRegistry.addName(pump, "Pump");
+            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 3);
+            
+            cde.api.Blocks.machinePump = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[3]);
             GameRegistry.registerTileEntity(TileEntityPump.class, "cdePumpTile");
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(pump.blockID, 1, 0),
+            Ic2Recipes.addCraftingRecipe(is,
             "xxx",
             "byb",
             "aza",
@@ -192,14 +201,16 @@ public class EnergyCore
             'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
         }
         
-        if(mixerId > 0)
+        if(machineAlphaId > 0)
         {
-            mixer = new BlockMixer(mixerId).setBlockName("cdeMixer").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
-            GameRegistry.registerBlock(mixer, "cdeMixer");
-            LanguageRegistry.addName(mixer, "Mixer");
+            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 4);
+            
+            cde.api.Blocks.machineMixer = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[4]);
             GameRegistry.registerTileEntity(TileEntityMixer.class, "cdeMixerTile");
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(mixer.blockID, 1, 0),
+            Ic2Recipes.addCraftingRecipe(is,
             "xxx",
             "byb",
             "aza",
@@ -210,14 +221,16 @@ public class EnergyCore
             'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
         }
         
-        if(solarPanelId > 0)
+        if(machineAlphaId > 0)
         {
-            solarPanel = new BlockSolarPanel(solarPanelId).setBlockName("cdeSolarPanel").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
-            GameRegistry.registerBlock(solarPanel, "cdeSolarPanel");
-            LanguageRegistry.addName(solarPanel, "Solar Panel");
+            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 5);
+            
+            cde.api.Blocks.machineSolarPanel = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[5]);
             GameRegistry.registerTileEntity(TileEntitySolarPanel.class, "cdeSolarPanelTile");
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(solarPanel.blockID, 1, 0),
+            Ic2Recipes.addCraftingRecipe(is,
             "aba",
             "bab",
             "cdc",
@@ -227,14 +240,16 @@ public class EnergyCore
             'd', new ItemStack(Items.getItem("generator").itemID, 1, 0));
         }
                 
-        if(transformerId > 0)
+        if(machineAlphaId > 0)
         {
-            transformer = new BlockTransformer(transformerId).setBlockName("cdeTransformer").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
-            GameRegistry.registerBlock(transformer, "cdeTransformer");
-            LanguageRegistry.addName(transformer, "Transformer");
+            ItemStack is = new ItemStack(machineAlpha.blockID, 1, 6);
+            
+            cde.api.Blocks.machineTransformer = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[6]);
             GameRegistry.registerTileEntity(TileEntityTransformer.class, "cdeTransformerTile");
             
-            Ic2Recipes.addCraftingRecipe(new ItemStack(transformer.blockID, 1, 0),
+            Ic2Recipes.addCraftingRecipe(is,
             "xxx",
             "byb",
             "aza",
