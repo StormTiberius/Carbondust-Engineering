@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core.base.item;
+package cde.core.item;
 
 import cde.CDECore;
 import cde.core.Namings;
