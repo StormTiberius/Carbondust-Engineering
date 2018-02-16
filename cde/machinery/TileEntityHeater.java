@@ -3,9 +3,9 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
-import cde.EnergyCore;
+import cde.MachineryCore;
 import ic2.api.Direction;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergyTile;
@@ -138,12 +138,12 @@ public class TileEntityHeater extends TileEntityMachine implements IEnergySink
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * EnergyCore.heaterVolume;
+        return 1.0F / 100 * MachineryCore.heaterVolume;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * EnergyCore.heaterPitch;
+        return 1.0F / 100 * MachineryCore.heaterPitch;
     }
 }

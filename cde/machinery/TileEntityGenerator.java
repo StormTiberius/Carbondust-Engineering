@@ -3,13 +3,13 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
 import buildcraft.api.power.IPowerProvider;
 import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.power.PowerFramework;
 import buildcraft.api.transport.IPipeConnection;
-import cde.EnergyCore;
+import cde.MachineryCore;
 import ic2.api.Direction;
 import ic2.api.energy.event.EnergyTileSourceEvent;
 import ic2.api.energy.tile.IEnergyConductor;
@@ -173,12 +173,12 @@ public class TileEntityGenerator extends TileEntityMachine implements IEnergySou
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * EnergyCore.generatorVolume;
+        return 1.0F / 100 * MachineryCore.generatorVolume;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * EnergyCore.generatorPitch;
+        return 1.0F / 100 * MachineryCore.generatorPitch;
     }
 }

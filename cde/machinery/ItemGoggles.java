@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
 import ic2.api.ElectricItem;
 import ic2.api.IElectricItem;

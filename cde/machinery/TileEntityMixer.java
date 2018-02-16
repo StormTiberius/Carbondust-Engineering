@@ -3,9 +3,9 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
-import cde.EnergyCore;
+import cde.MachineryCore;
 import ic2.api.Direction;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergyTile;
@@ -28,7 +28,7 @@ public class TileEntityMixer extends TileEntityMachine implements IEnergySink
     
     public TileEntityMixer()
     {
-        indigoDyeId = EnergyCore.getItemId(2);
+        indigoDyeId = MachineryCore.getItemId(2);
     }
     
     @Override
@@ -184,12 +184,12 @@ public class TileEntityMixer extends TileEntityMachine implements IEnergySink
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * EnergyCore.mixerVolume;
+        return 1.0F / 100 * MachineryCore.mixerVolume;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * EnergyCore.mixerPitch;
+        return 1.0F / 100 * MachineryCore.mixerPitch;
     }
 }

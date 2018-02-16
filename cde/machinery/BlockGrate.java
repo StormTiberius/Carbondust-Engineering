@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
 import cde.CDECore;
 import net.minecraft.block.Block;

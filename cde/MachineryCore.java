@@ -6,17 +6,17 @@
 package cde;
 
 import cde.core.Namings;
-import cde.energy.BlockMachineAlpha;
-import cde.energy.BlockGrate;
-import cde.energy.ItemGoggles;
-import cde.energy.ItemMachineAlpha;
-import cde.energy.TileEntityGenerator;
-import cde.energy.TileEntityHeater;
-import cde.energy.TileEntityMixer;
-import cde.energy.TileEntityPump;
-import cde.energy.TileEntitySolarPanel;
-import cde.energy.TileEntityTransformer;
-import cde.energy.TileEntityTurbine;
+import cde.machinery.BlockMachineAlpha;
+import cde.machinery.BlockGrate;
+import cde.machinery.ItemGoggles;
+import cde.machinery.ItemMachineAlpha;
+import cde.machinery.TileEntityGenerator;
+import cde.machinery.TileEntityHeater;
+import cde.machinery.TileEntityMixer;
+import cde.machinery.TileEntityPump;
+import cde.machinery.TileEntitySolarPanel;
+import cde.machinery.TileEntityTransformer;
+import cde.machinery.TileEntityTurbine;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -38,9 +38,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import railcraft.common.api.core.items.ItemRegistry;
 
-@Mod(modid="CDE|Energy", name="Energy", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|Machinery", name="Machinery", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
-public class EnergyCore
+public class MachineryCore
 {
     private static Configuration cfg;
     private static int machineAlphaId,grateId,gogglesId;
@@ -53,7 +53,7 @@ public class EnergyCore
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
     {
-        cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/energy.cfg"));
+        cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/machinery.cfg"));
         cfg.load();
         
         machineAlphaId = cfg.get(Configuration.CATEGORY_BLOCK, "machinealphaid", 182).getInt();

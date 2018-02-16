@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
 import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;

@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

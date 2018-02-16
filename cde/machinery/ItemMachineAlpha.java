@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
 import cde.core.Namings;
 import java.util.List;

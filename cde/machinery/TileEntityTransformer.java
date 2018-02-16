@@ -3,9 +3,9 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
-import cde.EnergyCore;
+import cde.MachineryCore;
 import ic2.api.Direction;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergyTile;
@@ -25,8 +25,8 @@ public class TileEntityTransformer extends TileEntityMachine implements IEnergyS
     
     public TileEntityTransformer()
     {
-        batteryEmptyId = EnergyCore.getItemId(0);
-        batteryFullId = EnergyCore.getItemId(1);
+        batteryEmptyId = MachineryCore.getItemId(0);
+        batteryFullId = MachineryCore.getItemId(1);
     }
         
     @Override
@@ -139,12 +139,12 @@ public class TileEntityTransformer extends TileEntityMachine implements IEnergyS
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * EnergyCore.transformerVolume;
+        return 1.0F / 100 * MachineryCore.transformerVolume;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * EnergyCore.transformerPitch;
+        return 1.0F / 100 * MachineryCore.transformerPitch;
     }
 }

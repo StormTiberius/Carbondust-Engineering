@@ -3,10 +3,10 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
 import buildcraft.api.transport.IPipeConnection;
-import cde.EnergyCore;
+import cde.MachineryCore;
 import ic2.api.Direction;
 import ic2.api.energy.tile.IEnergyConductor;
 import ic2.api.energy.tile.IEnergySink;
@@ -89,7 +89,7 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
             counter = 0;
             flags = 0;
             
-            if(worldObj.getBlockId(xCoord, yCoord - 1, zCoord) == EnergyCore.grate.blockID)
+            if(worldObj.getBlockId(xCoord, yCoord - 1, zCoord) == MachineryCore.grate.blockID)
             {
                 flags++;
             }
@@ -283,12 +283,12 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * EnergyCore.pumpVolume;
+        return 1.0F / 100 * MachineryCore.pumpVolume;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * EnergyCore.pumpPitch;
+        return 1.0F / 100 * MachineryCore.pumpPitch;
     }
 }

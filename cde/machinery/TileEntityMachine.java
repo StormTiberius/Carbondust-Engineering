@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.energy;
+package cde.machinery;
 
 import cde.core.sound.TileEntityWithSound;
 import ic2.api.energy.event.EnergyTileLoadEvent;
