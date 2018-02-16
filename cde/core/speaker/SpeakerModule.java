@@ -6,6 +6,7 @@
 package cde.core.speaker;
 
 import cde.CDECore;
+import cde.core.Defaults;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -55,7 +56,7 @@ public class SpeakerModule
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/speaker.cfg"));
         cfg.load();
         
-        speakerId = cfg.get(Configuration.CATEGORY_BLOCK, "speaker", 190).getInt();
+        speakerId = cfg.get(Configuration.CATEGORY_BLOCK, "speaker", Defaults.BLOCK_SPEAKER_ID).getInt();
         
         sounds = cfg.get(Configuration.CATEGORY_GENERAL, "sounds", DEFAULT_SOUNDS, "Sound File Names").valueList;
         volumes = cfg.get(Configuration.CATEGORY_GENERAL, "volumes", DEFAULT_VOLUMES, "Sound Volumes").getIntList();
