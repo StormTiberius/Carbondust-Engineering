@@ -9,6 +9,7 @@ import cde.api.Blocks;
 import cde.api.Materials;
 import cde.core.CommonProxy;
 import cde.core.CreativeTabCDE;
+import cde.core.Defaults;
 import cde.core.FuelManager;
 import cde.core.Namings;
 import cde.core.RecipeManager;
@@ -79,10 +80,10 @@ public class CDECore
         sounds = cfg.get(Configuration.CATEGORY_GENERAL, "sounds", true, "Enable/Disable CDE Sounds").getBoolean(false);
         altRainSounds = cfg.get(Configuration.CATEGORY_GENERAL, "rain", true, "MC 1.9 Rain Sounds").getBoolean(false);
         
-        oreBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "oreblockid", 180).getInt();
-        storageBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "storageblockid", 181).getInt();
+        oreBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "oreblockid", Defaults.BLOCK_ORE_ID).getInt();
+        storageBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "storageblockid", Defaults.BLOCK_STORAGE_ID).getInt();
         
-        materialsItemId = cfg.get(Configuration.CATEGORY_ITEM, "materialsitemid", 501).getInt() + ID_SHIFT;
+        materialsItemId = cfg.get(Configuration.CATEGORY_ITEM, "materialsitemid", Defaults.ITEM_MATERIALS_ID).getInt() + ID_SHIFT;
         
         apatiteId = materialsItemId;
         apatiteMeta = 40;

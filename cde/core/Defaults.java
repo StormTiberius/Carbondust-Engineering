@@ -7,6 +7,14 @@ package cde.core;
 
 public class Defaults
 {
+    public static final int BLOCK_ORE_ID = 180;
+    public static final int BLOCK_STORAGE_ID = 181;
+    public static final int BLOCK_MACHINERY_ALPHA_ID = 182;
+    public static final int BLOCK_GRATE_ID = 183;
+    
+    public static final int ITEM_MATERIALS_ID = 500;
+    public static final int ITEM_GOGGLES_ID = 501;
+    
     public static final int PEAT_FUEL_VALUE = 2000;
     public static final int BITUMINOUS_PEAT_FUEL_VALUE = 4200;
     public static final int COKE_FUEL_VALUE = 6400;

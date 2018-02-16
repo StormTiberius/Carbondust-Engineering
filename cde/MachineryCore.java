@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.core.Defaults;
 import cde.core.Namings;
 import cde.machinery.BlockMachineAlpha;
 import cde.machinery.BlockGrate;
@@ -56,11 +57,11 @@ public class MachineryCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/machinery.cfg"));
         cfg.load();
         
-        machineAlphaId = cfg.get(Configuration.CATEGORY_BLOCK, "machinealphaid", 182).getInt();
+        machineAlphaId = cfg.get(Configuration.CATEGORY_BLOCK, "machinealphaid", Defaults.BLOCK_MACHINERY_ALPHA_ID).getInt();
         
-        grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grateid", 189).getInt();
+        grateId = cfg.get(Configuration.CATEGORY_BLOCK, "grateid", Defaults.BLOCK_GRATE_ID).getInt();
         
-        gogglesId = cfg.get(Configuration.CATEGORY_ITEM, "gogglesid", 500).getInt() + CDECore.ID_SHIFT;
+        gogglesId = cfg.get(Configuration.CATEGORY_ITEM, "gogglesid", Defaults.ITEM_GOGGLES_ID).getInt() + CDECore.ID_SHIFT;
         
         // Individual Machine Sound Settings.
         
