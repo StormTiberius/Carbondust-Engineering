@@ -16,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class SpeakerModule
@@ -69,10 +70,11 @@ public class SpeakerModule
     {   
         if(speakerId > 0)
         {
-            speaker = new BlockSpeaker(speakerId).setBlockName("cdeSpeaker").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
+            speaker = new BlockSpeaker(speakerId).setBlockName("cdeSpeaker").setCreativeTab(CDECore.TAB_CDE).setHardness(2.0F);
             GameRegistry.registerBlock(speaker, "cdeSpeaker");
             LanguageRegistry.addName(speaker, "Speaker");
             GameRegistry.registerTileEntity(TileEntitySpeaker.class, "cdeSpeakerTile");
+            MinecraftForge.setBlockHarvestLevel(speaker, "axe", 1);
             
             GameRegistry.addRecipe(new ShapedOreRecipe(speaker,
             "xxx",

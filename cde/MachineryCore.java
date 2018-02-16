@@ -136,7 +136,7 @@ public class MachineryCore
         
         if(machineAlphaId > 0)
         {
-            machineAlpha = new BlockMachineAlpha(machineAlphaId).setBlockName("cdeMachineAlpha").setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
+            machineAlpha = new BlockMachineAlpha(machineAlphaId).setBlockName("cdeMachineAlpha").setCreativeTab(CDECore.TAB_CDE).setHardness(3.5F);
             GameRegistry.registerBlock(machineAlpha, ItemMachineAlpha.class, "cdeMachineAlpha");
 
             MinecraftForge.setBlockHarvestLevel(machineAlpha, "pickaxe", 1);
@@ -289,7 +289,7 @@ public class MachineryCore
         
         if(grateId > 0)
         {
-            grate = new BlockGrate(grateId).setBlockName(Namings.INTERNAL_GRATE_NAME).setCreativeTab(CDECore.TAB_CDE).setHardness(0.5F);
+            grate = new BlockGrate(grateId).setBlockName(Namings.INTERNAL_GRATE_NAME).setCreativeTab(CDECore.TAB_CDE).setHardness(3.5F);
             GameRegistry.registerBlock(grate, Namings.INTERNAL_GRATE_NAME);
             LanguageRegistry.addName(grate, Namings.EXTERNAL_GRATE_NAME);
             
