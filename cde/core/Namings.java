@@ -35,7 +35,7 @@ public class Namings
         "dustSulfur",
         "dustSaltpeter",
         "dustQuartz",
-        "dustApatite",
+        "dustFertilizer",
         "dustYellowcake",
         
         "nuggetIron",

@@ -9,57 +9,52 @@ import net.minecraft.item.ItemStack;
 
 public class Materials
 {
-    ItemStack ingotCopper;
-    ItemStack ingotTin;
-    ItemStack ingotZinc;
-    ItemStack ingotSilver;
-    ItemStack ingotLead;
-    ItemStack ingotUranium;
-    ItemStack ingotBronze;
-    ItemStack ingotBrass;
-    ItemStack ingotSteel;
+    public static ItemStack ingotCopper;
+    public static ItemStack ingotTin;
+    public static ItemStack ingotZinc;
+    public static ItemStack ingotSilver;
+    public static ItemStack ingotLead;
+    public static ItemStack ingotUranium;
+    public static ItemStack ingotBronze;
+    public static ItemStack ingotBrass;
+    public static ItemStack ingotSteel;
     
-    ItemStack Peat;
-    ItemStack BituminousPeat;
+    public static ItemStack fuelPeat;
+    public static ItemStack fuelBituminousPeat;
     
-    ItemStack dustCoal;
-    ItemStack dustCharcoal;
-    ItemStack dustIron;
-    ItemStack dustGold;
-    ItemStack dustCopper;
-    ItemStack dustTin;
-    ItemStack dustZinc;
-    ItemStack dustSilver;
-    ItemStack dustLead;
-    ItemStack dustBronze;
-    ItemStack dustBrass;
-    ItemStack dustSulfur;
-    ItemStack dustSaltpeter;
-    ItemStack dustQuartz;
-    ItemStack dustFertilizer;
-    ItemStack dustYellowcake;
+    public static ItemStack dustCoal;
+    public static ItemStack dustCharcoal;
+    public static ItemStack dustIron;
+    public static ItemStack dustGold;
+    public static ItemStack dustCopper;
+    public static ItemStack dustTin;
+    public static ItemStack dustZinc;
+    public static ItemStack dustSilver;
+    public static ItemStack dustLead;
+    public static ItemStack dustBronze;
+    public static ItemStack dustBrass;
+    public static ItemStack dustSulfur;
+    public static ItemStack dustSaltpeter;
+    public static ItemStack dustQuartz;
+    public static ItemStack dustFertilizer;
+    public static ItemStack dustYellowcake;
     
-    ItemStack nuggetIron;
-    ItemStack nuggetCopper;
-    ItemStack nuggetTin;
-    ItemStack nuggetZinc;
-    ItemStack nuggetSilver;
-    ItemStack nuggetLead;
-    ItemStack nuggetBronze;
-    ItemStack nuggetBrass;
-    ItemStack nuggetSteel;
+    public static ItemStack nuggetIron;
+    public static ItemStack nuggetCopper;
+    public static ItemStack nuggetTin;
+    public static ItemStack nuggetZinc;
+    public static ItemStack nuggetSilver;
+    public static ItemStack nuggetLead;
+    public static ItemStack nuggetBronze;
+    public static ItemStack nuggetBrass;
+    public static ItemStack nuggetSteel;
     
-    ItemStack gemRuby;
-    ItemStack gemJade;
-    ItemStack gemSapphire;
-    ItemStack gemQuartz;
-    ItemStack gemApatite;
+    public static ItemStack gemRuby;
+    public static ItemStack gemJade;
+    public static ItemStack gemSapphire;
+    public static ItemStack gemQuartz;
+    public static ItemStack gemApatite;
     
-    ItemStack fuelCoke;
-    ItemStack fuelUranium;
-    
-    private void joh()
-    {
-        
-    }
+    public static ItemStack fuelCoke;
+    public static ItemStack fuelUranium;
  }

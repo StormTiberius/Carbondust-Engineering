@@ -5,6 +5,8 @@
 
 package cde;
 
+import cde.api.Blocks;
+import cde.api.Materials;
 import cde.core.CommonProxy;
 import cde.core.CreativeTabCDE;
 import cde.core.FuelManager;
@@ -145,6 +147,54 @@ public class CDECore
             for(int i = 0; i < Namings.EXTERNAL_PART_ITEM_NAMES.length; i++)
             {              
                 ItemStack is = new ItemStack(materialsItem.itemID, 1, i);
+                
+                switch(i)
+                {
+                    case 0: Materials.ingotCopper = is; break;
+                    case 1: Materials.ingotTin = is; break;
+                    case 2: Materials.ingotZinc = is; break;
+                    case 3: Materials.ingotSilver = is; break;
+                    case 4: Materials.ingotLead = is; break;
+                    case 5: Materials.ingotUranium = is; break;
+                    case 6: Materials.ingotBronze = is; break;
+                    case 7: Materials.ingotBrass = is; break;
+                    case 8: Materials.ingotSteel = is; break;
+                    case 9: Materials.fuelPeat = is; break;
+                    case 10: Materials.fuelBituminousPeat = is; break;
+                    case 11: Materials.dustCoal = is; break;
+                    case 12: Materials.dustCharcoal = is; break;
+                    case 13: Materials.dustIron = is; break;
+                    case 14: Materials.dustGold = is; break;
+                    case 15: Materials.dustCopper = is; break;
+                    case 16: Materials.dustTin = is; break;
+                    case 17: Materials.dustZinc = is; break;
+                    case 18: Materials.dustSilver = is; break;
+                    case 19: Materials.dustLead = is; break;
+                    case 20: Materials.dustBronze = is; break;
+                    case 21: Materials.dustBrass = is; break;
+                    case 22: Materials.dustSulfur = is; break;
+                    case 23: Materials.dustSaltpeter = is; break;
+                    case 24: Materials.dustQuartz = is; break;
+                    case 25: Materials.dustFertilizer = is; break;
+                    case 26: Materials.dustYellowcake = is; break;
+                    case 27: Materials.nuggetIron = is; break;
+                    case 28: Materials.nuggetCopper = is; break;
+                    case 29: Materials.nuggetTin = is; break;
+                    case 30: Materials.nuggetZinc = is; break;
+                    case 31: Materials.nuggetSilver = is; break;
+                    case 32: Materials.nuggetLead = is; break;
+                    case 33: Materials.nuggetBronze = is; break;
+                    case 34: Materials.nuggetBrass = is; break;
+                    case 35: Materials.nuggetSteel = is; break;
+                    case 36: Materials.gemRuby = is; break;
+                    case 37: Materials.gemJade = is; break;
+                    case 38: Materials.gemSapphire = is; break;
+                    case 39: Materials.gemQuartz = is; break;
+                    case 40: Materials.gemApatite = is; break;
+                    case 41: Materials.fuelCoke = is; break;
+                    case 42: Materials.fuelUranium = is; break;
+                }
+                
                 LanguageRegistry.addName(is, Namings.EXTERNAL_PART_ITEM_NAMES[i]);
                 OreDictionary.registerOre(is.getItemName(), is);
             }
@@ -166,6 +216,24 @@ public class CDECore
             for(int i = 0; i < Namings.EXTERNAL_ORE_BLOCK_NAMES.length; i++)
             {              
                 ItemStack is = new ItemStack(oreBlock.blockID, 1, i);
+                
+                switch(i)
+                {
+                    case 0: Blocks.oreCopper = is; break;
+                    case 1: Blocks.oreTin = is; break;
+                    case 2: Blocks.oreZinc = is; break;
+                    case 3: Blocks.oreSilver = is; break;
+                    case 4: Blocks.oreLead = is; break;
+                    case 5: Blocks.oreUranium = is; break;
+                    case 6: Blocks.oreSulfur = is; break;
+                    case 7: Blocks.oreSaltpeter = is; break;
+                    case 8: Blocks.oreQuartz = is; break;
+                    case 9: Blocks.oreRuby = is; break;
+                    case 10: Blocks.oreJade = is; break;
+                    case 11: Blocks.oreSapphire = is; break;
+                    case 12: Blocks.oreApatite = is; break;
+                }
+                
                 LanguageRegistry.addName(is, Namings.EXTERNAL_ORE_BLOCK_NAMES[i]);
                 OreDictionary.registerOre(is.getItemName(), is);
             }
@@ -194,6 +262,23 @@ public class CDECore
             for(int i = 0; i < Namings.EXTERNAL_STORAGE_BLOCK_NAMES.length; i++)
             {                
                 ItemStack is = new ItemStack(storageBlock.blockID, 1, i);
+                
+                switch(i)
+                {
+                    case 0: Blocks.blockCopper = is; break;
+                    case 1: Blocks.blockTin = is; break;
+                    case 2: Blocks.blockZinc = is; break;
+                    case 3: Blocks.blockSilver = is; break;
+                    case 4: Blocks.blockLead = is; break;
+                    case 5: Blocks.blockUranium = is; break;
+                    case 6: Blocks.blockBronze = is; break;
+                    case 7: Blocks.blockBrass = is; break;
+                    case 8: Blocks.blockSteel = is; break;
+                    case 9: Blocks.blockRuby = is; break;
+                    case 10: Blocks.blockJade = is; break;
+                    case 11: Blocks.blockSapphire = is; break;
+                }
+                
                 LanguageRegistry.addName(is, Namings.EXTERNAL_STORAGE_BLOCK_NAMES[i]);
                 OreDictionary.registerOre(is.getItemName(), is);
             }
