@@ -1,6 +1,8 @@
 package cde.core.block;
 
 import cde.CDECore;
+import cde.api.Blocks;
+import cde.api.Materials;
 import cde.core.Defaults;
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,7 +22,7 @@ public class BlockOre extends Block
     @Override
     public int idDropped(int meta, Random random, int fortune)
     {
-        if(meta == 12)
+        if(meta == Blocks.oreApatite.getItemDamage())
         {
             return CDECore.apatiteId;
         }
@@ -39,14 +41,13 @@ public class BlockOre extends Block
     {
         switch(meta)
         {
-            case 5: return 42;
-            case 6: return 22;
-            case 7: return 23;
-            case 8: return 39;
-            case 9: return 36;
-            case 10: return 37;
-            case 11: return 38;
-            case 12: return CDECore.apatiteMeta;
+            case 5: return Materials.dustSulfur.getItemDamage();
+            case 6: return Materials.dustSaltpeter.getItemDamage();
+            case 7: return Materials.gemQuartz.getItemDamage();
+            case 8: return CDECore.apatiteMeta;
+            case 9: return Materials.gemRuby.getItemDamage();
+            case 10: return Materials.gemJade.getItemDamage();
+            case 11: return Materials.gemSapphire.getItemDamage();
             default: return meta;
         }
     }
@@ -62,23 +63,11 @@ public class BlockOre extends Block
     {
         switch(meta)
         {
-            case 6: return 2 + random.nextInt(4) + random.nextInt(fortune + 1);
-            case 7: return 1 + random.nextInt(2) + random.nextInt(fortune + 1);
-            case 8: return 1 + Math.abs(random.nextInt()) % (1 + fortune);
-            case 9:
-            case 10:
-
-            case 11:
-                int i = random.nextInt(fortune + 2) - 1;
+            case 5: return 2 + random.nextInt(4) + random.nextInt(fortune + 1);
+            case 6: return 1 + random.nextInt(2) + random.nextInt(fortune + 1);
+            case 7: return 1 + Math.abs(random.nextInt()) % (1 + fortune);
             
-                if(i < 0)
-                {
-                    i = 0;
-                }
-
-                return i + 1;
-
-            case 12:
+            case 8:
                 int fortmod = random.nextInt(fortune + 2) - 1;
             
                 if(fortmod < 0)
@@ -92,6 +81,19 @@ public class BlockOre extends Block
                 {
                     return amount;
                 }
+            
+            case 9:
+            case 10:
+
+            case 11:
+                int i = random.nextInt(fortune + 2) - 1;
+            
+                if(i < 0)
+                {
+                    i = 0;
+                }
+
+                return i + 1;
                 
             default: return quantityDroppedWithBonus(fortune, random);
         }
@@ -130,13 +132,13 @@ public class BlockOre extends Block
         {
             ArrayList<ItemStack> items = getBlockDropped(par1World, par2, par3, par4, par5, par7);
 
-            if(par5 == 8)
+            if(par5 == Blocks.oreQuartz.getItemDamage())
             {
                 int amount = Math.abs(par1World.rand.nextInt()) % (3 + par7);
                 
                 if(amount > 0)
                 {
-                    items.add(new ItemStack(CDECore.materialsItem.itemID, amount, 24));
+                    items.add(new ItemStack(Materials.dustQuartz.itemID, amount, Materials.dustQuartz.getItemDamage()));
                 }
             }
             
@@ -155,14 +157,13 @@ public class BlockOre extends Block
 
             switch(par5)
             {
-                case 5: var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 1, 3); break; // Uranium
-                case 6:
-                case 7: var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 2, 5); break; // Sulfur & Saltpeter
-                case 8: var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 1, 5); break; // Quartz
+                case 5:
+                case 6: var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 2, 5); break; // Sulfur & Saltpeter
+                case 7: var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 1, 5); break; // Quartz
+                case 8: var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 1, 4); break; // Apatite
                 case 9:
                 case 10:
                 case 11: var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 3, 7); break; // Gems // Nikolite 1 to 5
-                case 12: var8 = MathHelper.getRandomIntegerInRange(par1World.rand, 1, 4); break; // Apatite
             }
             
             this.dropXpOnBlockBreak(par1World, par2, par3, par4, var8);

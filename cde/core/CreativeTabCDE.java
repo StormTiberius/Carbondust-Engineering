@@ -1,6 +1,6 @@
 package cde.core;
 
-import cde.CDECore;
+import cde.api.Materials;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -14,7 +14,7 @@ public class CreativeTabCDE extends CreativeTabs
     @Override
     public ItemStack getIconItemStack()
     {
-        return new ItemStack(CDECore.materialsItem.itemID, 1, 11);
+        return Materials.dustCoal;
     }
 	
     @Override
