@@ -5,6 +5,7 @@
 
 package cde.machinery;
 
+import cde.core.Defaults;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.tileentity.TileEntity;
@@ -62,7 +63,7 @@ public class BlockMachineAlpha extends BlockMachine
             case 4: return getMixerTexture(par1IBlockAccess, x, y, z, side);
             case 5: return getSolarPanelTexture(par1IBlockAccess, x, y, z, side);
             case 6: return getTransformerTexture(par1IBlockAccess, x, y, z, side);
-            default: return 4;
+            default: return 0;
         }
     }
     
@@ -78,7 +79,7 @@ public class BlockMachineAlpha extends BlockMachine
             case 4: return getMixerTextureFromSide(side);
             case 5: return getSolarPanelTextureFromSide(side);
             case 6: return getTransformerTextureFromSide(side);
-            default: return 4;
+            default: return 0;
         }
     }
     
@@ -86,13 +87,13 @@ public class BlockMachineAlpha extends BlockMachine
     {
         switch(side)
         {
-            case 0: return 8;
-            case 1: return 4;
-            case 2: return 2;
-            case 3: return 2;
-            case 4: return 2;
-            case 5: return 2;
-            default: return 4;
+            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+            case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 2: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_OFF;
+            case 3: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_OFF;
+            case 4: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_OFF;
+            case 5: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_OFF;
+            default: return 0;
         }
     }
     
@@ -100,13 +101,13 @@ public class BlockMachineAlpha extends BlockMachine
     {
         switch(side)
         {
-            case 0: return 8;
-            case 1: return 11;
-            case 2: return 9;
-            case 3: return 9;
-            case 4: return 9;
-            case 5: return 9;
-            default: return 4;
+            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+            case 1: return Defaults.TEXTURE_MACHINE_TURBINE_TOP_OFF;
+            case 2: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+            case 3: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+            case 4: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+            case 5: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+            default: return 0;
         }
     }
     
@@ -114,13 +115,13 @@ public class BlockMachineAlpha extends BlockMachine
     {
         switch(side)
         {
-            case 0: return 8;
-            case 1: return 10;
-            case 2: return 4;
-            case 3: return 4;
-            case 4: return 4;
-            case 5: return 4;
-            default: return 4;
+            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+            case 1: return Defaults.TEXTURE_MACHINE_HEATER_TOP;
+            case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 5: return Defaults.TEXTURE_MACHINE_SIDE;
+            default: return 0;
         }
     }
     
@@ -128,13 +129,13 @@ public class BlockMachineAlpha extends BlockMachine
     {
         switch(side)
         {
-            case 0: return 8;
-            case 1: return 4;
-            case 2: return 6;
-            case 3: return 6;
-            case 4: return 6;
-            case 5: return 6;
-            default: return 4;
+            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+            case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 2: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_OFF;
+            case 3: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_OFF;
+            case 4: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_OFF;
+            case 5: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_OFF;
+            default: return 0;
         }
     }
     
@@ -142,13 +143,13 @@ public class BlockMachineAlpha extends BlockMachine
     {
         switch(side)
         {
-            case 0: return 8;
-            case 1: return 4;
-            case 2: return 13;
-            case 3: return 13;
-            case 4: return 13;
-            case 5: return 13;
-            default: return 4;
+            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+            case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 2: return Defaults.TEXTURE_MACHINE_MIXER_SIDE_OFF;
+            case 3: return Defaults.TEXTURE_MACHINE_MIXER_SIDE_OFF;
+            case 4: return Defaults.TEXTURE_MACHINE_MIXER_SIDE_OFF;
+            case 5: return Defaults.TEXTURE_MACHINE_MIXER_SIDE_OFF;
+            default: return 0;
         }
     }
     
@@ -156,13 +157,13 @@ public class BlockMachineAlpha extends BlockMachine
     {
         switch(side)
         {
-            case 0: return 8;
-            case 1: return 15;
-            case 2: return 4;
-            case 3: return 4;
-            case 4: return 4;
-            case 5: return 4;
-            default: return 4;
+            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+            case 1: return Defaults.TEXTURE_MACHINE_SOLAR_PANEL_TOP;
+            case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 5: return Defaults.TEXTURE_MACHINE_SIDE;
+            default: return 0;
         }
     }
     
@@ -170,13 +171,13 @@ public class BlockMachineAlpha extends BlockMachine
     {
         switch(side)
         {
-            case 0: return 8;
-            case 1: return 0;
-            case 2: return 4;
-            case 3: return 4;
-            case 4: return 4;
-            case 5: return 4;
-            default: return 4;
+            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+            case 1: return Defaults.TEXTURE_MACHINE_TRANSFORMER_TOP_OFF;
+            case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+            case 5: return Defaults.TEXTURE_MACHINE_SIDE;
+            default: return 0;
         }
     }
     
@@ -188,20 +189,20 @@ public class BlockMachineAlpha extends BlockMachine
         {
             if(tem.isConnected(ForgeDirection.getOrientation(side)))
             {
-                return 5;
+                return Defaults.TEXTURE_MACHINE_CONNECTED;
             }
             
             if(tem.isPowered())
             {
                 switch(side)
                 {
-                    case 0: return 8;
-                    case 1: return 4;
-                    case 2: return 3;
-                    case 3: return 3;
-                    case 4: return 3;
-                    case 5: return 3;
-                    default: return 4;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 2: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_ON;
+                    case 3: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_ON;
+                    case 4: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_ON;
+                    case 5: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_ON;
+                    default: return 0;
                 }
             }
         }
@@ -217,20 +218,20 @@ public class BlockMachineAlpha extends BlockMachine
         {
             if(tem.isConnected(ForgeDirection.getOrientation(side)))
             {
-                return 5;
+                return Defaults.TEXTURE_MACHINE_CONNECTED;
             }
             
             if(tem.isPowered())
             {
                 switch(side)
                 {
-                    case 0: return 8;
-                    case 1: return 12;
-                    case 2: return 9;
-                    case 3: return 9;
-                    case 4: return 9;
-                    case 5: return 9;
-                    default: return 4;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_TURBINE_TOP_ON;
+                    case 2: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                    case 3: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                    case 4: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                    case 5: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                    default: return 0;
                 }
             }
         }
@@ -246,20 +247,20 @@ public class BlockMachineAlpha extends BlockMachine
         {
             if(tem.isConnected(ForgeDirection.getOrientation(side)))
             {
-                return 5;
+                return Defaults.TEXTURE_MACHINE_CONNECTED;
             }
             
             if(tem.isPowered())
             {
                 switch(side)
                 {
-                    case 0: return 8;
-                    case 1: return 10;
-                    case 2: return 4;
-                    case 3: return 4;
-                    case 4: return 4;
-                    case 5: return 4;
-                    default: return 4;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_HEATER_TOP;
+                    case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 5: return Defaults.TEXTURE_MACHINE_SIDE;
+                    default: return 0;
                 }
             }
         }
@@ -275,20 +276,20 @@ public class BlockMachineAlpha extends BlockMachine
         {
             if(tem.isConnected(ForgeDirection.getOrientation(side)))
             {
-                return 5;
+                return Defaults.TEXTURE_MACHINE_CONNECTED;
             }
             
             if(tem.isPowered())
             {
                 switch(side)
                 {
-                    case 0: return 8;
-                    case 1: return 4;
-                    case 2: return 7;
-                    case 3: return 7;
-                    case 4: return 7;
-                    case 5: return 7;
-                    default: return 4;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 2: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_ON;
+                    case 3: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_ON;
+                    case 4: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_ON;
+                    case 5: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_ON;
+                    default: return 0;
                 }
             }
         }
@@ -304,20 +305,20 @@ public class BlockMachineAlpha extends BlockMachine
         {
             if(tem.isConnected(ForgeDirection.getOrientation(side)))
             {
-                return 5;
+                return Defaults.TEXTURE_MACHINE_CONNECTED;
             }
             
             if(tem.isPowered())
             {
                 switch(side)
                 {
-                    case 0: return 8;
-                    case 1: return 4;
-                    case 2: return 14;
-                    case 3: return 14;
-                    case 4: return 14;
-                    case 5: return 14;
-                    default: return 4;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 2: return Defaults.TEXTURE_MACHINE_MIXER_SIDE_ON;
+                    case 3: return Defaults.TEXTURE_MACHINE_MIXER_SIDE_ON;
+                    case 4: return Defaults.TEXTURE_MACHINE_MIXER_SIDE_ON;
+                    case 5: return Defaults.TEXTURE_MACHINE_MIXER_SIDE_ON;
+                    default: return 0;
                 }
             }
         }
@@ -333,20 +334,20 @@ public class BlockMachineAlpha extends BlockMachine
         {
             if(!ForgeDirection.getOrientation(side).equals(ForgeDirection.UP) && tem.isConnected(ForgeDirection.getOrientation(side)))
             {
-                return 5;
+                return Defaults.TEXTURE_MACHINE_CONNECTED;
             }
             
             if(tem.isPowered())
             {
                 switch(side)
                 {
-                    case 0: return 8;
-                    case 1: return 15;
-                    case 2: return 4;
-                    case 3: return 4;
-                    case 4: return 4;
-                    case 5: return 4;
-                    default: return 4;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_SOLAR_PANEL_TOP;
+                    case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 5: return Defaults.TEXTURE_MACHINE_SIDE;
+                    default: return 0;
                 }
             }
         }
@@ -362,20 +363,20 @@ public class BlockMachineAlpha extends BlockMachine
         {
             if(tem.isConnected(ForgeDirection.getOrientation(side)))
             {
-                return 5;
+                return Defaults.TEXTURE_MACHINE_CONNECTED;
             }
             
             if(tem.isPowered())
             {
                 switch(side)
                 {
-                    case 0: return 8;
-                    case 1: return 1;
-                    case 2: return 4;
-                    case 3: return 4;
-                    case 4: return 4;
-                    case 5: return 4;
-                    default: return 4;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_TRANSFORMER_TOP_ON;
+                    case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 5: return Defaults.TEXTURE_MACHINE_SIDE;
+                    default: return 0;
                 }
             }
         }

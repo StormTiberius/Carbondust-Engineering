@@ -11,10 +11,10 @@ public class Namings
     {
         "ingotCopper",
         "ingotTin",
-        "ingotZinc",
         "ingotSilver",
         "ingotLead",
         "ingotUranium",
+        "ingotZinc",
         "ingotBronze",
         "ingotBrass",
         "ingotSteel",
@@ -27,26 +27,42 @@ public class Namings
         "dustGold",
         "dustCopper",
         "dustTin",
-        "dustZinc",
         "dustSilver",
         "dustLead",
+        "dustZinc",
         "dustBronze",
         "dustBrass",
         "dustSulfur",
         "dustSaltpeter",
+        "dustApatite",
         "dustQuartz",
-        "dustFertilizer",
         "dustYellowcake",
         
         "nuggetIron",
         "nuggetCopper",
         "nuggetTin",
-        "nuggetZinc",
         "nuggetSilver",
         "nuggetLead",
+        "nuggetZinc",
         "nuggetBronze",
         "nuggetBrass",
         "nuggetSteel",
+        
+        "washedIron",
+        "washedGold",
+        "washedCopper",
+        "washedTin",
+        "washedSilver",
+        "washedLead",
+        "washedUranium",
+        
+        "crushedIron",
+        "crushedGold",
+        "crushedCopper",
+        "crushedTin",
+        "crushedSilver",
+        "crushedLead",
+        "crushedUranium",
         
         "gemRuby",
         "gemJade",
@@ -54,18 +70,17 @@ public class Namings
         "gemQuartz",
         "gemApatite",
         
-        "fuelCoke",
-        "fuelUranium",
+        "fuelCoke"
     };
             
     public static final String[] EXTERNAL_PART_ITEM_NAMES =
     {
         "Copper Ingot",
         "Tin Ingot",
-        "Zinc Ingot",
         "Silver Ingot",
         "Lead Ingot",
         "Uranium Ingot",
+        "Zinc Ingot",
         "Bronze Ingot",
         "Brass Ingot",
         "Steel Ingot",
@@ -78,26 +93,42 @@ public class Namings
         "Gold Dust",
         "Copper Dust",
         "Tin Dust",
-        "Zinc Dust",
         "Silver Dust",
         "Lead Dust",
+        "Zinc Dust",
         "Bronze Dust",
         "Brass Dust",
         "Sulfur Dust",
         "Saltpeter Dust",
-        "Quartz Dust",
         "Fertilizer",
+        "Quartz Dust",
         "Yellowcake",
 
         "Iron Nugget",
         "Copper Nugget",
         "Tin Nugget",
-        "Zinc Nugget",
         "Silver Nugget",
         "Lead Nugget",
+        "Zinc Nugget",
         "Bronze Nugget",
         "Brass Nugget",
         "Steel Nugget",
+
+        "Washed Iron Ore",
+        "Washed Gold Ore",
+        "Washed Copper Ore",
+        "Washed Tin Ore",
+        "Washed Silver Ore",
+        "Washed Lead Ore",
+        "Washed Uranium Ore",
+        
+        "Crushed Iron Ore",
+        "Crushed Gold Ore",
+        "Crushed Copper Ore",
+        "Crushed Tin Ore",
+        "Crushed Silver Ore",
+        "Crushed Lead Ore",
+        "Crushed Uranium Ore",
         
         "Ruby",
         "Jade",
@@ -105,52 +136,49 @@ public class Namings
         "Quartz",
         "Apatite",
        
-        "Coal Coke",
-        "Uranium Ore"
+        "Coal Coke"
     };
                         
     public static final String[] INTERNAL_ORE_BLOCK_NAMES =
     {
         "oreCopper",
         "oreTin",
-        "oreZinc",
         "oreSilver",
         "oreLead",
         "oreUranium",
         "oreSulfur",
         "oreSaltpeter",
         "oreQuartz",
+        "oreApatite",
         "oreRuby",
         "oreJade",
-        "oreSapphire",
-        "oreApatite"
+        "oreSapphire"
     };
         
     public static final String[] EXTERNAL_ORE_BLOCK_NAMES =
     {
         "Copper Ore",
         "Tin Ore",
-        "Zinc Ore",
         "Silver Ore",
         "Lead Ore",
         "Uranium Ore",
         "Sulfur Ore",
         "Saltpeter Ore",
         "Quartz Ore",
+        "Apatite Ore",
         "Ruby Ore",
         "Jade Ore",
-        "Sapphire Ore",
-        "Apatite Ore",
+        "Sapphire Ore"
     };
     
     public static final String[] INTERNAL_STORAGE_BLOCK_NAMES =
     {
         "blockCopper",
         "blockTin",
-        "blockZinc",
         "blockSilver",
         "blockLead",
         "blockUranium",
+        "blockZinc",
         "blockBronze",
         "blockBrass",
         "blockSteel",
@@ -163,10 +191,10 @@ public class Namings
     {
         "Block of Copper",
         "Block of Tin",
-        "Block of Zinc",
         "Block of Silver",
         "Block of Lead",
         "Block of Uranium",
+        "Block of Zinc",
         "Block of Bronze",
         "Block of Brass",
         "Block of Steel",
@@ -207,7 +235,7 @@ public class Namings
         "Transformer"
     };
     
-    public static final String INTERNAL_GOGGLES_NAME = "goggles";
+    public static final String INTERNAL_GOGGLES_NAME = "cdeGoggles";
     public static final String EXTERNAL_GOGGLES_NAME = "Nightvision Goggles";
     
     public static final String INTERNAL_GRATE_NAME = "cdeGrate";

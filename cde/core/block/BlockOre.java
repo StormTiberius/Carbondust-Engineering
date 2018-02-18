@@ -1,6 +1,7 @@
 package cde.core.block;
 
 import cde.CDECore;
+import cde.core.Defaults;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -171,7 +172,22 @@ public class BlockOre extends Block
     @Override
     public int getBlockTextureFromSideAndMetadata(int side, int meta)
     {
-        return 32 + meta;
+        switch(meta)
+        {
+            case 0: return Defaults.TEXTURE_ORE_COPPER;
+            case 1: return Defaults.TEXTURE_ORE_TIN;
+            case 2: return Defaults.TEXTURE_ORE_SILVER;
+            case 3: return Defaults.TEXTURE_ORE_LEAD;
+            case 4: return Defaults.TEXTURE_ORE_URANIUM;
+            case 5: return Defaults.TEXTURE_ORE_SULFUR;
+            case 6: return Defaults.TEXTURE_ORE_SALTPETER;
+            case 7: return Defaults.TEXTURE_ORE_QUARTZ;
+            case 8: return Defaults.TEXTURE_ORE_APATITE;
+            case 9: return Defaults.TEXTURE_ORE_RUBY;
+            case 10: return Defaults.TEXTURE_ORE_JADE;
+            case 11: return Defaults.TEXTURE_ORE_SAPPHIRE;
+            default: return 0;
+        }
     }
     
     @Override
