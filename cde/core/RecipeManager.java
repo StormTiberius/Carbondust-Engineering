@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import railcraft.common.api.crafting.RailcraftCraftingManager;
 
@@ -54,70 +55,70 @@ public class RecipeManager
         GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBrass, 2), "dustCopper", "dustCopper", "dustLead", "dustZinc"));
         
         // Nugget Recipes
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetIron, 9), new ItemStack(Item.ingotIron.itemID, 1, 0));        
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetCopper, 9), Utils.getNewItemStackWithQuantity(Materials.ingotCopper, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetTin, 9), Utils.getNewItemStackWithQuantity(Materials.ingotTin, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetSilver, 9), Utils.getNewItemStackWithQuantity(Materials.ingotSilver, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetLead, 9), Utils.getNewItemStackWithQuantity(Materials.ingotLead, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetZinc, 9), Utils.getNewItemStackWithQuantity(Materials.ingotZinc, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetBronze, 9), Utils.getNewItemStackWithQuantity(Materials.ingotBronze, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetBrass, 9), Utils.getNewItemStackWithQuantity(Materials.ingotBrass, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetSteel, 9), Utils.getNewItemStackWithQuantity(Materials.ingotSteel, 1));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetIron, 9), new ItemStack(Item.ingotIron.itemID, 1, 0)));        
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetCopper, 9), "ingotCopper"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetTin, 9), "ingotTin"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetSilver, 9), "ingotSilver"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetLead, 9), "ingotLead"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetZinc, 9), "ingotZinc"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetBronze, 9), "ingotBronze"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetBrass, 9), "ingotBrass"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetSteel, 9), "ingotSteel"));
 
         // Nugget Reverse Recipes
-        GameRegistry.addRecipe(new ItemStack(Item.ingotIron.itemID, 1, 0), 
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.ingotIron.itemID, 1, 0), 
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetIron, 1));
+        'x', "nuggetIron"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotCopper, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotCopper, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetCopper, 1));
+        'x', "nuggetCopper"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotTin, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotTin, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetTin, 1));
+        'x', "nuggetTin"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotSilver, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotSilver, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetSilver, 1));
+        'x', "nuggetSilver"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotLead, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotLead, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetLead, 1));
+        'x', "nuggetLead"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotZinc, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotZinc, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetZinc, 1));
+        'x', "nuggetZinc"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotBronze, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotBronze, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetBronze, 1));
+        'x', "nuggetBronze"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotBrass, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotBrass, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetBrass, 1));
+        'x', "nuggetBrass"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotSteel, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotSteel, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.nuggetSteel, 1));
+        'x', "nuggetSteel"));
         
         // Storage Block Recipes
         GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageCopper, 1),
