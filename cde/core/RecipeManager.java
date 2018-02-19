@@ -121,91 +121,91 @@ public class RecipeManager
         'x', "nuggetSteel"));
         
         // Storage Block Recipes
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageCopper, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockCopper, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotCopper, 1));
+        'x', "ingotCopper"));
 
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageTin, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockTin, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotTin, 1));
+        'x', "ingotTin"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageSilver, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockSilver, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotSilver, 1));
+        'x', "ingotSilver"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageLead, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockLead, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotLead, 1));
+        'x', "ingotLead"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageUranium, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockUranium, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotUranium, 1));
+        'x', "ingotUranium"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageZinc, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockZinc, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotZinc, 1));      
+        'x', "ingotZinc"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageBronze, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockBronze, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotBronze, 1));
+        'x', "ingotBronze"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageBrass, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockBrass, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotBrass, 1));
+        'x', "ingotBrass"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageSteel, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockSteel, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.ingotSteel, 1));
+        'x', "ingotSteel"));
         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageRuby, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockRuby, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.gemRuby, 1));
+        'x', "gemRuby"));
                 
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageJade, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockJade, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.gemJade, 1));
+        'x', "gemJade"));
                         
-        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.storageSapphire, 1),
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Blocks.blockSapphire, 1),
         "xxx",
         "xxx",
         "xxx",
-        'x', Utils.getNewItemStackWithQuantity(Materials.gemSapphire, 1));
+        'x', "gemSapphire"));
         
         // Reverse Storage Block Recipes
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotCopper, 9), Utils.getNewItemStackWithQuantity(Blocks.storageCopper, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotTin, 9), Utils.getNewItemStackWithQuantity(Blocks.storageTin, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotSilver, 9), Utils.getNewItemStackWithQuantity(Blocks.storageSilver, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotLead, 9), Utils.getNewItemStackWithQuantity(Blocks.storageLead, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotUranium, 9), Utils.getNewItemStackWithQuantity(Blocks.storageUranium, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotZinc, 9), Utils.getNewItemStackWithQuantity(Blocks.storageZinc, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotBronze, 9), Utils.getNewItemStackWithQuantity(Blocks.storageBronze, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotBrass, 9), Utils.getNewItemStackWithQuantity(Blocks.storageBrass, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotSteel, 9), Utils.getNewItemStackWithQuantity(Blocks.storageSteel, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.gemRuby, 9), Utils.getNewItemStackWithQuantity(Blocks.storageRuby, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.gemJade, 9), Utils.getNewItemStackWithQuantity(Blocks.storageJade, 1));
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.gemSapphire, 9), Utils.getNewItemStackWithQuantity(Blocks.storageSapphire, 1));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotCopper, 9), "blockCopper"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotTin, 9), "blockTin"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotSilver, 9), "blockSilver"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotLead, 9), "blockLead"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotUranium, 9), "blockUranium"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotZinc, 9), "blockZinc"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotBronze, 9), "blockBronze"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotBrass, 9), "blockBrass"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.ingotSteel, 9), "blockSteel"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.gemRuby, 9), "blockRuby"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.gemJade, 9), "blockJade"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.gemSapphire, 9), "blockSapphire"));
         
         
         if(ModLoader.isModLoaded("IC2"))
@@ -259,62 +259,62 @@ public class RecipeManager
         
         // for(Object o : copper)
         // {
-        //     Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageCopper, 1));
+        //     Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockCopper, 1));
         // }
         
         // for(Object o : tin)
         // {
-        //     Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageTin, 1));
+        //     Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockTin, 1));
         // }
                 
         // for(Object o : silver)
         // {
-        //     Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageSilver, 1));
+        //     Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockSilver, 1));
         // }
         
         for(Object o : lead)
         {
-            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageLead, 1));
+            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockLead, 1));
         }
                 
         // for(Object o : uranium)
         // {
-        //     Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageUranium, 1));
+        //     Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockUranium, 1));
         // }
         
         for(Object o : zinc)
         {
-            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageZinc, 1));
+            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockZinc, 1));
         }
                                 
         for(Object o : bronze)
         {
-            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageBronze, 1));
+            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockBronze, 1));
         }
                                         
         for(Object o : brass)
         {
-            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageBrass, 1));
+            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockBrass, 1));
         }
                                                 
         for(Object o : steel)
         {
-            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageSteel, 1));
+            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockSteel, 1));
         }
                                                         
         for(Object o : ruby)
         {
-            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageRuby, 1));
+            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockRuby, 1));
         }
                                                                 
         for(Object o : jade)
         {
-            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageJade, 1));
+            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockJade, 1));
         }
         
         for(Object o : sapphire)
         {
-            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.storageSapphire, 1));
+            Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockSapphire, 1));
         }
     }
 }
