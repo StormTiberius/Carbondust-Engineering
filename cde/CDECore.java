@@ -141,7 +141,7 @@ public class CDECore
     {
         if(materialsItemId > 0)
         {
-            materialsItem = (new ItemMaterial(materialsItemId)).setItemName("parts").setCreativeTab(TAB_CDE);
+            materialsItem = (new ItemMaterial(materialsItemId)).setItemName("materials").setCreativeTab(TAB_CDE);
             
             GameRegistry.registerItem(materialsItem, "materials");
             
@@ -285,18 +285,18 @@ public class CDECore
                 
                 switch(i)
                 {
-                    case 0: Blocks.blockCopper = is; break;
-                    case 1: Blocks.blockTin = is; break;
-                    case 2: Blocks.blockSilver = is; break;
-                    case 3: Blocks.blockLead = is; break;
-                    case 4: Blocks.blockUranium = is; break;
-                    case 5: Blocks.blockZinc = is; break;
-                    case 6: Blocks.blockBronze = is; break;
-                    case 7: Blocks.blockBrass = is; break;
-                    case 8: Blocks.blockSteel = is; break;
-                    case 9: Blocks.blockRuby = is; break;
-                    case 10: Blocks.blockJade = is; break;
-                    case 11: Blocks.blockSapphire = is; break;
+                    case 0: Blocks.storageCopper = is; break;
+                    case 1: Blocks.storageTin = is; break;
+                    case 2: Blocks.storageSilver = is; break;
+                    case 3: Blocks.storageLead = is; break;
+                    case 4: Blocks.storageUranium = is; break;
+                    case 5: Blocks.storageZinc = is; break;
+                    case 6: Blocks.storageBronze = is; break;
+                    case 7: Blocks.storageBrass = is; break;
+                    case 8: Blocks.storageSteel = is; break;
+                    case 9: Blocks.storageRuby = is; break;
+                    case 10: Blocks.storageJade = is; break;
+                    case 11: Blocks.storageSapphire = is; break;
                 }
                 
                 LanguageRegistry.addName(is, Namings.EXTERNAL_STORAGE_BLOCK_NAMES[i]);
