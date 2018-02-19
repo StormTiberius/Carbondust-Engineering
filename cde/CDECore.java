@@ -112,8 +112,6 @@ public class CDECore
         WorldGenModule.init(event);
         
         GameRegistry.registerFuelHandler(new FuelManager());
-        
-        RecipeManager.addRecipes();
     }
 
     @PostInit
@@ -129,6 +127,8 @@ public class CDECore
                 apatiteMeta = is.getItemDamage();
             }
         }
+        
+        RecipeManager.addRecipes();
     }
 
     @ServerStarting
