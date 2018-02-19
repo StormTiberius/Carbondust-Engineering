@@ -22,18 +22,18 @@ public class Blocks
     public static ItemStack oreSapphire;
     public static ItemStack oreApatite;
     
-    public static ItemStack storageCopper;
-    public static ItemStack storageTin;
-    public static ItemStack storageSilver;
-    public static ItemStack storageLead;
-    public static ItemStack storageUranium;
-    public static ItemStack storageZinc;
-    public static ItemStack storageBronze;
-    public static ItemStack storageBrass;
-    public static ItemStack storageSteel;
-    public static ItemStack storageRuby;
-    public static ItemStack storageJade;
-    public static ItemStack storageSapphire;
+    public static ItemStack blockCopper;
+    public static ItemStack blockTin;
+    public static ItemStack blockSilver;
+    public static ItemStack blockLead;
+    public static ItemStack blockUranium;
+    public static ItemStack blockZinc;
+    public static ItemStack blockBronze;
+    public static ItemStack blockBrass;
+    public static ItemStack blockSteel;
+    public static ItemStack blockRuby;
+    public static ItemStack blockJade;
+    public static ItemStack blockSapphire;
     
     public static ItemStack machineGenerator;
     public static ItemStack machineTurbine;
