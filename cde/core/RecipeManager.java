@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import railcraft.common.api.crafting.RailcraftCraftingManager;
 
 public class RecipeManager
@@ -47,33 +48,10 @@ public class RecipeManager
         // Iron Nugget -> Steel Nugget
         FurnaceRecipes.smelting().addSmelting(Materials.nuggetIron.itemID, Materials.nuggetIron.getItemDamage(), Utils.getNewItemStackWithQuantity(Materials.nuggetSteel, 1), 0.1F);
         
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBronze, 2),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustTin, 1)
-        );
-        
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBronze, 2),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustLead, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustTin, 1)
-        );
-        
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBrass, 2),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustZinc, 1)
-        );
-                
-        GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBrass, 2),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustLead, 1),
-                Utils.getNewItemStackWithQuantity(Materials.dustZinc, 1)
-        );
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBronze, 2), "dustCopper", "dustCopper", "dustCopper", "dustTin"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBronze, 2), "dustCopper", "dustCopper", "dustLead", "dustTin"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBrass, 2), "dustCopper", "dustCopper", "dustCopper", "dustZinc"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.dustBrass, 2), "dustCopper", "dustCopper", "dustLead", "dustZinc"));
         
         // Nugget Recipes
         GameRegistry.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.nuggetIron, 9), new ItemStack(Item.ingotIron.itemID, 1, 0));        
