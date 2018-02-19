@@ -11,7 +11,6 @@ public class Blocks
 {
     public static ItemStack oreCopper;
     public static ItemStack oreTin;
-    public static ItemStack oreZinc;
     public static ItemStack oreSilver;
     public static ItemStack oreLead;
     public static ItemStack oreUranium;
@@ -25,10 +24,10 @@ public class Blocks
     
     public static ItemStack blockCopper;
     public static ItemStack blockTin;
-    public static ItemStack blockZinc;
     public static ItemStack blockSilver;
     public static ItemStack blockLead;
     public static ItemStack blockUranium;
+    public static ItemStack blockZinc;
     public static ItemStack blockBronze;
     public static ItemStack blockBrass;
     public static ItemStack blockSteel;

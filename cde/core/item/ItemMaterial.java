@@ -87,8 +87,8 @@ public class ItemMaterial extends Item
             case 21: return Defaults.TEXTURE_MATERIAL_DUST_BRASS;
             case 22: return Defaults.TEXTURE_MATERIAL_DUST_SULFUR;
             case 23: return Defaults.TEXTURE_MATERIAL_DUST_SALTPETER;
-            case 24: return Defaults.TEXTURE_MATERIAL_DUST_APATITE;
-            case 25: return Defaults.TEXTURE_MATERIAL_DUST_QUARTZ;
+            case 24: return Defaults.TEXTURE_MATERIAL_DUST_QUARTZ;
+            case 25: return Defaults.TEXTURE_MATERIAL_DUST_APATITE;
             case 26: return Defaults.TEXTURE_MATERIAL_DUST_YELLOWCAKE;
             case 27: return Defaults.TEXTURE_MATERIAL_NUGGET_IRON;
             case 28: return Defaults.TEXTURE_MATERIAL_NUGGET_COPPER;
@@ -113,11 +113,11 @@ public class ItemMaterial extends Item
             case 47: return Defaults.TEXTURE_MATERIAL_CRUSHED_SILVER;
             case 48: return Defaults.TEXTURE_MATERIAL_CRUSHED_LEAD;
             case 49: return Defaults.TEXTURE_MATERIAL_CRUSHED_URANIUM;
-            case 50: return Defaults.TEXTURE_MATERIAL_GEM_RUBY;
-            case 51: return Defaults.TEXTURE_MATERIAL_GEM_JADE;
-            case 52: return Defaults.TEXTURE_MATERIAL_GEM_SAPPHIRE;
-            case 53: return Defaults.TEXTURE_MATERIAL_GEM_QUARTZ;
-            case 54: return Defaults.TEXTURE_MATERIAL_GEM_APATITE;
+            case 50: return Defaults.TEXTURE_MATERIAL_GEM_QUARTZ;
+            case 51: return Defaults.TEXTURE_MATERIAL_GEM_APATITE;
+            case 52: return Defaults.TEXTURE_MATERIAL_GEM_RUBY;
+            case 53: return Defaults.TEXTURE_MATERIAL_GEM_JADE;
+            case 54: return Defaults.TEXTURE_MATERIAL_GEM_SAPPHIRE;
             case 55: return Defaults.TEXTURE_MATERIAL_FUEL_COKE;
             default: return 0;
         }

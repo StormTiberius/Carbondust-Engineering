@@ -34,8 +34,8 @@ public class Namings
         "dustBrass",
         "dustSulfur",
         "dustSaltpeter",
-        "dustApatite",
         "dustQuartz",
+        "dustApatite",
         "dustYellowcake",
         
         "nuggetIron",
@@ -64,11 +64,11 @@ public class Namings
         "crushedLead",
         "crushedUranium",
         
+        "gemQuartz",
+        "gemApatite",
         "gemRuby",
         "gemJade",
         "gemSapphire",
-        "gemQuartz",
-        "gemApatite",
         
         "fuelCoke"
     };
@@ -100,8 +100,8 @@ public class Namings
         "Brass Dust",
         "Sulfur Dust",
         "Saltpeter Dust",
-        "Fertilizer",
         "Quartz Dust",
+        "Fertilizer",
         "Yellowcake",
 
         "Iron Nugget",
@@ -130,11 +130,11 @@ public class Namings
         "Crushed Lead Ore",
         "Crushed Uranium Ore",
         
+        "Quartz",
+        "Apatite",
         "Ruby",
         "Jade",
         "Sapphire",
-        "Quartz",
-        "Apatite",
        
         "Coal Coke"
     };
