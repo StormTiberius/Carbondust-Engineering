@@ -15,6 +15,17 @@ import net.minecraftforge.common.DungeonHooks;
 
 public class WorldGenDungeons extends WorldGenerator
 {
+    private final String LOOT;
+    private final int FLOOR_BLOCK_ID,WALL_BLOCK_ID;
+    
+    public WorldGenDungeons(String loot, int floor, int wall)
+    {
+        LOOT = loot;
+        FLOOR_BLOCK_ID = floor;
+        WALL_BLOCK_ID = wall;
+    }
+    
+    @Override
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         byte var6 = 3;
@@ -69,13 +80,13 @@ public class WorldGenDungeons extends WorldGenerator
                         }
                         else if (par1World.getBlockMaterial(var10, var11, var12).isSolid())
                         {
-                            if (var11 == par4 - 1 && par2Random.nextInt(4) != 0)
+                            if (var11 == par4 - 1)
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, Block.cobblestoneMossy.blockID);
+                                par1World.setBlockWithNotify(var10, var11, var12, FLOOR_BLOCK_ID);
                             }
                             else
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, Block.cobblestone.blockID);
+                                par1World.setBlockWithNotify(var10, var11, var12, WALL_BLOCK_ID);
                             }
                         }
                     }
@@ -128,7 +139,7 @@ public class WorldGenDungeons extends WorldGenerator
 
                                     if (var16 != null)
                                     {
-                                        ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+                                        ChestGenHooks info = ChestGenHooks.getInfo(LOOT);
                                         WeightedRandomChestContent.generateChestContents(par2Random, info.getItems(par2Random), var16, info.getCount(par2Random));
                                     }
 
@@ -146,18 +157,30 @@ public class WorldGenDungeons extends WorldGenerator
                 }
             }
 
-            par1World.setBlockWithNotify(par3, par4, par5, Block.mobSpawner.blockID);
-            TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(par3, par4, par5);
-
-            if (var19 != null)
+            if(!LOOT.equals(ChestGenHooks.BONUS_CHEST))
             {
-                var19.setMobID(this.pickMobSpawner(par2Random));
+                par1World.setBlockWithNotify(par3, par4, par5, Block.mobSpawner.blockID);
+                TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(par3, par4, par5);
+
+                if (var19 != null)
+                {
+                    var19.setMobID(this.pickMobSpawner(par2Random));
+                }
+                else
+                {
+                    System.err.println("Failed to fetch mob spawner entity at (" + par3 + ", " + par4 + ", " + par5 + ")");
+                }
             }
             else
             {
-                System.err.println("Failed to fetch mob spawner entity at (" + par3 + ", " + par4 + ", " + par5 + ")");
-            }
+                par1World.setBlockWithNotify(par3 + 1, par4, par5, Block.torchWood.blockID);
+                par1World.setBlockWithNotify(par3, par4, par5 + 1, Block.torchWood.blockID);
+                par1World.setBlockWithNotify(par3 - 1, par4, par5, Block.torchWood.blockID);
+                par1World.setBlockWithNotify(par3, par4, par5 - 1, Block.torchWood.blockID);
 
+                par1World.setSpawnLocation(par3, par4, par5);
+            }
+            
             return true;
         }
         else
@@ -171,7 +194,7 @@ public class WorldGenDungeons extends WorldGenerator
      */
     private ItemStack pickCheckLootItem(Random par1Random)
     {
-        return ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, par1Random);
+        return ChestGenHooks.getOneItem(LOOT, par1Random);
     }
 
     /**
