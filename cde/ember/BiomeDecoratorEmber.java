@@ -30,7 +30,7 @@ public class BiomeDecoratorEmber extends BiomeDecorator
         this.generateOres();
         
         int var2,var3,var4,var7;
-        
+
         boolean doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, SHROOM);
         if (doGen && this.randomGenerator.nextInt(4) == 0)
         {
@@ -56,7 +56,7 @@ public class BiomeDecoratorEmber extends BiomeDecorator
                 var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
                 var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(120) + 8);
                 var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-                (new WorldGenLiquids(Block.lavaMoving.blockID)).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
+                (new WorldGenLiquids(Block.waterMoving.blockID)).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
             }
 
             for (var2 = 0; var2 < 20; ++var2)
