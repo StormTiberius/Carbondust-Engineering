@@ -5,11 +5,11 @@
 
 package cde.ember;
 
-import cde.ember.dungeons.StarterDungeon;
-import cde.ember.dungeons.VanillaDungeon;
 import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ChestGenHooks;
 
 public class DungeonManager
 {
@@ -19,11 +19,17 @@ public class DungeonManager
         
         if(ck.posX == 0 && ck.posY == 128 && ck.posZ == 0)
         {
-            return new StarterDungeon().generate(world, random, x, y, z);
+            return new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
         }
         else
         {
-            return new VanillaDungeon().generate(world, random, x, y, z);
+            switch(random.nextInt(4))
+            {
+                case 0: return new WorldGenDungeons(ChestGenHooks.PYRAMID_DESERT_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
+                case 1: return new WorldGenDungeons(ChestGenHooks.PYRAMID_JUNGLE_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
+                case 2: return new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
+                default: return new WorldGenDungeons(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
+            }
         }
     }
 }
