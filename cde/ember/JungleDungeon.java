@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DungeonHooks;
 
-public class WorldGenDungeons extends WorldGenerator
+public class JungleDungeon extends WorldGenerator
 {
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
@@ -69,9 +69,9 @@ public class WorldGenDungeons extends WorldGenerator
                         }
                         else if (par1World.getBlockMaterial(var10, var11, var12).isSolid())
                         {
-                            if (var11 == par4 - 1)// && par2Random.nextInt(4) != 0)
+                            if (var11 == par4 - 1 && par2Random.nextInt(4) != 0)
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, Block.grass.blockID);
+                                par1World.setBlockWithNotify(var10, var11, var12, Block.cobblestoneMossy.blockID);
                             }
                             else
                             {
@@ -128,7 +128,7 @@ public class WorldGenDungeons extends WorldGenerator
 
                                     if (var16 != null)
                                     {
-                                        ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH);
+                                        ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
                                         WeightedRandomChestContent.generateChestContents(par2Random, info.getItems(par2Random), var16, info.getCount(par2Random));
                                     }
 
@@ -179,6 +179,6 @@ public class WorldGenDungeons extends WorldGenerator
      */
     private String pickMobSpawner(Random par1Random)
     {
-        return "Pig";// DungeonHooks.getRandomDungeonMob(par1Random);
+        return DungeonHooks.getRandomDungeonMob(par1Random);
     }
 }
