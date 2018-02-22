@@ -1,4 +1,4 @@
-package cde.ember;
+package cde.ember.dungeons;
 
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DungeonHooks;
 
-public class VanillaDungeon extends WorldGenerator
+public class NetherDungeon extends WorldGenerator
 {
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
