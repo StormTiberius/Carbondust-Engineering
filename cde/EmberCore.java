@@ -42,7 +42,7 @@ public class EmberCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/ember.cfg"));
         cfg.load();
         
-        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", true, "Enable/Disable Ember").getBoolean(false);
+        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Ember").getBoolean(false);
         emberId = cfg.get(Configuration.CATEGORY_GENERAL, "emberid", 23, "Ember biome id").getInt();
         
         cfg.save();
@@ -77,7 +77,7 @@ public class EmberCore
         }
         else
         {
-            liquidId = Block.waterMoving.blockID;
+            liquidId = Block.lavaStill.blockID;
         }
     }
 
