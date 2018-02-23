@@ -65,8 +65,8 @@ public class EmberCore
             DimensionManager.unregisterProviderType(0);
             DimensionManager.registerProviderType(0, WorldProviderEmber.class, true);
             
-            DungeonHooks.addDungeonMob("Creeper", 200);
-            DungeonHooks.addDungeonMob("Enderman", 200);
+            DungeonHooks.addDungeonMob("Creeper", 150);
+            DungeonHooks.addDungeonMob("Enderman", 150);
         }
     }
 
