@@ -23,6 +23,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
@@ -63,6 +64,9 @@ public class EmberCore
             
             DimensionManager.unregisterProviderType(0);
             DimensionManager.registerProviderType(0, WorldProviderEmber.class, true);
+            
+            DungeonHooks.addDungeonMob("Creeper", 150);
+            DungeonHooks.addDungeonMob("Enderman", 150);
         }
     }
 
