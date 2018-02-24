@@ -58,6 +58,12 @@ public class WorldProviderEmber extends WorldProvider
         return getSpawnPoint();
     }
     
+    @Override
+    public int getActualHeight()
+    {
+        return 256;
+    }
+        
     @SideOnly(Side.CLIENT)
     @Override
     public boolean getWorldHasVoidParticles()
