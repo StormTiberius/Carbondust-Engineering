@@ -31,7 +31,7 @@ import railcraft.common.api.fuel.FuelManager;
 public class TweakCore
 {
     private static Configuration cfg;
-    private static final boolean[] FLAGS = new boolean[36];
+    private static final boolean[] FLAGS = new boolean[38];
     private static int lavaHeatValue;
     
     @PreInit
@@ -81,6 +81,9 @@ public class TweakCore
         FLAGS[34] = cfg.get(Configuration.CATEGORY_GENERAL, "nightvision", true, "Disable nightvision fading").getBoolean(false);
         
         FLAGS[35] = cfg.get(Configuration.CATEGORY_GENERAL, "dcpfix", true, "Alternate recipe for Dense Copper Plate").getBoolean(false);
+        
+        FLAGS[36] = cfg.get(Configuration.CATEGORY_GENERAL, "netherrack", true, "Netherrack Recipe").getBoolean(false);
+        FLAGS[37] = cfg.get(Configuration.CATEGORY_GENERAL, "soulsand", true, "Soulsand Recipe").getBoolean(false);
         
         cfg.save();
       

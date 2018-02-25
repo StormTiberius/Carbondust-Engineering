@@ -8,6 +8,7 @@ package cde.tweak;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import forestry.api.core.ItemInterface;
+import forestry.api.recipes.RecipeManagers;
 import ic2.api.Ic2Recipes;
 import ic2.api.Items;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.oredict.OreDictionary;
 import railcraft.common.api.core.items.ItemRegistry;
 import railcraft.common.api.crafting.RailcraftCraftingManager;
@@ -130,6 +133,22 @@ public class RecipeManager
                 "xxx",
                 'x', new ItemStack(ItemInterface.getItem("ash").itemID, 1, 0),
                 'y', new ItemStack(Block.sand.blockID, 1, 0));
+            }
+            
+            if(flags[36])
+            {
+                RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), null, new ItemStack(Block.netherrack.blockID, 1, 0), new Object[] {
+                    "x  ",
+                    "   ",
+                    "   ", 'x', new ItemStack(Item.redstone.itemID, 1, 0)});
+            }
+            
+            if(flags[37])
+            {
+                RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), null, new ItemStack(Block.slowSand.blockID, 1, 0), new Object[] {
+                    "xy ",
+                    "   ",
+                    "   ", 'x', new ItemStack(Block.sand.blockID, 1, 0), 'y', new ItemStack(Block.mycelium.blockID, 1, 0)});
             }
         }        
     }
