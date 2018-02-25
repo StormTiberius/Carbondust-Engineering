@@ -224,7 +224,7 @@ public class WorldGenDungeons extends WorldGenerator
                 par1World.setBlockWithNotify(par3 - 1, par4, par5, Block.torchWood.blockID);
                 par1World.setBlockWithNotify(par3, par4, par5 - 1, Block.torchWood.blockID);
 
-                par1World.setSpawnLocation(par3, par4, par5);
+                par1World.provider.setSpawnPoint(par3, par4, par5);
             }
             
             return true;
