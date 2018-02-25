@@ -433,7 +433,7 @@ public class ChunkProviderEmber implements IChunkProvider
             var13 = this.rand.nextInt(this.rand.nextInt(238) + 8);
             var14 = var5 + this.rand.nextInt(16) + 8;
 
-            if (var13 < 127 || this.rand.nextInt(10) == 0)
+            if (var13 < 127 || this.rand.nextInt(5) == 0)
             {
                 (new WorldGenLakes(EmberCore.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
             }
