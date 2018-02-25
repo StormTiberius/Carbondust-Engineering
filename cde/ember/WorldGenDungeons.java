@@ -166,7 +166,7 @@ public class WorldGenDungeons extends WorldGenerator
 
             if(LOOT.equals(ChestGenHooks.VILLAGE_BLACKSMITH))
             {
-                if(ModLoader.isModLoaded("Forestry")) System.out.println(par3 + " " + par4 + " " + par5);
+                if(ModLoader.isModLoaded("Forestry"))
                 {
                     ItemStack beehives = BlockInterface.getBlock("beehives");
 
@@ -192,8 +192,7 @@ public class WorldGenDungeons extends WorldGenerator
                     case 0: animal = new EntityChicken(par1World); break;
                     case 1: animal = new EntityPig(par1World); break;
                     case 2: animal = new EntitySheep(par1World); break;
-                    case 3: animal = new EntityCow(par1World); break;
-                    default: animal = new EntityPig(par1World); break;
+                    default: animal = new EntityCow(par1World); break;
                 }
                 
                 animal.setPosition(par3, par4, par5);
