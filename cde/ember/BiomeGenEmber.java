@@ -31,7 +31,7 @@ public class BiomeGenEmber extends BiomeGenBase
         for (var6 = 0; var6 < var5; ++var6)
         {
             var7 = par3 + par2Random.nextInt(16);
-            var8 = par2Random.nextInt(56) + 4;
+            var8 = par2Random.nextInt(28) + 4;
             int var9 = par4 + par2Random.nextInt(16);
             int var10 = par1World.getBlockId(var7, var8, var9);
 
