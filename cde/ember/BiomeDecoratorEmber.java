@@ -91,15 +91,15 @@ public class BiomeDecoratorEmber extends BiomeDecorator
         if (TerrainGen.generateOre(currentWorld, randomGenerator, coalGen, chunk_X, chunk_Z, COAL))
         this.genStandardOre1(40, this.coalGen, 0, 256);
         if (TerrainGen.generateOre(currentWorld, randomGenerator, ironGen, chunk_X, chunk_Z, IRON))
-        this.genStandardOre1(40, this.ironGen, 0, 128);
+        this.genStandardOre1(40, this.ironGen, 0, 256);
         if (TerrainGen.generateOre(currentWorld, randomGenerator, goldGen, chunk_X, chunk_Z, GOLD))
-        this.genStandardOre1(4, this.goldGen, 0, 64);
+        this.genStandardOre1(4, this.goldGen, 0, 256);
         if (TerrainGen.generateOre(currentWorld, randomGenerator, redstoneGen, chunk_X, chunk_Z, REDSTONE))
-        this.genStandardOre1(16, this.redstoneGen, 0, 32);
+        this.genStandardOre1(16, this.redstoneGen, 0, 256);
         if (TerrainGen.generateOre(currentWorld, randomGenerator, diamondGen, chunk_X, chunk_Z, DIAMOND))
-        this.genStandardOre1(2, this.diamondGen, 0, 32);
+        this.genStandardOre1(2, this.diamondGen, 0, 256);
         if (TerrainGen.generateOre(currentWorld, randomGenerator, lapisGen, chunk_X, chunk_Z, LAPIS))
-        this.genStandardOre2(2, this.lapisGen, 32, 32);
+        this.genStandardOre1(2, this.lapisGen, 0, 256);
         MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Post(currentWorld, randomGenerator, chunk_X, chunk_Z));
     }
 }
