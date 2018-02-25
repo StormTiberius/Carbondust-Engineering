@@ -184,7 +184,7 @@ public class MapGenCaves extends MapGenBase
 
                                             if (var53 == Block.stone.blockID || var53 == Block.dirt.blockID || var53 == Block.grass.blockID)
                                             {
-                                                if (var50 < 10)
+                                                if (var50 < 20)
                                                 {
                                                     par5ArrayOfByte[var48] = (byte)Block.lavaMoving.blockID;
                                                 }

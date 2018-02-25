@@ -171,7 +171,7 @@ public class MapGenRavine extends MapGenBase
 
                                             if (var52 == Block.stone.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID)
                                             {
-                                                if (var49 < 10)
+                                                if (var49 < 20)
                                                 {
                                                     par5ArrayOfByte[var47] = (byte)Block.lavaMoving.blockID;
                                                 }
