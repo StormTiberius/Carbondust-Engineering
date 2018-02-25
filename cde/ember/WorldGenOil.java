@@ -26,7 +26,7 @@ public class WorldGenOil implements IWorldGenerator
 
             if(mediumDeposit || largeDeposit )
             {
-                int yPos = 20 + random.nextInt(216);
+                int yPos = 40 + random.nextInt(20);
 
                 int r = 0;
 
