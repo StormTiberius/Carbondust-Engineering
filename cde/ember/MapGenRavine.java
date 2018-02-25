@@ -34,7 +34,7 @@ public class MapGenRavine extends MapGenBase
 
         float var27 = 1.0F;
 
-        for (int var28 = 0; var28 < 128; ++var28)
+        for (int var28 = 0; var28 < 256; ++var28)
         {
             if (var28 == 0 || var19.nextInt(3) == 0)
             {
@@ -99,9 +99,9 @@ public class MapGenRavine extends MapGenBase
                         var55 = 1;
                     }
 
-                    if (var37 > 120)
+                    if (var37 > 248)
                     {
-                        var37 = 120;
+                        var37 = 248;
                     }
 
                     if (var57 < 0)
@@ -124,9 +124,9 @@ public class MapGenRavine extends MapGenBase
                         {
                             for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
                             {
-                                var44 = (var41 * 16 + var42) * 128 + var43;
+                                var44 = (var41 * 16 + var42) * 256 + var43;
 
-                                if (var43 >= 0 && var43 < 128)
+                                if (var43 >= 0 && var43 < 256)
                                 {
                                     if (par5ArrayOfByte[var44] == Block.waterMoving.blockID || par5ArrayOfByte[var44] == Block.waterStill.blockID)
                                     {
@@ -151,7 +151,7 @@ public class MapGenRavine extends MapGenBase
                             for (var44 = var57; var44 < var39; ++var44)
                             {
                                 double var45 = ((double)(var44 + par4 * 16) + 0.5D - par10) / var53;
-                                int var47 = (var41 * 16 + var44) * 128 + var37;
+                                int var47 = (var41 * 16 + var44) * 256 + var37;
                                 boolean var48 = false;
 
                                 if (var59 * var59 + var45 * var45 < 1.0D)
