@@ -15,11 +15,11 @@ public class DungeonManager
 {
     public static boolean generate(World world, Random random, int x, int y, int z)
     {
-        ChunkCoordinates ck = world.getSpawnPoint();
+        ChunkCoordinates cc = world.getSpawnPoint();
         
-        if(ck.posX == 0 && ck.posY == 128 && ck.posZ == 0)
+        if(cc.posX == 0 && cc.posY == 128 && cc.posZ == 0)
         {
-            return new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.sandStone.blockID, Block.sandStone.blockID).generate(world, random, x, y, z);
+            return new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
         }
         else
         {
