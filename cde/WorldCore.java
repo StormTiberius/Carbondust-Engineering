@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.world.EmberModule;
 import cde.world.WorldEventManager;
 import cde.world.atlantic.BiomeGenAtlantic;
 import cde.world.atlantic.WorldProviderAtlantic;
@@ -71,6 +72,8 @@ public class WorldCore
         beach = (new BiomeGenPacificBeach(beachId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
         ocean = (new BiomeGenPacificOcean(oceanId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);   
         atlantic = (new BiomeGenAtlantic(atlanticId)).setColor(16440917).setBiomeName("Atlantic").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.4F);
+        
+        EmberModule.preInit(event);
     }
 
     @Init
@@ -105,18 +108,20 @@ public class WorldCore
             DimensionManager.registerProviderType(atlanticDimId, WorldProviderAtlantic.class, true);
             DimensionManager.registerDimension(atlanticDimId, atlanticDimId);
         }
+        
+        EmberModule.init(event);
     }
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
-        
+        EmberModule.postInit(event);
     }
 
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
-        
+        EmberModule.serverStarting(event);
     }
     
     public static byte getIslandSize()
