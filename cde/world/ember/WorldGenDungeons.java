@@ -1,4 +1,4 @@
-package cde.ember;
+package cde.world.ember;
 
 import forestry.api.core.BlockInterface;
 import java.util.Random;

@@ -3,9 +3,9 @@
  * @author StormTiberius
  */
 
-package cde.ember;
+package cde.world.ember;
 
-import cde.EmberCore;
+import cde.world.EmberModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
@@ -24,7 +24,7 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerHell(EmberCore.ember, 0.5F, 0.5F);
+        worldChunkMgr = new WorldChunkManagerHell(EmberModule.ember, 0.5F, 0.5F);
         hasNoSky = true;
     }
     

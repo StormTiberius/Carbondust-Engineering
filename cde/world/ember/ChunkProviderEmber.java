@@ -1,6 +1,6 @@
-package cde.ember;
+package cde.world.ember;
 
-import cde.EmberCore;
+import cde.world.EmberModule;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -435,7 +435,7 @@ public class ChunkProviderEmber implements IChunkProvider
 
             if (var13 < 127 || this.rand.nextInt(5) == 0)
             {
-                (new WorldGenLakes(EmberCore.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
+                (new WorldGenLakes(EmberModule.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
             }
         }
 
