@@ -1,4 +1,4 @@
-package cde.tropics.layer;
+package cde.world.pacific.layer;
 
 import cde.WorldCore;
 import net.minecraft.world.WorldType;
