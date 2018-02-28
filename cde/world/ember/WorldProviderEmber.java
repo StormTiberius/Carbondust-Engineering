@@ -8,13 +8,18 @@ package cde.world.ember;
 import cde.world.EmberModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldProviderEmber extends WorldProvider
 {
+    private final String ID = "EmberSpawnLocation";
+    private LocationData ld = new LocationData(ID);
+    
     @Override
     public String getDimensionName()
     {
@@ -25,6 +30,7 @@ public class WorldProviderEmber extends WorldProvider
     protected void registerWorldChunkManager()
     {
         worldChunkMgr = new WorldChunkManagerHell(EmberModule.ember, 0.5F, 0.5F);
+        dimensionId = EmberModule.getDimId();
         hasNoSky = true;
     }
     
@@ -50,6 +56,33 @@ public class WorldProviderEmber extends WorldProvider
     public boolean canCoordinateBeSpawn(int par1, int par2)
     {
         return true;
+    }
+    
+    @Override
+    public void setSpawnPoint(int x, int y, int z)
+    {
+        ld.setSpawn(x, y, z);
+        MinecraftServer.getServer().worldServerForDimension(dimensionId).perWorldStorage.setData(ID, ld);
+    }
+        
+    @Override
+    public ChunkCoordinates getSpawnPoint()
+    {
+        if(ld.isValid())
+        {
+            return ld.getSpawn();
+        }
+        else
+        {
+            WorldSavedData wsd = MinecraftServer.getServer().worldServerForDimension(dimensionId).perWorldStorage.loadData(LocationData.class, ID);
+            
+            if(wsd != null)
+            {
+                ld = (LocationData)wsd;
+            }
+            
+            return ld.getSpawn();
+        }
     }
         
     @Override
