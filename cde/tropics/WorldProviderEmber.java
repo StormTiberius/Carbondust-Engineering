@@ -3,9 +3,9 @@
  * @author StormTiberius
  */
 
-package cde.world.ember;
+package cde.tropics;
 
-import cde.world.EmberModule;
+import cde.TropicsCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
@@ -24,7 +24,7 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerHell(EmberModule.ember, 0.5F, 0.5F);
+        worldChunkMgr = new WorldChunkManagerHell(TropicsCore.ocean, 0.5F, 0.5F);
         hasNoSky = true;
     }
     

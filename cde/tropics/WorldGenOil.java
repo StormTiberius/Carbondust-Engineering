@@ -3,9 +3,9 @@
  * @author StormTiberius
  */
 
-package cde.world.ember;
+package cde.tropics;
 
-import cde.world.EmberModule;
+import cde.TropicsCore;
 import cpw.mods.fml.common.IWorldGenerator;
 import java.util.Random;
 import net.minecraft.world.World;
@@ -19,7 +19,7 @@ public class WorldGenOil implements IWorldGenerator
         int xPos = chunkX * 16;
         int zPos = chunkZ * 16;
         
-        if(world.getBiomeGenForCoords(xPos, zPos).biomeID == EmberModule.ember.biomeID)
+        if(world.getBiomeGenForCoords(xPos, zPos).biomeID == TropicsCore.ocean.biomeID)
         {
             boolean mediumDeposit = random.nextDouble() <= (0.15 / 100.0);
             boolean largeDeposit = random.nextDouble() <= (0.005 / 100.0);
@@ -51,7 +51,7 @@ public class WorldGenOil implements IWorldGenerator
 
                             if(a <= b)
                             {
-                                world.setBlockWithNotify(xPos + x, yPos + y, zPos + z, EmberModule.getLiquidId());
+                                world.setBlockWithNotify(xPos + x, yPos + y, zPos + z, TropicsCore.getLiquidId());
                             }
                         }
                     }

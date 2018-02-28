@@ -1,4 +1,4 @@
-package cde.world.ember;
+package cde.tropics;
 
 import java.util.Random;
 import net.minecraft.block.Block;

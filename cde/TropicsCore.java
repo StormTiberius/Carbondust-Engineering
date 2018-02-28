@@ -8,6 +8,7 @@ package cde;
 import cde.tropics.BiomeGenTropicsBeach;
 import cde.tropics.BiomeGenTropicsIsland;
 import cde.tropics.BiomeGenTropicsOcean;
+import cde.tropics.WorldGenOil;
 import cde.tropics.WorldProviderTropics;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -19,18 +20,24 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 import java.io.File;
+import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.DungeonHooks;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 
 @Mod(modid="CDE|Tropics", name="Tropics", version="1.0.6", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TropicsCore
 {
     private static Configuration cfg;
-    private static int islandSize,islandScarcity,islandId,beachId,oceanId;
+    private static int islandSize,islandScarcity,islandId,beachId,oceanId,liquidId;
     private static boolean dayMode;
     
     public static BiomeGenBase island,beach,ocean;
@@ -67,12 +74,26 @@ public class TropicsCore
 
         DimensionManager.unregisterProviderType(0);
         DimensionManager.registerProviderType(0, WorldProviderTropics.class, true);
+        
+        DungeonHooks.addDungeonMob("Creeper", 150);
+        DungeonHooks.addDungeonMob("Enderman", 150);
+
+        GameRegistry.registerWorldGenerator(new WorldGenOil());
     }
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
-
+        LiquidStack oil = LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME);
+        
+        if(oil != null)
+        {
+            liquidId = oil.itemID;
+        }
+        else
+        {
+            liquidId = Block.lavaStill.blockID;
+        }
     }
 
     @ServerStarting
@@ -109,5 +130,10 @@ public class TropicsCore
     public static boolean isDayMode()
     {        
         return dayMode;
+    }
+    
+    public static int getLiquidId()
+    {
+        return liquidId;
     }
 }
