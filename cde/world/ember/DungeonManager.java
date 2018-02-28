@@ -17,7 +17,7 @@ public class DungeonManager
     {
         ChunkCoordinates cc = world.getSpawnPoint();
         
-        if(cc.posX == 0 && cc.posY == 128 && cc.posZ == 0)
+        if(cc.posX == 0 && cc.posY == 0 && cc.posZ == 0)
         {
             return new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
         }
