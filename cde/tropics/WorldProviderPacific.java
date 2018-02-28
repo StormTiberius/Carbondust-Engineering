@@ -1,30 +1,30 @@
 package cde.tropics;
 
-import cde.TropicsCore;
+import cde.WorldCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 
-public class WorldProviderTropics extends WorldProvider
+public class WorldProviderPacific extends WorldProvider
 {
     @Override
     public String getDimensionName()
     {
-        return "Tropics";
+        return "Pacific";
     }
     
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerTropics(worldObj);
+        worldChunkMgr = new WorldChunkManagerPacific(worldObj);
     }
 
     @Override
     public IChunkProvider createChunkGenerator()
     {
-        return new ChunkProviderTropics(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+        return new ChunkProviderPacific(worldObj, worldObj.getSeed(), false);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class WorldProviderTropics extends WorldProvider
     @Override
     public float calculateCelestialAngle(long par1, float par3)
     {
-        if(!TropicsCore.isDayMode())
+        if(!WorldCore.isDayMode(dimensionId))
         {
             return super.calculateCelestialAngle(par1, par3);
         }

@@ -1,6 +1,6 @@
 package cde.tropics.layer;
 
-import cde.TropicsCore;
+import cde.WorldCore;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class GenLayerRiverMix extends GenLayer
@@ -38,7 +38,7 @@ public class GenLayerRiverMix extends GenLayer
 
         for (int var8 = 0; var8 < par3 * par4; ++var8)
         {
-            if (TropicsCore.isOcean(var5[var8]))
+            if (WorldCore.isOcean(var5[var8]))
             {
                 var7[var8] = var5[var8];
             }
@@ -48,13 +48,13 @@ public class GenLayerRiverMix extends GenLayer
                 {
                     var7[var8] = BiomeGenBase.frozenRiver.biomeID;
                 }
-                else if (!TropicsCore.isIsland(var5[var8]) && !TropicsCore.isBeach(var5[var8]))
+                else if (!WorldCore.isIsland(var5[var8]) && !WorldCore.isBeach(var5[var8]))
                 {
                     var7[var8] = var6[var8];
                 }
                 else
                 {
-                    var7[var8] = TropicsCore.beach.biomeID;
+                    var7[var8] = WorldCore.beach.biomeID;
                 }
             }
             else
