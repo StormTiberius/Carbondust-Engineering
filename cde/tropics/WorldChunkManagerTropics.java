@@ -17,7 +17,7 @@ import net.minecraft.world.biome.WorldChunkManager;
 
 import static net.minecraft.world.biome.BiomeGenBase.*;
 
-public class WorldChunkManagerPacific extends WorldChunkManager
+public class WorldChunkManagerTropics extends WorldChunkManager
 {
     public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(forest, plains, taiga, taigaHills, forestHills, jungle. jungleHills));
     private GenLayer genBiomes;
@@ -31,14 +31,14 @@ public class WorldChunkManagerPacific extends WorldChunkManager
     /** A list of biomes that the player can spawn in. */
     private List biomesToSpawnIn;
 
-    protected WorldChunkManagerPacific()
+    protected WorldChunkManagerTropics()
     {
         this.biomeCache = new BiomeCache(this);
         this.biomesToSpawnIn = new ArrayList();
         this.biomesToSpawnIn.addAll(allowedBiomes);
     }
 
-    public WorldChunkManagerPacific(long par1, WorldType par3WorldType)
+    public WorldChunkManagerTropics(long par1, WorldType par3WorldType)
     {
         this();
         GenLayer[] var4 = GenLayer.initializeAllBiomeGenerators(par1, par3WorldType);
@@ -46,7 +46,7 @@ public class WorldChunkManagerPacific extends WorldChunkManager
         this.biomeIndexLayer = var4[1];
     }
 
-    public WorldChunkManagerPacific(World par1World)
+    public WorldChunkManagerTropics(World par1World)
     {
         this(par1World.getSeed(), par1World.getWorldInfo().getTerrainType());
     }

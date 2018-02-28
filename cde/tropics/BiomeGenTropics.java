@@ -10,9 +10,9 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public abstract class BiomeGenPacific extends BiomeGenBase
+public abstract class BiomeGenTropics extends BiomeGenBase
 {
-    public BiomeGenPacific(int id)
+    public BiomeGenTropics(int id)
     {
         super(id);
 

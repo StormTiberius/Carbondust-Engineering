@@ -28,7 +28,7 @@ import net.minecraftforge.common.*;
 import net.minecraftforge.event.Event.*;
 import net.minecraftforge.event.terraingen.*;
 
-public class ChunkProviderPacific implements IChunkProvider
+public class ChunkProviderTropics implements IChunkProvider
 {
     /** RNG. */
     private Random rand;
@@ -109,7 +109,7 @@ public class ChunkProviderPacific implements IChunkProvider
         ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
     }
 
-    public ChunkProviderPacific(World par1World, long par2, boolean par4)
+    public ChunkProviderTropics(World par1World, long par2, boolean par4)
     {
         this.worldObj = par1World;
         this.mapFeaturesEnabled = par4;
