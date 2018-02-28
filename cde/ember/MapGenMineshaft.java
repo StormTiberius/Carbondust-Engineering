@@ -1,4 +1,4 @@
-package cde.world.ember;
+package cde.ember;
 
 import java.util.Iterator;
 import java.util.Map;

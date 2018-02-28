@@ -3,15 +3,21 @@
  * @author StormTiberius
  */
 
-package cde.world;
+package cde;
 
-import cde.world.ember.BiomeGenEmber;
-import cde.world.ember.WorldGenOil;
-import cde.world.ember.WorldProviderEmber;
+import cde.ember.BiomeGenEmber;
+import cde.ember.WorldGenOil;
+import cde.ember.WorldProviderEmber;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.PostInit;
+import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
@@ -24,14 +30,17 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class EmberModule
+@Mod(modid="CDE|Ember", name="Ember", version="1.0.5", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@NetworkMod(clientSideRequired=true, serverSideRequired=true)
+public class EmberCore
 {   
     private static Configuration cfg;
     private static boolean enabled;
     private static int emberId,liquidId;
     public static BiomeGenBase ember;
     
-    public static void preInit(FMLPreInitializationEvent event) 
+    @PreInit
+    public void preInit(FMLPreInitializationEvent event) 
     {
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/ember.cfg"));
         cfg.load();
@@ -48,7 +57,8 @@ public class EmberModule
       
     }
 
-    public static void init(FMLInitializationEvent event) 
+    @Init
+    public void init(FMLInitializationEvent event) 
     {
         if(enabled)
         {
@@ -64,7 +74,8 @@ public class EmberModule
         }
     }
 
-    public static void postInit(FMLPostInitializationEvent event) 
+    @PostInit
+    public void postInit(FMLPostInitializationEvent event) 
     {
         LiquidStack oil = LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME);
         
@@ -78,7 +89,8 @@ public class EmberModule
         }
     }
 
-    public static void serverStarting(FMLServerStartingEvent event)
+    @ServerStarting
+    public void serverStarting(FMLServerStartingEvent event)
     {
         
     }

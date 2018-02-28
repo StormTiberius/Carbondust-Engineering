@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.world.ember;
+package cde.ember;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeDecorator;
