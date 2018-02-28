@@ -1,4 +1,4 @@
-package cde.world.pacific;
+package cde.tropics;
 
 import cde.tropics.layer.GenLayer;
 import cde.tropics.layer.IntCache;

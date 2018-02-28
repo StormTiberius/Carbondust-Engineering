@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.world.pacific;
+package cde.tropics;
 
 public class BiomeGenPacificBeach extends BiomeGenPacific
 {
