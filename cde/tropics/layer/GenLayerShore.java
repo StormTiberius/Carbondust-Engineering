@@ -1,4 +1,4 @@
-package cde.world.pacific.layer;
+package cde.tropics.layer;
 
 import cde.WorldCore;
 import net.minecraft.world.biome.BiomeGenBase;

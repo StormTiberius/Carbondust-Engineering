@@ -1,14 +1,13 @@
-package cde.world.pacific.layer;
+package cde.tropics.layer;
 
-import cde.WorldCore;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class GenLayerAddMushroomIsland extends GenLayer
+public class GenLayerRiver extends GenLayer
 {
-    public GenLayerAddMushroomIsland(long par1, GenLayer par3GenLayer)
+    public GenLayerRiver(long par1, GenLayer par3GenLayer)
     {
         super(par1);
-        this.parent = par3GenLayer;
+        super.parent = par3GenLayer;
     }
 
     /**
@@ -28,20 +27,19 @@ public class GenLayerAddMushroomIsland extends GenLayer
         {
             for (int var12 = 0; var12 < par3; ++var12)
             {
-                int var13 = var9[var12 + 0 + (var11 + 0) * var7];
-                int var14 = var9[var12 + 2 + (var11 + 0) * var7];
-                int var15 = var9[var12 + 0 + (var11 + 2) * var7];
-                int var16 = var9[var12 + 2 + (var11 + 2) * var7];
+                int var13 = var9[var12 + 0 + (var11 + 1) * var7];
+                int var14 = var9[var12 + 2 + (var11 + 1) * var7];
+                int var15 = var9[var12 + 1 + (var11 + 0) * var7];
+                int var16 = var9[var12 + 1 + (var11 + 2) * var7];
                 int var17 = var9[var12 + 1 + (var11 + 1) * var7];
-                this.initChunkSeed((long)(var12 + par1), (long)(var11 + par2));
 
-                if (var17 == 0 && var13 == 0 && var14 == 0 && var15 == 0 && var16 == 0 && this.nextInt(WorldCore.getIslandScarcity()) == 0)
+                if (var17 != 0 && var13 != 0 && var14 != 0 && var15 != 0 && var16 != 0 && var17 == var13 && var17 == var15 && var17 == var14 && var17 == var16)
                 {
-                    var10[var12 + var11 * par3] = BiomeGenBase.mushroomIsland.biomeID;
+                    var10[var12 + var11 * par3] = -1;
                 }
                 else
                 {
-                    var10[var12 + var11 * par3] = var17;
+                    var10[var12 + var11 * par3] = BiomeGenBase.river.biomeID;
                 }
             }
         }

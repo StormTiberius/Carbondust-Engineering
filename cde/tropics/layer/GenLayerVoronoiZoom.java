@@ -1,4 +1,4 @@
-package cde.world.pacific.layer;
+package cde.tropics.layer;
 
 public class GenLayerVoronoiZoom extends GenLayer
 {
