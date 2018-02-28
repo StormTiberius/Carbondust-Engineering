@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.tropics;
+package cde.world.ember;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeDecorator;
@@ -24,9 +24,9 @@ import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.Ev
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.REDSTONE;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-public class BiomeDecoratorTropics extends BiomeDecorator
+public class BiomeDecoratorEmber extends BiomeDecorator
 {
-    public BiomeDecoratorTropics(BiomeGenBase biome)
+    public BiomeDecoratorEmber(BiomeGenBase biome)
     {
         super(biome);
     }
