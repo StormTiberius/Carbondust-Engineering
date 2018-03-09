@@ -1,5 +1,6 @@
 package cde.ember;
 
+import cde.EmberCore;
 import forestry.api.core.BlockInterface;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -224,7 +225,14 @@ public class WorldGenDungeons extends WorldGenerator
                 par1World.setBlockWithNotify(par3 - 1, par4, par5, Block.torchWood.blockID);
                 par1World.setBlockWithNotify(par3, par4, par5 - 1, Block.torchWood.blockID);
 
-                par1World.provider.setSpawnPoint(par3, par4, par5);
+                LocationData ld = new LocationData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+                ld.setSpawnLocation(par3, par4, par5);
+                par1World.setItemData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD, ld);
+                
+                if(par1World.provider instanceof WorldProviderEmber)
+                {
+                    ((WorldProviderEmber)par1World.provider).setLocationData(ld);
+                }
             }
             
             return true;
