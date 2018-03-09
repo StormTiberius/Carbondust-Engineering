@@ -225,9 +225,15 @@ public class WorldGenDungeons extends WorldGenerator
                 par1World.setBlockWithNotify(par3 - 1, par4, par5, Block.torchWood.blockID);
                 par1World.setBlockWithNotify(par3, par4, par5 - 1, Block.torchWood.blockID);
 
-                LocationData ld = new LocationData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
-                ld.setSpawnLocation(par3, par4, par5);
-                par1World.setItemData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD, ld);
+                LocationData ld = (LocationData)par1World.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+                
+                if(ld == null)
+                {
+                    ld = new LocationData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+                    par1World.setItemData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD, ld);
+                }
+                
+                ld.setSpawnLocation(par3, par4, par5); 
                 
                 if(par1World.provider instanceof WorldProviderEmber)
                 {

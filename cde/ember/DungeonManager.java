@@ -21,7 +21,11 @@ public class DungeonManager
     {   
         ChunkCoordinates cc = world.provider.getSpawnPoint();
         
-        if(cc.posX == LocationData.SPAWN_X && cc.posY == LocationData.SPAWN_Y && cc.posZ == LocationData.SPAWN_Z && BB.isVecInside(Vec3.createVectorHelper(x, y, z)))
+        if(cc.posX == LocationData.SPAWN_X && cc.posY == LocationData.SPAWN_Y && cc.posZ == LocationData.SPAWN_Z)
+        {
+            return new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
+        }
+        else if(BB.isVecInside(Vec3.createVectorHelper(x, y, z)) && !BB.isVecInside(Vec3.createVectorHelper(cc.posX, cc.posY, cc.posZ)))
         {
             return new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID).generate(world, random, x, y, z);
         }
