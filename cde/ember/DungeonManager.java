@@ -15,7 +15,7 @@ import net.minecraftforge.common.ChestGenHooks;
 
 public class DungeonManager
 {   
-    private static final AxisAlignedBB BB = AxisAlignedBB.getBoundingBox(184, 0, 184, 328, 255, 328);
+    private static final AxisAlignedBB BB = AxisAlignedBB.getBoundingBox(192, 0, 192, 336, 255, 336);
     
     public static boolean generate(World world, Random random, int x, int y, int z)
     {   
