@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.ember.EmberEventManager;
 import cde.ember.BiomeGenEmber;
 import cde.ember.WorldGenOil;
 import cde.ember.WorldProviderEmber;
@@ -26,11 +27,12 @@ import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.DungeonHooks;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
-@Mod(modid="CDE|Ember", name="Ember", version="1.0.5", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|Ember", name="Ember", version="1.0.6", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class EmberCore
 {   
@@ -38,6 +40,7 @@ public class EmberCore
     private static boolean enabled;
     private static int emberId,liquidId;
     public static BiomeGenBase ember;
+    public static final String EMBER_SPAWN_LOCATION_KEYWORD = "EmberSpawnLocation";
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -71,6 +74,8 @@ public class EmberCore
             DungeonHooks.addDungeonMob("Enderman", 150);
             
             GameRegistry.registerWorldGenerator(new WorldGenOil());
+            
+            MinecraftForge.EVENT_BUS.register(new EmberEventManager());
         }
     }
 
