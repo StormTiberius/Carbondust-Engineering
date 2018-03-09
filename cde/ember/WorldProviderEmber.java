@@ -10,11 +10,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderEmber extends WorldProvider
 {
+    private LocationData ld = new LocationData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+    
     @Override
     public String getDimensionName()
     {
@@ -24,8 +26,15 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerHell(EmberCore.ember, 0.5F, 0.5F);
+        worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.5F, 0.5F);
         hasNoSky = true;
+        
+        LocationData data = (LocationData)worldObj.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+        
+        if(data != null)
+        {
+            ld = data;
+        }
     }
     
     @Override
@@ -51,7 +60,28 @@ public class WorldProviderEmber extends WorldProvider
     {
         return true;
     }
+    
+    @Override
+    public void setSpawnPoint(int x, int y, int z)
+    {
+        ChunkCoordinates cc = ld.getSpawnLocation();
+        worldObj.getWorldInfo().setSpawnPosition(cc.posX, cc.posY, cc.posZ);
+    }
+    
+    @Override
+    public ChunkCoordinates getSpawnPoint()
+    {
+        ChunkCoordinates cc = ld.getSpawnLocation();
+        WorldInfo info = worldObj.getWorldInfo();
         
+        if(cc.posX != info.getSpawnX() || cc.posY != info.getSpawnY() || cc.posZ != info.getSpawnZ())
+        {
+            info.setSpawnPosition(cc.posX, cc.posY, cc.posZ);
+        }
+        
+        return cc;
+    }
+    
     @Override
     public ChunkCoordinates getRandomizedSpawnPoint()
     {
@@ -76,5 +106,10 @@ public class WorldProviderEmber extends WorldProvider
     public double getVoidFogYFactor()
     {
         return 1.0D;
+    }
+    
+    public void setLocationData(LocationData ld)
+    {
+        this.ld = ld;
     }
 }
