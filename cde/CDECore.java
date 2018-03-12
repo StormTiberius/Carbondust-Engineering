@@ -13,6 +13,7 @@ import cde.core.Defaults;
 import cde.core.FuelManager;
 import cde.core.Namings;
 import cde.core.RecipeManager;
+import cde.core.Version;
 import cde.core.block.BlockOre;
 import cde.core.block.BlockStorage;
 import cde.core.item.ItemOre;
@@ -52,7 +53,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
-@Mod(modid="CDE|Core", name="Core", version="1.0.3", dependencies = "required-after:Forge@[6.6.2.534,);required-after:IC2;required-after:BuildCraft|Core;required-after:Forestry;required-after:Railcraft;required-after:AppliedEnergistics")
+@Mod(modid="CDE|Core", name="Core", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:IC2;required-after:BuildCraft|Core;required-after:Forestry;required-after:Railcraft;required-after:AppliedEnergistics")
 @NetworkMod(channels = { "CDE" }, packetHandler = PacketHandler.class, clientSideRequired=true, serverSideRequired=true)
 public class CDECore
 {

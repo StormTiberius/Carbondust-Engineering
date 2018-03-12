@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.core.Version;
 import cde.ember.EmberEventManager;
 import cde.ember.BiomeGenEmber;
 import cde.ember.WorldGenOil;
@@ -32,7 +33,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
-@Mod(modid="CDE|Ember", name="Ember", version="1.0.6", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|Ember", name="Ember", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class EmberCore
 {   

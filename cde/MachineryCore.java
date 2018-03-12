@@ -7,6 +7,7 @@ package cde;
 
 import cde.core.Defaults;
 import cde.core.Namings;
+import cde.core.Version;
 import cde.machinery.BlockMachineAlpha;
 import cde.machinery.BlockGrate;
 import cde.machinery.ItemGoggles;
@@ -40,7 +41,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import railcraft.common.api.core.items.ItemRegistry;
 
-@Mod(modid="CDE|Machinery", name="Machinery", version="1.0.3", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|Machinery", name="Machinery", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class MachineryCore
 {

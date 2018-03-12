@@ -8,6 +8,7 @@ package cde;
 import cde.compat.CompatTickHandler;
 import cde.compat.PlayerEventManager;
 import cde.compat.WorldEventManager;
+import cde.core.Version;
 import com.eloraam.redpower.core.Config;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -33,7 +34,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import railcraft.common.api.core.items.ItemRegistry;
 
-@Mod(modid="CDE|Compat", name="Compat", version="1.0.3", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core;required-after:RedPowerCore")
+@Mod(modid="CDE|Compat", name="Compat", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core;required-after:RedPowerCore")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class CompatCore
 {
