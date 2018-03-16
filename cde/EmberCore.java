@@ -27,7 +27,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
@@ -39,7 +38,7 @@ public class EmberCore
 {   
     private static Configuration cfg;
     private static boolean enabled;
-    private static int emberId,liquidId;
+    private static int biomeId,dimensionId,liquidId;
     public static BiomeGenBase ember;
     public static final String EMBER_SPAWN_LOCATION_KEYWORD = "EmberSpawnLocation";
     
@@ -50,13 +49,14 @@ public class EmberCore
         cfg.load();
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Ember").getBoolean(false);
-        emberId = cfg.get(Configuration.CATEGORY_GENERAL, "emberid", 23, "Ember biome id").getInt();
+        biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "biomeid", 23, "Ember biome id").getInt();
+        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionid", 2, "Ember dimension id").getInt();
         
         cfg.save();
         
         if(enabled)
         {
-            ember = (new BiomeGenEmber(emberId)).setColor(112).setBiomeName("Ember");
+            ember = (new BiomeGenEmber(biomeId)).setColor(112).setBiomeName("Ember");
         }
       
     }
@@ -68,15 +68,20 @@ public class EmberCore
         {
             BiomeManager.addStrongholdBiome(ember);
             
-            DimensionManager.unregisterProviderType(0);
-            DimensionManager.registerProviderType(0, WorldProviderEmber.class, true);
+            if(dimensionId == 0 || dimensionId == -1 || dimensionId == 1)
+            {
+                DimensionManager.unregisterProviderType(dimensionId);
+                DimensionManager.registerProviderType(dimensionId, WorldProviderEmber.class, true);
+            }
+            else
+            {
+                DimensionManager.registerProviderType(dimensionId, WorldProviderEmber.class, true);
+                DimensionManager.registerDimension(dimensionId, dimensionId);
+            }
             
-            DungeonHooks.addDungeonMob("Creeper", 150);
-            DungeonHooks.addDungeonMob("Enderman", 150);
+            GameRegistry.registerWorldGenerator(new WorldGenOil(dimensionId));
             
-            GameRegistry.registerWorldGenerator(new WorldGenOil());
-            
-            MinecraftForge.EVENT_BUS.register(new EmberEventManager());
+            MinecraftForge.EVENT_BUS.register(new EmberEventManager(dimensionId));
         }
     }
 
@@ -104,5 +109,10 @@ public class EmberCore
     public static int getLiquidId()
     {
         return liquidId;
+    }
+    
+    public static int getDimensionId()
+    {
+        return dimensionId;
     }
 }
