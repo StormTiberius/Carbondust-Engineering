@@ -19,18 +19,18 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DungeonHooks;
 
 public class WorldGenDungeons extends WorldGenerator
 {
-    private final String LOOT;
-    private final int FLOOR_BLOCK_ID,WALL_BLOCK_ID;
+    private static final String[] DUNGEON_MOBS = {"Skeleton", "Zombie", "Spider", "Creeper", "Enderman"};
+    private final String loot;
+    private final int floorBlockId,wallBlockId;
     
-    public WorldGenDungeons(String loot, int floor, int wall)
+    public WorldGenDungeons(String loot, int floorBlockId, int wallBlockId)
     {
-        LOOT = loot;
-        FLOOR_BLOCK_ID = floor;
-        WALL_BLOCK_ID = wall;
+        this.loot = loot;
+        this.floorBlockId = floorBlockId;
+        this.wallBlockId = wallBlockId;
     }
     
     @Override
@@ -90,11 +90,11 @@ public class WorldGenDungeons extends WorldGenerator
                         {
                             if (var11 == par4 - 1)
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, FLOOR_BLOCK_ID);
+                                par1World.setBlockWithNotify(var10, var11, var12, floorBlockId);
                             }
                             else
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, WALL_BLOCK_ID);
+                                par1World.setBlockWithNotify(var10, var11, var12, wallBlockId);
                             }
                         }
                     }
@@ -147,7 +147,7 @@ public class WorldGenDungeons extends WorldGenerator
 
                                     if (var16 != null)
                                     {
-                                        ChestGenHooks info = ChestGenHooks.getInfo(LOOT);
+                                        ChestGenHooks info = ChestGenHooks.getInfo(loot);
                                         WeightedRandomChestContent.generateChestContents(par2Random, info.getItems(par2Random), var16, info.getCount(par2Random));
                                     }
 
@@ -165,7 +165,7 @@ public class WorldGenDungeons extends WorldGenerator
                 }
             }
 
-            if(LOOT.equals(ChestGenHooks.VILLAGE_BLACKSMITH))
+            if(loot.equals(ChestGenHooks.VILLAGE_BLACKSMITH))
             {
                 if(ModLoader.isModLoaded("Forestry"))
                 {
@@ -204,7 +204,7 @@ public class WorldGenDungeons extends WorldGenerator
                 }
                 
             }
-            else if(!LOOT.equals(ChestGenHooks.BONUS_CHEST))
+            else if(!loot.equals(ChestGenHooks.BONUS_CHEST))
             {
                 par1World.setBlockWithNotify(par3, par4, par5, Block.mobSpawner.blockID);
                 TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(par3, par4, par5);
@@ -254,7 +254,7 @@ public class WorldGenDungeons extends WorldGenerator
      */
     private ItemStack pickCheckLootItem(Random par1Random)
     {
-        return ChestGenHooks.getOneItem(LOOT, par1Random);
+        return ChestGenHooks.getOneItem(loot, par1Random);
     }
 
     /**
@@ -262,6 +262,6 @@ public class WorldGenDungeons extends WorldGenerator
      */
     private String pickMobSpawner(Random par1Random)
     {
-        return DungeonHooks.getRandomDungeonMob(par1Random);
+        return DUNGEON_MOBS[par1Random.nextInt(DUNGEON_MOBS.length)];
     }
 }
