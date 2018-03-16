@@ -66,8 +66,6 @@ public class EmberCore
     {
         if(enabled)
         {
-            BiomeManager.addStrongholdBiome(ember);
-            
             if(dimensionId == 0 || dimensionId == -1 || dimensionId == 1)
             {
                 DimensionManager.unregisterProviderType(dimensionId);

@@ -1,5 +1,6 @@
 package cde.ember;
 
+import cde.EmberCore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +19,7 @@ import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenStronghold extends MapGenStructure
 {
-    public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.icePlains, BiomeGenBase.iceMountains, BiomeGenBase.desertHills, BiomeGenBase.forestHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.jungle, BiomeGenBase.jungleHills)); 
+    public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(EmberCore.ember)); 
     private BiomeGenBase[] allowedBiomeGenBases;
 
     /**
