@@ -13,13 +13,20 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldGenOil implements IWorldGenerator
 {
+    private final int dimensionId;
+    
+    public WorldGenOil(int dimensionId)
+    {
+        this.dimensionId = dimensionId;
+    }
+    
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
         int xPos = chunkX * 16;
         int zPos = chunkZ * 16;
         
-        if(world.getBiomeGenForCoords(xPos, zPos).biomeID == EmberCore.ember.biomeID)
+        if(world.provider.dimensionId == dimensionId)
         {
             boolean mediumDeposit = random.nextDouble() <= (0.15 / 100.0);
             boolean largeDeposit = random.nextDouble() <= (0.005 / 100.0);
