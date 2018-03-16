@@ -28,6 +28,7 @@ public class WorldProviderEmber extends WorldProvider
     {
         worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.5F, 0.5F);
         hasNoSky = true;
+        dimensionId = EmberCore.getDimensionId();
         
         LocationData data = (LocationData)worldObj.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
         
@@ -84,6 +85,12 @@ public class WorldProviderEmber extends WorldProvider
     
     @Override
     public ChunkCoordinates getRandomizedSpawnPoint()
+    {
+        return getSpawnPoint();
+    }
+    
+    @Override
+    public ChunkCoordinates getEntrancePortalLocation()
     {
         return getSpawnPoint();
     }
