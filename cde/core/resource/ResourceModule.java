@@ -15,7 +15,6 @@ import java.io.File;
 import net.minecraft.block.Block;
 import static net.minecraft.block.Block.soundSandFootstep;
 import static net.minecraft.block.Block.soundStoneFootstep;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -51,7 +50,7 @@ public class ResourceModule
         
         if(geoStoneId > 0)
         {
-            geoStone = (new Block(geoStoneId,Material.rock)).setHardness(3.0F).setResistance(5.0F).setStepSound(soundStoneFootstep).setBlockName("oreGeoStone");
+            geoStone = (new BlockOreGeoStone(geoStoneId, 1)).setHardness(3.0F).setResistance(5.0F).setStepSound(soundStoneFootstep).setBlockName("oreGeoStone");
             GameRegistry.registerBlock(geoStone, "oreGeoStone");
             LanguageRegistry.addName(geoStone, "Geostone");
             MinecraftForge.setBlockHarvestLevel(geoStone, "pickaxe", 1);
@@ -65,7 +64,7 @@ public class ResourceModule
         
         if(oilSandId > 0)
         {
-            oilSand = (new Block(oilSandId, Material.rock)).setHardness(0.5F).setStepSound(soundSandFootstep).setBlockName("oreOilSand");
+            oilSand = (new BlockOreOilSand(oilSandId, 0)).setHardness(0.5F).setStepSound(soundSandFootstep).setBlockName("oreOilSand");
             GameRegistry.registerBlock(oilSand, "oreOilSand");
             LanguageRegistry.addName(oilSand, "Oilsand");
             MinecraftForge.setBlockHarvestLevel(oilSand, "shovel", 0);
