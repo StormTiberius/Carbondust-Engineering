@@ -20,6 +20,7 @@ import cde.core.item.ItemOre;
 import cde.core.item.ItemMaterial;
 import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
+import cde.core.resource.ResourceModule;
 import cde.core.sound.SoundTickHandler;
 import cde.core.speaker.SpeakerModule;
 import cde.core.worldgen.WorldGenModule;
@@ -102,6 +103,7 @@ public class CDECore
         
         SpeakerModule.preInit(event);
         WorldGenModule.preInit(event);
+        ResourceModule.preInit(event);
     }
     
     @Init
@@ -111,6 +113,7 @@ public class CDECore
         
         SpeakerModule.init(event);
         WorldGenModule.init(event);
+        ResourceModule.init(event);
         
         GameRegistry.registerFuelHandler(new FuelManager());
     }
