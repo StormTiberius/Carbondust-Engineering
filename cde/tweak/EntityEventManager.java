@@ -29,9 +29,9 @@ public class EntityEventManager
     {
         if(FLAGS[14] && (event.entity instanceof EntityPlayer || event.entity instanceof EntityPlayerMP))
         {
-            if(event.distance <= 10.0F)
+            if(event.distance > 2.0F)
             {
-                event.distance *= 0.3F;
+                event.distance = 2.0F;
             }
         }
     }
