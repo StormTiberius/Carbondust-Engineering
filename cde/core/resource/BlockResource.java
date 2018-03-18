@@ -8,7 +8,6 @@ package cde.core.resource;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
 
 public class BlockResource extends Block
@@ -16,12 +15,7 @@ public class BlockResource extends Block
     public BlockResource(int id)
     {
         super(id, 17, Material.rock);
-        setBlockUnbreakable();
-        setResistance(6000000.0F);
-        setStepSound(soundStoneFootstep);
-        disableStats();
-        setTickRandomly(true);
-        setCreativeTab(CreativeTabs.tabBlock);
+        enableStats = false;
     }
 
     @Override
