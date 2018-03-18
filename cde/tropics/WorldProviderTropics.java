@@ -1,3 +1,8 @@
+/**
+ *
+ * @author StormTiberius
+ */
+
 package cde.tropics;
 
 import cde.TropicsCore;
