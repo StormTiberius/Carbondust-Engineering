@@ -49,7 +49,7 @@ public class TropicsCore
         beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachid", 24, "Beach biome id").getInt();
         oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanid", 25, "Ocean biome id").getInt();
         
-        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionid", 0, "Dimension Id").getInt();
+        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionid", 0, "Tropics dimension Id").getInt();
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable tropics dimension").getBoolean(false);
         
