@@ -51,7 +51,7 @@ public class TropicsCore
         
         dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionid", 0, "Tropics dimension Id").getInt();
         
-        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable tropics dimension").getBoolean(false);
+        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", true, "Enable/Disable tropics dimension").getBoolean(true);
         
         dayMode = cfg.get(Configuration.CATEGORY_GENERAL, "daymode", false, "Always day").getBoolean(false);
         
