@@ -116,7 +116,7 @@ public class TweakCore
             
             if(ls != null)
             {
-                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.obsidian.blockID, 1, 0)}, ls, new ItemStack(Block.cobblestone.blockID, 1, 0), 100);
+                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.obsidian.blockID, 1, 0)}, ls);
             }
         }
 
@@ -126,7 +126,7 @@ public class TweakCore
             
             if(ls != null)
             {
-                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.sand.blockID, 1, 0)}, ls, new ItemStack(Block.sand.blockID, 1, 0), 0);
+                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.sand.blockID, 1, 0)}, ls);
             }
         }
 
@@ -136,7 +136,7 @@ public class TweakCore
             
             if(ls != null)
             {
-                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.gravel.blockID, 1, 0)}, ls, new ItemStack(Block.gravel.blockID, 1, 0), 0);
+                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.gravel.blockID, 1, 0)}, ls);
             }
         }
         
