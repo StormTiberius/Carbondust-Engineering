@@ -39,7 +39,7 @@ public class ResourceModule
         cfg.save(); 
     }
 
-    public static void init(FMLInitializationEvent event) 
+    public static void load(FMLInitializationEvent event) 
     {   
         if(resourceId > 0)
         {
