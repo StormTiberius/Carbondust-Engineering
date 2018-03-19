@@ -20,15 +20,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import forestry.api.recipes.RecipeManagers;
 import java.io.File;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
-import net.minecraftforge.liquids.LiquidStack;
 import railcraft.common.api.fuel.FuelManager;
 
 @Mod(modid="CDE|Tweak", name="Tweak", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core;after:CDE|Compat")
@@ -37,7 +33,7 @@ public class TweakCore
 {
     private static Configuration cfg;
     private static final boolean[] FLAGS = new boolean[38];
-    private static int lavaHeatValue,lavaPerObsidian,oilPerSand,oilPerGravel;
+    private static int lavaHeatValue;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -62,6 +58,8 @@ public class TweakCore
         FLAGS[14] = cfg.get(Configuration.CATEGORY_GENERAL, "fall", false, "Fall distance tweak").getBoolean(false);
         FLAGS[15] = cfg.get(Configuration.CATEGORY_GENERAL, "noxporbs", false, "Disables xp orb drops").getBoolean(false);
         FLAGS[16] = cfg.get(Configuration.CATEGORY_GENERAL, "fertilizer", true, "Fertilizer recipe").getBoolean(false);
+        
+        lavaHeatValue = cfg.get(Configuration.CATEGORY_GENERAL, "lavaheatvalue", 20000, "20000 for 50EU/t, 8000 for 20EU/t, 0 disable").getInt();
         
         FLAGS[17] = cfg.get(Configuration.CATEGORY_GENERAL, "brown", true, "Brown mushroom drop").getBoolean(false);
         FLAGS[18] = cfg.get(Configuration.CATEGORY_GENERAL, "red", true, "Red mushroom drop").getBoolean(false);
@@ -88,11 +86,6 @@ public class TweakCore
         FLAGS[36] = cfg.get(Configuration.CATEGORY_GENERAL, "netherrack", true, "Netherrack Recipe").getBoolean(false);
         FLAGS[37] = cfg.get(Configuration.CATEGORY_GENERAL, "soulsand", true, "Soulsand Recipe").getBoolean(false);
         
-        lavaHeatValue = cfg.get(Configuration.CATEGORY_GENERAL, "lavaHeatValue", 20000, "20000 for 50EU/t, 8000 for 20EU/t, 0 disable").getInt();
-        lavaPerObsidian = cfg.get(Configuration.CATEGORY_GENERAL, "lavaPerObsidian", 1000, "Amount of lava per obsidian in squeezer").getInt();
-        oilPerSand = cfg.get(Configuration.CATEGORY_GENERAL, "oilPerSand", 7, "Amount of oil per sand in squeezer").getInt();
-        oilPerGravel = cfg.get(Configuration.CATEGORY_GENERAL, "oilPerGravel", 7, "Amount of oil per gravel in squeezer").getInt();
-        
         cfg.save();
       
     }
@@ -108,36 +101,6 @@ public class TweakCore
         if(lavaHeatValue > 0 && Loader.isModLoaded("Railcraft"))
         {
             FuelManager.addBoilerFuel(LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), lavaHeatValue);
-        }
-        
-        if(lavaPerObsidian > 0)
-        {
-            LiquidStack ls = LiquidDictionary.getLiquid("Lava", lavaPerObsidian);
-            
-            if(ls != null)
-            {
-                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.obsidian.blockID, 1, 0)}, ls, new ItemStack(Block.cobblestone.blockID, 1, 0), 100);
-            }
-        }
-
-        if(oilPerSand > 0)
-        {
-            LiquidStack ls = LiquidDictionary.getLiquid("Oil", oilPerSand);
-            
-            if(ls != null)
-            {
-                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.sand.blockID, 1, 0)}, ls, new ItemStack(Block.sand.blockID, 1, 0), 0);
-            }
-        }
-
-        if(oilPerGravel > 0)
-        {
-            LiquidStack ls = LiquidDictionary.getLiquid("Oil", oilPerGravel);
-            
-            if(ls != null)
-            {
-                RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(Block.gravel.blockID, 1, 0)}, ls, new ItemStack(Block.sand.blockID, 1, 0), 0);
-            }
         }
         
         PlantSeedGrass.init(FLAGS);
