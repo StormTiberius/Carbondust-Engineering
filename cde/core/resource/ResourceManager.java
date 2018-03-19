@@ -16,22 +16,22 @@ public class ResourceManager
     private static WeightedObject[] resourceArray;
     private static final String[] INITIAL_RESOURCES = 
     {
-        "3.0.578.Dirt",
-        "13.0.294.Gravel",
+        "3.0.622.Dirt",
+        "13.0.298.Gravel",
         "12.0.292.Sand",
         "82.0.10.Clay",
-        "16.0.105.Coal",
-        "15.0.60.Iron",
-        "14.0.8.Gold",
+        "16.0.113.Coal",
+        "15.0.65.Iron",
+        "14.0.9.Gold",
         "21.0.4.Lapis",
-        "73.0.24.Redstone",
-        "56.0.3.Diamond",
+        "73.0.29.Redstone",
+        "56.0.4.Diamond",
         "129.0.5.Emerald",
         "249.0.72.Copper",
-        "248.0.75.Tin",
+        "248.0.83.Tin",
         "247.0.5.Uranium",
-        "254.3.17.Silver",
-        "254.7.26.Nikolite",
+        "254.3.19.Silver",
+        "254.7.29.Nikolite",
         "254.6.2.Tungsten",
         "254.0.7.Ruby",
         "254.1.7.GreenSapphire",
@@ -45,8 +45,8 @@ public class ResourceManager
         "182.0.4.Oil",
         "87.0.30.Netherrack",
         "88.0.10.Soulsand",
-        "89.0.8.Glowstone",
-        "1.0.9967.Stone"
+        "89.0.9.Glowstone",
+        "1.0.9885.Stone"
     };
     
     public static WeightedObject getResource()
