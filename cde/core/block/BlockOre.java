@@ -126,30 +126,27 @@ public class BlockOre extends Block
     }
 
     @Override
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
+    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
     {
-        if (!par1World.isRemote)
-        {
-            ArrayList<ItemStack> items = getBlockDropped(par1World, par2, par3, par4, par5, par7);
+        ArrayList<ItemStack> ret = super.getBlockDropped(world, x, y, z, metadata, fortune);
 
-            if(par5 == Blocks.oreQuartz.getItemDamage())
+        if(metadata == Blocks.oreQuartz.getItemDamage())
+        {
+            int amount = Math.abs(world.rand.nextInt()) % (3 + fortune);
+
+            if(amount > 0)
             {
-                int amount = Math.abs(par1World.rand.nextInt()) % (3 + par7);
-                
-                if(amount > 0)
-                {
-                    items.add(new ItemStack(Materials.dustQuartz.itemID, amount, Materials.dustQuartz.getItemDamage()));
-                }
-            }
-            
-            for (ItemStack item : items)
-            {
-                if (par1World.rand.nextFloat() <= par6)
-                {
-                    this.dropBlockAsItem_do(par1World, par2, par3, par4, item);
-                }
+                ret.add(new ItemStack(Materials.dustQuartz.itemID, amount, Materials.dustQuartz.getItemDamage()));
             }
         }
+        
+        return ret;
+    }
+        
+    @Override
+    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
+    {
+        super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
         
         if (par5 > 4)
         {
