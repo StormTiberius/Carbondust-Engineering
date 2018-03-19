@@ -31,14 +31,13 @@ public class ResourceManager
         "180.0.72.Copper",
         "180.1.75.Tin",
         "180.2.17.Silver",
-        "180.3.17.Lead",
+        "180.3.15.Lead",
         "180.4.5.Uranium",
         "180.5.6.Sulfur",
         "180.6.6.Saltpeter",
         "180.7.8.Quartz",
         "180.8.6.Apatite",
         "254.7.26.Nikolite",
-        "254.6.2.Tungsten",
         "254.0.7.Ruby",
         "254.1.7.GreenSapphire",
         "254.2.7.BlueSapphire",
@@ -47,7 +46,7 @@ public class ResourceManager
         "87.0.30.Netherrack",
         "88.0.10.Soulsand",
         "89.0.8.Glowstone",
-        "1.0.9967.Stone"
+        "1.0.9950.Stone"
     };
     
     public static WeightedObject getResource()
