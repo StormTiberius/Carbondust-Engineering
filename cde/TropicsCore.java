@@ -5,9 +5,11 @@
 
 package cde;
 
+import cde.core.Version;
 import cde.tropics.BiomeGenTropicsBeach;
 import cde.tropics.BiomeGenTropicsIsland;
 import cde.tropics.BiomeGenTropicsOcean;
+import cde.tropics.WorldChunkManagerTropics;
 import cde.tropics.WorldTypeTropics;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -23,10 +25,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 
-@Mod(modid="CDE|Tropics", name="Tropics", version="1.0", dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|Tropics", name="Tropics", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TropicsCore
 {
@@ -58,6 +59,10 @@ public class TropicsCore
         beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
         ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
         
+        WorldChunkManagerTropics.allowedBiomes.clear();
+        WorldChunkManagerTropics.allowedBiomes.add(island);
+        WorldChunkManagerTropics.allowedBiomes.add(beach);
+        
         tropics = new WorldTypeTropics(tropicsId, "TROPICS");
     }
 
@@ -65,9 +70,6 @@ public class TropicsCore
     public void load(FMLInitializationEvent event) 
     {   
         LanguageRegistry.instance().addStringLocalization("generator.TROPICS", "en_US", "Tropics");
-        
-        BiomeManager.addSpawnBiome(island);
-        BiomeManager.addSpawnBiome(beach);
     }
 
     @PostInit

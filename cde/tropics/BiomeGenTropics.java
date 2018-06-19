@@ -5,7 +5,8 @@
 
 package cde.tropics;
 
-import net.minecraft.block.Block;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public abstract class BiomeGenTropics extends BiomeGenBase
@@ -20,11 +21,9 @@ public abstract class BiomeGenTropics extends BiomeGenBase
         field_82914_M.clear();
         
         theBiomeDecorator.generateLakes = false;
-        
-        topBlock = (byte)Block.sand.blockID;
-        fillerBlock = (byte)Block.sand.blockID;
     }
     
+    @SideOnly(Side.CLIENT)
     @Override
     public int getSkyColorByTemp(float par1)
     {
