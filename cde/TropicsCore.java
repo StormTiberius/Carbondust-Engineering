@@ -67,7 +67,7 @@ public class TropicsCore
     }
 
     @Init
-    public void load(FMLInitializationEvent event) 
+    public void init(FMLInitializationEvent event) 
     {   
         LanguageRegistry.instance().addStringLocalization("generator.TROPICS", "en_US", "Tropics");
     }
