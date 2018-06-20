@@ -5,79 +5,82 @@
 
 package cde;
 
-import cde.resource.BlockOreGeoStone;
-import cde.resource.BlockOreOilSand;
+import cde.core.Version;
 import cde.resource.BlockResource;
 import cde.resource.ResourceManager;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.PostInit;
+import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import forestry.api.recipes.RecipeManagers;
 import java.io.File;
 import net.minecraft.block.Block;
-import static net.minecraft.block.Block.soundSandFootstep;
 import static net.minecraft.block.Block.soundStoneFootstep;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
-import net.minecraftforge.oredict.OreDictionary;
 
+@Mod(modid="CDE|Resource", name="Resource", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class ResourceCore
 {
     private static Configuration cfg;
-    private static int resourceId,geoStoneId,oilSandId;
-    public static Block resource,geoStone,oilSand;
+    private static int resourceId,lavaPerObsidian,oilPerSand,oilPerGravel;
+    public static int resourceRate;
+    public static Block resource;
     
+    @PreInit
     public static void preInit(FMLPreInitializationEvent event) 
     {
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/resource.cfg"));
         cfg.load();
-        resourceId = cfg.get(Configuration.CATEGORY_BLOCK, "resource", 180).getInt();
-        geoStoneId = cfg.get(Configuration.CATEGORY_BLOCK, "geostone", 181).getInt();
-        oilSandId = cfg.get(Configuration.CATEGORY_BLOCK, "oilsand", 182).getInt();
+        resourceId = cfg.get(Configuration.CATEGORY_BLOCK, "resource", 183).getInt();
         ResourceManager.cfgInit(cfg);
-        cfg.save(); 
+        resourceRate = cfg.get(Configuration.CATEGORY_GENERAL, "rate", 5, "Resource block update rate").getInt();
+        
+        lavaPerObsidian = cfg.get(Configuration.CATEGORY_GENERAL, "lavaperobsidian", 1000, "Millibuckets of lava per obsidian block").getInt();
+        oilPerSand = cfg.get(Configuration.CATEGORY_GENERAL, "oilpersand", 7, "Millibuckets of oil per sand block").getInt();
+        oilPerGravel = cfg.get(Configuration.CATEGORY_GENERAL, "oilpergravel", 7, "Millibuckets of oil per gravel block").getInt();
+        
+        cfg.save();
     }
 
-    public static void load(FMLInitializationEvent event) 
-    {   
+    @Init
+    public static void init(FMLInitializationEvent event) 
+    {
         if(resourceId > 0)
         {
-            resource = new BlockResource(resourceId).setBlockName("resourceBlock");
+            resource = new BlockResource(resourceId).setBlockName("resourceBlock").setBlockUnbreakable().setResistance(6000000.0F).setStepSound(soundStoneFootstep).setTickRandomly(true).setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerBlock(resource, "resourceBlock");
             LanguageRegistry.addName(resource, "Resource");
-        }
-        
-        if(geoStoneId > 0)
-        {
-            geoStone = (new BlockOreGeoStone(geoStoneId, 1)).setHardness(3.0F).setResistance(5.0F).setStepSound(soundStoneFootstep).setBlockName("oreGeoStone");
-            GameRegistry.registerBlock(geoStone, "oreGeoStone");
-            LanguageRegistry.addName(geoStone, "Geostone");
-            MinecraftForge.setBlockHarvestLevel(geoStone, "pickaxe", 1);
-            OreDictionary.registerOre("geostone", geoStone);
             
             if(Loader.isModLoaded("Forestry"))
             {
-                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(geoStone.blockID, 1, 0)}, LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Block.cobblestone.blockID, 1, 0), 100);
+                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.obsidian.blockID, 1, 0)}, LiquidDictionary.getLiquid("Lava", lavaPerObsidian), new ItemStack(Block.cobblestone.blockID, 1, 0), 100);
+                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.sand.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", oilPerSand), new ItemStack(Block.sand.blockID, 1, 0), 0);
+                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.gravel.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", oilPerGravel), new ItemStack(Block.sand.blockID, 1, 0), 0);
             }
         }
+    }
+    
+    @PostInit
+    public void postInit(FMLPostInitializationEvent event) 
+    {
         
-        if(oilSandId > 0)
-        {
-            oilSand = (new BlockOreOilSand(oilSandId, 0)).setHardness(0.5F).setStepSound(soundSandFootstep).setBlockName("oreOilSand");
-            GameRegistry.registerBlock(oilSand, "oreOilSand");
-            LanguageRegistry.addName(oilSand, "Oilsand");
-            MinecraftForge.setBlockHarvestLevel(oilSand, "shovel", 0);
-            OreDictionary.registerOre("oilsand", oilSand);
-            
-            if(Loader.isModLoaded("Forestry"))
-            {
-                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(oilSand.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Block.sand.blockID, 1, 0), 100);
-            }
-        }
+    }
+
+    @ServerStarting
+    public void serverStarting(FMLServerStartingEvent event)
+    {
+        
     }
 }
