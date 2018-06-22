@@ -5,8 +5,6 @@
 
 package cde.resource;
 
-import cde.ResourceCore;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
@@ -18,29 +16,19 @@ public class BlockResource extends Block
         super(id, 17, Material.rock);
         enableStats = false;
     }
-        
-    @Override
-    public void updateTick(World world, int x, int y, int z, Random random)
-    {
-        if(!world.isRemote)
-        {
-            setResource(world, x, y, z);
-            world.scheduleBlockUpdate(x, y, z, blockID, ResourceCore.resourceRate);
-        }
-    }
     
     @Override
-    public void onBlockAdded(World world, int x, int y, int z)
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
-        super.onBlockAdded(world, x, y, z);
+        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
         
-        if(!world.isRemote)
+        if(!par1World.isRemote)
         {
-            world.scheduleBlockUpdate(x, y, z, blockID, ResourceCore.resourceRate);
+            tryPlaceResource(par1World, par2, par3, par4);
         }
     }
 
-    private void setResource(World world, int x, int y, int z)
+    private void tryPlaceResource(World world, int x, int y, int z)
     {
         if(world.isAirBlock(x, y + 1, z))
         {
