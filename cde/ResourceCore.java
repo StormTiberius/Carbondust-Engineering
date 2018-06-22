@@ -35,7 +35,6 @@ public class ResourceCore
 {
     private static Configuration cfg;
     private static int resourceId,lavaPerObsidian,oilPerSand,oilPerGravel;
-    public static int resourceRate;
     public static Block resource;
     
     @PreInit
@@ -44,13 +43,10 @@ public class ResourceCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/resource.cfg"));
         cfg.load();
         resourceId = cfg.get(Configuration.CATEGORY_BLOCK, "resource", 183).getInt();
-        ResourceManager.cfgInit(cfg);
-        resourceRate = cfg.get(Configuration.CATEGORY_GENERAL, "rate", 5, "Resource block update rate").getInt();
-        
         lavaPerObsidian = cfg.get(Configuration.CATEGORY_GENERAL, "lavaperobsidian", 1000, "Millibuckets of lava per obsidian block").getInt();
         oilPerSand = cfg.get(Configuration.CATEGORY_GENERAL, "oilpersand", 7, "Millibuckets of oil per sand block").getInt();
         oilPerGravel = cfg.get(Configuration.CATEGORY_GENERAL, "oilpergravel", 7, "Millibuckets of oil per gravel block").getInt();
-        
+        ResourceManager.cfgInit(cfg);
         cfg.save();
     }
 
@@ -59,15 +55,15 @@ public class ResourceCore
     {
         if(resourceId > 0)
         {
-            resource = new BlockResource(resourceId).setBlockName("resourceBlock").setBlockUnbreakable().setResistance(6000000.0F).setStepSound(soundStoneFootstep).setTickRandomly(true).setCreativeTab(CDECore.TAB_CDE);
+            resource = new BlockResource(resourceId).setBlockName("resourceBlock").setBlockUnbreakable().setResistance(6000000.0F).setStepSound(soundStoneFootstep).setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerBlock(resource, "resourceBlock");
             LanguageRegistry.addName(resource, "Resource");
             
             if(Loader.isModLoaded("Forestry"))
             {
-                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.obsidian.blockID, 1, 0)}, LiquidDictionary.getLiquid("Lava", lavaPerObsidian), new ItemStack(Block.cobblestone.blockID, 1, 0), 100);
-                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.sand.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", oilPerSand), new ItemStack(Block.sand.blockID, 1, 0), 0);
-                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.gravel.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", oilPerGravel), new ItemStack(Block.sand.blockID, 1, 0), 0);
+                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.obsidian.blockID, 1, 0)}, LiquidDictionary.getLiquid("Lava", lavaPerObsidian), new ItemStack(Block.cobblestone.blockID, 1, 0), 0);
+                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.sand.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", oilPerSand), new ItemStack(Block.cobblestone.blockID, 1, 0), 0);
+                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.gravel.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", oilPerGravel), new ItemStack(Block.cobblestone.blockID, 1, 0), 0);
             }
         }
     }
