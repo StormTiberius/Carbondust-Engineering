@@ -337,6 +337,10 @@ public class ChunkProviderTropics implements IChunkProvider
                 terrain[i] = middle[index_middle];
                 index_middle++;
             }
+            else if(counter == 0)
+            {
+                terrain[i] = (byte)Block.bedrock.blockID;
+            }
             else
             {
                 terrain[i] = (byte)Block.stone.blockID;
@@ -379,8 +383,6 @@ public class ChunkProviderTropics implements IChunkProvider
                 }
             }
         }
-        // --
-        Arrays.fill(ti, 0, 256, (short)Block.bedrock.blockID);
         // --
         
         Chunk var4 = new Chunk(this.worldObj, ti, tm, par1, par2);
