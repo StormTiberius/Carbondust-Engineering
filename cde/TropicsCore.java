@@ -36,7 +36,7 @@ public class TropicsCore
 {
     private static Configuration cfg;
     private static boolean enabled;
-    private static int islandSize,islandScarcity,islandId,beachId,oceanId,dimensionId,liquidId;
+    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId;
     public static BiomeGenBase island,beach,ocean;
     
     @PreInit
