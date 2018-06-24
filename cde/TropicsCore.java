@@ -9,6 +9,8 @@ import cde.core.Version;
 import cde.tropics.BiomeGenTropicsBeach;
 import cde.tropics.BiomeGenTropicsIsland;
 import cde.tropics.BiomeGenTropicsOcean;
+import cde.tropics.EntityBatty;
+import cde.tropics.EntitySquiddy;
 import cde.tropics.WorldChunkManagerTropics;
 import cde.tropics.WorldProviderTropics;
 import cpw.mods.fml.common.Mod;
@@ -21,6 +23,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -86,6 +89,9 @@ public class TropicsCore
                 DimensionManager.registerProviderType(dimensionId, WorldProviderTropics.class, true);
                 DimensionManager.registerDimension(dimensionId, dimensionId);
             }
+            
+            EntityRegistry.registerModEntity(EntitySquiddy.class, "Squiddy", 0, this, 50, 1, true);
+            EntityRegistry.registerModEntity(EntityBatty.class, "Batty", 1, this, 50, 1, true);
         }
     }
 

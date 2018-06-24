@@ -11,6 +11,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.SpawnListEntry;
 
 public abstract class BiomeGenTropics extends BiomeGenBase
 {
@@ -18,6 +19,11 @@ public abstract class BiomeGenTropics extends BiomeGenBase
     {
         super(id);
 
+        spawnableWaterCreatureList.clear();
+        field_82914_M.clear();
+        
+        field_82914_M.add(new SpawnListEntry(EntityBatty.class, 10, 8, 8));
+        
         theBiomeDecorator = new BiomeDecoratorTropics(this);
     }
     
