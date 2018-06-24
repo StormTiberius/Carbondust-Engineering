@@ -1,5 +1,6 @@
 package cde.tropics;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -322,7 +323,12 @@ public class ChunkProviderTropics implements IChunkProvider
     public Chunk provideChunk(int par1, int par2)
     {
         this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
-        byte[] var3 = new byte[32768];
+        
+        byte[] var3 = new byte[65536];
+        short[] ti = new short[65536];
+        byte[] tm = new byte[65536];
+        Arrays.fill(tm, (byte)0);
+        
         this.generateTerrain(par1, par2, var3);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
         this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
@@ -337,7 +343,24 @@ public class ChunkProviderTropics implements IChunkProvider
             this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, var3);
         }
 
-        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
+        // --
+        for (int x = 0; x < 16; ++x)
+        {
+            for (int z = 0; z < 16; ++z)
+            {
+                for (int y = 255; y >= 0; --y)
+                {
+                    int var17 = (z * 16 + x) * 256 + y;
+        
+                    int index = y << 8 | x << 4 | z;
+        
+                    ti[index] = var3[var17];
+                }
+            }
+        }
+        // --
+        
+        Chunk var4 = new Chunk(this.worldObj, ti, tm, par1, par2);
         byte[] var5 = var4.getBiomeArray();
 
         for (int var6 = 0; var6 < var5.length; ++var6)
