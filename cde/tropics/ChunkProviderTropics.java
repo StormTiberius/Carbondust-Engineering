@@ -19,8 +19,6 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.feature.MapGenScatteredFeature;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
-import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
@@ -236,66 +234,59 @@ public class ChunkProviderTropics implements IChunkProvider
                 {
                     int var17 = (var9 * 16 + var8) * 128 + var16;
 
-                    if (var16 <= 0)
+                    byte var18 = par3ArrayOfByte[var17];
+
+                    if (var18 == 0)
                     {
-                        par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
+                        var13 = -1;
                     }
-                    else
+                    else if (var18 == Block.stone.blockID)
                     {
-                        byte var18 = par3ArrayOfByte[var17];
-
-                        if (var18 == 0)
+                        if (var13 == -1)
                         {
-                            var13 = -1;
-                        }
-                        else if (var18 == Block.stone.blockID)
-                        {
-                            if (var13 == -1)
+                            if (var12 <= 0)
                             {
-                                if (var12 <= 0)
-                                {
-                                    var14 = 0;
-                                    var15 = (byte)Block.stone.blockID;
-                                }
-                                else if (var16 >= var5 - 4 && var16 <= var5 + 1)
-                                {
-                                    var14 = var10.topBlock;
-                                    var15 = var10.fillerBlock;
-                                }
+                                var14 = 0;
+                                var15 = (byte)Block.stone.blockID;
+                            }
+                            else if (var16 >= var5 - 4 && var16 <= var5 + 1)
+                            {
+                                var14 = var10.topBlock;
+                                var15 = var10.fillerBlock;
+                            }
 
-                                if (var16 < var5 && var14 == 0)
+                            if (var16 < var5 && var14 == 0)
+                            {
+                                if (var11 < 0.15F)
                                 {
-                                    if (var11 < 0.15F)
-                                    {
-                                        var14 = (byte)Block.ice.blockID;
-                                    }
-                                    else
-                                    {
-                                        var14 = (byte)Block.waterStill.blockID;
-                                    }
-                                }
-
-                                var13 = var12;
-
-                                if (var16 >= var5 - 1)
-                                {
-                                    par3ArrayOfByte[var17] = var14;
+                                    var14 = (byte)Block.ice.blockID;
                                 }
                                 else
                                 {
-                                    par3ArrayOfByte[var17] = var15;
+                                    var14 = (byte)Block.waterStill.blockID;
                                 }
                             }
-                            else if (var13 > 0)
-                            {
-                                --var13;
-                                par3ArrayOfByte[var17] = var15;
 
-                                if (var13 == 0 && var15 == Block.sand.blockID)
-                                {
-                                    var13 = this.rand.nextInt(4);
-                                    var15 = (byte)Block.sandStone.blockID;
-                                }
+                            var13 = var12;
+
+                            if (var16 >= var5 - 1)
+                            {
+                                par3ArrayOfByte[var17] = var14;
+                            }
+                            else
+                            {
+                                par3ArrayOfByte[var17] = var15;
+                            }
+                        }
+                        else if (var13 > 0)
+                        {
+                            --var13;
+                            par3ArrayOfByte[var17] = var15;
+
+                            if (var13 == 0 && var15 == Block.sand.blockID)
+                            {
+                                var13 = this.rand.nextInt(4);
+                                var15 = (byte)Block.sandStone.blockID;
                             }
                         }
                     }
@@ -320,23 +311,57 @@ public class ChunkProviderTropics implements IChunkProvider
     {
         this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
         
-        byte[] var3 = new byte[65536];
+        byte[] middle = new byte[32768];
+        byte[] terrain = new byte[65536];
+        
         short[] ti = new short[65536];
         byte[] tm = new byte[65536];
         Arrays.fill(tm, (byte)0);
         
-        this.generateTerrain(par1, par2, var3);
+        this.generateTerrain(par1, par2, middle);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
-        this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
-        this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
-        this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
+        this.replaceBlocksForBiome(par1, par2, middle, this.biomesForGeneration);
+        
+        // --
+        int counter = 0;
+        int index_middle = 0;
+        
+        for(int i = 0; i < terrain.length; i++)
+        {
+            if(counter >= 192)
+            {
+                terrain[i] = (byte)0;
+            }
+            else if(counter >= 64)
+            {
+                terrain[i] = middle[index_middle];
+                index_middle++;
+            }
+            else
+            {
+                terrain[i] = (byte)Block.stone.blockID;
+            }
+            
+            if(counter == 255)
+            {
+                counter = 0;
+            }
+            else
+            {
+                counter++;
+            }
+        }
+        // --
+        
+        this.caveGenerator.generate(this, this.worldObj, par1, par2, terrain);
+        this.ravineGenerator.generate(this, this.worldObj, par1, par2, terrain);
 
         if (this.mapFeaturesEnabled)
         {
-            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
-            this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
-            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
-            this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, var3);
+            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, terrain);
+            this.villageGenerator.generate(this, this.worldObj, par1, par2, terrain);
+            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, terrain);
+            this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, terrain);
         }
 
         // --
@@ -350,10 +375,12 @@ public class ChunkProviderTropics implements IChunkProvider
         
                     int index = y << 8 | x << 4 | z;
         
-                    ti[index] = var3[var17];
+                    ti[index] = terrain[var17];
                 }
             }
         }
+        // --
+        Arrays.fill(ti, 0, 256, (short)Block.bedrock.blockID);
         // --
         
         Chunk var4 = new Chunk(this.worldObj, ti, tm, par1, par2);
