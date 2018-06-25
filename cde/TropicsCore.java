@@ -93,10 +93,10 @@ public class TropicsCore
             
             EntityRegistry.registerModEntity(EntitySquiddy.class, "Squiddy", 0, this, 50, 1, true);
             EntityRegistry.registerModEntity(EntityBatty.class, "Batty", 1, this, 50, 1, true);
-        }
         
-        BiomeManager.addVillageBiome(island, enabled);
-        BiomeManager.addVillageBiome(beach, enabled);
+            BiomeManager.addVillageBiome(island, enabled);
+            BiomeManager.addVillageBiome(beach, enabled);
+        }
     }
 
     @PostInit
