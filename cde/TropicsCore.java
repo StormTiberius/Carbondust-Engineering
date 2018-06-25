@@ -27,6 +27,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
@@ -93,6 +94,9 @@ public class TropicsCore
             EntityRegistry.registerModEntity(EntitySquiddy.class, "Squiddy", 0, this, 50, 1, true);
             EntityRegistry.registerModEntity(EntityBatty.class, "Batty", 1, this, 50, 1, true);
         }
+        
+        BiomeManager.addVillageBiome(island, enabled);
+        BiomeManager.addVillageBiome(beach, enabled);
     }
 
     @PostInit
