@@ -87,8 +87,8 @@ public class TropicsCore
                 DimensionManager.registerDimension(dimensionId, dimensionId);
             }
             
-            EntityRegistry.registerModEntity(EntitySquiddy.class, "Squiddy", 0, this, 50, 1, true);
-            EntityRegistry.registerModEntity(EntityBatty.class, "Batty", 1, this, 50, 1, true);
+            EntityRegistry.registerModEntity(EntitySquiddy.class, "Squiddy", 0, this, 64, 3, true);
+            EntityRegistry.registerModEntity(EntityBatty.class, "Batty", 1, this, 80, 3, true);
         
             BiomeManager.addVillageBiome(island, enabled);
             BiomeManager.addVillageBiome(beach, enabled);
