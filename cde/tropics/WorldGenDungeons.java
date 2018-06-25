@@ -4,11 +4,6 @@ import forestry.api.core.BlockInterface;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntityChest;
@@ -164,58 +159,35 @@ public class WorldGenDungeons extends WorldGenerator
                 }
             }
 
-            if(loot.equals(ChestGenHooks.VILLAGE_BLACKSMITH))
+            if(ModLoader.isModLoaded("Forestry"))
             {
-                if(ModLoader.isModLoaded("Forestry"))
-                {
-                    ItemStack beehives = BlockInterface.getBlock("beehives");
+                ItemStack beehives = BlockInterface.getBlock("beehives");
 
-                    if(beehives != null && par1World.getBlockMaterial(par3, par4 + 4, par5).isSolid())
+                if(beehives != null && par1World.getBlockMaterial(par3, par4 + 4, par5).isSolid())
+                {
+                    switch(par2Random.nextInt(7))
                     {
-                        switch(par2Random.nextInt(7))
-                        {
-                            case 0: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 1); break;
-                            case 1: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 2); break;
-                            case 2: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 3); break;
-                            case 3: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 4); break;
-                            case 4: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 5); break;
-                            case 5: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 6); break;
-                            case 6: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 7); break;
-                        }
+                        case 0: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 1); break;
+                        case 1: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 2); break;
+                        case 2: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 3); break;
+                        case 3: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 4); break;
+                        case 4: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 5); break;
+                        case 5: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 6); break;
+                        case 6: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 7); break;
                     }
                 }
-                
-                EntityAnimal animal;
-                
-                switch(par2Random.nextInt(4))
-                {
-                    case 0: animal = new EntityChicken(par1World); break;
-                    case 1: animal = new EntityPig(par1World); break;
-                    case 2: animal = new EntitySheep(par1World); break;
-                    default: animal = new EntityCow(par1World); break;
-                }
-                
-                animal.setPosition(par3, par4, par5);
-                
-                if(par1World.checkIfAABBIsClear(animal.boundingBox) && par1World.getCollidingBoundingBoxes(animal, animal.boundingBox).isEmpty() && !par1World.isAnyLiquid(animal.boundingBox))
-                {
-                    par1World.spawnEntityInWorld(animal);
-                }
-                
+            }
+
+            par1World.setBlockWithNotify(par3, par4, par5, Block.mobSpawner.blockID);
+            TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(par3, par4, par5);
+
+            if (var19 != null)
+            {
+                var19.setMobID(this.pickMobSpawner(par2Random));
             }
             else
             {
-                par1World.setBlockWithNotify(par3, par4, par5, Block.mobSpawner.blockID);
-                TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(par3, par4, par5);
-
-                if (var19 != null)
-                {
-                    var19.setMobID(this.pickMobSpawner(par2Random));
-                }
-                else
-                {
-                    System.err.println("Failed to fetch mob spawner entity at (" + par3 + ", " + par4 + ", " + par5 + ")");
-                }
+                System.err.println("Failed to fetch mob spawner entity at (" + par3 + ", " + par4 + ", " + par5 + ")");
             }
             
             return true;
