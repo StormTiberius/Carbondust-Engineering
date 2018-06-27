@@ -1,6 +1,5 @@
 package cde.tropics;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -15,9 +14,13 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
+import net.minecraft.world.gen.MapGenCaves;
+import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.feature.MapGenScatteredFeature;
 import net.minecraft.world.gen.feature.WorldGenLakes;
+import net.minecraft.world.gen.structure.MapGenMineshaft;
+import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
@@ -214,6 +217,10 @@ public class ChunkProviderTropics implements IChunkProvider
      */
     public void replaceBlocksForBiome(int par1, int par2, byte[] par3ArrayOfByte, BiomeGenBase[] par4ArrayOfBiomeGenBase)
     {
+        ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, par1, par2, par3ArrayOfByte, par4ArrayOfBiomeGenBase);
+        MinecraftForge.EVENT_BUS.post(event);
+        if (event.getResult() == Result.DENY) return;
+
         byte var5 = 63;
         double var6 = 0.03125D;
         this.stoneNoise = this.noiseGen4.generateNoiseOctaves(this.stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
@@ -233,59 +240,66 @@ public class ChunkProviderTropics implements IChunkProvider
                 {
                     int var17 = (var9 * 16 + var8) * 128 + var16;
 
-                    byte var18 = par3ArrayOfByte[var17];
-
-                    if (var18 == 0)
+                    if (var16 <= 0)
                     {
-                        var13 = -1;
+                        par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
                     }
-                    else if (var18 == Block.stone.blockID)
+                    else
                     {
-                        if (var13 == -1)
-                        {
-                            if (var12 <= 0)
-                            {
-                                var14 = 0;
-                                var15 = (byte)Block.stone.blockID;
-                            }
-                            else if (var16 >= var5 - 4 && var16 <= var5 + 1)
-                            {
-                                var14 = var10.topBlock;
-                                var15 = var10.fillerBlock;
-                            }
+                        byte var18 = par3ArrayOfByte[var17];
 
-                            if (var16 < var5 && var14 == 0)
+                        if (var18 == 0)
+                        {
+                            var13 = -1;
+                        }
+                        else if (var18 == Block.stone.blockID)
+                        {
+                            if (var13 == -1)
                             {
-                                if (var11 < 0.15F)
+                                if (var12 <= 0)
                                 {
-                                    var14 = (byte)Block.ice.blockID;
+                                    var14 = 0;
+                                    var15 = (byte)Block.stone.blockID;
+                                }
+                                else if (var16 >= var5 - 4 && var16 <= var5 + 1)
+                                {
+                                    var14 = var10.topBlock;
+                                    var15 = var10.fillerBlock;
+                                }
+
+                                if (var16 < var5 && var14 == 0)
+                                {
+                                    if (var11 < 0.15F)
+                                    {
+                                        var14 = (byte)Block.ice.blockID;
+                                    }
+                                    else
+                                    {
+                                        var14 = (byte)Block.waterStill.blockID;
+                                    }
+                                }
+
+                                var13 = var12;
+
+                                if (var16 >= var5 - 1)
+                                {
+                                    par3ArrayOfByte[var17] = var14;
                                 }
                                 else
                                 {
-                                    var14 = (byte)Block.waterStill.blockID;
+                                    par3ArrayOfByte[var17] = var15;
                                 }
                             }
-
-                            var13 = var12;
-
-                            if (var16 >= var5 - 1)
+                            else if (var13 > 0)
                             {
-                                par3ArrayOfByte[var17] = var14;
-                            }
-                            else
-                            {
+                                --var13;
                                 par3ArrayOfByte[var17] = var15;
-                            }
-                        }
-                        else if (var13 > 0)
-                        {
-                            --var13;
-                            par3ArrayOfByte[var17] = var15;
 
-                            if (var13 == 0 && var15 == Block.sand.blockID)
-                            {
-                                var13 = this.rand.nextInt(4);
-                                var15 = (byte)Block.sandStone.blockID;
+                                if (var13 == 0 && var15 == Block.sand.blockID)
+                                {
+                                    var13 = this.rand.nextInt(4);
+                                    var15 = (byte)Block.sandStone.blockID;
+                                }
                             }
                         }
                     }
@@ -309,82 +323,22 @@ public class ChunkProviderTropics implements IChunkProvider
     public Chunk provideChunk(int par1, int par2)
     {
         this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
-        
-        byte[] middle = new byte[32768];
-        byte[] terrain = new byte[65536];
-        
-        short[] ti = new short[65536];
-        byte[] tm = new byte[65536];
-        Arrays.fill(tm, (byte)0);
-        
-        this.generateTerrain(par1, par2, middle);
+        byte[] var3 = new byte[32768];
+        this.generateTerrain(par1, par2, var3);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
-        this.replaceBlocksForBiome(par1, par2, middle, this.biomesForGeneration);
-        
-        // --
-        int counter = 0;
-        int index_middle = 0;
-        
-        for(int i = 0; i < terrain.length; i++)
-        {
-            if(counter >= 192)
-            {
-                terrain[i] = (byte)0;
-            }
-            else if(counter >= 64)
-            {
-                terrain[i] = middle[index_middle];
-                index_middle++;
-            }
-            else if(counter == 0)
-            {
-                terrain[i] = (byte)Block.bedrock.blockID;
-            }
-            else
-            {
-                terrain[i] = (byte)Block.stone.blockID;
-            }
-            
-            if(counter == 255)
-            {
-                counter = 0;
-            }
-            else
-            {
-                counter++;
-            }
-        }
-        // --
-        
-        this.caveGenerator.generate(this, this.worldObj, par1, par2, terrain);
-        this.ravineGenerator.generate(this, this.worldObj, par1, par2, terrain);
+        this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
+        this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
+        this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
 
         if (this.mapFeaturesEnabled)
         {
-            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, terrain);
-            this.villageGenerator.generate(this, this.worldObj, par1, par2, terrain);
-            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, terrain);
-            this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, terrain);
+            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
+            this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
+            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
+            this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, var3);
         }
 
-        // --
-        for (int x = 0; x < 16; ++x)
-        {
-            for (int z = 0; z < 16; ++z)
-            {
-                for (int y = 255; y >= 0; --y)
-                {
-                    int var17 = (z * 16 + x) * 256 + y;
-        
-                    int index = y << 8 | x << 4 | z;
-        
-                    ti[index] = terrain[var17];
-                }
-            }
-        }
-        // --
-        
-        Chunk var4 = new Chunk(this.worldObj, ti, tm, par1, par2);
+        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
         byte[] var5 = var4.getBiomeArray();
 
         for (int var6 = 0; var6 < var5.length; ++var6)
@@ -617,12 +571,9 @@ public class ChunkProviderTropics implements IChunkProvider
             var14 = this.rand.nextInt(128);
             int var15 = var5 + this.rand.nextInt(16) + 8;
 
-            switch(rand.nextInt(4))
+            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
             {
-                case 0: new WorldGenDungeons(ChestGenHooks.PYRAMID_DESERT_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
-                case 1: new WorldGenDungeons(ChestGenHooks.PYRAMID_JUNGLE_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
-                case 2: new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
-                default: new WorldGenDungeons(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
+                ;
             }
         }
 
