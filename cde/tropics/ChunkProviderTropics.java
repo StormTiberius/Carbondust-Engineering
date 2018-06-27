@@ -571,9 +571,12 @@ public class ChunkProviderTropics implements IChunkProvider
             var14 = this.rand.nextInt(128);
             int var15 = var5 + this.rand.nextInt(16) + 8;
 
-            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
+            switch(rand.nextInt(4))
             {
-                ;
+                case 0: new WorldGenDungeons(ChestGenHooks.PYRAMID_DESERT_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
+                case 1: new WorldGenDungeons(ChestGenHooks.PYRAMID_JUNGLE_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
+                case 2: new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
+                default: new WorldGenDungeons(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
             }
         }
 
