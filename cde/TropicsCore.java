@@ -10,6 +10,7 @@ import cde.tropics.BiomeGenTropicsBeach;
 import cde.tropics.BiomeGenTropicsIsland;
 import cde.tropics.BiomeGenTropicsOcean;
 import cde.tropics.WorldChunkManagerTropics;
+import cde.tropics.WorldTypeTropics;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -20,7 +21,9 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
@@ -30,8 +33,9 @@ import net.minecraftforge.common.Configuration;
 public class TropicsCore
 {
     private static Configuration cfg;
-    private static int islandId,beachId,oceanId,islandSize,islandScarcity;
+    private static int islandId,beachId,oceanId,tropicsId,islandSize,islandScarcity;
     public static BiomeGenBase island,beach,ocean;
+    public static WorldType tropics;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -40,9 +44,11 @@ public class TropicsCore
         
         cfg.load();
         
-        islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandid", 23, "Island biome id").getInt();
-        beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachid", 24, "Beach biome id").getInt();
-        oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanid", 25, "Ocean biome id").getInt();
+        islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandid", 23, "Island id").getInt();
+        beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachid", 24, "Beach id").getInt();
+        oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanid", 25, "Ocean id").getInt();
+        
+        tropicsId = cfg.get(Configuration.CATEGORY_GENERAL, "tropicsid", 10, "Tropics id").getInt();
         
         islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandsize", 4, "Island size, 4-6 recommended").getInt();
         islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandscarcity", 100, "Island scarcity, 100 default").getInt();
@@ -56,6 +62,8 @@ public class TropicsCore
         WorldChunkManagerTropics.allowedBiomes.clear();
         WorldChunkManagerTropics.allowedBiomes.add(island);
         WorldChunkManagerTropics.allowedBiomes.add(beach);
+        
+        tropics = new WorldTypeTropics(tropicsId, "TROPICS");
     }
 
     @Init
@@ -63,6 +71,8 @@ public class TropicsCore
     {
         BiomeManager.addVillageBiome(island, true);
         BiomeManager.addVillageBiome(beach, true);
+        
+        LanguageRegistry.instance().addStringLocalization("generator.TROPICS", "en_US", "Tropics");
     }
 
     @PostInit
