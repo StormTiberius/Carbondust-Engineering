@@ -11,7 +11,6 @@ public class BiomeGenTropicsIsland extends BiomeGenTropics
     {
         super(id);
         
-        spawnableCreatureList.clear();
         spawnableMonsterList.clear();
         spawnableWaterCreatureList.clear();
         
