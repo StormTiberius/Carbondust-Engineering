@@ -1,11 +1,9 @@
 package cde.tropics;
 
-import forestry.api.core.BlockInterface;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -156,25 +154,6 @@ public class WorldGenDungeons extends WorldGenerator
 
                     ++var10;
                     break;
-                }
-            }
-
-            if(ModLoader.isModLoaded("Forestry"))
-            {
-                ItemStack beehives = BlockInterface.getBlock("beehives");
-
-                if(beehives != null && par1World.getBlockMaterial(par3, par4 + 4, par5).isSolid())
-                {
-                    switch(par2Random.nextInt(7))
-                    {
-                        case 0: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 1); break;
-                        case 1: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 2); break;
-                        case 2: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 3); break;
-                        case 3: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 4); break;
-                        case 4: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 5); break;
-                        case 5: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 6); break;
-                        case 6: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 7); break;
-                    }
                 }
             }
 
