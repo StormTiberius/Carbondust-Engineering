@@ -13,6 +13,7 @@ public class BiomeGenTropicsBeach extends BiomeGenTropics
         
         spawnableCreatureList.clear();
         spawnableMonsterList.clear();
+        spawnableWaterCreatureList.clear();
         
         theBiomeDecorator.treesPerChunk = 50;
         theBiomeDecorator.reedsPerChunk = 50;
