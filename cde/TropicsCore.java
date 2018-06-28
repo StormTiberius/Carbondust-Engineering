@@ -69,6 +69,10 @@ public class TropicsCore
     @Init
     public void init(FMLInitializationEvent event) 
     {
+        BiomeManager.addStrongholdBiome(island);
+        BiomeManager.addStrongholdBiome(beach);
+        BiomeManager.addStrongholdBiome(ocean);
+        
         BiomeManager.addVillageBiome(island, true);
         BiomeManager.addVillageBiome(beach, true);
         
