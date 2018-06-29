@@ -14,7 +14,7 @@ public class BiomeGenTropicsIsland extends BiomeGenTropics
         spawnableMonsterList.clear();
         spawnableWaterCreatureList.clear();
         
-        theBiomeDecorator.treesPerChunk = 0;
+        theBiomeDecorator.treesPerChunk = -999;
         theBiomeDecorator.reedsPerChunk = 50;
         theBiomeDecorator.cactiPerChunk = 10;
     }
