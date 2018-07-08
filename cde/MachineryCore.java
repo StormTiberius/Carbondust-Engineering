@@ -134,7 +134,7 @@ public class MachineryCore
                 }
             }
             
-            goggles = new ItemGoggles(gogglesId, spriteIndex, renderId).setCreativeTab(CDECore.TAB_CDE);
+            goggles = new ItemGoggles(gogglesId, spriteIndex, renderId).setItemName("goggles").setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerItem(goggles, Namings.INTERNAL_GOGGLES_NAME);
             LanguageRegistry.addName(goggles, Namings.EXTERNAL_GOGGLES_NAME);
             
