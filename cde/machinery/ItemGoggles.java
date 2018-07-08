@@ -8,22 +8,18 @@ package cde.machinery;
 import ic2.api.ElectricItem;
 import ic2.api.IElectricItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class ItemGoggles extends Item implements IElectricItem
+public class ItemGoggles extends ItemArmorUtility implements IElectricItem
 {
     private int counter = 240;
     
-    public ItemGoggles(int par1)
+    public ItemGoggles(int itemId, int spriteIndex, int renderId)
     {
-        super(par1);
-        this.setMaxDamage(13);
-        this.setMaxStackSize(1);
-        this.setNoRepair();
+        super(itemId, spriteIndex, renderId, 0);
     }
     
     @Override
@@ -50,34 +46,10 @@ public class ItemGoggles extends Item implements IElectricItem
     }
     
     @Override
-    public String getItemName()
-    {
-        return "item.goggles";
-    }
-    
-    @Override
-    public String getItemNameIS(ItemStack par1ItemStack)
-    {
-        return getItemName();
-    }
-    
-    @Override
-    public boolean isValidArmor(ItemStack stack, int armorType)
-    {
-        return armorType == 0;
-    }
-    
-    @Override
     public String getTextureFile()
     {
         return "/ic2/sprites/item_0.png";
-    }
-    
-    @Override
-    public int getIconFromDamage(int par1)
-    {
-        return 232;
-    }    
+    }   
     
     // IElectricItem methods
     @Override
