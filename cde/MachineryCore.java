@@ -36,7 +36,9 @@ import ic2.api.Items;
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import railcraft.common.api.core.items.ItemRegistry;
@@ -112,7 +114,27 @@ public class MachineryCore
         
         if(gogglesId > 0)
         {
-            goggles = new ItemGoggles(gogglesId).setCreativeTab(CDECore.TAB_CDE);
+            int spriteIndex = 0;
+            int renderId = 0;
+            
+            if(ModLoader.isModLoaded("IC2"))
+            {
+                ItemStack nvg = Items.getItem("nightvisionGoggles");
+                
+                if(nvg != null)
+                {
+                    spriteIndex = nvg.getIconIndex();
+                    
+                    Item item = nvg.getItem();
+
+                    if(item instanceof ItemArmor)
+                    {
+                        renderId = ((ItemArmor)item).renderIndex;
+                    }
+                }
+            }
+            
+            goggles = new ItemGoggles(gogglesId, spriteIndex, renderId).setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerItem(goggles, Namings.INTERNAL_GOGGLES_NAME);
             LanguageRegistry.addName(goggles, Namings.EXTERNAL_GOGGLES_NAME);
             
