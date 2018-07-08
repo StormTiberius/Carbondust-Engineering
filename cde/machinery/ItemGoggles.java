@@ -19,11 +19,13 @@ import net.minecraft.world.World;
 
 public class ItemGoggles extends ItemArmorUtility implements IElectricItem
 {
+    private final String TEXTURE_FILE;
     private int counter = 240;
     
-    public ItemGoggles(int itemId, int spriteIndex, int renderId)
+    public ItemGoggles(int itemId, int spriteIndex, int renderId, String textureFile)
     {
         super(itemId, spriteIndex, renderId, 0);
+        TEXTURE_FILE = textureFile;
     }
     
     @Override
@@ -52,7 +54,7 @@ public class ItemGoggles extends ItemArmorUtility implements IElectricItem
     @Override
     public String getTextureFile()
     {
-        return "/ic2/sprites/item_0.png";
+        return TEXTURE_FILE;
     }   
     
     @SideOnly(Side.CLIENT)

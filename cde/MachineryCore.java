@@ -114,6 +114,7 @@ public class MachineryCore
         
         if(gogglesId > 0)
         {
+            String textureFile = "";
             int spriteIndex = 0;
             int renderId = 0;
             
@@ -129,12 +130,13 @@ public class MachineryCore
 
                     if(item instanceof ItemArmor)
                     {
+                        textureFile = item.getTextureFile();
                         renderId = ((ItemArmor)item).renderIndex;
                     }
                 }
             }
             
-            goggles = new ItemGoggles(gogglesId, spriteIndex, renderId).setItemName("goggles").setCreativeTab(CDECore.TAB_CDE);
+            goggles = new ItemGoggles(gogglesId, spriteIndex, renderId, textureFile).setItemName("goggles").setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerItem(goggles, Namings.INTERNAL_GOGGLES_NAME);
             LanguageRegistry.addName(goggles, Namings.EXTERNAL_GOGGLES_NAME);
             
