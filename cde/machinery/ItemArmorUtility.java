@@ -18,7 +18,7 @@ public class ItemArmorUtility extends ItemArmor implements ISpecialArmor
 {
     public ItemArmorUtility(int itemId, int spriteIndex, int renderId, int equipmentSlot)
     {
-        super(itemId, EnumArmorMaterial.CLOTH, renderId, equipmentSlot);
+        super(itemId, EnumArmorMaterial.DIAMOND, renderId, equipmentSlot);
         iconIndex = spriteIndex;
     }
 
