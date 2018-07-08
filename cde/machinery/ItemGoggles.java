@@ -5,8 +5,12 @@
 
 package cde.machinery;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.ElectricItem;
 import ic2.api.IElectricItem;
+import java.util.List;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -50,6 +54,17 @@ public class ItemGoggles extends ItemArmorUtility implements IElectricItem
     {
         return "/ic2/sprites/item_0.png";
     }   
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    {
+            ItemStack charged = new ItemStack(this, 1);
+            ElectricItem.charge(charged, 0x7fffffff, 0x7fffffff, true, false);
+            par3List.add(charged);
+
+            par3List.add(new ItemStack(this, 1, getMaxDamage()));
+    }
     
     // IElectricItem methods
     @Override
