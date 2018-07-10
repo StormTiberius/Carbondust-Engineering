@@ -135,7 +135,7 @@ public class TileEntityMixer extends TileEntityMachine implements IEnergySink
     @Override
     public int demandsEnergy()
     {
-        if(isRedstonePowered && euBuffer < BUFFER_SIZE)
+        if(isPowered() && euBuffer < BUFFER_SIZE)
         {
             return BUFFER_SIZE - euBuffer;
         }

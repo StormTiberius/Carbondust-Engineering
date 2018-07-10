@@ -96,7 +96,7 @@ public class TileEntityTransformer extends TileEntityMachine implements IEnergyS
     @Override
     public int demandsEnergy()
     {
-        if(isRedstonePowered && euBuffer < BUFFER_SIZE)
+        if(isPowered() && euBuffer < BUFFER_SIZE)
         {
             return BUFFER_SIZE - euBuffer;
         }

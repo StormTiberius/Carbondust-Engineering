@@ -192,7 +192,7 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
     @Override
     public int demandsEnergy()
     {
-        if(isRedstonePowered && euBuffer < BUFFER_SIZE)
+        if(isPowered() && euBuffer < BUFFER_SIZE)
         {
             return BUFFER_SIZE - euBuffer;
         }
