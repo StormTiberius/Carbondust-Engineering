@@ -80,6 +80,12 @@ public class TileEntityTransformer extends TileEntityMachine implements IEnergyS
         par1NBTTagCompound.setInteger("batteryFullId", batteryFullId);
     }
     
+    @Override
+    protected boolean isPowered()
+    {
+        return !isRedstonePowered;
+    }
+        
     // IC2 Methods
     @Override
     public boolean acceptsEnergyFrom(TileEntity emitter, Direction direction)
