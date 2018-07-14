@@ -137,10 +137,10 @@ public class Defaults
     
     public static final int[][] ORE_GEN_DEFAULTS =
     {    
-        new int[]{1,9,20,80,150},
-        new int[]{1,9,16,50,100},
-        new int[]{1,9,8,30,70},
-        new int[]{1,7,8,40,80},        
+        new int[]{1,10,30,20,140},
+        new int[]{1,6,50,0,80},
+        new int[]{1,8,8,0,64},
+        new int[]{1,8,8,20,70},        
         new int[]{1,3,40,0,128},
         new int[]{1,6,2,20,32},
         new int[]{1,6,2,32,64},
