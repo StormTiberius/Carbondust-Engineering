@@ -24,7 +24,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
