@@ -12,6 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.Ic2Recipes;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -221,11 +222,59 @@ public class RecipeManager
         if(ModLoader.isModLoaded("Railcraft"))
         {
             LinkedHashMap output = new LinkedHashMap();
+            output.put(Utils.getNewItemStackWithQuantity(Materials.crushedIron, 2), 1.0F);
+            output.put(Utils.getNewItemStackWithQuantity(Materials.dustIron, 1), 0.44F);
+            RailcraftCraftingManager.rockCrusher.addRecipe(new ItemStack(Block.oreIron.blockID, 1, 0), output);
             
-            output.put(Utils.getNewItemStackWithQuantity(Materials.dustLead, 2), 1.0F);
-            output.put(Utils.getNewItemStackWithQuantity(Materials.dustZinc, 1), 0.25F);
+            output = new LinkedHashMap();
+            output.put(Utils.getNewItemStackWithQuantity(Materials.crushedGold, 2), 1.0F);
+            output.put(Utils.getNewItemStackWithQuantity(Materials.dustGold, 1), 0.44F);
+            RailcraftCraftingManager.rockCrusher.addRecipe(new ItemStack(Block.oreGold.blockID, 1, 0), output);
             
-            RailcraftCraftingManager.rockCrusher.addRecipe(Utils.getNewItemStackWithQuantity(Blocks.oreLead, 1), output);
+            output = new LinkedHashMap();
+            output.put(Utils.getNewItemStackWithQuantity(Materials.crushedCopper, 2), 1.0F);
+            output.put(Utils.getNewItemStackWithQuantity(Materials.dustCopper, 1), 0.44F);
+            
+            for(ItemStack is : OreDictionary.getOres("oreCopper"))
+            {
+                RailcraftCraftingManager.rockCrusher.addRecipe(Utils.getNewItemStackWithQuantity(is, 1), output);
+            }
+            
+            output = new LinkedHashMap();
+            output.put(Utils.getNewItemStackWithQuantity(Materials.crushedTin, 2), 1.0F);
+            output.put(Utils.getNewItemStackWithQuantity(Materials.dustTin, 1), 0.44F);
+            
+            for(ItemStack is : OreDictionary.getOres("oreTin"))
+            {
+                RailcraftCraftingManager.rockCrusher.addRecipe(Utils.getNewItemStackWithQuantity(is, 1), output);
+            }
+            
+            output = new LinkedHashMap();
+            output.put(Utils.getNewItemStackWithQuantity(Materials.crushedSilver, 2), 1.0F);
+            output.put(Utils.getNewItemStackWithQuantity(Materials.dustSilver, 1), 0.44F);
+            
+            for(ItemStack is : OreDictionary.getOres("oreSilver"))
+            {
+                RailcraftCraftingManager.rockCrusher.addRecipe(Utils.getNewItemStackWithQuantity(is, 1), output);
+            }
+            
+            output = new LinkedHashMap();
+            output.put(Utils.getNewItemStackWithQuantity(Materials.crushedLead, 2), 1.0F);
+            output.put(Utils.getNewItemStackWithQuantity(Materials.dustLead, 1), 0.44F);
+            output.put(Utils.getNewItemStackWithQuantity(Materials.dustZinc, 1), 1.0F);
+            
+            for(ItemStack is : OreDictionary.getOres("oreLead"))
+            {
+                RailcraftCraftingManager.rockCrusher.addRecipe(Utils.getNewItemStackWithQuantity(is, 1), output);
+            }
+            
+            output = new LinkedHashMap();
+            output.put(Utils.getNewItemStackWithQuantity(Materials.crushedUranium, 2), 1.0F);
+              
+            for(ItemStack is : OreDictionary.getOres("oreUranium"))
+            {
+                RailcraftCraftingManager.rockCrusher.addRecipe(Utils.getNewItemStackWithQuantity(is, 1), output);
+            }
         }
     }
     
