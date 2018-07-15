@@ -9,7 +9,6 @@ import cde.api.Blocks;
 import cde.api.Materials;
 import cde.core.util.Utils;
 import cpw.mods.fml.common.registry.GameRegistry;
-import forestry.api.recipes.RecipeManagers;
 import ic2.api.Ic2Recipes;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,8 +17,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.src.ModLoader;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -278,44 +275,6 @@ public class RecipeManager
             {
                 RailcraftCraftingManager.rockCrusher.addRecipe(Utils.getNewItemStackWithQuantity(is, 1), output);
             }
-        }
-        
-        if(ModLoader.isModLoaded("Forestry"))
-        {
-            RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), null, Utils.getNewItemStackWithQuantity(Materials.washedIron, 1), new Object[] {
-            "x  ",
-            "   ",
-            "   ", 'x', Utils.getNewItemStackWithQuantity(Materials.crushedIron, 1)});
-            
-            RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), null, Utils.getNewItemStackWithQuantity(Materials.washedGold, 1), new Object[] {
-            "x  ",
-            "   ",
-            "   ", 'x', Utils.getNewItemStackWithQuantity(Materials.crushedGold, 1)});
-                        
-            RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), null, Utils.getNewItemStackWithQuantity(Materials.washedCopper, 1), new Object[] {
-            "x  ",
-            "   ",
-            "   ", 'x', Utils.getNewItemStackWithQuantity(Materials.crushedCopper, 1)});
-                                    
-            RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), null, Utils.getNewItemStackWithQuantity(Materials.washedTin, 1), new Object[] {
-            "x  ",
-            "   ",
-            "   ", 'x', Utils.getNewItemStackWithQuantity(Materials.crushedTin, 1)});
-                                                
-            RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), null, Utils.getNewItemStackWithQuantity(Materials.washedSilver, 1), new Object[] {
-            "x  ",
-            "   ",
-            "   ", 'x', Utils.getNewItemStackWithQuantity(Materials.crushedSilver, 1)});
-                                                            
-            RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), null, Utils.getNewItemStackWithQuantity(Materials.washedLead, 1), new Object[] {
-            "x  ",
-            "   ",
-            "   ", 'x', Utils.getNewItemStackWithQuantity(Materials.crushedLead, 1)});
-                                                                        
-            RecipeManagers.carpenterManager.addRecipe(40, LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), null, Utils.getNewItemStackWithQuantity(Materials.washedUranium, 1), new Object[] {
-            "x  ",
-            "   ",
-            "   ", 'x', Utils.getNewItemStackWithQuantity(Materials.crushedUranium, 1)});
         }
     }
     
