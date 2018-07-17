@@ -5,7 +5,7 @@
 
 package cde.world.ember;
 
-import cde.EmberCore;
+import cde.WorldCore;
 import cpw.mods.fml.common.IWorldGenerator;
 import java.util.Random;
 import net.minecraft.world.World;
@@ -58,7 +58,7 @@ public class WorldGenOil implements IWorldGenerator
 
                             if(a <= b)
                             {
-                                world.setBlockWithNotify(xPos + x, yPos + y, zPos + z, EmberCore.getLiquidId());
+                                world.setBlockWithNotify(xPos + x, yPos + y, zPos + z, WorldCore.getLiquidId());
                             }
                         }
                     }

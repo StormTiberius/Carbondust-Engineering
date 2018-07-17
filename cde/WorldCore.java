@@ -33,7 +33,7 @@ import net.minecraftforge.liquids.LiquidStack;
 
 @Mod(modid="CDE|Ember", name="Ember", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
-public class EmberCore
+public class WorldCore
 {   
     private static Configuration cfg;
     private static boolean enabled;
