@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.world.tropics;
+package cde.world.pacific;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

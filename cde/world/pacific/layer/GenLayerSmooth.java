@@ -1,10 +1,8 @@
-package cde.world.tropics.layer;
+package cde.world.pacific.layer;
 
-import net.minecraft.world.biome.BiomeGenBase;
-
-public class GenLayerRiver extends GenLayer
+public class GenLayerSmooth extends GenLayer
 {
-    public GenLayerRiver(long par1, GenLayer par3GenLayer)
+    public GenLayerSmooth(long par1, GenLayer par3GenLayer)
     {
         super(par1);
         super.parent = par3GenLayer;
@@ -33,14 +31,33 @@ public class GenLayerRiver extends GenLayer
                 int var16 = var9[var12 + 1 + (var11 + 2) * var7];
                 int var17 = var9[var12 + 1 + (var11 + 1) * var7];
 
-                if (var17 != 0 && var13 != 0 && var14 != 0 && var15 != 0 && var16 != 0 && var17 == var13 && var17 == var15 && var17 == var14 && var17 == var16)
+                if (var13 == var14 && var15 == var16)
                 {
-                    var10[var12 + var11 * par3] = -1;
+                    this.initChunkSeed((long)(var12 + par1), (long)(var11 + par2));
+
+                    if (this.nextInt(2) == 0)
+                    {
+                        var17 = var13;
+                    }
+                    else
+                    {
+                        var17 = var15;
+                    }
                 }
                 else
                 {
-                    var10[var12 + var11 * par3] = BiomeGenBase.river.biomeID;
+                    if (var13 == var14)
+                    {
+                        var17 = var13;
+                    }
+
+                    if (var15 == var16)
+                    {
+                        var17 = var15;
+                    }
                 }
+
+                var10[var12 + var11 * par3] = var17;
             }
         }
 

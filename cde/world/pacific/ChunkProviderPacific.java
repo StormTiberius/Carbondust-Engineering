@@ -1,4 +1,4 @@
-package cde.world.tropics;
+package cde.world.pacific;
 
 import java.util.List;
 import java.util.Random;

@@ -3,18 +3,19 @@
  * @author StormTiberius
  */
 
-package cde.world.tropics;
+package cde.world.pacific;
 
-public class BiomeGenPacificIsland extends BiomeGenPacific
+public class BiomeGenPacificBeach extends BiomeGenPacific
 {
-    public BiomeGenPacificIsland(int id)
+    public BiomeGenPacificBeach(int id)
     {
         super(id);
         
+        spawnableCreatureList.clear();
         spawnableMonsterList.clear();
         spawnableWaterCreatureList.clear();
         
-        theBiomeDecorator.treesPerChunk = -999;
+        theBiomeDecorator.treesPerChunk = 50;
         theBiomeDecorator.reedsPerChunk = 50;
         theBiomeDecorator.cactiPerChunk = 10;
     }
