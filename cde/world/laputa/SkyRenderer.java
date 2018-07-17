@@ -31,7 +31,6 @@ public class SkyRenderer extends IRenderHandler
         int glSkyList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST);
         int glSkyList2 = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST2);
         int starGLCallList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, STAR_GL_CALL_LIST);
-
         
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         Vec3 var2 = theWorld.getSkyColor(mc.renderViewEntity, par1);
