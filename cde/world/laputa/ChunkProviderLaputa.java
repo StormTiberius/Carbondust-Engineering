@@ -156,7 +156,7 @@ public class ChunkProviderLaputa implements IChunkProvider
                 {
                     int var17 = (var9 * 16 + var8) * 128 + var16;
 
-                    if (par1 == 15 && par2 == 15 && var16 == 20)
+                    if (par1 == 16 && par2 == 16 && var16 == 20)
                     {
                         par3ArrayOfByte[var17] = (byte)Block.grass.blockID;
                     }
