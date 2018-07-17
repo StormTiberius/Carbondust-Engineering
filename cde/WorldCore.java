@@ -13,7 +13,7 @@ import cde.world.ember.WorldProviderEmber;
 import cde.world.tropics.BiomeGenPacificBeach;
 import cde.world.tropics.BiomeGenPacificIsland;
 import cde.world.tropics.BiomeGenPacificOcean;
-import cde.world.tropics.WorldChunkManagerTropics;
+import cde.world.tropics.WorldChunkManagerPacific;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -87,10 +87,10 @@ public class WorldCore
             beach = (new BiomeGenPacificBeach(beachBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             pacific = (new BiomeGenPacificOcean(pacificBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
 
-            WorldChunkManagerTropics.allowedBiomes.clear();
-            WorldChunkManagerTropics.allowedBiomes.add(oasis);
-            WorldChunkManagerTropics.allowedBiomes.add(island);
-            WorldChunkManagerTropics.allowedBiomes.add(beach);
+            WorldChunkManagerPacific.allowedBiomes.clear();
+            WorldChunkManagerPacific.allowedBiomes.add(oasis);
+            WorldChunkManagerPacific.allowedBiomes.add(island);
+            WorldChunkManagerPacific.allowedBiomes.add(beach);
         }
         
         if(atlanticDimension)
