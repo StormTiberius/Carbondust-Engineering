@@ -5,10 +5,12 @@
 
 package cde.world.laputa;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.MathHelper;
@@ -18,10 +20,19 @@ import org.lwjgl.opengl.GL11;
 
 public class SkyRenderer extends IRenderHandler
 {
+    public static final String[] STAR_GL_CALL_LIST = new String[] { "starGLCallList", "field_72772_v", "F" };
+    public static final String[] GL_SKY_LIST = new String[] { "glSkyList", "field_72771_w", "G" };
+    public static final String[] GL_SKY_LIST2 = new String[] { "glSkyList2", "field_72781_x", "H" };
+
     @SideOnly(Side.CLIENT)
     @Override
     public void render(float par1, WorldClient theWorld, Minecraft mc)
     {
+        int glSkyList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST);
+        int glSkyList2 = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST2);
+        int starGLCallList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, STAR_GL_CALL_LIST);
+
+        
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         Vec3 var2 = theWorld.getSkyColor(mc.renderViewEntity, par1);
         float var3 = (float)var2.xCoord;
@@ -44,7 +55,7 @@ public class SkyRenderer extends IRenderHandler
         GL11.glDepthMask(false);
         GL11.glEnable(GL11.GL_FOG);
         GL11.glColor3f(var3, var4, var5);
-        GL11.glCallList(this.glSkyList);
+        GL11.glCallList(glSkyList);
         GL11.glDisable(GL11.GL_FOG);
         GL11.glDisable(GL11.GL_ALPHA_TEST);
         GL11.glEnable(GL11.GL_BLEND);
@@ -138,7 +149,7 @@ public class SkyRenderer extends IRenderHandler
         if (var20 > 0.0F)
         {
             GL11.glColor4f(var20, var20, var20, var20);
-            GL11.glCallList(this.starGLCallList);
+            GL11.glCallList(starGLCallList);
         }
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -154,7 +165,7 @@ public class SkyRenderer extends IRenderHandler
         {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, 12.0F, 0.0F);
-            GL11.glCallList(this.glSkyList2);
+            GL11.glCallList(glSkyList2);
             GL11.glPopMatrix();
             var10 = 1.0F;
             var11 = -((float)(var25 + 65.0D));
@@ -195,7 +206,7 @@ public class SkyRenderer extends IRenderHandler
 
         GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, -((float)(var25 - 16.0D)), 0.0F);
-        GL11.glCallList(this.glSkyList2);
+        GL11.glCallList(glSkyList2);
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDepthMask(true);
