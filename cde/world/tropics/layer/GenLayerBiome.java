@@ -1,6 +1,6 @@
 package cde.world.tropics.layer;
 
-import cde.TropicsCore;
+import cde.WorldCore;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -34,11 +34,11 @@ public class GenLayerBiome extends GenLayer
 
                 if (var9 == BiomeGenBase.mushroomIsland.biomeID)
                 {
-                    var6[var8 + var7 * par3] = TropicsCore.island.biomeID;
+                    var6[var8 + var7 * par3] = WorldCore.island.biomeID;
                 }
                 else
                 {
-                    var6[var8 + var7 * par3] = TropicsCore.ocean.biomeID;
+                    var6[var8 + var7 * par3] = WorldCore.pacific.biomeID;
                 }
             }
         }
