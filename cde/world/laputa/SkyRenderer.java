@@ -20,17 +20,19 @@ import org.lwjgl.opengl.GL11;
 
 public class SkyRenderer extends IRenderHandler
 {
-    public static final String[] STAR_GL_CALL_LIST = new String[] { "starGLCallList", "field_72772_v", "F" };
-    public static final String[] GL_SKY_LIST = new String[] { "glSkyList", "field_72771_w", "G" };
-    public static final String[] GL_SKY_LIST2 = new String[] { "glSkyList2", "field_72781_x", "H" };
-
+    private static final String[] GL_SKY_LIST = new String[] { "w" };
+    private static final String[] GL_SKY_LIST2 = new String[] { "x" };
+    private static final String[] STAR_GL_CALL_LIST = new String[] { "v" };
+    
+    private int glSkyList,glSkyList2,starGLCallList;
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void render(float par1, WorldClient theWorld, Minecraft mc)
     {
-        int glSkyList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST);
-        int glSkyList2 = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST2);
-        int starGLCallList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, STAR_GL_CALL_LIST);
+        glSkyList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST);
+        glSkyList2 = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST2);
+        starGLCallList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, STAR_GL_CALL_LIST);
         
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         Vec3 var2 = theWorld.getSkyColor(mc.renderViewEntity, par1);
