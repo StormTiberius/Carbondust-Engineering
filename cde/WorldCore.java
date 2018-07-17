@@ -6,14 +6,20 @@
 package cde;
 
 import cde.core.Version;
+import cde.world.atlantic.BiomeGenAtlantic;
+import cde.world.atlantic.WorldProviderAtlantic;
 import cde.world.ember.EmberEventManager;
 import cde.world.ember.BiomeGenEmber;
 import cde.world.ember.WorldGenOil;
 import cde.world.ember.WorldProviderEmber;
+import cde.world.laputa.BiomeGenLaputa;
+import cde.world.laputa.WorldProviderLaputa;
 import cde.world.pacific.BiomeGenPacificBeach;
 import cde.world.pacific.BiomeGenPacificIsland;
+import cde.world.pacific.BiomeGenPacificOasis;
 import cde.world.pacific.BiomeGenPacificOcean;
 import cde.world.pacific.WorldChunkManagerPacific;
+import cde.world.pacific.WorldProviderPacific;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -82,7 +88,7 @@ public class WorldCore
         
         if(pacificDimension)
         {
-            oasis = (new BiomeGenPacificIsland(oasisBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            oasis = (new BiomeGenPacificOasis(oasisBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             island = (new BiomeGenPacificIsland(islandBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             beach = (new BiomeGenPacificBeach(beachBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             pacific = (new BiomeGenPacificOcean(pacificBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
@@ -95,17 +101,17 @@ public class WorldCore
         
         if(atlanticDimension)
         {
-            
+            atlantic = (new BiomeGenAtlantic(atlanticBiomeId)).setColor(16440917).setBiomeName("Atlantic").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.4F);
         }
         
         if(emberDimension)
         {
-            ember = (new BiomeGenEmber(emberBiomeId)).setColor(112).setBiomeName("Ember");
+            ember = (new BiomeGenEmber(emberBiomeId)).setColor(16440917).setBiomeName("Ember").setTemperatureRainfall(0.8F, 0.4F);
         }
         
         if(laputaDimension)
         {
-            
+            laputa = (new BiomeGenLaputa(laputaBiomeId)).setColor(16440917).setBiomeName("Laputa").setTemperatureRainfall(0.8F, 0.4F);
         }
     }
 
@@ -114,15 +120,15 @@ public class WorldCore
     {
         if(pacificDimension)
         {
-            if(emberDimensionId == 0 || emberDimensionId == -1 || emberDimensionId == 1)
+            if(pacificDimensionId == 0 || pacificDimensionId == -1 || pacificDimensionId == 1)
             {
-                DimensionManager.unregisterProviderType(emberDimensionId);
-                DimensionManager.registerProviderType(emberDimensionId, WorldProviderEmber.class, true);
+                DimensionManager.unregisterProviderType(pacificDimensionId);
+                DimensionManager.registerProviderType(pacificDimensionId, WorldProviderPacific.class, true);
             }
             else
             {
-                DimensionManager.registerProviderType(emberDimensionId, WorldProviderEmber.class, true);
-                DimensionManager.registerDimension(emberDimensionId, emberDimensionId);
+                DimensionManager.registerProviderType(pacificDimensionId, WorldProviderPacific.class, true);
+                DimensionManager.registerDimension(pacificDimensionId, pacificDimensionId);
             }
                         
             BiomeManager.addStrongholdBiome(oasis);
@@ -137,18 +143,17 @@ public class WorldCore
         
         if(atlanticDimension)
         {
-            if(emberDimensionId == 0 || emberDimensionId == -1 || emberDimensionId == 1)
+            if(atlanticDimensionId == 0 || atlanticDimensionId == -1 || atlanticDimensionId == 1)
             {
-                DimensionManager.unregisterProviderType(emberDimensionId);
-                DimensionManager.registerProviderType(emberDimensionId, WorldProviderEmber.class, true);
+                DimensionManager.unregisterProviderType(atlanticDimensionId);
+                DimensionManager.registerProviderType(atlanticDimensionId, WorldProviderAtlantic.class, true);
             }
             else
             {
-                DimensionManager.registerProviderType(emberDimensionId, WorldProviderEmber.class, true);
-                DimensionManager.registerDimension(emberDimensionId, emberDimensionId);
+                DimensionManager.registerProviderType(atlanticDimensionId, WorldProviderAtlantic.class, true);
+                DimensionManager.registerDimension(atlanticDimensionId, atlanticDimensionId);
             }
             
-            BiomeManager.addSpawnBiome(pacific);
             BiomeManager.addStrongholdBiome(atlantic);
         }
         
@@ -175,15 +180,15 @@ public class WorldCore
         
         if(laputaDimension)
         {
-            if(emberDimensionId == 0 || emberDimensionId == -1 || emberDimensionId == 1)
+            if(laputaDimensionId == 0 || laputaDimensionId == -1 || laputaDimensionId == 1)
             {
-                DimensionManager.unregisterProviderType(emberDimensionId);
-                DimensionManager.registerProviderType(emberDimensionId, WorldProviderEmber.class, true);
+                DimensionManager.unregisterProviderType(laputaDimensionId);
+                DimensionManager.registerProviderType(laputaDimensionId, WorldProviderLaputa.class, true);
             }
             else
             {
-                DimensionManager.registerProviderType(emberDimensionId, WorldProviderEmber.class, true);
-                DimensionManager.registerDimension(emberDimensionId, emberDimensionId);
+                DimensionManager.registerProviderType(laputaDimensionId, WorldProviderLaputa.class, true);
+                DimensionManager.registerDimension(laputaDimensionId, laputaDimensionId);
             }
         }
     }
