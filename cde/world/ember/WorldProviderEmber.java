@@ -28,7 +28,7 @@ public class WorldProviderEmber extends WorldProvider
     {
         worldChunkMgr = new WorldChunkManagerEmber(WorldCore.ember, 0.5F, 0.5F);
         hasNoSky = true;
-        dimensionId = WorldCore.getDimensionId();
+        dimensionId = WorldCore.getEmberDimensionId();
         
         LocationData data = (LocationData)worldObj.loadItemData(LocationData.class, WorldCore.EMBER_SPAWN_LOCATION_KEYWORD);
         
