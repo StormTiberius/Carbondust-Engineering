@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.ember;
+package cde.world.ember;
 
 import cde.EmberCore;
 import cpw.mods.fml.relauncher.Side;

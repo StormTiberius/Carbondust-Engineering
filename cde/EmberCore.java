@@ -6,10 +6,10 @@
 package cde;
 
 import cde.core.Version;
-import cde.ember.EmberEventManager;
-import cde.ember.BiomeGenEmber;
-import cde.ember.WorldGenOil;
-import cde.ember.WorldProviderEmber;
+import cde.world.ember.EmberEventManager;
+import cde.world.ember.BiomeGenEmber;
+import cde.world.ember.WorldGenOil;
+import cde.world.ember.WorldProviderEmber;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;

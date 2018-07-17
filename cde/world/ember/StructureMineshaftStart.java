@@ -1,4 +1,4 @@
-package cde.ember;
+package cde.world.ember;
 
 import java.util.Iterator;
 import java.util.Random;

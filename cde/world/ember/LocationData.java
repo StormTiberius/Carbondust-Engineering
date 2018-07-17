@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.ember;
+package cde.world.ember;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;

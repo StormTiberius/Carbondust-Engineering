@@ -1,4 +1,4 @@
-package cde.ember;
+package cde.world.ember;
 
 import cde.EmberCore;
 import java.util.ArrayList;
