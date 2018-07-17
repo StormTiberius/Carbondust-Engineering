@@ -17,6 +17,9 @@ public abstract class BiomeGenPacific extends BiomeGenBase
     public BiomeGenPacific(int id)
     {
         super(id);
+        
+        topBlock = (byte)Block.sand.blockID;
+        fillerBlock = (byte)Block.sand.blockID;
     }
     
     @Override

@@ -16,7 +16,6 @@ import cde.world.laputa.BiomeGenLaputa;
 import cde.world.laputa.WorldProviderLaputa;
 import cde.world.pacific.BiomeGenPacificBeach;
 import cde.world.pacific.BiomeGenPacificIsland;
-import cde.world.pacific.BiomeGenPacificOasis;
 import cde.world.pacific.BiomeGenPacificOcean;
 import cde.world.pacific.WorldChunkManagerPacific;
 import cde.world.pacific.WorldProviderPacific;
@@ -50,11 +49,11 @@ public class WorldCore
     
     private static boolean pacificDimension,atlanticDimension,emberDimension,laputaDimension;
     
-    private static int oasisBiomeId,islandBiomeId,beachBiomeId,pacificBiomeId,atlanticBiomeId,emberBiomeId,laputaBiomeId;
+    private static int islandBiomeId,beachBiomeId,pacificBiomeId,atlanticBiomeId,emberBiomeId,laputaBiomeId;
     private static int pacificDimensionId,atlanticDimensionId,emberDimensionId,laputaDimensionId;
     private static int islandSize,islandScarcity,liquidId;
     
-    public static BiomeGenBase oasis,island,beach,pacific,atlantic,ember,laputa;
+    public static BiomeGenBase island,beach,pacific,atlantic,ember,laputa;
     public static final String EMBER_SPAWN_LOCATION_KEYWORD = "EmberSpawnLocation";
     
     @PreInit
@@ -73,13 +72,12 @@ public class WorldCore
         emberDimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "emberDimensionId", 4, "Ember Dimension Id").getInt();
         laputaDimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "laputaDimensionId", 5, "Laputa Dimension Id").getInt();
         
-        oasisBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "oasisBiomeId", 23, "Oasis Biome Id").getInt();
-        islandBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 24, "Island Biome Id").getInt();
-        beachBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 25, "Beach Biome Id").getInt();
-        pacificBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "pacificBiomeId", 26, "Pacific Biome Id").getInt();
-        atlanticBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "atlanticBiomeId", 27, "Atlantic Biome Id").getInt();
-        emberBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 28, "Ember Biome Id").getInt();
-        laputaBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "laputaBiomeId", 29, "Laputa Biome Id").getInt();
+        islandBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 23, "Island Biome Id").getInt();
+        beachBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 24, "Beach Biome Id").getInt();
+        pacificBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "pacificBiomeId", 25, "Pacific Biome Id").getInt();
+        atlanticBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "atlanticBiomeId", 26, "Atlantic Biome Id").getInt();
+        emberBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 27, "Ember Biome Id").getInt();
+        laputaBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "laputaBiomeId", 28, "Laputa Biome Id").getInt();
         
         islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandsize", 4, "Island size, 4-6 recommended").getInt();
         islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandscarcity", 100, "Island scarcity, 100 default").getInt();
@@ -88,13 +86,11 @@ public class WorldCore
         
         if(pacificDimension)
         {
-            oasis = (new BiomeGenPacificOasis(oasisBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             island = (new BiomeGenPacificIsland(islandBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             beach = (new BiomeGenPacificBeach(beachBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             pacific = (new BiomeGenPacificOcean(pacificBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
 
             WorldChunkManagerPacific.allowedBiomes.clear();
-            WorldChunkManagerPacific.allowedBiomes.add(oasis);
             WorldChunkManagerPacific.allowedBiomes.add(island);
             WorldChunkManagerPacific.allowedBiomes.add(beach);
         }
@@ -131,12 +127,10 @@ public class WorldCore
                 DimensionManager.registerDimension(pacificDimensionId, pacificDimensionId);
             }
                         
-            BiomeManager.addStrongholdBiome(oasis);
             BiomeManager.addStrongholdBiome(island);
             BiomeManager.addStrongholdBiome(beach);
             BiomeManager.addStrongholdBiome(pacific);
 
-            BiomeManager.addVillageBiome(oasis, true);
             BiomeManager.addVillageBiome(island, true);
             BiomeManager.addVillageBiome(beach, true);
         }
@@ -251,7 +245,7 @@ public class WorldCore
     
     public static boolean isIsland(int id)
     {
-        return id == island.biomeID || id == oasis.biomeID;
+        return id == island.biomeID;
     }
     
     public static boolean isBeach(int id)
