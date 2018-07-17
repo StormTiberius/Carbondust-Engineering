@@ -10,9 +10,9 @@ import cde.world.ember.EmberEventManager;
 import cde.world.ember.BiomeGenEmber;
 import cde.world.ember.WorldGenOil;
 import cde.world.ember.WorldProviderEmber;
-import cde.world.tropics.BiomeGenTropicsBeach;
-import cde.world.tropics.BiomeGenTropicsIsland;
-import cde.world.tropics.BiomeGenTropicsOcean;
+import cde.world.tropics.BiomeGenPacificBeach;
+import cde.world.tropics.BiomeGenPacificIsland;
+import cde.world.tropics.BiomeGenPacificOcean;
 import cde.world.tropics.WorldChunkManagerTropics;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -82,10 +82,10 @@ public class WorldCore
         
         if(pacificDimension)
         {
-            oasis = (new BiomeGenTropicsIsland(oasisBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            island = (new BiomeGenTropicsIsland(islandBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            beach = (new BiomeGenTropicsBeach(beachBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            pacific = (new BiomeGenTropicsOcean(pacificBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
+            oasis = (new BiomeGenPacificIsland(oasisBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            island = (new BiomeGenPacificIsland(islandBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            beach = (new BiomeGenPacificBeach(beachBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            pacific = (new BiomeGenPacificOcean(pacificBiomeId)).setColor(16440917).setBiomeName("Pacific").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
 
             WorldChunkManagerTropics.allowedBiomes.clear();
             WorldChunkManagerTropics.allowedBiomes.add(oasis);
