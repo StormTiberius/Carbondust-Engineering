@@ -3,19 +3,18 @@
  * @author StormTiberius
  */
 
-package cde.tropics;
+package cde.world.tropics;
 
-public class BiomeGenTropicsBeach extends BiomeGenTropics
+public class BiomeGenTropicsIsland extends BiomeGenTropics
 {
-    public BiomeGenTropicsBeach(int id)
+    public BiomeGenTropicsIsland(int id)
     {
         super(id);
         
-        spawnableCreatureList.clear();
         spawnableMonsterList.clear();
         spawnableWaterCreatureList.clear();
         
-        theBiomeDecorator.treesPerChunk = 50;
+        theBiomeDecorator.treesPerChunk = -999;
         theBiomeDecorator.reedsPerChunk = 50;
         theBiomeDecorator.cactiPerChunk = 10;
     }
