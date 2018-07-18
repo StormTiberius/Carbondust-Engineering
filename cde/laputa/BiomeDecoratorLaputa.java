@@ -14,4 +14,10 @@ public class BiomeDecoratorLaputa extends BiomeDecorator
     {
         super(biome);
     }
+    
+    @Override
+    protected void decorate()
+    {
+        
+    }
 }
