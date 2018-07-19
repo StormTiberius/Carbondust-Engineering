@@ -8,6 +8,7 @@ package cde;
 import cde.core.Version;
 import cde.laputa.BiomeGenLaputa;
 import cde.laputa.WorldProviderLaputa;
+import cde.laputa.gog.ClientTickHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -18,6 +19,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 import java.io.File;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
@@ -49,9 +52,9 @@ public class LaputaCore
         biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "biomeId", 23, "Laputa Biome Id").getInt();
         dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Laputa Dimension Id").getInt();
         
-        weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS).getIntList();
+        weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Tweaks").getIntList();
         
-        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1).getInt();
+        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "DNC Duration").getInt();
                 
         cfg.save();
         
@@ -76,6 +79,8 @@ public class LaputaCore
                 DimensionManager.registerProviderType(dimensionId, WorldProviderLaputa.class, true);
                 DimensionManager.registerDimension(dimensionId, dimensionId);
             }
+            
+            TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
         }
     }
     
