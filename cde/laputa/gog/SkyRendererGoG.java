@@ -25,11 +25,11 @@ import org.lwjgl.opengl.GL11;
 
 public class SkyRendererGoG extends IRenderHandler
 {
-    private static final String textureSkybox = "";
-    private static final String textureRainbow = "";
-    private static final String textureMoonPhases = "textures/environment/moon_phases.png";
-    private static final String textureSun = "textures/environment/sun.png";
-    private static final String[] planetTextures = new String[] {
+    private static final String TEXTURE_SKYBOX = "";
+    private static final String TEXTURE_RAINBOW = "";
+    private static final String TEXTURE_MOON_PHASES = "textures/environment/moon_phases.png";
+    private static final String TEXTURE_SUN = "textures/environment/sun.png";
+    private static final String[] TEXTURE_PLANETS = new String[] {
 		"" + "0.png",
 		"" + "1.png",
 		"" + "2.png",
@@ -131,8 +131,8 @@ public class SkyRendererGoG extends IRenderHandler
         GL11.glPushMatrix();
         GL11.glColor4f(1F, 1F, 1F, (a * 4) * (1F - insideVoid));
         GL11.glRotatef(90F, 0.5F, 0.5F, 0.0F);
-        for(int p = 0; p < planetTextures.length; p++) {
-                mc.renderEngine.bindTexture(mc.renderEngine.getTexture(planetTextures[p]));
+        for(int p = 0; p < TEXTURE_PLANETS.length; p++) {
+                mc.renderEngine.bindTexture(mc.renderEngine.getTexture(TEXTURE_PLANETS[p]));
                 drawObject(tessellator1, f10);
 
                 switch(p) {
@@ -161,7 +161,7 @@ public class SkyRendererGoG extends IRenderHandler
         GL11.glPopMatrix();
 
         // === Rays
-        mc.renderEngine.bindTexture(mc.renderEngine.getTexture(textureSkybox)); 
+        mc.renderEngine.bindTexture(mc.renderEngine.getTexture(TEXTURE_SKYBOX)); 
 
         f10 = 20F;
         a = lowA;
@@ -228,7 +228,7 @@ public class SkyRendererGoG extends IRenderHandler
         // === Rainbow
         GL11.glPushMatrix();
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-        mc.renderEngine.bindTexture(mc.renderEngine.getTexture(textureRainbow)); 
+        mc.renderEngine.bindTexture(mc.renderEngine.getTexture(TEXTURE_RAINBOW)); 
         f10 = 10F;
         float effCelAng1 = celAng;
         if(effCelAng1 > 0.25F)
@@ -275,12 +275,12 @@ public class SkyRendererGoG extends IRenderHandler
         // === Sun	
         GL11.glRotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
         f10 = 60.0F;
-        mc.renderEngine.bindTexture(mc.renderEngine.getTexture(textureSun)); 
+        mc.renderEngine.bindTexture(mc.renderEngine.getTexture(TEXTURE_SUN)); 
         drawObject(tessellator1, f10);
 
         // === Moon
         f10 = 60.0F;
-        mc.renderEngine.bindTexture(mc.renderEngine.getTexture(textureMoonPhases));
+        mc.renderEngine.bindTexture(mc.renderEngine.getTexture(TEXTURE_MOON_PHASES));
         int k = world.getMoonPhase(partialTicks);
         int l = k % 4;
         int i1 = k / 4 % 2;
