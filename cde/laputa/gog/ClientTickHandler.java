@@ -11,6 +11,9 @@ import cpw.mods.fml.common.TickType;
 
 public class ClientTickHandler implements ITickHandler
 {   
+    public static int ticksInGame = 0;
+    public static float partialTicks = 0;
+    
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData)
     {
