@@ -339,7 +339,7 @@ public class SkyRendererGoG extends IRenderHandler
         GL11.glEnable(GL11.GL_FOG);
         GL11.glPopMatrix();
         GL11.glDepthMask(true);
-}
+    }
 
     private void drawObject(Tessellator tess, float f10)
     {
