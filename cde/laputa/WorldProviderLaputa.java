@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderLaputa extends WorldProvider
 {
@@ -118,97 +119,99 @@ public class WorldProviderLaputa extends WorldProvider
 
     @Override
     public void updateWeather()
-    {       
-        if (!this.provider.hasNoSky)
+    {   
+        WorldInfo worldInfo = worldObj.getWorldInfo();
+        
+        if (!this.hasNoSky)
         {
-            int var1 = this.worldInfo.getThunderTime();
+            int var1 = worldInfo.getThunderTime();
 
             if (var1 <= 0)
             {
-                if (this.worldInfo.isThundering())
+                if (worldInfo.isThundering())
                 {
-                    this.worldInfo.setThunderTime(this.rand.nextInt(12000) + 3600);
+                    worldInfo.setThunderTime(worldObj.rand.nextInt(12000) + 3600);
                 }
                 else
                 {
-                    this.worldInfo.setThunderTime(this.rand.nextInt(168000) + 12000);
+                    worldInfo.setThunderTime(worldObj.rand.nextInt(168000) + 12000);
                 }
             }
             else
             {
                 --var1;
-                this.worldInfo.setThunderTime(var1);
+                worldInfo.setThunderTime(var1);
 
                 if (var1 <= 0)
                 {
-                    this.worldInfo.setThundering(!this.worldInfo.isThundering());
+                    worldInfo.setThundering(!worldInfo.isThundering());
                 }
             }
 
-            int var2 = this.worldInfo.getRainTime();
+            int var2 = worldInfo.getRainTime();
 
             if (var2 <= 0)
             {
-                if (this.worldInfo.isRaining())
+                if (worldInfo.isRaining())
                 {
-                    this.worldInfo.setRainTime(this.rand.nextInt(12000) + 12000);
+                    worldInfo.setRainTime(worldObj.rand.nextInt(12000) + 12000);
                 }
                 else
                 {
-                    this.worldInfo.setRainTime(this.rand.nextInt(168000) + 12000);
+                    worldInfo.setRainTime(worldObj.rand.nextInt(168000) + 12000);
                 }
             }
             else
             {
                 --var2;
-                this.worldInfo.setRainTime(var2);
+                worldInfo.setRainTime(var2);
 
                 if (var2 <= 0)
                 {
-                    this.worldInfo.setRaining(!this.worldInfo.isRaining());
+                    worldInfo.setRaining(!worldInfo.isRaining());
                 }
             }
 
-            this.prevRainingStrength = this.rainingStrength;
+            worldObj.prevRainingStrength = worldObj.rainingStrength;
 
-            if (this.worldInfo.isRaining())
+            if (worldInfo.isRaining())
             {
-                this.rainingStrength = (float)((double)this.rainingStrength + 0.01D);
+                worldObj.rainingStrength = (float)((double)worldObj.rainingStrength + 0.01D);
             }
             else
             {
-                this.rainingStrength = (float)((double)this.rainingStrength - 0.01D);
+                worldObj.rainingStrength = (float)((double)worldObj.rainingStrength - 0.01D);
             }
 
-            if (this.rainingStrength < 0.0F)
+            if (worldObj.rainingStrength < 0.0F)
             {
-                this.rainingStrength = 0.0F;
+                worldObj.rainingStrength = 0.0F;
             }
 
-            if (this.rainingStrength > 1.0F)
+            if (worldObj.rainingStrength > 1.0F)
             {
-                this.rainingStrength = 1.0F;
+                worldObj.rainingStrength = 1.0F;
             }
 
-            this.prevThunderingStrength = this.thunderingStrength;
+            worldObj.prevThunderingStrength = worldObj.thunderingStrength;
 
-            if (this.worldInfo.isThundering())
+            if (worldInfo.isThundering())
             {
-                this.thunderingStrength = (float)((double)this.thunderingStrength + 0.01D);
+                worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength + 0.01D);
             }
             else
             {
-                this.thunderingStrength = (float)((double)this.thunderingStrength - 0.01D);
+                worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength - 0.01D);
             }
 
-            if (this.thunderingStrength < 0.0F)
+            if (worldObj.thunderingStrength < 0.0F)
             {
-                this.thunderingStrength = 0.0F;
+                worldObj.thunderingStrength = 0.0F;
             }
 
-            if (this.thunderingStrength > 1.0F)
+            if (worldObj.thunderingStrength > 1.0F)
             {
-                this.thunderingStrength = 1.0F;
+                worldObj.thunderingStrength = 1.0F;
             }
         }
     }
