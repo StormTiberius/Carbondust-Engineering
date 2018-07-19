@@ -25,6 +25,19 @@ import org.lwjgl.opengl.GL11;
 
 public class SkyRendererGoG extends IRenderHandler
 {
+    private static final String textureSkybox = "";
+    private static final String textureRainbow = "";
+    private static final String textureMoonPhases = "textures/environment/moon_phases.png";
+    private static final String textureSun = "textures/environment/sun.png";
+    private static final String[] planetTextures = new String[] {
+		"" + "0.png",
+		"" + "1.png",
+		"" + "2.png",
+		"" + "3.png",
+		"" + "4.png",
+		"" + "5.png"
+	};
+        
     @SideOnly(Side.CLIENT)
     @Override
     public void render(float partialTicks, WorldClient world, Minecraft mc)
