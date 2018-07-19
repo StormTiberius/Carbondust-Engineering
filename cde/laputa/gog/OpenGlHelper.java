@@ -3,6 +3,7 @@ package cde.laputa.gog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.ARBMultitexture;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GLContext;
 
@@ -98,5 +99,10 @@ public class OpenGlHelper
             lastBrightnessX = par1;
             lastBrightnessY = par2;
         }
+    }
+    
+    public static void glBlendFunc(int p_148821_0_, int p_148821_1_, int p_148821_2_, int p_148821_3_)
+    {
+        GL11.glBlendFunc(p_148821_0_, p_148821_1_);
     }
 }
