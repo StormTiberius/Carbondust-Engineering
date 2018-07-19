@@ -231,12 +231,6 @@ public class WorldProviderLaputa extends WorldProvider
     }
     
     @Override
-    public void setWorldTime(long time)
-    {
-        worldObj.getWorldInfo().setWorldTime(time);
-    }
-    
-    @Override
     public ChunkCoordinates getSpawnPoint()
     {
         return new ChunkCoordinates(264, 20, 264);
