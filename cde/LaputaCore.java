@@ -35,6 +35,8 @@ public class LaputaCore
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     private static int[] weatherDurations = WEATHER_DURATIONS;
     
+    private static int dayCycleDurationMultiplier = 1;
+    
     public static BiomeGenBase laputa;
     
     @PreInit
@@ -49,6 +51,8 @@ public class LaputaCore
         
         weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS).getIntList();
         
+        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1).getInt();
+                
         cfg.save();
         
         if(enabled)
@@ -100,5 +104,10 @@ public class LaputaCore
             case 7: return weatherDurations[index] + weatherDurations[8];
             default: return weatherDurations[index];
         }
+    }
+    
+    public static int getDayCycleDurationMultiplier()
+    {
+        return dayCycleDurationMultiplier;
     }
 }
