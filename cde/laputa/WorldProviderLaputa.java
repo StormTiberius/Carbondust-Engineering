@@ -20,6 +20,8 @@ public class WorldProviderLaputa extends WorldProvider
 {
     private final IRenderHandler skyRendererGoG;
     
+    private long time;
+    
     public WorldProviderLaputa()
     {
         skyRendererGoG = new SkyRendererGoG();
@@ -136,6 +138,8 @@ public class WorldProviderLaputa extends WorldProvider
     {   
         WorldInfo worldInfo = worldObj.getWorldInfo();
         
+        time = worldInfo.getWorldTime();
+        
         if (!this.hasNoSky)
         {
             int var1 = worldInfo.getThunderTime();
@@ -240,5 +244,11 @@ public class WorldProviderLaputa extends WorldProvider
     public double getHorizon()
     {
         return 20.0D;
+    }
+    
+    @Override
+    public void resetRainAndThunder()
+    {
+        super.resetRainAndThunder();
     }
 }
