@@ -29,8 +29,8 @@ public class SkyRendererGoG extends IRenderHandler
     @Override
     public void render(float partialTicks, WorldClient world, Minecraft mc)
     {
-        int glSkyList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, LibObfuscation.GL_SKY_LIST);
-        int starGLCallList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, LibObfuscation.STAR_GL_CALL_LIST);
+        int glSkyList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, "w");
+        int starGLCallList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, "v");
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         Vec3 vec3 = world.getSkyColor(mc.renderViewEntity, partialTicks);
