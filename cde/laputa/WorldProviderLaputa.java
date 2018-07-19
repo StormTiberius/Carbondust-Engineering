@@ -253,8 +253,8 @@ public class WorldProviderLaputa extends WorldProvider
         
         if(time != worldInfo.getWorldTime())
         {
-            long var2 = time + 24000L;
-            worldInfo.setWorldTime(var2 - var2 % 24000L);
+            long var2 = time + (24000L * LaputaCore.getDayCycleDurationMultiplier());
+            worldInfo.setWorldTime(var2 - var2 % (24000L * LaputaCore.getDayCycleDurationMultiplier()));
         }
         
         super.resetRainAndThunder();
