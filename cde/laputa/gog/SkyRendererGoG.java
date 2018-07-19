@@ -268,7 +268,7 @@ public class SkyRendererGoG extends IRenderHandler
         // === Moon
         f10 = 60.0F;
         mc.renderEngine.bindTexture(textureMoonPhases);
-        int k = world.getMoonPhase();
+        int k = world.getMoonPhase(partialTicks);
         int l = k % 4;
         int i1 = k / 4 % 2;
         float f14 = (float)(l + 0) / 4.0F;
