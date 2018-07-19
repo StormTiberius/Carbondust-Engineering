@@ -14,9 +14,17 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.client.IRenderHandler;
 
 public class WorldProviderLaputa extends WorldProvider
 {
+    private final IRenderHandler skyRendererGoG;
+    
+    public WorldProviderLaputa()
+    {
+        skyRendererGoG = new SkyRendererGoG();
+    }
+    
     @Override
     public String getDimensionName()
     {
@@ -28,7 +36,6 @@ public class WorldProviderLaputa extends WorldProvider
     {
         worldChunkMgr = new WorldChunkManagerLaputa(LaputaCore.laputa, 0.8F, 0.4F);
         dimensionId = LaputaCore.getDimensionId();
-        setSkyRenderer(new SkyRendererGoG());
     }
     
     @Override
@@ -103,6 +110,13 @@ public class WorldProviderLaputa extends WorldProvider
     public double getVoidFogYFactor()
     {
         return 1.0D;
+    }
+        
+    @SideOnly(Side.CLIENT)
+    @Override
+    public IRenderHandler getSkyRenderer()
+    {
+        return skyRendererGoG;
     }
     
     @Override
