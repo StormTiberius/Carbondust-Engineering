@@ -25,17 +25,17 @@ import org.lwjgl.opengl.GL11;
 
 public class SkyRendererGoG extends IRenderHandler
 {
-    private static final String TEXTURE_SKYBOX = "skybox.png";
-    private static final String TEXTURE_RAINBOW = "rainbow.png";
-    private static final String TEXTURE_MOON_PHASES = "terrain/moon_phases.png";
-    private static final String TEXTURE_SUN = "terrain/sun.png";
+    private static final String TEXTURE_SKYBOX = "/cde/assets/gog/skybox.png";
+    private static final String TEXTURE_RAINBOW = "/cde/assets/gog/rainbow.png";
+    private static final String TEXTURE_MOON_PHASES = "/terrain/moon_phases.png";
+    private static final String TEXTURE_SUN = "/terrain/sun.png";
     private static final String[] TEXTURE_PLANETS = new String[] {
-		"planet0.png",
-		"planet1.png",
-		"planet2.png",
-		"planet3.png",
-		"planet4.png",
-		"planet5.png"
+		"/cde/assets/gog/planet0.png",
+		"/cde/assets/gog/planet1.png",
+		"/cde/assets/gog/planet2.png",
+		"/cde/assets/gog/planet3.png",
+		"/cde/assets/gog/planet4.png",
+		"/cde/assets/gog/planet5.png"
 	};
         
     @SideOnly(Side.CLIENT)
