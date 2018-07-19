@@ -53,8 +53,8 @@ public class WorldProviderLaputa extends WorldProvider
     @Override
     public float calculateCelestialAngle(long par1, float par3)
     {
-        int var4 = (int)(par1 % 72000L);
-        float var5 = ((float)var4 + par3) / 72000.0F - 0.25F;
+        int var4 = (int)(par1 % (24000L * LaputaCore.getDayCycleDurationMultiplier()));
+        float var5 = ((float)var4 + par3) / (24000.0F * LaputaCore.getDayCycleDurationMultiplier()) - 0.25F;
 
         if (var5 < 0.0F)
         {
@@ -76,7 +76,7 @@ public class WorldProviderLaputa extends WorldProvider
     @Override
     public int getMoonPhase(long par1, float par3)
     {
-        return (int)(par1 / 72000L) % 8;
+        return (int)(par1 / (24000L * LaputaCore.getDayCycleDurationMultiplier())) % 8;
     }
     
     @SideOnly(Side.CLIENT)
