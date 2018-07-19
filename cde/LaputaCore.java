@@ -32,6 +32,9 @@ public class LaputaCore
     private static boolean enabled;
     private static int biomeId,dimensionId;
     
+    private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
+    private static int[] weatherDurations = WEATHER_DURATIONS;
+    
     public static BiomeGenBase laputa;
     
     @PreInit
@@ -43,6 +46,8 @@ public class LaputaCore
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Laputa Dimension").getBoolean(false);
         biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "biomeId", 23, "Laputa Biome Id").getInt();
         dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Laputa Dimension Id").getInt();
+        
+        weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS).getIntList();
         
         cfg.save();
         
@@ -85,5 +90,15 @@ public class LaputaCore
     public static int getDimensionId()
     {
         return dimensionId;
+    }
+    
+    public static int getWeatherDuration(int index)
+    {
+        switch(index)
+        {
+            case 3:return weatherDurations[index] + weatherDurations[9];
+            case 7: return weatherDurations[index] + weatherDurations[8];
+            default: return weatherDurations[index];
+        }
     }
 }

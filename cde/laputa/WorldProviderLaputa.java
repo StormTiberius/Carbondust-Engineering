@@ -144,11 +144,11 @@ public class WorldProviderLaputa extends WorldProvider
             {
                 if (worldInfo.isThundering())
                 {
-                    worldInfo.setThunderTime(worldObj.rand.nextInt(12000) + 3600);
+                    worldInfo.setThunderTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(0)) + LaputaCore.getWeatherDuration(1));
                 }
                 else
                 {
-                    worldInfo.setThunderTime(worldObj.rand.nextInt(168000) + 12000);
+                    worldInfo.setThunderTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(2)) + LaputaCore.getWeatherDuration(3));
                 }
             }
             else
@@ -168,11 +168,11 @@ public class WorldProviderLaputa extends WorldProvider
             {
                 if (worldInfo.isRaining())
                 {
-                    worldInfo.setRainTime(worldObj.rand.nextInt(12000) + 12000);
+                    worldInfo.setRainTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(4)) + LaputaCore.getWeatherDuration(5));
                 }
                 else
                 {
-                    worldInfo.setRainTime(worldObj.rand.nextInt(168000) + 12000);
+                    worldInfo.setRainTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(6)) + LaputaCore.getWeatherDuration(7));
                 }
             }
             else
