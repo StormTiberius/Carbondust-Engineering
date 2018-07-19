@@ -1,6 +1,6 @@
 package cde.laputa;
 
-import net.minecraft.world.gen.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -14,9 +14,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.MapGenBase;
+import net.minecraft.world.gen.MapGenCaves;
+import net.minecraft.world.gen.MapGenRavine;
+import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.feature.MapGenScatteredFeature;
-import net.minecraft.world.gen.feature.WorldGenDungeons;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
@@ -138,76 +140,7 @@ public class ChunkProviderLaputa implements IChunkProvider
      */
     public void generateTerrain(int par1, int par2, byte[] par3ArrayOfByte)
     {
-        byte var4 = 4;
-        byte var5 = 16;
-        byte var6 = 63;
-        int var7 = var4 + 1;
-        byte var8 = 17;
-        int var9 = var4 + 1;
-        this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, var7 + 5, var9 + 5);
-        this.noiseArray = this.initializeNoiseField(this.noiseArray, par1 * var4, 0, par2 * var4, var7, var8, var9);
-
-        for (int var10 = 0; var10 < var4; ++var10)
-        {
-            for (int var11 = 0; var11 < var4; ++var11)
-            {
-                for (int var12 = 0; var12 < var5; ++var12)
-                {
-                    double var13 = 0.125D;
-                    double var15 = this.noiseArray[((var10 + 0) * var9 + var11 + 0) * var8 + var12 + 0];
-                    double var17 = this.noiseArray[((var10 + 0) * var9 + var11 + 1) * var8 + var12 + 0];
-                    double var19 = this.noiseArray[((var10 + 1) * var9 + var11 + 0) * var8 + var12 + 0];
-                    double var21 = this.noiseArray[((var10 + 1) * var9 + var11 + 1) * var8 + var12 + 0];
-                    double var23 = (this.noiseArray[((var10 + 0) * var9 + var11 + 0) * var8 + var12 + 1] - var15) * var13;
-                    double var25 = (this.noiseArray[((var10 + 0) * var9 + var11 + 1) * var8 + var12 + 1] - var17) * var13;
-                    double var27 = (this.noiseArray[((var10 + 1) * var9 + var11 + 0) * var8 + var12 + 1] - var19) * var13;
-                    double var29 = (this.noiseArray[((var10 + 1) * var9 + var11 + 1) * var8 + var12 + 1] - var21) * var13;
-
-                    for (int var31 = 0; var31 < 8; ++var31)
-                    {
-                        double var32 = 0.25D;
-                        double var34 = var15;
-                        double var36 = var17;
-                        double var38 = (var19 - var15) * var32;
-                        double var40 = (var21 - var17) * var32;
-
-                        for (int var42 = 0; var42 < 4; ++var42)
-                        {
-                            int var43 = var42 + var10 * 4 << 11 | 0 + var11 * 4 << 7 | var12 * 8 + var31;
-                            short var44 = 128;
-                            var43 -= var44;
-                            double var45 = 0.25D;
-                            double var49 = (var36 - var34) * var45;
-                            double var47 = var34 - var49;
-
-                            for (int var51 = 0; var51 < 4; ++var51)
-                            {
-                                if ((var47 += var49) > 0.0D)
-                                {
-                                    par3ArrayOfByte[var43 += var44] = (byte)Block.stone.blockID;
-                                }
-                                else if (var12 * 8 + var31 < var6)
-                                {
-                                    par3ArrayOfByte[var43 += var44] = (byte)Block.waterStill.blockID;
-                                }
-                                else
-                                {
-                                    par3ArrayOfByte[var43 += var44] = 0;
-                                }
-                            }
-
-                            var34 += var38;
-                            var36 += var40;
-                        }
-
-                        var15 += var23;
-                        var17 += var25;
-                        var19 += var27;
-                        var21 += var29;
-                    }
-                }
-            }
-        }
+        Arrays.fill(par3ArrayOfByte, (byte)0);
     }
 
     /**
@@ -215,91 +148,17 @@ public class ChunkProviderLaputa implements IChunkProvider
      */
     public void replaceBlocksForBiome(int par1, int par2, byte[] par3ArrayOfByte, BiomeGenBase[] par4ArrayOfBiomeGenBase)
     {
-        ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, par1, par2, par3ArrayOfByte, par4ArrayOfBiomeGenBase);
-        MinecraftForge.EVENT_BUS.post(event);
-        if (event.getResult() == Result.DENY) return;
-
-        byte var5 = 63;
-        double var6 = 0.03125D;
-        this.stoneNoise = this.noiseGen4.generateNoiseOctaves(this.stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
-
         for (int var8 = 0; var8 < 16; ++var8)
         {
             for (int var9 = 0; var9 < 16; ++var9)
             {
-                BiomeGenBase var10 = par4ArrayOfBiomeGenBase[var9 + var8 * 16];
-                float var11 = var10.getFloatTemperature();
-                int var12 = (int)(this.stoneNoise[var8 + var9 * 16] / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
-                int var13 = -1;
-                byte var14 = var10.topBlock;
-                byte var15 = var10.fillerBlock;
-
                 for (int var16 = 127; var16 >= 0; --var16)
                 {
                     int var17 = (var9 * 16 + var8) * 128 + var16;
 
-                    if (var16 <= 0 + this.rand.nextInt(5))
+                    if (par1 == 16 && par2 == 16 && var16 == 19)
                     {
-                        par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
-                    }
-                    else
-                    {
-                        byte var18 = par3ArrayOfByte[var17];
-
-                        if (var18 == 0)
-                        {
-                            var13 = -1;
-                        }
-                        else if (var18 == Block.stone.blockID)
-                        {
-                            if (var13 == -1)
-                            {
-                                if (var12 <= 0)
-                                {
-                                    var14 = 0;
-                                    var15 = (byte)Block.stone.blockID;
-                                }
-                                else if (var16 >= var5 - 4 && var16 <= var5 + 1)
-                                {
-                                    var14 = var10.topBlock;
-                                    var15 = var10.fillerBlock;
-                                }
-
-                                if (var16 < var5 && var14 == 0)
-                                {
-                                    if (var11 < 0.15F)
-                                    {
-                                        var14 = (byte)Block.ice.blockID;
-                                    }
-                                    else
-                                    {
-                                        var14 = (byte)Block.waterStill.blockID;
-                                    }
-                                }
-
-                                var13 = var12;
-
-                                if (var16 >= var5 - 1)
-                                {
-                                    par3ArrayOfByte[var17] = var14;
-                                }
-                                else
-                                {
-                                    par3ArrayOfByte[var17] = var15;
-                                }
-                            }
-                            else if (var13 > 0)
-                            {
-                                --var13;
-                                par3ArrayOfByte[var17] = var15;
-
-                                if (var13 == 0 && var15 == Block.sand.blockID)
-                                {
-                                    var13 = this.rand.nextInt(4);
-                                    var15 = (byte)Block.sandStone.blockID;
-                                }
-                            }
-                        }
+                        par3ArrayOfByte[var17] = (byte)Block.grass.blockID;
                     }
                 }
             }
@@ -325,11 +184,11 @@ public class ChunkProviderLaputa implements IChunkProvider
         this.generateTerrain(par1, par2, var3);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
         this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
-        this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
-        this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
 
         if (this.mapFeaturesEnabled)
         {
+            this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
+            this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
             this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
             this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
             this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
@@ -540,47 +399,12 @@ public class ChunkProviderLaputa implements IChunkProvider
         int var13;
         int var14;
 
-        if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAKE) && 
-                !var11 && this.rand.nextInt(4) == 0)
-        {
-            var12 = var4 + this.rand.nextInt(16) + 8;
-            var13 = this.rand.nextInt(128);
-            var14 = var5 + this.rand.nextInt(16) + 8;
-            (new WorldGenLakes(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
-        }
-
-        if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAVA) &&
-                !var11 && this.rand.nextInt(8) == 0)
-        {
-            var12 = var4 + this.rand.nextInt(16) + 8;
-            var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
-            var14 = var5 + this.rand.nextInt(16) + 8;
-
-            if (var13 < 63 || this.rand.nextInt(10) == 0)
-            {
-                (new WorldGenLakes(Block.lavaStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
-            }
-        }
-
-        boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, DUNGEON);
-        for (var12 = 0; doGen && var12 < 8; ++var12)
-        {
-            var13 = var4 + this.rand.nextInt(16) + 8;
-            var14 = this.rand.nextInt(128);
-            int var15 = var5 + this.rand.nextInt(16) + 8;
-
-            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
-            {
-                ;
-            }
-        }
-
         var6.decorate(this.worldObj, this.rand, var4, var5);
         SpawnerAnimals.performWorldGenSpawning(this.worldObj, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
         var4 += 8;
         var5 += 8;
 
-        doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, ICE);
+        boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, ICE);
         for (var12 = 0; doGen && var12 < 16; ++var12)
         {
             for (var13 = 0; var13 < 16; ++var13)
