@@ -26,7 +26,14 @@ public class ClientTickHandler implements ITickHandler
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData)
     {
-        
+        if(event.phase == Phase.START)
+        {
+            partialTicks = event.renderTickTime;
+        }
+        else
+        {
+            calcDelta();
+        }
     }
 
     @Override
