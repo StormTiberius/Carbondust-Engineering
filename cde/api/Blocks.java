@@ -46,4 +46,8 @@ public class Blocks
     public static ItemStack blockGrate;
     
     public static ItemStack machineSpeaker;
+    
+    public static ItemStack resource;
+    public static ItemStack oilSand;
+    public static ItemStack magmaticStone;
 }
