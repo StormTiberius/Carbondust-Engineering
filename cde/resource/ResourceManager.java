@@ -19,7 +19,6 @@ public class ResourceManager
         "3.0.578.Dirt",
         "13.0.294.Gravel",
         "12.0.292.Sand",
-        "49.0.166.Obsidian",
         "82.0.10.Clay",
         "16.0.105.Coal",
         "15.0.60.Iron",
@@ -46,7 +45,9 @@ public class ResourceManager
         "87.0.30.Netherrack",
         "88.0.10.Soulsand",
         "89.0.8.Glowstone",
-        "1.0.9950.Stone"
+        "184.0.4.Oil",
+        "185.0.166.Magmatic",
+        "1.0.9946.Stone"
     };
     
     public static WeightedObject getResource()
