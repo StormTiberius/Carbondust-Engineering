@@ -41,10 +41,6 @@ public class ClientTickHandler implements ITickHandler
     {
         if(type.contains(TickType.RENDER))
         {
-            partialTicks = (Float)tickData[0];
-        }
-        else
-        {
             calcDelta();
         }
     }
