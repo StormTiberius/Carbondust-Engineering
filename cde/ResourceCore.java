@@ -30,6 +30,7 @@ import static net.minecraft.block.Block.soundSandFootstep;
 import static net.minecraft.block.Block.soundStoneFootstep;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 
@@ -69,6 +70,8 @@ public class ResourceCore
             GameRegistry.registerBlock(oilSand, "oilSand");
             LanguageRegistry.addName(oilSand, "Oil Sand");
             
+            MinecraftForge.setBlockHarvestLevel(oilSand, "shovel", 0);
+            
             if(Loader.isModLoaded("Forestry"))
             {
                 RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(oilSand.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Block.sand.blockID, 1, 0), 100);
@@ -80,6 +83,8 @@ public class ResourceCore
             magmaticStone = new BlockMagmaticStone(magmaticStoneId).setHardness(3.0F).setResistance(5.0F).setStepSound(soundStoneFootstep).setBlockName("magmaticStone").setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerBlock(magmaticStone, "magmaticStone");
             LanguageRegistry.addName(magmaticStone, "Magmatic Stone");
+            
+            MinecraftForge.setBlockHarvestLevel(magmaticStone, "pickaxe", 1);
             
             if(Loader.isModLoaded("Forestry"))
             {
