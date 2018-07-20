@@ -30,6 +30,8 @@ public class ClientTickHandler implements ITickHandler
         {
             partialTicks = (Float)tickData[0];
         }
+        
+
     }
 
     @Override
@@ -37,6 +39,19 @@ public class ClientTickHandler implements ITickHandler
     {
         if(type.contains(TickType.RENDER))
         {
+            calcDelta();
+        }
+        
+                if(type.contains(TickType.CLIENT))
+        {
+            GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+	
+            if(gui == null || !gui.doesGuiPauseGame())
+            {
+                ticksInGame++;
+                partialTicks = 0;
+            }
+
             calcDelta();
         }
     }
