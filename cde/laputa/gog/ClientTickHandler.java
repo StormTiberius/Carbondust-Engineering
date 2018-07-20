@@ -39,7 +39,14 @@ public class ClientTickHandler implements ITickHandler
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData)
     {
-
+        if(type.contains(TickType.RENDER))
+        {
+            partialTicks = (Float)tickData[0];
+        }
+        else
+        {
+            calcDelta();
+        }
     }
 
     @Override
