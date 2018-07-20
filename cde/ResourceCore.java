@@ -33,6 +33,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid="CDE|Resource", name="Resource", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
@@ -72,6 +73,8 @@ public class ResourceCore
             
             MinecraftForge.setBlockHarvestLevel(oilSand, "shovel", 0);
             
+            OreDictionary.registerOre("oilSand", oilSand);
+            
             if(Loader.isModLoaded("Forestry"))
             {
                 RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(oilSand.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Block.sand.blockID, 1, 0), 100);
@@ -85,6 +88,8 @@ public class ResourceCore
             LanguageRegistry.addName(magmaticStone, "Magmatic Stone");
             
             MinecraftForge.setBlockHarvestLevel(magmaticStone, "pickaxe", 1);
+            
+            OreDictionary.registerOre("magmaticStone", magmaticStone);
             
             if(Loader.isModLoaded("Forestry"))
             {
