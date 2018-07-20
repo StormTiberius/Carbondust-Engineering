@@ -13,6 +13,15 @@ public class ClientTickHandler implements ITickHandler
 {   
     public static int ticksInGame = 0;
     public static float partialTicks = 0;
+    public static float delta = 0;
+    public static float total = 0;
+    
+    private void calcDelta()
+    {
+        float oldTotal = total;
+        total = ticksInGame + partialTicks;
+        delta = total - oldTotal;
+    }
     
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData)
