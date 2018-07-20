@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.api.Blocks;
 import cde.core.Version;
 import cde.resource.BlockMagmaticStone;
 import cde.resource.BlockOilSand;
@@ -63,6 +64,8 @@ public class ResourceCore
             resource = new BlockResource(resourceId).setBlockName("resourceBlock").setBlockUnbreakable().setResistance(6000000.0F).setStepSound(soundStoneFootstep).setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerBlock(resource, "resourceBlock");
             LanguageRegistry.addName(resource, "Resource");
+            
+            Blocks.resource = new ItemStack(resource.blockID, 1, 0);
         }
         
         if(oilSandId > 0)
@@ -72,6 +75,8 @@ public class ResourceCore
             LanguageRegistry.addName(oilSand, "Oil Sand");
             
             MinecraftForge.setBlockHarvestLevel(oilSand, "shovel", 0);
+            
+            Blocks.oilSand = new ItemStack(oilSand.blockID, 1, 0);
             
             OreDictionary.registerOre("oilSand", oilSand);
             
@@ -88,6 +93,8 @@ public class ResourceCore
             LanguageRegistry.addName(magmaticStone, "Magmatic Stone");
             
             MinecraftForge.setBlockHarvestLevel(magmaticStone, "pickaxe", 1);
+            
+            Blocks.magmaticStone = new ItemStack(magmaticStone.blockID, 1, 0);
             
             OreDictionary.registerOre("magmaticStone", magmaticStone);
             
