@@ -38,7 +38,7 @@ public class ClientTickHandler implements ITickHandler
     @Override
     public EnumSet<TickType> ticks()
     {
-        return EnumSet.of(TickType.CLIENT);
+        return EnumSet.of(TickType.CLIENT, TickType.RENDER);
     }
 
     @Override
