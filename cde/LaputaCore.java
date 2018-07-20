@@ -52,9 +52,9 @@ public class LaputaCore
         biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "biomeId", 23, "Laputa Biome Id").getInt();
         dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Laputa Dimension Id").getInt();
         
-        weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Tweaks").getIntList();
+        weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Durations").getIntList();
         
-        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "DNC Duration").getInt();
+        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Multiplier").getInt();
                 
         cfg.save();
         
