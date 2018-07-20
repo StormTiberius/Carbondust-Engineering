@@ -8,6 +8,8 @@ package cde.laputa.gog;
 import java.util.EnumSet;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 
 public class ClientTickHandler implements ITickHandler
 {   
@@ -30,8 +32,6 @@ public class ClientTickHandler implements ITickHandler
         {
             partialTicks = (Float)tickData[0];
         }
-        
-
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ClientTickHandler implements ITickHandler
             calcDelta();
         }
         
-                if(type.contains(TickType.CLIENT))
+        if(type.contains(TickType.CLIENT))
         {
             GuiScreen gui = Minecraft.getMinecraft().currentScreen;
 	
