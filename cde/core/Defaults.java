@@ -56,6 +56,9 @@ public class Defaults
     public static final int TEXTURE_MACHINE_SPEAKER_BOTTOM_TOP = 50;
     public static final int TEXTURE_MACHINE_SPEAKER_SIDE = 51;
     
+    public static final int TEXTURE_OIL_SAND = 64;
+    public static final int TEXTURE_MAGMATIC_STONE = 65;
+    
     // ITEM TEXTURE INDEX
     public static final int TEXTURE_MATERIAL_INGOT_COPPER = 0;
     public static final int TEXTURE_MATERIAL_INGOT_TIN = 1;
