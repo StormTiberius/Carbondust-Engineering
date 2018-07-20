@@ -6,6 +6,8 @@
 package cde;
 
 import cde.core.Version;
+import cde.resource.BlockMagmaticStone;
+import cde.resource.BlockOilSand;
 import cde.resource.BlockResource;
 import cde.resource.ResourceManager;
 import cpw.mods.fml.common.Loader;
@@ -24,9 +26,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import forestry.api.recipes.RecipeManagers;
 import java.io.File;
 import net.minecraft.block.Block;
+import static net.minecraft.block.Block.soundSandFootstep;
 import static net.minecraft.block.Block.soundStoneFootstep;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 
 @Mod(modid="CDE|Resource", name="Resource", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
@@ -34,18 +38,17 @@ import net.minecraftforge.liquids.LiquidDictionary;
 public class ResourceCore
 {
     private static Configuration cfg;
-    private static int resourceId,lavaPerObsidian,oilPerSand,oilPerGravel;
-    public static Block resource;
+    private static int resourceId,oilSandId,magmaticStoneId;
+    public static Block resource,oilSand,magmaticStone;
     
     @PreInit
     public static void preInit(FMLPreInitializationEvent event) 
     {
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/resource.cfg"));
         cfg.load();
-        resourceId = cfg.get(Configuration.CATEGORY_BLOCK, "resource", 183).getInt();
-        lavaPerObsidian = cfg.get(Configuration.CATEGORY_GENERAL, "lavaperobsidian", 1000, "Millibuckets of lava per obsidian block").getInt();
-        oilPerSand = cfg.get(Configuration.CATEGORY_GENERAL, "oilpersand", 7, "Millibuckets of oil per sand block").getInt();
-        oilPerGravel = cfg.get(Configuration.CATEGORY_GENERAL, "oilpergravel", 7, "Millibuckets of oil per gravel block").getInt();
+        resourceId = cfg.get(Configuration.CATEGORY_BLOCK, "resourceId", 183).getInt();
+        oilSandId = cfg.get(Configuration.CATEGORY_BLOCK, "oilSandId", 184).getInt();
+        magmaticStoneId = cfg.get(Configuration.CATEGORY_BLOCK, "magmaticStoneId", 185).getInt();
         ResourceManager.cfgInit(cfg);
         cfg.save();
     }
@@ -58,12 +61,29 @@ public class ResourceCore
             resource = new BlockResource(resourceId).setBlockName("resourceBlock").setBlockUnbreakable().setResistance(6000000.0F).setStepSound(soundStoneFootstep).setCreativeTab(CDECore.TAB_CDE);
             GameRegistry.registerBlock(resource, "resourceBlock");
             LanguageRegistry.addName(resource, "Resource");
+        }
+        
+        if(oilSandId > 0)
+        {
+            oilSand = new BlockOilSand(oilSandId).setHardness(0.5F).setStepSound(soundSandFootstep).setBlockName("oilSand").setCreativeTab(CDECore.TAB_CDE);
+            GameRegistry.registerBlock(oilSand, "oilSand");
+            LanguageRegistry.addName(oilSand, "Oil Sand");
             
             if(Loader.isModLoaded("Forestry"))
             {
-                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.obsidian.blockID, 1, 0)}, LiquidDictionary.getLiquid("Lava", lavaPerObsidian), new ItemStack(Block.cobblestone.blockID, 1, 0), 0);
-                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.sand.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", oilPerSand), new ItemStack(Block.cobblestone.blockID, 1, 0), 0);
-                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(Block.gravel.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", oilPerGravel), new ItemStack(Block.cobblestone.blockID, 1, 0), 0);
+                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(oilSand.blockID, 1, 0)}, LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Block.sand.blockID, 1, 0), 100);
+            }
+        }
+                
+        if(magmaticStoneId > 0)
+        {
+            magmaticStone = new BlockMagmaticStone(magmaticStoneId).setHardness(3.0F).setResistance(5.0F).setStepSound(soundStoneFootstep).setBlockName("magmaticStone").setCreativeTab(CDECore.TAB_CDE);
+            GameRegistry.registerBlock(magmaticStone, "magmaticStone");
+            LanguageRegistry.addName(magmaticStone, "Magmatic Stone");
+            
+            if(Loader.isModLoaded("Forestry"))
+            {
+                RecipeManagers.squeezerManager.addRecipe(40, new ItemStack[]{new ItemStack(magmaticStone.blockID, 1, 0)}, LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(Block.cobblestone.blockID, 1, 0), 100);
             }
         }
     }
