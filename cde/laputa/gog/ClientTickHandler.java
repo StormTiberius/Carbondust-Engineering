@@ -30,10 +30,6 @@ public class ClientTickHandler implements ITickHandler
         {
             partialTicks = (Float)tickData[0];
         }
-        else
-        {
-            calcDelta();
-        }
     }
 
     @Override
