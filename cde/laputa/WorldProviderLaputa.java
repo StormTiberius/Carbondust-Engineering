@@ -256,12 +256,15 @@ public class WorldProviderLaputa extends WorldProvider
     @Override
     public void resetRainAndThunder()
     {
-        WorldInfo worldInfo = worldObj.getWorldInfo();
-        
-        if(time != worldInfo.getWorldTime())
+        if(!worldObj.isRemote)
         {
-            long var2 = time + (24000L * LaputaCore.getDayCycleDurationMultiplier());
-            worldInfo.setWorldTime(var2 - var2 % (24000L * LaputaCore.getDayCycleDurationMultiplier()));
+            WorldInfo worldInfo = worldObj.getWorldInfo();
+
+            if(time != worldInfo.getWorldTime())
+            {
+                long var2 = time + (24000L * LaputaCore.getDayCycleDurationMultiplier());
+                worldInfo.setWorldTime(var2 - var2 % (24000L * LaputaCore.getDayCycleDurationMultiplier()));
+            }
         }
         
         super.resetRainAndThunder();
