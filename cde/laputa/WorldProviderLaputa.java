@@ -140,7 +140,8 @@ public class WorldProviderLaputa extends WorldProvider
         {
             super.updateWeather();
         }
-        
+        else
+        {
             WorldInfo worldInfo = worldObj.getWorldInfo();
 
             time = worldInfo.getWorldTime();
@@ -237,6 +238,7 @@ public class WorldProviderLaputa extends WorldProvider
                     worldObj.thunderingStrength = 1.0F;
                 }
             }
+        }
     }
     
     @Override
