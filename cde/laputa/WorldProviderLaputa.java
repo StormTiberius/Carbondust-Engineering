@@ -141,102 +141,102 @@ public class WorldProviderLaputa extends WorldProvider
             super.updateWeather();
         }
         
-        WorldInfo worldInfo = worldObj.getWorldInfo();
-        
-        time = worldInfo.getWorldTime();
-        
-        if (!this.hasNoSky)
-        {
-            int var1 = worldInfo.getThunderTime();
+            WorldInfo worldInfo = worldObj.getWorldInfo();
 
-            if (var1 <= 0)
+            time = worldInfo.getWorldTime();
+
+            if (!this.hasNoSky)
             {
-                if (worldInfo.isThundering())
-                {
-                    worldInfo.setThunderTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(0)) + LaputaCore.getWeatherDuration(1));
-                }
-                else
-                {
-                    worldInfo.setThunderTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(2)) + LaputaCore.getWeatherDuration(3));
-                }
-            }
-            else
-            {
-                --var1;
-                worldInfo.setThunderTime(var1);
+                int var1 = worldInfo.getThunderTime();
 
                 if (var1 <= 0)
                 {
-                    worldInfo.setThundering(!worldInfo.isThundering());
-                }
-            }
-
-            int var2 = worldInfo.getRainTime();
-
-            if (var2 <= 0)
-            {
-                if (worldInfo.isRaining())
-                {
-                    worldInfo.setRainTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(4)) + LaputaCore.getWeatherDuration(5));
+                    if (worldInfo.isThundering())
+                    {
+                        worldInfo.setThunderTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(0)) + LaputaCore.getWeatherDuration(1));
+                    }
+                    else
+                    {
+                        worldInfo.setThunderTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(2)) + LaputaCore.getWeatherDuration(3));
+                    }
                 }
                 else
                 {
-                    worldInfo.setRainTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(6)) + LaputaCore.getWeatherDuration(7));
+                    --var1;
+                    worldInfo.setThunderTime(var1);
+
+                    if (var1 <= 0)
+                    {
+                        worldInfo.setThundering(!worldInfo.isThundering());
+                    }
                 }
-            }
-            else
-            {
-                --var2;
-                worldInfo.setRainTime(var2);
+
+                int var2 = worldInfo.getRainTime();
 
                 if (var2 <= 0)
                 {
-                    worldInfo.setRaining(!worldInfo.isRaining());
+                    if (worldInfo.isRaining())
+                    {
+                        worldInfo.setRainTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(4)) + LaputaCore.getWeatherDuration(5));
+                    }
+                    else
+                    {
+                        worldInfo.setRainTime(worldObj.rand.nextInt(LaputaCore.getWeatherDuration(6)) + LaputaCore.getWeatherDuration(7));
+                    }
+                }
+                else
+                {
+                    --var2;
+                    worldInfo.setRainTime(var2);
+
+                    if (var2 <= 0)
+                    {
+                        worldInfo.setRaining(!worldInfo.isRaining());
+                    }
+                }
+
+                worldObj.prevRainingStrength = worldObj.rainingStrength;
+
+                if (worldInfo.isRaining())
+                {
+                    worldObj.rainingStrength = (float)((double)worldObj.rainingStrength + 0.01D);
+                }
+                else
+                {
+                    worldObj.rainingStrength = (float)((double)worldObj.rainingStrength - 0.01D);
+                }
+
+                if (worldObj.rainingStrength < 0.0F)
+                {
+                    worldObj.rainingStrength = 0.0F;
+                }
+
+                if (worldObj.rainingStrength > 1.0F)
+                {
+                    worldObj.rainingStrength = 1.0F;
+                }
+
+                worldObj.prevThunderingStrength = worldObj.thunderingStrength;
+
+                if (worldInfo.isThundering())
+                {
+                    worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength + 0.01D);
+                }
+                else
+                {
+                    worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength - 0.01D);
+                }
+
+                if (worldObj.thunderingStrength < 0.0F)
+                {
+                    worldObj.thunderingStrength = 0.0F;
+                }
+
+                if (worldObj.thunderingStrength > 1.0F)
+                {
+                    worldObj.thunderingStrength = 1.0F;
                 }
             }
-
-            worldObj.prevRainingStrength = worldObj.rainingStrength;
-
-            if (worldInfo.isRaining())
-            {
-                worldObj.rainingStrength = (float)((double)worldObj.rainingStrength + 0.01D);
-            }
-            else
-            {
-                worldObj.rainingStrength = (float)((double)worldObj.rainingStrength - 0.01D);
-            }
-
-            if (worldObj.rainingStrength < 0.0F)
-            {
-                worldObj.rainingStrength = 0.0F;
-            }
-
-            if (worldObj.rainingStrength > 1.0F)
-            {
-                worldObj.rainingStrength = 1.0F;
-            }
-
-            worldObj.prevThunderingStrength = worldObj.thunderingStrength;
-
-            if (worldInfo.isThundering())
-            {
-                worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength + 0.01D);
-            }
-            else
-            {
-                worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength - 0.01D);
-            }
-
-            if (worldObj.thunderingStrength < 0.0F)
-            {
-                worldObj.thunderingStrength = 0.0F;
-            }
-
-            if (worldObj.thunderingStrength > 1.0F)
-            {
-                worldObj.thunderingStrength = 1.0F;
-            }
-        }
     }
     
     @Override
