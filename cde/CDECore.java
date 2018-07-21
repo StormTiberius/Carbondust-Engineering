@@ -68,7 +68,7 @@ public class CDECore
     public static Item materialsItem;
     private static Configuration cfg;
     private static int networkUpdateRate,oreBlockId,storageBlockId,materialsItemId;
-    private static boolean sounds,altRainSounds;
+    private static boolean sounds,altRainSounds,altExplosionSounds;
     public static int apatiteId,apatiteMeta;
     
     @PreInit
@@ -80,6 +80,7 @@ public class CDECore
         networkUpdateRate = cfg.get(Configuration.CATEGORY_GENERAL, "networkupdaterate", 40, "Network Update Rate").getInt();
         sounds = cfg.get(Configuration.CATEGORY_GENERAL, "sounds", true, "Enable/Disable CDE Sounds").getBoolean(false);
         altRainSounds = cfg.get(Configuration.CATEGORY_GENERAL, "rain", true, "MC 1.9 Rain Sounds").getBoolean(false);
+        altExplosionSounds = cfg.get(Configuration.CATEGORY_GENERAL, "explosion", true, "Alternate Explosion Sounds").getBoolean(false);
         
         oreBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "oreblockid", Defaults.BLOCK_ORE_ID).getInt();
         storageBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "storageblockid", Defaults.BLOCK_STORAGE_ID).getInt();
@@ -319,6 +320,11 @@ public class CDECore
     public static boolean altRainSounds()
     {
         return altRainSounds;
+    }
+    
+    public static boolean altExplosionSounds()
+    {
+        return altExplosionSounds;
     }
     
     public static List<Item> getItemsByClass(String n)

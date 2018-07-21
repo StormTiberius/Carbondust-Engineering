@@ -28,6 +28,17 @@ public class SoundEventManager
                 event.manager.soundPoolSounds.addSound(name, CDECore.class.getResource((new StringBuilder()).append(path).toString()));
             }
         }
+        
+        if(CDECore.altExplosionSounds())
+        {
+            for(int i = 1; i < 5; i++)
+            {
+                String name = "cde/random/explode" + i + ".ogg";
+                String path = "/cde/sounds/random/explode" + i + ".ogg";
+
+                event.manager.soundPoolSounds.addSound(name, CDECore.class.getResource((new StringBuilder()).append(path).toString()));
+            }
+        }
     }
     
     @ForgeSubscribe
@@ -44,6 +55,14 @@ public class SoundEventManager
             if(event.name.equalsIgnoreCase("ambient.weather.rain"))
             {
                 event.result = event.manager.soundPoolSounds.getRandomSoundFromSoundPool("cde.ambient.weather.rain");
+            }
+        }
+        
+        if(CDECore.altExplosionSounds())
+        {
+            if(event.name.equalsIgnoreCase("random.explode"))
+            {
+                event.result = event.manager.soundPoolSounds.getRandomSoundFromSoundPool("cde.random.explode");
             }
         }
     }
