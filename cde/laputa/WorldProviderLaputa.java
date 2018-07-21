@@ -136,6 +136,11 @@ public class WorldProviderLaputa extends WorldProvider
     @Override
     public void updateWeather()
     {   
+        if(worldObj.isRemote)
+        {
+            super.updateWeather();
+        }
+        
         WorldInfo worldInfo = worldObj.getWorldInfo();
         
         time = worldInfo.getWorldTime();
