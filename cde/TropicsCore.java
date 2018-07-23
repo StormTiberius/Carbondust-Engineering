@@ -25,17 +25,23 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.DimensionManager;
 
 @Mod(modid="CDE|Tropics", name="Tropics", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TropicsCore
 {
     private static Configuration cfg;
+    private static boolean enabled;
     private static int islandId,beachId,oceanId,tropicsId,islandSize,islandScarcity;
     public static BiomeGenBase island,beach,ocean;
     public static WorldType tropics;
+    
+    private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
+    private static int[] weatherDurations = WEATHER_DURATIONS;
+    
+    private static int dayCycleDurationMultiplier = 1;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -68,14 +74,7 @@ public class TropicsCore
 
     @Init
     public void init(FMLInitializationEvent event) 
-    {
-        BiomeManager.addStrongholdBiome(island);
-        BiomeManager.addStrongholdBiome(beach);
-        BiomeManager.addStrongholdBiome(ocean);
-        
-        BiomeManager.addVillageBiome(island, true);
-        BiomeManager.addVillageBiome(beach, true);
-        
+    {        
         LanguageRegistry.instance().addStringLocalization("generator.TROPICS", "en_US", "Tropics");
     }
 
