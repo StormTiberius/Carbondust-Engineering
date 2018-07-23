@@ -50,18 +50,16 @@ public class TropicsCore
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Tropics Dimension").getBoolean(false);
         
-        islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandid", 23, "Island id").getInt();
-        beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachid", 24, "Beach id").getInt();
-        oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanid", 25, "Ocean id").getInt();
+        islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 23, "Island Biome Id").getInt();
+        beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 24, "Beach Biome Id").getInt();
+        oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanBiomeId", 25, "Ocean Biome Id").getInt();
         
-        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Laputa Dimension Id").getInt();
-        
+        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Tropics Dimension Id").getInt();
         weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Durations").getIntList();
+        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Duration Multiplier").getInt();
         
-        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Multiplier").getInt();
-        
-        islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandsize", 4, "Island size, 4-6 recommended").getInt();
-        islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandscarcity", 100, "Island scarcity, 100 default").getInt();
+        islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandSize", 4, "Island Size, 4-6 Recommended").getInt();
+        islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandScarcity", 100, "Island Scarcity, 100 Default").getInt();
 
         cfg.save();
 
