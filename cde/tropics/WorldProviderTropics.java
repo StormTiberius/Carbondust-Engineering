@@ -5,52 +5,43 @@
 
 package cde.tropics;
 
-import cde.laputa.*;
 import cde.TropicsCore;
-import cde.laputa.gog.SkyRendererGoG;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
-import net.minecraftforge.client.IRenderHandler;
 
 public class WorldProviderTropics extends WorldProvider
-{
-    private final IRenderHandler skyRendererGoG;
-    
+{    
     private long time;
-    
-    public WorldProviderTropics()
-    {
-        skyRendererGoG = new SkyRendererGoG();
-    }
     
     @Override
     public String getDimensionName()
     {
-        return "Laputa";
+        return "Tropics";
     }
     
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerLaputa(TropicsCore.laputa, 0.8F, 0.4F);
+        worldChunkMgr = new WorldChunkManagerTropics(worldObj);
         dimensionId = TropicsCore.getDimensionId();
     }
     
     @Override
     public IChunkProvider createChunkGenerator()
     {
-        return new ChunkProviderLaputa(worldObj, worldObj.getSeed(), false);
+        return new ChunkProviderTropics(worldObj, worldObj.getSeed(), false);
     }
     
     @Override
     public boolean canCoordinateBeSpawn(int par1, int par2)
     {
-        return true;
+        int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
+        return var3 == Block.grass.blockID || var3 == Block.sand.blockID;
     }
     
     @Override
@@ -84,25 +75,6 @@ public class WorldProviderTropics extends WorldProvider
     
     @SideOnly(Side.CLIENT)
     @Override
-    public float getCloudHeight()
-    {
-        return 85.0F;
-    }
-    
-    @Override
-    public ChunkCoordinates getEntrancePortalLocation()
-    {
-        return getSpawnPoint();
-    }
-    
-    @Override
-    public int getAverageGroundLevel()
-    {
-        return 21;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
     public boolean getWorldHasVoidParticles()
     {
         return false;
@@ -113,19 +85,6 @@ public class WorldProviderTropics extends WorldProvider
     public double getVoidFogYFactor()
     {
         return 1.0D;
-    }
-        
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IRenderHandler getSkyRenderer()
-    {
-        return skyRendererGoG;
-    }
-    
-    @Override
-    public ChunkCoordinates getRandomizedSpawnPoint()
-    {
-        return getSpawnPoint();
     }
     
     @Override
@@ -240,18 +199,6 @@ public class WorldProviderTropics extends WorldProvider
                 }
             }
         }
-    }
-    
-    @Override
-    public ChunkCoordinates getSpawnPoint()
-    {
-        return new ChunkCoordinates(264, 20, 264);
-    }
-    
-    @Override
-    public double getHorizon()
-    {
-        return 20.0D;
     }
     
     @Override
