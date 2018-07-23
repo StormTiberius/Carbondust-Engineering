@@ -33,12 +33,13 @@ public class TropicsCore
     private static Configuration cfg;
     private static boolean enabled;
     private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity;
-    public static BiomeGenBase island,beach,ocean;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     private static int[] weatherDurations = WEATHER_DURATIONS;
     
     private static int dayCycleDurationMultiplier = 1;
+    
+    public static BiomeGenBase island,beach,ocean;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
