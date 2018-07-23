@@ -11,7 +11,7 @@ public class BiomeGenTropicsIsland extends BiomeGenTropics
     {
         super(id);
         
-        theBiomeDecorator.treesPerChunk = -999;
+        theBiomeDecorator.treesPerChunk = 50;
         theBiomeDecorator.reedsPerChunk = 50;
         theBiomeDecorator.cactiPerChunk = 10;
     }
