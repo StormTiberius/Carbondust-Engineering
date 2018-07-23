@@ -21,9 +21,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
@@ -36,7 +34,6 @@ public class TropicsCore
     private static boolean enabled;
     private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity;
     public static BiomeGenBase island,beach,ocean;
-    public static WorldType tropics;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     private static int[] weatherDurations = WEATHER_DURATIONS;
