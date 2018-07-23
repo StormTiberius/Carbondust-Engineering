@@ -17,6 +17,16 @@ public abstract class BiomeGenTropics extends BiomeGenBase
     public BiomeGenTropics(int id)
     {
         super(id);
+        
+        spawnableCreatureList.clear();
+        spawnableMonsterList.clear();
+        spawnableWaterCreatureList.clear();
+        field_82914_M.clear();
+        
+        topBlock = (byte)Block.sand.blockID;
+        fillerBlock = (byte)Block.sand.blockID;
+        
+        theBiomeDecorator.generateLakes = false;
     }
     
     @Override

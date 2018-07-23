@@ -11,8 +11,6 @@ public class BiomeGenTropicsOcean extends BiomeGenTropics
     {
         super(id);
         
-        spawnableCreatureList.clear();
-        
         theBiomeDecorator.treesPerChunk = -999;
     }
 }
