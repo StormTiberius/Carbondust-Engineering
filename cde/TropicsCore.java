@@ -82,7 +82,19 @@ public class TropicsCore
     @Init
     public void init(FMLInitializationEvent event) 
     {   
-        
+        if(enabled)
+        {
+            if(dimensionId == 0 || dimensionId == -1 || dimensionId == 1)
+            {
+                DimensionManager.unregisterProviderType(dimensionId);
+                DimensionManager.registerProviderType(dimensionId, WorldProviderTropics.class, true);
+            }
+            else
+            {
+                DimensionManager.registerProviderType(dimensionId, WorldProviderTropics.class, true);
+                DimensionManager.registerDimension(dimensionId, dimensionId);
+            }
+        }
     }
 
     @PostInit
