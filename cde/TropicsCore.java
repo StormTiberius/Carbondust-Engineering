@@ -71,7 +71,6 @@ public class TropicsCore
 
             WorldChunkManagerTropics.allowedBiomes.clear();
             WorldChunkManagerTropics.allowedBiomes.add(island);
-            WorldChunkManagerTropics.allowedBiomes.add(beach);
         }
     }
 
