@@ -18,7 +18,6 @@ import net.minecraft.world.gen.MapGenCaves;
 import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.feature.MapGenScatteredFeature;
-import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraft.world.gen.structure.MapGenStronghold;
@@ -553,7 +552,7 @@ public class ChunkProviderTropics implements IChunkProvider
         }
 
         if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAVA) &&
-                !var11 && this.rand.nextInt(8) == 0)
+                !var11 && this.rand.nextInt(8) == 1)
         {
             var12 = var4 + this.rand.nextInt(16) + 8;
             var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
@@ -565,16 +564,19 @@ public class ChunkProviderTropics implements IChunkProvider
             }
         }
 
-        boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, DUNGEON);
+        boolean doGen = mapFeaturesEnabled && TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, DUNGEON);
         for (var12 = 0; doGen && var12 < 8; ++var12)
         {
             var13 = var4 + this.rand.nextInt(16) + 8;
             var14 = this.rand.nextInt(128);
             int var15 = var5 + this.rand.nextInt(16) + 8;
 
-            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
+            switch(rand.nextInt(4))
             {
-                ;
+                case 0: new WorldGenDungeons(ChestGenHooks.PYRAMID_DESERT_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
+                case 1: new WorldGenDungeons(ChestGenHooks.PYRAMID_JUNGLE_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
+                case 2: new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
+                default: new WorldGenDungeons(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
             }
         }
 
