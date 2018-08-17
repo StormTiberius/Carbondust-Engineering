@@ -12,7 +12,6 @@ import cde.tropics.BiomeGenTropicsOcean;
 import cde.tropics.EventManagerTropics;
 import cde.tropics.WorldChunkManagerTropics;
 import cde.tropics.WorldProviderTropics;
-import cde.tropics.WorldTypeTropics;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -23,9 +22,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
@@ -38,7 +35,7 @@ public class TropicsCore
 {
     private static Configuration cfg;
     private static boolean enabled,civspawn;
-    private static int islandId,beachId,oceanId,tropicsId,dimensionId,islandSize,islandScarcity;
+    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     private static int[] weatherDurations = WEATHER_DURATIONS;
@@ -46,7 +43,6 @@ public class TropicsCore
     private static int dayCycleDurationMultiplier = 1;
     
     public static BiomeGenBase island,beach,ocean;
-    public static WorldType tropics;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -62,8 +58,6 @@ public class TropicsCore
         beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 24, "Beach Biome Id").getInt();
         oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanBiomeId", 25, "Ocean Biome Id").getInt();
         
-        tropicsId = cfg.get(Configuration.CATEGORY_GENERAL, "tropicsid", 10, "Tropics Id").getInt();
-        
         dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Tropics Dimension Id").getInt();
         weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Durations").getIntList();
         dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Duration Multiplier").getInt();
@@ -73,14 +67,15 @@ public class TropicsCore
 
         cfg.save();
 
-        island = (new BiomeGenTropicsIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-        beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-        ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
-        
-        WorldChunkManagerTropics.allowedBiomes.clear();
-        WorldChunkManagerTropics.allowedBiomes.add(island);
-            
-        tropics = new WorldTypeTropics(tropicsId, "TROPICS");
+        if(enabled)
+        {
+            island = (new BiomeGenTropicsIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
+
+            WorldChunkManagerTropics.allowedBiomes.clear();
+            WorldChunkManagerTropics.allowedBiomes.add(island);
+        }
     }
 
     @Init
@@ -98,20 +93,18 @@ public class TropicsCore
                 DimensionManager.registerProviderType(dimensionId, WorldProviderTropics.class, true);
                 DimensionManager.registerDimension(dimensionId, dimensionId);
             }
-        }
                     
-        BiomeManager.addStrongholdBiome(island);
-        BiomeManager.addStrongholdBiome(beach);
-        BiomeManager.addStrongholdBiome(ocean);
+            BiomeManager.addStrongholdBiome(island);
+            BiomeManager.addStrongholdBiome(beach);
+            BiomeManager.addStrongholdBiome(ocean);
 
-        BiomeManager.addVillageBiome(island, true);
-        BiomeManager.addVillageBiome(beach, true);
-        
-        LanguageRegistry.instance().addStringLocalization("generator.TROPICS", "en_US", "Tropics");
-        
-        if(civspawn)
-        {
-            MinecraftForge.EVENT_BUS.register(new EventManagerTropics(getDimensionId()));
+            BiomeManager.addVillageBiome(island, true);
+            BiomeManager.addVillageBiome(beach, true);
+
+            if(civspawn)
+            {
+                MinecraftForge.EVENT_BUS.register(new EventManagerTropics(getDimensionId()));
+            }
         }
     }
 
