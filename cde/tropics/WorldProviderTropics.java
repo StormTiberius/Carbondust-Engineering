@@ -8,7 +8,6 @@ package cde.tropics;
 import cde.TropicsCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -34,14 +33,7 @@ public class WorldProviderTropics extends WorldProvider
     @Override
     public IChunkProvider createChunkGenerator()
     {
-        return new ChunkProviderTropics(worldObj, worldObj.getSeed(), false);
-    }
-    
-    @Override
-    public boolean canCoordinateBeSpawn(int par1, int par2)
-    {
-        int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
-        return var3 == Block.grass.blockID || var3 == Block.sand.blockID;
+        return new ChunkProviderTropics(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
     }
     
     @Override
