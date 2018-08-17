@@ -9,6 +9,7 @@ import cde.core.Version;
 import cde.tropics.BiomeGenTropicsBeach;
 import cde.tropics.BiomeGenTropicsIsland;
 import cde.tropics.BiomeGenTropicsOcean;
+import cde.tropics.EventManagerTropics;
 import cde.tropics.WorldChunkManagerTropics;
 import cde.tropics.WorldProviderTropics;
 import cde.tropics.WorldTypeTropics;
@@ -29,13 +30,14 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid="CDE|Tropics", name="Tropics", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TropicsCore
 {
     private static Configuration cfg;
-    private static boolean enabled;
+    private static boolean enabled,civspawn;
     private static int islandId,beachId,oceanId,tropicsId,dimensionId,islandSize,islandScarcity;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
@@ -54,6 +56,7 @@ public class TropicsCore
         cfg.load();
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Tropics Dimension").getBoolean(false);
+        civspawn = cfg.get(Configuration.CATEGORY_GENERAL, "civspawn", true, "Custom Spawn Rules").getBoolean(false);
         
         islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 23, "Island Biome Id").getInt();
         beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 24, "Beach Biome Id").getInt();
@@ -105,6 +108,11 @@ public class TropicsCore
         BiomeManager.addVillageBiome(beach, true);
         
         LanguageRegistry.instance().addStringLocalization("generator.TROPICS", "en_US", "Tropics");
+        
+        if(civspawn)
+        {
+            MinecraftForge.EVENT_BUS.register(new EventManagerTropics(getDimensionId()));
+        }
     }
 
     @PostInit
