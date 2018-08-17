@@ -27,7 +27,8 @@ public class EventManagerTropics
             Block.grass.blockID, 
             Block.sand.blockID, 
             Block.gravel.blockID, 
-            Block.obsidian.blockID, 
+            Block.obsidian.blockID,
+            Block.blockSnow.blockID,
             Block.bedrock.blockID
         };
         
