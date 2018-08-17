@@ -21,6 +21,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import java.io.File;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
@@ -32,7 +33,7 @@ import railcraft.common.api.fuel.FuelManager;
 public class TweakCore
 {
     private static Configuration cfg;
-    private static final boolean[] FLAGS = new boolean[38];
+    private static final boolean[] FLAGS = new boolean[39];
     private static int lavaHeatValue;
     
     @PreInit
@@ -86,6 +87,8 @@ public class TweakCore
         FLAGS[36] = cfg.get(Configuration.CATEGORY_GENERAL, "netherrack", true, "Netherrack Recipe").getBoolean(false);
         FLAGS[37] = cfg.get(Configuration.CATEGORY_GENERAL, "soulsand", true, "Soulsand Recipe").getBoolean(false);
         
+        FLAGS[38] = cfg.get(Configuration.CATEGORY_GENERAL, "enderman", true, "Enderman Carriable Blocks").getBoolean(false);
+        
         cfg.save();
       
     }
@@ -111,6 +114,14 @@ public class TweakCore
     {
         RecipeManager.delRecipes(FLAGS);
         RecipeManager.addRecipes(FLAGS);
+        
+        if(FLAGS[38])
+        {
+            for(int i = 0; i < EntityEnderman.carriableBlocks.length; i++)
+            {
+                EntityEnderman.carriableBlocks[i] = false;
+            }
+        }
     }
 
     @ServerStarting
