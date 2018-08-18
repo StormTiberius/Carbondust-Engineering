@@ -33,7 +33,7 @@ import railcraft.common.api.fuel.FuelManager;
 public class TweakCore
 {
     private static Configuration cfg;
-    private static final boolean[] FLAGS = new boolean[39];
+    private static final boolean[] FLAGS = new boolean[40];
     private static int lavaHeatValue;
     
     @PreInit
@@ -88,6 +88,8 @@ public class TweakCore
         FLAGS[37] = cfg.get(Configuration.CATEGORY_GENERAL, "soulsand", true, "Soulsand Recipe").getBoolean(false);
         
         FLAGS[38] = cfg.get(Configuration.CATEGORY_GENERAL, "enderman", true, "Enderman Carriable Blocks").getBoolean(false);
+        
+        FLAGS[39] = cfg.get(Configuration.CATEGORY_GENERAL, "gtrecipe", true, "Ghast Tear Recipe").getBoolean(false);
         
         cfg.save();
       

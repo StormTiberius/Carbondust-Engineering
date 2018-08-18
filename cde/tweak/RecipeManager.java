@@ -49,6 +49,12 @@ public class RecipeManager
             FurnaceRecipes.smelting().addSmelting(Item.emerald.itemID, new ItemStack(Item.enderPearl.itemID, 1, 0), 1.0F);
         }
         
+        // Diamond smelting recipe
+        if(flags[39])
+        {
+            FurnaceRecipes.smelting().addSmelting(Item.diamond.itemID, new ItemStack(Item.ghastTear.itemID, 1, 0), 1.0F);
+        }
+        
         // Feather recipe
         if(flags[3])
         {
