@@ -39,7 +39,7 @@ public class TropicsCore
 {
     private static Configuration cfg;
     private static boolean enabled,civspawn;
-    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId;
+    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId,indigoFlowerId;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     private static int[] weatherDurations = WEATHER_DURATIONS;
@@ -115,6 +115,13 @@ public class TropicsCore
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
+        Block block = CDECore.getBlockByClass("com.eloraam.redpower.world.BlockCustomFlower");
+        
+        if(block != null)
+        {
+            indigoFlowerId = block.blockID;
+        }
+        
         LiquidStack oil = LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME);
 
         if(oil != null)
@@ -131,6 +138,11 @@ public class TropicsCore
     public void serverStarting(FMLServerStartingEvent event)
     {
         
+    }
+        
+    public static int getFlowerId()
+    {
+        return indigoFlowerId;
     }
         
     public static int getLiquidId()
