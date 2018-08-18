@@ -8,7 +8,9 @@ package cde.tropics;
 import cde.TropicsCore;
 import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 
 public class BiomeGenTropicsIsland extends BiomeGenTropics
@@ -21,9 +23,12 @@ public class BiomeGenTropicsIsland extends BiomeGenTropics
         
         flag = true;
         
+        spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
+        
         theBiomeDecorator.treesPerChunk = 0;
         theBiomeDecorator.reedsPerChunk = 50;
         theBiomeDecorator.cactiPerChunk = 10;
+        theBiomeDecorator.waterlilyPerChunk = 4;
     }
     
     @Override

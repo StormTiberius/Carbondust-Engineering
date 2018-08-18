@@ -6,6 +6,8 @@
 package cde.tropics;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.world.biome.SpawnListEntry;
 
 public class BiomeGenTropicsBeach extends BiomeGenTropics
 {
@@ -17,6 +19,7 @@ public class BiomeGenTropicsBeach extends BiomeGenTropics
         fillerBlock = (byte)Block.sand.blockID;
         
         spawnableCreatureList.clear();
+        spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
         
         theBiomeDecorator.treesPerChunk = 50;
         theBiomeDecorator.reedsPerChunk = 50;
