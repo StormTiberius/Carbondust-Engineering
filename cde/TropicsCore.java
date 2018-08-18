@@ -23,11 +23,15 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import java.io.File;
+import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 
 @Mod(modid="CDE|Tropics", name="Tropics", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
@@ -35,7 +39,7 @@ public class TropicsCore
 {
     private static Configuration cfg;
     private static boolean enabled,civspawn;
-    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity;
+    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     private static int[] weatherDurations = WEATHER_DURATIONS;
@@ -111,13 +115,27 @@ public class TropicsCore
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
+        LiquidStack oil = LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME);
 
+        if(oil != null)
+        {
+            liquidId = oil.itemID;
+        }
+        else
+        {
+            liquidId = Block.lavaStill.blockID;
+        }
     }
 
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
         
+    }
+        
+    public static int getLiquidId()
+    {
+        return liquidId;
     }
         
     public static int getDimensionId()
