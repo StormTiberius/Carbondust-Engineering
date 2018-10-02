@@ -6,6 +6,7 @@
 package cde;
 
 import cde.core.Version;
+import cde.world.CommandTPW;
 import cde.world.ember.BiomeGenEmber;
 import cde.world.ember.EmberEventManager;
 import cde.world.ember.WorldGenOil;
@@ -164,7 +165,10 @@ public class WorldCore
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
-        
+        if(tropicsDimension && emberDimension)
+        {
+            event.registerServerCommand(new CommandTPW());
+        }
     }
         
     public static int getFlowerId()
