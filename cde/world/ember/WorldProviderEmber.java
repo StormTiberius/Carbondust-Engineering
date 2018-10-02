@@ -5,7 +5,7 @@
 
 package cde.world.ember;
 
-import cde.EmberCore;
+import cde.WorldCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
@@ -15,7 +15,7 @@ import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderEmber extends WorldProvider
 {
-    private LocationData ld = new LocationData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+    private LocationData ld = new LocationData(WorldCore.EMBER_SPAWN_LOCATION_KEYWORD);
     
     @Override
     public String getDimensionName()
@@ -26,11 +26,11 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.5F, 0.5F);
+        worldChunkMgr = new WorldChunkManagerEmber(WorldCore.ember, 0.5F, 0.5F);
         hasNoSky = true;
-        dimensionId = EmberCore.getDimensionId();
+        dimensionId = WorldCore.getEmberDimensionId();
         
-        LocationData data = (LocationData)worldObj.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+        LocationData data = (LocationData)worldObj.loadItemData(LocationData.class, WorldCore.EMBER_SPAWN_LOCATION_KEYWORD);
         
         if(data != null)
         {
