@@ -43,8 +43,8 @@ import net.minecraftforge.liquids.LiquidStack;
 public class WorldCore
 {
     private static Configuration cfg;
-    private static boolean enabled,civspawn;
-    private static int islandId,beachId,oceanId,emberId,dimensionId,islandSize,islandScarcity,liquidId,indigoFlowerId;
+    private static boolean tropicsDimension,emberDimension,civSpawn;
+    private static int islandBiomeId,beachBiomeId,oceanBiomeId,emberBiomeId,tropicsDimensionId,emberDimensionId,islandSize,islandScarcity,liquidId,indigoFlowerId;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     private static int[] weatherDurations = WEATHER_DURATIONS;
@@ -62,57 +62,57 @@ public class WorldCore
         
         cfg.load();
         
-        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Tropics Dimension").getBoolean(false);
-        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Ember").getBoolean(false);
-        civspawn = cfg.get(Configuration.CATEGORY_GENERAL, "civspawn", true, "Custom Spawn Rules").getBoolean(false);
+        tropicsDimension = cfg.get(Configuration.CATEGORY_GENERAL, "tropicsDimension", true, "Enable/Disable Tropics Dimension").getBoolean(false);
+        emberDimension = cfg.get(Configuration.CATEGORY_GENERAL, "emberDimension", true, "Enable/Disable Ember Dimension").getBoolean(false);
         
-        islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 23, "Island Biome Id").getInt();
-        beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 24, "Beach Biome Id").getInt();
-        oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanBiomeId", 25, "Ocean Biome Id").getInt();
+        islandBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 23, "Island Biome Id").getInt();
+        beachBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 24, "Beach Biome Id").getInt();
+        oceanBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanBiomeId", 25, "Ocean Biome Id").getInt();
+        emberBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 26, "Ember Biome Id").getInt();
         
-        emberId = cfg.get(Configuration.CATEGORY_GENERAL, "biomeid", 23, "Ember biome id").getInt();
-        
-        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Tropics Dimension Id").getInt();
-        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionid", 2, "Ember dimension id").getInt();
-        
-        weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Durations").getIntList();
-        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Duration Multiplier").getInt();
+        tropicsDimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "tropicsDimensionId", 2, "Tropics Dimension Id").getInt();
+        emberDimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "emberDimensionId", 3, "Ember dimension Id").getInt();
         
         islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandSize", 4, "Island Size, 4-6 Recommended").getInt();
         islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandScarcity", 100, "Island Scarcity, 100 Default").getInt();
 
+        weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Durations").getIntList();
+        dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Duration Multiplier").getInt();
+        
+        civSpawn = cfg.get(Configuration.CATEGORY_GENERAL, "civSpawn", true, "Custom Spawn Rules").getBoolean(false);
+        
         cfg.save();
 
-        if(enabled)
+        if(tropicsDimension)
         {
-            island = (new BiomeGenTropicsIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
+            island = (new BiomeGenTropicsIsland(islandBiomeId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            beach = (new BiomeGenTropicsBeach(beachBiomeId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            ocean = (new BiomeGenTropicsOcean(oceanBiomeId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
 
             WorldChunkManagerTropics.allowedBiomes.clear();
             WorldChunkManagerTropics.allowedBiomes.add(island);
         }
         
-        if(enabled)
+        if(emberDimension)
         {
-            ember = (new BiomeGenEmber(emberId)).setColor(112).setBiomeName("Ember");
+            ember = (new BiomeGenEmber(emberBiomeId)).setColor(112).setBiomeName("Ember");
         }
     }
 
     @Init
     public void init(FMLInitializationEvent event) 
     {   
-        if(enabled)
+        if(tropicsDimension)
         {
-            if(dimensionId == 0 || dimensionId == -1 || dimensionId == 1)
+            if(tropicsDimensionId == 0 || tropicsDimensionId == -1 || tropicsDimensionId == 1)
             {
-                DimensionManager.unregisterProviderType(dimensionId);
-                DimensionManager.registerProviderType(dimensionId, WorldProviderTropics.class, true);
+                DimensionManager.unregisterProviderType(tropicsDimensionId);
+                DimensionManager.registerProviderType(tropicsDimensionId, WorldProviderTropics.class, true);
             }
             else
             {
-                DimensionManager.registerProviderType(dimensionId, WorldProviderTropics.class, true);
-                DimensionManager.registerDimension(dimensionId, dimensionId);
+                DimensionManager.registerProviderType(tropicsDimensionId, WorldProviderTropics.class, true);
+                DimensionManager.registerDimension(tropicsDimensionId, tropicsDimensionId);
             }
                     
             BiomeManager.addStrongholdBiome(island);
@@ -122,28 +122,20 @@ public class WorldCore
             BiomeManager.addVillageBiome(island, true);
             BiomeManager.addVillageBiome(beach, true);
 
-            if(civspawn)
+            if(civSpawn)
             {
                 MinecraftForge.EVENT_BUS.register(new EventManagerTropics(getTropicsDimensionId()));
             }
         }
         
-        if(enabled)
+        if(emberDimension)
         {
-            if(dimensionId == 0 || dimensionId == -1 || dimensionId == 1)
-            {
-                DimensionManager.unregisterProviderType(dimensionId);
-                DimensionManager.registerProviderType(dimensionId, WorldProviderEmber.class, true);
-            }
-            else
-            {
-                DimensionManager.registerProviderType(dimensionId, WorldProviderEmber.class, true);
-                DimensionManager.registerDimension(dimensionId, dimensionId);
-            }
+            DimensionManager.registerProviderType(emberDimensionId, WorldProviderEmber.class, true);
+            DimensionManager.registerDimension(emberDimensionId, emberDimensionId);
             
-            GameRegistry.registerWorldGenerator(new WorldGenOil(dimensionId));
+            GameRegistry.registerWorldGenerator(new WorldGenOil(emberDimensionId));
             
-            MinecraftForge.EVENT_BUS.register(new EmberEventManager(dimensionId));
+            MinecraftForge.EVENT_BUS.register(new EmberEventManager(emberDimensionId));
         }
     }
 
@@ -187,12 +179,12 @@ public class WorldCore
         
     public static int getTropicsDimensionId()
     {
-        return dimensionId;
+        return tropicsDimensionId;
     }
     
     public static int getEmberDimensionId()
     {
-        return dimensionId;
+        return emberDimensionId;
     }
     
     public static int getWeatherDuration(int index)
