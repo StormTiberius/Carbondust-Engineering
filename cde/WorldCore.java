@@ -71,7 +71,7 @@ public class WorldCore
         emberBiomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 26, "Ember Biome Id").getInt();
         
         tropicsDimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "tropicsDimensionId", 2, "Tropics Dimension Id").getInt();
-        emberDimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "emberDimensionId", 3, "Ember dimension Id").getInt();
+        emberDimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "emberDimensionId", 3, "Ember Dimension Id").getInt();
         
         islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandSize", 4, "Island Size, 4-6 Recommended").getInt();
         islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandScarcity", 100, "Island Scarcity, 100 Default").getInt();
