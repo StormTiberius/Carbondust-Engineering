@@ -5,7 +5,7 @@
 
 package cde.world.tropics;
 
-import cde.TropicsCore;
+import cde.WorldCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -27,7 +27,7 @@ public class WorldProviderTropics extends WorldProvider
     protected void registerWorldChunkManager()
     {
         worldChunkMgr = new WorldChunkManagerTropics(worldObj);
-        dimensionId = TropicsCore.getDimensionId();
+        dimensionId = WorldCore.getDimensionId();
     }
     
     @Override
@@ -39,8 +39,8 @@ public class WorldProviderTropics extends WorldProvider
     @Override
     public float calculateCelestialAngle(long par1, float par3)
     {
-        int var4 = (int)(par1 % (24000L * TropicsCore.getDayCycleDurationMultiplier()));
-        float var5 = ((float)var4 + par3) / (24000.0F * TropicsCore.getDayCycleDurationMultiplier()) - 0.25F;
+        int var4 = (int)(par1 % (24000L * WorldCore.getDayCycleDurationMultiplier()));
+        float var5 = ((float)var4 + par3) / (24000.0F * WorldCore.getDayCycleDurationMultiplier()) - 0.25F;
 
         if (var5 < 0.0F)
         {
@@ -62,7 +62,7 @@ public class WorldProviderTropics extends WorldProvider
     @Override
     public int getMoonPhase(long par1, float par3)
     {
-        return (int)(par1 / (24000L * TropicsCore.getDayCycleDurationMultiplier())) % 8;
+        return (int)(par1 / (24000L * WorldCore.getDayCycleDurationMultiplier())) % 8;
     }
     
     @SideOnly(Side.CLIENT)
@@ -106,11 +106,11 @@ public class WorldProviderTropics extends WorldProvider
                 {
                     if (worldInfo.isThundering())
                     {
-                        worldInfo.setThunderTime(worldObj.rand.nextInt(TropicsCore.getWeatherDuration(0)) + TropicsCore.getWeatherDuration(1));
+                        worldInfo.setThunderTime(worldObj.rand.nextInt(WorldCore.getWeatherDuration(0)) + WorldCore.getWeatherDuration(1));
                     }
                     else
                     {
-                        worldInfo.setThunderTime(worldObj.rand.nextInt(TropicsCore.getWeatherDuration(2)) + TropicsCore.getWeatherDuration(3));
+                        worldInfo.setThunderTime(worldObj.rand.nextInt(WorldCore.getWeatherDuration(2)) + WorldCore.getWeatherDuration(3));
                     }
                 }
                 else
@@ -130,11 +130,11 @@ public class WorldProviderTropics extends WorldProvider
                 {
                     if (worldInfo.isRaining())
                     {
-                        worldInfo.setRainTime(worldObj.rand.nextInt(TropicsCore.getWeatherDuration(4)) + TropicsCore.getWeatherDuration(5));
+                        worldInfo.setRainTime(worldObj.rand.nextInt(WorldCore.getWeatherDuration(4)) + WorldCore.getWeatherDuration(5));
                     }
                     else
                     {
-                        worldInfo.setRainTime(worldObj.rand.nextInt(TropicsCore.getWeatherDuration(6)) + TropicsCore.getWeatherDuration(7));
+                        worldInfo.setRainTime(worldObj.rand.nextInt(WorldCore.getWeatherDuration(6)) + WorldCore.getWeatherDuration(7));
                     }
                 }
                 else
@@ -202,8 +202,8 @@ public class WorldProviderTropics extends WorldProvider
 
             if(time != worldInfo.getWorldTime())
             {
-                long var2 = time + (24000L * TropicsCore.getDayCycleDurationMultiplier());
-                worldInfo.setWorldTime(var2 - var2 % (24000L * TropicsCore.getDayCycleDurationMultiplier()));
+                long var2 = time + (24000L * WorldCore.getDayCycleDurationMultiplier());
+                worldInfo.setWorldTime(var2 - var2 % (24000L * WorldCore.getDayCycleDurationMultiplier()));
             }
         }
         

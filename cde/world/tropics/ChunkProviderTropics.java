@@ -1,6 +1,6 @@
 package cde.world.tropics;
 
-import cde.TropicsCore;
+import cde.WorldCore;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -561,7 +561,7 @@ public class ChunkProviderTropics implements IChunkProvider
 
             if (var13 < 63 || this.rand.nextInt(10) == 0)
             {
-                (new WorldGenLakes(TropicsCore.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
+                (new WorldGenLakes(WorldCore.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
             }
         }
 
