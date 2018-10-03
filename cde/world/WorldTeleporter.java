@@ -37,6 +37,9 @@ public class WorldTeleporter extends Teleporter
     {
         if(par1Entity instanceof EntityPlayerMP)
         {
+            double xOffset = 0.5D;
+            double zOffset = 0.5D;
+            
             EntityPlayerMP player = (EntityPlayerMP)par1Entity;
             NBTTagCompound nbt = player.getEntityData();
             
@@ -50,13 +53,36 @@ public class WorldTeleporter extends Teleporter
 
                 if(nbt.hasKey(EMBER_LAST_X) && nbt.hasKey(EMBER_LAST_Y) && nbt.hasKey(EMBER_LAST_Z) && nbt.hasKey(EMBER_LAST_W) && nbt.hasKey(EMBER_LAST_P))
                 {
-                    player.setLocationAndAngles(nbt.getDouble(EMBER_LAST_X) + 0.5D, nbt.getDouble(EMBER_LAST_Y), nbt.getDouble(EMBER_LAST_Z) + 0.5D, nbt.getFloat(EMBER_LAST_W), nbt.getFloat(EMBER_LAST_P));
+                    double xPos = nbt.getDouble(EMBER_LAST_X);
+                    double zPos = nbt.getDouble(EMBER_LAST_Z);
+                    
+                    if(xPos < 0)
+                    {
+                        xOffset = -0.5D;
+                    }
+                    
+                    if(zPos < 0)
+                    {
+                        zOffset = -0.5D;
+                    }
+                    
+                    player.setLocationAndAngles(xPos + xOffset, nbt.getDouble(EMBER_LAST_Y), zPos + zOffset, nbt.getFloat(EMBER_LAST_W), nbt.getFloat(EMBER_LAST_P));
                 }
                 else
                 {
                     ChunkCoordinates ck = player.worldObj.provider.getEntrancePortalLocation();
                     
-                    player.setLocationAndAngles(ck.posX + 0.5D, ck.posY, ck.posZ + 0.5D, 0.0F, 0.0F);
+                    if(ck.posX < 0)
+                    {
+                        xOffset = -0.5D;
+                    }
+                    
+                    if(ck.posZ < 0)
+                    {
+                        zOffset = -0.5D;
+                    }
+                    
+                    player.setLocationAndAngles(ck.posX + xOffset, ck.posY, ck.posZ + zOffset, 0.0F, 0.0F);
                 }
             }
             else if(player.worldObj.provider.dimensionId == WorldCore.getTropicsDimensionId())
@@ -69,13 +95,36 @@ public class WorldTeleporter extends Teleporter
 
                 if(nbt.hasKey(TROPICS_LAST_X) && nbt.hasKey(TROPICS_LAST_Y) && nbt.hasKey(TROPICS_LAST_Z) && nbt.hasKey(TROPICS_LAST_W) && nbt.hasKey(TROPICS_LAST_P))
                 {
-                    player.setLocationAndAngles(nbt.getDouble(TROPICS_LAST_X) + 0.5D, nbt.getDouble(TROPICS_LAST_Y), nbt.getDouble(TROPICS_LAST_Z) + 0.5D, nbt.getFloat(TROPICS_LAST_W), nbt.getFloat(TROPICS_LAST_P));
+                    double xPos = nbt.getDouble(TROPICS_LAST_X);
+                    double zPos = nbt.getDouble(TROPICS_LAST_Z);
+                    
+                    if(xPos < 0)
+                    {
+                        xOffset = -0.5D;
+                    }
+                    
+                    if(zPos < 0)
+                    {
+                        zOffset = -0.5D;
+                    }
+                    
+                    player.setLocationAndAngles(nbt.getDouble(TROPICS_LAST_X) + xOffset, nbt.getDouble(TROPICS_LAST_Y), nbt.getDouble(TROPICS_LAST_Z) + zOffset, nbt.getFloat(TROPICS_LAST_W), nbt.getFloat(TROPICS_LAST_P));
                 }
                 else
                 {
                     ChunkCoordinates ck = player.worldObj.provider.getEntrancePortalLocation();
+                                        
+                    if(ck.posX < 0)
+                    {
+                        xOffset = -0.5D;
+                    }
                     
-                    player.setLocationAndAngles(ck.posX + 0.5D, ck.posY, ck.posZ + 0.5D, 0.0F, 0.0F);
+                    if(ck.posZ < 0)
+                    {
+                        zOffset = -0.5D;
+                    }
+                    
+                    player.setLocationAndAngles(ck.posX + xOffset, ck.posY, ck.posZ + zOffset, 0.0F, 0.0F);
                 }
             }
         }
