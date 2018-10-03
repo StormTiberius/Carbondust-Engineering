@@ -11,9 +11,9 @@ import net.minecraft.world.WorldSavedData;
 
 public class LocationData extends WorldSavedData
 {
-    public static final int SPAWN_X = 264;
-    public static final int SPAWN_Y = 128;
-    public static final int SPAWN_Z = 264;
+    public static final int SPAWN_X = 0;
+    public static final int SPAWN_Y = 255;
+    public static final int SPAWN_Z = 0;
     
     private final ChunkCoordinates c;
     
