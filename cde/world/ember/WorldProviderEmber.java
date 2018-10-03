@@ -8,10 +8,10 @@ package cde.world.ember;
 import cde.WorldCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderEmber extends WorldProvider
 {
@@ -59,40 +59,25 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     public boolean canCoordinateBeSpawn(int par1, int par2)
     {
-        return true;
+        return false;
     }
     
     @Override
-    public void setSpawnPoint(int x, int y, int z)
+    public boolean canRespawnHere()
     {
-        ChunkCoordinates cc = ld.getSpawnLocation();
-        worldObj.getWorldInfo().setSpawnPosition(cc.posX, cc.posY, cc.posZ);
-    }
-    
-    @Override
-    public ChunkCoordinates getSpawnPoint()
-    {
-        ChunkCoordinates cc = ld.getSpawnLocation();
-        WorldInfo info = worldObj.getWorldInfo();
-        
-        if(cc.posX != info.getSpawnX() || cc.posY != info.getSpawnY() || cc.posZ != info.getSpawnZ())
-        {
-            info.setSpawnPosition(cc.posX, cc.posY, cc.posZ);
-        }
-        
-        return cc;
-    }
-    
-    @Override
-    public ChunkCoordinates getRandomizedSpawnPoint()
-    {
-        return getSpawnPoint();
+        return false;
     }
     
     @Override
     public ChunkCoordinates getEntrancePortalLocation()
     {
-        return getSpawnPoint();
+        return ld.getSpawnLocation();
+    }
+    
+    @Override
+    public int getRespawnDimension(EntityPlayerMP player)
+    {
+        return WorldCore.getTropicsDimensionId();
     }
     
     @Override
@@ -118,5 +103,17 @@ public class WorldProviderEmber extends WorldProvider
     public void setLocationData(LocationData ld)
     {
         this.ld = ld;
+        
+        ChunkCoordinates ck = ld.getSpawnLocation();
+        
+        for(Object o : worldObj.playerEntities)
+        {
+            if(o instanceof EntityPlayerMP)
+            {
+                EntityPlayerMP player = (EntityPlayerMP)o;
+                
+                player.setLocationAndAngles(ck.posX + 0.5D, ck.posY, ck.posZ + 0.5D, 0.0F, 0.0F);
+            }
+        }
     }
 }
