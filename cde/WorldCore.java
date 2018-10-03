@@ -105,16 +105,8 @@ public class WorldCore
     {   
         if(tropicsDimension)
         {
-            if(tropicsDimensionId == 0 || tropicsDimensionId == -1 || tropicsDimensionId == 1)
-            {
-                DimensionManager.unregisterProviderType(tropicsDimensionId);
-                DimensionManager.registerProviderType(tropicsDimensionId, WorldProviderTropics.class, true);
-            }
-            else
-            {
-                DimensionManager.registerProviderType(tropicsDimensionId, WorldProviderTropics.class, true);
-                DimensionManager.registerDimension(tropicsDimensionId, tropicsDimensionId);
-            }
+            DimensionManager.registerProviderType(tropicsDimensionId, WorldProviderTropics.class, true);
+            DimensionManager.registerDimension(tropicsDimensionId, tropicsDimensionId);
                     
             BiomeManager.addStrongholdBiome(island);
             BiomeManager.addStrongholdBiome(beach);
