@@ -9,6 +9,7 @@ import cde.WorldCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
@@ -63,6 +64,12 @@ public class WorldProviderTropics extends WorldProvider
     public int getMoonPhase(long par1, float par3)
     {
         return (int)(par1 / (24000L * WorldCore.getDayCycleDurationMultiplier())) % 8;
+    }
+    
+    @Override
+    public ChunkCoordinates getEntrancePortalLocation()
+    {
+        return getSpawnPoint();
     }
     
     @SideOnly(Side.CLIENT)
