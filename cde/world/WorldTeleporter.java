@@ -15,6 +15,18 @@ import net.minecraft.world.WorldServer;
 
 public class WorldTeleporter extends Teleporter
 {
+    private final String TROPICS_LAST_X = "tropicsLastX";
+    private final String TROPICS_LAST_Y = "tropicsLastY";
+    private final String TROPICS_LAST_Z = "tropicsLastZ";
+    private final String TROPICS_LAST_W = "tropicsLastW";
+    private final String TROPICS_LAST_P = "tropicsLastP";
+    
+    private final String EMBER_LAST_X = "emberLastX";
+    private final String EMBER_LAST_Y = "emberLastY";
+    private final String EMBER_LAST_Z = "emberLastZ";
+    private final String EMBER_LAST_W = "emberLastW";
+    private final String EMBER_LAST_P = "emberLastP";
+    
     public WorldTeleporter(WorldServer ws)
     {
         super(ws);
@@ -30,40 +42,40 @@ public class WorldTeleporter extends Teleporter
             
             if(player.worldObj.provider.dimensionId == WorldCore.getEmberDimensionId())
             {
-                nbt.setDouble("tropicsLastX", player.posX);
-                nbt.setDouble("tropicsLastY", player.posY);
-                nbt.setDouble("tropicsLastZ", player.posZ);
-                nbt.setFloat("tropicsLastYaw", player.rotationYaw);
-                nbt.setFloat("tropicsLastPitch", player.rotationPitch);
+                nbt.setDouble(TROPICS_LAST_X, player.posX);
+                nbt.setDouble(TROPICS_LAST_Y, player.posY);
+                nbt.setDouble(TROPICS_LAST_Z, player.posZ);
+                nbt.setFloat(TROPICS_LAST_W, player.rotationYaw);
+                nbt.setFloat(TROPICS_LAST_P, player.rotationPitch);
 
-                if(nbt.hasKey("emberLastX") && nbt.hasKey("emberLastY") && nbt.hasKey("emberLastZ") && nbt.hasKey("emberLastYaw") && nbt.hasKey("emberLastPitch"))
+                if(nbt.hasKey(EMBER_LAST_X) && nbt.hasKey(EMBER_LAST_Y) && nbt.hasKey(EMBER_LAST_Z) && nbt.hasKey(EMBER_LAST_W) && nbt.hasKey(EMBER_LAST_P))
                 {
-                    player.setLocationAndAngles(nbt.getDouble("emberLastX"), nbt.getDouble("emberLastY"), nbt.getDouble("emberLastZ"), nbt.getFloat("emberLastYaw"), nbt.getFloat("emberLastPitch"));
+                    player.setLocationAndAngles(nbt.getDouble(EMBER_LAST_X) + 0.5D, nbt.getDouble(EMBER_LAST_Y), nbt.getDouble(EMBER_LAST_Z) + 0.5D, nbt.getFloat(EMBER_LAST_W), nbt.getFloat(EMBER_LAST_P));
                 }
                 else
                 {
-                    ChunkCoordinates ck = player.worldObj.provider.getSpawnPoint();
+                    ChunkCoordinates ck = player.worldObj.provider.getEntrancePortalLocation();
                     
-                    player.setLocationAndAngles(ck.posX, ck.posY, ck.posZ, 0.0F, 0.0F);
+                    player.setLocationAndAngles(ck.posX + 0.5D, ck.posY, ck.posZ + 0.5D, 0.0F, 0.0F);
                 }
             }
             else if(player.worldObj.provider.dimensionId == WorldCore.getTropicsDimensionId())
             {
-                nbt.setDouble("emberLastX", player.posX);
-                nbt.setDouble("emberLastY", player.posY);
-                nbt.setDouble("emberLastZ", player.posZ);
-                nbt.setFloat("emberLastYaw", player.rotationYaw);
-                nbt.setFloat("emberLastPitch", player.rotationPitch);
+                nbt.setDouble(EMBER_LAST_X, player.posX);
+                nbt.setDouble(EMBER_LAST_Y, player.posY);
+                nbt.setDouble(EMBER_LAST_Z, player.posZ);
+                nbt.setFloat(EMBER_LAST_W, player.rotationYaw);
+                nbt.setFloat(EMBER_LAST_P, player.rotationPitch);
 
-                if(nbt.hasKey("tropicsLastX") && nbt.hasKey("tropicsLastY") && nbt.hasKey("tropicsLastZ") && nbt.hasKey("tropicsLastYaw") && nbt.hasKey("tropicsLastPitch"))
+                if(nbt.hasKey(TROPICS_LAST_X) && nbt.hasKey(TROPICS_LAST_Y) && nbt.hasKey(TROPICS_LAST_Z) && nbt.hasKey(TROPICS_LAST_W) && nbt.hasKey(TROPICS_LAST_P))
                 {
-                    player.setLocationAndAngles(nbt.getDouble("tropicsLastX"), nbt.getDouble("tropicsLastY"), nbt.getDouble("tropicsLastZ"), nbt.getFloat("tropicsLastYaw"), nbt.getFloat("tropicsLastPitch"));
+                    player.setLocationAndAngles(nbt.getDouble(TROPICS_LAST_X) + 0.5D, nbt.getDouble(TROPICS_LAST_Y), nbt.getDouble(TROPICS_LAST_Z) + 0.5D, nbt.getFloat(TROPICS_LAST_W), nbt.getFloat(TROPICS_LAST_P));
                 }
                 else
                 {
-                    ChunkCoordinates ck = player.worldObj.provider.getSpawnPoint();
+                    ChunkCoordinates ck = player.worldObj.provider.getEntrancePortalLocation();
                     
-                    player.setLocationAndAngles(ck.posX, ck.posY, ck.posZ, 0.0F, 0.0F);
+                    player.setLocationAndAngles(ck.posX + 0.5D, ck.posY, ck.posZ + 0.5D, 0.0F, 0.0F);
                 }
             }
         }
