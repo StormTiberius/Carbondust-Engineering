@@ -24,6 +24,7 @@ public class BiomeGenTropicsIsland extends BiomeGenTropics
         flag = true;
         
         spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
+        spawnableWaterCreatureList.clear();
         
         theBiomeDecorator.treesPerChunk = 0;
         theBiomeDecorator.reedsPerChunk = 50;

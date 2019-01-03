@@ -20,6 +20,7 @@ public class BiomeGenTropicsBeach extends BiomeGenTropics
         
         spawnableCreatureList.clear();
         spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
+        spawnableWaterCreatureList.clear();
         
         theBiomeDecorator.treesPerChunk = 50;
         theBiomeDecorator.reedsPerChunk = 50;
