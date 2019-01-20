@@ -41,28 +41,22 @@ public class BiomeDecoratorEmber extends BiomeDecorator
         int var2,var3,var4,var7;
 
         boolean doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, SHROOM);
-        if(doGen && randomGenerator.nextInt(4) == 0)
+        if(doGen && randomGenerator.nextInt(2) == 0)
         {
-            for(var2 = 0; var2 < 2; ++var2)
-            {    
-                var2 = chunk_X + randomGenerator.nextInt(16) + 8;
-                var3 = randomGenerator.nextInt(256);
-                var4 = chunk_Z + randomGenerator.nextInt(16) + 8;
-                
-                mushroomBrownGen.generate(currentWorld, randomGenerator, var2, var3, var4);
-            }
+            var2 = chunk_X + randomGenerator.nextInt(16) + 8;
+            var3 = randomGenerator.nextInt(256);
+            var4 = chunk_Z + randomGenerator.nextInt(16) + 8;
+
+            mushroomBrownGen.generate(currentWorld, randomGenerator, var2, var3, var4);
         }
 
-        if(doGen && randomGenerator.nextInt(8) == 0)
+        if(doGen && randomGenerator.nextInt(4) == 0)
         {
-            for(var2 = 0; var2 < 2; ++var2)
-            {
-                var2 = chunk_X + randomGenerator.nextInt(16) + 8;
-                var3 = randomGenerator.nextInt(256);
-                var4 = chunk_Z + randomGenerator.nextInt(16) + 8;
-                
-                mushroomRedGen.generate(currentWorld, randomGenerator, var2, var3, var4);
-            }
+            var2 = chunk_X + randomGenerator.nextInt(16) + 8;
+            var3 = randomGenerator.nextInt(256);
+            var4 = chunk_Z + randomGenerator.nextInt(16) + 8;
+
+            mushroomRedGen.generate(currentWorld, randomGenerator, var2, var3, var4);
         }
 
         doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, LAKE);
