@@ -28,6 +28,13 @@ public class WorldProviderEmber extends WorldProvider
     {
         worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.5F, 0.0F);
         hasNoSky = true;
+        
+        LocationData data = (LocationData)worldObj.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+        
+        if(data != null)
+        {
+            ld = data;
+        }
     }
     
     @Override
