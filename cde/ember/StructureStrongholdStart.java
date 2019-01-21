@@ -1,6 +1,7 @@
 package cde.ember;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.ComponentStrongholdStairs2;
@@ -27,5 +28,27 @@ class StructureStrongholdStart extends StructureStart
 
         this.updateBoundingBox();
         this.markAvailableHeight(par1World, par2Random, 10);
+    }
+    
+    @Override
+    protected void markAvailableHeight(World par1World, Random par2Random, int par3)
+    {
+        int var4 = 127 - par3;
+        int var5 = this.boundingBox.getYSize() + 1;
+
+        if (var5 < var4)
+        {
+            var5 += par2Random.nextInt(var4 - var5);
+        }
+
+        int var6 = var5 - this.boundingBox.maxY;
+        this.boundingBox.offset(0, var6, 0);
+        Iterator var7 = this.components.iterator();
+
+        while (var7.hasNext())
+        {
+            StructureComponent var8 = (StructureComponent)var7.next();
+            var8.getBoundingBox().offset(0, var6, 0);
+        }
     }
 }
