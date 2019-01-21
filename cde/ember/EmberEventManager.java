@@ -22,15 +22,12 @@ public class EmberEventManager
     {
         ALLOWED_BLOCK_IDS = new int[]
         {    
-            Block.stone.blockID, 
-            Block.cobblestone.blockID, 
-            Block.cobblestoneMossy.blockID, 
-            Block.dirt.blockID, 
-            Block.grass.blockID, 
-            Block.sand.blockID, 
-            Block.gravel.blockID, 
+            Block.stone.blockID,
+            Block.cobblestone.blockID,
+            Block.cobblestoneMossy.blockID,
+            Block.dirt.blockID,
+            Block.gravel.blockID,
             Block.obsidian.blockID,
-            Block.blockSnow.blockID,
             Block.bedrock.blockID
         };
         
