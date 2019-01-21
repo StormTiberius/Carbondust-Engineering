@@ -198,7 +198,7 @@ public class WorldGenDungeons extends WorldGenerator
                 
                 animal.setPosition(par3, par4, par5);
                 
-                if(par1World.checkIfAABBIsClear(animal.boundingBox) && par1World.getCollidingBoundingBoxes(animal, animal.boundingBox).isEmpty())
+                if(par1World.checkIfAABBIsClear(animal.boundingBox) && par1World.getCollidingBoundingBoxes(animal, animal.boundingBox).isEmpty() && !par1World.isAnyLiquid(animal.boundingBox))
                 {
                     par1World.spawnEntityInWorld(animal);
                 }
