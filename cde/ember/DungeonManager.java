@@ -23,11 +23,11 @@ public class DungeonManager
         
         if(cc.posX == LocationData.SPAWN_X && cc.posY == LocationData.SPAWN_Y && cc.posZ == LocationData.SPAWN_Z)
         {
-            (new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID)).generate(world, random, x, y, z);
+            (new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID)).generate(world, random, x, random.nextInt(128), z);
         }
         else if(BB.isVecInside(Vec3.createVectorHelper(x, y, z)) && !BB.isVecInside(Vec3.createVectorHelper(cc.posX, cc.posY, cc.posZ)))
         {
-            (new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID)).generate(world, random, x, y, z);
+            (new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID)).generate(world, random, x, random.nextInt(128), z);
         }
         else
         {
