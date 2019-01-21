@@ -112,9 +112,9 @@ public class MapGenCaves extends MapGenBase
                         var57 = 1;
                     }
 
-                    if (var38 > 120)
+                    if (var38 > 248)
                     {
-                        var38 = 120;
+                        var38 = 248;
                     }
 
                     if (var56 < 0)
@@ -137,9 +137,9 @@ public class MapGenCaves extends MapGenBase
                         {
                             for (int var44 = var38 + 1; !var58 && var44 >= var57 - 1; --var44)
                             {
-                                var45 = (var42 * 16 + var43) * 128 + var44;
+                                var45 = (var42 * 16 + var43) * 256 + var44;
 
-                                if (var44 >= 0 && var44 < 128)
+                                if (var44 >= 0 && var44 < 256)
                                 {
                                     if (par5ArrayOfByte[var45] == Block.waterMoving.blockID || par5ArrayOfByte[var45] == Block.waterStill.blockID)
                                     {
@@ -164,7 +164,7 @@ public class MapGenCaves extends MapGenBase
                             for (var45 = var56; var45 < var40; ++var45)
                             {
                                 double var46 = ((double)(var45 + par4 * 16) + 0.5D - par10) / var29;
-                                int var48 = (var42 * 16 + var45) * 128 + var38;
+                                int var48 = (var42 * 16 + var45) * 256 + var38;
                                 boolean var49 = false;
 
                                 if (var59 * var59 + var46 * var46 < 1.0D)
@@ -184,7 +184,7 @@ public class MapGenCaves extends MapGenBase
 
                                             if (var53 == Block.stone.blockID || var53 == Block.dirt.blockID || var53 == Block.grass.blockID)
                                             {
-                                                if (var50 < 10)
+                                                if (var50 < 20)
                                                 {
                                                     par5ArrayOfByte[var48] = (byte)Block.lavaMoving.blockID;
                                                 }
@@ -231,7 +231,7 @@ public class MapGenCaves extends MapGenBase
         for (int var8 = 0; var8 < var7; ++var8)
         {
             double var9 = (double)(par2 * 16 + this.rand.nextInt(16));
-            double var11 = (double)this.rand.nextInt(this.rand.nextInt(120) + 8);
+            double var11 = (double)this.rand.nextInt(this.rand.nextInt(248) + 8);
             double var13 = (double)(par3 * 16 + this.rand.nextInt(16));
             int var15 = 1;
 
