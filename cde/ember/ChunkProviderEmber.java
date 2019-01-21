@@ -1,5 +1,6 @@
 package cde.ember;
 
+import cde.EmberCore;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -14,14 +15,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.feature.MapGenScatteredFeature;
-import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
-import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
@@ -29,6 +25,7 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import net.minecraftforge.common.*;
 import net.minecraftforge.event.Event.*;
 import net.minecraftforge.event.terraingen.*;
+import org.bouncycastle.util.Arrays;
 
 public class ChunkProviderEmber implements IChunkProvider
 {
@@ -218,91 +215,17 @@ public class ChunkProviderEmber implements IChunkProvider
      */
     public void replaceBlocksForBiome(int par1, int par2, byte[] par3ArrayOfByte, BiomeGenBase[] par4ArrayOfBiomeGenBase)
     {
-        ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, par1, par2, par3ArrayOfByte, par4ArrayOfBiomeGenBase);
-        MinecraftForge.EVENT_BUS.post(event);
-        if (event.getResult() == Result.DENY) return;
-
-        byte var5 = 63;
-        double var6 = 0.03125D;
-        this.stoneNoise = this.noiseGen4.generateNoiseOctaves(this.stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
-
-        for (int var8 = 0; var8 < 16; ++var8)
+        for(int var8 = 0; var8 < 16; ++var8)
         {
-            for (int var9 = 0; var9 < 16; ++var9)
+            for(int var9 = 0; var9 < 16; ++var9)
             {
-                BiomeGenBase var10 = par4ArrayOfBiomeGenBase[var9 + var8 * 16];
-                float var11 = var10.getFloatTemperature();
-                int var12 = (int)(this.stoneNoise[var8 + var9 * 16] / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
-                int var13 = -1;
-                byte var14 = var10.topBlock;
-                byte var15 = var10.fillerBlock;
-
-                for (int var16 = 127; var16 >= 0; --var16)
+                for(int var16 = 255; var16 >= 0; --var16)
                 {
-                    int var17 = (var9 * 16 + var8) * 128 + var16;
+                    int var17 = (var9 * 16 + var8) * 256 + var16;
 
-                    if (var16 <= 0 + this.rand.nextInt(5))
+                    if(var16 == 0 || var16 == 255)
                     {
                         par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
-                    }
-                    else
-                    {
-                        byte var18 = par3ArrayOfByte[var17];
-
-                        if (var18 == 0)
-                        {
-                            var13 = -1;
-                        }
-                        else if (var18 == Block.stone.blockID)
-                        {
-                            if (var13 == -1)
-                            {
-                                if (var12 <= 0)
-                                {
-                                    var14 = 0;
-                                    var15 = (byte)Block.stone.blockID;
-                                }
-                                else if (var16 >= var5 - 4 && var16 <= var5 + 1)
-                                {
-                                    var14 = var10.topBlock;
-                                    var15 = var10.fillerBlock;
-                                }
-
-                                if (var16 < var5 && var14 == 0)
-                                {
-                                    if (var11 < 0.15F)
-                                    {
-                                        var14 = (byte)Block.ice.blockID;
-                                    }
-                                    else
-                                    {
-                                        var14 = (byte)Block.waterStill.blockID;
-                                    }
-                                }
-
-                                var13 = var12;
-
-                                if (var16 >= var5 - 1)
-                                {
-                                    par3ArrayOfByte[var17] = var14;
-                                }
-                                else
-                                {
-                                    par3ArrayOfByte[var17] = var15;
-                                }
-                            }
-                            else if (var13 > 0)
-                            {
-                                --var13;
-                                par3ArrayOfByte[var17] = var15;
-
-                                if (var13 == 0 && var15 == Block.sand.blockID)
-                                {
-                                    var13 = this.rand.nextInt(4);
-                                    var15 = (byte)Block.sandStone.blockID;
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -324,10 +247,17 @@ public class ChunkProviderEmber implements IChunkProvider
     public Chunk provideChunk(int par1, int par2)
     {
         this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
-        byte[] var3 = new byte[32768];
-        this.generateTerrain(par1, par2, var3);
+        
+        byte[] var3 = new byte[65536];
+        short[] tData = new short[65536];
+        byte[] tMeta = new byte[65536];
+        
+        Arrays.fill(var3, (byte)Block.stone.blockID);
+        Arrays.fill(tMeta, (byte)0);
+        
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
         this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
+        
         this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
         this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
 
@@ -339,7 +269,25 @@ public class ChunkProviderEmber implements IChunkProvider
             this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, var3);
         }
 
-        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
+        // --
+        for (int x = 0; x < 16; ++x)
+        {
+            for (int z = 0; z < 16; ++z)
+            {
+                for (int y = 255; y >= 0; --y)
+                {
+                    int var17 = (z * 16 + x) * 256 + y;
+        
+                    int index = y << 8 | x << 4 | z;
+        
+                    tData[index] = var3[var17];
+                }
+            }
+        }
+        // --
+        
+        Chunk var4 = new Chunk(this.worldObj, tData, tMeta, par1, par2);
+        
         byte[] var5 = var4.getBiomeArray();
 
         for (int var6 = 0; var6 < var5.length; ++var6)
@@ -543,25 +491,23 @@ public class ChunkProviderEmber implements IChunkProvider
         int var13;
         int var14;
 
-        if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAKE) && 
-                !var11 && this.rand.nextInt(4) == 0)
+        if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAKE) && !var11 && this.rand.nextInt(2) == 0)
         {
             var12 = var4 + this.rand.nextInt(16) + 8;
-            var13 = this.rand.nextInt(128);
+            var13 = this.rand.nextInt(240);
             var14 = var5 + this.rand.nextInt(16) + 8;
-            (new WorldGenLakes(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
+            (new WorldGenLakes(Block.blockClay.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
         }
 
-        if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAVA) &&
-                !var11 && this.rand.nextInt(8) == 0)
+        if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAVA) && !var11 && this.rand.nextInt(4) == 0)
         {
             var12 = var4 + this.rand.nextInt(16) + 8;
-            var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
+            var13 = this.rand.nextInt(this.rand.nextInt(232) + 8);
             var14 = var5 + this.rand.nextInt(16) + 8;
 
-            if (var13 < 63 || this.rand.nextInt(10) == 0)
+            if (var13 < 127 || this.rand.nextInt(10) == 0)
             {
-                (new WorldGenLakes(Block.lavaStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
+                (new WorldGenLakes(EmberCore.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
             }
         }
 
@@ -569,13 +515,10 @@ public class ChunkProviderEmber implements IChunkProvider
         for (var12 = 0; doGen && var12 < 8; ++var12)
         {
             var13 = var4 + this.rand.nextInt(16) + 8;
-            var14 = this.rand.nextInt(128);
+            var14 = this.rand.nextInt(240);
             int var15 = var5 + this.rand.nextInt(16) + 8;
 
-            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
-            {
-                ;
-            }
+            DungeonManager.generate(this.worldObj, this.rand, var13, var14, var15);
         }
 
         var6.decorate(this.worldObj, this.rand, var4, var5);
