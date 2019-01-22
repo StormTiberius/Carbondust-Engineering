@@ -14,4 +14,10 @@ public class EntitySquidEmber extends EntitySquid
     {
         super(world);
     }
+    
+    @Override
+    public boolean getCanSpawnHere()
+    {
+        return this.worldObj.checkIfAABBIsClear(this.boundingBox);
+    }
 }
