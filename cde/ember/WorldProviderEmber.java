@@ -26,7 +26,7 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     public void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.5F, 0.0F);
+        worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.8F, 0.4F);
         hasNoSky = true;
         
         LocationData data = (LocationData)worldObj.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
