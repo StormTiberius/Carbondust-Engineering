@@ -24,7 +24,7 @@ public class WorldProviderEmber extends WorldProvider
     }
     
     @Override
-    public void registerWorldChunkManager()
+    protected void registerWorldChunkManager()
     {
         worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.8F, 0.4F);
         hasNoSky = true;
