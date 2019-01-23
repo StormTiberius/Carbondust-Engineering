@@ -148,7 +148,7 @@ public class Defaults
         new int[]{1,6,1,10,16},
         new int[]{1,6,1,16,32},
         new int[]{1,4,7,12,62},
-        new int[]{1,6,1,64,128},
+        new int[]{1,6,1,0,64},
         new int[]{1,7,2,0,48},
         new int[]{1,7,2,0,48},
         new int[]{1,7,2,0,48}
