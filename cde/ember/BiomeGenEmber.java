@@ -8,6 +8,12 @@ package cde.ember;
 import cde.EmberCore;
 import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.SpawnListEntry;
@@ -21,11 +27,29 @@ public class BiomeGenEmber extends BiomeGenBase
         theBiomeDecorator = new BiomeDecoratorEmber(this);
         
         spawnableCreatureList.clear();
+        spawnableMonsterList.clear();
         spawnableWaterCreatureList.clear();
         field_82914_M.clear();
         
-        spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidEmber.class, 10, 4, 4));
-        field_82914_M.add(new SpawnListEntry(EntityBatEmber.class, 10, 8, 8));
+        if(EmberCore.getSpawnHostileCreatures())
+        {
+            spawnableMonsterList.add(new SpawnListEntry(EntitySpider.class, 10, 4, 4));
+            spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 10, 4, 4));
+            spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 10, 4, 4));
+            spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 10, 4, 4));
+            spawnableMonsterList.add(new SpawnListEntry(EntitySlime.class, 10, 4, 4));
+            spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 4));
+        }
+        
+        if(EmberCore.getSpawnAquaticCreatures())
+        {
+            spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidEmber.class, 10, 4, 4));
+        }
+        
+        if(EmberCore.getSpawnAmbientCreatures())
+        {
+            field_82914_M.add(new SpawnListEntry(EntityBatEmber.class, 10, 8, 8));
+        }
     }
     
     @Override
