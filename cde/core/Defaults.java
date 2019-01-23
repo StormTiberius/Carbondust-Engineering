@@ -123,21 +123,23 @@ public class Defaults
     
     public static final int TEXTURE_MATERIAL_FUEL_COKE = 96;
     
-    // --
-    
+    // BLOCK ID
     public static final int BLOCK_ORE_ID = 180;
     public static final int BLOCK_STORAGE_ID = 181;
     public static final int BLOCK_MACHINERY_ALPHA_ID = 182;
     public static final int BLOCK_GRATE_ID = 188;
     public static final int BLOCK_SPEAKER_ID = 189;
     
+    // ITEM ID
     public static final int ITEM_MATERIALS_ID = 500;
     public static final int ITEM_GOGGLES_ID = 501;
     
+    // FUEL VALUES
     public static final int PEAT_FUEL_VALUE = 2000;
     public static final int BITUMINOUS_PEAT_FUEL_VALUE = 4200;
     public static final int COKE_FUEL_VALUE = 6400;
     
+    // WORLD GEN DEFAULTS
     public static final int[][] ORE_GEN_DEFAULTS =
     {    
         new int[]{1,10,15,10,70},
