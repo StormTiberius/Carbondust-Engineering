@@ -518,7 +518,7 @@ public class ChunkProviderEmber implements IChunkProvider
             var14 = this.rand.nextInt(240);
             int var15 = var5 + this.rand.nextInt(16) + 8;
 
-            DungeonManager.generate(this.worldObj, this.rand, var13, var14, var15);
+            DungeonManager.generate(this.worldObj, this.rand, var13, var14, var15, mapFeaturesEnabled);
         }
 
         var6.decorate(this.worldObj, this.rand, var4, var5);
