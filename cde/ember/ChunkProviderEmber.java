@@ -1,6 +1,7 @@
 package cde.ember;
 
 import cde.EmberCore;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -25,7 +26,6 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import net.minecraftforge.common.*;
 import net.minecraftforge.event.Event.*;
 import net.minecraftforge.event.terraingen.*;
-import org.bouncycastle.util.Arrays;
 
 public class ChunkProviderEmber implements IChunkProvider
 {
