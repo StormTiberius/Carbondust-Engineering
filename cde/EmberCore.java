@@ -70,8 +70,8 @@ public class EmberCore
             DimensionManager.unregisterProviderType(0);
             DimensionManager.registerProviderType(0, WorldProviderEmber.class, true);
         
-            EntityRegistry.registerModEntity(EntityBatEmber.class, "EmberBat", 0, this, 50, 1, true);
-            EntityRegistry.registerModEntity(EntitySquidEmber.class, "EmberSquid", 1, this, 50, 1, true);
+            EntityRegistry.registerModEntity(EntityBatEmber.class, "EmberBat", 0, this, 80, 3, false);
+            EntityRegistry.registerModEntity(EntitySquidEmber.class, "EmberSquid", 1, this, 64, 3, true);
             
             MinecraftForge.EVENT_BUS.register(new EmberEventManager(mobSpawnRules));
         }
