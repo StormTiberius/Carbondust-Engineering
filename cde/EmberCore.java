@@ -118,7 +118,7 @@ public class EmberCore
         return spawnAquaticCreatures;
     }
     
-        public static boolean getSpawnAmbientCreatures()
+    public static boolean getSpawnAmbientCreatures()
     {
         return spawnAmbientCreatures;
     }
