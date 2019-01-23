@@ -37,7 +37,7 @@ import net.minecraftforge.liquids.LiquidStack;
 public class EmberCore
 {
     private static Configuration cfg;
-    private static boolean enabled,mobSpawnRules;
+    private static boolean enabled,mobSpawnRules,spawnHostileCreatures,spawnAquaticCreatures,spawnAmbientCreatures;
     private static int biomeId,liquidId;
     
     public static final String EMBER_SPAWN_LOCATION_KEYWORD = "EmberSpawnLocation";
@@ -50,7 +50,12 @@ public class EmberCore
         cfg.load();
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Ember").getBoolean(false);
+        
         mobSpawnRules = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
+        
+        spawnHostileCreatures = cfg.get(Configuration.CATEGORY_GENERAL, "spawnHostileCreatures", true, "Spawn Hostile Creatures").getBoolean(true);
+        spawnAquaticCreatures = cfg.get(Configuration.CATEGORY_GENERAL, "spawnAquaticCreatures", true, "Spawn Aquatic Creatures").getBoolean(true);
+        spawnAmbientCreatures = cfg.get(Configuration.CATEGORY_GENERAL, "spawnAmbientCreatures", true, "Spawn Ambient Creatures").getBoolean(true);
         
         biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 23, "Ember Biome Id").getInt();
         
@@ -101,5 +106,20 @@ public class EmberCore
     public static int getLiquidId()
     {
         return liquidId;
+    }
+    
+    public static boolean getSpawnHostileCreatures()
+    {
+        return spawnHostileCreatures;
+    }
+    
+    public static boolean getSpawnAquaticCreatures()
+    {
+        return spawnAquaticCreatures;
+    }
+    
+        public static boolean getSpawnAmbientCreatures()
+    {
+        return spawnAmbientCreatures;
     }
 }
