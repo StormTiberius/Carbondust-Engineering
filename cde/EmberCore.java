@@ -8,6 +8,8 @@ package cde;
 import cde.core.Version;
 import cde.ember.BiomeGenEmber;
 import cde.ember.EmberEventManager;
+import cde.ember.EntityBatEmber;
+import cde.ember.EntitySquidEmber;
 import cde.ember.WorldProviderEmber;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -19,6 +21,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -36,8 +39,9 @@ public class EmberCore
     private static Configuration cfg;
     private static boolean enabled,mobSpawnRules;
     private static int biomeId,liquidId;
-    public static BiomeGenBase ember;
+    
     public static final String EMBER_SPAWN_LOCATION_KEYWORD = "EmberSpawnLocation";
+    public static BiomeGenBase ember;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -54,7 +58,7 @@ public class EmberCore
         
         if(enabled)
         {
-            ember = (new BiomeGenEmber(biomeId)).setColor(112).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.5F, 0.0F);
+            ember = (new BiomeGenEmber(biomeId)).setColor(16440917).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.8F, 0.4F);
         }
     }
 
@@ -66,7 +70,8 @@ public class EmberCore
             DimensionManager.unregisterProviderType(0);
             DimensionManager.registerProviderType(0, WorldProviderEmber.class, true);
         
-            // GameRegistry.registerWorldGenerator(new WorldGenOil(dimensionId));
+            EntityRegistry.registerModEntity(EntityBatEmber.class, "EmberBat", 0, this, 50, 1, true);
+            EntityRegistry.registerModEntity(EntitySquidEmber.class, "EmberSquid", 1, this, 50, 1, true);
             
             MinecraftForge.EVENT_BUS.register(new EmberEventManager(mobSpawnRules));
         }
