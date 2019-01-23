@@ -27,7 +27,7 @@ public class EntityEventManager
     @ForgeSubscribe
     public void eem(LivingFallEvent event)
     {
-        if(FLAGS[14] && (event.entity instanceof EntityPlayer || event.entity instanceof EntityPlayerMP))
+        if(FLAGS[14] && event.entity instanceof EntityPlayerMP)
         {
             event.distance *= 0.3F;
         }
