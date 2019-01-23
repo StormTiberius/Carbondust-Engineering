@@ -139,7 +139,7 @@ public class Defaults
     public static final int BITUMINOUS_PEAT_FUEL_VALUE = 4200;
     public static final int COKE_FUEL_VALUE = 6400;
     
-    // WORLD GEN DEFAULTS
+    // ORE GEN DEFAULTS
     public static final int[][] ORE_GEN_DEFAULTS =
     {    
         new int[]{1,10,15,10,70},
