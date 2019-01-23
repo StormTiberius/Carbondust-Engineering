@@ -17,7 +17,7 @@ public class DungeonManager
 {
     private static final AxisAlignedBB BB = AxisAlignedBB.getBoundingBox(192, 0, 192, 336, 255, 336);
     
-    public static void generate(World world, Random random, int x, int y, int z)
+    public static void generate(World world, Random random, int x, int y, int z, boolean mapFeaturesEnabled)
     {
         ChunkCoordinates cc = world.provider.getSpawnPoint();
         
@@ -29,7 +29,7 @@ public class DungeonManager
         {
             (new WorldGenDungeons(ChestGenHooks.BONUS_CHEST, Block.grass.blockID, Block.cobblestone.blockID)).generate(world, random, x, random.nextInt(128), z);
         }
-        else
+        else if(mapFeaturesEnabled)
         {
             switch(random.nextInt(4))
             {
