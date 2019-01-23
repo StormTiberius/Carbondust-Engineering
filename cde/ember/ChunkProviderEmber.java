@@ -512,7 +512,7 @@ public class ChunkProviderEmber implements IChunkProvider
         }
 
         boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, DUNGEON);
-        for (var12 = 0; doGen && var12 < 8; ++var12)
+        for (var12 = 0; doGen && var12 < 16; ++var12)
         {
             var13 = var4 + this.rand.nextInt(16) + 8;
             var14 = this.rand.nextInt(240);
