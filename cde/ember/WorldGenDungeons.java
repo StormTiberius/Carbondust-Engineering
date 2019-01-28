@@ -1,23 +1,39 @@
 package cde.ember;
 
-import net.minecraft.world.gen.feature.*;
+import cde.EmberCore;
+import forestry.api.core.BlockInterface;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DungeonHooks;
-import net.minecraftforge.common.MinecraftForge;
 
 public class WorldGenDungeons extends WorldGenerator
 {
+    private static final String[] DUNGEON_MOBS = {"Skeleton", "Zombie", "Spider", "Creeper", "Enderman"};
+    private final String loot;
+    private final int floorBlockId,wallBlockId;
+    
+    public WorldGenDungeons(String loot, int floorBlockId, int wallBlockId)
+    {
+        this.loot = loot;
+        this.floorBlockId = floorBlockId;
+        this.wallBlockId = wallBlockId;
+    }
+    
+    @Override
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         byte var6 = 3;
@@ -72,13 +88,13 @@ public class WorldGenDungeons extends WorldGenerator
                         }
                         else if (par1World.getBlockMaterial(var10, var11, var12).isSolid())
                         {
-                            if (var11 == par4 - 1 && par2Random.nextInt(4) != 0)
+                            if (var11 == par4 - 1)
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, Block.cobblestoneMossy.blockID);
+                                par1World.setBlockWithNotify(var10, var11, var12, floorBlockId);
                             }
                             else
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, Block.cobblestone.blockID);
+                                par1World.setBlockWithNotify(var10, var11, var12, wallBlockId);
                             }
                         }
                     }
@@ -131,7 +147,7 @@ public class WorldGenDungeons extends WorldGenerator
 
                                     if (var16 != null)
                                     {
-                                        ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+                                        ChestGenHooks info = ChestGenHooks.getInfo(loot);
                                         WeightedRandomChestContent.generateChestContents(par2Random, info.getItems(par2Random), var16, info.getCount(par2Random));
                                     }
 
@@ -149,39 +165,86 @@ public class WorldGenDungeons extends WorldGenerator
                 }
             }
 
-            par1World.setBlockWithNotify(par3, par4, par5, Block.mobSpawner.blockID);
-            TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(par3, par4, par5);
-
-            if (var19 != null)
+            if(loot.equals(ChestGenHooks.VILLAGE_BLACKSMITH))
             {
-                var19.setMobID(this.pickMobSpawner(par2Random));
+                if(ModLoader.isModLoaded("Forestry"))
+                {
+                    ItemStack beehives = BlockInterface.getBlock("beehives");
+                    
+                    if(beehives != null && par1World.getBlockMaterial(par3, par4 + 4, par5).isSolid())
+                    {
+                        switch(par2Random.nextInt(7))
+                        {
+                            case 0: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 1); break;
+                            case 1: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 2); break;
+                            case 2: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 3); break;
+                            case 3: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 4); break;
+                            case 4: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 5); break;
+                            case 5: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 6); break;
+                            case 6: par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, beehives.itemID, 7); break;
+                        }
+                    }
+                }
+                
+                EntityAnimal animal;
+                
+                switch(par2Random.nextInt(4))
+                {
+                    case 0: animal = new EntityChicken(par1World); break;
+                    case 1: animal = new EntityPig(par1World); break;
+                    case 2: animal = new EntitySheep(par1World); break;
+                    default: animal = new EntityCow(par1World); break;
+                }
+                
+                animal.setPosition(par3, par4, par5);
+                
+                if(par1World.checkIfAABBIsClear(animal.boundingBox) && par1World.getCollidingBoundingBoxes(animal, animal.boundingBox).isEmpty() && !par1World.isAnyLiquid(animal.boundingBox))
+                {
+                    par1World.spawnEntityInWorld(animal);
+                }
+            }
+            else if(!loot.equals(ChestGenHooks.BONUS_CHEST))
+            {
+                par1World.setBlockWithNotify(par3, par4, par5, Block.mobSpawner.blockID);
+                TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(par3, par4, par5);
+                
+                if(var19 != null)
+                {
+                    var19.setMobID(DUNGEON_MOBS[par2Random.nextInt(DUNGEON_MOBS.length)]);
+                }
+                else
+                {
+                    System.err.println("Failed to fetch mob spawner entity at (" + par3 + ", " + par4 + ", " + par5 + ")");
+                }
             }
             else
             {
-                System.err.println("Failed to fetch mob spawner entity at (" + par3 + ", " + par4 + ", " + par5 + ")");
+                par1World.setBlockWithNotify(par3 + 1, par4, par5, Block.torchWood.blockID);
+                par1World.setBlockWithNotify(par3, par4, par5 + 1, Block.torchWood.blockID);
+                par1World.setBlockWithNotify(par3 - 1, par4, par5, Block.torchWood.blockID);
+                par1World.setBlockWithNotify(par3, par4, par5 - 1, Block.torchWood.blockID);
+                
+                LocationData ld = (LocationData)par1World.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+                
+                if(ld == null)
+                {
+                    ld = new LocationData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+                    par1World.setItemData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD, ld);
+                }
+                
+                ld.setSpawnLocation(par3, par4, par5);
+                
+                if(par1World.provider instanceof WorldProviderEmber)
+                {
+                    ((WorldProviderEmber)par1World.provider).setLocationData(ld);
+                }
             }
-
+            
             return true;
         }
         else
         {
             return false;
         }
-    }
-
-    /**
-     * Picks potentially a random item to add to a dungeon chest.
-     */
-    private ItemStack pickCheckLootItem(Random par1Random)
-    {
-        return ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, par1Random);
-    }
-
-    /**
-     * Randomly decides which spawner to use in a dungeon
-     */
-    private String pickMobSpawner(Random par1Random)
-    {
-        return DungeonHooks.getRandomDungeonMob(par1Random);
     }
 }
