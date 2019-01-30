@@ -491,6 +491,11 @@ public class ChunkProviderEmber implements IChunkProvider
         int var13;
         int var14;
 
+        if(par2 == 16 && par3 == 16)
+        {
+            (new WorldGenSpawn()).generate(this.worldObj, this.rand, par2 * 16, 20, par3 * 16);
+        }
+        
         if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAKE) && !var11 && this.rand.nextInt(2) == 0)
         {
             var12 = var4 + this.rand.nextInt(16) + 8;
@@ -511,14 +516,20 @@ public class ChunkProviderEmber implements IChunkProvider
             }
         }
 
-        boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, DUNGEON);
+        boolean doGen = this.mapFeaturesEnabled && TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, DUNGEON);
         for (var12 = 0; doGen && var12 < 16; ++var12)
         {
             var13 = var4 + this.rand.nextInt(16) + 8;
             var14 = this.rand.nextInt(240);
             int var15 = var5 + this.rand.nextInt(16) + 8;
 
-            DungeonManager.generate(this.worldObj, this.rand, var13, var14, var15, mapFeaturesEnabled);
+            switch(this.rand.nextInt(4))
+            {
+                case 0: (new WorldGenDungeons(ChestGenHooks.PYRAMID_DESERT_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
+                case 1: (new WorldGenDungeons(ChestGenHooks.PYRAMID_JUNGLE_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
+                case 2: (new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.grass.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
+                case 3: (new WorldGenDungeons(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
+            }
         }
 
         var6.decorate(this.worldObj, this.rand, var4, var5);
