@@ -1,6 +1,5 @@
 package cde.ember;
 
-import cde.EmberCore;
 import forestry.api.core.BlockInterface;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -203,7 +202,7 @@ public class WorldGenDungeons extends WorldGenerator
                     par1World.spawnEntityInWorld(animal);
                 }
             }
-            else if(!loot.equals(ChestGenHooks.BONUS_CHEST))
+            else
             {
                 par1World.setBlockWithNotify(par3, par4, par5, Block.mobSpawner.blockID);
                 TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(par3, par4, par5);
@@ -215,28 +214,6 @@ public class WorldGenDungeons extends WorldGenerator
                 else
                 {
                     System.err.println("Failed to fetch mob spawner entity at (" + par3 + ", " + par4 + ", " + par5 + ")");
-                }
-            }
-            else
-            {
-                par1World.setBlockWithNotify(par3 + 1, par4, par5, Block.torchWood.blockID);
-                par1World.setBlockWithNotify(par3, par4, par5 + 1, Block.torchWood.blockID);
-                par1World.setBlockWithNotify(par3 - 1, par4, par5, Block.torchWood.blockID);
-                par1World.setBlockWithNotify(par3, par4, par5 - 1, Block.torchWood.blockID);
-                
-                LocationData ld = (LocationData)par1World.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
-                
-                if(ld == null)
-                {
-                    ld = new LocationData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
-                    par1World.setItemData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD, ld);
-                }
-                
-                ld.setSpawnLocation(par3, par4, par5);
-                
-                if(par1World.provider instanceof WorldProviderEmber)
-                {
-                    ((WorldProviderEmber)par1World.provider).setLocationData(ld);
                 }
             }
             
