@@ -2,7 +2,10 @@ package cde.ember;
 
 import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ChestGenHooks;
 
 public class WorldGenSpawn
 {   
@@ -62,6 +65,14 @@ public class WorldGenSpawn
         if(world.getBlockMaterial(xPos, yPos - 1, zPos).isSolid() && world.isAirBlock(xPos, yPos, zPos))
         {
             world.setBlockWithNotify(xPos, yPos, zPos, Block.chest.blockID);
+            
+            TileEntityChest tec = (TileEntityChest)world.getBlockTileEntity(xPos, yPos, zPos);
+
+            if (tec != null)
+            {
+                ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST);
+                WeightedRandomChestContent.generateChestContents(random, info.getItems(random), tec, info.getCount(random));
+            }
         }
     }
 }
