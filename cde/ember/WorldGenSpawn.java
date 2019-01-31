@@ -14,9 +14,9 @@ public class WorldGenSpawn
     {
         int xPos,yPos,zPos;
         
-        for(int y = 5; y >= 0; y--)
+        for(int x = 4; x < 13; x++)
         {
-            for(int x = 4; x < 13; x++)
+            for(int y = 0; y < 5; y++)
             {
                 for(int z = 4; z < 13; z++)
                 {
@@ -24,18 +24,15 @@ public class WorldGenSpawn
                     yPos = 19 + y;
                     zPos = chunkZ * 16 + z;
                     
-                    if(x == 4 || x == 12 || y == 5 || z == 4 || z == 12)
+                    if(y == 0)
+                    {
+                        world.setBlock(xPos, yPos, zPos, Block.grass.blockID);
+                    }
+                    else if(x == 4 || x == 12 || z == 4 || z == 12)
                     {
                         if(!world.isAirBlock(xPos, yPos, zPos))
                         {
                             world.setBlock(xPos, yPos, zPos, Block.cobblestone.blockID);
-                        }
-                    }
-                    else if(y == 0)
-                    {
-                        if(!world.isAirBlock(xPos, yPos, zPos))
-                        {
-                            world.setBlock(xPos, yPos, zPos, Block.grass.blockID);
                         }
                     }
                     else
