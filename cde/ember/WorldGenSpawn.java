@@ -55,29 +55,72 @@ public class WorldGenSpawn
         world.setBlockWithNotify(xPos - 1, yPos, zPos, Block.torchWood.blockID);
         world.setBlockWithNotify(xPos, yPos, zPos - 1, Block.torchWood.blockID);
         
-        switch(random.nextInt(4))
+        int[] spots = new int[2];
+        
+        spots[0] = random.nextInt(20);
+        spots[1] = spots[0] + random.nextInt(19);
+        
+        if(spots[1] > 19)
         {
-            case 0: xPos -= 3; zPos -= 3; xPos += 1 + random.nextInt(5); break;
-            case 1: xPos -= 3; zPos -= 3; zPos += 1 + random.nextInt(5); break;
-            case 2: xPos += 3; zPos += 3; xPos -= 1 + random.nextInt(5); break;
-            case 3: xPos += 3; zPos += 3; zPos -= 1 + random.nextInt(5); break;
+            spots[1] -= 19;
         }
         
-        if(world.getBlockMaterial(xPos, yPos - 1, zPos).isSolid() && world.isAirBlock(xPos, yPos, zPos))
+        if(getWall(spots[0]) == getWall(spots[1]))
         {
-            world.setBlockWithNotify(xPos, yPos, zPos, Block.chest.blockID);
-            
-            TileEntityChest tec = (TileEntityChest)world.getBlockTileEntity(xPos, yPos, zPos);
-
-            if (tec != null)
+            if(spots[0] == spots[1] + 1)
             {
-                ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST);
-                WeightedRandomChestContent.generateChestContents(random, info.getItems(random), tec, info.getCount(random));
+
+            }
+
+            if(spots[0] == spots[1] - 1)
+            {
+
+            }
+        }
+                
+        for(int i = 0; i < 2; i++)
+        {
+            ChunkCoordinates cc = getOffset(spots[i]);
+            
+            xPos = chunkX * 16 + cc.posX;
+            zPos = chunkZ * 16 + cc.posZ;
+        
+            if(world.getBlockMaterial(xPos, yPos - 1, zPos).isSolid() && world.isAirBlock(xPos, yPos, zPos))
+            {
+                world.setBlockWithNotify(xPos, yPos, zPos, Block.chest.blockID);
+
+                TileEntityChest tec = (TileEntityChest)world.getBlockTileEntity(xPos, yPos, zPos);
+
+                if (tec != null)
+                {
+                    ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST);
+                    WeightedRandomChestContent.generateChestContents(random, info.getItems(random), tec, info.getCount(random));
+                }
             }
         }
     }
     
-    private ChunkCoordinates getChestOffset(int spot, int chunkX, int ChunkZ)
+    private int getWall(int i)
+    {
+        if(i < 5)
+        {
+            return 0;
+        }
+        else if(i < 10)
+        {
+            return 1;
+        }
+        else if(i < 15)
+        {
+            return 2;
+        }
+        else
+        {
+            return 3;
+        }
+    }
+    
+    private ChunkCoordinates getOffset(int spot)
     {
         ChunkCoordinates cc = new ChunkCoordinates();
         
