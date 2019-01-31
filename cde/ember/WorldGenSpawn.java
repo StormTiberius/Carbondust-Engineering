@@ -83,26 +83,26 @@ public class WorldGenSpawn
         
         switch(spot)
         {
-            case 0:  cc.set(6,  0,  5); return cc;
-            case 1:  cc.set(7,  0,  5); return cc;
-            case 2:  cc.set(8,  0,  5); return cc;
-            case 3:  cc.set(9,  0,  5); return cc;
-            case 4:  cc.set(10, 0,  5); return cc;
-            case 5:  cc.set(11, 0,  6); return cc;
-            case 6:  cc.set(11, 0,  7); return cc;
-            case 7:  cc.set(11, 0,  8); return cc;
-            case 8:  cc.set(11, 0,  9); return cc;
-            case 9:  cc.set(11, 0, 10); return cc;
-            case 10: cc.set(10, 0, 11); return cc;
-            case 11: cc.set(9,  0, 11); return cc;
-            case 12: cc.set(8,  0, 11); return cc;
-            case 13: cc.set(7,  0, 11); return cc;
-            case 14: cc.set(6,  0, 11); return cc;
-            case 15: cc.set(5,  0, 10); return cc;
-            case 16: cc.set(5,  0,  9); return cc;
-            case 17: cc.set(5,  0,  8); return cc;
-            case 18: cc.set(5,  0,  7); return cc;
-            case 19: cc.set(5,  0,  6); return cc;
+            case 0: cc.set(6,0,5); return cc;
+            case 1: cc.set(7,0,5); return cc;
+            case 2: cc.set(8,0,5); return cc;
+            case 3: cc.set(9,0,5); return cc;
+            case 4: cc.set(10,0,5); return cc;
+            case 5: cc.set(11,0,6); return cc;
+            case 6: cc.set(11,0,7); return cc;
+            case 7: cc.set(11,0,8); return cc;
+            case 8: cc.set(11,0,9); return cc;
+            case 9: cc.set(11,0,10); return cc;
+            case 10: cc.set(10,0,11); return cc;
+            case 11: cc.set(9,0,11); return cc;
+            case 12: cc.set(8,0,11); return cc;
+            case 13: cc.set(7,0,11); return cc;
+            case 14: cc.set(6,0,11); return cc;
+            case 15: cc.set(5,0,10); return cc;
+            case 16: cc.set(5,0,9); return cc;
+            case 17: cc.set(5,0,8); return cc;
+            case 18: cc.set(5,0,7); return cc;
+            case 19: cc.set(5,0,6); return cc;
             default: return cc;
         }
     }
