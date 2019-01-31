@@ -55,35 +55,86 @@ public class WorldGenSpawn
         world.setBlockWithNotify(xPos - 1, yPos, zPos, Block.torchWood.blockID);
         world.setBlockWithNotify(xPos, yPos, zPos - 1, Block.torchWood.blockID);
         
-        int[] spots = new int[2];
+        int[] ra = getRandomizedArray(20, random);
         
-        spots[0] = random.nextInt(20);
-        spots[1] = spots[0] + random.nextInt(19);
+        int chests = 0;
+        int first = 0;
         
-        if(spots[1] > 19)
+        for(int i = 0; i < ra.length; i++)
         {
-            spots[1] -= 19;
+            if(chests == 0)
+            {
+                if(generateChest(world, random, chunkX, chunkZ, ra[i]))
+                {
+                    first = ra[i];
+                    chests++;
+                }
+            }
+            else
+            {
+                if(!(isAdjacent(first, ra[i])))
+                {
+                    if(generateChest(world, random, chunkX, chunkZ, ra[i]))
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    private boolean isAdjacent(int a, int b)
+    {
+        if(a == 4 && b == 5)
+        {
+            return false;
         }
         
-        if(getWall(spots[0]) == getWall(spots[1]))
+        if(a == 5 && b == 4)
         {
-            if(spots[0] == spots[1] + 1)
-            {
-
-            }
-
-            if(spots[0] == spots[1] - 1)
-            {
-
-            }
+            return false;
         }
-                
-        for(int i = 0; i < 2; i++)
+        
+        if(a == 9 && b == 10)
         {
-            ChunkCoordinates cc = getOffset(spots[i]);
+            return false;
+        }
+        
+        if(a == 10 && b == 9)
+        {
+            return false;
+        }
+        
+        if(a == 14 && b == 15)
+        {
+            return false;
+        }
+        
+        if(a == 15 && b == 14)
+        {
+            return false;
+        }
+        
+        if(a == 18 && b == 19)
+        {
+            return false;
+        }
+        
+        if(a == 19 && b == 18)
+        {
+            return false;
+        }
+        
+        return a == b + 1 || a == b - 1;
+    }
+    
+    private boolean generateChest(World world, Random random, int chunkX, int chunkZ, int spot)
+    {
+        ChunkCoordinates cc = getOffset(spot);
             
-            xPos = chunkX * 16 + cc.posX;
-            zPos = chunkZ * 16 + cc.posZ;
+            int xPos = chunkX * 16 + cc.posX;
+            int yPos = 20;
+            int zPos = chunkZ * 16 + cc.posZ;
         
             if(world.getBlockMaterial(xPos, yPos - 1, zPos).isSolid() && world.isAirBlock(xPos, yPos, zPos))
             {
@@ -95,9 +146,12 @@ public class WorldGenSpawn
                 {
                     ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST);
                     WeightedRandomChestContent.generateChestContents(random, info.getItems(random), tec, info.getCount(random));
+                    
+                    return true;
                 }
             }
-        }
+            
+            return false;
     }
     
     private int getWall(int i)
@@ -148,5 +202,28 @@ public class WorldGenSpawn
             case 19: cc.set(5,0,6); return cc;
             default: return cc;
         }
+    }
+    
+    private int[] getRandomizedArray(int size, Random r)
+    {
+        int[] array = new int[size];
+        
+        for(int i = 0; i < size; i++)
+        {
+            array[i] = i; 
+        }
+        
+        for(int i = 0; i < size; i++)
+        {
+            int temp = array[i];
+            
+            int index = r.nextInt(size);
+            
+            array[i] = array[index];
+            
+            array[index] = temp;
+        }
+        
+        return array;
     }
 }
