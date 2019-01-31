@@ -82,6 +82,32 @@ public class WorldGenSpawn
             }
         }
     }
+        
+    private boolean generateChest(World world, Random random, int chunkX, int chunkZ, int spot)
+    {
+        ChunkCoordinates cc = getOffset(spot);
+            
+            int xPos = chunkX * 16 + cc.posX;
+            int yPos = 20;
+            int zPos = chunkZ * 16 + cc.posZ;
+        
+            if(world.getBlockMaterial(xPos, yPos - 1, zPos).isSolid() && world.isAirBlock(xPos, yPos, zPos))
+            {
+                world.setBlockWithNotify(xPos, yPos, zPos, Block.chest.blockID);
+
+                TileEntityChest tec = (TileEntityChest)world.getBlockTileEntity(xPos, yPos, zPos);
+
+                if (tec != null)
+                {
+                    ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST);
+                    WeightedRandomChestContent.generateChestContents(random, info.getItems(random), tec, info.getCount(random));
+                    
+                    return true;
+                }
+            }
+            
+            return false;
+    }
     
     private boolean isAdjacent(int a, int b)
     {
@@ -126,52 +152,6 @@ public class WorldGenSpawn
         }
         
         return a == b + 1 || a == b - 1;
-    }
-    
-    private boolean generateChest(World world, Random random, int chunkX, int chunkZ, int spot)
-    {
-        ChunkCoordinates cc = getOffset(spot);
-            
-            int xPos = chunkX * 16 + cc.posX;
-            int yPos = 20;
-            int zPos = chunkZ * 16 + cc.posZ;
-        
-            if(world.getBlockMaterial(xPos, yPos - 1, zPos).isSolid() && world.isAirBlock(xPos, yPos, zPos))
-            {
-                world.setBlockWithNotify(xPos, yPos, zPos, Block.chest.blockID);
-
-                TileEntityChest tec = (TileEntityChest)world.getBlockTileEntity(xPos, yPos, zPos);
-
-                if (tec != null)
-                {
-                    ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST);
-                    WeightedRandomChestContent.generateChestContents(random, info.getItems(random), tec, info.getCount(random));
-                    
-                    return true;
-                }
-            }
-            
-            return false;
-    }
-    
-    private int getWall(int i)
-    {
-        if(i < 5)
-        {
-            return 0;
-        }
-        else if(i < 10)
-        {
-            return 1;
-        }
-        else if(i < 15)
-        {
-            return 2;
-        }
-        else
-        {
-            return 3;
-        }
     }
     
     private ChunkCoordinates getOffset(int spot)
