@@ -138,12 +138,12 @@ public class WorldGenSpawn
             return false;
         }
         
-        if(a == 18 && b == 19)
+        if(a == 19 && b == 0)
         {
             return false;
         }
         
-        if(a == 19 && b == 18)
+        if(a == 0 && b == 19)
         {
             return false;
         }
