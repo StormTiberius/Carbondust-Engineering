@@ -12,6 +12,8 @@ public class WorldGenSpawn
 {   
     public void generate(World world, Random random, int chunkX, int chunkZ)
     {
+        int spawnY = world.provider.getSpawnPoint().posY;
+        
         int xPos,yPos,zPos;
         
         for(int x = 4; x < 13; x++)
@@ -21,7 +23,7 @@ public class WorldGenSpawn
                 for(int z = 4; z < 13; z++)
                 {
                     xPos = chunkX * 16 + x;
-                    yPos = 19 + y;
+                    yPos = spawnY - 1 + y;
                     zPos = chunkZ * 16 + z;
                     
                     if(y == 0)
@@ -44,7 +46,7 @@ public class WorldGenSpawn
         }
         
         xPos = chunkX * 16 + 8;
-        yPos = 20;
+        yPos = spawnY;
         zPos = chunkZ * 16 + 8;
         
         world.setBlockWithNotify(xPos + 1, yPos, zPos, Block.torchWood.blockID);
@@ -61,7 +63,7 @@ public class WorldGenSpawn
         {
             if(chests == 0)
             {
-                if(generateChest(world, random, chunkX, chunkZ, ra[i]))
+                if(generateChest(world, random, chunkX, spawnY, chunkZ, ra[i]))
                 {
                     first = ra[i];
                     chests++;
@@ -71,7 +73,7 @@ public class WorldGenSpawn
             {
                 if(!(isAdjacent(first, ra[i])))
                 {
-                    if(generateChest(world, random, chunkX, chunkZ, ra[i]))
+                    if(generateChest(world, random, chunkX, spawnY, chunkZ, ra[i]))
                     {
                         break;
                     }
@@ -80,12 +82,11 @@ public class WorldGenSpawn
         }
     }
         
-    private boolean generateChest(World world, Random random, int chunkX, int chunkZ, int spot)
+    private boolean generateChest(World world, Random random, int chunkX, int yPos, int chunkZ, int spot)
     {
         ChunkCoordinates cc = getOffset(spot);
             
             int xPos = chunkX * 16 + cc.posX;
-            int yPos = 20;
             int zPos = chunkZ * 16 + cc.posZ;
         
             if(world.getBlockMaterial(xPos, yPos - 1, zPos).isSolid() && world.isAirBlock(xPos, yPos, zPos))
