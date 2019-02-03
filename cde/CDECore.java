@@ -10,6 +10,7 @@ import cde.api.Materials;
 import cde.core.CommonProxy;
 import cde.core.CreativeTabCDE;
 import cde.core.Defaults;
+import cde.core.EventHandler;
 import cde.core.FuelManager;
 import cde.core.Namings;
 import cde.core.RecipeManager;
@@ -113,6 +114,8 @@ public class CDECore
         WorldGenModule.init(event);
         
         GameRegistry.registerFuelHandler(new FuelManager());
+        
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
     }
 
     @PostInit
