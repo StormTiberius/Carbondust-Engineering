@@ -184,6 +184,21 @@ public class EventManager
             return true;
         }
         
+        if(var11 == Block.dirt.blockID)
+        {
+            if(!par3World.isRemote)
+            {
+                par1ItemStack.stackSize--;
+                
+                if(par3World.isAirBlock(par4, par5 + 1, par6))
+                {
+                    par3World.setBlockWithNotify(par4, par5, par6, Block.grass.blockID);
+                }
+            }
+            
+            return true;
+        }
+        
         return false;
     }
 }
