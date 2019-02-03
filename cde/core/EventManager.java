@@ -23,11 +23,11 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
-public class EventHandler
+public class EventManager
 {
     private final Random RANDOM;
     
-    public EventHandler()
+    public EventManager()
     {
         this.RANDOM = new Random();
     }
