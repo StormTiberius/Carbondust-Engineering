@@ -67,19 +67,6 @@ public class WorldProviderTropics extends WorldProvider
     
     @SideOnly(Side.CLIENT)
     @Override
-    public float getCloudHeight()
-    {
-        return 256.0F;
-    }
-    
-    @Override
-    public int getAverageGroundLevel()
-    {
-        return 128;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
     public boolean getWorldHasVoidParticles()
     {
         return false;
@@ -206,12 +193,6 @@ public class WorldProviderTropics extends WorldProvider
         }
     }
     
-    @Override
-    public double getHorizon()
-    {
-        return 127.0D;
-    }
-        
     @Override
     public void resetRainAndThunder()
     {
