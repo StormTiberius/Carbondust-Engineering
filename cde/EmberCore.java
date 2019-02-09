@@ -38,7 +38,7 @@ public class EmberCore
 {
     private static Configuration cfg;
     private static boolean enabled,mobSpawnRules;
-    private static int biomeId,liquidId;
+    private static int biomeId,dimensionId,liquidId;
     
     public static BiomeGenBase ember;
     
@@ -49,10 +49,10 @@ public class EmberCore
         cfg.load();
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Ember").getBoolean(false);
-        
         mobSpawnRules = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
         
-        biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 23, "Ember Biome Id").getInt();
+        biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 26, "Ember Biome Id").getInt();
+        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 3, "Ember Dimension Id").getInt();
         
         cfg.save();
         
@@ -67,8 +67,16 @@ public class EmberCore
     {   
         if(enabled)
         {
-            DimensionManager.unregisterProviderType(0);
-            DimensionManager.registerProviderType(0, WorldProviderEmber.class, true);
+            if(dimensionId == 0 || dimensionId == -1 || dimensionId == 1)
+            {
+                DimensionManager.unregisterProviderType(dimensionId);
+                DimensionManager.registerProviderType(dimensionId, WorldProviderEmber.class, true);
+            }
+            else
+            {
+                DimensionManager.registerProviderType(dimensionId, WorldProviderEmber.class, true);
+                DimensionManager.registerDimension(dimensionId, dimensionId);
+            }
         
             EntityRegistry.registerModEntity(EntitySquidEmber.class, "EmberSquid", 0, this, 64, 3, true);
             EntityRegistry.registerModEntity(EntityBatEmber.class, "EmberBat", 1, this, 80, 3, false);
