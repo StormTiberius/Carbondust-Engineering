@@ -19,6 +19,7 @@ import cde.machinery.TileEntityPump;
 import cde.machinery.TileEntitySolarPanel;
 import cde.machinery.TileEntityTransformer;
 import cde.machinery.TileEntityTurbine;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -31,6 +32,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 import ic2.api.Ic2Recipes;
 import ic2.api.Items;
 import java.io.File;
@@ -118,7 +120,7 @@ public class MachineryCore
             int spriteIndex = 0;
             int renderId = 0;
             
-            if(ModLoader.isModLoaded("IC2"))
+            if(ModLoader.isModLoaded("IC2") && FMLCommonHandler.instance().getSide().isClient())
             {
                 ItemStack nvg = Items.getItem("nightvisionGoggles");
                 
