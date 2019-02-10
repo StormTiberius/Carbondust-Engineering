@@ -110,4 +110,9 @@ public class EmberCore
     {
         return liquidId;
     }
+    
+    public static int getDimensionId()
+    {
+        return dimensionId;
+    }
 }

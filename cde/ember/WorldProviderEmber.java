@@ -26,6 +26,7 @@ public class WorldProviderEmber extends WorldProvider
     protected void registerWorldChunkManager()
     {
         worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.8F, 0.4F);
+        dimensionId = EmberCore.getDimensionId();
         hasNoSky = true;
     }
     
