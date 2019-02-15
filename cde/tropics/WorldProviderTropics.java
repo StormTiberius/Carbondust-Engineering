@@ -9,11 +9,11 @@ import cde.TropicsCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
 
-public class WorldProviderTropics extends WorldProvider
+public class WorldProviderTropics extends WorldProviderSurface
 {    
     private long time;
     
