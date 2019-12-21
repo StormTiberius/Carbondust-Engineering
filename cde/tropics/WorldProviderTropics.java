@@ -9,6 +9,7 @@ import cde.TropicsCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
@@ -191,6 +192,12 @@ public class WorldProviderTropics extends WorldProviderSurface
                 }
             }
         }
+    }
+    
+    @Override
+    public ChunkCoordinates getSpawnPoint()
+    {
+        return new ChunkCoordinates(264, worldObj.getTopSolidOrLiquidBlock(264, 264), 264);
     }
     
     @Override
