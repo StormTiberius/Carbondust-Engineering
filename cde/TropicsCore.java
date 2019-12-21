@@ -38,7 +38,7 @@ import net.minecraftforge.liquids.LiquidStack;
 public class TropicsCore
 {
     private static Configuration cfg;
-    private static boolean enabled,civspawn;
+    private static boolean enabled,sisterIslands,civspawn;
     private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId,indigoFlowerId;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
@@ -56,6 +56,7 @@ public class TropicsCore
         cfg.load();
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Tropics Dimension").getBoolean(false);
+        sisterIslands = cfg.get(Configuration.CATEGORY_GENERAL, "sisterislands", true, "Sister Islands").getBoolean(false);
         civspawn = cfg.get(Configuration.CATEGORY_GENERAL, "civspawn", true, "Custom Spawn Rules").getBoolean(false);
         
         islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 23, "Island Biome Id").getInt();
@@ -193,5 +194,10 @@ public class TropicsCore
     public static boolean isOcean(int id)
     {
         return id == ocean.biomeID;
+    }
+    
+    public static boolean sisterIslands()
+    {
+        return sisterIslands;
     }
 }
