@@ -197,7 +197,11 @@ public class WorldProviderTropics extends WorldProviderSurface
     @Override
     public ChunkCoordinates getSpawnPoint()
     {
-        return new ChunkCoordinates(264, worldObj.getTopSolidOrLiquidBlock(264, 264), 264);
+        int i = 16 << TropicsCore.getIslandSize();
+        
+        i += 8;
+        
+        return new ChunkCoordinates(i, worldObj.getTopSolidOrLiquidBlock(i, i), i);
     }
     
     @Override
