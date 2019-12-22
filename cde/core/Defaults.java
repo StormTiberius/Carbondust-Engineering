@@ -56,6 +56,11 @@ public class Defaults
     public static final int TEXTURE_MACHINE_SPEAKER_BOTTOM_TOP = 50;
     public static final int TEXTURE_MACHINE_SPEAKER_SIDE = 51;
     
+    public static final int TEXTURE_DRUM_IRON_SIDE = 52;
+    public static final int TEXTURE_DRUM_STEEL_SIDE = 53;
+    public static final int TEXTURE_DRUM_IRON_TOP = 54;
+    public static final int TEXTURE_DRUM_STEEL_TOP = 55;
+    
     // ITEM TEXTURE INDEX
     public static final int TEXTURE_MATERIAL_INGOT_COPPER = 0;
     public static final int TEXTURE_MATERIAL_INGOT_TIN = 1;
