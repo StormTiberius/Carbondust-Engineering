@@ -53,20 +53,8 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
         t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         t.setColorRGBA_F(1.0F, 1.0F, 1.0F, 1.0F);
         
-        int icon = block.getBlockTextureFromSideAndMetadata(2, 0); // TODO ICON?
-        
-        if(true) // (renderer.overrideBlockTexture != null) // TODO CHECK LATER
-        {
-            icon = renderer.overrideBlockTexture;
-        }
-        
-        // func_94212_f,getMaxU,0,Returns the maximum U coordinate to use when rendering with this icon.
-        // func_94209_e,getMinU,0,Returns the minimum U coordinate to use when rendering with this icon.
-        // func_94210_h,getMaxV,0,Returns the maximum V coordinate to use when rendering with this icon.
-        // func_94206_g,getMinV,0,Returns the minimum V coordinate to use when rendering with this icon.
-        
-        float wu = (float)DRUM_UV_IRON_SIDE[1] - (float)DRUM_UV_IRON_SIDE[0]; // icon.getMaxU() - icon.getMinU();
-        float wv = (float)DRUM_UV_IRON_SIDE[3] - (float)DRUM_UV_IRON_SIDE[2]; // icon.getMaxV() - icon.getMinV();
+        float wu = (float)DRUM_UV_IRON_SIDE[1] - (float)DRUM_UV_IRON_SIDE[0];
+        float wv = (float)DRUM_UV_IRON_SIDE[3] - (float)DRUM_UV_IRON_SIDE[2];
         float ddv = wv * 0.3125F;
         
         for(int i = 0; i < 8; i++)
@@ -100,11 +88,6 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
             t.setColorOpaque_F(0.65F, 0.65F, 0.65F);
             
             w = base_w;
-            
-            // func_94212_f,getMaxU,0,Returns the maximum U coordinate to use when rendering with this icon.
-            // func_94209_e,getMinU,0,Returns the minimum U coordinate to use when rendering with this icon.
-            // func_94210_h,getMaxV,0,Returns the maximum V coordinate to use when rendering with this icon.
-            // func_94206_g,getMinV,0,Returns the minimum V coordinate to use when rendering with this icon.
             
             setB((float)(i + 1) - d, 0.6F);
             t.addVertexWithUV((double)x + dx(i + 1), (double)y, (double)z + dz(i + 1), DRUM_UV_IRON_SIDE[0]/*getMinU*/ + du2(i) * (double)wu, DRUM_UV_IRON_SIDE[3]/*getMaxV*/);
@@ -143,15 +126,8 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
         
         w = base_w;
         
-        icon = block.getBlockTextureFromSideAndMetadata(1, 0);
-        
-        if(true) // (renderer.overrideBlockTexture != null) // TODO CHECK LATER
-        {
-            icon = renderer.overrideBlockTexture;
-        }
-        
-        wu = (float)DRUM_UV_IRON_TOP[1] - (float)DRUM_UV_IRON_TOP[0]; // icon.getMaxU() - icon.getMinU();
-        wv = (float)DRUM_UV_IRON_TOP[3] - (float)DRUM_UV_IRON_TOP[2]; // icon.getMaxV() - icon.getMinV();
+        wu = (float)DRUM_UV_IRON_TOP[1] - (float)DRUM_UV_IRON_TOP[0];
+        wv = (float)DRUM_UV_IRON_TOP[3] - (float)DRUM_UV_IRON_TOP[2];
         
         for(int i = 0; i < 8; i++)
         {
@@ -167,11 +143,6 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
 
             t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 
-            // func_94212_f,getMaxU,0,Returns the maximum U coordinate to use when rendering with this icon.
-            // func_94209_e,getMinU,0,Returns the minimum U coordinate to use when rendering with this icon.
-            // func_94210_h,getMaxV,0,Returns the maximum V coordinate to use when rendering with this icon.
-            // func_94206_g,getMinV,0,Returns the minimum V coordinate to use when rendering with this icon.
-            
             w = (double)(base_w * h) * 0.9D;
             t.addVertexWithUV((double)x + dx(i), (double)y + h, (double)z + dz(i), DRUM_UV_IRON_TOP[0]/*getMinU*/ + dx(i) * (double)wu, DRUM_UV_IRON_TOP[3]/*getMaxV*/ - dz(i) * (double)wv);
             t.addVertexWithUV((double)x + dx(i + 1), (double)y + h, (double)z + dz(i + 1), DRUM_UV_IRON_TOP[0]/*getMinU*/ + dx(i + 1) * (double)wu, DRUM_UV_IRON_TOP[3]/*getMaxV*/ - dz(i + 1) * (double)wv);
@@ -182,15 +153,9 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
         }
 
         t.setColorOpaque_F(0.5F, 0.5F, 0.5F);
-        icon = block.getBlockTextureFromSideAndMetadata(0, 0);
         
-        if(true) // (renderer.overrideBlockTexture != null) // TODO CHECK LATER
-        {
-            icon = renderer.overrideBlockTexture;
-        }
-        
-        wu = (float)DRUM_UV_IRON_TOP[1] - (float)DRUM_UV_IRON_TOP[0]; // icon.getMaxU() - icon.getMinU();
-        wv = (float)DRUM_UV_IRON_TOP[3] - (float)DRUM_UV_IRON_TOP[2]; // icon.getMaxV() - icon.getMinV();
+        wu = (float)DRUM_UV_IRON_TOP[1] - (float)DRUM_UV_IRON_TOP[0];
+        wv = (float)DRUM_UV_IRON_TOP[3] - (float)DRUM_UV_IRON_TOP[2];
         
         for(int i = 0; i < 8; i++)
         {
@@ -206,11 +171,6 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
 
             t.setColorOpaque_F(0.6F, 0.6F, 0.6F);
 
-            // func_94212_f,getMaxU,0,Returns the maximum U coordinate to use when rendering with this icon.
-            // func_94209_e,getMinU,0,Returns the minimum U coordinate to use when rendering with this icon.
-            // func_94210_h,getMaxV,0,Returns the maximum V coordinate to use when rendering with this icon.
-            // func_94206_g,getMinV,0,Returns the minimum V coordinate to use when rendering with this icon.
-            
             w = 0.0D;
             t.addVertexWithUV((double)x + dx(i), (double)(y + 1.0D) - h, (double)z + dz(i), DRUM_UV_IRON_TOP[0]/*getMinU*/ + dx(i) * (double)wu, DRUM_UV_IRON_TOP[3]/*getMaxV*/ - dz(i) * (double)wv);
             t.addVertexWithUV((double)x + dx(i + 1), (double)(y + 1.0D) - h, (double)z + dz(i + 1), DRUM_UV_IRON_TOP[0]/*getMinU*/ + dx(i + 1) * (double)wu, DRUM_UV_IRON_TOP[3]/*getMaxV*/ - dz(i + 1) * (double)wv);
@@ -245,20 +205,14 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
         Tessellator t = Tessellator.instance;
         t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         GL11.glTranslatef(-0.0F, -0.5F, -0.0F);
-        int icon = block.getBlockTextureFromSideAndMetadata(2, 0);
         
-        float wu = (float)DRUM_UV_IRON_SIDE[1] - (float)DRUM_UV_IRON_SIDE[0]; // icon.getMaxU() - icon.getMinU();
-        float wv = (float)DRUM_UV_IRON_SIDE[3] - (float)DRUM_UV_IRON_SIDE[2]; // icon.getMaxV() - icon.getMinV();
+        float wu = (float)DRUM_UV_IRON_SIDE[1] - (float)DRUM_UV_IRON_SIDE[0];
+        float wv = (float)DRUM_UV_IRON_SIDE[3] - (float)DRUM_UV_IRON_SIDE[2];
         float ddv = wv * 0.3125F;
         
         for(int i = 0; i < 8; i++)
         {
             w = base_w * h;
-            
-            // func_94206_g,getMinV,0,Returns the minimum V coordinate to use when rendering with this icon.
-            // func_94209_e,getMinU,0,Returns the minimum U coordinate to use when rendering with this icon.
-            // func_94210_h,getMaxV,0,Returns the maximum V coordinate to use when rendering with this icon.
-            // func_94212_f,getMaxU,0,Returns the maximum U coordinate to use when rendering with this icon.
             
             t.startDrawingQuads();
             t.setNormal(ddx((double)i + 0.5D), 0.0F, ddz((double)i + 0.5D));
@@ -307,19 +261,12 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
             t.addVertexWithUV(1.0D - dx(i + 1), 0.05D, 1.0D - dz(i + 1), DRUM_UV_IRON_TOP[0]/*getMinU*/ + du2(i) * (double)wu, DRUM_UV_IRON_TOP[2]/*getMinV*/ + (double)wu * 0.05D);
             t.addVertexWithUV(1.0D - dx(i + 1), 0.0D, 1.0D - dz(i + 1), DRUM_UV_IRON_TOP[0]/*getMinU*/ + du2(i) * (double)wu, DRUM_UV_IRON_TOP[2]/*getMinV*/);
             t.draw();
-            
-            // func_94206_g,getMinV,0,Returns the minimum V coordinate to use when rendering with this icon.
-            // func_94209_e,getMinU,0,Returns the minimum U coordinate to use when rendering with this icon.
-            // func_94210_h,getMaxV,0,Returns the maximum V coordinate to use when rendering with this icon.
-            // func_94212_f,getMaxU,0,Returns the maximum U coordinate to use when rendering with this icon.
         }
         
         w = base_w;
         
-        icon = block.getBlockTextureFromSideAndMetadata(1, 0);
-        
-        wu = (float)DRUM_UV_IRON_TOP[1] - (float)DRUM_UV_IRON_TOP[0]; // icon.getMaxU() - icon.getMinU();
-        wv = (float)DRUM_UV_IRON_TOP[3] - (float)DRUM_UV_IRON_TOP[2]; // icon.getMaxV() - icon.getMinV();
+        wu = (float)DRUM_UV_IRON_TOP[1] - (float)DRUM_UV_IRON_TOP[0];
+        wv = (float)DRUM_UV_IRON_TOP[3] - (float)DRUM_UV_IRON_TOP[2];
         
         for(int i = 0; i < 8; i++)
         {
@@ -350,10 +297,8 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
             t.draw();
         }
         
-        icon = block.getBlockTextureFromSideAndMetadata(0, 0);
-        
-        wu = (float)DRUM_UV_IRON_TOP[1] - (float)DRUM_UV_IRON_TOP[0]; // icon.getMaxU() - icon.getMinU();
-        wv = (float)DRUM_UV_IRON_TOP[3] - (float)DRUM_UV_IRON_TOP[2]; // icon.getMaxV() - icon.getMinV();
+        wu = (float)DRUM_UV_IRON_TOP[1] - (float)DRUM_UV_IRON_TOP[0];
+        wv = (float)DRUM_UV_IRON_TOP[3] - (float)DRUM_UV_IRON_TOP[2];
         
         for(int i = 0; i < 8; i++)
         {
@@ -383,11 +328,6 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
             t.addVertexWithUV(dx(i), 1.0F - h, dz(i), DRUM_UV_IRON_TOP[0]/*getMinU*/ + dx(i) * (double)wu, DRUM_UV_IRON_TOP[3]/*getMaxV*/ - dz(i) * (double)wv);
             t.draw();
         }
-        
-        // func_94206_g,getMinV,0,Returns the minimum V coordinate to use when rendering with this icon.
-        // func_94209_e,getMinU,0,Returns the minimum U coordinate to use when rendering with this icon.
-        // func_94210_h,getMaxV,0,Returns the maximum V coordinate to use when rendering with this icon.
-        // func_94212_f,getMaxU,0,Returns the maximum U coordinate to use when rendering with this icon.
         
         GL11.glTranslatef(0.0F, 0.5F, 0.0F);
     }
