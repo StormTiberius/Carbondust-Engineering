@@ -46,9 +46,9 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
         
         int l = block.colorMultiplier(world, x, y, z);
         
-        float f = (float)(1 >> 16 & 0xff) / 255.0F;
-        float f1 = (float)(1 >> 8 & 0xff) / 255.0F;
-        float f2 = (float)(1 & 0xff) / 255.0F;
+        float f = (float)(l >> 16 & 0xff) / 255.0F;
+        float f1 = (float)(l >> 8 & 0xff) / 255.0F;
+        float f2 = (float)(l & 0xff) / 255.0F;
         
         Tessellator t = Tessellator.instance;
         
