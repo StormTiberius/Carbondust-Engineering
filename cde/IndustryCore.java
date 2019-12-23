@@ -43,7 +43,8 @@ public class IndustryCore
     
     private static int drumVolume;
     private static int drumPitch;
-    private static int drumRenderId;
+    private static int drumRenderIdBlock;
+    private static int drumRenderIdItem;
     private static int drumBlockId;
     
     public static Block blockDrum;
@@ -130,14 +131,24 @@ public class IndustryCore
         return drumPitch;
     }
     
-    public static int getDrumRenderId()
+    public static int getDrumRenderId(boolean flag)
     {
-        return drumRenderId;
+        if(flag)
+        {
+            return drumRenderIdItem;
+        }
+        
+        return drumRenderIdBlock;
     }
     
-    public static void setDrumRenderId(int id)
+    public static void setDrumRenderId(boolean flag, int id)
     {
-        drumRenderId = id;
+        if(flag)
+        {
+            drumRenderIdItem = id;
+        }
+        
+        drumRenderIdBlock = id;
     }
     
     public static int getLiquidColor(String s)
