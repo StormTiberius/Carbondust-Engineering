@@ -43,8 +43,7 @@ public class IndustryCore
     
     private static int drumVolume;
     private static int drumPitch;
-    private static int drumRenderIdBlock;
-    private static int drumRenderIdItem;
+    private static int drumRenderId;
     private static int drumBlockId;
     
     public static Block blockDrum;
@@ -97,8 +96,6 @@ public class IndustryCore
     @Init
     public void init(FMLInitializationEvent event) 
     {   
-        proxy.registerRenderers();
-        
         if(drumBlockId > 0)
         {
             blockDrum = new BlockDrum(drumBlockId).setBlockName("cdeDrumBlock").setCreativeTab(CDECore.TAB_CDE).setHardness(1.5F);
@@ -107,6 +104,8 @@ public class IndustryCore
 
             GameRegistry.registerTileEntity(TileEntityDrum.class, "cdeDrumTile");
         }
+        
+        proxy.registerRenderers();
     }
 
     @PostInit
@@ -121,6 +120,11 @@ public class IndustryCore
 
     }
     
+    public static boolean isDrumEnabled()
+    {
+        return drumBlockId > 0;
+    }
+    
     public static int getDrumVolume()
     {
         return drumVolume;
@@ -131,24 +135,14 @@ public class IndustryCore
         return drumPitch;
     }
     
-    public static int getDrumRenderId(boolean flag)
+    public static int getDrumRenderId()
     {
-        if(flag)
-        {
-            return drumRenderIdItem;
-        }
-        
-        return drumRenderIdBlock;
+        return drumRenderId;
     }
     
-    public static void setDrumRenderId(boolean flag, int id)
+    public static void setDrumRenderId(int id)
     {
-        if(flag)
-        {
-            drumRenderIdItem = id;
-        }
-        
-        drumRenderIdBlock = id;
+        drumRenderId = id;
     }
     
     public static int getLiquidColor(String s)
