@@ -201,12 +201,12 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
             l = item.stackTagCompound.getInteger("color");
         }
             
-        LiquidStack fluid = ((ItemBlockDrum)item.getItem()).getLiquid(item); // TODO NEEDS CHECKING
+        // LiquidStack fluid = ((ItemBlockDrum)item.getItem()).getLiquid(item); // TODO NEEDS CHECKING
         l = 0; // LiquidColorRegistry.getFluidColor(fluid); // TODO NEEDS CHECKING
             
-        float f = (float)(1 >> 16 & 0xff) / 255.0F;
-        float f1 = (float)(1 >> 8 & 0xff) / 255.0F;
-        float f2 = (float)(1 & 0xff) / 255.0F;
+        float f = (float)(l >> 16 & 0xff) / 255.0F;
+        float f1 = (float)(l >> 8 & 0xff) / 255.0F;
+        float f2 = (float)(l & 0xff) / 255.0F;
         
         Tessellator t = Tessellator.instance;
         t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
@@ -363,7 +363,7 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
     @Override
     public int getRenderId()
     {
-        return IndustryCore.drumRenderId;
+        return IndustryCore.getDrumRenderId();
     }
     
     public void setB(float i, float p, float r, float g, float b)

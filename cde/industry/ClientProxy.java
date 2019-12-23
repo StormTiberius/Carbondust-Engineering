@@ -14,7 +14,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerRenderers()
     {
-        IndustryCore.drumRenderId = RenderingRegistry.getNextAvailableRenderId();
-        RenderingRegistry.registerBlockHandler(IndustryCore.drumRenderId, new RenderDrum());
+        IndustryCore.setDrumRenderId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(IndustryCore.getDrumRenderId(), new RenderDrum());
     }
 }
