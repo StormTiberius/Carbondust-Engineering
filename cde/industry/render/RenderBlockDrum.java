@@ -18,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.liquids.LiquidStack;
 import org.lwjgl.opengl.GL11;
 
-public class RenderDrum implements ISimpleBlockRenderingHandler
+public class RenderBlockDrum implements ISimpleBlockRenderingHandler
 {
     private static final double[] DRUM_UV_IRON_SIDE = Utils.getUV(Defaults.TEXTURE_DRUM_IRON_SIDE);
     private static final double[] DRUM_UV_IRON_TOP = Utils.getUV(Defaults.TEXTURE_DRUM_IRON_TOP);
