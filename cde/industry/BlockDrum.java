@@ -25,9 +25,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockIndustry extends BlockContainer
+public class BlockDrum extends BlockContainer
 {   
-    public BlockIndustry(int id)
+    public BlockDrum(int id)
     {
         super(id, Material.iron);
 

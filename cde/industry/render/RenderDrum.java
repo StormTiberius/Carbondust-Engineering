@@ -8,7 +8,7 @@ package cde.industry.render;
 import cde.IndustryCore;
 import cde.core.Defaults;
 import cde.core.util.Utils;
-import cde.industry.ItemBlockIndustry;
+import cde.industry.ItemBlockDrum;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -201,7 +201,7 @@ public class RenderDrum implements ISimpleBlockRenderingHandler
             l = item.stackTagCompound.getInteger("color");
         }
             
-        LiquidStack fluid = ((ItemBlockIndustry)item.getItem()).getLiquid(item); // TODO NEEDS CHECKING
+        LiquidStack fluid = ((ItemBlockDrum)item.getItem()).getLiquid(item); // TODO NEEDS CHECKING
         l = 0; // LiquidColorRegistry.getFluidColor(fluid); // TODO NEEDS CHECKING
             
         float f = (float)(1 >> 16 & 0xff) / 255.0F;
