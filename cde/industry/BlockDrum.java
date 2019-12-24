@@ -19,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
@@ -159,7 +160,8 @@ public class BlockDrum extends BlockContainer
     @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata)
     {
-        
+        player.addStat(StatList.mineBlockStatArray[blockID], 1);
+        player.addExhaustion(0.025F);
     }
     
     @Override
