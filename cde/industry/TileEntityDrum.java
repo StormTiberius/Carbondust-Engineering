@@ -8,6 +8,9 @@ package cde.industry;
 import cde.IndustryCore;
 import cde.core.sound.TileEntityWithSound;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
@@ -21,7 +24,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     private final LiquidTank TANK;
     private boolean isRedstonePowered,isWorking,flag;
-    private int counter = 100; // 5 Seconds
+    private int counter = 60; // 5 Seconds
     
     public TileEntityDrum()
     {
@@ -57,13 +60,15 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         if(counter == 0)
         {
             isWorking = true;
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
-        else if(counter == 99)
+        else if(counter == 59)
         {
             isWorking = false;
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
         
-        if(counter < 100)
+        if(counter < 60)
         {
             counter++;
         }
@@ -94,6 +99,8 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             TANK.setLiquid(LiquidStack.loadLiquidStackFromNBT(tag.getCompoundTag("liquid")));
         }
+        
+        isWorking = tag.getBoolean("isworking");
     }
 
     @Override
@@ -112,6 +119,28 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         else if(tag.hasKey("liquid"))
         {
             tag.removeTag("liquid");
+        }
+        
+        tag.setBoolean("isworking", isWorking);
+    }
+    
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound tag = new NBTTagCompound();
+        
+        writeToNBT(tag);
+        
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 4, tag);
+    }
+    
+    @Override
+    public void onDataPacket(INetworkManager inm, Packet132TileEntityData pkt)
+    {
+        if(worldObj.isRemote)
+        {
+            readFromNBT(pkt.customParam1);
+            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
         }
     }
     
