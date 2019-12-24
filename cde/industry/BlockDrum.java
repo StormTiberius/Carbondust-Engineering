@@ -8,8 +8,6 @@ package cde.industry;
 import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
 import cde.IndustryCore;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,10 +18,15 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.liquids.ILiquidTank;
+import net.minecraftforge.liquids.ITankContainer;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class BlockDrum extends BlockContainer
 {   
@@ -37,7 +40,7 @@ public class BlockDrum extends BlockContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
     {
-        TileEntityIndustry tei = (TileEntityIndustry)world.getBlockTileEntity(x, y, z);
+        TileEntityDrum tei = (TileEntityDrum)world.getBlockTileEntity(x, y, z);
 
         if (entityplayer.isSneaking())
         {
@@ -83,7 +86,7 @@ public class BlockDrum extends BlockContainer
     @Override
     public int getRenderType()
     {
-        return IndustryCore.drumRenderId;
+        return IndustryCore.getDrumRenderId();
     }
     
     @Override
@@ -91,11 +94,21 @@ public class BlockDrum extends BlockContainer
     {
         TileEntity te = iba.getBlockTileEntity(x, y, z);
         
-        if(te instanceof TileEntityDrum)
+        if(te instanceof ITankContainer)
         {
-            TileEntityDrum ted = (TileEntityDrum)te;
+            ITankContainer itc = (ITankContainer)te;
             
-            return ted.getLiquidColor();
+            ILiquidTank ilt = itc.getTank(ForgeDirection.DOWN, null);
+            
+            if(ilt != null)
+            {
+                LiquidStack ls = ilt.getLiquid();
+                
+                if(ls != null)
+                {
+                    return IndustryCore.getLiquidColor(ls.itemID);
+                }
+            }
         }
         
         return 0xffffff;
@@ -110,18 +123,8 @@ public class BlockDrum extends BlockContainer
     @Override
     public TileEntity createNewTileEntity(World var1)
     {
-        return null;
+        return new TileEntityDrum();
     }
-    
-    @Override
-    public TileEntity createNewTileEntity(World world, int metadata)
-    {
-        switch(metadata)
-        {
-            case 0: return new TileEntityDrum();
-            default: return null;
-        }
-    }    
     
     @Override
     public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z)
@@ -150,13 +153,85 @@ public class BlockDrum extends BlockContainer
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
     {
-        return null;
+        TileEntity te = world.getBlockTileEntity(x, y, z);
+        
+        if(te instanceof ITankContainer)
+        {
+            ITankContainer itc = (ITankContainer)te;
+            
+            ILiquidTank ilt = itc.getTank(ForgeDirection.UP, null);
+            
+            if(ilt != null)
+            {
+                LiquidStack liquid = ilt.getLiquid();
+                
+                if(liquid != null)
+                {
+                    int id = liquid.itemID;
+                    int amount = liquid.amount;
+                    
+                    ItemStack drum = new ItemStack(IndustryCore.blockDrum.blockID, 1, 0);
+                    
+                    NBTTagCompound tag;
+                    
+                    tag = drum.writeToNBT(new NBTTagCompound());
+                    
+                    tag.setInteger("liquidid", id);
+                    tag.setInteger("amount", amount);
+                    tag.setInteger("color", IndustryCore.getLiquidColor(id));
+                    
+                    drum.readFromNBT(tag);
+                }
+                else
+                {
+                    return new ItemStack(IndustryCore.blockDrum.blockID, 1, 0);
+                }
+            }
+        }
+        
+        return new ItemStack(IndustryCore.blockDrum.blockID, 1, 0);
     }
     
     @Override
     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
     {
-        return null;
+        ArrayList<ItemStack> al = new ArrayList<ItemStack>();
+        
+        TileEntity te = world.getBlockTileEntity(x, y, z);
+        
+        if(te instanceof TileEntityDrum)
+        {
+            ITankContainer itc = (ITankContainer)te;
+            
+            ILiquidTank ilt = itc.getTank(ForgeDirection.UP, null);
+            
+            if(ilt != null)
+            {
+                LiquidStack liquid = ilt.getLiquid();
+                
+                if(liquid != null)
+                {
+                    int id = liquid.itemID;
+                    int amount = liquid.amount;
+                    
+                    ItemStack drum = new ItemStack(IndustryCore.blockDrum.blockID, 1, 0);
+                    
+                    NBTTagCompound tag;
+                    
+                    tag = drum.writeToNBT(new NBTTagCompound());
+                    
+                    tag.setInteger("liquidid", id);
+                    tag.setInteger("amount", amount);
+                    tag.setInteger("color", IndustryCore.getLiquidColor(id));
+                    
+                    drum.readFromNBT(tag);
+                    
+                    al.add(drum);
+                }
+            }
+        }
+        
+        return al;
     }
     
     // @Override
@@ -177,35 +252,8 @@ public class BlockDrum extends BlockContainer
     }
     
     @Override
-    public int damageDropped(int i)
-    {
-        return i;
-    }
-    
-    @Override
     public String getTextureFile()
     {             
         return CDECore.CDE_BLOCKS;
-    }
-    
-    @Override
-    public int getBlockTextureFromSideAndMetadata(int side, int meta)
-    {
-        switch(meta)
-        {
-            default: return 0;
-        }
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getBlockTexture(IBlockAccess par1IBlockAccess, int x, int y, int z, int side)
-    {
-        int meta = par1IBlockAccess.getBlockMetadata(x, y, z);
-        
-        switch(meta)
-        {
-            default: return 0;
-        }
     }
 }
