@@ -167,7 +167,25 @@ public class BlockDrum extends BlockContainer
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity)
     {
+        TileEntity te = world.getBlockTileEntity(x, y, z);
         
+        if(te instanceof TileEntityDrum && entity instanceof EntityPlayer)
+        {
+            ItemStack is = entity.getHeldItem();
+            
+            if(is != null && is.hasTagCompound() && is.getTagCompound().hasKey("liquid"))
+            {
+                NBTTagCompound liquid = is.getTagCompound().getCompoundTag("liquid");
+               
+                NBTTagCompound tag = new NBTTagCompound();
+
+                te.writeToNBT(tag);
+                
+                tag.setCompoundTag("liquid", liquid);
+                
+                te.readFromNBT(tag);
+            }
+        }
     }
  
     @Override
