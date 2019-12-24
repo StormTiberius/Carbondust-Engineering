@@ -31,6 +31,9 @@ import net.minecraftforge.liquids.LiquidStack;
 
 public class BlockDrum extends BlockContainer
 {   
+    public static final int DRUM_CAPACITY_IRON = 16000;
+    public static final int DRUM_CAPACITY_STEEL = 256000;
+    
     public BlockDrum(int id)
     {
         super(id, Material.iron);

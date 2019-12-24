@@ -18,17 +18,14 @@ import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
 public class TileEntityDrum extends TileEntityWithSound implements ITankContainer
-{
-    public static final int DRUM_CAPACITY_IRON = 16000;
-    public static final int DRUM_CAPACITY_STEEL = 256000;
-    
+{    
     private final LiquidTank TANK;
     private boolean isRedstonePowered,isWorking,flag;
     private int counter = 60; // 5 Seconds
     
     public TileEntityDrum()
     {
-        TANK = new LiquidTank(DRUM_CAPACITY_STEEL);
+        TANK = new LiquidTank(BlockDrum.DRUM_CAPACITY_STEEL);
     }
     
     public TileEntityDrum(int capacity)
