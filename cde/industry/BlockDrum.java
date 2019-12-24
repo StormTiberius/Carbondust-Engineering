@@ -129,7 +129,31 @@ public class BlockDrum extends BlockContainer
     @Override
     public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z)
     {
-        return false;
+        if(!player.capabilities.isCreativeMode && canHarvestBlock(player, world.getBlockMetadata(x, y, z)))
+        {
+            ArrayList<ItemStack> items = getBlockDropped(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+            
+            if(world.setBlock(x, y, z, 0))
+            {
+                if(!world.isRemote)
+                {
+                    for(ItemStack is : items)
+                    {
+                        dropBlockAsItem_do(world, x, y, z, is);
+                    }
+                }
+                
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return super.removeBlockByPlayer(world, player, x, y, z);
+        }
     }
     
     @Override
