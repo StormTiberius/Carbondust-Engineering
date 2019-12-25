@@ -65,7 +65,38 @@ public class BlockDrum extends BlockContainer
 
                     if(held.getItem() instanceof IToolWrench)
                     {
-                        IToolWrench tool = (IToolWrench)held.getItem();
+                        taskWrench();
+                        
+                        return true;
+                    }
+                    else if(held.itemID == Item.stick.itemID)
+                    {
+                        taskStick();
+                        
+                        return true;
+                    }
+                    else if(LiquidContainerRegistry.isEmptyContainer(held))
+                    {
+                        taskEmptyContainer();
+                        
+                        return true;
+                    }
+                    else if(LiquidContainerRegistry.isFilledContainer(held))
+                    {
+                        taskFilledContainer();
+                        
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
+        }
+    }
+    
+    private void taskWrench()
+    {
+                                IToolWrench tool = (IToolWrench)held.getItem();
 
                         if(tool.canWrench(player, x, y, z))
                         {
@@ -82,10 +113,11 @@ public class BlockDrum extends BlockContainer
 
                             return true;
                         }
-                    }
-                    else if(held.itemID == Item.stick.itemID)
-                    {
-                        String s;
+    }
+    
+    private void taskStick()
+    {
+                                String s;
 
                         ILiquidTank tank = ted.getTank(ForgeDirection.UP, null);
 
@@ -149,12 +181,16 @@ public class BlockDrum extends BlockContainer
                         player.sendChatToPlayer(s);
 
                         return true;
-                    }
-                }
-            }
-            
-            return false;
-        }
+    }
+    
+    private void taskEmptyContainer()
+    {
+        
+    }
+    
+    private void taskFilledContainer()
+    {
+        
     }
     
     @Override
