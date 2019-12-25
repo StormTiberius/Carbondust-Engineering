@@ -8,6 +8,7 @@ package cde.industry;
 import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
 import cde.IndustryCore;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
@@ -51,29 +53,85 @@ public class BlockDrum extends BlockContainer
             TileEntity te = world.getBlockTileEntity(x, y, z);
             ItemStack held = player.getHeldItem();
 
-            if(te instanceof TileEntityDrum && held != null && held.getItem() instanceof IToolWrench)
+            if(te instanceof TileEntityDrum && held != null)
             {
-                if(player.isSneaking())
-                {
-                    dropBlockAsItem(world, x, y, z, 0, 0);
-                    world.setBlock(x, y, z, 0);
-                    
-                    return true;
-                }
-                
                 TileEntityDrum ted = (TileEntityDrum)te;
-                IToolWrench tool = (IToolWrench)held.getItem();
-
-                if(tool.canWrench(player, x, y, z))
+                
+                if(held.getItem() instanceof IToolWrench)
                 {
-                    if(!world.isRemote)
+                    IToolWrench tool = (IToolWrench)held.getItem();
+
+                    if(tool.canWrench(player, x, y, z))
                     {
-                        player.sendChatToPlayer(ted.useWrench(false));
+                        if(player.isSneaking() && world.setBlock(x, y, z, 0))
+                        {
+                            dropBlockAsItem(world, x, y, z, 0, 0);
+                            
+                            return true;
+                        }
+                        
+                        if(!world.isRemote)
+                        {
+                            player.sendChatToPlayer(ted.useWrench(false));
+                        }
+
+                        tool.wrenchUsed(player, x, y, z);
+
+                        return true;
                     }
+                }
+                else if(held.itemID == Item.stick.itemID)
+                {
+                    String s = "";
+                    
+                    ILiquidTank tank = ted.getTank(ForgeDirection.UP, null);
+                    
+                    if(tank != null)
+                    {
+                        String type;
 
-                    tool.wrenchUsed(player, x, y, z);
-
-                    return true;
+                        int capacity = tank.getCapacity();
+                        
+                        switch(capacity)
+                        {
+                            case DRUM_CAPACITY_IRON: type = "iron"; break;
+                            case DRUM_CAPACITY_STEEL: type = "steel"; break;
+                            default: type = "UNKNOWN DRUM TYPE";
+                        }
+                            
+                        if(tank.getLiquid() != null)
+                        {
+                            s = "This " + type + " drum ";
+                            
+                            int i = tank.getLiquid().amount;
+                            
+                            String amount;
+                            
+                            if(i < LiquidContainerRegistry.BUCKET_VOLUME)
+                            {
+                                amount = "has a few drops";
+                            }
+                            else
+                            {
+                                double d = (double)i / (double)capacity;
+                                
+                                DecimalFormat df = new DecimalFormat("#%");
+                                
+                                String percent = df.format(d);
+                                int buckets = i / LiquidContainerRegistry.BUCKET_VOLUME;
+                                
+                                amount = " is " + percent + " full and has " + buckets;
+                            }
+                        }
+                        else
+                        {
+                            s = "This " + type + " drum is empty";
+                        }
+                    }
+                    else
+                    {
+                        s = "ERROR: TANK IS NULL";
+                    }
                 }
             }
         }
