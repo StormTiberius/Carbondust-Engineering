@@ -10,6 +10,7 @@ import cde.CDECore;
 import cde.IndustryCore;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -27,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
+import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class BlockDrum extends BlockContainer
@@ -192,9 +194,32 @@ public class BlockDrum extends BlockContainer
     }
  
     @Override
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    public void getSubBlocks(int id, CreativeTabs tab, List list)
     {
-        par3List.add(new ItemStack(par1, 1, 0));
+        for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
+        {
+            LiquidStack liquid = entry.getValue();
+            
+            if(liquid != null)
+            {
+                liquid.amount = DRUM_CAPACITY_IRON;
+                
+                NBTTagCompound tag = liquid.writeToNBT(new NBTTagCompound());
+                
+                ItemStack drum = new ItemStack(id, 1, 0);
+                
+                if(!drum.hasTagCompound())
+                {
+                    drum.setTagCompound(new NBTTagCompound());
+                }
+                
+                drum.stackTagCompound.setTag("liquid", tag);
+
+                list.add(drum);
+            }
+        }
+        
+        list.add(new ItemStack(id, 1, 0));
     }
     
     @Override
