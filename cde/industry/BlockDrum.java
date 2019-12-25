@@ -65,96 +65,126 @@ public class BlockDrum extends BlockContainer
 
                     if(held.getItem() instanceof IToolWrench)
                     {
-                        IToolWrench tool = (IToolWrench)held.getItem();
-
-                        if(tool.canWrench(player, x, y, z))
-                        {
-                            if(player.isSneaking() && world.setBlock(x, y, z, 0))
-                            {
-                                dropBlockAsItem(world, x, y, z, 0, 0);
-
-                                return true;
-                            }
-
-                            player.sendChatToPlayer(ted.useWrench(false));
-
-                            tool.wrenchUsed(player, x, y, z);
-
-                            return true;
-                        }
+                        return taskWrench(world, x, y, z, player, held, ted);
                     }
                     else if(held.itemID == Item.stick.itemID)
                     {
-                        String s;
-
-                        ILiquidTank tank = ted.getTank(ForgeDirection.UP, null);
-
-                        if(tank != null)
-                        {
-                            String type;
-
-                            int capacity = tank.getCapacity();
-
-                            switch(capacity)
-                            {
-                                case DRUM_CAPACITY_IRON: type = "iron"; break;
-                                case DRUM_CAPACITY_STEEL: type = "steel"; break;
-                                default: type = "UNKNOWN DRUM TYPE"; break;
-                            }
-
-                            if(tank.getLiquid() != null)
-                            {
-                                LiquidStack liquid = tank.getLiquid();
-                                
-                                s = "This " + type + " drum ";
-
-                                int i = liquid.amount;
-
-                                double d = (double)i / (double)capacity;
-
-                                DecimalFormat df = new DecimalFormat("#%");
-
-                                String percent = df.format(d);
-                                
-                                if(liquid.asItemStack() != null)
-                                {
-                                    ItemStack is = liquid.asItemStack();
-                                    
-                                    String amount;
-                                    
-                                    if(i < LiquidContainerRegistry.BUCKET_VOLUME)
-                                    {
-                                        amount = "is " + percent + " full and has " + i + " drops of " + is.getDisplayName().toLowerCase() + ".";
-                                    }
-                                    else
-                                    {
-                                        int buckets = i / LiquidContainerRegistry.BUCKET_VOLUME;
-
-                                        amount = "is " + percent + " full and has " + buckets + " buckets of " + is.getDisplayName().toLowerCase() + ".";
-                                    }
-                                    
-                                    s = s.concat(amount);
-                                }
-                            }
-                            else
-                            {
-                                s = "This " + type + " drum is empty.";
-                            }
-                        }
-                        else
-                        {
-                            s = "ERROR: TANK IS NULL!";
-                        }
-
-                        player.sendChatToPlayer(s);
-
-                        return true;
+                        return taskStick(player, ted);
+                    }
+                    else if(LiquidContainerRegistry.isEmptyContainer(held))
+                    {
+                        return taskEmptyContainer();
+                    }
+                    else if(LiquidContainerRegistry.isFilledContainer(held))
+                    {
+                        return taskFilledContainer();
                     }
                 }
             }
             
             return false;
         }
+    }
+    
+    private boolean taskWrench(World world, int x, int y, int z, EntityPlayer player, ItemStack held, TileEntityDrum ted)
+    {
+        IToolWrench tool = (IToolWrench)held.getItem();
+
+        if(tool.canWrench(player, x, y, z))
+        {
+            if(player.isSneaking() && world.setBlock(x, y, z, 0))
+            {
+                dropBlockAsItem(world, x, y, z, 0, 0);
+
+                return true;
+            }
+
+            player.sendChatToPlayer(ted.useWrench(false));
+
+            tool.wrenchUsed(player, x, y, z);
+
+            return true;
+        }
+        
+        return false;
+    }
+
+    private boolean taskStick(EntityPlayer player, TileEntityDrum ted)
+    {
+        String s;
+
+        ILiquidTank tank = ted.getTank(ForgeDirection.UP, null);
+
+        if(tank != null)
+        {
+            String type;
+
+            int capacity = tank.getCapacity();
+
+            switch(capacity)
+            {
+                case DRUM_CAPACITY_IRON: type = "iron"; break;
+                case DRUM_CAPACITY_STEEL: type = "steel"; break;
+                default: type = "UNKNOWN DRUM TYPE"; break;
+            }
+
+            if(tank.getLiquid() != null)
+            {
+                LiquidStack liquid = tank.getLiquid();
+
+                s = "This " + type + " drum ";
+
+                int i = liquid.amount;
+
+                double d = (double)i / (double)capacity;
+
+                DecimalFormat df = new DecimalFormat("#%");
+
+                String percent = df.format(d);
+
+                if(liquid.asItemStack() != null)
+                {
+                    ItemStack is = liquid.asItemStack();
+
+                    String amount;
+
+                    if(i < LiquidContainerRegistry.BUCKET_VOLUME)
+                    {
+                        amount = "is " + percent + " full and has " + i + " drops of " + is.getDisplayName().toLowerCase() + ".";
+                    }
+                    else
+                    {
+                        int buckets = i / LiquidContainerRegistry.BUCKET_VOLUME;
+
+                        amount = "is " + percent + " full and has " + buckets + " buckets of " + is.getDisplayName().toLowerCase() + ".";
+                    }
+
+                    s = s.concat(amount);
+                }
+            }
+            else
+            {
+                s = "This " + type + " drum is empty.";
+            }
+        }
+        else
+        {
+            s = "ERROR: TANK IS NULL!";
+        }
+
+        player.sendChatToPlayer(s);
+
+        return true;
+    }
+
+    private boolean taskEmptyContainer()
+    {
+        return false;
+    }
+
+    private boolean taskFilledContainer()
+    {
+        return false;
     }
     
     @Override
