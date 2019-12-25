@@ -196,6 +196,9 @@ public class BlockDrum extends BlockContainer
     @Override
     public void getSubBlocks(int id, CreativeTabs tab, List list)
     {
+        ItemStack drum;
+        
+        // IRON DRUMS
         for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
         {
             LiquidStack liquid = entry.getValue();
@@ -206,20 +209,66 @@ public class BlockDrum extends BlockContainer
                 
                 NBTTagCompound tag = liquid.writeToNBT(new NBTTagCompound());
                 
-                ItemStack drum = new ItemStack(id, 1, 0);
+                drum = new ItemStack(id, 1, 0);
                 
                 if(!drum.hasTagCompound())
                 {
                     drum.setTagCompound(new NBTTagCompound());
                 }
                 
+                drum.stackTagCompound.setBoolean("steel", false);
                 drum.stackTagCompound.setTag("liquid", tag);
 
                 list.add(drum);
             }
         }
         
-        list.add(new ItemStack(id, 1, 0));
+        drum = new ItemStack(id, 1, 0);
+        
+        if(!drum.hasTagCompound())
+        {
+            drum.setTagCompound(new NBTTagCompound());
+        }
+        
+        drum.stackTagCompound.setBoolean("steel", false);
+        
+        list.add(drum);
+        
+        // STEEL DRUMS
+        for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
+        {
+            LiquidStack liquid = entry.getValue();
+            
+            if(liquid != null)
+            {
+                liquid.amount = DRUM_CAPACITY_STEEL;
+                
+                NBTTagCompound tag = liquid.writeToNBT(new NBTTagCompound());
+                
+                drum = new ItemStack(id, 1, 0);
+                
+                if(!drum.hasTagCompound())
+                {
+                    drum.setTagCompound(new NBTTagCompound());
+                }
+                
+                drum.stackTagCompound.setBoolean("steel", true);
+                drum.stackTagCompound.setTag("liquid", tag);
+
+                list.add(drum);
+            }
+        }
+        
+        drum = new ItemStack(id, 1, 0);
+        
+        if(!drum.hasTagCompound())
+        {
+            drum.setTagCompound(new NBTTagCompound());
+        }
+        
+        drum.stackTagCompound.setBoolean("steel", true);
+        
+        list.add(drum);
     }
     
     @Override
