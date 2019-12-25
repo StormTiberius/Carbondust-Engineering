@@ -18,6 +18,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -73,11 +74,11 @@ public class BlockDrum extends BlockContainer
                     }
                     else if(LiquidContainerRegistry.isEmptyContainer(held))
                     {
-                        return taskEmptyContainer();
+                        return taskEmptyContainer(world, x, y, z, player, held, ted);
                     }
                     else if(LiquidContainerRegistry.isFilledContainer(held))
                     {
-                        return taskFilledContainer();
+                        return taskFilledContainer(world, x, y, z, player, held, ted);
                     }
                 }
             }
@@ -177,13 +178,82 @@ public class BlockDrum extends BlockContainer
         return true;
     }
 
-    private boolean taskEmptyContainer()
+    private boolean taskEmptyContainer(World world, int x, int y, int z, EntityPlayer player, ItemStack held, ITankContainer drum)
     {
+        ItemStack filled = LiquidContainerRegistry.fillLiquidContainer(drum.getTank(ForgeDirection.UP, null).getLiquid(), held);
+        
+        if(filled != null)
+        {
+            int maxDrain = LiquidContainerRegistry.getLiquidForFilledItem(filled).amount;
+            
+            if(player.capabilities.isCreativeMode)
+            {
+                drum.drain(ForgeDirection.UP, maxDrain, true);
+            }
+            else if(held.stackSize == 1)
+            {
+                player.setCurrentItemOrArmor(0, filled);
+                drum.drain(ForgeDirection.UP, maxDrain, true);
+            }
+            else if(player.inventory.addItemStackToInventory(filled))
+            {
+                held.stackSize--;
+                drum.drain(ForgeDirection.UP, maxDrain, true);
+                
+                if(player instanceof EntityPlayerMP)
+                {
+                    ((EntityPlayerMP)player).mcServer.getConfigurationManager().syncPlayerInventory((EntityPlayerMP)player);
+                }
+            }                
+            
+            if(drum.getTanks(ForgeDirection.UP)[0].getLiquid() == null)
+            {
+                world.markBlockForUpdate(x, y, z);
+            }
+                
+            return true;
+        }
+        
         return false;
     }
 
-    private boolean taskFilledContainer()
+    private boolean taskFilledContainer(World world, int x, int y, int z, EntityPlayer player, ItemStack held, ITankContainer drum)
     {
+        LiquidStack fluid = LiquidContainerRegistry.getLiquidForFilledItem(held);
+        
+        if(drum.fill(ForgeDirection.UP, fluid, false) == fluid.amount)
+        {
+            if(player.capabilities.isCreativeMode)
+            {
+                drum.fill(ForgeDirection.UP, fluid, true);
+            }
+            else
+            {
+                ItemStack c = null;
+                
+                if(held.getItem().hasContainerItem())
+                {
+                    c = held.getItem().getContainerItemStack(held);
+                }
+                
+                if(c == null || held.stackSize == 1 || player.inventory.addItemStackToInventory(c))
+                {
+                    drum.fill(ForgeDirection.UP, fluid, true);
+                    
+                    if(held.stackSize == 1)
+                    {
+                        player.setCurrentItemOrArmor(0, c);
+                    }
+                    else if(held.stackSize > 1)
+                    {
+                        held.stackSize--;
+                    }
+                }
+            }
+            
+            return true;
+        }
+            
         return false;
     }
     
