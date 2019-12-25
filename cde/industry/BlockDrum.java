@@ -44,35 +44,36 @@ public class BlockDrum extends BlockContainer
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-        TileEntityDrum tei = (TileEntityDrum)world.getBlockTileEntity(x, y, z);
-
-        if (entityplayer.isSneaking())
+        if(player != null)
         {
-            return false;
-        }
-
-        Item equipped = entityplayer.getCurrentEquippedItem() != null ? entityplayer.getCurrentEquippedItem().getItem() : null;
-		
-        if (equipped instanceof IToolWrench && ((IToolWrench) equipped).canWrench(entityplayer, x, y, z))
-        {
-            if(!world.isRemote && tei != null)
+            if(player.isSneaking())
             {
-                if(tei.isPowered())
+                return false;
+            }
+
+            TileEntity te = world.getBlockTileEntity(x, y, z);
+            ItemStack held = player.getHeldItem();
+
+            if(te instanceof TileEntityDrum && held != null && held.getItem() instanceof IToolWrench)
+            {
+                TileEntityDrum ted = (TileEntityDrum)te;
+                IToolWrench tool = (IToolWrench)held.getItem();
+
+                if(tool.canWrench(player, x, y, z))
                 {
-                    entityplayer.sendChatToPlayer(tei.useWrench(false));
-                }
-                else
-                {
-                    entityplayer.sendChatToPlayer(tei.useWrench(true));
+                    if(!world.isRemote)
+                    {
+                        player.sendChatToPlayer(ted.useWrench(false));
+                    }
+
+                    tool.wrenchUsed(player, x, y, z);
+
+                    return true;
                 }
             }
-            
-            ((IToolWrench) equipped).wrenchUsed(entityplayer, x, y, z);
-            
-            return true;
-        } 
+        }
         
         return false;
     }
