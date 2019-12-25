@@ -104,29 +104,37 @@ public class BlockDrum extends BlockContainer
 
                             if(tank.getLiquid() != null)
                             {
+                                LiquidStack liquid = tank.getLiquid();
+                                
                                 s = "This " + type + " drum ";
 
-                                int i = tank.getLiquid().amount;
+                                int i = liquid.amount;
 
-                                String amount;
+                                double d = (double)i / (double)capacity;
 
-                                if(i < LiquidContainerRegistry.BUCKET_VOLUME)
+                                DecimalFormat df = new DecimalFormat("#%");
+
+                                String percent = df.format(d);
+                                
+                                if(liquid.asItemStack() != null)
                                 {
-                                    amount = "has a few drops";
+                                    ItemStack is = liquid.asItemStack();
+                                    
+                                    String amount;
+                                    
+                                    if(i < LiquidContainerRegistry.BUCKET_VOLUME)
+                                    {
+                                        amount = "is " + percent + " full and has " + i + " drops of " + is.getDisplayName().toLowerCase() + ".";
+                                    }
+                                    else
+                                    {
+                                        int buckets = i / LiquidContainerRegistry.BUCKET_VOLUME;
+
+                                        amount = "is " + percent + " full and has " + buckets + " buckets of " + is.getDisplayName().toLowerCase() + ".";
+                                    }
+                                    
+                                    s = s.concat(amount);
                                 }
-                                else
-                                {
-                                    double d = (double)i / (double)capacity;
-
-                                    DecimalFormat df = new DecimalFormat("#%");
-
-                                    String percent = df.format(d);
-                                    int buckets = i / LiquidContainerRegistry.BUCKET_VOLUME;
-
-                                    amount = "is " + percent + " full and has " + buckets + " buckets of " + tank.getLiquid().asItemStack().getDisplayName().toLowerCase() + ".";
-                                }
-
-                                s = s.concat(amount);
                             }
                             else
                             {
