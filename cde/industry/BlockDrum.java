@@ -48,95 +48,105 @@ public class BlockDrum extends BlockContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-        if(player != null)
+        if(world.isRemote)
         {
-            TileEntity te = world.getBlockTileEntity(x, y, z);
-            ItemStack held = player.getHeldItem();
-
-            if(te instanceof TileEntityDrum && held != null)
+            return true;
+        }
+        else
+        {
+            if(player != null)
             {
-                TileEntityDrum ted = (TileEntityDrum)te;
-                
-                if(held.getItem() instanceof IToolWrench)
-                {
-                    IToolWrench tool = (IToolWrench)held.getItem();
+                TileEntity te = world.getBlockTileEntity(x, y, z);
+                ItemStack held = player.getHeldItem();
 
-                    if(tool.canWrench(player, x, y, z))
+                if(te instanceof TileEntityDrum && held != null)
+                {
+                    TileEntityDrum ted = (TileEntityDrum)te;
+
+                    if(held.getItem() instanceof IToolWrench)
                     {
-                        if(player.isSneaking() && world.setBlock(x, y, z, 0))
+                        IToolWrench tool = (IToolWrench)held.getItem();
+
+                        if(tool.canWrench(player, x, y, z))
                         {
-                            dropBlockAsItem(world, x, y, z, 0, 0);
-                            
+                            if(player.isSneaking() && world.setBlock(x, y, z, 0))
+                            {
+                                dropBlockAsItem(world, x, y, z, 0, 0);
+
+                                return true;
+                            }
+
+                            player.sendChatToPlayer(ted.useWrench(false));
+
+                            tool.wrenchUsed(player, x, y, z);
+
                             return true;
                         }
-                        
-                        if(!world.isRemote)
-                        {
-                            player.sendChatToPlayer(ted.useWrench(false));
-                        }
-
-                        tool.wrenchUsed(player, x, y, z);
-
-                        return true;
                     }
-                }
-                else if(held.itemID == Item.stick.itemID)
-                {
-                    String s = "";
-                    
-                    ILiquidTank tank = ted.getTank(ForgeDirection.UP, null);
-                    
-                    if(tank != null)
+                    else if(held.itemID == Item.stick.itemID)
                     {
-                        String type;
+                        String s;
 
-                        int capacity = tank.getCapacity();
-                        
-                        switch(capacity)
+                        ILiquidTank tank = ted.getTank(ForgeDirection.UP, null);
+
+                        if(tank != null)
                         {
-                            case DRUM_CAPACITY_IRON: type = "iron"; break;
-                            case DRUM_CAPACITY_STEEL: type = "steel"; break;
-                            default: type = "UNKNOWN DRUM TYPE";
-                        }
-                            
-                        if(tank.getLiquid() != null)
-                        {
-                            s = "This " + type + " drum ";
-                            
-                            int i = tank.getLiquid().amount;
-                            
-                            String amount;
-                            
-                            if(i < LiquidContainerRegistry.BUCKET_VOLUME)
+                            String type;
+
+                            int capacity = tank.getCapacity();
+
+                            switch(capacity)
                             {
-                                amount = "has a few drops";
+                                case DRUM_CAPACITY_IRON: type = "iron"; break;
+                                case DRUM_CAPACITY_STEEL: type = "steel"; break;
+                                default: type = "UNKNOWN DRUM TYPE"; break;
+                            }
+
+                            if(tank.getLiquid() != null)
+                            {
+                                s = "This " + type + " drum ";
+
+                                int i = tank.getLiquid().amount;
+
+                                String amount;
+
+                                if(i < LiquidContainerRegistry.BUCKET_VOLUME)
+                                {
+                                    amount = "has a few drops";
+                                }
+                                else
+                                {
+                                    double d = (double)i / (double)capacity;
+
+                                    DecimalFormat df = new DecimalFormat("#%");
+
+                                    String percent = df.format(d);
+                                    int buckets = i / LiquidContainerRegistry.BUCKET_VOLUME;
+
+                                    amount = "is " + percent + " full and has " + buckets + " buckets of " + tank.getLiquid().asItemStack().getDisplayName().toLowerCase() + ".";
+                                }
+
+                                s = s.concat(amount);
                             }
                             else
                             {
-                                double d = (double)i / (double)capacity;
-                                
-                                DecimalFormat df = new DecimalFormat("#%");
-                                
-                                String percent = df.format(d);
-                                int buckets = i / LiquidContainerRegistry.BUCKET_VOLUME;
-                                
-                                amount = " is " + percent + " full and has " + buckets;
+                                s = "This " + type + " drum is empty.";
                             }
                         }
                         else
                         {
-                            s = "This " + type + " drum is empty";
+                            s = "ERROR: TANK IS NULL!";
                         }
-                    }
-                    else
-                    {
-                        s = "ERROR: TANK IS NULL";
+
+                        player.sendChatToPlayer(s);
+
+                        return true;
                     }
                 }
             }
+            
+            return false;
         }
-        
-        return false;
     }
     
     @Override
