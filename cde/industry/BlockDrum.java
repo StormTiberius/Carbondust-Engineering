@@ -48,16 +48,19 @@ public class BlockDrum extends BlockContainer
     {
         if(player != null)
         {
-            if(player.isSneaking())
-            {
-                return false;
-            }
-
             TileEntity te = world.getBlockTileEntity(x, y, z);
             ItemStack held = player.getHeldItem();
 
             if(te instanceof TileEntityDrum && held != null && held.getItem() instanceof IToolWrench)
             {
+                if(player.isSneaking())
+                {
+                    dropBlockAsItem(world, x, y, z, 0, 0);
+                    world.setBlock(x, y, z, 0);
+                    
+                    return true;
+                }
+                
                 TileEntityDrum ted = (TileEntityDrum)te;
                 IToolWrench tool = (IToolWrench)held.getItem();
 
