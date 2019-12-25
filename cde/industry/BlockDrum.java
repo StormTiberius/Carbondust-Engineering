@@ -216,7 +216,7 @@ public class BlockDrum extends BlockContainer
                     drum.setTagCompound(new NBTTagCompound());
                 }
                 
-                drum.stackTagCompound.setBoolean("steel", false);
+                drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
                 drum.stackTagCompound.setTag("liquid", tag);
 
                 list.add(drum);
@@ -230,7 +230,7 @@ public class BlockDrum extends BlockContainer
             drum.setTagCompound(new NBTTagCompound());
         }
         
-        drum.stackTagCompound.setBoolean("steel", false);
+        drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
         
         list.add(drum);
         
@@ -252,7 +252,7 @@ public class BlockDrum extends BlockContainer
                     drum.setTagCompound(new NBTTagCompound());
                 }
                 
-                drum.stackTagCompound.setBoolean("steel", true);
+                drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
                 drum.stackTagCompound.setTag("liquid", tag);
 
                 list.add(drum);
@@ -266,7 +266,7 @@ public class BlockDrum extends BlockContainer
             drum.setTagCompound(new NBTTagCompound());
         }
         
-        drum.stackTagCompound.setBoolean("steel", true);
+        drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
         
         list.add(drum);
     }
@@ -316,43 +316,30 @@ public class BlockDrum extends BlockContainer
     @Override
     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
     {
-        ArrayList<ItemStack> al = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> list = new ArrayList<ItemStack>();
         
         TileEntity te = world.getBlockTileEntity(x, y, z);
         
         if(te instanceof TileEntityDrum)
         {
-            ITankContainer itc = (ITankContainer)te;
+            NBTTagCompound tag = new NBTTagCompound();
             
-            ILiquidTank ilt = itc.getTank(ForgeDirection.UP, null);
+            te.writeToNBT(tag);
             
-            if(ilt != null)
+            ItemStack drum = new ItemStack(blockID, 1, 0);
+                    
+            if(!drum.hasTagCompound())
             {
-                LiquidStack liquid = ilt.getLiquid();
-                
-                if(liquid != null)
-                {
-                    int id = liquid.itemID;
-                    int amount = liquid.amount;
+               drum.setTagCompound(new NBTTagCompound());
+            }      
+            
+            drum.stackTagCompound.setInteger("capacity", tag.getInteger("capacity"));
+            drum.stackTagCompound.setCompoundTag("liquid", tag.getCompoundTag("liquid"));
                     
-                    ItemStack drum = new ItemStack(IndustryCore.blockDrum.blockID, 1, 0);
-                    
-                    NBTTagCompound tag;
-                    
-                    tag = drum.writeToNBT(new NBTTagCompound());
-                    
-                    tag.setInteger("liquidid", id);
-                    tag.setInteger("amount", amount);
-                    tag.setInteger("color", IndustryCore.getLiquidColor(id));
-                    
-                    drum.readFromNBT(tag);
-                    
-                    al.add(drum);
-                }
-            }
+            list.add(drum);
         }
         
-        return al;
+        return list;
     }
     
     // @Override
