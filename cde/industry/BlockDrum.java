@@ -274,43 +274,26 @@ public class BlockDrum extends BlockContainer
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
     {
+        ItemStack drum = new ItemStack(blockID, 1, 0);
+        
         TileEntity te = world.getBlockTileEntity(x, y, z);
         
-        if(te instanceof ITankContainer)
+        if(te instanceof TileEntityDrum)
         {
-            ITankContainer itc = (ITankContainer)te;
+            NBTTagCompound tag = new NBTTagCompound();
             
-            ILiquidTank ilt = itc.getTank(ForgeDirection.UP, null);
+            te.writeToNBT(tag);
             
-            if(ilt != null)
+            if(!drum.hasTagCompound())
             {
-                LiquidStack liquid = ilt.getLiquid();
-                
-                if(liquid != null)
-                {
-                    int id = liquid.itemID;
-                    int amount = liquid.amount;
-                    
-                    ItemStack drum = new ItemStack(IndustryCore.blockDrum.blockID, 1, 0);
-                    
-                    NBTTagCompound tag;
-                    
-                    tag = drum.writeToNBT(new NBTTagCompound());
-                    
-                    tag.setInteger("liquidid", id);
-                    tag.setInteger("amount", amount);
-                    tag.setInteger("color", IndustryCore.getLiquidColor(id));
-                    
-                    drum.readFromNBT(tag);
-                }
-                else
-                {
-                    return new ItemStack(IndustryCore.blockDrum.blockID, 1, 0);
-                }
+                drum.stackTagCompound = new NBTTagCompound();
             }
+            
+            drum.stackTagCompound.setInteger("capacity", tag.getInteger("capacity"));
+            drum.stackTagCompound.setCompoundTag("liquid", tag.getCompoundTag("liquid"));
         }
         
-        return new ItemStack(IndustryCore.blockDrum.blockID, 1, 0);
+        return drum;
     }
     
     @Override
