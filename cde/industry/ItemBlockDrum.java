@@ -17,6 +17,13 @@ public class ItemBlockDrum extends ItemBlock
     {
         super(id);
         maxStackSize = 1;
+        hasSubtypes = true;
+    }
+    
+    @Override
+    public int getMaxDamage()
+    {
+        return 100;
     }
     
     @Override
