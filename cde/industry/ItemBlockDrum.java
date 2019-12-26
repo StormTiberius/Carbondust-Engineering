@@ -52,14 +52,14 @@ public class ItemBlockDrum extends ItemBlock
     @Override
     public String getItemDisplayName(ItemStack is)
     {
-        String s = " Drum";
+        int capacity = 0;
         
         if(is != null && is.hasTagCompound() && is.stackTagCompound.hasKey("capacity"))
         {
-            return getType(is.stackTagCompound.getInteger("capacity")) + s;
+            capacity = is.stackTagCompound.getInteger("capacity");
         }
         
-        return getType(0) + s;
+        return getType(capacity) + " Drum";
     }
     
     private String getType(int capacity)
