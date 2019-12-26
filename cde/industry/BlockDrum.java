@@ -124,7 +124,7 @@ public class BlockDrum extends BlockContainer
             {
                 case DRUM_CAPACITY_IRON: sb.append("iron"); break;
                 case DRUM_CAPACITY_STEEL: sb.append("steel"); break;
-                default: sb.append("UNKNOWN TYPE"); break;
+                default: sb.append("UNKNOWN"); break;
             }
             
             sb.append(" drum is ");

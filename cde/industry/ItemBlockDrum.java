@@ -90,7 +90,7 @@ public class ItemBlockDrum extends ItemBlock
         {
             case BlockDrum.DRUM_CAPACITY_IRON: type = " Iron"; break;
             case BlockDrum.DRUM_CAPACITY_STEEL: type = " Steel"; break;
-            default: type = " UNKNOWN TYPE"; break;
+            default: type = " UNKNOWN"; break;
         }
         
         return name + type + " Drum";
