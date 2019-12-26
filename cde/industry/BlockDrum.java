@@ -376,9 +376,21 @@ public class BlockDrum extends BlockContainer
     @Override
     public void getSubBlocks(int id, CreativeTabs tab, List list)
     {
-        ItemStack drum;
-        
         // IRON DRUMS
+        ItemStack drum = new ItemStack(id, 1, 0);
+        
+        if(!drum.hasTagCompound())
+        {
+            drum.setTagCompound(new NBTTagCompound());
+        }
+        
+        drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
+        
+        drum.getItem().setMaxDamage(DRUM_CAPACITY_IRON);
+        drum.setItemDamage(DRUM_CAPACITY_IRON);
+        
+        list.add(drum);
+        
         for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
         {
             LiquidStack liquid = entry.getValue();
@@ -399,10 +411,14 @@ public class BlockDrum extends BlockContainer
                 drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
                 drum.stackTagCompound.setTag("liquid", tag);
 
+                drum.getItem().setMaxDamage(DRUM_CAPACITY_IRON);
+                drum.setItemDamage(DRUM_CAPACITY_IRON);
+                
                 list.add(drum);
             }
         }
         
+        // STEEL DRUMS
         drum = new ItemStack(id, 1, 0);
         
         if(!drum.hasTagCompound())
@@ -410,11 +426,13 @@ public class BlockDrum extends BlockContainer
             drum.setTagCompound(new NBTTagCompound());
         }
         
-        drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
+        drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
+        
+        drum.getItem().setMaxDamage(DRUM_CAPACITY_STEEL);
+        drum.setItemDamage(DRUM_CAPACITY_STEEL);
         
         list.add(drum);
         
-        // STEEL DRUMS
         for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
         {
             LiquidStack liquid = entry.getValue();
@@ -435,20 +453,12 @@ public class BlockDrum extends BlockContainer
                 drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
                 drum.stackTagCompound.setTag("liquid", tag);
 
+                drum.getItem().setMaxDamage(DRUM_CAPACITY_STEEL);
+                drum.setItemDamage(DRUM_CAPACITY_STEEL);
+                
                 list.add(drum);
             }
         }
-        
-        drum = new ItemStack(id, 1, 0);
-        
-        if(!drum.hasTagCompound())
-        {
-            drum.setTagCompound(new NBTTagCompound());
-        }
-        
-        drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
-        
-        list.add(drum);
     }
     
     @Override
