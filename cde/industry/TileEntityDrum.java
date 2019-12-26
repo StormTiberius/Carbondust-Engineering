@@ -21,7 +21,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
 {    
     private final LiquidTank TANK;
     private boolean isRedstonePowered,isWorking,flag;
-    private int counter = 60; // 5 Seconds
+    private int counter = 70; // 5 Seconds
     
     public TileEntityDrum()
     {
@@ -54,13 +54,13 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             isWorking = true;
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
-        else if(counter == 59)
+        else if(counter == 69)
         {
             isWorking = false;
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
         
-        if(counter < 60)
+        if(counter < 70)
         {
             counter++;
         }
