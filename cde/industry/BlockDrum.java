@@ -388,7 +388,7 @@ public class BlockDrum extends BlockContainer
             drum.setTagCompound(new NBTTagCompound());
         }
         
-        drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
+        drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_IRON);
         
         drum.setItemDamage(getDamageValue(0, DRUM_CAPACITY_IRON, drum.getMaxDamage()));
         
@@ -411,8 +411,8 @@ public class BlockDrum extends BlockContainer
                     drum.setTagCompound(new NBTTagCompound());
                 }
                 
-                drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
-                drum.stackTagCompound.setTag("liquid", tag);
+                drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_IRON);
+                drum.getTagCompound().setTag("liquid", tag);
 
                 drum.setItemDamage(getDamageValue(DRUM_CAPACITY_IRON, DRUM_CAPACITY_IRON, drum.getMaxDamage()));
                 
@@ -428,7 +428,7 @@ public class BlockDrum extends BlockContainer
             drum.setTagCompound(new NBTTagCompound());
         }
         
-        drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
+        drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_STEEL);
         
         drum.setItemDamage(getDamageValue(0, DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
         
@@ -451,8 +451,8 @@ public class BlockDrum extends BlockContainer
                     drum.setTagCompound(new NBTTagCompound());
                 }
                 
-                drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
-                drum.stackTagCompound.setTag("liquid", tag);
+                drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_STEEL);
+                drum.getTagCompound().setTag("liquid", tag);
 
                 drum.setItemDamage(getDamageValue(DRUM_CAPACITY_STEEL, DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
                 
@@ -476,11 +476,11 @@ public class BlockDrum extends BlockContainer
             
             if(!drum.hasTagCompound())
             {
-                drum.stackTagCompound = new NBTTagCompound();
+                drum.setTagCompound(new NBTTagCompound());
             }
             
-            drum.stackTagCompound.setInteger("capacity", tag.getInteger("capacity"));
-            drum.stackTagCompound.setCompoundTag("liquid", tag.getCompoundTag("liquid"));
+            drum.getTagCompound().setInteger("capacity", tag.getInteger("capacity"));
+            drum.getTagCompound().setCompoundTag("liquid", tag.getCompoundTag("liquid"));
         }
         
         return drum;
@@ -506,8 +506,8 @@ public class BlockDrum extends BlockContainer
                drum.setTagCompound(new NBTTagCompound());
             }      
             
-            drum.stackTagCompound.setInteger("capacity", tag.getInteger("capacity"));
-            drum.stackTagCompound.setCompoundTag("liquid", tag.getCompoundTag("liquid"));
+            drum.getTagCompound().setInteger("capacity", tag.getInteger("capacity"));
+            drum.getTagCompound().setCompoundTag("liquid", tag.getCompoundTag("liquid"));
                     
             list.add(drum);
         }
