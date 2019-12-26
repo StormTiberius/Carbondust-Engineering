@@ -8,7 +8,6 @@ package cde.industry;
 import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
 import cde.IndustryCore;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
