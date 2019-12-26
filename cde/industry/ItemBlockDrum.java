@@ -16,68 +16,59 @@ public class ItemBlockDrum extends ItemBlock
     public ItemBlockDrum(int id)
     {
         super(id);
-        this.maxStackSize = 1;
+        maxStackSize = 1;
     }
     
     @Override
     public void addInformation(ItemStack is, EntityPlayer player, List info, boolean flag)
     {
-        if(is != null && is.hasTagCompound())
+        if(is != null && is.hasTagCompound() && is.stackTagCompound.hasKey("capacity"))
         {
-            if(is.stackTagCompound.hasKey("capacity") && is.stackTagCompound.hasKey("liquid"))
+            String liquid = "Empty";
+            int amount = 0;
+            int capacity = is.stackTagCompound.getInteger("capacity");
+            
+            if(is.stackTagCompound.hasKey("liquid"))
             {
-                int capacity = is.stackTagCompound.getInteger("capacity");
-                
-                LiquidStack liquid = LiquidStack.loadLiquidStackFromNBT(is.stackTagCompound.getCompoundTag("liquid"));
-                
-                if(liquid != null)
+                LiquidStack ls = LiquidStack.loadLiquidStackFromNBT(is.stackTagCompound.getCompoundTag("liquid"));
+
+                if(ls != null)
                 {
-                    ItemStack ls = liquid.asItemStack();
+                    amount = ls.amount;
                     
-                    if(ls != null)
+                    ItemStack ais = ls.asItemStack();
+
+                    if(ais != null)
                     {
-                        info.add(ls.getDisplayName() + ": " + liquid.amount + " / " + capacity);
+                        liquid = ais.getDisplayName();    
                     }
-                }
+                }   
             }
+            
+            info.add(liquid + ": " + amount + " mB / " + capacity + " mB");
         }
     }
     
     @Override
     public String getItemDisplayName(ItemStack is)
     {
-        if(is != null && is.hasTagCompound())
+        String s = " Drum";
+        
+        if(is != null && is.hasTagCompound() && is.stackTagCompound.hasKey("capacity"))
         {
-            if(is.stackTagCompound.hasKey("capacity"))
-            {
-                String type;
-                
-                switch(is.stackTagCompound.getInteger("capacity"))
-                {
-                    case BlockDrum.DRUM_CAPACITY_IRON: type = " Iron "; break;
-                    case BlockDrum.DRUM_CAPACITY_STEEL: type = " Steel "; break;
-                    default: type = "UNKNOWN DRUM TYPE"; break;
-                }
-                
-                if(is.stackTagCompound.hasKey("liquid"))
-                {
-                    LiquidStack liquid = LiquidStack.loadLiquidStackFromNBT(is.stackTagCompound.getCompoundTag("liquid"));
-
-                    if(liquid != null)
-                    {   
-                        ItemStack ls = liquid.asItemStack();
-
-                        if(ls != null)
-                        {
-                            return ls.getDisplayName() + type + "Drum";
-                        }
-                    }
-                }
-                
-                return "Empty" + type + "Drum";
-            }
+            return getType(is.stackTagCompound.getInteger("capacity")) + s;
         }
         
-        return "UNKNOWN DRUM TYPE";
+        return getType(0) + s;
+    }
+    
+    private String getType(int capacity)
+    {
+        switch(capacity)
+        {
+            case BlockDrum.DRUM_CAPACITY_IRON: return "Iron";
+            case BlockDrum.DRUM_CAPACITY_STEEL: return "Steel";
+            default: return "UNKNOWN TYPE";
+        }
     }
 }
