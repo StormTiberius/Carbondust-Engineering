@@ -362,15 +362,22 @@ public class BlockDrum extends BlockContainer
         {
             ItemStack is = entity.getHeldItem();
             
-            if(is != null && is.hasTagCompound() && is.getTagCompound().hasKey("liquid"))
+            if(is != null && is.hasTagCompound())
             {
-                NBTTagCompound liquid = is.getTagCompound().getCompoundTag("liquid");
-               
+                NBTTagCompound note = is.getTagCompound();
                 NBTTagCompound tag = new NBTTagCompound();
-
+                
                 te.writeToNBT(tag);
                 
-                tag.setCompoundTag("liquid", liquid);
+                if(note.hasKey("capacity"))
+                {                
+                    tag.setInteger("capacity", note.getInteger("capacity"));
+                    
+                    if(note.hasKey("liquid"))
+                    {
+                        tag.setCompoundTag("liquid", note.getCompoundTag("liquid"));
+                    }
+                }
                 
                 te.readFromNBT(tag);
             }
