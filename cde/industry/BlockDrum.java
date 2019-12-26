@@ -93,16 +93,17 @@ public class BlockDrum extends BlockContainer
 
         if(tool.canWrench(player, x, y, z))
         {
-            if(player.isSneaking() && world.setBlock(x, y, z, 0))
+            tool.wrenchUsed(player, x, y, z);
+            
+            if(player.isSneaking())
             {
                 dropBlockAsItem(world, x, y, z, 0, 0);
-
+                world.setBlock(x, y, z, 0);
+                
                 return true;
             }
 
             player.sendChatToPlayer(ted.useWrench(false));
-
-            tool.wrenchUsed(player, x, y, z);
 
             return true;
         }
@@ -298,12 +299,6 @@ public class BlockDrum extends BlockContainer
         }
         
         return 0xffffff;
-    }
-    
-    @Override
-    public boolean hasTileEntity(int metadata)
-    {
-        return true;
     }
     
     @Override
