@@ -513,10 +513,22 @@ public class BlockDrum extends BlockContainer
                drum.setTagCompound(new NBTTagCompound());
             }      
             
-            drum.getTagCompound().setInteger("capacity", tag.getInteger("capacity"));
-            drum.getTagCompound().setCompoundTag("liquid", tag.getCompoundTag("liquid"));
+            if(tag.hasKey("capacity") && tag.hasKey("liquid"))
+            {
+                int capacity = tag.getInteger("capacity");
+                NBTTagCompound liquid = tag.getCompoundTag("liquid");
+                
+                if(liquid.hasKey("Amount"))
+                {
+                    int amount = liquid.getInteger("Amount");
                     
-            list.add(drum);
+                    drum.getTagCompound().setInteger("capacity", capacity);
+                    drum.getTagCompound().setCompoundTag("liquid", liquid);
+                    drum.setItemDamage(getDamageValue(amount, capacity, drum.getMaxDamage()));
+
+                    list.add(drum);
+                }
+            }
         }
         
         return list;
