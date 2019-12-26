@@ -9,6 +9,7 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class ItemBlockDrum extends ItemBlock
@@ -59,22 +60,39 @@ public class ItemBlockDrum extends ItemBlock
     @Override
     public String getItemDisplayName(ItemStack is)
     {
+        String name = "Empty";
+        
         int capacity = 0;
         
-        if(is != null && is.hasTagCompound() && is.getTagCompound().hasKey("capacity"))
+        if(is != null && is.hasTagCompound())
         {
-            capacity = is.getTagCompound().getInteger("capacity");
+            if(is.getTagCompound().hasKey("capacity"))
+            {
+                capacity = is.getTagCompound().getInteger("capacity");
+
+                if(is.getTagCompound().hasKey("liquid"));
+                {
+                    NBTTagCompound liquid = is.getTagCompound().getCompoundTag("liquid");
+
+                    LiquidStack ls = LiquidStack.loadLiquidStackFromNBT(liquid);
+
+                    if(ls != null && ls.asItemStack() != null)
+                    {
+                        name = ls.asItemStack().getDisplayName();
+                    }
+                }
+            }
         }
         
         String type;
         
         switch(capacity)
         {
-            case BlockDrum.DRUM_CAPACITY_IRON: type = "Iron"; break;
-            case BlockDrum.DRUM_CAPACITY_STEEL: type = "Steel"; break;
-            default: type = "UNKNOWN TYPE"; break;
+            case BlockDrum.DRUM_CAPACITY_IRON: type = " Iron"; break;
+            case BlockDrum.DRUM_CAPACITY_STEEL: type = " Steel"; break;
+            default: type = " UNKNOWN TYPE"; break;
         }
         
-        return type + " Drum";
+        return name + type + " Drum";
     }
 }
