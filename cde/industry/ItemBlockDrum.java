@@ -29,15 +29,15 @@ public class ItemBlockDrum extends ItemBlock
     @Override
     public void addInformation(ItemStack is, EntityPlayer player, List info, boolean flag)
     {
-        if(is != null && is.hasTagCompound() && is.stackTagCompound.hasKey("capacity"))
+        if(is != null && is.hasTagCompound() && is.getTagCompound().hasKey("capacity"))
         {
             String liquid = "Empty";
             int amount = 0;
-            int capacity = is.stackTagCompound.getInteger("capacity");
+            int capacity = is.getTagCompound().getInteger("capacity");
             
-            if(is.stackTagCompound.hasKey("liquid"))
+            if(is.getTagCompound().hasKey("liquid"))
             {
-                LiquidStack ls = LiquidStack.loadLiquidStackFromNBT(is.stackTagCompound.getCompoundTag("liquid"));
+                LiquidStack ls = LiquidStack.loadLiquidStackFromNBT(is.getTagCompound().getCompoundTag("liquid"));
 
                 if(ls != null)
                 {
@@ -61,9 +61,9 @@ public class ItemBlockDrum extends ItemBlock
     {
         int capacity = 0;
         
-        if(is != null && is.hasTagCompound() && is.stackTagCompound.hasKey("capacity"))
+        if(is != null && is.hasTagCompound() && is.getTagCompound().hasKey("capacity"))
         {
-            capacity = is.stackTagCompound.getInteger("capacity");
+            capacity = is.getTagCompound().getInteger("capacity");
         }
         
         String type;
