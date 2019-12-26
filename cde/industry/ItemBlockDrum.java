@@ -66,16 +66,15 @@ public class ItemBlockDrum extends ItemBlock
             capacity = is.stackTagCompound.getInteger("capacity");
         }
         
-        return getType(capacity) + " Drum";
-    }
-    
-    private String getType(int capacity)
-    {
+        String type;
+        
         switch(capacity)
         {
-            case BlockDrum.DRUM_CAPACITY_IRON: return "Iron";
-            case BlockDrum.DRUM_CAPACITY_STEEL: return "Steel";
-            default: return "UNKNOWN TYPE";
+            case BlockDrum.DRUM_CAPACITY_IRON: type = "Iron"; break;
+            case BlockDrum.DRUM_CAPACITY_STEEL: type = "Steel"; break;
+            default: type = "UNKNOWN TYPE"; break;
         }
+        
+        return type + " Drum";
     }
 }
