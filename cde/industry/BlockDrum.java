@@ -113,69 +113,79 @@ public class BlockDrum extends BlockContainer
 
     private boolean taskStick(EntityPlayer player, TileEntityDrum ted)
     {
-        String s;
-
+        StringBuilder sb = new StringBuilder("This ");
+        
         ILiquidTank tank = ted.getTank(ForgeDirection.UP, null);
-
+        
         if(tank != null)
         {
-            String type;
-
             int capacity = tank.getCapacity();
-
+            
             switch(capacity)
             {
-                case DRUM_CAPACITY_IRON: type = "iron"; break;
-                case DRUM_CAPACITY_STEEL: type = "steel"; break;
-                default: type = "UNKNOWN DRUM TYPE"; break;
+                case DRUM_CAPACITY_IRON: sb.append("iron"); break;
+                case DRUM_CAPACITY_STEEL: sb.append("steel"); break;
+                default: sb.append("UNKNOWN TYPE"); break;
             }
-
-            if(tank.getLiquid() != null)
+            
+            sb.append(" drum is ");
+            
+            LiquidStack liquid = tank.getLiquid();
+            
+            if(liquid != null)
             {
-                LiquidStack liquid = tank.getLiquid();
-
-                s = "This " + type + " drum ";
-
-                int i = liquid.amount;
-
-                double d = (double)i / (double)capacity;
-
-                DecimalFormat df = new DecimalFormat("#%");
-
-                String percent = df.format(d);
-
-                if(liquid.asItemStack() != null)
+                int amount = liquid.amount;
+                int percent = amount * 100 / capacity;
+            
+                sb.append(percent);
+                sb.append("% full and has ");
+                
+                if(amount < LiquidContainerRegistry.BUCKET_VOLUME)
                 {
-                    ItemStack is = liquid.asItemStack();
-
-                    String amount;
-
-                    if(i < LiquidContainerRegistry.BUCKET_VOLUME)
+                    sb.append(amount);
+                    sb.append(" drop");
+                    
+                    if(amount > 1)
                     {
-                        amount = "is " + percent + " full and has " + i + " drops of " + is.getDisplayName().toLowerCase() + ".";
+                        sb.append("s");
                     }
-                    else
-                    {
-                        int buckets = i / LiquidContainerRegistry.BUCKET_VOLUME;
-
-                        amount = "is " + percent + " full and has " + buckets + " buckets of " + is.getDisplayName().toLowerCase() + ".";
-                    }
-
-                    s = s.concat(amount);
                 }
+                else
+                {
+                    int buckets = amount / LiquidContainerRegistry.BUCKET_VOLUME;
+    
+                    sb.append(buckets);
+                    sb.append(" bucket");
+                    
+                    if(buckets > 1)
+                    {
+                        sb.append("s");
+                    }
+                }
+                
+                sb.append(" of ");
+                
+                ItemStack is = liquid.asItemStack();
+                
+                if(is != null)
+                {    
+                    sb.append(is.getDisplayName().toLowerCase());
+                }
+                
+                sb.append(".");
             }
             else
             {
-                s = "This " + type + " drum is empty.";
+                sb.append("empty.");
             }
         }
         else
         {
-            s = "ERROR: TANK IS NULL!";
+            sb = new StringBuilder("ERROR: TANK IS NULL!");
         }
-
-        player.sendChatToPlayer(s);
-
+    
+        player.sendChatToPlayer(sb.toString());
+    
         return true;
     }
 
