@@ -36,8 +36,8 @@ import net.minecraftforge.liquids.LiquidStack;
 
 public class BlockDrum extends BlockContainer
 {   
-    public static final int DRUM_CAPACITY_IRON = 16000;
-    public static final int DRUM_CAPACITY_STEEL = 256000;
+    public static final int DRUM_CAPACITY_IRON = 100000;
+    public static final int DRUM_CAPACITY_STEEL = 200000;
     
     public BlockDrum(int id)
     {
@@ -386,8 +386,7 @@ public class BlockDrum extends BlockContainer
         
         drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
         
-        drum.getItem().setMaxDamage(DRUM_CAPACITY_IRON);
-        drum.setItemDamage(DRUM_CAPACITY_IRON);
+        drum.setItemDamage(getDamageValue(0, DRUM_CAPACITY_IRON, drum.getMaxDamage()));
         
         list.add(drum);
         
@@ -411,8 +410,7 @@ public class BlockDrum extends BlockContainer
                 drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_IRON);
                 drum.stackTagCompound.setTag("liquid", tag);
 
-                drum.getItem().setMaxDamage(DRUM_CAPACITY_IRON);
-                drum.setItemDamage(DRUM_CAPACITY_IRON);
+                drum.setItemDamage(getDamageValue(DRUM_CAPACITY_IRON, DRUM_CAPACITY_IRON, drum.getMaxDamage()));
                 
                 list.add(drum);
             }
@@ -428,8 +426,7 @@ public class BlockDrum extends BlockContainer
         
         drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
         
-        drum.getItem().setMaxDamage(DRUM_CAPACITY_STEEL);
-        drum.setItemDamage(DRUM_CAPACITY_STEEL);
+        drum.setItemDamage(getDamageValue(0, DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
         
         list.add(drum);
         
@@ -453,8 +450,7 @@ public class BlockDrum extends BlockContainer
                 drum.stackTagCompound.setInteger("capacity", DRUM_CAPACITY_STEEL);
                 drum.stackTagCompound.setTag("liquid", tag);
 
-                drum.getItem().setMaxDamage(DRUM_CAPACITY_STEEL);
-                drum.setItemDamage(DRUM_CAPACITY_STEEL);
+                drum.setItemDamage(getDamageValue(DRUM_CAPACITY_STEEL, DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
                 
                 list.add(drum);
             }
@@ -534,7 +530,21 @@ public class BlockDrum extends BlockContainer
     
     @Override
     public String getTextureFile()
-    {             
+    {
         return CDECore.CDE_BLOCKS;
+    }
+    
+    private int getDamageValue(int amount, int capacity, int max)
+    {
+        int i = amount * max / capacity;
+       
+        i = max - i;
+        
+        if(i == 0)
+        {
+            i++;
+        }
+        
+        return i;
     }
 }
