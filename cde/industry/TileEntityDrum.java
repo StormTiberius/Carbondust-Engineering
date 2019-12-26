@@ -78,11 +78,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     public String useWrench(boolean flag)
     {
-        String liquidName = TANK.getLiquid().asItemStack().getDisplayName();
-        int i = TANK.getLiquid().amount;
-        int ii = TANK.getCapacity();
-        
-        return liquidName + " Drum: " + i + " / " + ii;
+        return "Drum by CDE Industries";
     }
     
     @Override
