@@ -9,80 +9,75 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class ItemBlockDrum extends ItemBlock implements ILiquidTank
+public class ItemBlockDrum extends ItemBlock
 {
     public ItemBlockDrum(int id)
     {
         super(id);
+        this.maxStackSize = 1;
     }
     
     @Override
-    public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag)
+    public void addInformation(ItemStack is, EntityPlayer player, List info, boolean flag)
     {
-        
+        if(is != null && is.hasTagCompound())
+        {
+            if(is.stackTagCompound.hasKey("capacity") && is.stackTagCompound.hasKey("liquid"))
+            {
+                int capacity = is.stackTagCompound.getInteger("capacity");
+                
+                LiquidStack liquid = LiquidStack.loadLiquidStackFromNBT(is.stackTagCompound.getCompoundTag("liquid"));
+                
+                if(liquid != null)
+                {
+                    ItemStack ls = liquid.asItemStack();
+                    
+                    if(ls != null)
+                    {
+                        info.add(ls.getDisplayName() + ": " + liquid.amount + " / " + capacity);
+                    }
+                }
+            }
+        }
     }
     
     @Override
     public String getItemDisplayName(ItemStack is)
     {
-        return "";
-    }
-    
-    /**
-     * @return LiquidStack representing the liquid contained in the tank, null if empty.
-     */
-    @Override
-    public LiquidStack getLiquid()
-    {
-        return null;
-    }
+        if(is != null && is.hasTagCompound())
+        {
+            if(is.stackTagCompound.hasKey("capacity"))
+            {
+                String type;
+                
+                switch(is.stackTagCompound.getInteger("capacity"))
+                {
+                    case BlockDrum.DRUM_CAPACITY_IRON: type = " Iron "; break;
+                    case BlockDrum.DRUM_CAPACITY_STEEL: type = " Steel "; break;
+                    default: type = "UNKNOWN DRUM TYPE"; break;
+                }
+                
+                if(is.stackTagCompound.hasKey("liquid"))
+                {
+                    LiquidStack liquid = LiquidStack.loadLiquidStackFromNBT(is.stackTagCompound.getCompoundTag("liquid"));
 
-    /**
-     * @return capacity of this tank
-     */
-    @Override
-    public int getCapacity()
-    {
-        return 0;
-    }
+                    if(liquid != null)
+                    {   
+                        ItemStack ls = liquid.asItemStack();
 
-    /**
-     *
-     * @param resource
-     * @param doFill
-     * @return Amount of liquid used for filling.
-     */
-    @Override
-    public int fill(LiquidStack resource, boolean doFill)
-    {
-        return 0;
-    }
-    
-    /**
-     *
-     * @param maxDrain
-     * @param doDrain
-     * @return Null if nothing was drained, otherwise a LiquidStack containing the drained.
-     */
-    @Override
-    public LiquidStack drain(int maxDrain, boolean doDrain)
-    {
-        return null;
-    }
-
-    /**
-     * Positive values indicate a positive liquid pressure (liquid wants to leave this tank)
-     * Negative values indicate a negative liquid pressure (liquid wants to fill this tank)
-     * Zero indicates no pressure
-     *
-     * @return a number indicating tank pressure
-     */
-    @Override
-    public int getTankPressure()
-    {
-        return 0;
+                        if(ls != null)
+                        {
+                            return ls.getDisplayName() + type + "Drum";
+                        }
+                    }
+                }
+                
+                return "Empty" + type + "Drum";
+            }
+        }
+        
+        return "UNKNOWN DRUM TYPE";
     }
 }
