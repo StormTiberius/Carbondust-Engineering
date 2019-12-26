@@ -28,11 +28,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         TANK = new LiquidTank(BlockDrum.DRUM_CAPACITY_STEEL);
     }
     
-    public TileEntityDrum(int capacity)
-    {
-        TANK = new LiquidTank(capacity);
-    }
-    
     @Override
     public void updateEntity()
     {
