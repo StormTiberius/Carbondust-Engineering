@@ -504,30 +504,39 @@ public class BlockDrum extends BlockContainer
         {
             NBTTagCompound tag = new NBTTagCompound();
             
-            te.writeToNBT(tag);
+            te.writeToNBT(tag);    
             
-            ItemStack drum = new ItemStack(blockID, 1, 0);
-                    
-            if(!drum.hasTagCompound())
-            {
-               drum.setTagCompound(new NBTTagCompound());
-            }      
-            
-            if(tag.hasKey("capacity") && tag.hasKey("liquid"))
+            if(tag.hasKey("capacity"))
             {
                 int capacity = tag.getInteger("capacity");
-                NBTTagCompound liquid = tag.getCompoundTag("liquid");
                 
-                if(liquid.hasKey("Amount"))
-                {
-                    int amount = liquid.getInteger("Amount");
+                ItemStack drum = new ItemStack(blockID, 1, 0);
                     
-                    drum.getTagCompound().setInteger("capacity", capacity);
-                    drum.getTagCompound().setCompoundTag("liquid", liquid);
-                    drum.setItemDamage(getDamageValue(amount, capacity, drum.getMaxDamage()));
+                if(!drum.hasTagCompound())
+                {
+                   drum.setTagCompound(new NBTTagCompound());
+                }  
 
-                    list.add(drum);
+                if(tag.hasKey("liquid"))
+                {
+                    NBTTagCompound liquid = tag.getCompoundTag("liquid");
+
+                    if(liquid.hasKey("Amount"))
+                    {
+                        int amount = liquid.getInteger("Amount");
+
+                        drum.getTagCompound().setInteger("capacity", capacity);
+                        drum.getTagCompound().setCompoundTag("liquid", liquid);
+                        drum.setItemDamage(getDamageValue(amount, capacity, drum.getMaxDamage()));
+                    }
                 }
+                else
+                {
+                    drum.getTagCompound().setInteger("capacity", capacity);
+                    drum.setItemDamage(getDamageValue(0, capacity, drum.getMaxDamage()));
+                }
+                
+                list.add(drum);
             }
         }
         
