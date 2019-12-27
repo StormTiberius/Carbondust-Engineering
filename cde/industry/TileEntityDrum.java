@@ -21,7 +21,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
 {    
     private final LiquidTank TANK;
     private boolean isRedstonePowered,isWorking,flag;
-    private int counter = 70; // 5 Seconds
+    private int counter = 70; // 3.5 Seconds
     
     public TileEntityDrum()
     {
@@ -148,7 +148,14 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             
             if(i > 0)
             {
-                counter = 0;
+                if(counter > 69)
+                {
+                    counter = 0;
+                }
+                else
+                {
+                    counter = 1;
+                }
             }
             
             return i;
@@ -172,7 +179,14 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             
             if(ls != null)
             {
-                counter = 0;
+                if(counter > 69)
+                {
+                    counter = 0;
+                }
+                else
+                {
+                    counter = 1;
+                }
             }
             
             return ls;
