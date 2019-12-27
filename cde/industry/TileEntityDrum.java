@@ -73,7 +73,16 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     public String useWrench(boolean flag)
     {
-        return "Drum by CDE Industries";
+        String type;
+        
+        switch(TANK.getCapacity())
+        {
+            case BlockDrum.DRUM_CAPACITY_IRON: type = "Iron"; break;
+            case BlockDrum.DRUM_CAPACITY_STEEL: type = "Steel"; break;
+            default: type = "UNKNOWN"; break;
+        }
+        
+        return type + " Drum by CDE Industries";
     }
     
     @Override
