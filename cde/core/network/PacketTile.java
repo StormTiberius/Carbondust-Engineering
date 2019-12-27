@@ -3,6 +3,7 @@ package cde.core.network;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import net.minecraft.tileentity.TileEntity;
 
 public abstract class PacketTile extends PacketCDE
 {
@@ -10,11 +11,11 @@ public abstract class PacketTile extends PacketCDE
     
     public PacketTile(){}
     
-    public PacketTile(int xCoord, int yCoord, int zCoord)
+    public PacketTile(TileEntity te)
     {
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
-        this.zCoord = zCoord;
+        this.xCoord = te.xCoord;
+        this.yCoord = te.yCoord;
+        this.zCoord = te.zCoord;
     }
 
     @Override
