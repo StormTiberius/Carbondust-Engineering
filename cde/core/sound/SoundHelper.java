@@ -5,9 +5,12 @@
 
 package cde.core.sound;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import static net.minecraft.client.audio.SoundManager.sndSystem;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class SoundHelper
 {
@@ -188,6 +191,46 @@ public class SoundHelper
             }
 
             SOURCES.clear();
+        }
+    }
+    
+    public static void receivePacket(Object packet, EntityPlayer player)
+    {
+        DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
+        
+        try
+        {
+            int xCoord = data.readInt();
+            int yCoord = data.readInt();
+            int zCoord = data.readInt();
+            
+            float volume = data.readFloat();
+            float pitch = data.readFloat();
+            
+            boolean updateVolume = data.readBoolean();
+            boolean updatePitch = data.readBoolean();
+            
+            for(Object o : SOURCES)
+            {
+                TileEntityWithSound te = (TileEntityWithSound)o;
+                
+                if(te.xCoord == xCoord && te.yCoord == yCoord && te.zCoord == zCoord)
+                {
+                    if(updateVolume)
+                    {
+                        sndSystem.setVolume(te.getSourceName(), volume * soundVolume);
+                    }
+                    
+                    if(updatePitch)
+                    {
+                        sndSystem.setPitch(te.getSourceName(), pitch);
+                    }
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
         }
     }
 }
