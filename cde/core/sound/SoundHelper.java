@@ -11,7 +11,7 @@ import static net.minecraft.client.audio.SoundManager.sndSystem;
 
 public class SoundHelper
 {
-    private static final ArrayList sources = new ArrayList<TileEntityWithSound>();
+    private static final ArrayList SOURCES = new ArrayList<TileEntityWithSound>();
     private static Minecraft mc;
     private static boolean init;
     private static float soundVolume,masterVolume;
@@ -39,9 +39,9 @@ public class SoundHelper
     
     private static void updateVolume()
     {
-        if(!sources.isEmpty())
+        if(!SOURCES.isEmpty())
         {
-            for(Object object : sources)
+            for(Object object : SOURCES)
             {
                 TileEntityWithSound te = (TileEntityWithSound)object;
                 sndSystem.setVolume(te.getSourceName(), te.getVolume() * soundVolume);
@@ -86,14 +86,14 @@ public class SoundHelper
         sndSystem.newSource(src.priority, src.sourceName, src.url, src.identifier, src.toLoop, src.x, src.y, src.z, src.attModel, src.distOrRoll);
         sndSystem.setVolume(src.sourceName, te.getVolume() * soundVolume);
         sndSystem.setPitch(src.sourceName, te.getPitch());
-        sources.add(te);
+        SOURCES.add(te);
     }
     
     public static void removeSource(TileEntityWithSound a)
     {
         Object temp = null;
         
-        for(Object object : sources)
+        for(Object object : SOURCES)
         {
             TileEntityWithSound b = (TileEntityWithSound)object;
             
@@ -106,7 +106,7 @@ public class SoundHelper
         
         if(temp != null)
         {
-            sources.remove(temp);
+            SOURCES.remove(temp);
             stopTileSound(a);
             sndSystem.removeSource(a.getSourceName());
         }
@@ -114,16 +114,16 @@ public class SoundHelper
     
     public static void removeAll()
     {
-        if(!sources.isEmpty())
+        if(!SOURCES.isEmpty())
         {
-            for(Object object : sources)
+            for(Object object : SOURCES)
             {
                 TileEntityWithSound te = (TileEntityWithSound)object;
                 stopTileSound(te);
                 sndSystem.removeSource(te.getSourceName());
             }
 
-            sources.clear();
+            SOURCES.clear();
         }
     }
 }
