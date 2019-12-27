@@ -5,8 +5,6 @@
 
 package cde.core.sound;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import static net.minecraft.client.audio.SoundManager.sndSystem;
@@ -194,43 +192,24 @@ public class SoundHelper
         }
     }
     
-    public static void receivePacket(Object packet, EntityPlayer player)
+    public static void receivePacket(PacketTileSound packet, EntityPlayer player)
     {
-        DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
-        
-        try
+        for(Object o : SOURCES)
         {
-            int xCoord = data.readInt();
-            int yCoord = data.readInt();
-            int zCoord = data.readInt();
-            
-            float volume = data.readFloat();
-            float pitch = data.readFloat();
-            
-            boolean updateVolume = data.readBoolean();
-            boolean updatePitch = data.readBoolean();
-            
-            for(Object o : SOURCES)
+            TileEntityWithSound te = (TileEntityWithSound)o;
+
+            if(te.xCoord == packet.xCoord && te.yCoord == packet.yCoord && te.zCoord == packet.zCoord)
             {
-                TileEntityWithSound te = (TileEntityWithSound)o;
-                
-                if(te.xCoord == xCoord && te.yCoord == yCoord && te.zCoord == zCoord)
+                if(packet.updateVolume)
                 {
-                    if(updateVolume)
-                    {
-                        sndSystem.setVolume(te.getSourceName(), volume * soundVolume);
-                    }
-                    
-                    if(updatePitch)
-                    {
-                        sndSystem.setPitch(te.getSourceName(), pitch);
-                    }
+                    sndSystem.setVolume(te.getSourceName(), packet.volume * soundVolume);
+                }
+
+                if(packet.updatePitch)
+                {
+                    sndSystem.setPitch(te.getSourceName(), packet.pitch);
                 }
             }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
         }
     }
 }
