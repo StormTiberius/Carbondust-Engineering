@@ -13,14 +13,19 @@ import java.io.IOException;
 
 public class PacketTileSound extends PacketTile
 {
-    private float volume,pitch;
+    public float volume,pitch;
+    public boolean updateVolume,updatePitch;
     
-    public PacketTileSound(TileEntityWithSound te)
+    public PacketTileSound(){}
+    
+    public PacketTileSound(TileEntityWithSound te, boolean updateVolume, boolean updatePitch)
     {
         super(te);
         
         this.volume = te.getVolume();
         this.pitch = te.getPitch();
+        this.updateVolume = updateVolume;
+        this.updatePitch = updatePitch;
     }
     
     @Override
@@ -36,6 +41,9 @@ public class PacketTileSound extends PacketTile
         
         data.writeFloat(volume);
         data.writeFloat(pitch);
+        
+        data.writeBoolean(updateVolume);
+        data.writeBoolean(updatePitch);
     }
 
     @Override
@@ -45,5 +53,8 @@ public class PacketTileSound extends PacketTile
         
         volume = data.readFloat();
         pitch = data.readFloat();
+        
+        updateVolume = data.readBoolean();
+        updatePitch = data.readBoolean();
     }
 }
