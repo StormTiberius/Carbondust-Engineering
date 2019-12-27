@@ -13,7 +13,7 @@ public class SoundHelper
 {
     private static final ArrayList SOURCES = new ArrayList<TileEntityWithSound>();
     private static Minecraft mc;
-    private static boolean init;
+    private static boolean init,resume;
     private static float soundVolume,masterVolume;
     
     public static void initSoundHelper()
@@ -34,6 +34,36 @@ public class SoundHelper
                 soundVolume = masterVolume;
                 updateVolume();
             }
+            
+            if(mc.isGamePaused && !resume)
+            {
+                muteSources(true);
+                resume = true;
+            }
+            else if(!mc.isGamePaused && resume)
+            {
+                muteSources(false);
+                resume = false;
+            }
+        }
+    }
+    
+    private static void muteSources(boolean flag)
+    {
+        if(flag)
+        {
+            if(!SOURCES.isEmpty())
+            {
+                for(Object object : SOURCES)
+                {
+                    TileEntityWithSound te = (TileEntityWithSound)object;
+                    sndSystem.setVolume(te.getSourceName(), 0.0F);
+                }
+            }
+        }
+        else
+        {
+            updateVolume();
         }
     }
     
@@ -45,6 +75,40 @@ public class SoundHelper
             {
                 TileEntityWithSound te = (TileEntityWithSound)object;
                 sndSystem.setVolume(te.getSourceName(), te.getVolume() * soundVolume);
+            }
+        }
+    }
+    
+    public static void setVolume(TileEntityWithSound a)
+    {
+        if(!SOURCES.isEmpty())
+        {
+            for(Object object : SOURCES)
+            {
+                TileEntityWithSound b = (TileEntityWithSound)object;
+                
+                if(a.xCoord == b.xCoord && a.yCoord == b.yCoord && a.zCoord == b.zCoord)
+                {
+                    sndSystem.setVolume(a.getSourceName(), a.getVolume() * soundVolume);
+                    break;
+                }
+            }
+        }
+    }
+        
+    public static void setPitch(TileEntityWithSound a)
+    {
+        if(!SOURCES.isEmpty())
+        {
+            for(Object object : SOURCES)
+            {
+                TileEntityWithSound b = (TileEntityWithSound)object;
+                
+                if(a.xCoord == b.xCoord && a.yCoord == b.yCoord && a.zCoord == b.zCoord)
+                {
+                    sndSystem.setPitch(a.getSourceName(), a.getPitch());
+                    break;
+                }
             }
         }
     }
