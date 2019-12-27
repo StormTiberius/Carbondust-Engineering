@@ -4,7 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public abstract class PacketEntity extends PacketCDE
+public class PacketEntity extends PacketCDE
 {
     public int entityId;
 
@@ -15,6 +15,12 @@ public abstract class PacketEntity extends PacketCDE
         this.entityId = entityId;
     }
 
+    @Override
+    public byte getID()
+    {
+        return PacketIds.ENTITY;
+    }
+    
     @Override
     public void writeData(DataOutputStream data) throws IOException
     {
