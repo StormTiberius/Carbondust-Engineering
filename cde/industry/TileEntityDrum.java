@@ -89,15 +89,21 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     public void readFromNBT(NBTTagCompound tag)
     {
         super.readFromNBT(tag);
-
-        TANK.setCapacity(tag.getInteger("capacity"));
         
-        if(tag.hasKey("liquid"))
+        if(tag.hasKey("capacity"))
         {
-            TANK.setLiquid(LiquidStack.loadLiquidStackFromNBT(tag.getCompoundTag("liquid")));
+            TANK.setCapacity(tag.getInteger("capacity"));
+        
+            if(tag.hasKey("liquid"))
+            {
+                TANK.setLiquid(LiquidStack.loadLiquidStackFromNBT(tag.getCompoundTag("liquid")));
+            }
         }
         
-        isWorking = tag.getBoolean("isworking");
+        if(tag.hasKey("isworking"))
+        {
+            isWorking = tag.getBoolean("isworking");
+        }
     }
 
     @Override
