@@ -17,9 +17,7 @@ public class PacketTileSound extends PacketTile
     
     public PacketTileSound(TileEntityWithSound te)
     {
-        this.xCoord = te.xCoord;
-        this.yCoord = te.yCoord;
-        this.zCoord = te.zCoord;
+        super(te);
         
         this.volume = te.getVolume();
         this.pitch = te.getPitch();
