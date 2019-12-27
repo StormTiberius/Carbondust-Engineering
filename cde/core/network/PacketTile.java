@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class PacketTile extends PacketCDE
+public class PacketTile extends PacketCDE
 {
     public int xCoord,yCoord,zCoord;
     
@@ -18,6 +18,12 @@ public abstract class PacketTile extends PacketCDE
         this.zCoord = te.zCoord;
     }
 
+    @Override
+    public byte getID()
+    {
+        return PacketIds.TILE;
+    }
+    
     @Override
     public void writeData(DataOutputStream data) throws IOException
     {
