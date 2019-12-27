@@ -171,8 +171,8 @@ public class IndustryCore
         {
             try
             {
-                String[] splits = s.split(".");
-                
+                String[] splits = s.split("\\.", 2);
+
                 int i = Integer.parseInt(splits[1]);
                 
                 NAME_COLOR_MAP.put(splits[0], i);
