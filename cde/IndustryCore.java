@@ -57,13 +57,14 @@ public class IndustryCore
     private static final Color WATER = new Color(3097845);
     private static final Color CREOSOTE = new Color(7037952);
     private static final Color HONEY = new Color(235,200,60);
-    private static final Color OIL = new Color(263172);
+    private static final Color OIL = new Color(21,21,21);
     private static final Color ICE = new Color(198,253,253);
     private static final Color MILK = new Color(245,245,245);
     private static final Color SEEDOIL = new Color(225,225,150);
     private static final Color JUICE = new Color(145,200,70);
     private static final Color LAVA = new Color(13982483);
-    private static final Color FUEL = new Color(9735936);
+    private static final Color FUEL = new Color(200,200,5);
+    private static final Color GLASS = new Color(224,224,224);
     private static final Color DEFAULT = new Color(255,255,255);
     
     private static final Map<String, Color> NAME_COLOR_MAP = new HashMap<String, Color>();
@@ -185,6 +186,7 @@ public class IndustryCore
         NAME_COLOR_MAP.put("juice", JUICE);
         NAME_COLOR_MAP.put("Lava", LAVA);
         NAME_COLOR_MAP.put("Fuel", FUEL);
+        NAME_COLOR_MAP.put("Glass", GLASS);
     }
     
     private static void parseLiquidColors()
