@@ -49,19 +49,19 @@ public class IndustryCore
     
     public static Block blockDrum;
     
-    private static final Color MEAD = new Color(16761872);
+    private static final Color MEAD = new Color(220,190,115);
     private static final Color COOLANT = new Color(405051);
-    private static final Color BIOMASS = new Color(2994432);
+    private static final Color BIOMASS = new Color(105,200,60);
     private static final Color STEAM = new Color(11711154);
-    private static final Color BIOFUEL = new Color(4337234);
+    private static final Color BIOFUEL = new Color(238,140,20);
     private static final Color WATER = new Color(3097845);
     private static final Color CREOSOTE = new Color(7037952);
-    private static final Color HONEY = new Color(16766977);
+    private static final Color HONEY = new Color(235,200,60);
     private static final Color OIL = new Color(263172);
-    private static final Color ICE = new Color(5429234);
-    private static final Color MILK = new Color(12961221);
-    private static final Color SEEDOIL = new Color(16777128);
-    private static final Color JUICE = new Color(4246016);
+    private static final Color ICE = new Color(198,253,253);
+    private static final Color MILK = new Color(245,245,245);
+    private static final Color SEEDOIL = new Color(225,225,150);
+    private static final Color JUICE = new Color(145,200,70);
     private static final Color LAVA = new Color(13982483);
     private static final Color FUEL = new Color(9735936);
     private static final Color DEFAULT = new Color(255,255,255);
