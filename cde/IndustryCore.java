@@ -23,6 +23,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
+import java.awt.Color;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,27 +49,27 @@ public class IndustryCore
     
     public static Block blockDrum;
     
-    private static final String[] LIQUID_COLOR_DEFAULTS = {
-        "mead.16777215",
-        "coolant.16777215",
-        "biomass.16777215",
-        "Steam.16777215",
-        "biofuel.6079922",
-        "Water.16777215",
-        "Creosote Oil.16777215",
-        "honey.16777215",
-        "Oil.16777215",
-        "ice.16777215",
-        "milk.16777215",
-        "seedoil.16777215",
-        "juice.16777215",
-        "Lava.16777215",
-        "Fuel.16777215"};
+    private static final Color MEAD = new Color(16761872);
+    private static final Color COOLANT = new Color(405051);
+    private static final Color BIOMASS = new Color(2994432);
+    private static final Color STEAM = new Color(11711154);
+    private static final Color BIOFUEL = new Color(4337234);
+    private static final Color WATER = new Color(3097845);
+    private static final Color CREOSOTE = new Color(7037952);
+    private static final Color HONEY = new Color(16766977);
+    private static final Color OIL = new Color(263172);
+    private static final Color ICE = new Color(5429234);
+    private static final Color MILK = new Color(12961221);
+    private static final Color SEEDOIL = new Color(16777128);
+    private static final Color JUICE = new Color(4246016);
+    private static final Color LAVA = new Color(13982483);
+    private static final Color FUEL = new Color(9735936);
+    private static final Color DEFAULT = new Color(255,255,255);
     
-    private static String[] liquidColors = LIQUID_COLOR_DEFAULTS;
-    
-    private static final Map<String, Integer> NAME_COLOR_MAP = new HashMap<String, Integer>();
-    private static final Map<Integer, Integer> ID_COLOR_MAP = new HashMap<Integer, Integer>();
+    private static final Map<String, Color> NAME_COLOR_MAP = new HashMap<String, Color>();
+    private static final Map<Integer, Color> ID_COLOR_MAP = new HashMap<Integer, Color>();
+
+    private static String[] liquidColors;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -76,7 +77,7 @@ public class IndustryCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/industry.cfg"));
         cfg.load();
         
-        liquidColors = cfg.get(Configuration.CATEGORY_GENERAL, "liquidcolors", LIQUID_COLOR_DEFAULTS, "Liquid Color List").valueList;
+        liquidColors = cfg.get(Configuration.CATEGORY_GENERAL, "liquidcolors", new String[]{"Liquid.255.255.255"}, "name.r.g.b").valueList;
         
         drumBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "drumblockid", Defaults.BLOCK_DRUM_ID).getInt();
         
@@ -111,13 +112,15 @@ public class IndustryCore
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
+        initNameColorMap();
         parseLiquidColors();
+        initIdColorMap();
     }
 
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
-
+        
     }
     
     public static boolean isDrumEnabled()
@@ -145,53 +148,97 @@ public class IndustryCore
         drumRenderId = id;
     }
     
-    public static int getLiquidColor(String s)
+    public static Color getLiquidColor(String s)
     {
         if(NAME_COLOR_MAP.containsKey(s))
         {
             return NAME_COLOR_MAP.get(s);
         }
         
-        return 0xffffff;
+        return DEFAULT;
     }
     
-    public static int getLiquidColor(int id)
+    public static Color getLiquidColor(int id)
     {
         if(ID_COLOR_MAP.containsKey(id))
         {
             return ID_COLOR_MAP.get(id);
         }
         
-        return 0xffffff;
+        return DEFAULT;
+    }
+        
+    private static void initNameColorMap()
+    {
+        NAME_COLOR_MAP.put("mead", MEAD);
+        NAME_COLOR_MAP.put("coolant", COOLANT);
+        NAME_COLOR_MAP.put("biomass", BIOMASS);
+        NAME_COLOR_MAP.put("Steam", STEAM);
+        NAME_COLOR_MAP.put("biofuel", BIOFUEL);
+        NAME_COLOR_MAP.put("Water", WATER);
+        NAME_COLOR_MAP.put("Creosote Oil", CREOSOTE);
+        NAME_COLOR_MAP.put("honey", HONEY);
+        NAME_COLOR_MAP.put("Oil", OIL);
+        NAME_COLOR_MAP.put("ice", ICE);
+        NAME_COLOR_MAP.put("milk", MILK);
+        NAME_COLOR_MAP.put("seedoil", SEEDOIL);
+        NAME_COLOR_MAP.put("juice", JUICE);
+        NAME_COLOR_MAP.put("Lava", LAVA);
+        NAME_COLOR_MAP.put("Fuel", FUEL);
     }
     
-    private void parseLiquidColors()
+    private static void parseLiquidColors()
     {
         for(String s : liquidColors)
         {
             try
             {
-                String[] splits = s.split("\\.", 2);
+                String[] splits = s.split("\\.", 4);
 
-                int i = Integer.parseInt(splits[1]);
+                int r = Integer.parseInt(splits[1]);
+                int g = Integer.parseInt(splits[2]);
+                int b = Integer.parseInt(splits[3]);
                 
-                NAME_COLOR_MAP.put(splits[0], i);
+                if(splits[0].contentEquals("Liquid") && r == 255 && g == 255 && b == 255)
+                {
+                    continue;
+                }
+                
+                if(!splits[0].isEmpty() && isValidRange(r, g, b))
+                {
+                    NAME_COLOR_MAP.put(splits[0], new Color(r, g, b));
+                }
             }
             catch(Exception e)
             {
-                System.out.println("IndustryCore parse int error");
+                System.out.println("IndustryCore config error at parseLiquidColors");
             }
         }
-        
-        for(Map.Entry<String, LiquidStack> id : LiquidDictionary.getLiquids().entrySet())
+    }
+    
+    private static void initIdColorMap()
+    {
+        for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
         {
-            for(Map.Entry<String, Integer> color : NAME_COLOR_MAP.entrySet())
+            LiquidStack liquid = entry.getValue();
+            
+            if(liquid != null)
             {
-                if(id.getKey().contentEquals(color.getKey()))
+                if(NAME_COLOR_MAP.containsKey(entry.getKey()))
                 {
-                    ID_COLOR_MAP.put(id.getValue().itemID, color.getValue());
+                    ID_COLOR_MAP.put(liquid.itemID, NAME_COLOR_MAP.get(entry.getKey()));
+                }
+                else
+                {
+                    ID_COLOR_MAP.put(liquid.itemID, DEFAULT);
+                    NAME_COLOR_MAP.put(entry.getKey(), DEFAULT);
                 }
             }
         }
+    }
+    
+    private static boolean isValidRange(int r, int g, int b)
+    {
+        return r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255;
     }
 }
