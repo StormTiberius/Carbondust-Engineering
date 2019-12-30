@@ -154,11 +154,16 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     @Override
     public Packet getDescriptionPacket()
     {
-        NBTTagCompound tag = new NBTTagCompound();
+        if(!worldObj.isRemote)
+        {
+            NBTTagCompound tag = new NBTTagCompound();
+
+            writeToNBT(tag);
+
+            return new Packet132TileEntityData(xCoord, yCoord, zCoord, 4, tag);
+        }
         
-        writeToNBT(tag);
-        
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 4, tag);
+        return super.getDescriptionPacket();
     }
     
     @Override
