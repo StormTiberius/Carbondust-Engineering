@@ -123,7 +123,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(tag.hasKey("timer"))
         {
-            counter = tag.getInteger("timer");
+            timer = tag.getInteger("timer");
         }
     }
 
