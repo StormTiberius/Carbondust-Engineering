@@ -57,7 +57,7 @@ public class IndustryCore
     private static final Color WATER = new Color(47,68,245);
     private static final Color CREOSOTE = new Color(105,105,10);
     private static final Color HONEY = new Color(235,200,60);
-    private static final Color OIL = new Color(21,21,21);
+    private static final Color OIL = new Color(50,50,50);
     private static final Color ICE = new Color(198,253,253);
     private static final Color MILK = new Color(245,245,245);
     private static final Color SEEDOIL = new Color(225,225,150);
