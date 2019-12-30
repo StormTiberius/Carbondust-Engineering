@@ -12,7 +12,6 @@ import cde.core.Defaults;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -526,17 +525,6 @@ public class BlockDrum extends BlockContainer
         list.add(drum);
         
         return list;
-    }
-    
-    @Override
-    public void updateTick(World world, int x, int y, int z, Random random)
-    {
-        TileEntity te = world.getBlockTileEntity(x, y, z);
-        
-        if(te instanceof TileEntityDrum)
-        {
-            ((TileEntityDrum)te).updateTick();
-        }
     }
     
     @Override
