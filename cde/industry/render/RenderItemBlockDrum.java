@@ -5,6 +5,7 @@
 
 package cde.industry.render;
 
+import cde.IndustryCore;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -42,53 +43,35 @@ public class RenderItemBlockDrum implements IItemRenderer
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
-        if(!(item.getItem() instanceof ItemBlock))
+        if(item != null && item.itemID == IndustryCore.blockDrum.blockID)
         {
-            return;
+            Block block = Block.blocksList[item.itemID];
+        
+            if(block != null)
+            {
+                RenderBlocks renderer = (RenderBlocks)data[0];
+                
+                block.setBlockBoundsForItemRender();
+
+                renderer.setRenderBoundsFromBlock(block);
+
+                GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+
+                switch(type)
+                {
+                    case EQUIPPED:
+                    case FIRST_PERSON_MAP:
+                        GL11.glTranslatef(-1.0F, 0.5F, 0.0F);
+                        break;
+                    default:
+                        GL11.glTranslatef(-0.5F, -0.0F, -0.5F);
+                        break;
+                }
+
+                RenderBlockDrum.drawInvBlock(block, item);
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GL11.glTranslatef(0.5F, 0.0F, 0.5F);
+            }
         }
-        
-        Block block = Block.blocksList[((ItemBlock)item.getItem()).getBlockID()];
-        
-        if(block == null)
-        {
-            return;
-        }
-        
-        RenderBlocks renderer = (RenderBlocks)data[0];
-        
-        Entity holder = null;
-        
-        if(data.length > 1 && (data[1] instanceof Entity))
-        {
-            holder = (Entity)data[1];
-        }
-        
-        if(holder == null)
-        {
-            holder = Minecraft.getMinecraft().thePlayer;
-        }
-
-        Tessellator var4 = Tessellator.instance;
-
-        block.setBlockBoundsForItemRender();
-
-        renderer.setRenderBoundsFromBlock(block);
-
-        GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-
-        switch(type)
-        {
-            case EQUIPPED:
-            case FIRST_PERSON_MAP:
-                GL11.glTranslatef(-1.0F, 0.5F, 0.0F);
-                break;
-            default:
-                GL11.glTranslatef(-0.5F, -0.0F, -0.5F);
-                break;
-        }
-
-        RenderBlockDrum.drawInvBlock(block, item);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glTranslatef(0.5F, 0.0F, 0.5F);
     }
 }
