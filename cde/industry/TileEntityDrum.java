@@ -5,7 +5,9 @@
 
 package cde.industry;
 
+import cde.CDECore;
 import cde.IndustryCore;
+import cde.core.sound.PacketTileSound;
 import cde.core.sound.TileEntityWithSound;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -20,7 +22,9 @@ import net.minecraftforge.liquids.LiquidTank;
 public class TileEntityDrum extends TileEntityWithSound implements ITankContainer
 {    
     private final LiquidTank TANK;
-    private boolean isRedstonePowered,isWorking,flag;
+    private boolean isWorking;
+    private int previousAmount;
+    private int timer = 20;   // 1 Second
     private int counter = 70; // 3.5 Seconds
     
     public TileEntityDrum()
@@ -33,42 +37,49 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         super.updateEntity();
         
-        flag = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
-        
-        if(isRedstonePowered != flag)
-        {
-            isRedstonePowered = flag;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        }
-        
         if(!worldObj.isRemote)
         {
-            doWorkCycle();
+            if(counter == 0)
+            {
+                isWorking = true;
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            }
+            else if(counter == 69)
+            {
+                isWorking = false;
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            }
+
+            if(counter < 70)
+            {
+                counter++;
+            }
+
+            if(timer == 20)
+            {
+                int amount = 0;
+
+                if(TANK.getLiquid() != null)
+                {
+                    amount = TANK.getLiquid().amount;
+                }
+
+                if(amount != previousAmount)
+                {
+                    CDECore.proxy.sendToPlayers(new PacketTileSound(this, false, true).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
+                    previousAmount = amount;
+                }
+            }
+
+            if(timer > 19)
+            {
+                timer = 0;
+            }
+            else
+            {
+                timer++;
+            }
         }
-    }
-    
-    public void doWorkCycle()
-    {
-        if(counter == 0)
-        {
-            isWorking = true;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        }
-        else if(counter == 69)
-        {
-            isWorking = false;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        }
-        
-        if(counter < 70)
-        {
-            counter++;
-        }
-    }
-    
-    protected boolean isPowered()
-    {
-        return isRedstonePowered;
     }
     
     public String useWrench(boolean flag)
@@ -159,9 +170,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         if(tankIndex == 0)
         {
-            int i = TANK.fill(resource, doFill); 
-            
-            if(i > 0)
+            int i = TANK.fill(resource, doFill); // NULL resource equals 0
+
+            if(doFill && i > 0)
             {
                 if(counter > 69)
                 {
@@ -192,7 +203,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             LiquidStack ls = TANK.drain(maxDrain, doDrain);
             
-            if(ls != null)
+            if(doDrain && ls != null)
             {
                 if(counter > 69)
                 {
@@ -253,14 +264,42 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     @Override
     public float getPitch()
-    {
-        return 1.0F / 100 * IndustryCore.getDrumPitch();
+    {   
+        if(IndustryCore.getDrumPitch() != 100)
+        {
+            return (float)IndustryCore.getDrumPitch() / 100;
+        }
+        
+        int amount = 0;
+        
+        if(TANK.getLiquid() != null)
+        {
+            amount = TANK.getLiquid().amount;
+        }
+        
+        float pitch = 0.5F;
+        
+        pitch += 1.5F * amount / TANK.getCapacity();
+        
+        if(pitch > 2.0F)
+        {
+            pitch = 2.0F;
+        }
+        
+        if(pitch < 0.5F)
+        {
+            pitch = 0.5F;
+        }
+        
+        System.out.println(pitch);
+        
+        return pitch;
     }
     
     @Override
     protected float getDistOrRoll()
     {
-        return 8.0F;
+        return 16.0F;
     }
     
     private boolean isValidDirection(ForgeDirection fd)
