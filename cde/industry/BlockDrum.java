@@ -540,26 +540,10 @@ public class BlockDrum extends BlockContainer
         }
     }
     
-    @SideOnly(Side.CLIENT)
     @Override
-    public int getBlockTexture(IBlockAccess iba, int x, int y, int z, int pass)
+    public int getBlockTextureFromSide(int side)
     {
-        int index = Defaults.TEXTURE_STORAGE_STEEL;
-        
-        TileEntity te = iba.getBlockTileEntity(x, y, z);
-        
-        if(te instanceof TileEntityDrum)
-        {
-            ILiquidTank tank = ((TileEntityDrum)te).getTank(ForgeDirection.UP, null);
-            
-            switch(tank.getCapacity())
-            {
-                case DRUM_CAPACITY_IRON: index = Defaults.TEXTURE_DRUM_IRON_SIDE; break;
-                case DRUM_CAPACITY_STEEL: index = Defaults.TEXTURE_DRUM_STEEL_SIDE; break;
-            }
-        }
-        
-        return index;
+        return Defaults.TEXTURE_DRUM_IRON_SIDE;
     }
     
     @Override
