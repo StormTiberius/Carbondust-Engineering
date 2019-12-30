@@ -100,7 +100,7 @@ public class IndustryCore
     {   
         if(drumBlockId > 0)
         {
-            blockDrum = new BlockDrum(drumBlockId, DEFAULT).setBlockName("cdeDrumBlock").setCreativeTab(CDECore.TAB_CDE).setHardness(1.5F);
+            blockDrum = new BlockDrum(drumBlockId).setBlockName("cdeDrumBlock").setCreativeTab(CDECore.TAB_CDE).setHardness(1.5F);
 
             GameRegistry.registerBlock(blockDrum, ItemBlockDrum.class, "cdeDrumBlock");
 
@@ -168,7 +168,12 @@ public class IndustryCore
         
         return DEFAULT;
     }
-        
+    
+    public static Color getLiquidColor()
+    {
+        return DEFAULT;
+    }
+    
     private static void initNameColorMap()
     {
         NAME_COLOR_MAP.put("mead", MEAD);
