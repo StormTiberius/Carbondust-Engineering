@@ -9,8 +9,6 @@ import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
 import cde.IndustryCore;
 import cde.core.Defaults;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
