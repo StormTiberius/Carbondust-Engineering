@@ -41,7 +41,6 @@ public class BlockDrum extends BlockContainer
     public BlockDrum(int id)
     {
         super(id, Material.iron);
-
         setBlockBounds(0.075F, 0.0F, 0.075F, 0.925F, 1.0F, 0.925F);
     }
 
@@ -94,15 +93,15 @@ public class BlockDrum extends BlockContainer
         {
             tool.wrenchUsed(player, x, y, z);
             
-            if(player.isSneaking())
+            if(!player.isSneaking())
             {
                 dropBlockAsItem(world, x, y, z, 0, 0);
-                world.setBlock(x, y, z, 0);
-                
-                return true;
+                world.setBlock(x, y, z, 0); 
             }
-
-            player.sendChatToPlayer(ted.useWrench(false));
+            else
+            {
+                player.sendChatToPlayer(ted.useWrench(false));
+            }
 
             return true;
         }
@@ -218,7 +217,7 @@ public class BlockDrum extends BlockContainer
             
             if(drum.getTanks(ForgeDirection.UP)[0].getLiquid() == null)
             {
-                world.markBlockForUpdate(x, y, z);
+                world.markBlockForUpdate(x, y, z); // Is this needed?
             }
                 
             return true;
@@ -292,9 +291,7 @@ public class BlockDrum extends BlockContainer
         
         if(te instanceof ITankContainer)
         {
-            ITankContainer itc = (ITankContainer)te;
-            
-            ILiquidTank ilt = itc.getTank(ForgeDirection.DOWN, null);
+            ILiquidTank ilt = ((ITankContainer)te).getTank(ForgeDirection.UP, null);
             
             if(ilt != null)
             {
@@ -302,12 +299,12 @@ public class BlockDrum extends BlockContainer
                 
                 if(ls != null)
                 {
-                    return IndustryCore.getLiquidColor(ls.itemID);
+                    return IndustryCore.getLiquidColor(ls.itemID).getRGB();
                 }
             }
         }
         
-        return 0xffffff;
+        return IndustryCore.getLiquidColor().getRGB();
     }
     
     @Override
@@ -358,7 +355,7 @@ public class BlockDrum extends BlockContainer
     {
         TileEntity te = world.getBlockTileEntity(x, y, z);
         
-        if(te instanceof TileEntityDrum && entity instanceof EntityPlayer)
+        if(te instanceof TileEntityDrum && entity != null)
         {
             ItemStack is = entity.getHeldItem();
             
@@ -471,32 +468,20 @@ public class BlockDrum extends BlockContainer
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
     {
-        ItemStack drum = new ItemStack(blockID, 1, 0);
-        
-        TileEntity te = world.getBlockTileEntity(x, y, z);
-        
-        if(te instanceof TileEntityDrum)
-        {
-            NBTTagCompound tag = new NBTTagCompound();
-            
-            te.writeToNBT(tag);
-            
-            if(!drum.hasTagCompound())
-            {
-                drum.setTagCompound(new NBTTagCompound());
-            }
-            
-            drum.getTagCompound().setInteger("capacity", tag.getInteger("capacity"));
-            drum.getTagCompound().setCompoundTag("liquid", tag.getCompoundTag("liquid"));
-        }
-        
-        return drum;
+        return getBlockDropped(world, x, y, z, world.getBlockMetadata(x, y, z), 0).get(0);
     }
     
     @Override
     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
     {
         ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+        
+        ItemStack drum = new ItemStack(blockID, 1, 0);
+                    
+        if(!drum.hasTagCompound())
+        {
+           drum.setTagCompound(new NBTTagCompound());
+        }
         
         TileEntity te = world.getBlockTileEntity(x, y, z);
         
@@ -510,48 +495,35 @@ public class BlockDrum extends BlockContainer
             {
                 int capacity = tag.getInteger("capacity");
                 
-                ItemStack drum = new ItemStack(blockID, 1, 0);
-                    
-                if(!drum.hasTagCompound())
-                {
-                   drum.setTagCompound(new NBTTagCompound());
-                }  
+                drum.getTagCompound().setInteger("capacity", capacity);
 
                 if(tag.hasKey("liquid"))
                 {
                     NBTTagCompound liquid = tag.getCompoundTag("liquid");
-
+                    
+                    drum.getTagCompound().setCompoundTag("liquid", liquid);
+                    
                     if(liquid.hasKey("Amount"))
                     {
-                        int amount = liquid.getInteger("Amount");
-
-                        drum.getTagCompound().setInteger("capacity", capacity);
-                        drum.getTagCompound().setCompoundTag("liquid", liquid);
-                        drum.setItemDamage(getDamageValue(amount, capacity, drum.getMaxDamage()));
+                        drum.setItemDamage(getDamageValue(liquid.getInteger("Amount"), capacity, drum.getMaxDamage()));
                     }
                 }
                 else
                 {
-                    drum.getTagCompound().setInteger("capacity", capacity);
                     drum.setItemDamage(getDamageValue(0, capacity, drum.getMaxDamage()));
                 }
-                
-                list.add(drum);
             }
         }
+        else
+        {
+            drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_IRON);
+
+            drum.setItemDamage(getDamageValue(0, DRUM_CAPACITY_IRON, drum.getMaxDamage()));
+        }
+        
+        list.add(drum);
         
         return list;
-    }
-    
-    // @Override
-    public ItemStack dismantleBlock(EntityPlayer player, World world, int x, int y, int z, boolean returnBlock)
-    {
-        return null;
-    }
-    
-    public boolean canDismantle(EntityPlayer player, World world, int x, int y, int z, boolean returnBlock)
-    {
-        return false;
     }
     
     @Override
