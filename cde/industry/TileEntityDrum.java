@@ -24,8 +24,8 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private final LiquidTank TANK;
     private boolean isWorking;
     private int previousAmount;
-    private int timer = 20;   // 1 Second
-    private int counter = 70; // 3.5 Seconds
+    private int timer = 20;
+    private int counter = 70;
     
     public TileEntityDrum()
     {
@@ -115,6 +115,16 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             isWorking = tag.getBoolean("isworking");
         }
+        
+        if(tag.hasKey("counter"))
+        {
+            counter = tag.getInteger("counter");
+        }
+        
+        if(tag.hasKey("timer"))
+        {
+            counter = tag.getInteger("timer");
+        }
     }
 
     @Override
@@ -136,6 +146,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         }
         
         tag.setBoolean("isworking", isWorking);
+        
+        tag.setInteger("counter", counter);
+        tag.setInteger("timer", timer);
     }
     
     @Override
@@ -170,18 +183,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         if(tankIndex == 0)
         {
-            int i = TANK.fill(resource, doFill); // NULL resource equals 0
+            int i = TANK.fill(resource, doFill);
 
             if(doFill && i > 0)
             {
-                if(counter > 69)
-                {
-                    counter = 0;
-                }
-                else
-                {
-                    counter = 1;
-                }
+                addToCounter();
             }
             
             return i;
@@ -205,14 +211,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             
             if(doDrain && ls != null)
             {
-                if(counter > 69)
-                {
-                    counter = 0;
-                }
-                else
-                {
-                    counter = 1;
-                }
+                addToCounter();
             }
             
             return ls;
@@ -291,19 +290,29 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             pitch = 0.5F;
         }
         
-        System.out.println(pitch);
-        
         return pitch;
     }
     
     @Override
     protected float getDistOrRoll()
     {
-        return 16.0F;
+        return 8.0F;
     }
     
     private boolean isValidDirection(ForgeDirection fd)
     {
         return fd.equals(ForgeDirection.DOWN)  || fd.equals(ForgeDirection.UP);
+    }
+    
+    private void addToCounter()
+    {
+        if(counter > 69)
+        {
+            counter = 0;
+        }
+        else
+        {
+            counter = 1;
+        }
     }
 }
