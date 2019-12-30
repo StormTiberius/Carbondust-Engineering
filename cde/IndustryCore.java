@@ -100,7 +100,7 @@ public class IndustryCore
     {   
         if(drumBlockId > 0)
         {
-            blockDrum = new BlockDrum(drumBlockId).setBlockName("cdeDrumBlock").setCreativeTab(CDECore.TAB_CDE).setHardness(1.5F).setTickRandomly(true);
+            blockDrum = new BlockDrum(drumBlockId).setBlockName("cdeDrumBlock").setCreativeTab(CDECore.TAB_CDE).setHardness(1.5F);
 
             GameRegistry.registerBlock(blockDrum, ItemBlockDrum.class, "cdeDrumBlock");
 
