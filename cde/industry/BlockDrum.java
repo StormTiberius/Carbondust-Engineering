@@ -8,6 +8,9 @@ package cde.industry;
 import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
 import cde.IndustryCore;
+import cde.core.Defaults;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -527,9 +530,36 @@ public class BlockDrum extends BlockContainer
     }
     
     @Override
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    public void updateTick(World world, int x, int y, int z, Random random)
     {
+        TileEntity te = world.getBlockTileEntity(x, y, z);
+        
+        if(te instanceof TileEntityDrum)
+        {
+            ((TileEntityDrum)te).updateTick();
+        }
+    }
     
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getBlockTexture(IBlockAccess iba, int x, int y, int z, int pass)
+    {
+        int index = Defaults.TEXTURE_STORAGE_STEEL;
+        
+        TileEntity te = iba.getBlockTileEntity(x, y, z);
+        
+        if(te instanceof TileEntityDrum)
+        {
+            ILiquidTank tank = ((TileEntityDrum)te).getTank(ForgeDirection.UP, null);
+            
+            switch(tank.getCapacity())
+            {
+                case DRUM_CAPACITY_IRON: index = Defaults.TEXTURE_DRUM_IRON_SIDE; break;
+                case DRUM_CAPACITY_STEEL: index = Defaults.TEXTURE_DRUM_STEEL_SIDE; break;
+            }
+        }
+        
+        return index;
     }
     
     @Override
