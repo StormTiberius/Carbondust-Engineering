@@ -42,6 +42,7 @@ public class BlockDrum extends BlockContainer
     public BlockDrum(int id)
     {
         super(id, Material.iron);
+        
         setBlockBounds(0.075F, 0.0F, 0.075F, 0.925F, 1.0F, 0.925F);
     }
 
