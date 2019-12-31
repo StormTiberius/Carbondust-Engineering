@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class ItemBlockDrum extends ItemBlock
@@ -94,5 +95,22 @@ public class ItemBlockDrum extends ItemBlock
         }
         
         return name + type + " Drum";
+    }
+    
+    @Override
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
+    {
+        int md = 0;
+        
+        if(stack != null && stack.hasTagCompound() && stack.getTagCompound().hasKey("capacity"))
+        {
+            switch(stack.getTagCompound().getInteger("capacity"))
+            {
+                case BlockDrum.DRUM_CAPACITY_IRON: md = 0; break;
+                case BlockDrum.DRUM_CAPACITY_STEEL: md = 1; break;
+            }
+        }
+        
+        return super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, md);
     }
 }
