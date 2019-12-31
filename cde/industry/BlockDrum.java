@@ -535,9 +535,24 @@ public class BlockDrum extends BlockContainer
     }
     
     @Override
-    public int getBlockTextureFromSide(int side)
+    public int getBlockTextureFromSideAndMetadata(int side, int metadata)
     {
-        return Defaults.TEXTURE_DRUM_IRON_SIDE;
+        if(side == 0 || side == 1)
+        {
+            switch(metadata)
+            {
+                case 0: return Defaults.TEXTURE_DRUM_IRON_TOP;
+                case 1: return Defaults.TEXTURE_DRUM_STEEL_TOP;
+                default: return 0;
+            }
+        }
+        
+        switch(metadata)
+        {
+            case 0: return Defaults.TEXTURE_DRUM_IRON_SIDE;
+            case 1: return Defaults.TEXTURE_DRUM_STEEL_SIDE;
+            default: return 0;
+        }
     }
     
     @Override
