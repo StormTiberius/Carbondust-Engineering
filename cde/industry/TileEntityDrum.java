@@ -193,10 +193,17 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         if(tankIndex == 0)
         {
+            boolean isEmpty = TANK.getLiquid() == null;
+            
             int i = TANK.fill(resource, doFill);
 
             if(doFill && i > 0)
             {
+                if(isEmpty)
+                {
+                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                }
+                
                 addToCounter();
             }
             
@@ -221,6 +228,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             
             if(doDrain && ls != null)
             {
+                if(TANK.getLiquid() == null)
+                {
+                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                }
+                
                 addToCounter();
             }
             
