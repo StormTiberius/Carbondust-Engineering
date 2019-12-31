@@ -178,7 +178,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
                 
-                addToCounter();
+                updateCounter();
             }
         }
         
@@ -211,7 +211,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
                 
-                addToCounter();
+                updateCounter();
             }
         }
         
@@ -304,7 +304,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         return fd.equals(ForgeDirection.DOWN)  || fd.equals(ForgeDirection.UP);
     }
     
-    private void addToCounter()
+    private void updateCounter()
     {
         if(counter > 69)
         {
