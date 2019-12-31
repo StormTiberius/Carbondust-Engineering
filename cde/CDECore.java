@@ -315,6 +315,11 @@ public class CDECore
         return networkUpdateRate;
     }
     
+    public static long getNetworkUpdateTime()
+    {
+        return networkUpdateRate * 1000 / 20;
+    }
+    
     public static boolean playSounds()
     {
         return sounds;
