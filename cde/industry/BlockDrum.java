@@ -368,8 +368,15 @@ public class BlockDrum extends BlockContainer
                 te.writeToNBT(tag);
                 
                 if(note.hasKey("capacity"))
-                {                
-                    tag.setInteger("capacity", note.getInteger("capacity"));
+                {   
+                    int capacity = note.getInteger("capacity");
+                    
+                    tag.setInteger("capacity", capacity);
+                    
+                    if(capacity == DRUM_CAPACITY_STEEL)
+                    {
+                        world.setBlockMetadata(x, y, z, 1);
+                    }
                     
                     if(note.hasKey("liquid"))
                     {
