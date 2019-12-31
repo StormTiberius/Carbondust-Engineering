@@ -16,12 +16,13 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
 public class TileEntityDrum extends TileEntityWithSound implements ITankContainer
 {    
-    private final LiquidTank TANK;
+    private final LiquidTank TANK = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
     private boolean isWorking;
     private int previousAmount;
     private int timer = 20;
@@ -29,7 +30,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     public TileEntityDrum()
     {
-        TANK = new LiquidTank(BlockDrum.DRUM_CAPACITY_STEEL);
+        
     }
     
     @Override
