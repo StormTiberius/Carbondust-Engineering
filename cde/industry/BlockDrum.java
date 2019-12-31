@@ -309,7 +309,7 @@ public class BlockDrum extends BlockContainer
     }
     
     @Override
-    public TileEntity createNewTileEntity(World var1)
+    public TileEntity createNewTileEntity(World world)
     {
         return new TileEntityDrum();
     }
@@ -368,15 +368,8 @@ public class BlockDrum extends BlockContainer
                 te.writeToNBT(tag);
                 
                 if(note.hasKey("capacity"))
-                {   
-                    int capacity = note.getInteger("capacity");
-                    
-                    tag.setInteger("capacity", capacity);
-                    
-                    if(capacity == DRUM_CAPACITY_STEEL)
-                    {
-                        world.setBlockMetadata(x, y, z, 1);
-                    }
+                {
+                    tag.setInteger("capacity", note.getInteger("capacity"));
                     
                     if(note.hasKey("liquid"))
                     {
