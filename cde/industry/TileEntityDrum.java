@@ -110,6 +110,10 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             {
                 TANK.setLiquid(LiquidStack.loadLiquidStackFromNBT(tag.getCompoundTag("liquid")));
             }
+            else
+            {
+                TANK.setLiquid(null);
+            }
         }
         
         if(tag.hasKey("isworking"))
