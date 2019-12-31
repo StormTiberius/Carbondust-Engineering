@@ -22,15 +22,16 @@ import net.minecraftforge.liquids.LiquidTank;
 
 public class TileEntityDrum extends TileEntityWithSound implements ITankContainer
 {    
-    private final LiquidTank TANK = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
-    private boolean isWorking;
-    private int previousAmount;
-    private int timer = 20;
+    private final LiquidTank TANK;
+    private final long NETWORK_UPDATE_INTERVAL;
+    private long previousUpdateTime;
+    private boolean isWorking,soundUpdateNeeded,recentlyUpdated;
     private int counter = 70;
     
     public TileEntityDrum()
     {
-        
+        TANK = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
+        NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
     }
     
     @Override
@@ -54,31 +55,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             if(counter < 70)
             {
                 counter++;
-            }
-
-            if(timer == 20)
-            {
-                int amount = 0;
-
-                if(TANK.getLiquid() != null)
-                {
-                    amount = TANK.getLiquid().amount;
-                }
-
-                if(amount != previousAmount)
-                {
-                    CDECore.proxy.sendToPlayers(new PacketTileSound(this, false, true).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
-                    previousAmount = amount;
-                }
-            }
-
-            if(timer > 19)
-            {
-                timer = 0;
-            }
-            else
-            {
-                timer++;
             }
         }
     }
@@ -125,11 +101,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             counter = tag.getInteger("counter");
         }
-        
-        if(tag.hasKey("timer"))
-        {
-            timer = tag.getInteger("timer");
-        }
     }
 
     @Override
@@ -153,7 +124,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         tag.setBoolean("isworking", isWorking);
         
         tag.setInteger("counter", counter);
-        tag.setInteger("timer", timer);
     }
     
     @Override
@@ -187,18 +157,22 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         return fill(0, resource, doFill);
     }
-
+    
     @Override
     public int fill(int tankIndex, LiquidStack resource, boolean doFill)
-    {
+    {   
+        int amount = 0;
+        
         if(tankIndex == 0)
         {
             boolean isEmpty = TANK.getLiquid() == null;
             
-            int i = TANK.fill(resource, doFill);
+            amount = TANK.fill(resource, doFill);
 
-            if(doFill && i > 0)
+            if(doFill && amount > 0)
             {
+                soundUpdateNeeded = true;
+                
                 if(isEmpty)
                 {
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -206,11 +180,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                 
                 addToCounter();
             }
-            
-            return i;
         }
         
-        return 0;
+        updateSound();
+        
+        return amount;
     }
 
     @Override
@@ -221,13 +195,17 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
 
     @Override
     public LiquidStack drain(int tankIndex, int maxDrain, boolean doDrain)
-    {
+    {   
+        LiquidStack liquid = null;
+        
         if(tankIndex == 0)
         {
-            LiquidStack ls = TANK.drain(maxDrain, doDrain);
+            liquid = TANK.drain(maxDrain, doDrain);
             
-            if(doDrain && ls != null)
+            if(doDrain && liquid != null)
             {
+                soundUpdateNeeded = true;
+                
                 if(TANK.getLiquid() == null)
                 {
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -235,11 +213,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                 
                 addToCounter();
             }
-            
-            return ls;
         }
-                    
-        return null;
+        
+        updateSound();
+        
+        return liquid;
     }
 
     @Override
@@ -335,6 +313,27 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         else
         {
             counter = 1;
+        }
+    }
+    
+    private void updateSound()
+    {
+        if(soundUpdateNeeded)
+        {
+            if(recentlyUpdated)
+            {
+                if(System.currentTimeMillis() - previousUpdateTime > NETWORK_UPDATE_INTERVAL)
+                {
+                    recentlyUpdated = false;
+                }
+            }
+            else
+            {
+                CDECore.proxy.sendToPlayers(new PacketTileSound(this, false, true).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
+                previousUpdateTime = System.currentTimeMillis();
+                soundUpdateNeeded = false;
+                recentlyUpdated = true;
+            }
         }
     }
 }
