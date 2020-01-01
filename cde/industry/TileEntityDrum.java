@@ -189,6 +189,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                 
                 if(isEmpty)
                 {
+                    color = IndustryCore.getLiquidColor(resource.itemID).getRGB();
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
                 
@@ -222,6 +223,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                 
                 if(TANK.getLiquid() == null)
                 {
+                    color = IndustryCore.getLiquidColor().getRGB();
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
                 
