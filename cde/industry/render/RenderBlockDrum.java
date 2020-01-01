@@ -48,9 +48,9 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         double[] uvs = getUVS(metadata);
         double[] uvt = getUVT(metadata);
         
-        float f = (float)(l >> 16 & 0xff) / 255.0F;
-        float f1 = (float)(l >> 8 & 0xff) / 255.0F;
-        float f2 = (float)(l & 0xff) / 255.0F;
+        float f = (float)(l >> 16 & 0xFF) / 255;
+        float f1 = (float)(l >> 8 & 0xFF) / 255;
+        float f2 = (float)(l & 0xFF) / 255;
         
         Tessellator t = Tessellator.instance;
         
@@ -194,16 +194,16 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     public static void drawInvBlock(Block block, ItemStack item)
     {
         float h = 0.97F;
-        float d = 0.2F;
         float h2 = 0.3125F;
+        
         int l = getColor(item);
         
         double[] uvs = getUVS(item);
         double[] uvt = getUVT(item);
             
-        float f = (float)(l >> 16 & 0xff) / 255.0F;
-        float f1 = (float)(l >> 8 & 0xff) / 255.0F;
-        float f2 = (float)(l & 0xff) / 255.0F;
+        float f = (float)(l >> 16 & 0xFF) / 255;
+        float f1 = (float)(l >> 8 & 0xFF) / 255;
+        float f2 = (float)(l & 0xFF) / 255;
         
         Tessellator t = Tessellator.instance;
         t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
