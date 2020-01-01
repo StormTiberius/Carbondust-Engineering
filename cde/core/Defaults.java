@@ -159,4 +159,8 @@ public class Defaults
         new int[]{1,7,2,0,48},
         new int[]{1,7,2,0,48}
     };
+    
+    // LIQUID DRUM CAPACITY DEFAULTS
+    public static final int DRUM_CAPACITY_IRON = 100000;
+    public static final int DRUM_CAPACITY_STEEL = 200000;
 }
