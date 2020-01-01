@@ -309,19 +309,9 @@ public class BlockDrum extends BlockContainer
     {
         TileEntity te = iba.getBlockTileEntity(x, y, z);
         
-        if(te instanceof ITankContainer)
-        {
-            ILiquidTank ilt = ((ITankContainer)te).getTank(ForgeDirection.UP, null);
-            
-            if(ilt != null)
-            {
-                LiquidStack ls = ilt.getLiquid();
-                
-                if(ls != null)
-                {
-                    return IndustryCore.getLiquidColor(ls.itemID).getRGB();
-                }
-            }
+        if(te instanceof TileEntityDrum)
+        {   
+            return ((TileEntityDrum)te).getDrumColor().getRGB();
         }
         
         return IndustryCore.getLiquidColor().getRGB();
