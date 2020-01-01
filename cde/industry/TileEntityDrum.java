@@ -7,6 +7,7 @@ package cde.industry;
 
 import cde.CDECore;
 import cde.IndustryCore;
+import cde.core.Defaults;
 import cde.core.sound.PacketTileSound;
 import cde.core.sound.TileEntityWithSound;
 import net.minecraft.nbt.NBTTagCompound;
@@ -65,8 +66,8 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         switch(TANK.getCapacity())
         {
-            case BlockDrum.DRUM_CAPACITY_IRON: type = "Iron"; break;
-            case BlockDrum.DRUM_CAPACITY_STEEL: type = "Steel"; break;
+            case Defaults.DRUM_CAPACITY_IRON: type = "Iron"; break;
+            case Defaults.DRUM_CAPACITY_STEEL: type = "Steel"; break;
             default: type = "UNKNOWN"; break;
         }
         
