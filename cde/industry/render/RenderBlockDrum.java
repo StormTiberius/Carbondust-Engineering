@@ -8,14 +8,12 @@ package cde.industry.render;
 import cde.IndustryCore;
 import cde.core.Defaults;
 import cde.core.util.Utils;
-import cde.industry.ItemBlockDrum;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.liquids.LiquidStack;
 import org.lwjgl.opengl.GL11;
 
 public class RenderBlockDrum implements ISimpleBlockRenderingHandler
@@ -188,21 +186,16 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
         return false;
     }
-
+    
     public static void drawInvBlock(Block block, ItemStack item)
     {
         float h = 0.97F;
         float d = 0.2F;
         float h2 = 0.3125F;
-        int l = 0xffffff;
+        int l = getColor(item);
         
-        if(item.hasTagCompound() && item.stackTagCompound.hasKey("color"))
-        {
-            l = item.stackTagCompound.getInteger("color");
-        }
-            
-        // LiquidStack fluid = ((ItemBlockDrum)item.getItem()).getLiquid(item); // TODO NEEDS CHECKING
-        l = 0; // LiquidColorRegistry.getFluidColor(fluid); // TODO NEEDS CHECKING
+        double[] uvs = getUVS(item);
+        double[] uvt = getUVT(item);
             
         float f = (float)(l >> 16 & 0xff) / 255.0F;
         float f1 = (float)(l >> 8 & 0xff) / 255.0F;
@@ -405,5 +398,49 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     public static float ddz(double i)
     {
         return (float)Math.sin((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
+    }
+    
+    private static int getColor(ItemStack is)
+    {
+        int color = IndustryCore.getLiquidColor().getRGB();
+        
+        if(is.hasTagCompound() && is.getTagCompound().hasKey("color"))
+        {
+            color = is.getTagCompound().getInteger("color");
+        }
+        
+        return color;
+    }
+    
+    private static boolean isSteel(ItemStack is)
+    {
+        boolean flag = false;
+        
+        if(is.hasTagCompound() && is.getTagCompound().hasKey("capacity"))
+        {
+            flag = is.getTagCompound().getInteger("capacity") == Defaults.DRUM_CAPACITY_STEEL;
+        }
+        
+        return flag;
+    }
+    
+    private static double[] getUVS(ItemStack is)
+    {
+        if(isSteel(is))
+        {
+            return DRUM_UV_STEEL_SIDE;
+        }
+        
+        return DRUM_UV_IRON_SIDE;
+    }
+    
+    private static double[] getUVT(ItemStack is)
+    {
+        if(isSteel(is))
+        {
+            return DRUM_UV_STEEL_TOP;
+        }
+        
+        return DRUM_UV_IRON_TOP;
     }
 }
