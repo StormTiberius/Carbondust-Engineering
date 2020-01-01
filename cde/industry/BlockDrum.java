@@ -32,12 +32,10 @@ import net.minecraftforge.liquids.ITankContainer;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockDrum extends BlockContainer
-{   
-    public static final int DRUM_CAPACITY_IRON = 100000;
-    public static final int DRUM_CAPACITY_STEEL = 200000;
-    
+{
     public BlockDrum(int id)
     {
         super(id, Material.iron);
@@ -79,11 +77,32 @@ public class BlockDrum extends BlockContainer
                     {
                         return taskFilledContainer(world, x, y, z, player, held, ted);
                     }
+                    else if(held.getDisplayName().endsWith(" Paint Brush"))
+                    {
+                        
+                    }
+                    else if(isDye(OreDictionary.getOreName(held.itemID)))
+                    {
+                        
+                    }
                 }
             }
             
             return false;
         }
+    }
+    
+    private boolean isDye(String dye)
+    {
+        for(String names : Defaults.DYE_ORE_DICTIONARY_NAMES)
+        {
+            if(dye.contentEquals(names))
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     private boolean taskWrench(World world, int x, int y, int z, EntityPlayer player, ItemStack held, TileEntityDrum ted)
@@ -122,8 +141,8 @@ public class BlockDrum extends BlockContainer
             
             switch(capacity)
             {
-                case DRUM_CAPACITY_IRON: sb.append("iron"); break;
-                case DRUM_CAPACITY_STEEL: sb.append("steel"); break;
+                case Defaults.DRUM_CAPACITY_IRON: sb.append("iron"); break;
+                case Defaults.DRUM_CAPACITY_STEEL: sb.append("steel"); break;
                 default: sb.append("UNKNOWN"); break;
             }
             
@@ -393,9 +412,9 @@ public class BlockDrum extends BlockContainer
             drum.setTagCompound(new NBTTagCompound());
         }
         
-        drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_IRON);
+        drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
         
-        drum.setItemDamage(getDamageValue(0, DRUM_CAPACITY_IRON, drum.getMaxDamage()));
+        drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
         
         list.add(drum);
         
@@ -405,7 +424,7 @@ public class BlockDrum extends BlockContainer
             
             if(liquid != null)
             {
-                liquid.amount = DRUM_CAPACITY_IRON;
+                liquid.amount = Defaults.DRUM_CAPACITY_IRON;
                 
                 NBTTagCompound tag = liquid.writeToNBT(new NBTTagCompound());
                 
@@ -416,10 +435,10 @@ public class BlockDrum extends BlockContainer
                     drum.setTagCompound(new NBTTagCompound());
                 }
                 
-                drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_IRON);
+                drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
                 drum.getTagCompound().setTag("liquid", tag);
 
-                drum.setItemDamage(getDamageValue(DRUM_CAPACITY_IRON, DRUM_CAPACITY_IRON, drum.getMaxDamage()));
+                drum.setItemDamage(getDamageValue(Defaults.DRUM_CAPACITY_IRON, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
                 
                 list.add(drum);
             }
@@ -433,9 +452,9 @@ public class BlockDrum extends BlockContainer
             drum.setTagCompound(new NBTTagCompound());
         }
         
-        drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_STEEL);
+        drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
         
-        drum.setItemDamage(getDamageValue(0, DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
+        drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
         
         list.add(drum);
         
@@ -445,7 +464,7 @@ public class BlockDrum extends BlockContainer
             
             if(liquid != null)
             {
-                liquid.amount = DRUM_CAPACITY_STEEL;
+                liquid.amount = Defaults.DRUM_CAPACITY_STEEL;
                 
                 NBTTagCompound tag = liquid.writeToNBT(new NBTTagCompound());
                 
@@ -456,10 +475,10 @@ public class BlockDrum extends BlockContainer
                     drum.setTagCompound(new NBTTagCompound());
                 }
                 
-                drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_STEEL);
+                drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
                 drum.getTagCompound().setTag("liquid", tag);
 
-                drum.setItemDamage(getDamageValue(DRUM_CAPACITY_STEEL, DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
+                drum.setItemDamage(getDamageValue(Defaults.DRUM_CAPACITY_STEEL, Defaults.DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
                 
                 list.add(drum);
             }
@@ -517,9 +536,9 @@ public class BlockDrum extends BlockContainer
         }
         else
         {
-            drum.getTagCompound().setInteger("capacity", DRUM_CAPACITY_IRON);
+            drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
 
-            drum.setItemDamage(getDamageValue(0, DRUM_CAPACITY_IRON, drum.getMaxDamage()));
+            drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
         }
         
         list.add(drum);
