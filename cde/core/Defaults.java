@@ -163,4 +163,38 @@ public class Defaults
     // LIQUID DRUM CAPACITY DEFAULTS
     public static final int DRUM_CAPACITY_IRON = 100000;
     public static final int DRUM_CAPACITY_STEEL = 200000;
+    
+    public static final String[] DYE_ORE_DICTIONARY_NAMES = {"dyeBlack",
+                                                             "dyeRed",
+                                                             "dyeGreen",   
+                                                             "dyeBrown",                                    
+                                                             "dyeBlue",                                            
+                                                             "dyePurple",
+                                                             "dyeCyan",
+                                                             "dyeLightGray",
+                                                             "dyeGray",
+                                                             "dyePink",
+                                                             "dyeLime",
+                                                             "dyeYellow",
+                                                             "dyeLightBlue",
+                                                             "dyeMagenta",
+                                                             "dyeOrange",
+                                                             "dyeWhite"};
+    
+    public static final String[] PAINT_BRUSH_NAMES = {"Black Paint Brush",
+                                                      "Red Paint Brush",
+                                                      "Green Paint Brush",
+                                                      "Brown Paint Brush",
+                                                      "Blue Paint Brush",
+                                                      "Purple Paint Brush",
+                                                      "Cyan Paint Brush",
+                                                      "Light Gray Paint Brush",
+                                                      "Gray Paint Brush",
+                                                      "Pink Paint Brush",
+                                                      "Lime Paint Brush",
+                                                      "Yellow Paint Brush",
+                                                      "Light Blue Paint Brush",
+                                                      "Magenta Paint Brush",
+                                                      "Orange Paint Brush",
+                                                      "White Paint Brush"};
 }
