@@ -46,9 +46,9 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         float d = 0.2F;
         float h2 = 0.3125F;
         
-        float f = (float)(color >> 16 & 0xFF) / 255;
-        float f1 = (float)(color >> 8 & 0xFF) / 255;
-        float f2 = (float)(color & 0xFF) / 255;
+        float r = (float)(color >> 16 & 0xFF) / 255;
+        float g = (float)(color >> 8 & 0xFF) / 255;
+        float b = (float)(color & 0xFF) / 255;
         
         Tessellator t = Tessellator.instance;
         
@@ -65,19 +65,19 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         {
             w = BASE_W * h;
             
-            setB((float)(i + 1) - d, 1.0F, f, f1, f2);
+            setB((float)(i + 1) - d, 1.0F, r, g, b);
             t.addVertexWithUV((double)x + dx(i + 1), y, (double)z + dz(i + 1), uvs[0] + du2(i) * (double)wu, uvs[3]);
             t.addVertexWithUV((double)x + dx(i + 1), (float)y + h2, (double)z + dz(i + 1), uvs[0] + du2(i) * (double)wu, uvs[3] - ddv);
             
-            setB((float)i + d, 0.9F, f, f1, f2);
+            setB((float)i + d, 0.9F, r, g, b);
             t.addVertexWithUV((double)x + dx(i), y + h2, (double)z + dz(i), uvs[0] + du(i) * (double)wu, uvs[3] - ddv);
             t.addVertexWithUV((double)x + dx(i), (float)y, (double)z + dz(i), uvs[0] + du(i) * (double)wu, uvs[3]);
             
-            setB((float)(i + 1) -d, 1.0F, f, f1, f2);
+            setB((float)(i + 1) -d, 1.0F, r, g, b);
             t.addVertexWithUV((double)x + dx(i + 1), (float)y + h2 * 2.0F, (double)z + dz(i + 1), uvs[0] + du2(i) * (double)wu, uvs[2] + ddv);
             t.addVertexWithUV((double)x + dx(i + 1), (float)y + 1, (double)z + dz(i + 1), uvs[0] + du2(i) * (double)wu, uvs[2]);
             
-            setB((float)i + d, 0.9F, f, f1, f2);
+            setB((float)i + d, 0.9F, r, g, b);
             t.addVertexWithUV((double)x + dx(i), (double)y + 1, (double)z + dz(i), uvs[0] + du(i) * (double)wu, uvs[2]);
             t.addVertexWithUV((double)x + dx(i), (float)y + h2 * 2.0F, (double)z + dz(i), uvs[0] + du(i) * (double)wu, uvs[2] + ddv);
             
@@ -199,9 +199,9 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         float h = 0.97F;
         float h2 = 0.3125F;
         
-        float f = (float)(color >> 16 & 0xFF) / 255;
-        float f1 = (float)(color >> 8 & 0xFF) / 255;
-        float f2 = (float)(color & 0xFF) / 255;
+        float r = (float)(color >> 16 & 0xFF) / 255;
+        float g = (float)(color >> 8 & 0xFF) / 255;
+        float b = (float)(color & 0xFF) / 255;
         
         Tessellator t = Tessellator.instance;
         t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
@@ -218,7 +218,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             // --
             t.startDrawingQuads();
             t.setNormal(ddx((double)i + 0.5D), 0.0F, ddz((double)i + 0.5D));
-            t.setColorOpaque_F(f, f1, f2);
+            t.setColorOpaque_F(r, g, b);
             
             t.addVertexWithUV(dx(i + 1), 0.0D, dz(i + 1), uvs[0] + du2(i) * (double)wu, uvs[3]);
             t.addVertexWithUV(dx(i + 1), h2, dz(i + 1), uvs[0] + du2(i) * (double)wu, uvs[3] - ddv);
