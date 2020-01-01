@@ -10,6 +10,7 @@ import cde.IndustryCore;
 import cde.core.Defaults;
 import cde.core.sound.PacketTileSound;
 import cde.core.sound.TileEntityWithSound;
+import java.awt.Color;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
@@ -27,12 +28,14 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private final long NETWORK_UPDATE_INTERVAL;
     private long previousUpdateTime;
     private boolean isWorking,soundUpdateNeeded,recentlyUpdated;
-    private int counter = 70;
+    private int color,counter;
     
     public TileEntityDrum()
     {
         TANK = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
         NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
+        color = IndustryCore.getLiquidColor().getRGB();
+        counter = 70; // 3.5 Seconds
     }
     
     @Override
@@ -102,6 +105,15 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             counter = tag.getInteger("counter");
         }
+        
+        if(tag.hasKey("color"))
+        {
+            color = tag.getInteger("color");
+        }
+        else
+        {
+            color = IndustryCore.getLiquidColor().getRGB();
+        }
     }
 
     @Override
@@ -125,6 +137,8 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         tag.setBoolean("isworking", isWorking);
         
         tag.setInteger("counter", counter);
+        
+        tag.setInteger("color", color);
     }
     
     @Override
@@ -298,6 +312,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     protected float getDistOrRoll()
     {
         return 8.0F;
+    }
+    
+    public Color getDrumColor()
+    {
+        return new Color(color);
     }
     
     private boolean isValidDirection(ForgeDirection fd)
