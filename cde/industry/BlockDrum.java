@@ -28,7 +28,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
-import net.minecraftforge.liquids.ITankContainer;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
@@ -71,11 +70,11 @@ public class BlockDrum extends BlockContainer
                     }
                     else if(LiquidContainerRegistry.isEmptyContainer(held))
                     {
-                        return taskEmptyContainer(world, x, y, z, player, held, ted);
+                        return taskEmptyContainer(player, held, ted);
                     }
                     else if(LiquidContainerRegistry.isFilledContainer(held))
                     {
-                        return taskFilledContainer(world, x, y, z, player, held, ted);
+                        return taskFilledContainer(player, held, ted);
                     }
                     else if(held.getDisplayName().endsWith(" Paint Brush"))
                     {
@@ -207,7 +206,7 @@ public class BlockDrum extends BlockContainer
         return true;
     }
 
-    private boolean taskEmptyContainer(World world, int x, int y, int z, EntityPlayer player, ItemStack held, ITankContainer drum)
+    private boolean taskEmptyContainer(EntityPlayer player, ItemStack held, TileEntityDrum drum)
     {
         ItemStack filled = LiquidContainerRegistry.fillLiquidContainer(drum.getTank(ForgeDirection.UP, null).getLiquid(), held);
         
@@ -233,20 +232,15 @@ public class BlockDrum extends BlockContainer
                 {
                     ((EntityPlayerMP)player).mcServer.getConfigurationManager().syncPlayerInventory((EntityPlayerMP)player);
                 }
-            }                
-            
-            if(drum.getTanks(ForgeDirection.UP)[0].getLiquid() == null)
-            {
-                world.markBlockForUpdate(x, y, z); // Is this needed?
             }
-                
+            
             return true;
         }
         
         return false;
     }
 
-    private boolean taskFilledContainer(World world, int x, int y, int z, EntityPlayer player, ItemStack held, ITankContainer drum)
+    private boolean taskFilledContainer(EntityPlayer player, ItemStack held, TileEntityDrum drum)
     {
         LiquidStack fluid = LiquidContainerRegistry.getLiquidForFilledItem(held);
         
@@ -380,6 +374,11 @@ public class BlockDrum extends BlockContainer
                 {
                     tag.setInteger("capacity", note.getInteger("capacity"));
                     
+                    if(note.hasKey("color"))
+                    {
+                        tag.setInteger("color", note.getInteger("color"));
+                    }
+                    
                     if(note.hasKey("liquid"))
                     {
                         tag.setCompoundTag("liquid", note.getCompoundTag("liquid"));
@@ -403,6 +402,7 @@ public class BlockDrum extends BlockContainer
         }
         
         drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
+        drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor().getRGB());
         
         drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
         
@@ -426,6 +426,7 @@ public class BlockDrum extends BlockContainer
                 }
                 
                 drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
+                drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
                 drum.getTagCompound().setTag("liquid", tag);
 
                 drum.setItemDamage(getDamageValue(Defaults.DRUM_CAPACITY_IRON, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
@@ -443,6 +444,7 @@ public class BlockDrum extends BlockContainer
         }
         
         drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
+        drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor().getRGB());
         
         drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
         
@@ -466,6 +468,7 @@ public class BlockDrum extends BlockContainer
                 }
                 
                 drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
+                drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
                 drum.getTagCompound().setTag("liquid", tag);
 
                 drum.setItemDamage(getDamageValue(Defaults.DRUM_CAPACITY_STEEL, Defaults.DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
@@ -507,6 +510,11 @@ public class BlockDrum extends BlockContainer
                 
                 drum.getTagCompound().setInteger("capacity", capacity);
 
+                if(tag.hasKey("color"))
+                {
+                    drum.getTagCompound().setInteger("color", tag.getInteger("color"));
+                }
+                
                 if(tag.hasKey("liquid"))
                 {
                     NBTTagCompound liquid = tag.getCompoundTag("liquid");
@@ -527,6 +535,7 @@ public class BlockDrum extends BlockContainer
         else
         {
             drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
+            drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor().getRGB());
 
             drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
         }
