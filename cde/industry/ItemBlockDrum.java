@@ -5,6 +5,7 @@
 
 package cde.industry;
 
+import cde.core.Defaults;
 import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -89,8 +90,8 @@ public class ItemBlockDrum extends ItemBlock
         
         switch(capacity)
         {
-            case BlockDrum.DRUM_CAPACITY_IRON: type = " Iron"; break;
-            case BlockDrum.DRUM_CAPACITY_STEEL: type = " Steel"; break;
+            case Defaults.DRUM_CAPACITY_IRON: type = " Iron"; break;
+            case Defaults.DRUM_CAPACITY_STEEL: type = " Steel"; break;
             default: type = " UNKNOWN"; break;
         }
         
@@ -106,8 +107,8 @@ public class ItemBlockDrum extends ItemBlock
         {
             switch(stack.getTagCompound().getInteger("capacity"))
             {
-                case BlockDrum.DRUM_CAPACITY_IRON: md = 0; break;
-                case BlockDrum.DRUM_CAPACITY_STEEL: md = 1; break;
+                case Defaults.DRUM_CAPACITY_IRON: md = 0; break;
+                case Defaults.DRUM_CAPACITY_STEEL: md = 1; break;
             }
         }
         
