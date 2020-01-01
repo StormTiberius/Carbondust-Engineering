@@ -86,6 +86,15 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             TANK.setCapacity(tag.getInteger("capacity"));
         
+            if(tag.hasKey("color"))
+            {
+                color = tag.getInteger("color");
+            }
+            else
+            {
+                color = IndustryCore.getLiquidColor().getRGB();
+            }
+            
             if(tag.hasKey("liquid"))
             {
                 TANK.setLiquid(LiquidStack.loadLiquidStackFromNBT(tag.getCompoundTag("liquid")));
@@ -105,15 +114,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             counter = tag.getInteger("counter");
         }
-        
-        if(tag.hasKey("color"))
-        {
-            color = tag.getInteger("color");
-        }
-        else
-        {
-            color = IndustryCore.getLiquidColor().getRGB();
-        }
     }
 
     @Override
@@ -122,6 +122,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         super.writeToNBT(tag);
         
         tag.setInteger("capacity", TANK.getCapacity());
+        tag.setInteger("color", color);
         
         LiquidStack liquid = TANK.getLiquid();
         
@@ -137,8 +138,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         tag.setBoolean("isworking", isWorking);
         
         tag.setInteger("counter", counter);
-        
-        tag.setInteger("color", color);
     }
     
     @Override
