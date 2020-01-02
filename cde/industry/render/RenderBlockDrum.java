@@ -58,7 +58,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
         double wu = uvs[1] - uvs[0];
         double wv = uvs[3] - uvs[2];
-        double ddv = wv * 0.3125F;
+        double ddv = wv * 0.3125D;
         
         // SIDE RENDER
         for(int i = 0; i < 8; i++)
@@ -209,7 +209,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
         double wu = uvs[1] - uvs[0];
         double wv = uvs[3] - uvs[2];
-        double ddv = wv * 0.3125F;
+        double ddv = wv * 0.3125D;
         
         for(int i = 0; i < 8; i++)
         {
