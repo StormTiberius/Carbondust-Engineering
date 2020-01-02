@@ -139,22 +139,22 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.setColorOpaque_F(0.8F, 0.8F, 0.8F);
             
             w = BASE_W;
-            t.addVertexWithUV((double)x + dx(i), (double)y + 1.0D, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
-            t.addVertexWithUV((double)x + dx(i + 1), (double)y + 1.0D, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
+            t.addVertexWithUV((double)x + dx(i), (double)y + 1.0D, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV((double)x + dx(i + 1), (double)y + 1.0D, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
             
             w = (double)(BASE_W * h) * 0.9D;
-            t.addVertexWithUV((double)x + dx(i + 1), (double)y + 1.0D, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
-            t.addVertexWithUV((double)x + dx(i), (double)y + 1.0D, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
+            t.addVertexWithUV((double)x + dx(i + 1), (double)y + 1.0D, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV((double)x + dx(i), (double)y + 1.0D, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
 
             t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 
             w = (double)(BASE_W * h) * 0.9D;
-            t.addVertexWithUV((double)x + dx(i), (double)y + h, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
-            t.addVertexWithUV((double)x + dx(i + 1), (double)y + h, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
+            t.addVertexWithUV((double)x + dx(i), (double)y + h, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV((double)x + dx(i + 1), (double)y + h, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
 
             w = 0.0D;
-            t.addVertexWithUV((double)x + dx(i + 1), (double)y + h, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
-            t.addVertexWithUV((double)x + dx(i), (double)y + h, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
+            t.addVertexWithUV((double)x + dx(i + 1), (double)y + h, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV((double)x + dx(i), (double)y + h, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
         }
 
         t.setColorOpaque_F(0.5F, 0.5F, 0.5F);
@@ -168,22 +168,22 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.setColorOpaque_F(0.5F, 0.5F, 0.5F);
             
             w = (double)(BASE_W * h) * 0.9D;
-            t.addVertexWithUV((double)x + dx(i), (double)y + 0.0D, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
-            t.addVertexWithUV((double)x + dx(i + 1), (double)y + 0.0D, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
+            t.addVertexWithUV((double)x + dx(i), (double)y + 0.0D, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV((double)x + dx(i + 1), (double)y + 0.0D, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
             
             w = BASE_W;
-            t.addVertexWithUV((double)x + dx(i + 1), (double)y + 0.0D, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
-            t.addVertexWithUV((double)x + dx(i), (double)y + 0.0D, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
+            t.addVertexWithUV((double)x + dx(i + 1), (double)y + 0.0D, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV((double)x + dx(i), (double)y + 0.0D, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
 
             t.setColorOpaque_F(0.6F, 0.6F, 0.6F);
 
             w = 0.0D;
-            t.addVertexWithUV((double)x + dx(i), (double)(y + 1.0D) - h, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
-            t.addVertexWithUV((double)x + dx(i + 1), (double)(y + 1.0D) - h, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
+            t.addVertexWithUV((double)x + dx(i), (double)(y + 1.0D) - h, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV((double)x + dx(i + 1), (double)(y + 1.0D) - h, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
 
             w = (double)(BASE_W * h) * 0.9D;
-            t.addVertexWithUV((double)x + dx(i + 1), (double)(y + 1.0D) - h, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
-            t.addVertexWithUV((double)x + dx(i), (double)(y + 1.0D) - h, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
+            t.addVertexWithUV((double)x + dx(i + 1), (double)(y + 1.0D) - h, (double)z + dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV((double)x + dx(i), (double)(y + 1.0D) - h, (double)z + dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
         }
         
         return false;
@@ -285,12 +285,12 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.setNormal(0.0F, 1.0F, 0.0F);
             
             w = BASE_W;
-            t.addVertexWithUV(dx(i), 1.0D, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
-            t.addVertexWithUV(dx(i + 1), 1.0D, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
+            t.addVertexWithUV(dx(i), 1.0D, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV(dx(i + 1), 1.0D, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
             
             w = (double)(BASE_W * h) * 0.9D;
-            t.addVertexWithUV(dx(i + 1), 1.0D, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
-            t.addVertexWithUV(dx(i), 1.0D, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
+            t.addVertexWithUV(dx(i + 1), 1.0D, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV(dx(i), 1.0D, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
             
             t.draw();
             
@@ -300,12 +300,12 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.setNormal(0.0F, 1.0F, 0.0F);
             
             w = (double)(BASE_W * h) * 0.9D;
-            t.addVertexWithUV(dx(i), h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
-            t.addVertexWithUV(dx(i + 1), h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
+            t.addVertexWithUV(dx(i), h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV(dx(i + 1), h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
             
             w = 0.0D;
-            t.addVertexWithUV(dx(i + 1), h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
-            t.addVertexWithUV(dx(i), h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
+            t.addVertexWithUV(dx(i + 1), h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV(dx(i), h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
             
             t.draw();
         }
@@ -321,12 +321,12 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.setNormal(0.0F, -1.0F, 0.0F);
             
             w = (double)(BASE_W * h) * 0.9D;
-            t.addVertexWithUV(dx(i), 0.0D, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
-            t.addVertexWithUV(dx(i + 1), 0.0D, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
+            t.addVertexWithUV(dx(i), 0.0D, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV(dx(i + 1), 0.0D, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
             
             w = BASE_W;
-            t.addVertexWithUV(dx(i + 1), 0.0D, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
-            t.addVertexWithUV(dx(i), 0.0D, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
+            t.addVertexWithUV(dx(i + 1), 0.0D, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV(dx(i), 0.0D, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
             
             t.draw();
             
@@ -336,12 +336,12 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.setNormal(0.0F, 1.0F, 0.0F);
             
             w = 0.0D;
-            t.addVertexWithUV(dx(i), 1.0D - h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
-            t.addVertexWithUV(dx(i + 1), 1.0F - h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
+            t.addVertexWithUV(dx(i), 1.0D - h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV(dx(i + 1), 1.0F - h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
             
             w = (double)(BASE_W * h) * 0.9D;
-            t.addVertexWithUV(dx(i + 1), 1.0F - h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * (double)wv);
-            t.addVertexWithUV(dx(i), 1.0F - h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * (double)wv);
+            t.addVertexWithUV(dx(i + 1), 1.0F - h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV(dx(i), 1.0F - h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
             
             t.draw();
         }
