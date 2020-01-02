@@ -337,11 +337,11 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             
             w = 0.0D;
             t.addVertexWithUV(dx(i), 1.0D - h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
-            t.addVertexWithUV(dx(i + 1), 1.0F - h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV(dx(i + 1), 1.0D - h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
             
             w = BASE_W * h * 0.9D;
-            t.addVertexWithUV(dx(i + 1), 1.0F - h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
-            t.addVertexWithUV(dx(i), 1.0F - h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
+            t.addVertexWithUV(dx(i + 1), 1.0D - h, dz(i + 1), uvt[0] + dx(i + 1) * wu, uvt[3] - dz(i + 1) * wv);
+            t.addVertexWithUV(dx(i), 1.0D - h, dz(i), uvt[0] + dx(i) * wu, uvt[3] - dz(i) * wv);
             
             t.draw();
         }
