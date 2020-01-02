@@ -56,9 +56,9 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         t.setColorRGBA_F(1.0F, 1.0F, 1.0F, 1.0F);
         
-        float wu = (float)uvs[1] - (float)uvs[0];
-        float wv = (float)uvs[3] - (float)uvs[2];
-        float ddv = wv * 0.3125F;
+        double wu = uvs[1] - uvs[0];
+        double wv = uvs[3] - uvs[2];
+        double ddv = wv * 0.3125F;
         
         // SIDE RENDER
         for(int i = 0; i < 8; i++)
@@ -130,8 +130,8 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
         w = BASE_W;
         
-        wu = (float)uvt[1] - (float)uvt[0];
-        wv = (float)uvt[3] - (float)uvt[2];
+        wu = uvt[1] - uvt[0];
+        wv = uvt[3] - uvt[2];
         
         // TOP RENDER
         for(int i = 0; i < 8; i++)
@@ -159,8 +159,8 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
 
         t.setColorOpaque_F(0.5F, 0.5F, 0.5F);
         
-        wu = (float)uvt[1] - (float)uvt[0];
-        wv = (float)uvt[3] - (float)uvt[2];
+        wu = uvt[1] - uvt[0];
+        wv = uvt[3] - uvt[2];
         
         // BOTTOM RENDER
         for(int i = 0; i < 8; i++)
@@ -207,9 +207,9 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         GL11.glTranslatef(-0.0F, -0.5F, -0.0F);
         
-        float wu = (float)uvs[1] - (float)uvs[0];
-        float wv = (float)uvs[3] - (float)uvs[2];
-        float ddv = wv * 0.3125F;
+        double wu = uvs[1] - uvs[0];
+        double wv = uvs[3] - uvs[2];
+        double ddv = wv * 0.3125F;
         
         for(int i = 0; i < 8; i++)
         {
@@ -274,8 +274,8 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
         w = BASE_W;
         
-        wu = (float)uvt[1] - (float)uvt[0];
-        wv = (float)uvt[3] - (float)uvt[2];
+        wu = uvt[1] - uvt[0];
+        wv = uvt[3] - uvt[2];
         
         for(int i = 0; i < 8; i++)
         {
@@ -310,8 +310,8 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.draw();
         }
         
-        wu = (float)uvt[1] - (float)uvt[0];
-        wv = (float)uvt[3] - (float)uvt[2];
+        wu = uvt[1] - uvt[0];
+        wv = uvt[3] - uvt[2];
         
         for(int i = 0; i < 8; i++)
         {
