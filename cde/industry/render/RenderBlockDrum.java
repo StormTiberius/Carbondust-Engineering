@@ -43,8 +43,8 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         double[] uvt = getUVT(metadata);
         
         float h = 0.97F;
-        float d = 0.2F;
         float h2 = 0.3125F;
+        float d = 0.2F;
         
         float r = (float)(color >> 16 & 0xFF) / 255;
         float g = (float)(color >> 8 & 0xFF) / 255;
