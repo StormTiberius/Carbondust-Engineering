@@ -361,43 +361,43 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         return IndustryCore.getDrumRenderId();
     }
     
-    public void setB(float i, float p, float r, float g, float b)
+    private void setB(float i, float p, float r, float g, float b)
     {
         float brightness = (float)((double)p * (0.7D + Math.cos(((((double)i + 0.5D) / 4.0D) * 2.0D + 1.0D) * Math.PI) * 0.1D));
         Tessellator.instance.setColorOpaque_F(brightness * r, brightness * g, brightness * b);
     }
     
-    public void setB(float i, float p)
+    private void setB(float i, float p)
     {
         setB(i, p, 1.0F, 1.0F, 1.0F);
     }
     
-    public static double du(double i)
+    private static double du(double i)
     {
         return (i % 3.0D) / 3.0D;
     }
     
-    public static double du2(double i)
+    private static double du2(double i)
     {
         return (i % 3.0D + 1.0D) / 3.0D;
     }
     
-    public static double dx(double i)
+    private static double dx(double i)
     {
         return 0.5D + (double)ddx(i) * w;
     }
     
-    public static double dz(double i)
+    private static double dz(double i)
     {
         return 0.5D + (double)ddz(i) * w;
     }
     
-    public static float ddx(double i)
+    private static float ddx(double i)
     {
         return (float)Math.cos((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
     }
     
-    public static float ddz(double i)
+    private static float ddz(double i)
     {
         return (float)Math.sin((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
     }
