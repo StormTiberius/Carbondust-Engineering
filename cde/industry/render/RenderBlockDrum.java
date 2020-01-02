@@ -159,8 +159,8 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
 
         t.setColorOpaque_F(0.5F, 0.5F, 0.5F);
         
-        wu = uvt[1] - uvt[0];
-        wv = uvt[3] - uvt[2];
+        // wu = uvb[1] - uvb[0];
+        // wv = uvb[3] - uvb[2];
         
         // BOTTOM RENDER
         for(int i = 0; i < 8; i++)
@@ -310,8 +310,8 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.draw();
         }
         
-        wu = uvt[1] - uvt[0];
-        wv = uvt[3] - uvt[2];
+        // wu = uvb[1] - uvb[0];
+        // wv = uvb[3] - uvb[2];
         
         for(int i = 0; i < 8; i++)
         {
