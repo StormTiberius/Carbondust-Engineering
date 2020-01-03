@@ -92,14 +92,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord + PART_H;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -108,14 +108,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord + PART_H;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -124,14 +124,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord + PART_H * 2.0D;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)(yCoord + 1);
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -140,14 +140,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)(yCoord + 1);
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord + PART_H * 2.0D;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -156,14 +156,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord + PART_H;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord + PART_H * 2.0D;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -172,14 +172,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord + PART_H * 2.0D;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord + PART_H;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -192,14 +192,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord + 0.05D;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -208,14 +208,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord + 0.05D;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -224,14 +224,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord + 0.95D;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i + 1, w);
             y = (double)yCoord + 1.0D;
             z = (double)zCoord + getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -240,14 +240,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord + 1.0D;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i, w);
             y = (double)yCoord + 0.95D;
             z = (double)zCoord + getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -258,14 +258,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)(xCoord + 1) - getOffsetX(i, w);
             y = (double)yCoord + 0.95D;
             z = (double)(zCoord + 1) - getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)(xCoord + 1) - getOffsetX(i, w);
             y = (double)yCoord + 1.0D;
             z = (double)(zCoord + 1) - getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -274,14 +274,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)(xCoord + 1) - getOffsetX(i + 1, w);
             y = (double)yCoord + 1.0D;
             z = (double)(zCoord + 1) - getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)(xCoord + 1) - getOffsetX(i + 1, w);
             y = (double)yCoord + 0.95D;
             z = (double)(zCoord + 1) - getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -290,14 +290,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)(xCoord + 1) - getOffsetX(i, w);
             y = (double)yCoord;
             z = (double)(zCoord + 1) - getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)(xCoord + 1) - getOffsetX(i, w);
             y = (double)yCoord + 0.05D;
             z = (double)(zCoord + 1) - getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -306,14 +306,14 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = (double)(xCoord + 1) - getOffsetX(i + 1, w);
             y = (double)yCoord + 0.05D;
             z = (double)(zCoord + 1) - getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)(xCoord + 1) - getOffsetX(i + 1, w);
             y = (double)yCoord;
             z = (double)(zCoord + 1) - getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
         }
@@ -519,56 +519,56 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = getOffsetX(i + 1, w);
             y = 0.0D;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             x = getOffsetX(i + 1, w);
             y = PART_H;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
             y = PART_H;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
                
             x = getOffsetX(i, w);
             y = 0.0D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) *uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) *uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             x = getOffsetX(i + 1, w);
             y = PART_H * 2.0D;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
               
             x = getOffsetX(i + 1, w);
             y = 1.0D;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
             y = 1.0D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U]  + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U]  + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
             y = PART_H * 2.0D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);            
             
@@ -581,28 +581,28 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = getOffsetX(i + 1, w);
             y = PART_H;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
                 
             x = getOffsetX(i + 1, w);
             y = PART_H * 2.0D;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
             y = PART_H * 2.0D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             x = getOffsetX(i, w);
             y = PART_H;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -617,56 +617,56 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = getOffsetX(i + 1, w);
             y = 0.0D;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i + 1, w);
             y = 0.05D;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
             y = 0.05D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - uLength *0.05D;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
             y = 0.0D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i + 1, w);
             y = 0.95D;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i + 1, w);
             y = 1.0D;
             z = getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
             y = 1.0D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
             y = 0.95D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -675,56 +675,56 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = 1.0D - getOffsetX(i, w);
             y = 0.95D;
             z = 1.0D - getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = 1.0D - getOffsetX(i, w);
             y = 1.0D;
             z = 1.0D - getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = 1.0D - getOffsetX(i + 1, w);
             y = 1.0D;
             z = 1.0D - getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = 1.0D - getOffsetX(i + 1, w);
             y = 0.95D;
             z = 1.0D - getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = 1.0D - getOffsetX(i, w);
             y = 0.0D;
             z = 1.0D - getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = 1.0D - getOffsetX(i, w);
             y = 0.05D;
             z = 1.0D - getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = 1.0D - getOffsetX(i + 1, w);
             y = 0.05D;
             z = 1.0D - getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = 1.0D - getOffsetX(i + 1, w);
             y = 0.0D;
             z = 1.0D - getOffsetZ(i + 1, w);
-            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -906,14 +906,9 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         }
     }
     
-    private static double getOffsetU(double i, boolean flag)
+    private static double getOffsetU(double i, double d)
     {
-        if(flag)
-        {
-            return (i % 3.0D + 1.0D) / 3.0D;
-        }
-        
-        return (i % 3.0D) / 3.0D;
+        return (i % 3.0D + d) / 3.0D;
     }
     
     private static double getOffsetX(double i, double w)
