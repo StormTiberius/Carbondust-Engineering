@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
+import org.lwjgl.opengl.GL11;
 
 public class RenderBlockDrum implements ISimpleBlockRenderingHandler
 {
@@ -476,6 +477,51 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     public static void drawInvBlock(Block block, ItemStack item)
     {
+        Tessellator t = Tessellator.instance;
+        t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+        GL11.glTranslatef(-0.0F, -0.5F, -0.0F);
+        
+        Color color = getColor(item);
+        
+        switch(getType(item))
+        {
+            case 0:
+                    drawInvBlockSides(t, Utils.getUV(Defaults.TEXTURE_DRUM_IRON_SIDE), color);
+                    drawInvBlockTop(t, Utils.getUV(Defaults.TEXTURE_DRUM_IRON_TOP));
+                    drawInvBlockBottom(t, Utils.getUV(Defaults.TEXTURE_DRUM_IRON_TOP));
+                    break;
+            case 1:
+                    drawInvBlockSides(t, Utils.getUV(Defaults.TEXTURE_DRUM_STEEL_SIDE), color);
+                    drawInvBlockTop(t, Utils.getUV(Defaults.TEXTURE_DRUM_STEEL_TOP));
+                    drawInvBlockBottom(t, Utils.getUV(Defaults.TEXTURE_DRUM_STEEL_TOP));
+                    break;
+        }
+        
+        GL11.glTranslatef(0.0F, 0.5F, 0.0F);
+    }
+    
+    private static void drawInvBlockSides(Tessellator t, double[] uv, Color color)
+    {
+        double uLength = uv[MAX_U] - uv[MIN_U];
+        double vLength = uv[MAX_V] - uv[MIN_V];
+        double vOffset = vLength * PART_H;
+        
+        
+    }
+    
+    private static void drawInvBlockTop(Tessellator t, double[] uv)
+    {
+        double uLength = uv[MAX_U] - uv[MIN_U];
+        double vLength = uv[MAX_V] - uv[MIN_V];
+        
+        
+    }
+        
+    private static void drawInvBlockBottom(Tessellator t, double[] uv)
+    {
+        double uLength = uv[MAX_U] - uv[MIN_U];
+        double vLength = uv[MAX_V] - uv[MIN_V];
+    
         
     }
     
@@ -535,25 +581,17 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         return IndustryCore.getLiquidColor();
     }
     
-    private static boolean isSteel(ItemStack is)
+    private static int getType(ItemStack is)
     {
-        boolean flag = false;
-        
         if(is.hasTagCompound() && is.getTagCompound().hasKey("capacity"))
         {
-            flag = is.getTagCompound().getInteger("capacity") == Defaults.DRUM_CAPACITY_STEEL;
+            switch(is.getTagCompound().getInteger("capacity"))
+            {
+                case Defaults.DRUM_CAPACITY_IRON: return 0;
+                case Defaults.DRUM_CAPACITY_STEEL: return 1;
+            }
         }
         
-        return flag;
-    }
-    
-    private static double[] getUV(ItemStack is)
-    {
-        if(isSteel(is))
-        {
-            return Utils.getUV(0);
-        }
-        
-        return Utils.getUV(0);
+        return 0;
     }
 }
