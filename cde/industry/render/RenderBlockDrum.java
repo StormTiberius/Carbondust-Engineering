@@ -320,7 +320,79 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
     private void renderTop(Tessellator t, int xCoord, int yCoord, int zCoord, double[] uv)
     {
+        double x,y,z,u,v,w;
         
+        double uLength = uv[MAX_U] - uv[MIN_U];
+        double vLength = uv[MAX_V] - uv[MIN_V];
+        
+        for(int i = 0; i < 8; i++)
+        {
+            t.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+            
+            w = BASE_W;
+            
+            x = (double)xCoord + getOffsetX(i, w);
+            y = (double)(yCoord + 1);
+            z = (double)zCoord + getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetX(i, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = (double)xCoord + getOffsetX(i + 1, w);
+            y = (double)(yCoord + 1);
+            z = (double)zCoord + getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetX(i + 1, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i + 1, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            w = BASE_W * TOTAL_H * 0.9D;
+            
+            x = (double)xCoord + getOffsetX(i + 1, w);
+            y = (double)(yCoord + 1);
+            z = (double)zCoord + getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetX(i + 1, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i + 1, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = (double)xCoord + getOffsetX(i, w);
+            y = (double)(yCoord + 1);
+            z = (double)zCoord + getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetX(i, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+
+            t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+            
+            x = (double)xCoord + getOffsetX(i, w);
+            y = (double)yCoord + TOTAL_H;
+            z = (double)zCoord + getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetX(i, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = (double)xCoord + getOffsetX(i + 1, w);
+            y = (double)yCoord + TOTAL_H;
+            z = (double)zCoord + getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetX(i + 1, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i + 1, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+
+            w = 0.0D;
+            
+            x = (double)xCoord + getOffsetX(i + 1, w);
+            y = (double)yCoord + TOTAL_H;
+            z = (double)zCoord + getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetX(i + 1, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i + 1, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = (double)xCoord + getOffsetX(i, w);
+            y = (double)yCoord + TOTAL_H;
+            z = (double)zCoord + getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetX(i, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);   
+        }
     }
             
     private void renderBottom(Tessellator t, int xCoord, int yCoord, int zCoord, double[] uv)
