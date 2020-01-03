@@ -734,10 +734,89 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     private static void drawInvBlockTop(Tessellator t, double[] uv)
     {
+        double x,y,z,u,v,w;
+        
         double uLength = uv[MAX_U] - uv[MIN_U];
         double vLength = uv[MAX_V] - uv[MIN_V];
         
-        
+        for(int i = 0; i < 8; i++)
+        {
+            t.startDrawingQuads();
+            t.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+            t.setNormal(0.0F, 1.0F, 0.0F);
+            
+            w = BASE_W;
+            
+            x = getOffsetX(i, w);
+            y = 1.0D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetX(i, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = getOffsetX(i + 1, w);
+            y = 1.0D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetX(i + 1, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i + 1, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            w = BASE_W * TOTAL_H * 0.9D;
+            
+            x = getOffsetX(i + 1, w);
+            y = 1.0D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetX(i + 1, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i + 1, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = getOffsetX(i, w);
+            y = 1.0D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetX(i, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            t.draw();
+            
+            t.startDrawingQuads();
+            t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+            t.setNormal(0.0F, 1.0F, 0.0F);
+            
+            w = BASE_W * TOTAL_H * 0.9D;
+            
+            x = getOffsetX(i, w);
+            y = TOTAL_H;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetX(i, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = getOffsetX(i + 1, w);
+            y = TOTAL_H;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetX(i + 1, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i + 1, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            w = 0.0D;
+            
+            x = getOffsetX(i + 1, w);
+            y = TOTAL_H;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetX(i + 1, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i + 1, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = getOffsetX(i, w);
+            y = TOTAL_H;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetX(i, w) * uLength;
+            v = uv[MAX_V] - getOffsetZ(i, w) * vLength;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            t.draw();
+        }
     }
         
     private static void drawInvBlockBottom(Tessellator t, double[] uv)
