@@ -943,7 +943,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     private void setColor(double i, double p)
     {
-        this.setColor(i, p, Color.WHITE);
+        setColor(i, p, Color.WHITE);
     }
     
     private static Color getColor(ItemStack is)
