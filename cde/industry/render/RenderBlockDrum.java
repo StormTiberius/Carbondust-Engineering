@@ -58,7 +58,6 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
                     renderBottom(t, xCoord, yCoord, zCoord, Utils.getUV(Defaults.TEXTURE_DRUM_STEEL_TOP));
                     break;
         }
- 
         
         return false;
     }
