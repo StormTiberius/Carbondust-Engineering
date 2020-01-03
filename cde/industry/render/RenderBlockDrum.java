@@ -930,7 +930,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         return Math.sin((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
     }
     
-    private void setColor(double i, double p, Color color)
+    private static void setColor(double i, double p, Color color)
     {
         float brightness = (float)(p * (0.7D + Math.cos((((i + 0.5D) / 4.0D) * 2.0D + 1.0D) * Math.PI) * 0.1D));
         
@@ -941,7 +941,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         Tessellator.instance.setColorOpaque_F(brightness * red, brightness * green, brightness * blue);
     }
     
-    private void setColor(double i, double p)
+    private static void setColor(double i, double p)
     {
         setColor(i, p, Color.WHITE);
     }
