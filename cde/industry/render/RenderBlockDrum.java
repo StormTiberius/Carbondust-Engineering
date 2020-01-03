@@ -502,11 +502,234 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     private static void drawInvBlockSides(Tessellator t, double[] uv, Color color)
     {
+        double x,y,z,u,v,w;
+        
         double uLength = uv[MAX_U] - uv[MIN_U];
         double vLength = uv[MAX_V] - uv[MIN_V];
         double vOffset = vLength * PART_H;
         
-        
+        for(int i = 0; i < 8; i++)
+        {
+            w = BASE_W * TOTAL_H;
+            
+            t.startDrawingQuads();
+            t.setNormal((float)getX((double)i + 0.5D), 0.0F, (float)getZ((double)i + 0.5D));
+            t.setColorOpaque(color.getRed(), color.getGreen(), color.getBlue());
+            
+            x = getOffsetX(i + 1, w);
+            y = 0.0D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MAX_V];
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = getOffsetX(i + 1, w);
+            y = PART_H;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MAX_V] - vOffset;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i, w);
+            y = PART_H;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MAX_V] - vOffset;
+            t.addVertexWithUV(x, y, z, u, v);
+               
+            x = getOffsetX(i, w);
+            y = 0.0D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) *uLength;
+            v = uv[MAX_V];
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = getOffsetX(i + 1, w);
+            y = PART_H * 2.0D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MIN_V] + vOffset;
+            t.addVertexWithUV(x, y, z, u, v);
+              
+            x = getOffsetX(i + 1, w);
+            y = 1.0D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MIN_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i, w);
+            y = 1.0D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U]  + getOffsetU(i, false) * uLength;
+            v = uv[MIN_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i, w);
+            y = PART_H * 2.0D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MIN_V] + vOffset;
+            t.addVertexWithUV(x, y, z, u, v);            
+            
+            t.draw();
+            
+            t.startDrawingQuads();
+            t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+            t.setNormal((float)getX((double)i + 0.5D), 0.0F, (float)getZ((double)i + 0.5D));
+                   
+            x = getOffsetX(i + 1, w);
+            y = PART_H;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MAX_V] - vOffset;
+            t.addVertexWithUV(x, y, z, u, v);
+                
+            x = getOffsetX(i + 1, w);
+            y = PART_H * 2.0D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MIN_V] + vOffset;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i, w);
+            y = PART_H * 2.0D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MIN_V] + vOffset;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            x = getOffsetX(i, w);
+            y = PART_H;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MAX_V] - vOffset;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            t.draw();
+            
+            w = BASE_W;
+            
+            t.startDrawingQuads();
+            t.setColorOpaque_F(0.6F, 0.6F, 0.6F);
+            t.setNormal((float)getX((double)i + 0.5D), 0.0F, (float)getZ((double)i + 0.5D));
+                        
+            x = getOffsetX(i + 1, w);
+            y = 0.0D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MAX_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i + 1, w);
+            y = 0.05D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MAX_V] - uLength * 0.05D;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i, w);
+            y = 0.05D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MAX_V] - uLength *0.05D;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i, w);
+            y = 0.0D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MAX_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i + 1, w);
+            y = 0.95D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MIN_V] + uLength * 0.05D;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i + 1, w);
+            y = 1.0D;
+            z = getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MIN_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i, w);
+            y = 1.0D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MIN_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = getOffsetX(i, w);
+            y = 0.95D;
+            z = getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MIN_V] + uLength * 0.05D;
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            w = BASE_W * TOTAL_H * 0.9D;
+                   
+            x = 1.0D - getOffsetX(i, w);
+            y = 0.95D;
+            z = 1.0D - getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MAX_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = 1.0D - getOffsetX(i, w);
+            y = 1.0D;
+            z = 1.0D - getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MAX_V] - uLength * 0.05D;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = 1.0D - getOffsetX(i + 1, w);
+            y = 1.0D;
+            z = 1.0D - getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MAX_V] - uLength * 0.05D;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = 1.0D - getOffsetX(i + 1, w);
+            y = 0.95D;
+            z = 1.0D - getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MAX_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = 1.0D - getOffsetX(i, w);
+            y = 0.0D;
+            z = 1.0D - getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MIN_V];
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = 1.0D - getOffsetX(i, w);
+            y = 0.05D;
+            z = 1.0D - getOffsetZ(i, w);
+            u = uv[MIN_U] + getOffsetU(i, false) * uLength;
+            v = uv[MIN_V] + uLength * 0.05D;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = 1.0D - getOffsetX(i + 1, w);
+            y = 0.05D;
+            z = 1.0D - getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MIN_V] + uLength * 0.05D;
+            t.addVertexWithUV(x, y, z, u, v);
+                        
+            x = 1.0D - getOffsetX(i + 1, w);
+            y = 0.0D;
+            z = 1.0D - getOffsetZ(i + 1, w);
+            u = uv[MIN_U] + getOffsetU(i, true) * uLength;
+            v = uv[MIN_V];
+            t.addVertexWithUV(x, y, z, u, v);
+            
+            t.draw();
+        }
     }
     
     private static void drawInvBlockTop(Tessellator t, double[] uv)
