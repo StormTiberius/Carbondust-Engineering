@@ -417,22 +417,22 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     private static double getOffsetX(double i, double w)
     {
-        return (double)getX(i) * w;
+        return 0.5D + (double)getX(i) * w;
     }
     
     private static double getOffsetZ(double i, double w)
     {
-        return (double)getZ(i) * w;
+        return 0.5D + (double)getZ(i) * w;
     }
     
     private static double getX(double i)
     {
-        return Math.cos((-(1.0D + i) / 8.0D) * 2.0D * Math.PI);
+        return Math.cos((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
     }
     
     private static double getZ(double i)
     {
-        return Math.sin((-(1.0D + i) / 8.0D) * 2.0D * Math.PI);
+        return Math.sin((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
     }
     
     private void setColor(double i, double p, Color color)
