@@ -88,97 +88,97 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             
             setColor((double)(i + 1) - COLOR_BCV, 1.0D, color);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord + PART_H;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)i + COLOR_BCV, 0.9D, color);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord + PART_H;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)(i + 1) - COLOR_BCV, 1.0D, color);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord + PART_H * 2.0D;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)(yCoord + 1);
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)i + COLOR_BCV, 0.9D, color);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)(yCoord + 1);
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord + PART_H * 2.0D;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)(i + 1) - COLOR_BCV, 1.0D);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord + PART_H;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord + PART_H * 2.0D;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)i + COLOR_BCV, 1.0D);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord + PART_H * 2.0D;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord + PART_H;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -188,65 +188,65 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             
             setColor((double)(i + 1) - COLOR_BCV, 0.6D);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord + 0.05D;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)i + COLOR_BCV, 0.6D);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord + 0.05D;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)(i + 1) - COLOR_BCV, 0.6D);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord + 0.95D;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i + 1);
+            x = (double)xCoord + getX(i + 1, w);
             y = (double)yCoord + 1.0D;
-            z = (double)zCoord + dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)zCoord + getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)i + COLOR_BCV, 0.6D);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord + 1.0D;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)xCoord + dx(i);
+            x = (double)xCoord + getX(i, w);
             y = (double)yCoord + 0.95D;
-            z = (double)zCoord + dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)zCoord + getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -254,65 +254,65 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             
             setColor((double)i + COLOR_BCV, 0.6D);
 
-            x = (double)(xCoord + 1) - dx(i);
+            x = (double)(xCoord + 1) - getX(i, w);
             y = (double)yCoord + 0.95D;
-            z = (double)(zCoord + 1) - dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)(zCoord + 1) - getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)(xCoord + 1) - dx(i);
+            x = (double)(xCoord + 1) - getX(i, w);
             y = (double)yCoord + 1.0D;
-            z = (double)(zCoord + 1) - dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)(zCoord + 1) - getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)(i + 1) - COLOR_BCV, 0.6D);
             
-            x = (double)(xCoord + 1) - dx(i + 1);
+            x = (double)(xCoord + 1) - getX(i + 1, w);
             y = (double)yCoord + 1.0D;
-            z = (double)(zCoord + 1) - dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)(zCoord + 1) - getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)(xCoord + 1) - dx(i + 1);
+            x = (double)(xCoord + 1) - getX(i + 1, w);
             y = (double)yCoord + 0.95D;
-            z = (double)(zCoord + 1) - dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)(zCoord + 1) - getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)i + COLOR_BCV, 0.6D);
             
-            x = (double)(xCoord + 1) - dx(i);
+            x = (double)(xCoord + 1) - getX(i, w);
             y = (double)yCoord;
-            z = (double)(zCoord + 1) - dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)(zCoord + 1) - getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)(xCoord + 1) - dx(i);
+            x = (double)(xCoord + 1) - getX(i, w);
             y = (double)yCoord + 0.05D;
-            z = (double)(zCoord + 1) - dz(i);
-            u = uv[MIN_U] + du(i) * uLength;
+            z = (double)(zCoord + 1) - getZ(i, w);
+            u = uv[MIN_U] + getU(i, false) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
             setColor((double)(i + 1) - COLOR_BCV, 0.6D);
             
-            x = (double)(xCoord + 1) - dx(i + 1);
+            x = (double)(xCoord + 1) - getX(i + 1, w);
             y = (double)yCoord + 0.05D;
-            z = (double)(zCoord + 1) - dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)(zCoord + 1) - getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = (double)(xCoord + 1) - dx(i + 1);
+            x = (double)(xCoord + 1) - getX(i + 1, w);
             y = (double)yCoord;
-            z = (double)(zCoord + 1) - dz(i + 1);
-            u = uv[MIN_U] + du2(i) * uLength;
+            z = (double)(zCoord + 1) - getZ(i + 1, w);
+            u = uv[MIN_U] + getU(i, true) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
         }
@@ -328,32 +328,32 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
     }
     
-    private static double du(double i)
+    private static double getU(double i, boolean flag)
     {
+        if(flag)
+        {
+            return (i % 3.0D + 1.0D) / 3.0D;
+        }
+        
         return (i % 3.0D) / 3.0D;
     }
     
-    private static double du2(double i)
+    private static double getX(double i, double w)
     {
-        return (i % 3.0D + 1.0D) / 3.0D;
+        return 0.5D + (double)getddx(i) * w;
     }
     
-    private static double dx(double i, double w)
+    private static double getZ(double i, double w)
     {
-        return 0.5D + (double)ddx(i) * w;
+        return 0.5D + (double)getddz(i) * w;
     }
     
-    private static double dz(double i, double w)
-    {
-        return 0.5D + (double)ddz(i) * w;
-    }
-    
-    private static float ddx(double i)
+    private static float getddx(double i)
     {
         return (float)Math.cos((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
     }
     
-    private static float ddz(double i)
+    private static float getddz(double i)
     {
         return (float)Math.sin((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
     }
