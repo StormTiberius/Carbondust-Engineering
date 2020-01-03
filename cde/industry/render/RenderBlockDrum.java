@@ -18,7 +18,15 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderBlockDrum implements ISimpleBlockRenderingHandler
 {
+    private static final int MIN_U = 0;
+    private static final int MAX_U = 1;
+    private static final int MIN_V = 2;
+    private static final int MAX_V = 3;
+    
     private static final double BASE_W = 0.425D;
+    private static final double TOTAL_H = 0.97D;
+    private static final double PART_H = 0.3125D;
+    private static final double COLOR_BCV = 0.2D;
     
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
@@ -68,233 +76,244 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     private void renderSides(Tessellator t, int xCoord, int yCoord, int zCoord, double[] uv, Color color)
     {
-        double x,y,z,u,v;
+        double x,y,z,u,v,w;
+        
+        double uLength = uv[MAX_U] - uv[MIN_U];
+        double vLength = uv[MAX_V] - uv[MIN_V];
+        double vOffset = vLength * PART_H;
         
         for(int i = 0; i < 8; i++)
         {   
-            setColor();
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            w = BASE_W * TOTAL_H;
+            
+            setColor((double)(i + 1) - COLOR_BCV, 1.0D, color);
+            
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord + PART_H;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)i + COLOR_BCV, 0.9D, color);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord + PART_H;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)(i + 1) - COLOR_BCV, 1.0D, color);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord + PART_H * 2.0D;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i + 1);
+            y = (double)(yCoord + 1);
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)i + COLOR_BCV, 0.9D, color);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)(yCoord + 1);
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord + PART_H * 2.0D;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)(i + 1) - COLOR_BCV, 1.0D);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord + PART_H;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord + PART_H * 2.0D;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)i + COLOR_BCV, 1.0D);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord + PART_H * 2.0D;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MIN_V] + vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord + PART_H;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
             t.setColorOpaque_F(0.65F, 0.65F, 0.65F);
             
-            setColor();
+            w = BASE_W;
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            setColor((double)(i + 1) - COLOR_BCV, 0.6D);
+            
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord + 0.05D;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)i + COLOR_BCV, 0.6D);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord + 0.05D;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)(i + 1) - COLOR_BCV, 0.6D);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord + 0.95D;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i + 1);
+            y = (double)yCoord + 1.0D;
+            z = (double)zCoord + dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)i + COLOR_BCV, 0.6D);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord + 1.0D;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)xCoord + dx(i);
+            y = (double)yCoord + 0.95D;
+            z = (double)zCoord + dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            w = BASE_W * TOTAL_H * 0.9D;
+            
+            setColor((double)i + COLOR_BCV, 0.6D);
 
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)(xCoord + 1) - dx(i);
+            y = (double)yCoord + 0.95D;
+            z = (double)(zCoord + 1) - dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)(xCoord + 1) - dx(i);
+            y = (double)yCoord + 1.0D;
+            z = (double)(zCoord + 1) - dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)(i + 1) - COLOR_BCV, 0.6D);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)(xCoord + 1) - dx(i + 1);
+            y = (double)yCoord + 1.0D;
+            z = (double)(zCoord + 1) - dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)(xCoord + 1) - dx(i + 1);
+            y = (double)yCoord + 0.95D;
+            z = (double)(zCoord + 1) - dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)i + COLOR_BCV, 0.6D);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)(xCoord + 1) - dx(i);
+            y = (double)yCoord;
+            z = (double)(zCoord + 1) - dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)(xCoord + 1) - dx(i);
+            y = (double)yCoord + 0.05D;
+            z = (double)(zCoord + 1) - dz(i);
+            u = uv[MIN_U] + du(i) * uLength;
+            v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            setColor();
+            setColor((double)(i + 1) - COLOR_BCV, 0.6D);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)(xCoord + 1) - dx(i + 1);
+            y = (double)yCoord + 0.05D;
+            z = (double)(zCoord + 1) - dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
-            x = 0;
-            y = 0;
-            z = 0;
-            u = 0;
-            v = 0;
+            x = (double)(xCoord + 1) - dx(i + 1);
+            y = (double)yCoord;
+            z = (double)(zCoord + 1) - dz(i + 1);
+            u = uv[MIN_U] + du2(i) * uLength;
+            v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
         }
     }
@@ -309,10 +328,50 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
     }
     
-    private void setColor(double i, double p, float red, float green, float blue)
+    private static double du(double i)
     {
-        float alpha = (float)(p * (0.7D + Math.cos((((i + 0.5D) / 4.0D) * 2.0D + 1.0D) * Math.PI) * 0.1D));
-        Tessellator.instance.setColorRGBA_F(red, green, blue, alpha);
+        return (i % 3.0D) / 3.0D;
+    }
+    
+    private static double du2(double i)
+    {
+        return (i % 3.0D + 1.0D) / 3.0D;
+    }
+    
+    private static double dx(double i, double w)
+    {
+        return 0.5D + (double)ddx(i) * w;
+    }
+    
+    private static double dz(double i, double w)
+    {
+        return 0.5D + (double)ddz(i) * w;
+    }
+    
+    private static float ddx(double i)
+    {
+        return (float)Math.cos((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
+    }
+    
+    private static float ddz(double i)
+    {
+        return (float)Math.sin((-(0.5D + i) / 8.0D) * 2.0D * Math.PI);
+    }
+    
+    private void setColor(double i, double p, Color color)
+    {
+        float brightness = (float)(p * (0.7D + Math.cos((((i + 0.5D) / 4.0D) * 2.0D + 1.0D) * Math.PI) * 0.1D));
+        
+        float red = (float)color.getRed() / 255;
+        float green = (float)color.getGreen() / 255;
+        float blue = (float)color.getBlue() / 255;
+        
+        Tessellator.instance.setColorOpaque_F(brightness * red, brightness * green, brightness * blue);
+    }
+    
+    private void setColor(double i, double p)
+    {
+        this.setColor(i, p, Color.WHITE);
     }
     
     private static Color getColor(ItemStack is)
