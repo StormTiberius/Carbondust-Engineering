@@ -912,12 +912,12 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     private static double getOffsetX(double i, double w)
     {
-        return 0.5D + (double)getX(i) * w;
+        return 0.5D + getX(i) * w;
     }
     
     private static double getOffsetZ(double i, double w)
     {
-        return 0.5D + (double)getZ(i) * w;
+        return 0.5D + getZ(i) * w;
     }
     
     private static double getX(double i)
