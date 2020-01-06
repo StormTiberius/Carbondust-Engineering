@@ -44,7 +44,16 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         
         Color color = new Color(block.colorMultiplier(world, xCoord, yCoord, zCoord));
         
-        switch(world.getBlockMetadata(xCoord, yCoord, zCoord))
+        int metadata = world.getBlockMetadata(xCoord, yCoord, zCoord);
+        
+        int index = renderer.overrideBlockTexture;
+        
+        if(index > -1)
+        {
+            metadata = 16;
+        }
+        
+        switch(metadata)
         {
             case 0:
                     renderSides(t, xCoord, yCoord, zCoord, Utils.getUV(Defaults.TEXTURE_DRUM_IRON_SIDE), color);
@@ -56,6 +65,11 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
                     renderTop(t, xCoord, yCoord, zCoord, Utils.getUV(Defaults.TEXTURE_DRUM_STEEL_TOP));
                     renderBottom(t, xCoord, yCoord, zCoord, Utils.getUV(Defaults.TEXTURE_DRUM_STEEL_TOP));
                     break;
+            case 16:
+                    renderSides(t, xCoord, yCoord, zCoord, Utils.getUV(index), color);
+                    renderTop(t, xCoord, yCoord, zCoord, Utils.getUV(index));
+                    renderBottom(t, xCoord, yCoord, zCoord, Utils.getUV(index));
+            break;
         }
         
         return false;
