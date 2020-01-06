@@ -115,7 +115,7 @@ public class BlockDrum extends BlockContainer
             if(!player.isSneaking())
             {
                 dropBlockAsItem(world, x, y, z, 0, 0);
-                world.setBlock(x, y, z, 0); 
+                world.setBlockWithNotify(x, y, z, 0);
             }
             else
             {
@@ -330,6 +330,23 @@ public class BlockDrum extends BlockContainer
                 {
                     for(ItemStack is : items)
                     {
+                        if(is.hasTagCompound())
+                        {
+                            NBTTagCompound tag = is.getTagCompound();
+                            
+                            if(tag.hasKey("liquid"))
+                            {
+                                tag.removeTag("liquid");
+                            }
+                            
+                            tag.setInteger("color", IndustryCore.getLiquidColor().getRGB());
+
+                            if(tag.hasKey("capacity"))
+                            {
+                                is.setItemDamage(getDamageValue(0, tag.getInteger("capacity"), is.getMaxDamage()));
+                            }
+                        }
+                        
                         dropBlockAsItem_do(world, x, y, z, is);
                     }
                 }
