@@ -41,7 +41,6 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         Tessellator t = Tessellator.instance;
         
         t.setBrightness(block.getMixedBrightnessForBlock(world, xCoord, yCoord, zCoord));
-         // REMOVE t.setColorRGBA(255, 255, 255, 255);
         
         Color color = new Color(block.colorMultiplier(world, xCoord, yCoord, zCoord));
         
@@ -181,8 +180,6 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
-            
-            // REMOVE t.setColorOpaque_F(0.65F, 0.65F, 0.65F);
             
             w = BASE_W;
             
@@ -477,7 +474,6 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     public static void drawInvBlock(Block block, ItemStack item)
     {
         Tessellator t = Tessellator.instance;
-        // REMOVE t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         GL11.glTranslatef(-0.0F, -0.5F, -0.0F);
         
         Color color = getColor(item);
