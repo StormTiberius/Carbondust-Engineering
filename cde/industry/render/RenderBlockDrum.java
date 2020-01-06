@@ -41,7 +41,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
         Tessellator t = Tessellator.instance;
         
         t.setBrightness(block.getMixedBrightnessForBlock(world, xCoord, yCoord, zCoord));
-        t.setColorRGBA(255, 255, 255, 255);
+         // REMOVE t.setColorRGBA(255, 255, 255, 255);
         
         Color color = new Color(block.colorMultiplier(world, xCoord, yCoord, zCoord));
         
@@ -182,7 +182,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             v = uv[MAX_V] - vOffset;
             t.addVertexWithUV(x, y, z, u, v);
             
-            t.setColorOpaque_F(0.65F, 0.65F, 0.65F);
+            // REMOVE t.setColorOpaque_F(0.65F, 0.65F, 0.65F);
             
             w = BASE_W;
             
@@ -228,7 +228,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)xCoord + getOffsetX(i + 1, w);
-            y = (double)yCoord + 1.0D;
+            y = (double)(yCoord + 1);
             z = (double)zCoord + getOffsetZ(i + 1, w);
             u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MIN_V];
@@ -237,7 +237,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             setColor((double)i + COLOR_BCV, 0.6D);
             
             x = (double)xCoord + getOffsetX(i, w);
-            y = (double)yCoord + 1.0D;
+            y = (double)(yCoord + 1);
             z = (double)zCoord + getOffsetZ(i, w);
             u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V];
@@ -262,7 +262,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             t.addVertexWithUV(x, y, z, u, v);
             
             x = (double)(xCoord + 1) - getOffsetX(i, w);
-            y = (double)yCoord + 1.0D;
+            y = (double)(yCoord + 1);
             z = (double)(zCoord + 1) - getOffsetZ(i, w);
             u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
@@ -271,7 +271,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             setColor((double)(i + 1) - COLOR_BCV, 0.6D);
             
             x = (double)(xCoord + 1) - getOffsetX(i + 1, w);
-            y = (double)yCoord + 1.0D;
+            y = (double)(yCoord + 1);
             z = (double)(zCoord + 1) - getOffsetZ(i + 1, w);
             u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
             v = uv[MAX_V] - uLength * 0.05D;
@@ -477,7 +477,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     public static void drawInvBlock(Block block, ItemStack item)
     {
         Tessellator t = Tessellator.instance;
-        t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+        // REMOVE t.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         GL11.glTranslatef(-0.0F, -0.5F, -0.0F);
         
         Color color = getColor(item);
@@ -512,8 +512,8 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             w = BASE_W * TOTAL_H;
             
             t.startDrawingQuads();
-            t.setNormal((float)getX((double)i + 0.5D), 0.0F, (float)getZ((double)i + 0.5D));
             t.setColorOpaque(color.getRed(), color.getGreen(), color.getBlue());
+            t.setNormal((float)getX((double)i + 0.5D), 0.0F, (float)getZ((double)i + 0.5D));
             
             x = getOffsetX(i + 1, w);
             y = 0.0D;
@@ -539,7 +539,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = getOffsetX(i, w);
             y = 0.0D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, 0.0D) *uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MAX_V];
             t.addVertexWithUV(x, y, z, u, v);
             
@@ -560,7 +560,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = getOffsetX(i, w);
             y = 1.0D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U]  + getOffsetU(i, 0.0D) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V];
             t.addVertexWithUV(x, y, z, u, v);
                         
@@ -631,7 +631,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             y = 0.05D;
             z = getOffsetZ(i, w);
             u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
-            v = uv[MAX_V] - uLength *0.05D;
+            v = uv[MAX_V] - uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
                         
             x = getOffsetX(i, w);
@@ -665,7 +665,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             x = getOffsetX(i, w);
             y = 0.95D;
             z = getOffsetZ(i, w);
-            u = uv[MIN_U] + getOffsetU(i, 1.0D) * uLength;
+            u = uv[MIN_U] + getOffsetU(i, 0.0D) * uLength;
             v = uv[MIN_V] + uLength * 0.05D;
             t.addVertexWithUV(x, y, z, u, v);
             
