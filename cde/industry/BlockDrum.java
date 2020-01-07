@@ -9,6 +9,7 @@ import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
 import cde.IndustryCore;
 import cde.core.Defaults;
+import ic2.api.IPaintableBlock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +32,8 @@ import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
-public class BlockDrum extends BlockContainer
+public class BlockDrum extends BlockContainer implements IPaintableBlock
 {
     public BlockDrum(int id)
     {
@@ -66,7 +66,7 @@ public class BlockDrum extends BlockContainer
                     }
                     else if(held.itemID == Item.stick.itemID)
                     {
-                        return taskStick(player, ted);
+                        return taskStick(world, x, y, z, player, ted);
                     }
                     else if(LiquidContainerRegistry.isEmptyContainer(held))
                     {
@@ -76,32 +76,11 @@ public class BlockDrum extends BlockContainer
                     {
                         return taskFilledContainer(player, held, ted);
                     }
-                    else if(held.getDisplayName().endsWith(" Paint Brush"))
-                    {
-                        
-                    }
-                    else if(isDye(OreDictionary.getOreName(held.itemID)))
-                    {
-                        
-                    }
                 }
             }
             
             return false;
         }
-    }
-    
-    private boolean isDye(String dye)
-    {
-        for(String names : Defaults.DYE_ORE_DICTIONARY_NAMES)
-        {
-            if(dye.contentEquals(names))
-            {
-                return true;
-            }
-        }
-        
-        return false;
     }
     
     private boolean taskWrench(World world, int x, int y, int z, EntityPlayer player, ItemStack held, TileEntityDrum ted)
@@ -128,7 +107,7 @@ public class BlockDrum extends BlockContainer
         return false;
     }
 
-    private boolean taskStick(EntityPlayer player, TileEntityDrum ted)
+    private boolean taskStick(World world, int x, int y, int z, EntityPlayer player, TileEntityDrum ted)
     {
         StringBuilder sb = new StringBuilder("This ");
         
@@ -201,6 +180,8 @@ public class BlockDrum extends BlockContainer
             sb = new StringBuilder("ERROR: TANK IS NULL!");
         }
     
+        world.markBlockForUpdate(x, y, z);
+        
         player.sendChatToPlayer(sb.toString());
     
         return true;
@@ -587,6 +568,21 @@ public class BlockDrum extends BlockContainer
     public String getTextureFile()
     {
         return CDECore.CDE_BLOCKS;
+    }
+    
+    @Override
+    public boolean colorBlock(World world, int x, int y, int z, int index)
+    {
+        TileEntity te = world.getBlockTileEntity(x, y, z);
+        
+        if(te instanceof TileEntityDrum)
+        {
+            ((TileEntityDrum)te).setDrumColor(Defaults.MC_COLORS.get(Defaults.DYE_ORE_DICTIONARY_NAMES[index]));
+            
+            return true;
+        }
+        
+        return false;
     }
     
     private int getDamageValue(int amount, int capacity, int max)
