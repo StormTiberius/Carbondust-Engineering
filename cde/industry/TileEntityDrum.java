@@ -186,7 +186,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             double xOffset,zOffset;
 
-            for(int i = 0; i < 1 + worldObj.rand.nextInt(count); i++)
+            for(int i = 0; i < 1 + count; i++)
             {
                 xOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
                 zOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
