@@ -373,6 +373,16 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
     
+    public int getFillPercentage()
+    {
+        if(TANK.getLiquid() == null)
+        {
+            return 0;
+        }
+        
+        return TANK.getLiquid().amount * 100 / TANK.getCapacity();
+    }
+    
     private boolean isValidDirection(ForgeDirection fd)
     {
         return fd.equals(ForgeDirection.DOWN)  || fd.equals(ForgeDirection.UP);
