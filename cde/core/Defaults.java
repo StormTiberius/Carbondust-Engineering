@@ -203,23 +203,23 @@ public class Defaults
                                                              "dyeMagenta",
                                                              "dyeOrange",
                                                              "dyeWhite"};
-    
-    public static final Color COLOR_BLACK = new Color(29,28,33);
-    public static final Color COLOR_RED = new Color(176,46,38);
-    public static final Color COLOR_GREEN = new Color(93,124,21);
-    public static final Color COLOR_BROWN = new Color(130,84,50);
-    public static final Color COLOR_BLUE = new Color(60,68,169);
-    public static final Color COLOR_PURPLE = new Color(137,50,183);
-    public static final Color COLOR_CYAN = new Color(22,156,157);
-    public static final Color COLOR_LIGHT_GRAY = new Color(156,157,151);
-    public static final Color COLOR_GRAY = new Color(71,79,82);
-    public static final Color COLOR_PINK = new Color(243,140,170);
-    public static final Color COLOR_LIME = new Color(128,199,31);
-    public static final Color COLOR_YELLOW = new Color(255,216,61);
-    public static final Color COLOR_LIGHT_BLUE = new Color(58,179,218);
-    public static final Color COLOR_MAGENTA = new Color(198,79,189);
-    public static final Color COLOR_ORANGE = new Color(249,128,29);
-    public static final Color COLOR_WHITE = new Color(249,255,255);
+
+    public static final Color COLOR_BLACK = new Color(26, 26, 26);
+    public static final Color COLOR_RED = new Color(153, 51, 51);
+    public static final Color COLOR_GREEN = new Color(102, 128, 51);
+    public static final Color COLOR_BROWN = new Color(102, 77, 51);
+    public static final Color COLOR_BLUE = new Color(51, 77, 179);
+    public static final Color COLOR_PURPLE = new Color(128, 64, 179);
+    public static final Color COLOR_CYAN = new Color(77, 128, 153);
+    public static final Color COLOR_LIGHT_GRAY = new Color(153, 153, 153);
+    public static final Color COLOR_GRAY = new Color(77, 77, 77);
+    public static final Color COLOR_PINK = new Color(242, 128, 166);
+    public static final Color COLOR_LIME = new Color(128, 204, 26);
+    public static final Color COLOR_YELLOW = new Color(230, 230, 51);
+    public static final Color COLOR_LIGHT_BLUE = new Color(102, 153, 217);
+    public static final Color COLOR_MAGENTA = new Color(179, 77, 217);
+    public static final Color COLOR_ORANGE = new Color(217, 128, 51);
+    public static final Color COLOR_WHITE = new Color(255, 255, 255);
     
     public static final Map<String, Color> MC_COLORS = ImmutableMap.<String, Color>builder()
                                                                                             .put(DYE_ORE_DICTIONARY_NAMES[0], COLOR_BLACK)
