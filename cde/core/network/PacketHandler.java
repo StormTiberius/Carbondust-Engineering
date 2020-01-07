@@ -39,7 +39,8 @@ public class PacketHandler implements IPacketHandler
                                 sendPacketToEntity(entity, ep);
                                 break;
                 case PacketIds.TILE:
-                                PacketTile tile = new PacketTile();
+                case PacketIds.TILE_PARTICLE:
+                                PacketTile tile = getPacket(packetId);
                                 tile.readData(data);
                                 sendPacketToTileEntity(tile, ep);
                                 break;
@@ -53,6 +54,16 @@ public class PacketHandler implements IPacketHandler
         catch(Exception e)
         {
             e.printStackTrace();
+        }
+    }
+    
+    private PacketTile getPacket(int id)
+    {
+        switch(id)
+        {
+            case PacketIds.TILE: return new PacketTile();
+            case PacketIds.TILE_PARTICLE: return new PacketTileParticle();
+            default: return new PacketTile();
         }
     }
     
