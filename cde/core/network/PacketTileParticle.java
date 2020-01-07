@@ -15,11 +15,19 @@ public class PacketTileParticle extends PacketTile
     public String particle;
     public int count;
     
+    public PacketTileParticle(){}
+    
     public PacketTileParticle(TileEntity te, String particle, int count)
     {
         super(te);
         this.particle = particle;
         this.count = count;
+    }
+    
+    @Override
+    public byte getID()
+    {
+        return PacketIds.TILE_PARTICLE;
     }
     
     @Override
