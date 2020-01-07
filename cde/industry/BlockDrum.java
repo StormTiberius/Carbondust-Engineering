@@ -179,9 +179,9 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
         {
             sb = new StringBuilder("ERROR: TANK IS NULL!");
         }
-    
-        world.markBlockForUpdate(x, y, z);
         
+        ted.makeParticles("splash", 5);
+
         player.sendChatToPlayer(sb.toString());
     
         return true;
