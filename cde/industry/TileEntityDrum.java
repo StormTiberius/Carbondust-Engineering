@@ -380,7 +380,14 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             return 0;
         }
         
-        return TANK.getLiquid().amount * 100 / TANK.getCapacity();
+        int percent = TANK.getLiquid().amount * 100 / TANK.getCapacity();
+        
+        if(percent == 0)
+        {
+            percent = 1;
+        }
+        
+        return percent;
     }
     
     private boolean isValidDirection(ForgeDirection fd)
