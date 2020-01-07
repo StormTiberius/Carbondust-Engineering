@@ -7,16 +7,18 @@ package cde.industry;
 
 import cde.CDECore;
 import cde.IndustryCore;
+import cde.api.INetwork;
 import cde.core.Defaults;
+import cde.core.network.PacketTileParticle;
 import cde.core.sound.PacketTileSound;
 import cde.core.sound.TileEntityWithSound;
 import com.eloraam.redpower.core.IPaintable;
 import java.awt.Color;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
@@ -24,7 +26,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
-public class TileEntityDrum extends TileEntityWithSound implements ITankContainer, IPaintable
+public class TileEntityDrum extends TileEntityWithSound implements ITankContainer, IPaintable, INetwork
 {    
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
@@ -116,19 +118,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             counter = tag.getInteger("counter");
         }
-        
-        if(worldObj.isRemote && tag.getBoolean("splash"))
-        {
-            double xOffset,zOffset;
-            
-            for(int i = 0; i < 5; i++)
-            {
-                xOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
-                zOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
-                
-                worldObj.spawnParticle("splash", xCoord + xOffset, yCoord + 1.1D, zCoord + zOffset, 0.0D, 0.0D, 0.0D);
-            }
-        }
     }
 
     @Override
@@ -177,6 +166,39 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             readFromNBT(pkt.customParam1);
             worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+        }
+    }
+    
+    @Override
+    public void receivePacket(Object packet, EntityPlayer player)
+    {
+        if(packet instanceof PacketTileParticle)
+        {
+            PacketTileParticle ptp = (PacketTileParticle)packet;
+            
+            makeParticles(ptp.particle, ptp.count);
+        }
+    }
+    
+    public void makeParticles(String name, int count)
+    {
+        if(worldObj.isRemote)
+        {
+            double xOffset,zOffset;
+
+            for(int i = 0; i < count; i++)
+            {
+                xOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
+                zOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
+
+                worldObj.spawnParticle(name, xCoord + xOffset, yCoord + 1.1D, zCoord + zOffset, 0.0D, 0.0D, 0.0D);
+            }
+        }
+        else
+        {
+            PacketTileParticle ptp = new PacketTileParticle(this, name, count);
+                    
+            CDECore.proxy.sendToPlayers(ptp.getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
         }
     }
     
