@@ -180,8 +180,15 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
             sb = new StringBuilder("ERROR: TANK IS NULL!");
         }
         
-        ted.makeParticles("splash", 5);
-
+        int i = ted.getFillPercentage();
+        
+        if(i > 0)
+        {
+            int count = i / 25 + 1;
+            
+            ted.makeParticles("splash", count);
+        }
+        
         player.sendChatToPlayer(sb.toString());
     
         return true;
