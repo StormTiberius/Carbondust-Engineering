@@ -24,7 +24,7 @@ public class CommonProxy
             {
                 EntityPlayerMP player = (EntityPlayerMP)o;
 
-                if (Math.abs(player.posX - x) <= maxDistance && Math.abs(player.posY - y) <= maxDistance && Math.abs(player.posZ - z) <= maxDistance)
+                if(Math.abs(player.posX - x) <= maxDistance && Math.abs(player.posY - y) <= maxDistance && Math.abs(player.posZ - z) <= maxDistance)
                 {
                     player.playerNetServerHandler.sendPacketToPlayer(packet);
                 }
