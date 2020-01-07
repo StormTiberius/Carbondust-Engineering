@@ -10,11 +10,13 @@ import cde.IndustryCore;
 import cde.core.Defaults;
 import cde.core.sound.PacketTileSound;
 import cde.core.sound.TileEntityWithSound;
+import com.eloraam.redpower.core.IPaintable;
 import java.awt.Color;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
@@ -22,7 +24,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
-public class TileEntityDrum extends TileEntityWithSound implements ITankContainer
+public class TileEntityDrum extends TileEntityWithSound implements ITankContainer, IPaintable
 {    
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
@@ -113,6 +115,19 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         if(tag.hasKey("counter"))
         {
             counter = tag.getInteger("counter");
+        }
+        
+        if(worldObj.isRemote && tag.getBoolean("splash"))
+        {
+            double xOffset,zOffset;
+            
+            for(int i = 0; i < 5; i++)
+            {
+                xOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
+                zOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
+                
+                worldObj.spawnParticle("splash", xCoord + xOffset, yCoord + 1.1D, zCoord + zOffset, 0.0D, 0.0D, 0.0D);
+            }
         }
     }
 
@@ -314,10 +329,26 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         return 8.0F;
     }
+        
+    @Override
+    public boolean tryPaint(int sub, int side, int index)
+    {
+        int i = 16 - index;
+        
+        setDrumColor(Defaults.MC_COLORS.get(Defaults.DYE_ORE_DICTIONARY_NAMES[i]));
+        
+        return true;
+    }
     
     public Color getDrumColor()
     {
         return new Color(color);
+    }
+    
+    public void setDrumColor(Color c)
+    {
+        color = c.getRGB();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
     
     private boolean isValidDirection(ForgeDirection fd)
