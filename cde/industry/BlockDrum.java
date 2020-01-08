@@ -45,30 +45,44 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-        if(!world.isRemote && player != null)
+        if(world.isRemote)
         {
-            TileEntity te = world.getBlockTileEntity(x, y, z);
-            ItemStack held = player.getHeldItem();
-
-            if(te instanceof TileEntityDrum && held != null)
+            boolean flag = true;
+            
+            if(player != null && player.getHeldItem() != null && player.getHeldItem().getItem() != null)
             {
-                TileEntityDrum ted = (TileEntityDrum)te;
+                flag = !player.getHeldItem().getItem().getClass().getCanonicalName().equalsIgnoreCase("ic2.core.item.tool.ItemToolPainter");
+            }
+            
+            return flag;
+        }
+        else
+        {
+            if(player != null)
+            {
+                TileEntity te = world.getBlockTileEntity(x, y, z);
+                ItemStack held = player.getHeldItem();
 
-                if(held.getItem() instanceof IToolWrench)
+                if(te instanceof TileEntityDrum && held != null)
                 {
-                    return taskWrench(world, x, y, z, player, held, ted);
-                }
-                else if(held.itemID == Item.stick.itemID)
-                {
-                    return taskStick(player, ted);
-                }
-                else if(LiquidContainerRegistry.isEmptyContainer(held))
-                {
-                    return taskEmptyContainer(player, held, ted);
-                }
-                else if(LiquidContainerRegistry.isFilledContainer(held))
-                {
-                    return taskFilledContainer(player, held, ted);
+                    TileEntityDrum ted = (TileEntityDrum)te;
+
+                    if(held.getItem() instanceof IToolWrench)
+                    {
+                        return taskWrench(world, x, y, z, player, held, ted);
+                    }
+                    else if(held.itemID == Item.stick.itemID)
+                    {
+                        return taskStick(player, ted);
+                    }
+                    else if(LiquidContainerRegistry.isEmptyContainer(held))
+                    {
+                        return taskEmptyContainer(player, held, ted);
+                    }
+                    else if(LiquidContainerRegistry.isFilledContainer(held))
+                    {
+                        return taskFilledContainer(player, held, ted);
+                    }
                 }
             }
         }
@@ -321,7 +335,8 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                             }
                             
                             tag.setInteger("color", IndustryCore.getLiquidColor().getRGB());
-
+                            tag.setInteger("paint", -1);
+                            
                             if(tag.hasKey("capacity"))
                             {
                                 is.setItemDamage(getDamageValue(0, tag.getInteger("capacity"), is.getMaxDamage()));
@@ -375,6 +390,11 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     if(note.hasKey("color"))
                     {
                         tag.setInteger("color", note.getInteger("color"));
+                    }
+                    
+                    if(note.hasKey("paint"))
+                    {
+                        tag.setInteger("paint", note.getInteger("paint"));
                     }
                     
                     if(note.hasKey("liquid"))
@@ -513,6 +533,11 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     drum.getTagCompound().setInteger("color", tag.getInteger("color"));
                 }
                 
+                if(tag.hasKey("paint"))
+                {
+                    drum.getTagCompound().setInteger("paint", tag.getInteger("paint"));
+                }
+                
                 if(tag.hasKey("liquid"))
                 {
                     NBTTagCompound liquid = tag.getCompoundTag("liquid");
@@ -534,7 +559,8 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
         {
             drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
             drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor().getRGB());
-
+            drum.getTagCompound().setInteger("paint", -1);
+            
             drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
         }
         
