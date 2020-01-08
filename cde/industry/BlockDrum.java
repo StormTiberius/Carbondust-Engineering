@@ -573,14 +573,11 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     @Override
     public boolean colorBlock(World world, int x, int y, int z, int index)
     {
-        if(!world.isRemote)
-        {
-            TileEntity te = world.getBlockTileEntity(x, y, z);
+        TileEntity te = world.getBlockTileEntity(x, y, z);
         
-            if(te instanceof TileEntityDrum)
-            {
-                return ((TileEntityDrum)te).setDrumColor(index);
-            }
+        if(te instanceof TileEntityDrum)
+        {
+            return ((TileEntityDrum)te).setDrumColor(index);
         }
         
         return false;
