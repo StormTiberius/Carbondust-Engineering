@@ -45,42 +45,35 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-        if(world.isRemote)
+        if(!world.isRemote && player != null)
         {
-            return true;
-        }
-        else
-        {
-            if(player != null)
+            TileEntity te = world.getBlockTileEntity(x, y, z);
+            ItemStack held = player.getHeldItem();
+
+            if(te instanceof TileEntityDrum && held != null)
             {
-                TileEntity te = world.getBlockTileEntity(x, y, z);
-                ItemStack held = player.getHeldItem();
+                TileEntityDrum ted = (TileEntityDrum)te;
 
-                if(te instanceof TileEntityDrum && held != null)
+                if(held.getItem() instanceof IToolWrench)
                 {
-                    TileEntityDrum ted = (TileEntityDrum)te;
-
-                    if(held.getItem() instanceof IToolWrench)
-                    {
-                        return taskWrench(world, x, y, z, player, held, ted);
-                    }
-                    else if(held.itemID == Item.stick.itemID)
-                    {
-                        return taskStick(world, x, y, z, player, ted);
-                    }
-                    else if(LiquidContainerRegistry.isEmptyContainer(held))
-                    {
-                        return taskEmptyContainer(player, held, ted);
-                    }
-                    else if(LiquidContainerRegistry.isFilledContainer(held))
-                    {
-                        return taskFilledContainer(player, held, ted);
-                    }
+                    return taskWrench(world, x, y, z, player, held, ted);
+                }
+                else if(held.itemID == Item.stick.itemID)
+                {
+                    return taskStick(player, ted);
+                }
+                else if(LiquidContainerRegistry.isEmptyContainer(held))
+                {
+                    return taskEmptyContainer(player, held, ted);
+                }
+                else if(LiquidContainerRegistry.isFilledContainer(held))
+                {
+                    return taskFilledContainer(player, held, ted);
                 }
             }
-            
-            return false;
         }
+        
+        return false;
     }
     
     private boolean taskWrench(World world, int x, int y, int z, EntityPlayer player, ItemStack held, TileEntityDrum ted)
@@ -107,7 +100,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
         return false;
     }
 
-    private boolean taskStick(World world, int x, int y, int z, EntityPlayer player, TileEntityDrum ted)
+    private boolean taskStick(EntityPlayer player, TileEntityDrum ted)
     {
         StringBuilder sb = new StringBuilder("This ");
         
@@ -580,13 +573,14 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     @Override
     public boolean colorBlock(World world, int x, int y, int z, int index)
     {
-        TileEntity te = world.getBlockTileEntity(x, y, z);
-        
-        if(te instanceof TileEntityDrum)
+        if(!world.isRemote)
         {
-            ((TileEntityDrum)te).setDrumColor(Defaults.MC_COLORS.get(Defaults.DYE_ORE_DICTIONARY_NAMES[index]));
-            
-            return true;
+            TileEntity te = world.getBlockTileEntity(x, y, z);
+        
+            if(te instanceof TileEntityDrum)
+            {
+                return ((TileEntityDrum)te).setDrumColor(index);
+            }
         }
         
         return false;
