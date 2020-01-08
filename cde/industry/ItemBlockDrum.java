@@ -56,6 +56,20 @@ public class ItemBlockDrum extends ItemBlock
             }
             
             info.add(liquid + ": " + amount + " mB / " + capacity + " mB");
+            
+            if(is.getTagCompound().hasKey("paint"))
+            {
+                int index = is.getTagCompound().getInteger("paint");
+                
+                if(index > -1 && index < 16)
+                {
+                    String name = Defaults.PAINT_BRUSH_NAMES[index];
+                
+                    name = name.replaceFirst("Brush", "Coating");
+                
+                    info.add("Has " + name.toLowerCase());
+                }
+            }
         }
     }
     
