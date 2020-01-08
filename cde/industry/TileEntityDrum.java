@@ -32,13 +32,14 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private final long NETWORK_UPDATE_INTERVAL;
     private long previousUpdateTime;
     private boolean isWorking,soundUpdateNeeded,recentlyUpdated;
-    private int color,counter;
+    private int color,paint,counter;
     
     public TileEntityDrum()
     {
         TANK = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
         NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
         color = IndustryCore.getLiquidColor().getRGB();
+        paint = -1;
         counter = 70; // 3.5 Seconds
     }
     
@@ -99,6 +100,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                 color = IndustryCore.getLiquidColor().getRGB();
             }
             
+            if(tag.hasKey("paint"))
+            {
+                paint = tag.getInteger("paint");
+            }
+            
             if(tag.hasKey("liquid"))
             {
                 TANK.setLiquid(LiquidStack.loadLiquidStackFromNBT(tag.getCompoundTag("liquid")));
@@ -127,6 +133,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         tag.setInteger("capacity", TANK.getCapacity());
         tag.setInteger("color", color);
+        tag.setInteger("paint", paint);
         
         LiquidStack liquid = TANK.getLiquid();
         
@@ -226,7 +233,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                 
                 if(isEmpty)
                 {
-                    color = IndustryCore.getLiquidColor(resource.itemID).getRGB();
+                    if(paint < 0 || paint > 15)
+                    {
+                        color = IndustryCore.getLiquidColor(resource.itemID).getRGB();
+                    }
+                    
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
                 
@@ -260,7 +271,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
                 
                 if(TANK.getLiquid() == null)
                 {
-                    color = IndustryCore.getLiquidColor().getRGB();
+                    if(paint < 0 || paint > 15)
+                    {
+                        color = IndustryCore.getLiquidColor().getRGB();
+                    }
+                    
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
                 
@@ -357,9 +372,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         int i = 16 - index;
         
-        setDrumColor(Defaults.MC_COLORS.get(Defaults.DYE_ORE_DICTIONARY_NAMES[i]));
-        
-        return true;
+        return setDrumColor(i);
     }
     
     public Color getDrumColor()
@@ -367,10 +380,18 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         return new Color(color);
     }
     
-    public void setDrumColor(Color c)
+    public boolean setDrumColor(int index)
     {
-        color = c.getRGB();
+        if(index < 0 || index > 15 || index == paint)
+        {
+            return false;
+        }
+        
+        color = IndustryCore.getPaintColor(index).getRGB();
+        paint = index;
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        
+        return true;
     }
     
     public int getFillPercentage()
