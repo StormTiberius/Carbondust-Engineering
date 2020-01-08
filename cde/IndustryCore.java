@@ -69,8 +69,9 @@ public class IndustryCore
     
     private static final Map<String, Color> NAME_COLOR_MAP = new HashMap<String, Color>();
     private static final Map<Integer, Color> ID_COLOR_MAP = new HashMap<Integer, Color>();
-
-    private static String[] liquidColors;
+    private static final Map<String, Color> PAINT_COLOR_MAP = new HashMap<String, Color>();
+    
+    private static String[] paintColors,liquidColors;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -78,7 +79,19 @@ public class IndustryCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/industry.cfg"));
         cfg.load();
         
-        liquidColors = cfg.get(Configuration.CATEGORY_GENERAL, "liquidcolors", new String[]{"Liquid.255.255.255"}, "name.r.g.b").valueList;
+        String[] paintArray = new String[Defaults.DYE_ORE_DICTIONARY_NAMES.length];
+        
+        for(int i = 0; i < Defaults.DYE_ORE_DICTIONARY_NAMES.length; i++)
+        {
+            String name = Defaults.DYE_ORE_DICTIONARY_NAMES[i];
+            
+            Color color = Defaults.MC_COLORS.get(name);
+            
+            paintArray[i] = name + "." + color.getRed() + "." + color.getGreen() + "." + color.getBlue();
+        }
+        
+        paintColors = cfg.get(Configuration.CATEGORY_GENERAL, "paintcolors", paintArray, "color.r.g.b").valueList;
+        liquidColors = cfg.get(Configuration.CATEGORY_GENERAL, "liquidcolors", new String[]{"Liquid.255.255.255"}, "liquid.r.g.b").valueList;
         
         drumBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "drumblockid", Defaults.BLOCK_DRUM_ID).getInt();
         
@@ -116,6 +129,7 @@ public class IndustryCore
         initNameColorMap();
         parseLiquidColors();
         initIdColorMap();
+        parsePaintColors();
     }
 
     @ServerStarting
@@ -147,6 +161,16 @@ public class IndustryCore
     public static void setDrumRenderId(int id)
     {
         drumRenderId = id;
+    }
+    
+    public static Color getPaintColor(int index)
+    {
+        if(index >= 0 && index <= 15)
+        {
+            return PAINT_COLOR_MAP.get(Defaults.DYE_ORE_DICTIONARY_NAMES[index]);
+        }
+        
+        return new Color(255,255,255);
     }
     
     public static Color getLiquidColor(String s)
@@ -240,6 +264,30 @@ public class IndustryCore
                     ID_COLOR_MAP.put(liquid.itemID, DEFAULT);
                     NAME_COLOR_MAP.put(entry.getKey(), DEFAULT);
                 }
+            }
+        }
+    }
+        
+    private static void parsePaintColors()
+    {
+        for(String s : paintColors)
+        {
+            try
+            {
+                String[] splits = s.split("\\.", 4);
+
+                int r = Integer.parseInt(splits[1]);
+                int g = Integer.parseInt(splits[2]);
+                int b = Integer.parseInt(splits[3]);
+                
+                if(!splits[0].isEmpty() && isValidRange(r, g, b))
+                {
+                    PAINT_COLOR_MAP.put(splits[0], new Color(r, g, b));
+                }
+            }
+            catch(Exception e)
+            {
+                System.out.println("IndustryCore config error at parsePaintColors");
             }
         }
     }
