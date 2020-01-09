@@ -554,9 +554,9 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     drum.setItemDamage(getDamageValue(0, capacity, drum.getMaxDamage()));
                 }
             }
-        }
         
-        list.add(drum);
+            list.add(drum);
+        }
         
         return list;
     }
