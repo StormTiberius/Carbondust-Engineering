@@ -6,6 +6,7 @@
 package cde;
 
 import cde.api.Blocks;
+import cde.api.Materials;
 import cde.core.Defaults;
 import cde.core.Version;
 import cde.industry.BlockDrum;
@@ -32,10 +33,12 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import railcraft.common.api.core.items.ItemRegistry;
 
 @Mod(modid="CDE|Industry", name="Industry", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
@@ -137,26 +140,71 @@ public class IndustryCore
             
             Blocks.blockDrumSteel = drumSteel;
             
+            ItemStack sealant = new ItemStack(Item.slimeBall.itemID, 1, 0);
+            ItemStack iron = new ItemStack(Item.ingotIron.itemID, 1, 0);
+            ItemStack steel = Materials.ingotSteel.copy();
+            
+            if(ModLoader.isModLoaded("BuildCraft|Core"))
+            {
+                for(Item item : CDECore.getItemsByClass("buildcraft.core.ItemBuildCraft"))
+                {
+                    if(item.getItemName().contentEquals("item.pipeWaterproof"))
+                    {
+                        sealant = new ItemStack(item.itemID, 1, 0);
+                        break;
+                    }
+                }
+            }
+            
+            boolean plate = false;
+            
+            if(ModLoader.isModLoaded("Railcraft"))
+            {
+                ItemStack plateIron = ItemRegistry.getItem("part.plate.iron", 1);
+                ItemStack plateSteel = ItemRegistry.getItem("part.plate.steel", 1);
+                
+                if(plateIron != null)
+                {
+                    iron = plateIron.copy();
+                }
+                
+                if(plateSteel != null)
+                {
+                    steel = plateSteel.copy();
+                    plate = true;
+                }
+            }
+            
             if(drumRecipeIron)
             {
-                GameRegistry.addRecipe(Blocks.blockDrumIron,
-                "xzx",
-                "xyx",
-                "xzx",
-                'x', new ItemStack(Item.ingotIron.itemID, 1, 0),
-                'y', new ItemStack(Item.cauldron.itemID, 1, 0),
-                'z', new ItemStack(Block.pressurePlatePlanks.blockID, 1, 0));
+                GameRegistry.addRecipe(Blocks.blockDrumIron.copy(),
+                "ppp",
+                "psp",
+                "ppp",
+                'p', iron,
+                's', sealant);
             }
-                        
+            
             if(drumRecipeSteel)
             {
-                GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel,
-                "xzx",
-                "xyx",
-                "xzx",
-                'x', "ingotSteel",
-                'y', new ItemStack(Item.cauldron.itemID, 1, 0),
-                'z', new ItemStack(Block.pressurePlateStone.blockID, 1, 0)));
+                if(plate)
+                {
+                    GameRegistry.addRecipe(Blocks.blockDrumSteel.copy(),
+                    "ppp",
+                    "psp",
+                    "ppp",
+                    'p', steel,
+                    's', sealant);
+                }
+                else
+                {
+                    GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel.copy(),
+                    "ppp",
+                    "psp",
+                    "ppp",
+                    'p', "ingotSteel",
+                    's', sealant));
+                }
             }
         }
         
