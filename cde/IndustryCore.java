@@ -178,9 +178,10 @@ public class IndustryCore
             if(drumRecipeIron)
             {
                 GameRegistry.addRecipe(Blocks.blockDrumIron.copy(),
-                "ppp",
                 "psp",
-                "ppp",
+                "pcp",
+                "psp",
+                'c', new ItemStack(Item.cauldron.itemID, 1, 0),
                 'p', iron,
                 's', sealant);
             }
@@ -190,18 +191,20 @@ public class IndustryCore
                 if(plate)
                 {
                     GameRegistry.addRecipe(Blocks.blockDrumSteel.copy(),
-                    "ppp",
                     "psp",
-                    "ppp",
+                    "pcp",
+                    "psp",
+                    'c', new ItemStack(Item.cauldron.itemID, 1, 0),
                     'p', steel,
                     's', sealant);
                 }
                 else
                 {
                     GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel.copy(),
-                    "ppp",
                     "psp",
-                    "ppp",
+                    "pcp",
+                    "psp",
+                    'c', new ItemStack(Item.cauldron.itemID, 1, 0),
                     'p', "ingotSteel",
                     's', sealant));
                 }
