@@ -28,9 +28,13 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(modid="CDE|Industry", name="Industry", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
@@ -42,10 +46,7 @@ public class IndustryCore
     
     private static Configuration cfg;
     
-    private static int drumVolume;
-    private static int drumPitch;
-    private static int drumRenderId;
-    private static int drumBlockId;
+    private static int drumBlockId,drumRenderId,drumVolume,drumPitch;
     
     public static Block blockDrum;
     
@@ -54,6 +55,8 @@ public class IndustryCore
     private static final Map<String, Color> PAINT_COLOR_MAP = new HashMap<String, Color>();
     
     private static String[] paintColors,liquidColors;
+    
+    private static boolean drumRecipeIron,drumRecipeSteel;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -87,6 +90,10 @@ public class IndustryCore
         // Pitch
         drumPitch = cfg.get(Configuration.CATEGORY_GENERAL, "drumpitch", defaultPitch, "Drum Pitch").getInt();
         
+        // Recipes
+        drumRecipeIron = cfg.get(Configuration.CATEGORY_GENERAL, "drumrecipeiron", true, "Enable/Disable Iron Drum Recipe").getBoolean(true);
+        drumRecipeSteel = cfg.get(Configuration.CATEGORY_GENERAL, "drumrecipesteel", true, "Enable/Disable Steel Drum Recipe").getBoolean(true);
+        
         cfg.save();
     }
 
@@ -100,6 +107,50 @@ public class IndustryCore
             GameRegistry.registerBlock(blockDrum, ItemBlockDrum.class, "cdeDrumBlock");
 
             GameRegistry.registerTileEntity(TileEntityDrum.class, "cdeDrumTile");
+            
+            if(drumRecipeIron)
+            {
+                ItemStack is = new ItemStack(blockDrum.blockID, 1, 0);
+                
+                if(!is.hasTagCompound())
+                {
+                    is.setTagCompound(new NBTTagCompound());
+                }
+                
+                is.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
+                is.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+                is.setItemDamage(100);
+                
+                GameRegistry.addRecipe(is,
+                "xzx",
+                "xyx",
+                "xzx",
+                'x', new ItemStack(Item.ingotIron.itemID, 1, 0),
+                'y', new ItemStack(Item.cauldron.itemID, 1, 0),
+                'z', new ItemStack(Block.pressurePlatePlanks.blockID, 1, 0));
+            }
+                        
+            if(drumRecipeSteel)
+            {
+                ItemStack is = new ItemStack(blockDrum.blockID, 1, 0);
+                                
+                if(!is.hasTagCompound())
+                {
+                    is.setTagCompound(new NBTTagCompound());
+                }
+                
+                is.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
+                is.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+                is.setItemDamage(100);
+                
+                GameRegistry.addRecipe(new ShapedOreRecipe(is,
+                "xzx",
+                "xyx",
+                "xzx",
+                'x', "ingotSteel",
+                'y', new ItemStack(Item.cauldron.itemID, 1, 0),
+                'z', new ItemStack(Block.pressurePlateStone.blockID, 1, 0)));
+            }
         }
         
         proxy.registerRenderers();
