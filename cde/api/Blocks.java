@@ -46,4 +46,7 @@ public class Blocks
     public static ItemStack blockGrate;
     
     public static ItemStack machineSpeaker;
+    
+    public static ItemStack blockDrumIron;
+    public static ItemStack blockDrumSteel;
 }
