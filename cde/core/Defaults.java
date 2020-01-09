@@ -238,4 +238,22 @@ public class Defaults
                                                                                             .put(DYE_ORE_DICTIONARY_NAMES[13], COLOR_MAGENTA)
                                                                                             .put(DYE_ORE_DICTIONARY_NAMES[14], COLOR_ORANGE)
                                                                                             .put(DYE_ORE_DICTIONARY_NAMES[15], COLOR_WHITE).build();
+
+    public static final Color MEAD = new Color(220,190,115);
+    public static final Color COOLANT = new Color(50,210,255);
+    public static final Color BIOMASS = new Color(105,200,60);
+    public static final Color STEAM = new Color(138,138,138);
+    public static final Color BIOFUEL = new Color(238,140,20);
+    public static final Color WATER = new Color(47,68,245);
+    public static final Color CREOSOTE = new Color(105,105,10);
+    public static final Color HONEY = new Color(235,200,60);
+    public static final Color OIL = new Color(50,50,50);
+    public static final Color ICE = new Color(198,253,253);
+    public static final Color MILK = new Color(245,245,245);
+    public static final Color SEEDOIL = new Color(225,225,150);
+    public static final Color JUICE = new Color(145,200,70);
+    public static final Color LAVA = new Color(213,91,19);
+    public static final Color FUEL = new Color(200,200,5);
+    public static final Color GLASS = new Color(224,224,224);
+    public static final Color DEFAULT = new Color(255,255,255);
 }
