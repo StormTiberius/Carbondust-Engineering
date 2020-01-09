@@ -109,9 +109,9 @@ public class IndustryCore
 
             GameRegistry.registerTileEntity(TileEntityDrum.class, "cdeDrumTile");
             
+            // Iron Drum
             ItemStack drumIron = new ItemStack(blockDrum.blockID, 1, 0);
             
-            // Iron Drum
             if(!drumIron.hasTagCompound())
             {
                 drumIron.setTagCompound(new NBTTagCompound());
