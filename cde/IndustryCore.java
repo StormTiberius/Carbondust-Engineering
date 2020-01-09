@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.api.Blocks;
 import cde.core.Defaults;
 import cde.core.Version;
 import cde.industry.BlockDrum;
@@ -108,20 +109,37 @@ public class IndustryCore
 
             GameRegistry.registerTileEntity(TileEntityDrum.class, "cdeDrumTile");
             
+            ItemStack drumIron = new ItemStack(blockDrum.blockID, 1, 0);
+            
+            // Iron Drum
+            if(!drumIron.hasTagCompound())
+            {
+                drumIron.setTagCompound(new NBTTagCompound());
+            }
+            
+            drumIron.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
+            drumIron.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+            drumIron.setItemDamage(drumIron.getMaxDamage());
+            
+            Blocks.blockDrumIron = drumIron;
+            
+            // Steel Drum
+            ItemStack drumSteel = new ItemStack(blockDrum.blockID, 1, 0);
+            
+            if(!drumSteel.hasTagCompound())
+            {
+                drumSteel.setTagCompound(new NBTTagCompound());
+            }
+            
+            drumSteel.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
+            drumSteel.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+            drumSteel.setItemDamage(drumSteel.getMaxDamage());
+            
+            Blocks.blockDrumSteel = drumSteel;
+            
             if(drumRecipeIron)
             {
-                ItemStack is = new ItemStack(blockDrum.blockID, 1, 0);
-                
-                if(!is.hasTagCompound())
-                {
-                    is.setTagCompound(new NBTTagCompound());
-                }
-                
-                is.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
-                is.getTagCompound().setInteger("color", getLiquidColor().getRGB());
-                is.setItemDamage(100);
-                
-                GameRegistry.addRecipe(is,
+                GameRegistry.addRecipe(drumIron,
                 "xzx",
                 "xyx",
                 "xzx",
@@ -132,18 +150,7 @@ public class IndustryCore
                         
             if(drumRecipeSteel)
             {
-                ItemStack is = new ItemStack(blockDrum.blockID, 1, 0);
-                                
-                if(!is.hasTagCompound())
-                {
-                    is.setTagCompound(new NBTTagCompound());
-                }
-                
-                is.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
-                is.getTagCompound().setInteger("color", getLiquidColor().getRGB());
-                is.setItemDamage(100);
-                
-                GameRegistry.addRecipe(new ShapedOreRecipe(is,
+                GameRegistry.addRecipe(new ShapedOreRecipe(drumSteel,
                 "xzx",
                 "xyx",
                 "xzx",
