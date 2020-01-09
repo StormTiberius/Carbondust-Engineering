@@ -49,24 +49,6 @@ public class IndustryCore
     
     public static Block blockDrum;
     
-    private static final Color MEAD = new Color(220,190,115);
-    private static final Color COOLANT = new Color(50,210,255);
-    private static final Color BIOMASS = new Color(105,200,60);
-    private static final Color STEAM = new Color(138,138,138);
-    private static final Color BIOFUEL = new Color(238,140,20);
-    private static final Color WATER = new Color(47,68,245);
-    private static final Color CREOSOTE = new Color(105,105,10);
-    private static final Color HONEY = new Color(235,200,60);
-    private static final Color OIL = new Color(50,50,50);
-    private static final Color ICE = new Color(198,253,253);
-    private static final Color MILK = new Color(245,245,245);
-    private static final Color SEEDOIL = new Color(225,225,150);
-    private static final Color JUICE = new Color(145,200,70);
-    private static final Color LAVA = new Color(213,91,19);
-    private static final Color FUEL = new Color(200,200,5);
-    private static final Color GLASS = new Color(224,224,224);
-    private static final Color DEFAULT = new Color(255,255,255);
-    
     private static final Map<String, Color> NAME_COLOR_MAP = new HashMap<String, Color>();
     private static final Map<Integer, Color> ID_COLOR_MAP = new HashMap<Integer, Color>();
     private static final Map<String, Color> PAINT_COLOR_MAP = new HashMap<String, Color>();
@@ -180,7 +162,7 @@ public class IndustryCore
             return NAME_COLOR_MAP.get(s);
         }
         
-        return DEFAULT;
+        return Defaults.COLOR_DEFAULT;
     }
     
     public static Color getLiquidColor(int id)
@@ -190,32 +172,32 @@ public class IndustryCore
             return ID_COLOR_MAP.get(id);
         }
         
-        return DEFAULT;
+        return Defaults.COLOR_DEFAULT;
     }
     
     public static Color getLiquidColor()
     {
-        return DEFAULT;
+        return Defaults.COLOR_DEFAULT;
     }
     
     private static void initNameColorMap()
     {
-        NAME_COLOR_MAP.put("mead", MEAD);
-        NAME_COLOR_MAP.put("coolant", COOLANT);
-        NAME_COLOR_MAP.put("biomass", BIOMASS);
-        NAME_COLOR_MAP.put("Steam", STEAM);
-        NAME_COLOR_MAP.put("biofuel", BIOFUEL);
-        NAME_COLOR_MAP.put("Water", WATER);
-        NAME_COLOR_MAP.put("Creosote Oil", CREOSOTE);
-        NAME_COLOR_MAP.put("honey", HONEY);
-        NAME_COLOR_MAP.put("Oil", OIL);
-        NAME_COLOR_MAP.put("ice", ICE);
-        NAME_COLOR_MAP.put("milk", MILK);
-        NAME_COLOR_MAP.put("seedoil", SEEDOIL);
-        NAME_COLOR_MAP.put("juice", JUICE);
-        NAME_COLOR_MAP.put("Lava", LAVA);
-        NAME_COLOR_MAP.put("Fuel", FUEL);
-        NAME_COLOR_MAP.put("Glass", GLASS);
+        NAME_COLOR_MAP.put("mead", Defaults.COLOR_MEAD);
+        NAME_COLOR_MAP.put("coolant", Defaults.COLOR_COOLANT);
+        NAME_COLOR_MAP.put("biomass", Defaults.COLOR_BIOMASS);
+        NAME_COLOR_MAP.put("Steam", Defaults.COLOR_STEAM);
+        NAME_COLOR_MAP.put("biofuel", Defaults.COLOR_BIOFUEL);
+        NAME_COLOR_MAP.put("Water", Defaults.COLOR_WATER);
+        NAME_COLOR_MAP.put("Creosote Oil", Defaults.COLOR_CREOSOTE);
+        NAME_COLOR_MAP.put("honey", Defaults.COLOR_HONEY);
+        NAME_COLOR_MAP.put("Oil", Defaults.COLOR_OIL);
+        NAME_COLOR_MAP.put("ice", Defaults.COLOR_ICE);
+        NAME_COLOR_MAP.put("milk", Defaults.COLOR_MILK);
+        NAME_COLOR_MAP.put("seedoil", Defaults.COLOR_SEEDOIL);
+        NAME_COLOR_MAP.put("juice", Defaults.COLOR_JUICE);
+        NAME_COLOR_MAP.put("Lava", Defaults.COLOR_LAVA);
+        NAME_COLOR_MAP.put("Fuel", Defaults.COLOR_FUEL);
+        NAME_COLOR_MAP.put("Glass", Defaults.COLOR_GLASS);
     }
     
     private static void parseLiquidColors()
@@ -261,8 +243,8 @@ public class IndustryCore
                 }
                 else
                 {
-                    ID_COLOR_MAP.put(liquid.itemID, DEFAULT);
-                    NAME_COLOR_MAP.put(entry.getKey(), DEFAULT);
+                    ID_COLOR_MAP.put(liquid.itemID, Defaults.COLOR_DEFAULT);
+                    NAME_COLOR_MAP.put(entry.getKey(), Defaults.COLOR_DEFAULT);
                 }
             }
         }
