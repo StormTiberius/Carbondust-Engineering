@@ -139,7 +139,7 @@ public class IndustryCore
             
             if(drumRecipeIron)
             {
-                GameRegistry.addRecipe(drumIron,
+                GameRegistry.addRecipe(Blocks.blockDrumIron,
                 "xzx",
                 "xyx",
                 "xzx",
@@ -150,7 +150,7 @@ public class IndustryCore
                         
             if(drumRecipeSteel)
             {
-                GameRegistry.addRecipe(new ShapedOreRecipe(drumSteel,
+                GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel,
                 "xzx",
                 "xyx",
                 "xzx",
