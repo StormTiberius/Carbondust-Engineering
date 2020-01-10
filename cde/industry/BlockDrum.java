@@ -411,87 +411,63 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     @Override
     public void getSubBlocks(int id, CreativeTabs tab, List list)
     {
-        // IRON DRUMS
-        ItemStack drum = new ItemStack(id, 1, 0);
+        ItemStack drum;
         
-        if(!drum.hasTagCompound())
+        for(int i = 0; i < 2; i++)
         {
-            drum.setTagCompound(new NBTTagCompound());
-        }
-        
-        drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
-        drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor().getRGB());
-        
-        drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
-        
-        list.add(drum);
-        
-        for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
-        {
-            LiquidStack liquid = entry.getValue();
+            int capacity;
             
-            if(liquid != null)
+            switch(i)
             {
-                liquid.amount = Defaults.DRUM_CAPACITY_IRON;
-                
-                NBTTagCompound tag = liquid.writeToNBT(new NBTTagCompound());
-                
+                case 0: capacity = Defaults.DRUM_CAPACITY_IRON; break;
+                case 1: capacity = Defaults.DRUM_CAPACITY_STEEL; break;
+                default: capacity = Defaults.DRUM_CAPACITY_IRON; break;
+            }
+            
+            for(int j = -1; j < 16; j++)
+            {
                 drum = new ItemStack(id, 1, 0);
-                
+
                 if(!drum.hasTagCompound())
                 {
                     drum.setTagCompound(new NBTTagCompound());
                 }
-                
-                drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
-                drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
-                drum.getTagCompound().setTag("liquid", tag);
 
-                drum.setItemDamage(getDamageValue(Defaults.DRUM_CAPACITY_IRON, Defaults.DRUM_CAPACITY_IRON, drum.getMaxDamage()));
-                
+                drum.getTagCompound().setInteger("capacity", capacity);
+                drum.getTagCompound().setInteger("color", IndustryCore.getPaintColor(j).getRGB());
+                drum.getTagCompound().setInteger("paint", j);
+
+                drum.setItemDamage(getDamageValue(0, capacity, drum.getMaxDamage()));
+
                 list.add(drum);
             }
-        }
-        
-        // STEEL DRUMS
-        drum = new ItemStack(id, 1, 0);
-        
-        if(!drum.hasTagCompound())
-        {
-            drum.setTagCompound(new NBTTagCompound());
-        }
-        
-        drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
-        drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor().getRGB());
-        
-        drum.setItemDamage(getDamageValue(0, Defaults.DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
-        
-        list.add(drum);
-        
-        for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
-        {
-            LiquidStack liquid = entry.getValue();
-            
-            if(liquid != null)
-            {
-                liquid.amount = Defaults.DRUM_CAPACITY_STEEL;
-                
-                NBTTagCompound tag = liquid.writeToNBT(new NBTTagCompound());
-                
-                drum = new ItemStack(id, 1, 0);
-                
-                if(!drum.hasTagCompound())
-                {
-                    drum.setTagCompound(new NBTTagCompound());
-                }
-                
-                drum.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
-                drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
-                drum.getTagCompound().setTag("liquid", tag);
 
-                drum.setItemDamage(getDamageValue(Defaults.DRUM_CAPACITY_STEEL, Defaults.DRUM_CAPACITY_STEEL, drum.getMaxDamage()));
-                
-                list.add(drum);
+            for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
+            {
+                LiquidStack liquid = entry.getValue();
+
+                if(liquid != null)
+                {
+                    liquid.amount = capacity;
+
+                    NBTTagCompound tag = liquid.writeToNBT(new NBTTagCompound());
+
+                    drum = new ItemStack(id, 1, 0);
+
+                    if(!drum.hasTagCompound())
+                    {
+                        drum.setTagCompound(new NBTTagCompound());
+                    }
+
+                    drum.getTagCompound().setInteger("capacity", capacity);
+                    drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
+                    drum.getTagCompound().setInteger("paint", -1);
+                    drum.getTagCompound().setTag("liquid", tag);
+
+                    drum.setItemDamage(getDamageValue(capacity, capacity, drum.getMaxDamage()));
+
+                    list.add(drum);
+                }
             }
         }
     }
