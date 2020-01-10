@@ -255,5 +255,5 @@ public class Defaults
     public static final Color COLOR_LAVA = new Color(213,91,19);
     public static final Color COLOR_FUEL = new Color(200,200,5);
     public static final Color COLOR_GLASS = new Color(224,224,224);
-    public static final Color COLOR_DEFAULT = new Color(255,255,255);
+    public static final Color COLOR_DEFAULT = new Color(203,205,205);
 }
