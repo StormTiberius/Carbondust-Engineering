@@ -433,6 +433,11 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     drum.setTagCompound(new NBTTagCompound());
                 }
 
+                if(drum.getTagCompound().getName().isEmpty())
+                {
+                    drum.getTagCompound().setName("tag");
+                }
+                
                 drum.getTagCompound().setInteger("capacity", capacity);
                 drum.getTagCompound().setInteger("color", IndustryCore.getPaintColor(j).getRGB());
                 drum.getTagCompound().setInteger("paint", j);
@@ -458,7 +463,12 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     {
                         drum.setTagCompound(new NBTTagCompound());
                     }
-
+                    
+                    if(drum.getTagCompound().getName().isEmpty())
+                    {
+                        drum.getTagCompound().setName("tag");
+                    }
+  
                     drum.getTagCompound().setInteger("capacity", capacity);
                     drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
                     drum.getTagCompound().setInteger("paint", -1);
@@ -490,6 +500,11 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
            drum.setTagCompound(new NBTTagCompound());
         }
         
+        if(drum.getTagCompound().getName().isEmpty())
+        {
+            drum.getTagCompound().setName("tag");
+        }
+  
         TileEntity te = world.getBlockTileEntity(x, y, z);
         
         if(te instanceof TileEntityDrum)
