@@ -191,14 +191,13 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         if(worldObj.isRemote)
         {
-            double xOffset,zOffset;
-
+            double xOffset = 0.5D;
+            double yOffset = 1.1D;
+            double zOffset = 0.68359375D;
+            
             for(int i = 0; i < 1 + count; i++)
             {
-                xOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
-                zOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
-
-                worldObj.spawnParticle(name, xCoord + xOffset, yCoord + 1.1D, zCoord + zOffset, 0.0D, 0.0D, 0.0D);
+                worldObj.spawnParticle(name, xCoord + xOffset, yCoord + yOffset, zCoord + zOffset, 0.0D, 0.0D, 0.0D);
             }
         }
         else
