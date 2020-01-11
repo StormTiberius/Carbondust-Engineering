@@ -191,7 +191,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
         
         if(i > 0)
         {
-            ted.makeParticles("splash", 1);
+            ted.makeParticles("splash", 3);
         }
         
         player.sendChatToPlayer(sb.toString());
