@@ -11,6 +11,7 @@ import cde.core.Defaults;
 import cde.core.Version;
 import cde.industry.BlockDrum;
 import cde.industry.CommonProxy;
+import cde.industry.CreativeTabDrums;
 import cde.industry.ItemBlockDrum;
 import cde.industry.TileEntityDrum;
 import cpw.mods.fml.common.Mod;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -45,22 +47,20 @@ import railcraft.common.api.core.items.ItemRegistry;
 public class IndustryCore
 {
     @SidedProxy(clientSide = "cde.industry.ClientProxy", serverSide = "cde.industry.CommonProxy")
-    
     public static CommonProxy proxy;
-    
-    private static Configuration cfg;
-    
-    private static int drumBlockId,drumRenderId,drumVolume,drumPitch;
-    
     public static Block blockDrum;
     
+    private static int drumBlockId,drumRenderId,drumVolume,drumPitch;
+    private static boolean drumRecipeIron,drumRecipeSteel;
+    private static String[] paintColors,liquidColors;
+    private static ItemStack tabIconDrum;
+    private static Configuration cfg;
+    
+    public static final CreativeTabs TAB_DRUMS = new CreativeTabDrums("industrydrums");
+    
+    private static final Map<String, Color> PAINT_COLOR_MAP = new HashMap<String, Color>();
     private static final Map<String, Color> NAME_COLOR_MAP = new HashMap<String, Color>();
     private static final Map<Integer, Color> ID_COLOR_MAP = new HashMap<Integer, Color>();
-    private static final Map<String, Color> PAINT_COLOR_MAP = new HashMap<String, Color>();
-    
-    private static String[] paintColors,liquidColors;
-    
-    private static boolean drumRecipeIron,drumRecipeSteel;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -106,7 +106,7 @@ public class IndustryCore
     {   
         if(drumBlockId > 0)
         {
-            blockDrum = new BlockDrum(drumBlockId).setBlockName("cdeDrumBlock").setCreativeTab(CDECore.TAB_CDE).setHardness(1.5F);
+            blockDrum = new BlockDrum(drumBlockId).setBlockName("cdeDrumBlock").setCreativeTab(TAB_DRUMS).setHardness(1.5F);
 
             GameRegistry.registerBlock(blockDrum, ItemBlockDrum.class, "cdeDrumBlock");
 
@@ -120,8 +120,14 @@ public class IndustryCore
                 drumIron.setTagCompound(new NBTTagCompound());
             }
             
+            if(drumIron.getTagCompound().getName().isEmpty())
+            {
+                drumIron.getTagCompound().setName("tag");
+            }
+            
             drumIron.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
             drumIron.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+            tabIconDrum = drumIron.copy(); // Copy iron drum itemstack for creative tab display purposes.
             drumIron.setItemDamage(drumIron.getMaxDamage());
             
             Blocks.blockDrumIron = drumIron;
@@ -132,6 +138,11 @@ public class IndustryCore
             if(!drumSteel.hasTagCompound())
             {
                 drumSteel.setTagCompound(new NBTTagCompound());
+            }
+            
+            if(drumSteel.getTagCompound().getName().isEmpty())
+            {
+                drumSteel.getTagCompound().setName("tag");
             }
             
             drumSteel.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
@@ -229,6 +240,11 @@ public class IndustryCore
         
     }
     
+    public static ItemStack getTabIcon()
+    {
+        return tabIconDrum;
+    }
+    
     public static boolean isDrumEnabled()
     {
         return drumBlockId > 0;
@@ -261,7 +277,7 @@ public class IndustryCore
             return PAINT_COLOR_MAP.get(Defaults.DYE_ORE_DICTIONARY_NAMES[index]);
         }
         
-        return new Color(255,255,255);
+        return Defaults.COLOR_DEFAULT;
     }
     
     public static Color getLiquidColor(String s)
