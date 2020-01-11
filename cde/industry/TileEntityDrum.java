@@ -195,7 +195,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             double yOffset = 1.1D;
             double zOffset = 0.68359375D;
             
-            for(int i = 0; i < 1 + count; i++)
+            for(int i = 0; i < count; i++)
             {
                 worldObj.spawnParticle(name, xCoord + xOffset, yCoord + yOffset, zCoord + zOffset, 0.0D, 0.0D, 0.0D);
             }
