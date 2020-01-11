@@ -127,6 +127,7 @@ public class IndustryCore
             
             drumIron.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
             drumIron.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+            drumIron.getTagCompound().setInteger("paint", -1);
             tabIconDrum = drumIron.copy(); // Copy iron drum itemstack for creative tab display purposes.
             drumIron.setItemDamage(drumIron.getMaxDamage());
             
@@ -147,6 +148,7 @@ public class IndustryCore
             
             drumSteel.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
             drumSteel.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+            drumSteel.getTagCompound().setInteger("paint", -1);
             drumSteel.setItemDamage(drumSteel.getMaxDamage());
             
             Blocks.blockDrumSteel = drumSteel;
