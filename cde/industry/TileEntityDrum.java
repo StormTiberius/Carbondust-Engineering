@@ -244,14 +244,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             {
                 soundUpdateNeeded = true;
                 
-                if(isEmpty)
+                if(isEmpty && !isPainted())
                 {
-                    if(paint < 0 || paint > 15)
-                    {
-                        color = IndustryCore.getLiquidColor(resource.itemID).getRGB();
-                    }
-                    
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                    updateColor(IndustryCore.getLiquidColor(resource.itemID));
                 }
                 
                 updateCounter();
@@ -282,14 +277,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             {
                 soundUpdateNeeded = true;
                 
-                if(TANK.getLiquid() == null)
+                if(TANK.getLiquid() == null && !isPainted())
                 {
-                    if(paint < 0 || paint > 15)
-                    {
-                        color = IndustryCore.getLiquidColor().getRGB();
-                    }
-                    
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                    updateColor(IndustryCore.getLiquidColor());
                 }
                 
                 updateCounter();
@@ -427,6 +417,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private boolean isValidDirection(ForgeDirection fd)
     {
         return fd.equals(ForgeDirection.DOWN)  || fd.equals(ForgeDirection.UP);
+    }
+    
+    private void updateColor(Color color)
+    {
+        
     }
     
     private boolean isPainted()
