@@ -43,6 +43,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         paint = -1;
         counter = new int[2];
         counter[0] = 70; // 3.5 Seconds
+        counter[1] = 40; // 2.0 Seconds
     }
     
     @Override
@@ -66,6 +67,17 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             if(counter[0] < 70)
             {
                 counter[0]++;
+            }
+            
+            if(counter[1] == 39)
+            {
+                color = Defaults.COLOR_DEFAULT.getRGB();
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            }
+
+            if(counter[1] < 40)
+            {
+                counter[1]++;
             }
         }
     }
