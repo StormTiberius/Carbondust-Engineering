@@ -30,9 +30,10 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
 {    
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
+    private final int[] counter;
+    private int color,paint;
     private long previousUpdateTime;
     private boolean isWorking,soundUpdateNeeded,recentlyUpdated;
-    private int color,paint,counter;
     
     public TileEntityDrum()
     {
@@ -40,7 +41,8 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
         color = IndustryCore.getLiquidColor().getRGB();
         paint = -1;
-        counter = 70; // 3.5 Seconds
+        counter = new int[2];
+        counter[0] = 70; // 3.5 Seconds
     }
     
     @Override
@@ -50,20 +52,20 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(!worldObj.isRemote)
         {
-            if(counter == 0)
+            if(counter[0] == 0)
             {
                 isWorking = true;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
-            else if(counter == 69)
+            else if(counter[0] == 69)
             {
                 isWorking = false;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
 
-            if(counter < 70)
+            if(counter[0] < 70)
             {
-                counter++;
+                counter[0]++;
             }
         }
     }
@@ -122,7 +124,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(tag.hasKey("counter"))
         {
-            counter = tag.getInteger("counter");
+            counter[0] = tag.getInteger("counter");
         }
     }
 
@@ -148,7 +150,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         tag.setBoolean("isworking", isWorking);
         
-        tag.setInteger("counter", counter);
+        tag.setInteger("counter", counter[0]);
     }
     
     @Override
@@ -417,13 +419,13 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     private void updateCounter()
     {
-        if(counter > 69)
+        if(counter[0] > 69)
         {
-            counter = 0;
+            counter[0] = 0;
         }
-        else if(counter != 0)
+        else if(counter[0] != 0)
         {
-            counter = 1;
+            counter[0] = 1;
         }
     }
     
