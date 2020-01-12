@@ -421,7 +421,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             counter = 0;
         }
-        else
+        else if(counter != 0)
         {
             counter = 1;
         }
