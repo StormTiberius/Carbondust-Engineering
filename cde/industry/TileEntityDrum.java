@@ -429,6 +429,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         return fd.equals(ForgeDirection.DOWN)  || fd.equals(ForgeDirection.UP);
     }
     
+    private boolean isPainted()
+    {
+        return paint > -1 && paint < 16;
+    }
+    
     private void updateCounter()
     {
         if(counter[0] > 69)
