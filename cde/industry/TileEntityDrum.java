@@ -30,7 +30,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
 {    
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
-    private final int[] counter;
+    private int[] counter;
     private int color,paint;
     private long previousUpdateTime;
     private boolean isWorking,soundUpdateNeeded,recentlyUpdated;
@@ -124,7 +124,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(tag.hasKey("counter"))
         {
-            counter[0] = tag.getInteger("counter");
+            counter = tag.getIntArray("counter");
         }
     }
 
@@ -150,7 +150,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         tag.setBoolean("isworking", isWorking);
         
-        tag.setInteger("counter", counter[0]);
+        tag.setIntArray("counter", counter);
     }
     
     @Override
