@@ -30,10 +30,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
 {    
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
-    private int[] counter;
-    private int color,paint;
     private long previousUpdateTime;
     private boolean isWorking,soundUpdateNeeded,recentlyUpdated;
+    private int color,paint,counter;
     
     public TileEntityDrum()
     {
@@ -41,9 +40,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
         color = IndustryCore.getLiquidColor().getRGB();
         paint = -1;
-        counter = new int[2];
-        counter[0] = 70; // 3.5 Seconds
-        counter[1] = 40; // 2.0 Seconds
+        counter = 70; // 3.5 Seconds
     }
     
     @Override
@@ -53,31 +50,20 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(!worldObj.isRemote)
         {
-            if(counter[0] == 0)
+            if(counter == 0)
             {
                 isWorking = true;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
-            else if(counter[0] == 69)
+            else if(counter == 69)
             {
                 isWorking = false;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
 
-            if(counter[0] < 70)
+            if(counter < 70)
             {
-                counter[0]++;
-            }
-            
-            if(counter[1] == 39)
-            {
-                color = Defaults.COLOR_DEFAULT.getRGB();
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            }
-
-            if(counter[1] < 40)
-            {
-                counter[1]++;
+                counter++;
             }
         }
     }
@@ -136,7 +122,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(tag.hasKey("counter"))
         {
-            counter = tag.getIntArray("counter");
+            counter = tag.getInteger("counter");
         }
     }
 
@@ -162,7 +148,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         tag.setBoolean("isworking", isWorking);
         
-        tag.setIntArray("counter", counter);
+        tag.setInteger("counter", counter);
     }
     
     @Override
@@ -244,9 +230,14 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             {
                 soundUpdateNeeded = true;
                 
-                if(isEmpty && !isPainted())
+                if(isEmpty)
                 {
-                    updateColor(IndustryCore.getLiquidColor(resource.itemID));
+                    if(paint < 0 || paint > 15)
+                    {
+                        color = IndustryCore.getLiquidColor(resource.itemID).getRGB();
+                    }
+                    
+                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
                 
                 updateCounter();
@@ -277,9 +268,14 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             {
                 soundUpdateNeeded = true;
                 
-                if(TANK.getLiquid() == null && !isPainted())
+                if(TANK.getLiquid() == null)
                 {
-                    updateColor(IndustryCore.getLiquidColor());
+                    if(paint < 0 || paint > 15)
+                    {
+                        color = IndustryCore.getLiquidColor().getRGB();
+                    }
+                    
+                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
                 
                 updateCounter();
@@ -419,41 +415,15 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         return fd.equals(ForgeDirection.DOWN)  || fd.equals(ForgeDirection.UP);
     }
     
-    private void updateColor(Color c)
-    {
-        if(color != c.getRGB())
-        {
-            if(c.equals(Defaults.COLOR_DEFAULT))
-            {
-                counter[1] = 0;
-            }
-            else
-            {
-                counter[1] = 40;
-                color = c.getRGB();
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            }
-        }
-        else
-        {
-            counter[1] = 40;
-        }
-    }
-    
-    private boolean isPainted()
-    {
-        return paint > -1 && paint < 16;
-    }
-    
     private void updateCounter()
     {
-        if(counter[0] > 69)
+        if(counter > 69)
         {
-            counter[0] = 0;
+            counter = 0;
         }
-        else if(counter[0] != 0)
+        else if(counter != 0)
         {
-            counter[0] = 1;
+            counter = 1;
         }
     }
     
