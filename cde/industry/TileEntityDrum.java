@@ -419,9 +419,25 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         return fd.equals(ForgeDirection.DOWN)  || fd.equals(ForgeDirection.UP);
     }
     
-    private void updateColor(Color color)
+    private void updateColor(Color c)
     {
-        
+        if(color != c.getRGB())
+        {
+            if(c.equals(Defaults.COLOR_DEFAULT))
+            {
+                counter[1] = 0;
+            }
+            else
+            {
+                counter[1] = 40;
+                color = c.getRGB();
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            }
+        }
+        else
+        {
+            counter[1] = 40;
+        }
     }
     
     private boolean isPainted()
