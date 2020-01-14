@@ -90,16 +90,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         if(tag.hasKey("capacity"))
         {
             TANK.setCapacity(tag.getInteger("capacity"));
-        
-            if(tag.hasKey("color"))
-            {
-                color = tag.getInteger("color");
-            }
-            
-            if(tag.hasKey("paint"))
-            {
-                paint = tag.getInteger("paint");
-            }
             
             if(tag.hasKey("liquid"))
             {
@@ -109,6 +99,16 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             {
                 TANK.setLiquid(null);
             }
+        }
+        
+        if(tag.hasKey("color"))
+        {
+            color = tag.getInteger("color");
+        }
+
+        if(tag.hasKey("paint"))
+        {
+            paint = tag.getInteger("paint");
         }
         
         if(tag.hasKey("isworking"))
