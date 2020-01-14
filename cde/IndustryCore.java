@@ -370,8 +370,8 @@ public class IndustryCore
                 }
                 else
                 {
-                    ID_COLOR_MAP.put(liquid.itemID, Defaults.COLOR_DEFAULT);
-                    NAME_COLOR_MAP.put(entry.getKey(), Defaults.COLOR_DEFAULT);
+                    ID_COLOR_MAP.put(liquid.itemID, getPaintColor());
+                    NAME_COLOR_MAP.put(entry.getKey(), getPaintColor());
                 }
             }
         }
