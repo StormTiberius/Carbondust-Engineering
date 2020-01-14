@@ -128,8 +128,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         super.writeToNBT(tag);
         
         tag.setInteger("capacity", TANK.getCapacity());
-        tag.setInteger("color", color);
-        tag.setInteger("paint", paint);
         
         LiquidStack liquid = TANK.getLiquid();
         
@@ -141,6 +139,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             tag.removeTag("liquid");
         }
+        
+        tag.setInteger("color", color);
+        tag.setInteger("paint", paint);
         
         tag.setBoolean("isworking", isWorking);
         
