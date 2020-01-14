@@ -385,20 +385,20 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                 {
                     tag.setInteger("capacity", note.getInteger("capacity"));
                     
-                    if(note.hasKey("color"))
-                    {
-                        tag.setInteger("color", note.getInteger("color"));
-                    }
-                    
-                    if(note.hasKey("paint"))
-                    {
-                        tag.setInteger("paint", note.getInteger("paint"));
-                    }
-                    
                     if(note.hasKey("liquid"))
                     {
                         tag.setCompoundTag("liquid", note.getCompoundTag("liquid"));
                     }
+                }
+                
+                if(note.hasKey("color"))
+                {
+                    tag.setInteger("color", note.getInteger("color"));
+                }
+                
+                if(note.hasKey("paint"))
+                {
+                    tag.setInteger("paint", note.getInteger("paint"));
                 }
                 
                 te.readFromNBT(tag);
