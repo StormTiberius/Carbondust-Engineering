@@ -301,7 +301,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
             return ((TileEntityDrum)te).getDrumColor().getRGB();
         }
         
-        return IndustryCore.getLiquidColor().getRGB();
+        return IndustryCore.getPaintColor().getRGB();
     }
     
     @Override
