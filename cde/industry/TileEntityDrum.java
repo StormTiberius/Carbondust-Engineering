@@ -32,13 +32,13 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private final long NETWORK_UPDATE_INTERVAL;
     private long previousUpdateTime;
     private boolean isWorking,soundUpdateNeeded,recentlyUpdated;
-    private int color,paint,counter;
+    private int paintColor,paint,counter;
     
     public TileEntityDrum()
     {
         TANK = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
         NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
-        color = IndustryCore.getLiquidColor().getRGB();
+        paintColor = IndustryCore.getLiquidColor().getRGB();
         paint = -1;
         counter = 70; // 3.5 Seconds
     }
@@ -93,11 +93,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
             if(tag.hasKey("color"))
             {
-                color = tag.getInteger("color");
+                paintColor = tag.getInteger("color");
             }
             else
             {
-                color = IndustryCore.getLiquidColor().getRGB();
+                paintColor = IndustryCore.getLiquidColor().getRGB();
             }
             
             if(tag.hasKey("paint"))
@@ -132,7 +132,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         super.writeToNBT(tag);
         
         tag.setInteger("capacity", TANK.getCapacity());
-        tag.setInteger("color", color);
+        tag.setInteger("color", paintColor);
         tag.setInteger("paint", paint);
         
         LiquidStack liquid = TANK.getLiquid();
@@ -352,7 +352,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     public Color getDrumColor()
     {
-        return new Color(color);
+        return new Color(paintColor);
     }
     
     public boolean setDrumColor(int index)
@@ -362,7 +362,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             return false;
         }
         
-        color = IndustryCore.getPaintColor(index).getRGB();
+        paintColor = IndustryCore.getPaintColor(index).getRGB();
         paint = index;
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         
