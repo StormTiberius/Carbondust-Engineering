@@ -95,10 +95,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             {
                 color = tag.getInteger("color");
             }
-            else
-            {
-                color = IndustryCore.getLiquidColor().getRGB();
-            }
             
             if(tag.hasKey("paint"))
             {
