@@ -272,6 +272,11 @@ public class IndustryCore
         drumRenderId = id;
     }
     
+    public static Color getPaintColor()
+    {
+        return Defaults.COLOR_DEFAULT;
+    }
+    
     public static Color getPaintColor(int index)
     {
         if(index >= 0 && index <= 15)
