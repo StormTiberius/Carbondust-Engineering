@@ -355,6 +355,12 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         return new Color(color);
     }
     
+    public void setDrumColor(Color c)
+    {
+        color = c.getRGB();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+    
     public boolean setDrumColor(int index)
     {
         if(index < 0 || index > 15 || index == paint)
