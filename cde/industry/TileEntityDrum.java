@@ -368,9 +368,8 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             return false;
         }
         
-        color = IndustryCore.getPaintColor(index).getRGB();
         paint = index;
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        setDrumColor(Defaults.MINECRAFT_COLORS[index]);
         
         return true;
     }
