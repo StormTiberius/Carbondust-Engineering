@@ -8,6 +8,7 @@ package cde.industry;
 import cde.CDECore;
 import cde.IndustryCore;
 import cde.api.INetwork;
+import cde.api.IPaintableTile;
 import cde.core.Defaults;
 import cde.core.network.PacketTileParticle;
 import cde.core.sound.PacketTileSound;
@@ -26,7 +27,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
-public class TileEntityDrum extends TileEntityWithSound implements ITankContainer, IPaintable, INetwork
+public class TileEntityDrum extends TileEntityWithSound implements ITankContainer, IPaintable, IPaintableTile, INetwork
 {    
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
@@ -347,6 +348,19 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         return setDrumColor(i);
     }
     
+    @Override
+    public boolean applyPaintCoating(Color c)
+    {
+        if(color != c.getRGB())
+        {
+            setDrumColor(c);
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
     public Color getDrumColor()
     {
         return new Color(color);
@@ -355,6 +369,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     public void setDrumColor(Color c)
     {
         color = c.getRGB();
+        paint = -2;
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
     
@@ -365,8 +380,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             return false;
         }
         
+        color = Defaults.MINECRAFT_COLORS[index].getRGB();
         paint = index;
-        setDrumColor(Defaults.MINECRAFT_COLORS[index]);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         
         return true;
     }
