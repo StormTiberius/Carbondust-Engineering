@@ -468,9 +468,9 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     }
   
                     drum.getTagCompound().setInteger("capacity", capacity);
+                    drum.getTagCompound().setTag("liquid", tag);
                     drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
                     drum.getTagCompound().setInteger("paint", -2);
-                    drum.getTagCompound().setTag("liquid", tag);
 
                     drum.setItemDamage(getDamageValue(capacity, capacity, drum.getMaxDamage()));
 
