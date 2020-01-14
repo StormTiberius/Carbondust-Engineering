@@ -229,17 +229,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             if(doFill && amount > 0)
             {
                 soundUpdateNeeded = true;
-                
-                if(isEmpty)
-                {
-                    if(paint < 0 || paint > 15)
-                    {
-                        color = IndustryCore.getLiquidColor(resource.itemID).getRGB();
-                    }
-                    
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                }
-                
                 updateCounter();
             }
         }
@@ -267,17 +256,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             if(doDrain && liquid != null)
             {
                 soundUpdateNeeded = true;
-                
-                if(TANK.getLiquid() == null)
-                {
-                    if(paint < 0 || paint > 15)
-                    {
-                        color = IndustryCore.getLiquidColor().getRGB();
-                    }
-                    
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                }
-                
                 updateCounter();
             }
         }
