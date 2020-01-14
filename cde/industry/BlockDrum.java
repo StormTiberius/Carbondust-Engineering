@@ -516,16 +516,6 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                 int capacity = tag.getInteger("capacity");
                 
                 drum.getTagCompound().setInteger("capacity", capacity);
-
-                if(tag.hasKey("color"))
-                {
-                    drum.getTagCompound().setInteger("color", tag.getInteger("color"));
-                }
-                
-                if(tag.hasKey("paint"))
-                {
-                    drum.getTagCompound().setInteger("paint", tag.getInteger("paint"));
-                }
                 
                 if(tag.hasKey("liquid"))
                 {
@@ -543,7 +533,17 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     drum.setItemDamage(getDamageValue(0, capacity, drum.getMaxDamage()));
                 }
             }
-        
+            
+            if(tag.hasKey("color"))
+            {
+                drum.getTagCompound().setInteger("color", tag.getInteger("color"));
+            }
+
+            if(tag.hasKey("paint"))
+            {
+                drum.getTagCompound().setInteger("paint", tag.getInteger("paint"));
+            }
+            
             list.add(drum);
         }
         
