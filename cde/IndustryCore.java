@@ -294,7 +294,7 @@ public class IndustryCore
             return NAME_COLOR_MAP.get(s);
         }
         
-        return Defaults.COLOR_DEFAULT;
+        return getPaintColor();
     }
     
     public static Color getLiquidColor(int id)
@@ -304,7 +304,7 @@ public class IndustryCore
             return ID_COLOR_MAP.get(id);
         }
         
-        return Defaults.COLOR_DEFAULT;
+        return getPaintColor();
     }
     
     private static void initNameColorMap()
