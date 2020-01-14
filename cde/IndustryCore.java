@@ -281,10 +281,10 @@ public class IndustryCore
     {
         if(index >= 0 && index <= 15)
         {
-            return PAINT_COLOR_MAP.get(Defaults.DYE_ORE_DICTIONARY_NAMES[index]);
+            return Defaults.MINECRAFT_COLORS[index];
         }
         
-        return Defaults.COLOR_DEFAULT;
+        return getPaintColor();
     }
     
     public static Color getLiquidColor(String s)
