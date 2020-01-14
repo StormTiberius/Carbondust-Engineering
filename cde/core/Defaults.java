@@ -221,6 +221,23 @@ public class Defaults
     public static final Color COLOR_ORANGE = new Color(217, 128, 51);
     public static final Color COLOR_WHITE = new Color(255, 255, 255);
     
+    public static final Color[] COLORS_MC = {COLOR_BLACK,
+                                             COLOR_RED,
+                                             COLOR_GREEN,
+                                             COLOR_BROWN,
+                                             COLOR_BLUE,
+                                             COLOR_PURPLE,
+                                             COLOR_CYAN,
+                                             COLOR_LIGHT_GRAY,
+                                             COLOR_GRAY,
+                                             COLOR_PINK,
+                                             COLOR_LIME,
+                                             COLOR_YELLOW,
+                                             COLOR_LIGHT_BLUE,
+                                             COLOR_MAGENTA,
+                                             COLOR_ORANGE,
+                                             COLOR_WHITE};
+    
     public static final Map<String, Color> MC_COLORS = ImmutableMap.<String, Color>builder()
                                                                                             .put(DYE_ORE_DICTIONARY_NAMES[0], COLOR_BLACK)
                                                                                             .put(DYE_ORE_DICTIONARY_NAMES[1], COLOR_RED)
