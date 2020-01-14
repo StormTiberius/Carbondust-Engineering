@@ -32,14 +32,13 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private final long NETWORK_UPDATE_INTERVAL;
     private long previousUpdateTime;
     private boolean isWorking,soundUpdateNeeded,recentlyUpdated;
-    private int factoryColor,paintColor,paint,counter;
+    private int paintColor,paint,counter;
     
     public TileEntityDrum()
     {
         TANK = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
         NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
-        factoryColor = IndustryCore.getPaintColor().getRGB();
-        paintColor = IndustryCore.getPaintColor().getRGB();
+        paintColor = IndustryCore.getLiquidColor().getRGB();
         paint = -1;
         counter = 70; // 3.5 Seconds
     }
@@ -91,15 +90,14 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         if(tag.hasKey("capacity"))
         {
             TANK.setCapacity(tag.getInteger("capacity"));
-            
-            if(tag.hasKey("factory"))
-            {
-                factoryColor = tag.getInteger("factory");
-            }
-            
+        
             if(tag.hasKey("color"))
             {
                 paintColor = tag.getInteger("color");
+            }
+            else
+            {
+                paintColor = IndustryCore.getLiquidColor().getRGB();
             }
             
             if(tag.hasKey("paint"))
@@ -134,7 +132,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         super.writeToNBT(tag);
         
         tag.setInteger("capacity", TANK.getCapacity());
-        tag.setInteger("factory", factoryColor);
         tag.setInteger("color", paintColor);
         tag.setInteger("paint", paint);
         
