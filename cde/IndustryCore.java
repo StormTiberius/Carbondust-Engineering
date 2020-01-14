@@ -126,7 +126,7 @@ public class IndustryCore
             }
             
             drumIron.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_IRON);
-            drumIron.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+            drumIron.getTagCompound().setInteger("color", getPaintColor().getRGB());
             drumIron.getTagCompound().setInteger("paint", -1);
             tabIconDrum = drumIron.copy(); // Copy iron drum itemstack for creative tab display purposes.
             drumIron.setItemDamage(drumIron.getMaxDamage());
@@ -147,7 +147,7 @@ public class IndustryCore
             }
             
             drumSteel.getTagCompound().setInteger("capacity", Defaults.DRUM_CAPACITY_STEEL);
-            drumSteel.getTagCompound().setInteger("color", getLiquidColor().getRGB());
+            drumSteel.getTagCompound().setInteger("color", getPaintColor().getRGB());
             drumSteel.getTagCompound().setInteger("paint", -1);
             drumSteel.setItemDamage(drumSteel.getMaxDamage());
             
@@ -304,11 +304,6 @@ public class IndustryCore
             return ID_COLOR_MAP.get(id);
         }
         
-        return Defaults.COLOR_DEFAULT;
-    }
-    
-    public static Color getLiquidColor()
-    {
         return Defaults.COLOR_DEFAULT;
     }
     
