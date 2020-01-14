@@ -332,7 +332,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                                 tag.removeTag("liquid");
                             }
                             
-                            tag.setInteger("color", IndustryCore.getLiquidColor().getRGB());
+                            tag.setInteger("color", IndustryCore.getPaintColor().getRGB());
                             tag.setInteger("paint", -1);
                             
                             if(tag.hasKey("capacity"))
