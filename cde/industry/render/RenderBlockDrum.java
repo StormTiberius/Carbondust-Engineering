@@ -953,7 +953,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     private static void setColor(double i, double p)
     {
-        setColor(i, p, IndustryCore.getLiquidColor());
+        setColor(i, p, IndustryCore.getPaintColor());
     }
     
     private static Color getColor(ItemStack is)
@@ -963,7 +963,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             return new Color(is.getTagCompound().getInteger("color"));
         }
         
-        return IndustryCore.getLiquidColor();
+        return IndustryCore.getPaintColor();
     }
     
     private static int getType(ItemStack is)
