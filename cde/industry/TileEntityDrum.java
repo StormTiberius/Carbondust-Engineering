@@ -222,8 +222,6 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(tankIndex == 0)
         {
-            boolean isEmpty = TANK.getLiquid() == null;
-            
             amount = TANK.fill(resource, doFill);
 
             if(doFill && amount > 0)
