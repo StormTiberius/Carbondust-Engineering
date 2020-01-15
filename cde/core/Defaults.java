@@ -187,6 +187,23 @@ public class Defaults
                                                       "Orange Paint Brush",
                                                       "White Paint Brush"};
     
+    public static final String[] COLOR_NAMES = {"Black",
+                                                "Red",
+                                                "Green",
+                                                "Brown",
+                                                "Blue",
+                                                "Purple",
+                                                "Cyan",
+                                                "Light Gray",
+                                                "Gray",
+                                                "Pink",
+                                                "Lime",
+                                                "Yellow",
+                                                "Light Blue",
+                                                "Magenta",
+                                                "Orange",
+                                                "White"};
+    
     public static final String[] DYE_ORE_DICTIONARY_NAMES = {"dyeBlack",
                                                              "dyeRed",
                                                              "dyeGreen",   
