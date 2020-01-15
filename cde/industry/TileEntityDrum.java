@@ -13,6 +13,7 @@ import cde.core.Defaults;
 import cde.core.network.PacketTileParticle;
 import cde.core.sound.PacketTileSound;
 import cde.core.sound.TileEntityWithSound;
+import cde.core.util.Utils;
 import com.eloraam.redpower.core.IPaintable;
 import java.awt.Color;
 import net.minecraft.entity.player.EntityPlayer;
@@ -369,7 +370,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     public void setDrumColor(Color c)
     {
         color = c.getRGB();
-        paint = -2;
+        paint = 16 + Utils.getClosestMinecraftColor(c);
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
     
