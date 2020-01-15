@@ -27,7 +27,6 @@ public class Utils
         double min_v = UV_SPACING * v;
         double max_v = min_v + UV_SPACING;
         
-        
         return new double[] {min_u, max_u, min_v, max_v};
     }
 }
