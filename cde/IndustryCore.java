@@ -9,6 +9,7 @@ import cde.api.Blocks;
 import cde.api.Materials;
 import cde.core.Defaults;
 import cde.core.Version;
+import cde.core.util.Utils;
 import cde.industry.BlockDrum;
 import cde.industry.CommonProxy;
 import cde.industry.CreativeTabDrums;
@@ -61,6 +62,7 @@ public class IndustryCore
     private static final Map<String, Color> PAINT_COLOR_MAP = new HashMap<String, Color>();
     private static final Map<String, Color> NAME_COLOR_MAP = new HashMap<String, Color>();
     private static final Map<Integer, Color> ID_COLOR_MAP = new HashMap<Integer, Color>();
+    private static final Map<Integer, Integer> COLOR_INDEX_MAP = new HashMap<Integer, Integer>();
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -234,6 +236,7 @@ public class IndustryCore
         parseLiquidColors();
         initIdColorMap();
         parsePaintColors();
+        initColorIndexMap();
     }
 
     @ServerStarting
@@ -404,5 +407,35 @@ public class IndustryCore
     private static boolean isValidRange(int r, int g, int b)
     {
         return r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255;
+    }
+    
+    private static void initColorIndexMap()
+    {
+        for(Map.Entry<String, LiquidStack> entry : LiquidDictionary.getLiquids().entrySet())
+        {
+            LiquidStack liquid = entry.getValue();
+            
+            Color color = IndustryCore.getLiquidColor(liquid.itemID);
+            
+            COLOR_INDEX_MAP.put(color.getRGB(), Utils.getClosestMinecraftColor(color));
+        }
+    }
+    
+    public static int getColorIndex(Color color)
+    {
+        int rgb = color.getRGB();
+        
+        if(COLOR_INDEX_MAP.containsKey(rgb))
+        {
+            return COLOR_INDEX_MAP.get(rgb);
+        }
+        else
+        {
+            int index = Utils.getClosestMinecraftColor(color);
+            
+            COLOR_INDEX_MAP.put(rgb, index);
+            
+            return index;
+        }
     }
 }
