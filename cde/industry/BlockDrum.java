@@ -9,6 +9,7 @@ import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
 import cde.IndustryCore;
 import cde.core.Defaults;
+import cde.core.util.Utils;
 import ic2.api.IPaintableBlock;
 import java.util.ArrayList;
 import java.util.List;
@@ -470,7 +471,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     drum.getTagCompound().setInteger("capacity", capacity);
                     drum.getTagCompound().setTag("liquid", tag);
                     drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
-                    drum.getTagCompound().setInteger("paint", -2);
+                    drum.getTagCompound().setInteger("paint", 16 + Utils.getClosestMinecraftColor(IndustryCore.getLiquidColor(liquid.itemID)));
 
                     drum.setItemDamage(getDamageValue(capacity, capacity, drum.getMaxDamage()));
 
