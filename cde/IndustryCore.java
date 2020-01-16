@@ -190,34 +190,37 @@ public class IndustryCore
             
             if(drumRecipeIron)
             {
-                GameRegistry.addRecipe(Blocks.blockDrumIron.copy(),
-                "psp",
-                "pcp",
-                "psp",
-                'c', new ItemStack(Item.cauldron.itemID, 1, 0),
+                GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumIron.copy(),
+                "zpz",
+                "zbz",
+                "zpz",
+                'z', "ingotZinc",
+                'b', new ItemStack(Block.blockSteel.blockID, 1, 0),
                 'p', iron,
-                's', sealant);
+                's', sealant));
             }
             
             if(drumRecipeSteel)
             {
                 if(plate)
                 {
-                    GameRegistry.addRecipe(Blocks.blockDrumSteel.copy(),
-                    "psp",
-                    "pcp",
-                    "psp",
-                    'c', new ItemStack(Item.cauldron.itemID, 1, 0),
+                    GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel.copy(),
+                    "zpz",
+                    "zbz",
+                    "zpz",
+                    'z', "ingotZinc",
+                    'b', "blockSteel",
                     'p', steel,
-                    's', sealant);
+                    's', sealant));
                 }
                 else
                 {
                     GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel.copy(),
-                    "psp",
-                    "pcp",
-                    "psp",
-                    'c', new ItemStack(Item.cauldron.itemID, 1, 0),
+                    "zpz",
+                    "zbz",
+                    "zpz",
+                    'z', "ingotZinc",
+                    'b', "blockSteel",
                     'p', "ingotSteel",
                     's', sealant));
                 }
