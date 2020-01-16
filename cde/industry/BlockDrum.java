@@ -9,7 +9,6 @@ import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
 import cde.IndustryCore;
 import cde.core.Defaults;
-import cde.core.util.Utils;
 import ic2.api.IPaintableBlock;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +82,10 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     else if(LiquidContainerRegistry.isFilledContainer(held))
                     {
                         return taskFilledContainer(player, held, ted);
+                    }
+                    else if(held.itemID == Item.paper.itemID)
+                    {
+                        return taskLabel(player, held, ted);
                     }
                 }
             }
@@ -271,6 +274,30 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
             return true;
         }
             
+        return false;
+    }
+    
+    private boolean taskLabel(EntityPlayer player, ItemStack held, TileEntityDrum ted)
+    {
+        LiquidStack liquid = ted.getTank(ForgeDirection.UP, null).getLiquid();
+        
+        if(liquid != null && ted.applyPaintCoating(IndustryCore.getLiquidColor(liquid.itemID)))
+        {
+            if(!player.capabilities.isCreativeMode)
+            {
+                if(held.stackSize == 1)
+                {
+                    player.setCurrentItemOrArmor(0, null);
+                }
+                else if(held.stackSize > 1)
+                {
+                    held.stackSize--;
+                }
+            }
+            
+            return true;
+        }
+        
         return false;
     }
     
@@ -471,7 +498,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     drum.getTagCompound().setInteger("capacity", capacity);
                     drum.getTagCompound().setTag("liquid", tag);
                     drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
-                    drum.getTagCompound().setInteger("paint", 16 + Utils.getClosestMinecraftColor(IndustryCore.getLiquidColor(liquid.itemID)));
+                    drum.getTagCompound().setInteger("paint", -2);
 
                     drum.setItemDamage(getDamageValue(capacity, capacity, drum.getMaxDamage()));
 
