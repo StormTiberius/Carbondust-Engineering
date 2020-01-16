@@ -53,7 +53,7 @@ public class IndustryCore
     private static int drumBlockId,drumRenderId,drumVolume,drumPitch;
     private static boolean drumRecipeIron,drumRecipeSteel;
     private static String[] paintColors,liquidColors;
-    private static ItemStack tabIconDrum;
+    private static ItemStack tabIconDrum,sealant;
     private static Configuration cfg;
     
     public static final CreativeTabs TAB_DRUMS = new CreativeTabDrums("industrydrums");
@@ -153,7 +153,7 @@ public class IndustryCore
             
             Blocks.blockDrumSteel = drumSteel;
             
-            ItemStack sealant = new ItemStack(Item.slimeBall.itemID, 1, 0);
+            sealant = new ItemStack(Item.slimeBall.itemID, 1, 0);
             ItemStack iron = new ItemStack(Item.ingotIron.itemID, 1, 0);
             ItemStack steel = Materials.ingotSteel.copy();
             
@@ -243,6 +243,11 @@ public class IndustryCore
     public void serverStarting(FMLServerStartingEvent event)
     {
         
+    }
+    
+    public static ItemStack getSealant()
+    {
+        return sealant;
     }
     
     public static ItemStack getTabIcon()
