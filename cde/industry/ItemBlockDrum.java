@@ -61,13 +61,17 @@ public class ItemBlockDrum extends ItemBlock
             {
                 int index = is.getTagCompound().getInteger("paint");
                 
-                if(index > -1 && index < 16)
+                if(index == -1)
                 {
-                    String name = Defaults.PAINT_BRUSH_NAMES[index];
-                
-                    name = name.replaceFirst("Brush", "Coating");
-                
-                    info.add("Has " + name.toLowerCase());
+                    info.add("Has unfinished exterior");
+                }
+                else if(index == -2)
+                {
+                    info.add("Has " + liquid.toLowerCase() + " colored label");                       
+                }
+                else if(index > -1 && index < 16)
+                {
+                    info.add("Has " + Defaults.COLOR_NAMES[index].toLowerCase() + " paint coating");
                 }
             }
         }
