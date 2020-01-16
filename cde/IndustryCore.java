@@ -196,8 +196,7 @@ public class IndustryCore
                 "zpz",
                 'z', "ingotZinc",
                 'b', new ItemStack(Block.blockSteel.blockID, 1, 0),
-                'p', iron,
-                's', sealant));
+                'p', iron));
             }
             
             if(drumRecipeSteel)
@@ -210,8 +209,7 @@ public class IndustryCore
                     "zpz",
                     'z', "ingotZinc",
                     'b', "blockSteel",
-                    'p', steel,
-                    's', sealant));
+                    'p', steel));
                 }
                 else
                 {
@@ -221,8 +219,7 @@ public class IndustryCore
                     "zpz",
                     'z', "ingotZinc",
                     'b', "blockSteel",
-                    'p', "ingotSteel",
-                    's', sealant));
+                    'p', "ingotSteel"));
                 }
             }
         }
