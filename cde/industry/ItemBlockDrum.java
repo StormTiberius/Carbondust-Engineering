@@ -63,7 +63,7 @@ public class ItemBlockDrum extends ItemBlock
                 
                 if(index == -1)
                 {
-                    info.add("Has unfinished exterior");
+                    info.add("Has galvanized coating");
                 }
                 else if(index == -2)
                 {
