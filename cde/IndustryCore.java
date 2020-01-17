@@ -153,9 +153,8 @@ public class IndustryCore
             
             Blocks.blockDrumSteel = drumSteel;
             
+            // Sealant for drum waterproofing
             sealant = new ItemStack(Item.slimeBall.itemID, 1, 0);
-            ItemStack iron = new ItemStack(Item.ingotIron.itemID, 1, 0);
-            ItemStack steel = Materials.ingotSteel.copy();
             
             if(ModLoader.isModLoaded("BuildCraft|Core"))
             {
@@ -169,10 +168,15 @@ public class IndustryCore
                 }
             }
             
-            boolean plate = false;
+            // Drum recipes
+            ItemStack iron = new ItemStack(Item.ingotIron.itemID, 1, 0);
+            Object steel = "ingotSteel";
+            Object zinc = new ItemStack(Item.ingotIron.itemID, 1, 0);
             
             if(ModLoader.isModLoaded("Railcraft"))
             {
+                zinc = "ingotZinc";
+                
                 ItemStack plateIron = ItemRegistry.getItem("part.plate.iron", 1);
                 ItemStack plateSteel = ItemRegistry.getItem("part.plate.steel", 1);
                 
@@ -184,7 +188,6 @@ public class IndustryCore
                 if(plateSteel != null)
                 {
                     steel = plateSteel.copy();
-                    plate = true;
                 }
             }
             
@@ -194,33 +197,20 @@ public class IndustryCore
                 "zpz",
                 "zbz",
                 "zpz",
-                'z', "ingotZinc",
+                'z', zinc,
                 'b', new ItemStack(Block.blockSteel.blockID, 1, 0),
                 'p', iron));
             }
             
             if(drumRecipeSteel)
             {
-                if(plate)
-                {
-                    GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel.copy(),
-                    "zpz",
-                    "zbz",
-                    "zpz",
-                    'z', "ingotZinc",
-                    'b', "blockSteel",
-                    'p', steel));
-                }
-                else
-                {
-                    GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel.copy(),
-                    "zpz",
-                    "zbz",
-                    "zpz",
-                    'z', "ingotZinc",
-                    'b', "blockSteel",
-                    'p', "ingotSteel"));
-                }
+                GameRegistry.addRecipe(new ShapedOreRecipe(Blocks.blockDrumSteel.copy(),
+                "zpz",
+                "zbz",
+                "zpz",
+                'z', zinc,
+                'b', "blockSteel",
+                'p', steel));
             }
         }
         
