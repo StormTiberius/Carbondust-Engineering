@@ -352,7 +352,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     {
         if(ModLoader.isModLoaded("IC2") || ModLoader.isModLoaded("RedPowerCore"))
         {
-            System.out.println(ModLoader.isModLoaded("IC2") + " " + ModLoader.isModLoaded("RedPowerCore"));//return false;
+            return false;
         }
         
         String name = OreDictionary.getOreName(OreDictionary.getOreID(held));
