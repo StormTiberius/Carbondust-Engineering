@@ -22,6 +22,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.src.ModLoader;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
@@ -32,6 +33,7 @@ import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockDrum extends BlockContainer implements IPaintableBlock
 {
@@ -91,7 +93,26 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     {
                         return taskSealant(player, held, ted);
                     }
+                    else if(isDye(held))
+                    {
+                        return taskDye(player, held, ted);
+                    }
                 }
+            }
+        }
+        
+        return false;
+    }
+    
+    private boolean isDye(ItemStack held)
+    {
+        String name = OreDictionary.getOreName(OreDictionary.getOreID(held));
+        
+        for(String s : Defaults.DYE_ORE_DICTIONARY_NAMES)
+        {
+            if(name.contentEquals(s))
+            {
+                return true;
             }
         }
         
@@ -322,6 +343,52 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
             }
             
             return true;
+        }
+        
+        return false;
+    }
+    
+    private boolean taskDye(EntityPlayer player, ItemStack held, TileEntityDrum ted)
+    {
+        if(ModLoader.isModLoaded("IC2") || ModLoader.isModLoaded("RedPowerCore"))
+        {
+            System.out.println(ModLoader.isModLoaded("IC2") + " " + ModLoader.isModLoaded("RedPowerCore"));//return false;
+        }
+        
+        String name = OreDictionary.getOreName(OreDictionary.getOreID(held));
+        
+        int index = 0;
+        
+        for(String s : Defaults.DYE_ORE_DICTIONARY_NAMES)
+        {
+            if(name.contentEquals(s))
+            {
+                break;
+            }
+            else
+            {
+                index++;
+            }
+        }
+        
+        if(index > -1 && index < 16)
+        {
+            if(ted.setDrumColor(index))
+            {
+                if(!player.capabilities.isCreativeMode)
+                {
+                    if(held.stackSize == 1)
+                    {
+                        player.setCurrentItemOrArmor(0, null);
+                    }
+                    else if(held.stackSize > 1)
+                    {
+                        held.stackSize--;
+                    }
+                }
+                
+                return true;
+            }
         }
         
         return false;
