@@ -87,6 +87,10 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     {
                         return taskLabel(player, held, ted);
                     }
+                    else if(held.itemID == IndustryCore.getSealant().itemID)
+                    {
+                        return taskSealant(player, held, ted);
+                    }
                 }
             }
         }
@@ -282,6 +286,28 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
         LiquidStack liquid = ted.getTank(ForgeDirection.UP, null).getLiquid();
         
         if(liquid != null && ted.applyPaintCoating(IndustryCore.getLiquidColor(liquid.itemID)))
+        {
+            if(!player.capabilities.isCreativeMode)
+            {
+                if(held.stackSize == 1)
+                {
+                    player.setCurrentItemOrArmor(0, null);
+                }
+                else if(held.stackSize > 1)
+                {
+                    held.stackSize--;
+                }
+            }
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
+    private boolean taskSealant(EntityPlayer player, ItemStack held, TileEntityDrum ted)
+    {
+        if(ted.applySealant())
         {
             if(!player.capabilities.isCreativeMode)
             {
