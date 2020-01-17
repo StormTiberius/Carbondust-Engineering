@@ -328,21 +328,24 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     
     private boolean taskSealant(EntityPlayer player, ItemStack held, TileEntityDrum ted)
     {
-        if(ted.applySealant())
+        if(held.stackSize >= 4 || player.capabilities.isCreativeMode)
         {
-            if(!player.capabilities.isCreativeMode)
+            if(ted.applySealant())
             {
-                if(held.stackSize == 1)
+                if(!player.capabilities.isCreativeMode)
                 {
-                    player.setCurrentItemOrArmor(0, null);
+                    if(held.stackSize == 4)
+                    {
+                        player.setCurrentItemOrArmor(0, null);
+                    }
+                    else if(held.stackSize > 4)
+                    {
+                        held.stackSize -= 4;
+                    }
                 }
-                else if(held.stackSize > 1)
-                {
-                    held.stackSize--;
-                }
+
+                return true;
             }
-            
-            return true;
         }
         
         return false;
