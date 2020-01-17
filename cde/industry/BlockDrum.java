@@ -388,6 +388,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                             
                             tag.setInteger("color", IndustryCore.getPaintColor().getRGB());
                             tag.setInteger("paint", -1);
+                            tag.setBoolean("sealant", false);
                             
                             if(tag.hasKey("capacity"))
                             {
@@ -455,6 +456,11 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     tag.setInteger("paint", note.getInteger("paint"));
                 }
                 
+                if(note.hasKey("sealant"))
+                {
+                    tag.setBoolean("sealant", note.getBoolean("sealant"));
+                }
+                
                 te.readFromNBT(tag);
             }
         }
@@ -493,6 +499,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                 drum.getTagCompound().setInteger("capacity", capacity);
                 drum.getTagCompound().setInteger("color", IndustryCore.getPaintColor(j).getRGB());
                 drum.getTagCompound().setInteger("paint", j);
+                drum.getTagCompound().setBoolean("sealant", true);
 
                 drum.setItemDamage(getDamageValue(0, capacity, drum.getMaxDamage()));
 
@@ -525,6 +532,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     drum.getTagCompound().setTag("liquid", tag);
                     drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
                     drum.getTagCompound().setInteger("paint", -2);
+                    drum.getTagCompound().setBoolean("sealant", true);
 
                     drum.setItemDamage(getDamageValue(capacity, capacity, drum.getMaxDamage()));
 
@@ -596,6 +604,11 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
             if(tag.hasKey("paint"))
             {
                 drum.getTagCompound().setInteger("paint", tag.getInteger("paint"));
+            }
+            
+            if(tag.hasKey("sealant"))
+            {
+                drum.getTagCompound().setBoolean("sealant", tag.getBoolean("sealant"));
             }
             
             list.add(drum);
