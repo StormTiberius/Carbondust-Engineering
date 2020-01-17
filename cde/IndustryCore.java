@@ -174,7 +174,7 @@ public class IndustryCore
             ItemStack plateIron = new ItemStack(Block.trapdoor.blockID, 1, 0);
             ItemStack plateSteel = new ItemStack(Block.trapdoor.blockID, 1, 0);
             
-            if(ModLoader.isModLoaded("Railcraft") && false)
+            if(ModLoader.isModLoaded("Railcraft"))
             {
                 ingotIron = "ingotZinc";
                 ingotSteel = "ingotZinc";
