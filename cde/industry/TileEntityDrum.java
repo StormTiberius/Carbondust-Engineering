@@ -42,6 +42,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
         counter = new int[2];
         counter[0] = 70; // 3.5 Seconds
+        counter[1] = 24; // 1.2 Seconds
         color = IndustryCore.getPaintColor().getRGB();
         paint = -1;
     }
@@ -67,6 +68,19 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             if(counter[0] < 70)
             {
                 counter[0]++;
+            }
+            
+            if(!hasSealant)
+            {
+                if(counter[1] >= 24)
+                {
+                    TANK.drain(1, true);
+                    counter[1] = 0;
+                }
+                else
+                {
+                    counter[1]++;
+                }
             }
         }
     }
