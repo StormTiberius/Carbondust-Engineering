@@ -169,27 +169,19 @@ public class IndustryCore
             }
             
             // Drum recipes
-            ItemStack iron = new ItemStack(Item.ingotIron.itemID, 1, 0);
-            Object steel = "ingotSteel";
-            Object zinc = new ItemStack(Item.ingotIron.itemID, 1, 0);
+            Object ingotIron = new ItemStack(Item.ingotIron.itemID, 1, 0);
+            Object ingotSteel = "ingotSteel";
+            ItemStack plateIron = new ItemStack(Block.trapdoor.blockID, 1, 0);
+            ItemStack plateSteel = new ItemStack(Block.trapdoor.blockID, 1, 0);
             
-            if(ModLoader.isModLoaded("Railcraft"))
+            if(ModLoader.isModLoaded("Railcraft") && false)
             {
-                zinc = "ingotZinc";
-                
-                ItemStack plateIron = ItemRegistry.getItem("part.plate.iron", 1);
-                ItemStack plateSteel = ItemRegistry.getItem("part.plate.steel", 1);
-                
-                if(plateIron != null)
-                {
-                    iron = plateIron.copy();
-                }
-                
-                if(plateSteel != null)
-                {
-                    steel = plateSteel.copy();
-                }
+                ingotIron = "ingotZinc";
+                ingotSteel = "ingotZinc";
+                plateIron = ItemRegistry.getItem("part.plate.iron", 1);
+                plateSteel = ItemRegistry.getItem("part.plate.steel", 1);
             }
+            
             
             if(drumRecipeIron)
             {
@@ -197,9 +189,9 @@ public class IndustryCore
                 "zpz",
                 "zbz",
                 "zpz",
-                'z', zinc,
+                'z', ingotIron,
                 'b', new ItemStack(Block.blockSteel.blockID, 1, 0),
-                'p', iron));
+                'p', plateIron));
             }
             
             if(drumRecipeSteel)
@@ -208,9 +200,9 @@ public class IndustryCore
                 "zpz",
                 "zbz",
                 "zpz",
-                'z', zinc,
+                'z', ingotSteel,
                 'b', "blockSteel",
-                'p', steel));
+                'p', plateSteel));
             }
         }
         
