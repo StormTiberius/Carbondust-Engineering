@@ -33,15 +33,13 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private final long NETWORK_UPDATE_INTERVAL;
     private long previousUpdateTime;
     private boolean isWorking,soundUpdateNeeded,recentlyUpdated,hasSealant;
-    private int color,paint;
-    private int[] counter;
+    private int counter,color,paint;
     
     public TileEntityDrum()
     {
         TANK = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
         NETWORK_UPDATE_INTERVAL = CDECore.getNetworkUpdateTime();
-        counter = new int[2];
-        counter[0] = 70; // 3.5 Seconds
+        counter = 70; // 3.5 Seconds
         color = IndustryCore.getPaintColor().getRGB();
         paint = -1;
     }
@@ -53,20 +51,20 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(!worldObj.isRemote)
         {
-            if(counter[0] == 0)
+            if(counter == 0)
             {
                 isWorking = true;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
-            else if(counter[0] == 69)
+            else if(counter == 69)
             {
                 isWorking = false;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
 
-            if(counter[0] < 70)
+            if(counter < 70)
             {
-                counter[0]++;
+                counter++;
             }
         }
     }
@@ -121,7 +119,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         if(tag.hasKey("counter"))
         {
-            counter = tag.getIntArray("counter");
+            counter = tag.getInteger("counter");
         }
         
         if(tag.hasKey("sealant"))
@@ -153,7 +151,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
         tag.setBoolean("isworking", isWorking);
         
-        tag.setIntArray("counter", counter);
+        tag.setInteger("counter", counter);
         
         tag.setBoolean("sealant", hasSealant);
     }
@@ -432,13 +430,13 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     private void updateCounter()
     {
-        if(counter[0] > 69)
+        if(counter > 69)
         {
-            counter[0] = 0;
+            counter = 0;
         }
-        else if(counter[0] != 0)
+        else if(counter != 0)
         {
-            counter[0] = 1;
+            counter = 1;
         }
     }
     
