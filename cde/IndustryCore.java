@@ -178,10 +178,20 @@ public class IndustryCore
             {
                 ingotIron = "ingotZinc";
                 ingotSteel = "ingotZinc";
-                plateIron = ItemRegistry.getItem("part.plate.iron", 1);
-                plateSteel = ItemRegistry.getItem("part.plate.steel", 1);
+                
+                ItemStack iron = ItemRegistry.getItem("part.plate.iron", 1);
+                ItemStack steel = ItemRegistry.getItem("part.plate.steel", 1);
+                
+                if(iron != null)
+                {
+                    plateIron = iron;
+                }
+                
+                if(steel != null)
+                {
+                    plateSteel = steel;
+                }
             }
-            
             
             if(drumRecipeIron)
             {
