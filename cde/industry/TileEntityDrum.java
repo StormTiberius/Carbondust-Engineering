@@ -373,9 +373,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         if(!hasSealant)
         {
             hasSealant = true;
+            
+            return true;
         }
         
-        return hasSealant;
+        return false;
     }
     
     public Color getDrumColor()
