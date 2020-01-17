@@ -6,7 +6,6 @@
 package cde;
 
 import cde.api.Blocks;
-import cde.api.Materials;
 import cde.core.Defaults;
 import cde.core.Version;
 import cde.industry.BlockDrum;
