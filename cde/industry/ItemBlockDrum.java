@@ -12,6 +12,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class ItemBlockDrum extends ItemBlock
@@ -32,11 +33,16 @@ public class ItemBlockDrum extends ItemBlock
     @Override
     public void addInformation(ItemStack is, EntityPlayer player, List info, boolean flag)
     {
-        if(is != null && is.hasTagCompound() && is.getTagCompound().hasKey("capacity"))
+        if(is != null && is.hasTagCompound())
         {
             String liquid = "Empty";
             int amount = 0;
-            int capacity = is.getTagCompound().getInteger("capacity");
+            int capacity = LiquidContainerRegistry.BUCKET_VOLUME;
+            
+            if(is.getTagCompound().hasKey("capacity"))
+            {
+                capacity = is.getTagCompound().getInteger("capacity");
+            }
             
             if(is.getTagCompound().hasKey("liquid"))
             {
@@ -59,20 +65,26 @@ public class ItemBlockDrum extends ItemBlock
             
             if(is.getTagCompound().hasKey("paint"))
             {
+                StringBuilder sb = new StringBuilder("Has ");
+                
                 int index = is.getTagCompound().getInteger("paint");
                 
                 if(index == -1)
                 {
-                    info.add("Has galvanized coating");
+                    sb.append("galvanized coating");
                 }
                 else if(index == -2)
                 {
-                    info.add("Has " + liquid.toLowerCase() + " colored label");                       
+                    sb.append(liquid.toLowerCase());
+                    sb.append(" colored label");                       
                 }
                 else if(index > -1 && index < 16)
                 {
-                    info.add("Has " + Defaults.COLOR_NAMES[index].toLowerCase() + " paint coating");
+                    sb.append(Defaults.COLOR_NAMES[index].toLowerCase());
+                    sb.append(" paint coating");
                 }
+                
+                info.add(sb.toString());
             }
         }
     }
