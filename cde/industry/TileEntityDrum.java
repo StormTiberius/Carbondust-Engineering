@@ -299,7 +299,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         if(isValidDirection(direction))
         {
-            return new ILiquidTank[] {TANK};
+            return new LiquidTank[] {TANK};
         }
         
         return new LiquidTank[0];
