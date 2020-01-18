@@ -451,7 +451,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     private boolean isValidDirection(ForgeDirection fd)
     {
-        return fd.equals(ForgeDirection.DOWN)  || fd.equals(ForgeDirection.UP);
+        return fd.equals(ForgeDirection.DOWN) || fd.equals(ForgeDirection.UP);
     }
     
     private void updateCounter()
