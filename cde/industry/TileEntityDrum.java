@@ -31,8 +31,8 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
 {    
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
-    private long previousUpdateTime;
-    private boolean isWorking,soundUpdateNeeded,recentlyUpdated,hasSealant;
+    private long previousSoundUpdateTime;
+    private boolean isWorking,soundUpdateNeeded,hasSealant;
     private int color,paint;
     private int[] counter;
     
@@ -233,7 +233,12 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     @Override
     public int fill(ForgeDirection from, LiquidStack resource, boolean doFill)
     {
-        return fill(0, resource, doFill);
+        if(isValidDirection(from))
+        {
+            return fill(0, resource, doFill);
+        }
+        
+        return 0;
     }
     
     @Override
@@ -260,7 +265,12 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     @Override
     public LiquidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
     {
-        return drain(0, maxDrain, doDrain);
+        if(isValidDirection(from))
+        {
+            return drain(0, maxDrain, doDrain);
+        }
+        
+        return null;
     }
 
     @Override
@@ -458,22 +468,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     
     private void updateSound()
     {
-        if(soundUpdateNeeded)
+        if(soundUpdateNeeded && System.currentTimeMillis() - previousSoundUpdateTime > NETWORK_UPDATE_INTERVAL)
         {
-            if(recentlyUpdated)
-            {
-                if(System.currentTimeMillis() - previousUpdateTime > NETWORK_UPDATE_INTERVAL)
-                {
-                    recentlyUpdated = false;
-                }
-            }
-            else
-            {
-                CDECore.proxy.sendToPlayers(new PacketTileSound(this, false, true).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
-                previousUpdateTime = System.currentTimeMillis();
-                soundUpdateNeeded = false;
-                recentlyUpdated = true;
-            }
+            CDECore.proxy.sendToPlayers(new PacketTileSound(this, false, true).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
+            previousSoundUpdateTime = System.currentTimeMillis();
+            soundUpdateNeeded = false;
         }
     }
 }
