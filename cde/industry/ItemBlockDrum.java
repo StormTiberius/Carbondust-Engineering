@@ -101,17 +101,17 @@ public class ItemBlockDrum extends ItemBlock
             if(is.getTagCompound().hasKey("capacity"))
             {
                 capacity = is.getTagCompound().getInteger("capacity");
-
-                if(is.getTagCompound().hasKey("liquid"));
+            }
+            
+            if(is.getTagCompound().hasKey("liquid"));
+            {
+                NBTTagCompound liquid = is.getTagCompound().getCompoundTag("liquid");
+                
+                LiquidStack ls = LiquidStack.loadLiquidStackFromNBT(liquid);
+                
+                if(ls != null && ls.asItemStack() != null)
                 {
-                    NBTTagCompound liquid = is.getTagCompound().getCompoundTag("liquid");
-
-                    LiquidStack ls = LiquidStack.loadLiquidStackFromNBT(liquid);
-
-                    if(ls != null && ls.asItemStack() != null)
-                    {
-                        name = ls.asItemStack().getDisplayName();
-                    }
+                    name = ls.asItemStack().getDisplayName();
                 }
             }
         }
