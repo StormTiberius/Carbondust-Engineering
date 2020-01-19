@@ -441,7 +441,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
         {
             ArrayList<ItemStack> items = getBlockDropped(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
             
-            if(world.setBlock(x, y, z, 0))
+            if(world.setBlockWithNotify(x, y, z, 0))
             {
                 if(!world.isRemote)
                 {
