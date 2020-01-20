@@ -18,6 +18,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -250,7 +251,8 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
             }
             else if(player.inventory.addItemStackToInventory(filled))
             {
-                held.stackSize--;
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
+                player.inventoryContainer.detectAndSendChanges();
                 ted.drain(ForgeDirection.UP, maxDrain, true);
                 
                 return true;
@@ -283,7 +285,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     }
                     else if(held.stackSize > 1)
                     {
-                        held.stackSize--;
+                        player.inventory.decrStackSize(player.inventory.currentItem, 1);
                     }
                 }
                 else
