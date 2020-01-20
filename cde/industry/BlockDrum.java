@@ -18,7 +18,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -228,9 +227,9 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
         return true;
     }
 
-    private boolean taskEmptyContainer(EntityPlayer player, ItemStack held, TileEntityDrum drum)
+    private boolean taskEmptyContainer(EntityPlayer player, ItemStack held, TileEntityDrum ted)
     {
-        ItemStack filled = LiquidContainerRegistry.fillLiquidContainer(drum.getTank(ForgeDirection.UP, null).getLiquid(), held);
+        ItemStack filled = LiquidContainerRegistry.fillLiquidContainer(ted.getTank(ForgeDirection.UP, null).getLiquid(), held);
         
         if(filled != null)
         {
@@ -238,41 +237,36 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
             
             if(player.capabilities.isCreativeMode)
             {
-                drum.drain(ForgeDirection.UP, maxDrain, true);
+                ted.drain(ForgeDirection.UP, maxDrain, true);
+                
+                return true;
             }
             else if(held.stackSize == 1)
             {
                 player.setCurrentItemOrArmor(0, filled);
-                drum.drain(ForgeDirection.UP, maxDrain, true);
+                ted.drain(ForgeDirection.UP, maxDrain, true);
+                
+                return true;
             }
             else if(player.inventory.addItemStackToInventory(filled))
             {
                 held.stackSize--;
-                drum.drain(ForgeDirection.UP, maxDrain, true);
+                ted.drain(ForgeDirection.UP, maxDrain, true);
                 
-                if(player instanceof EntityPlayerMP)
-                {
-                    ((EntityPlayerMP)player).mcServer.getConfigurationManager().syncPlayerInventory((EntityPlayerMP)player);
-                }
+                return true;
             }
-            
-            return true;
         }
         
         return false;
     }
 
-    private boolean taskFilledContainer(EntityPlayer player, ItemStack held, TileEntityDrum drum)
+    private boolean taskFilledContainer(EntityPlayer player, ItemStack held, TileEntityDrum ted)
     {
-        LiquidStack fluid = LiquidContainerRegistry.getLiquidForFilledItem(held);
+        LiquidStack liquid = LiquidContainerRegistry.getLiquidForFilledItem(held);
         
-        if(drum.fill(ForgeDirection.UP, fluid, false) == fluid.amount)
+        if(ted.fill(ForgeDirection.UP, liquid, false) == liquid.amount)
         {
-            if(player.capabilities.isCreativeMode)
-            {
-                drum.fill(ForgeDirection.UP, fluid, true);
-            }
-            else
+            if(!player.capabilities.isCreativeMode)
             {
                 ItemStack c = null;
                 
@@ -283,8 +277,6 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                 
                 if(c == null || held.stackSize == 1 || player.inventory.addItemStackToInventory(c))
                 {
-                    drum.fill(ForgeDirection.UP, fluid, true);
-                    
                     if(held.stackSize == 1)
                     {
                         player.setCurrentItemOrArmor(0, c);
@@ -294,11 +286,17 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                         held.stackSize--;
                     }
                 }
+                else
+                {
+                    return false;
+                }
             }
+            
+            ted.fill(ForgeDirection.UP, liquid, true);
             
             return true;
         }
-            
+        
         return false;
     }
     
