@@ -17,7 +17,6 @@ import net.minecraftforge.common.MinecraftForge;
 public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySource 
 {
     private int euOutput;
-    private boolean flag = true;
     
     public TileEntitySolarPanel()
     {
@@ -33,15 +32,10 @@ public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySo
     @Override
     protected void doWorkCycle()
     {   
-        if(flag)
+        if(worldObj.isDaytime() && !worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord))
         {
             EnergyTileSourceEvent event = new EnergyTileSourceEvent(this, euOutput);
             MinecraftForge.EVENT_BUS.post(event);
-            flag = false;
-        }
-        else
-        {
-            flag = true;
         }
     }
         
