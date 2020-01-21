@@ -5,6 +5,7 @@
 
 package cde.core;
 
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.packet.Packet;
@@ -15,6 +16,7 @@ public class CommonProxy
     public void preloadTextures(){}
     public void sendToServer(Packet packet){}
     public void setupSound(){}
+    public void spawnParticle(EntityFX effect){}
         
     public void sendToPlayers(Packet packet, World world, int x, int y, int z, int maxDistance)
     {

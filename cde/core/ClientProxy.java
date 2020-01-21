@@ -8,6 +8,7 @@ package cde.core;
 import cde.CDECore;
 import cde.core.sound.SoundEventManager;
 import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.network.packet.Packet;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,5 +32,11 @@ public class ClientProxy extends CommonProxy
     public void setupSound()
     {
         MinecraftForge.EVENT_BUS.register(new SoundEventManager());
+    }
+    
+    @Override
+    public void spawnParticle(EntityFX effect)
+    {
+        FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
     }
 }
