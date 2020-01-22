@@ -221,7 +221,8 @@ public class Namings
         "cdeMachinePump",
         "cdeMachineMixer",
         "cdeMachineSolarPanel",
-        "cdeMachineTransformer"
+        "cdeMachineTransformer",
+        "cdeMachineSmokestack"
     };
     
     public static final String[] EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES =
@@ -232,7 +233,8 @@ public class Namings
         "Pump",
         "Mixer",
         "Solar Panel",
-        "Transformer"
+        "Transformer",
+        "Smokestack"
     };
     
     public static final String INTERNAL_GOGGLES_NAME = "cdeGoggles";
