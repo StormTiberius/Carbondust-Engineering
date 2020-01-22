@@ -5,7 +5,9 @@
 
 package cde.machinery;
 
+import cde.CDECore;
 import cde.MachineryCore;
+import cde.core.particles.ParticleSteam;
 import ic2.api.Direction;
 import ic2.api.energy.event.EnergyTileSourceEvent;
 import ic2.api.energy.tile.IEnergySource;
@@ -51,6 +53,31 @@ public class TileEntityTurbine extends TileEntityMachine implements IEnergySourc
         }
         
         return false;
+    }
+    
+    private void makeSteamParticle()
+    {
+        double xOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
+        double zOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
+        
+        double vx = worldObj.rand.nextGaussian() * 0.02D;
+        double vy = worldObj.rand.nextGaussian() * 0.02D;
+        double vz = worldObj.rand.nextGaussian() * 0.02D;
+        
+        ParticleSteam steam = new ParticleSteam(worldObj, xCoord + xOffset, yCoord + 1.1D, zCoord + zOffset, vx, vy + 0.15D, vz, 1.0F, false);
+        
+        CDECore.proxy.spawnParticle(steam);
+    }
+    
+    @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
+        
+        if(worldObj.isRemote && CDECore.particlesEnabled() && isPowered())
+        {
+            makeSteamParticle();
+        }
     }
     
     @Override
