@@ -16,6 +16,7 @@ import cde.machinery.TileEntityGenerator;
 import cde.machinery.TileEntityHeater;
 import cde.machinery.TileEntityMixer;
 import cde.machinery.TileEntityPump;
+import cde.machinery.TileEntitySmokestack;
 import cde.machinery.TileEntitySolarPanel;
 import cde.machinery.TileEntityTransformer;
 import cde.machinery.TileEntityTurbine;
@@ -32,7 +33,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
 import ic2.api.Ic2Recipes;
 import ic2.api.Items;
 import java.io.File;
@@ -56,7 +56,7 @@ public class MachineryCore
     public static Item goggles;
     public static Block machineAlpha,grate;
     private static int ironGearId,tankBlockId,batteryEmptyId,batteryFullId,indigoDyeId;
-    private final boolean[] CRAFTABLE = new boolean[9];
+    private final boolean[] CRAFTABLE = new boolean[10];
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
@@ -103,6 +103,8 @@ public class MachineryCore
         
         CRAFTABLE[7] = cfg.get(Configuration.CATEGORY_GENERAL, "recipegrate", true, "Enable/Disable Crafting recipe for Grate").getBoolean(true);
         CRAFTABLE[8] = cfg.get(Configuration.CATEGORY_GENERAL, "recipegoggles", true, "Enable/Disable Crafting recipe for Nightvision Goggles").getBoolean(true);
+        
+        CRAFTABLE[9] = cfg.get(Configuration.CATEGORY_GENERAL, "recipesmokestack", true, "Enable/Disable Crafting recipe for Smokestack").getBoolean(true);
         
         cfg.save();
     }
@@ -311,6 +313,25 @@ public class MachineryCore
                 'z', new ItemStack(Items.getItem("electronicCircuit").itemID, 1, 0),
                 'a', new ItemStack(Items.getItem("insulatedCopperCableItem").itemID, 1, 0),
                 'b', new ItemStack(Items.getItem("reBattery").itemID, 1, 0));
+            }
+            
+            // Smokestack
+            is = new ItemStack(machineAlpha.blockID, 1, 7);
+            
+            cde.api.Blocks.blockSmokestack = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[7]);
+            GameRegistry.registerTileEntity(TileEntitySmokestack.class, "cdeSmokestackTile");
+            
+            if(CRAFTABLE[7])
+            {
+                Ic2Recipes.addCraftingRecipe(is,
+                " x ",
+                "zyz",
+                "   ",
+                'x', new ItemStack(Block.netherrack.blockID, 1, 10),
+                'y', new ItemStack(Item.cauldron.itemID, 1, 0),
+                'z', new ItemStack(Item.redstone.itemID, 1, 0));
             }
         }
         
