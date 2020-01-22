@@ -65,6 +65,10 @@ public class Defaults
     public static final int TEXTURE_DRUM_IRON_TOP = 54;
     public static final int TEXTURE_DRUM_STEEL_TOP = 55;
     
+    public static final int TEXTURE_MACHINE_SMOKESTACK_BOTTOM = 56;
+    public static final int TEXTURE_MACHINE_SMOKESTACK_TOP = 57;
+    public static final int TEXTURE_MACHINE_SMOKESTACK_SIDE = 58;
+    
     // ITEM TEXTURE INDEX
     public static final int TEXTURE_MATERIAL_INGOT_COPPER = 0;
     public static final int TEXTURE_MATERIAL_INGOT_TIN = 1;
