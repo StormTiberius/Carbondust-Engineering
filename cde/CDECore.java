@@ -69,7 +69,7 @@ public class CDECore
     public static Item materialsItem;
     private static Configuration cfg;
     private static int networkUpdateRate,oreBlockId,storageBlockId,materialsItemId;
-    private static boolean sounds,altRainSounds,altExplosionSounds;
+    private static boolean particles,sounds,altRainSounds,altExplosionSounds;
     public static int apatiteId,apatiteMeta;
     
     @PreInit
@@ -79,6 +79,7 @@ public class CDECore
         cfg.load();
         
         networkUpdateRate = cfg.get(Configuration.CATEGORY_GENERAL, "networkupdaterate", 40, "Network Update Rate").getInt();
+        particles = cfg.get(Configuration.CATEGORY_GENERAL, "particles", true, "Enable/Disable CDE Particles").getBoolean(false);
         sounds = cfg.get(Configuration.CATEGORY_GENERAL, "sounds", true, "Enable/Disable CDE Sounds").getBoolean(false);
         altRainSounds = cfg.get(Configuration.CATEGORY_GENERAL, "rain", true, "MC 1.9 Rain Sounds").getBoolean(false);
         altExplosionSounds = cfg.get(Configuration.CATEGORY_GENERAL, "explosion", true, "Alternate Explosion Sounds").getBoolean(false);
@@ -320,6 +321,11 @@ public class CDECore
         return networkUpdateRate * 1000 / 20;
     }
     
+    public static boolean particlesEnabled()
+    {
+        return particles;
+    }
+        
     public static boolean playSounds()
     {
         return sounds;
