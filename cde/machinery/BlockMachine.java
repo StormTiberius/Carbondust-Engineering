@@ -11,6 +11,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public abstract class BlockMachine extends BlockContainer
@@ -23,33 +24,38 @@ public abstract class BlockMachine extends BlockContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
     {
-        TileEntityMachine tem = (TileEntityMachine)world.getBlockTileEntity(x, y, z);
-
-        if (entityplayer.isSneaking())
+        if(entityplayer.isSneaking())
         {
             return false;
         }
-
-        Item equipped = entityplayer.getCurrentEquippedItem() != null ? entityplayer.getCurrentEquippedItem().getItem() : null;
-		
-        if (equipped instanceof IToolWrench && ((IToolWrench) equipped).canWrench(entityplayer, x, y, z))
+        
+        TileEntity te = world.getBlockTileEntity(x, y, z);
+        
+        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolWrench && te instanceof TileEntityMachine)
         {
-            if(!world.isRemote && tem != null)
+            TileEntityMachine tem = (TileEntityMachine)te;
+            
+            IToolWrench tool = (IToolWrench)entityplayer.getCurrentEquippedItem().getItem();
+            
+            if(tool.canWrench(entityplayer, x, y, z))
             {
-                if(tem.isPowered())
+                if(!world.isRemote)
                 {
-                    entityplayer.sendChatToPlayer(tem.useWrench(false));
+                    if(tem.isPowered())
+                    {
+                        entityplayer.sendChatToPlayer(tem.useWrench(false));
+                    }
+                    else
+                    {
+                        entityplayer.sendChatToPlayer(tem.useWrench(true));
+                    }
                 }
-                else
-                {
-                    entityplayer.sendChatToPlayer(tem.useWrench(true));
-                }
+                
+                tool.wrenchUsed(entityplayer, x, y, z);
+                
+                return true;
             }
-            
-            ((IToolWrench) equipped).wrenchUsed(entityplayer, x, y, z);
-            
-            return true;
-        } 
+        }
         
         return false;
     }
