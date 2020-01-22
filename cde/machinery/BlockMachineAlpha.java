@@ -44,6 +44,7 @@ public class BlockMachineAlpha extends BlockMachine
             case 4: return new TileEntityMixer();
             case 5: return new TileEntitySolarPanel();
             case 6: return new TileEntityTransformer();
+            case 7: return new TileEntitySmokestack();
             default: return null;
         }
     }
@@ -63,6 +64,7 @@ public class BlockMachineAlpha extends BlockMachine
             case 4: return getMixerTexture(par1IBlockAccess, x, y, z, side);
             case 5: return getSolarPanelTexture(par1IBlockAccess, x, y, z, side);
             case 6: return getTransformerTexture(par1IBlockAccess, x, y, z, side);
+            case 7: return getSmokestackTexture(par1IBlockAccess, x, y, z, side);
             default: return 0;
         }
     }
@@ -79,6 +81,7 @@ public class BlockMachineAlpha extends BlockMachine
             case 4: return getMixerTextureFromSide(side);
             case 5: return getSolarPanelTextureFromSide(side);
             case 6: return getTransformerTextureFromSide(side);
+            case 7: return getSmokestackTextureFromSide(side);
             default: return 0;
         }
     }
@@ -177,6 +180,20 @@ public class BlockMachineAlpha extends BlockMachine
             case 3: return Defaults.TEXTURE_MACHINE_SIDE;
             case 4: return Defaults.TEXTURE_MACHINE_SIDE;
             case 5: return Defaults.TEXTURE_MACHINE_SIDE;
+            default: return 0;
+        }
+    }
+    
+    private int getSmokestackTextureFromSide(int side)
+    {
+        switch(side)
+        {
+            case 0: return Defaults.TEXTURE_MACHINE_SMOKESTACK_BOTTOM;
+            case 1: return Defaults.TEXTURE_MACHINE_SMOKESTACK_TOP;
+            case 2: return Defaults.TEXTURE_MACHINE_SMOKESTACK_SIDE;
+            case 3: return Defaults.TEXTURE_MACHINE_SMOKESTACK_SIDE;
+            case 4: return Defaults.TEXTURE_MACHINE_SMOKESTACK_SIDE;
+            case 5: return Defaults.TEXTURE_MACHINE_SMOKESTACK_SIDE;
             default: return 0;
         }
     }
@@ -382,5 +399,10 @@ public class BlockMachineAlpha extends BlockMachine
         }
         
         return getTransformerTextureFromSide(side);
+    }
+    
+    private int getSmokestackTexture(IBlockAccess par1IBlockAccess, int x, int y, int z, int side)
+    {
+        return getSmokestackTextureFromSide(side);
     }
 }
