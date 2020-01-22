@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySmokestack extends TileEntity
 {
+    private int delay;
     private long time;
     private boolean flag;
     
@@ -35,11 +36,12 @@ public class TileEntitySmokestack extends TileEntity
             {
                 if(!flag && worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.snow.blockID)
                 {
+                    delay = 1000 + worldObj.rand.nextInt(4000);
                     time = System.currentTimeMillis();
                     flag = true;
                 }
                 
-                if(flag && System.currentTimeMillis() - time > 5000)
+                if(flag && System.currentTimeMillis() - time > delay)
                 {
                     if(worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.snow.blockID)
                     {
