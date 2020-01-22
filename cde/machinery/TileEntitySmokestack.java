@@ -31,7 +31,7 @@ public class TileEntitySmokestack extends TileEntity
             {
                 if(System.currentTimeMillis() - previousSnowMeltTime > 5000)
                 {
-                    worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+                    worldObj.setBlock(xCoord, yCoord + 1, zCoord, 0);
                     previousSnowMeltTime = System.currentTimeMillis();
                 }
             }
