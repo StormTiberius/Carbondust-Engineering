@@ -12,27 +12,40 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySmokestack extends TileEntity
 {
-    private long previousSnowMeltTime;
+    private long time;
+    private boolean flag;
     
     @Override
     public void updateEntity()
     {
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord))
         {
-            if(worldObj.isRemote && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord))
+            if(worldObj.isRemote)
             {
-                double x = (double)xCoord + worldObj.rand.nextDouble();
-                double y = (double)yCoord + worldObj.rand.nextDouble() * 0.5D + 1.0D;
-                double z = (double)zCoord + worldObj.rand.nextDouble();
-                
-                CDECore.proxy.spawnParticle(new ParticleSmoke(worldObj, x, y, z));
-            }
-            else if(!worldObj.isRemote && worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.snow.blockID)
-            {
-                if(System.currentTimeMillis() - previousSnowMeltTime > 5000)
+                if(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord))
                 {
-                    worldObj.setBlock(xCoord, yCoord + 1, zCoord, 0);
-                    previousSnowMeltTime = System.currentTimeMillis();
+                    double x = (double)xCoord + worldObj.rand.nextDouble();
+                    double y = (double)yCoord + worldObj.rand.nextDouble() * 0.5D + 1.0D;
+                    double z = (double)zCoord + worldObj.rand.nextDouble();
+
+                    CDECore.proxy.spawnParticle(new ParticleSmoke(worldObj, x, y, z));
+                }
+            }
+            else
+            {
+                if(!flag && worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.snow.blockID)
+                {
+                    time = System.currentTimeMillis();
+                    flag = true;
+                }
+                
+                if(flag && System.currentTimeMillis() - time > 5000)
+                {
+                    if(worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.snow.blockID)
+                    {
+                        worldObj.setBlock(xCoord, yCoord + 1, zCoord, 0);
+                        flag = false;
+                    }
                 }
             }
         }
