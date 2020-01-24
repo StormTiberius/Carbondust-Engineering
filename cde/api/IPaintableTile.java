@@ -9,5 +9,5 @@ import java.awt.Color;
 
 public interface IPaintableTile
 {
-    public boolean applyPaintCoating(Color color);
+    public abstract boolean applyPaintCoating(Color color);
 }
