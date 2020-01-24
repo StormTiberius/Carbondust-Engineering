@@ -28,7 +28,7 @@ public class TileEntitySmokestack extends TileEntity
                     double x = (double)xCoord + worldObj.rand.nextDouble();
                     double y = (double)yCoord + worldObj.rand.nextDouble() * 0.5D + 1.0D;
                     double z = (double)zCoord + worldObj.rand.nextDouble();
-
+                    
                     CDECore.proxy.spawnParticle(new ParticleSmoke(worldObj, x, y, z));
                 }
             }
