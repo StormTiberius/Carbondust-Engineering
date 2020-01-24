@@ -6,11 +6,11 @@
 package cde.core.sound;
 
 import cde.CDECore;
+import cde.core.TileEntityCDE;
 import java.net.URL;
-import net.minecraft.tileentity.TileEntity;
 import paulscode.sound.SoundSystemConfig;
 
-public abstract class TileEntityWithSound extends TileEntity
+public abstract class TileEntityWithSound extends TileEntityCDE
 {
     protected abstract boolean isWorking();
     protected abstract String getSoundFileName();
