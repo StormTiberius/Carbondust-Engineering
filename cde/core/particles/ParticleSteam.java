@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 @SideOnly(Side.CLIENT)
 public class ParticleSteam extends ParticleDiminishing
-{   
+{
     public ParticleSteam(World world, double x, double y, double z, double vx, double vy, double vz)
     {
         this(world, x, y, z, vx, vy, vz, 1.0F, true);
