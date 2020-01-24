@@ -57,8 +57,8 @@ public class TileEntityTurbine extends TileEntityMachine implements IEnergySourc
     
     private void makeSteamParticle()
     {
-        double xOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
-        double zOffset = worldObj.rand.nextDouble() * (10.0D/16.0D) + (3.0D / 16.0D);
+        double xOffset = worldObj.rand.nextDouble() * 0.625D + 0.1875D;
+        double zOffset = worldObj.rand.nextDouble() * 0.625D + 0.1875D;
         
         double vx = worldObj.rand.nextGaussian() * 0.02D;
         double vy = worldObj.rand.nextGaussian() * 0.02D;
