@@ -1,6 +1,6 @@
 package cde.terrene;
 
-import cde.TropicsCore;
+import cde.TerreneCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
@@ -151,7 +151,7 @@ public class BlockPortal extends BlockBreakable
             {
                 for (var8 = 0; var8 < 3; ++var8)
                 {
-                    par1World.setBlockWithNotify(par2 + var5 * var7, par3 + var8, par4 + var6 * var7, TropicsCore.portal.blockID);
+                    par1World.setBlockWithNotify(par2 + var5 * var7, par3 + var8, par4 + var6 * var7, TerreneCore.portal.blockID);
                 }
             }
 
@@ -229,7 +229,7 @@ public class BlockPortal extends BlockBreakable
         {
             return false;
         }
-        else if(id == TropicsCore.portal.blockID)
+        else if(id == TerreneCore.portal.blockID)
         {
             return false;
         }
@@ -250,11 +250,11 @@ public class BlockPortal extends BlockBreakable
         
         if(world.provider.getDimensionName().contentEquals("Tropics"))
         {
-            destination = TropicsCore.getEmberDimensionId();
+            destination = TerreneCore.getDimensionId(1);
         }
         else if(world.provider.getDimensionName().contentEquals("Ember"))
         {
-            destination = TropicsCore.getDimensionId();
+            destination = TerreneCore.getDimensionId(0);
         }
         
         if(entity instanceof EntityPlayerMP)

@@ -5,7 +5,7 @@
 
 package cde.terrene;
 
-import cde.TropicsCore;
+import cde.TerreneCore;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -45,11 +45,11 @@ public class TeleporterTropics extends Teleporter
     {
         StringBuilder sb = new StringBuilder("CDE_");
         
-        if(player.dimension == TropicsCore.getDimensionId())
+        if(player.dimension == TerreneCore.getDimensionId(0))
         {
             sb.append("Tropics");
         }
-        else if(player.dimension == TropicsCore.getEmberDimensionId())
+        else if(player.dimension == TerreneCore.getDimensionId(1))
         {
             sb.append("Ember");
         }

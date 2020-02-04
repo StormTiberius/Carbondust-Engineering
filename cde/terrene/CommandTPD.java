@@ -5,7 +5,7 @@
 
 package cde.terrene;
 
-import cde.TropicsCore;
+import cde.TerreneCore;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -46,11 +46,11 @@ public class CommandTPD extends CommandBase
 
                 if(name.contentEquals("Tropics"))
                 {
-                    destination = TropicsCore.getEmberDimensionId();
+                    destination = TerreneCore.getDimensionId(1);
                 }
                 else if(name.contentEquals("Ember"))
                 {
-                    destination = TropicsCore.getDimensionId();
+                    destination = TerreneCore.getDimensionId(0);
                 }
 
                 if(player.dimension != destination)
