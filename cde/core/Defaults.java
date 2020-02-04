@@ -137,11 +137,13 @@ public class Defaults
     public static final int BLOCK_ORE_ID = 180;
     public static final int BLOCK_STORAGE_ID = 181;
     public static final int BLOCK_MACHINERY_ALPHA_ID = 182;
-    public static final int BLOCK_DRUM_ID = 183;
-    public static final int BLOCK_SMOKER_ID = 184;
-    public static final int BLOCK_INDUSTRY_ID = 185;
-    public static final int BLOCK_GRATE_ID = 188;
-    public static final int BLOCK_SPEAKER_ID = 189;
+    public static final int BLOCK_GRATE_ID = 183;
+    public static final int BLOCK_SPEAKER_ID = 184;
+    public static final int BLOCK_DRUM_ID = 185;
+    public static final int BLOCK_INDUSTRY_A_ID = 186;
+    public static final int BLOCK_INDUSTRY_B_ID = 187;
+    public static final int BLOCK_INDUSTRY_C_ID = 188;
+    public static final int BLOCK_PORTAL_ID = 189;
     
     // ITEM ID
     public static final int ITEM_MATERIALS_ID = 500;

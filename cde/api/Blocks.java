@@ -51,4 +51,6 @@ public class Blocks
     public static ItemStack blockDrumSteel;
     
     public static ItemStack blockSmokestack;
+    
+    public static ItemStack blockPortal;
 }
