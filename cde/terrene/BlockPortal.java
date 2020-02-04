@@ -1,5 +1,6 @@
-package cde.tropics.portal;
+package cde.terrene;
 
+import cde.TropicsCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
@@ -7,16 +8,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemMonsterPlacer;
+import net.minecraft.stats.AchievementList;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.ForgeDirection;
 
 public class BlockPortal extends BlockBreakable
 {
-    public BlockPortal(int par1, int par2)
+    public BlockPortal(int par1)
     {
-        super(par1, par2, Material.portal, false);
+        super(par1, 0, Material.water, false);
         this.setTickRandomly(true);
     }
 
@@ -84,18 +90,17 @@ public class BlockPortal extends BlockBreakable
         return false;
     }
 
-    @Override
     public boolean tryToCreatePortal(World par1World, int par2, int par3, int par4)
     {
         byte var5 = 0;
         byte var6 = 0;
 
-        if (par1World.getBlockId(par2 - 1, par3, par4) == Block.obsidian.blockID || par1World.getBlockId(par2 + 1, par3, par4) == Block.obsidian.blockID)
+        if (par1World.getBlockId(par2 - 1, par3, par4) == Block.sandStone.blockID || par1World.getBlockId(par2 + 1, par3, par4) == Block.sandStone.blockID)
         {
             var5 = 1;
         }
 
-        if (par1World.getBlockId(par2, par3, par4 - 1) == Block.obsidian.blockID || par1World.getBlockId(par2, par3, par4 + 1) == Block.obsidian.blockID)
+        if (par1World.getBlockId(par2, par3, par4 - 1) == Block.sandStone.blockID || par1World.getBlockId(par2, par3, par4 + 1) == Block.sandStone.blockID)
         {
             var6 = 1;
         }
@@ -127,7 +132,7 @@ public class BlockPortal extends BlockBreakable
 
                         if (var9)
                         {
-                            if (var10 != Block.obsidian.blockID)
+                            if (var10 != Block.sandStone.blockID)
                             {
                                 return false;
                             }
@@ -146,7 +151,7 @@ public class BlockPortal extends BlockBreakable
             {
                 for (var8 = 0; var8 < 3; ++var8)
                 {
-                    par1World.setBlockWithNotify(par2 + var5 * var7, par3 + var8, par4 + var6 * var7, Block.portal.blockID);
+                    par1World.setBlockWithNotify(par2 + var5 * var7, par3 + var8, par4 + var6 * var7, TropicsCore.portal.blockID);
                 }
             }
 
@@ -174,9 +179,9 @@ public class BlockPortal extends BlockBreakable
             ;
         }
 
-        if (par1World.getBlockId(par2, var8 - 1, par4) != Block.obsidian.blockID)
+        if (par1World.getBlockId(par2, var8 - 1, par4) != Block.sandStone.blockID)
         {
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            //par1World.setBlockWithNotify(par2, par3, par4, 0);
         }
         else
         {
@@ -187,48 +192,49 @@ public class BlockPortal extends BlockBreakable
                 ;
             }
 
-            if (var9 == 3 && par1World.getBlockId(par2, var8 + var9, par4) == Block.obsidian.blockID)
+            if (var9 == 3 && par1World.getBlockId(par2, var8 + var9, par4) == Block.sandStone.blockID)
             {
                 boolean var10 = par1World.getBlockId(par2 - 1, par3, par4) == this.blockID || par1World.getBlockId(par2 + 1, par3, par4) == this.blockID;
                 boolean var11 = par1World.getBlockId(par2, par3, par4 - 1) == this.blockID || par1World.getBlockId(par2, par3, par4 + 1) == this.blockID;
 
                 if (var10 && var11)
                 {
-                    par1World.setBlockWithNotify(par2, par3, par4, 0);
+                    //par1World.setBlockWithNotify(par2, par3, par4, 0);
                 }
                 else
                 {
-                    if ((par1World.getBlockId(par2 + var6, par3, par4 + var7) != Block.obsidian.blockID || par1World.getBlockId(par2 - var6, par3, par4 - var7) != this.blockID) && (par1World.getBlockId(par2 - var6, par3, par4 - var7) != Block.obsidian.blockID || par1World.getBlockId(par2 + var6, par3, par4 + var7) != this.blockID))
+                    if ((par1World.getBlockId(par2 + var6, par3, par4 + var7) != Block.sandStone.blockID || par1World.getBlockId(par2 - var6, par3, par4 - var7) != this.blockID) && (par1World.getBlockId(par2 - var6, par3, par4 - var7) != Block.sandStone.blockID || par1World.getBlockId(par2 + var6, par3, par4 + var7) != this.blockID))
                     {
-                        par1World.setBlockWithNotify(par2, par3, par4, 0);
+                        //par1World.setBlockWithNotify(par2, par3, par4, 0);
                     }
                 }
             }
             else
             {
-                par1World.setBlockWithNotify(par2, par3, par4, 0);
+                //par1World.setBlockWithNotify(par2, par3, par4, 0);
             }
         }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    public boolean shouldSideBeRendered(IBlockAccess iba, int x, int y, int z, int side)
     {
-        if (par1IBlockAccess.getBlockId(par2, par3, par4) == this.blockID)
+        ForgeDirection fd = ForgeDirection.getOrientation(side);
+        
+        int id = iba.getBlockId(x + fd.offsetX, y + fd.offsetY, z + fd.offsetZ);
+        int md = iba.getBlockMetadata(x + fd.offsetX, y + fd.offsetY, z + fd.offsetZ);
+        
+        if(id == Block.sandStone.blockID && md == 1)
         {
             return false;
         }
-        else
+        else if(id == TropicsCore.portal.blockID)
         {
-            boolean var6 = par1IBlockAccess.getBlockId(par2 - 1, par3, par4) == this.blockID && par1IBlockAccess.getBlockId(par2 - 2, par3, par4) != this.blockID;
-            boolean var7 = par1IBlockAccess.getBlockId(par2 + 1, par3, par4) == this.blockID && par1IBlockAccess.getBlockId(par2 + 2, par3, par4) != this.blockID;
-            boolean var8 = par1IBlockAccess.getBlockId(par2, par3, par4 - 1) == this.blockID && par1IBlockAccess.getBlockId(par2, par3, par4 - 2) != this.blockID;
-            boolean var9 = par1IBlockAccess.getBlockId(par2, par3, par4 + 1) == this.blockID && par1IBlockAccess.getBlockId(par2, par3, par4 + 2) != this.blockID;
-            boolean var10 = var6 || var7;
-            boolean var11 = var8 || var9;
-            return var10 && par5 == 4 ? true : (var10 && par5 == 5 ? true : (var11 && par5 == 2 ? true : var11 && par5 == 3));
+            return false;
         }
+        
+        return true;
     }
 
     @Override
@@ -238,11 +244,38 @@ public class BlockPortal extends BlockBreakable
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
-        if (par5Entity.ridingEntity == null && par5Entity.riddenByEntity == null)
+        int destination = 0;
+        
+        if(world.provider.getDimensionName().contentEquals("Tropics"))
         {
-            par5Entity.setInPortal();
+            destination = TropicsCore.getEmberDimensionId();
+        }
+        else if(world.provider.getDimensionName().contentEquals("Ember"))
+        {
+            destination = TropicsCore.getDimensionId();
+        }
+        
+        if(entity instanceof EntityPlayerMP)
+        {
+            EntityPlayerMP player = (EntityPlayerMP)entity;
+            
+            if(player.isSneaking())
+            {
+                player.setSneaking(false);
+                
+                ChunkCoordinates ck = player.mcServer.worldServerForDimension(destination).getEntrancePortalLocation();
+
+                if(ck != null)
+                {
+                    // player.playerNetServerHandler.setPlayerLocation((double)ck.posX, (double)ck.posY, (double)ck.posZ, 0.0F, 0.0F);
+                }
+
+                player.triggerAchievement(AchievementList.portal);
+
+                player.mcServer.getConfigurationManager().transferPlayerToDimension(player, destination, new TeleporterTropics((WorldServer)world));
+            }   
         }
     }
 
@@ -259,7 +292,7 @@ public class BlockPortal extends BlockBreakable
     {
         if (par5Random.nextInt(100) == 0)
         {
-            par1World.playSound((double)par2 + 0.5D, (double)par3 + 0.5D, (double)par4 + 0.5D, "portal.portal", 0.5F, par5Random.nextFloat() * 0.4F + 0.8F, false);
+            par1World.playSound((double)par2 + 0.5D, (double)par3 + 0.5D, (double)par4 + 0.5D, "liquid.water", 0.5F, par5Random.nextFloat() * 0.4F + 0.8F, false);
         }
 
         for (int var6 = 0; var6 < 4; ++var6)
@@ -286,7 +319,7 @@ public class BlockPortal extends BlockBreakable
                 var17 = (double)(par5Random.nextFloat() * 2.0F * (float)var19);
             }
 
-            par1World.spawnParticle("portal", var7, var9, var11, var13, var15, var17);
+            par1World.spawnParticle("bubble", var7, var9, var11, var13, var15, var17);
         }
     }
 

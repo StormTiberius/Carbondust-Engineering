@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.tropics.portal;
+package cde.terrene;
 
 import cde.TropicsCore;
 import net.minecraft.command.CommandBase;
@@ -39,20 +39,25 @@ public class CommandTPD extends CommandBase
         {
             EntityPlayerMP player = (EntityPlayerMP)ics;
             
-            int destination = 0;
-            
-            if(player.worldObj.provider.getDimensionName().contentEquals("Tropics"))
+            if(!player.worldObj.isRemote)
             {
-                destination = TropicsCore.getEmberDimensionId();
-            }
-            else if(player.worldObj.provider.getDimensionName().contentEquals("Ember"))
-            {
-                destination = TropicsCore.getDimensionId();
-            }
-            
-            if(player.dimension != destination)
-            {
-                player.mcServer.getConfigurationManager().transferPlayerToDimension(player, destination, new TeleporterTropics((WorldServer)player.worldObj));
+                String name = player.worldObj.provider.getDimensionName();
+                int destination = 0;
+
+                if(name.contentEquals("Tropics"))
+                {
+                    destination = TropicsCore.getEmberDimensionId();
+                }
+                else if(name.contentEquals("Ember"))
+                {
+                    destination = TropicsCore.getDimensionId();
+                }
+
+                if(player.dimension != destination)
+                {
+                    TeleporterTropics.setDepartureCoords(player);
+                    player.mcServer.getConfigurationManager().transferPlayerToDimension(player, destination, new TeleporterTropics((WorldServer)player.worldObj));
+                }
             }
         }
     }
