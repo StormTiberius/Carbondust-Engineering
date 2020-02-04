@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.api.Blocks;
 import cde.core.Defaults;
 import cde.core.Version;
 import cde.tropics.BiomeGenTropicsBeach;
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
@@ -127,6 +129,8 @@ public class TropicsCore
                 
                 GameRegistry.registerBlock(portal, "dimensionalportal");
                 LanguageRegistry.addName(portal, "Dimensional Portal");
+                
+                Blocks.blockPortal = new ItemStack(portal.blockID, 1, 0);
             }
         }
     }
