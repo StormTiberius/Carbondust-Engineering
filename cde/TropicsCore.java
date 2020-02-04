@@ -15,6 +15,7 @@ import cde.tropics.EventManagerTropics;
 import cde.tropics.WorldChunkManagerTropics;
 import cde.tropics.WorldProviderTropics;
 import cde.tropics.portal.BlockPortal;
+import cde.tropics.portal.CommandTPD;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -174,7 +175,10 @@ public class TropicsCore
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
-        
+        if(enabled)
+        {
+            event.registerServerCommand(new CommandTPD());
+        }
     }
     
     public static int getEmberDimensionId()
