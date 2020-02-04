@@ -28,7 +28,7 @@ public class WorldProviderTropics extends WorldProviderSurface
     protected void registerWorldChunkManager()
     {
         worldChunkMgr = new WorldChunkManagerTropics(worldObj);
-        dimensionId = TerreneCore.getDimensionId();
+        dimensionId = TerreneCore.getDimensionId(TerreneCore.TROPICS);
     }
     
     @Override

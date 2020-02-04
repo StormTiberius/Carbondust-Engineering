@@ -47,7 +47,7 @@ public class EmberEventManager
     @ForgeSubscribe
     public void lse(LivingSpawnEvent event)
     {
-        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.dimension == TerreneCore.getDimensionId())
+        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.dimension == TerreneCore.getDimensionId(TerreneCore.EMBER))
         {
             if(event.entity instanceof EntityMob)
             {

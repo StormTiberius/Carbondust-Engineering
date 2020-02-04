@@ -26,7 +26,7 @@ public class WorldProviderEmber extends WorldProvider
     protected void registerWorldChunkManager()
     {
         worldChunkMgr = new WorldChunkManagerEmber(TerreneCore.ember, 0.8F, 0.4F);
-        dimensionId = TerreneCore.getDimensionId();
+        dimensionId = TerreneCore.getDimensionId(TerreneCore.EMBER);
         hasNoSky = true;
     }
     
