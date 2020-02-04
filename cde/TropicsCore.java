@@ -5,6 +5,7 @@
 
 package cde;
 
+import cde.core.Defaults;
 import cde.core.Version;
 import cde.tropics.BiomeGenTropicsBeach;
 import cde.tropics.BiomeGenTropicsIsland;
@@ -12,16 +13,21 @@ import cde.tropics.BiomeGenTropicsOcean;
 import cde.tropics.EventManagerTropics;
 import cde.tropics.WorldChunkManagerTropics;
 import cde.tropics.WorldProviderTropics;
+import cde.tropics.portal.BlockPortal;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -37,9 +43,11 @@ import net.minecraftforge.liquids.LiquidStack;
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TropicsCore
 {
+    public static Block portal;
+    
     private static Configuration cfg;
     private static boolean enabled,sisterIslands,civspawn;
-    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId,indigoFlowerId;
+    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId,indigoFlowerId,emberDimensionId,portalId;
     
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     private static int[] weatherDurations = WEATHER_DURATIONS;
@@ -69,7 +77,9 @@ public class TropicsCore
         
         islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandSize", 4, "Island Size, 4-6 Recommended").getInt();
         islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandScarcity", 100, "Island Scarcity, 100 Default").getInt();
-
+        
+        portalId = cfg.get(Configuration.CATEGORY_BLOCK, "portalId", Defaults.BLOCK_PORTAL_ID).getInt();
+        
         cfg.save();
 
         if(enabled)
@@ -110,9 +120,17 @@ public class TropicsCore
             {
                 MinecraftForge.EVENT_BUS.register(new EventManagerTropics(getDimensionId()));
             }
+            
+            if(portalId > 0)
+            {
+                portal = new BlockPortal(portalId).setHardness(-1.0F).setStepSound(Block.soundGlassFootstep).setLightValue(0.75F).setBlockName("dimensionalportal");
+                
+                GameRegistry.registerBlock(portal, "dimensionalportal");
+                LanguageRegistry.addName(portal, "Dimensional Portal");
+            }
         }
     }
-
+    
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
@@ -133,14 +151,34 @@ public class TropicsCore
         {
             liquidId = Block.lavaStill.blockID;
         }
+        
+        for(IMCMessage msg : FMLInterModComms.fetchRuntimeMessages(this))
+        {
+            if(msg.isStringMessage() && msg.key.contentEquals("ember-dimension-id"))
+            {
+                try
+                {
+                    emberDimensionId = Integer.parseInt(msg.getStringValue());
+                }
+                catch(Exception e)
+                {
+                    emberDimensionId = dimensionId;
+                }
+            }
+        }
     }
-
+    
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
         
     }
-        
+    
+    public static int getEmberDimensionId()
+    {
+        return emberDimensionId;
+    }
+    
     public static int getFlowerId()
     {
         return indigoFlowerId;
