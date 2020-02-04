@@ -62,14 +62,14 @@ public class TerreneCore
     private static int dayCycleDurationMultiplier = 1;
     private static int islandSize,islandScarcity,islandId,beachId,oceanId,emberId,liquidId,indigoFlowerId,portalId;
     private static int[] weatherDurations = WEATHER_DURATIONS;
-    private static boolean sisterIslands; 
+    private static boolean sisterIslands;
     private static Configuration cfg;
     
     public static BiomeGenBase island,beach,ocean,ember;
     public static Block portal;
     
     @PreInit
-    public void preInit(FMLPreInitializationEvent event) 
+    public void preInit(FMLPreInitializationEvent event)
     {
         // Terrene
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/terrene.cfg"));
@@ -99,7 +99,7 @@ public class TerreneCore
         islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandScarcity", 100, "Island Scarcity, 100 Default").getInt();
         
         cfg.save();
-
+        
         // Ember
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/ember.cfg"));
         cfg.load();
@@ -115,10 +115,10 @@ public class TerreneCore
         if(portalId > 0)
         {
             portal = new BlockPortal(portalId).setHardness(-1.0F).setStepSound(Block.soundGlassFootstep).setLightValue(0.75F).setBlockName("dimensionalportal");
-
+            
             GameRegistry.registerBlock(portal, "dimensionalportal");
             LanguageRegistry.addName(portal, "Dimensional Portal");
-
+            
             Blocks.blockPortal = new ItemStack(portal.blockID, 1, 0);
         }
         
@@ -127,7 +127,7 @@ public class TerreneCore
             island = (new BiomeGenTropicsIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
-
+            
             WorldChunkManagerTropics.allowedBiomes.clear();
             WorldChunkManagerTropics.allowedBiomes.add(island);
         }
@@ -137,10 +137,10 @@ public class TerreneCore
             ember = (new BiomeGenEmber(emberId)).setColor(16440917).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.8F, 0.4F);
         }
     }
-
+    
     @Init
-    public void init(FMLInitializationEvent event) 
-    {   
+    public void init(FMLInitializationEvent event)
+    {
         if(ENABLED[TROPICS])
         {
             if(DIMENSION_ID[TROPICS] == 0 || DIMENSION_ID[TROPICS] == -1 || DIMENSION_ID[TROPICS] == 1)
@@ -153,14 +153,14 @@ public class TerreneCore
                 DimensionManager.registerProviderType(DIMENSION_ID[TROPICS], WorldProviderTropics.class, true);
                 DimensionManager.registerDimension(DIMENSION_ID[TROPICS], DIMENSION_ID[TROPICS]);
             }
-                    
+            
             BiomeManager.addStrongholdBiome(island);
             BiomeManager.addStrongholdBiome(beach);
             BiomeManager.addStrongholdBiome(ocean);
-
+            
             BiomeManager.addVillageBiome(island, true);
             BiomeManager.addVillageBiome(beach, true);
-
+            
             if(MOB_SPAWN_RULES[TROPICS])
             {
                 MinecraftForge.EVENT_BUS.register(new EventManagerTropics(DIMENSION_ID[TROPICS]));
@@ -179,7 +179,7 @@ public class TerreneCore
                 DimensionManager.registerProviderType(DIMENSION_ID[EMBER], WorldProviderEmber.class, true);
                 DimensionManager.registerDimension(DIMENSION_ID[EMBER], DIMENSION_ID[EMBER]);
             }
-        
+            
             EntityRegistry.registerModEntity(EntitySquidEmber.class, "EmberSquid", 0, this, 64, 3, true);
             EntityRegistry.registerModEntity(EntityBatEmber.class, "EmberBat", 1, this, 80, 3, false);
             
@@ -188,7 +188,7 @@ public class TerreneCore
     }
     
     @PostInit
-    public void postInit(FMLPostInitializationEvent event) 
+    public void postInit(FMLPostInitializationEvent event)
     {
         Block block = CDECore.getBlockByClass("com.eloraam.redpower.world.BlockCustomFlower");
         
@@ -198,7 +198,7 @@ public class TerreneCore
         }
         
         LiquidStack oil = LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME);
-
+        
         if(oil != null)
         {
             liquidId = oil.itemID;
@@ -222,12 +222,12 @@ public class TerreneCore
     {
         return indigoFlowerId;
     }
-        
+    
     public static int getLiquidId()
     {
         return liquidId;
     }
-        
+    
     public static int getDimensionId(int i)
     {
         switch(i)
@@ -272,7 +272,7 @@ public class TerreneCore
     {
         return id == beach.biomeID;
     }
-
+    
     public static boolean isOcean(int id)
     {
         return id == ocean.biomeID;
