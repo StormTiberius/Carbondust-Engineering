@@ -50,17 +50,18 @@ import net.minecraftforge.liquids.LiquidStack;
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TerreneCore
 {
-    private static final int TROPICS = 0;
-    private static final int EMBER = 1;
     private static final int WORLDS = 2;
     private static final int[] DIMENSION_ID = new int[WORLDS];
     private static final boolean[] MOB_SPAWN_RULES = new boolean[WORLDS];
     private static final boolean[] ENABLED = new boolean[WORLDS];
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     
-    private static int[] weatherDurations = WEATHER_DURATIONS;
-    private static int islandSize,islandScarcity,islandId,beachId,oceanId,emberId,liquidId,indigoFlowerId,portalId;
+    public static final int TROPICS = 0;
+    public static final int EMBER = 1;
+    
     private static int dayCycleDurationMultiplier = 1;
+    private static int islandSize,islandScarcity,islandId,beachId,oceanId,emberId,liquidId,indigoFlowerId,portalId;
+    private static int[] weatherDurations = WEATHER_DURATIONS;
     private static boolean sisterIslands; 
     private static Configuration cfg;
     
