@@ -91,6 +91,16 @@ public class TropicsCore
 
             WorldChunkManagerTropics.allowedBiomes.clear();
             WorldChunkManagerTropics.allowedBiomes.add(island);
+            
+            if(portalId > 0)
+            {
+                portal = new BlockPortal(portalId).setHardness(-1.0F).setStepSound(Block.soundGlassFootstep).setLightValue(0.75F).setBlockName("dimensionalportal");
+                
+                GameRegistry.registerBlock(portal, "dimensionalportal");
+                LanguageRegistry.addName(portal, "Dimensional Portal");
+                
+                Blocks.blockPortal = new ItemStack(portal.blockID, 1, 0);
+            }
         }
     }
 
@@ -120,16 +130,6 @@ public class TropicsCore
             if(civspawn)
             {
                 MinecraftForge.EVENT_BUS.register(new EventManagerTropics(getDimensionId()));
-            }
-            
-            if(portalId > 0)
-            {
-                portal = new BlockPortal(portalId).setHardness(-1.0F).setStepSound(Block.soundGlassFootstep).setLightValue(0.75F).setBlockName("dimensionalportal");
-                
-                GameRegistry.registerBlock(portal, "dimensionalportal");
-                LanguageRegistry.addName(portal, "Dimensional Portal");
-                
-                Blocks.blockPortal = new ItemStack(portal.blockID, 1, 0);
             }
         }
     }
