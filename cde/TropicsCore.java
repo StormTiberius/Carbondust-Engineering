@@ -45,8 +45,6 @@ import net.minecraftforge.liquids.LiquidStack;
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TropicsCore
 {
-    public static Block portal;
-    
     private static Configuration cfg;
     private static boolean enabled,sisterIslands,civspawn;
     private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId,indigoFlowerId,emberDimensionId,portalId;
@@ -57,6 +55,7 @@ public class TropicsCore
     private static int dayCycleDurationMultiplier = 1;
     
     public static BiomeGenBase island,beach,ocean;
+    public static Block portal;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
