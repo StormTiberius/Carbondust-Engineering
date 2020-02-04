@@ -5,7 +5,7 @@
 
 package cde.ember;
 
-import cde.EmberCore;
+import cde.TerreneCore;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.util.ChunkCoordinates;
@@ -47,7 +47,7 @@ public class EmberEventManager
     @ForgeSubscribe
     public void lse(LivingSpawnEvent event)
     {
-        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.dimension == EmberCore.getDimensionId())
+        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.dimension == TerreneCore.getDimensionId())
         {
             if(event.entity instanceof EntityMob)
             {

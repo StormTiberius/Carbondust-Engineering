@@ -5,7 +5,7 @@
 
 package cde.ember;
 
-import cde.EmberCore;
+import cde.TerreneCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
@@ -25,8 +25,8 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.8F, 0.4F);
-        dimensionId = EmberCore.getDimensionId();
+        worldChunkMgr = new WorldChunkManagerEmber(TerreneCore.ember, 0.8F, 0.4F);
+        dimensionId = TerreneCore.getDimensionId();
         hasNoSky = true;
     }
     

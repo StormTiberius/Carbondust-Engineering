@@ -5,7 +5,7 @@
 
 package cde.ember;
 
-import cde.EmberCore;
+import cde.TerreneCore;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -86,7 +86,7 @@ public class BiomeGenEmber extends BiomeGenBase
 
                         if(a <= b)
                         {
-                            world.setBlockWithNotify(xPos + x, yPos + y, zPos + z, EmberCore.getLiquidId());
+                            world.setBlockWithNotify(xPos + x, yPos + y, zPos + z, TerreneCore.getLiquidId());
                         }
                     }
                 }
