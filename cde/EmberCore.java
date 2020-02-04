@@ -17,6 +17,7 @@ import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -59,6 +60,8 @@ public class EmberCore
         if(enabled)
         {
             ember = (new BiomeGenEmber(biomeId)).setColor(16440917).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.8F, 0.4F);
+            
+            FMLInterModComms.sendMessage("CDE|Tropics", "ember-dimension-id", String.valueOf(dimensionId));
         }
     }
 
