@@ -20,7 +20,7 @@ import cde.tropics.EventManagerTropics;
 import cde.tropics.WorldChunkManagerTropics;
 import cde.tropics.WorldProviderTropics;
 import cde.terrene.BlockPortal;
-import cde.terrene.CommandTPD;
+import cde.terrene.CommandTPX;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -37,6 +37,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
@@ -212,9 +213,12 @@ public class TerreneCore
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
-        if(ENABLED[TROPICS] && ENABLED[EMBER])
+        if(!ModLoader.isModLoaded("Mystcraft"))
         {
-            event.registerServerCommand(new CommandTPD());
+            if(ENABLED[TROPICS] || ENABLED[EMBER])
+            {
+                event.registerServerCommand(new CommandTPX());
+            }
         }
     }
     
