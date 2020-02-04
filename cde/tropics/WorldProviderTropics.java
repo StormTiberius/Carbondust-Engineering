@@ -5,7 +5,7 @@
 
 package cde.tropics;
 
-import cde.TropicsCore;
+import cde.TerreneCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -28,7 +28,7 @@ public class WorldProviderTropics extends WorldProviderSurface
     protected void registerWorldChunkManager()
     {
         worldChunkMgr = new WorldChunkManagerTropics(worldObj);
-        dimensionId = TropicsCore.getDimensionId();
+        dimensionId = TerreneCore.getDimensionId();
     }
     
     @Override
@@ -40,8 +40,8 @@ public class WorldProviderTropics extends WorldProviderSurface
     @Override
     public float calculateCelestialAngle(long par1, float par3)
     {
-        int var4 = (int)(par1 % (24000L * TropicsCore.getDayCycleDurationMultiplier()));
-        float var5 = ((float)var4 + par3) / (24000.0F * TropicsCore.getDayCycleDurationMultiplier()) - 0.25F;
+        int var4 = (int)(par1 % (24000L * TerreneCore.getDayCycleDurationMultiplier()));
+        float var5 = ((float)var4 + par3) / (24000.0F * TerreneCore.getDayCycleDurationMultiplier()) - 0.25F;
 
         if (var5 < 0.0F)
         {
@@ -63,7 +63,7 @@ public class WorldProviderTropics extends WorldProviderSurface
     @Override
     public int getMoonPhase(long par1, float par3)
     {
-        return (int)(par1 / (24000L * TropicsCore.getDayCycleDurationMultiplier())) % 8;
+        return (int)(par1 / (24000L * TerreneCore.getDayCycleDurationMultiplier())) % 8;
     }
     
     @SideOnly(Side.CLIENT)
@@ -107,11 +107,11 @@ public class WorldProviderTropics extends WorldProviderSurface
                 {
                     if (worldInfo.isThundering())
                     {
-                        worldInfo.setThunderTime(worldObj.rand.nextInt(TropicsCore.getWeatherDuration(0)) + TropicsCore.getWeatherDuration(1));
+                        worldInfo.setThunderTime(worldObj.rand.nextInt(TerreneCore.getWeatherDuration(0)) + TerreneCore.getWeatherDuration(1));
                     }
                     else
                     {
-                        worldInfo.setThunderTime(worldObj.rand.nextInt(TropicsCore.getWeatherDuration(2)) + TropicsCore.getWeatherDuration(3));
+                        worldInfo.setThunderTime(worldObj.rand.nextInt(TerreneCore.getWeatherDuration(2)) + TerreneCore.getWeatherDuration(3));
                     }
                 }
                 else
@@ -131,11 +131,11 @@ public class WorldProviderTropics extends WorldProviderSurface
                 {
                     if (worldInfo.isRaining())
                     {
-                        worldInfo.setRainTime(worldObj.rand.nextInt(TropicsCore.getWeatherDuration(4)) + TropicsCore.getWeatherDuration(5));
+                        worldInfo.setRainTime(worldObj.rand.nextInt(TerreneCore.getWeatherDuration(4)) + TerreneCore.getWeatherDuration(5));
                     }
                     else
                     {
-                        worldInfo.setRainTime(worldObj.rand.nextInt(TropicsCore.getWeatherDuration(6)) + TropicsCore.getWeatherDuration(7));
+                        worldInfo.setRainTime(worldObj.rand.nextInt(TerreneCore.getWeatherDuration(6)) + TerreneCore.getWeatherDuration(7));
                     }
                 }
                 else
@@ -197,7 +197,7 @@ public class WorldProviderTropics extends WorldProviderSurface
     @Override
     public ChunkCoordinates getSpawnPoint()
     {
-        int i = 16 << TropicsCore.getIslandSize();
+        int i = 16 << TerreneCore.getIslandSize();
         
         i += 8;
         
@@ -213,8 +213,8 @@ public class WorldProviderTropics extends WorldProviderSurface
 
             if(time != worldInfo.getWorldTime())
             {
-                long var2 = time + (24000L * TropicsCore.getDayCycleDurationMultiplier());
-                worldInfo.setWorldTime(var2 - var2 % (24000L * TropicsCore.getDayCycleDurationMultiplier()));
+                long var2 = time + (24000L * TerreneCore.getDayCycleDurationMultiplier());
+                worldInfo.setWorldTime(var2 - var2 % (24000L * TerreneCore.getDayCycleDurationMultiplier()));
             }
         }
         

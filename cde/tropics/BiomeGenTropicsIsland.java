@@ -5,7 +5,7 @@
 
 package cde.tropics;
 
-import cde.TropicsCore;
+import cde.TerreneCore;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityOcelot;
@@ -50,7 +50,7 @@ public class BiomeGenTropicsIsland extends BiomeGenTropics
             flag = (new WorldGenFlowers(Block.potato.blockID)).generate(par1World, par2Random, x, y, z);
         }
         
-        int id = TropicsCore.getFlowerId();
+        int id = TerreneCore.getFlowerId();
         
         if(id != 0)
         {
