@@ -13,11 +13,11 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
-public class TeleporterTropics extends Teleporter
+public class TeleporterTerrene extends Teleporter
 {
     private final boolean PORTAL;
     
-    public TeleporterTropics(WorldServer ws, boolean portal)
+    public TeleporterTerrene(WorldServer ws, boolean portal)
     {
         super(ws);
         PORTAL = portal;
