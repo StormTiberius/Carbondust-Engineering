@@ -15,29 +15,39 @@ import net.minecraftforge.common.DimensionManager;
 
 public class TeleporterTropics extends Teleporter
 {
-    public TeleporterTropics(WorldServer ws)
+    private final boolean PORTAL;
+    
+    public TeleporterTropics(WorldServer ws, boolean portal)
     {
         super(ws);
+        PORTAL = portal;
     }
     
     @Override
     public void placeInPortal(Entity entity, double posX, double posY, double posZ, float rotationYaw)
     {
-        if(entity instanceof EntityPlayerMP)
+        if(PORTAL)
         {
-            EntityPlayerMP player = (EntityPlayerMP)entity;
-            String prefix = getPrefix(player.dimension);
-            NBTTagCompound tag = player.getEntityData();
             
-            if(hasKeys(player))
+        }
+        else
+        {
+            if(entity instanceof EntityPlayerMP)
             {
-                player.setLocationAndAngles(tag.getDouble(prefix + "posX"),
-                                            tag.getDouble(prefix + "posY"),
-                                            tag.getDouble(prefix + "posZ"),
-                                            tag.getFloat(prefix + "rotationYaw"),
-                                            tag.getFloat(prefix + "rotationPitch"));
-                
-                player.motionX = player.motionY = player.motionZ = 0.0D;
+                EntityPlayerMP player = (EntityPlayerMP)entity;
+                String prefix = getPrefix(player.dimension);
+                NBTTagCompound tag = player.getEntityData();
+
+                if(hasKeys(player))
+                {
+                    player.setLocationAndAngles(tag.getDouble(prefix + "posX"),
+                                                tag.getDouble(prefix + "posY"),
+                                                tag.getDouble(prefix + "posZ"),
+                                                tag.getFloat(prefix + "rotationYaw"),
+                                                tag.getFloat(prefix + "rotationPitch"));
+
+                    player.motionX = player.motionY = player.motionZ = 0.0D;
+                }
             }
         }
     }
