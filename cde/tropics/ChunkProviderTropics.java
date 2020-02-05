@@ -241,7 +241,7 @@ public class ChunkProviderTropics implements IChunkProvider
                 {
                     int var17 = (var9 * 16 + var8) * 128 + var16;
 
-                    if (var16 <= 0)
+                    if (var16 < 2)
                     {
                         par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
                     }
