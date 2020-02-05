@@ -323,7 +323,7 @@ public class MachineryCore
             LanguageRegistry.addName(is, Namings.EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES[7]);
             GameRegistry.registerTileEntity(TileEntitySmokestack.class, "cdeSmokestackTile");
             
-            if(CRAFTABLE[7])
+            if(CRAFTABLE[9])
             {
                 Ic2Recipes.addCraftingRecipe(is,
                 " x ",
