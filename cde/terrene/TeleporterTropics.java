@@ -5,12 +5,13 @@
 
 package cde.terrene;
 
-import cde.TerreneCore;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 
 public class TeleporterTropics extends Teleporter
 {
@@ -45,13 +46,15 @@ public class TeleporterTropics extends Teleporter
     {
         StringBuilder sb = new StringBuilder("CDE_");
         
-        if(player.dimension == TerreneCore.getDimensionId(0))
+        WorldProvider provider = DimensionManager.getProvider(player.dimension);
+        
+        if(provider != null)
         {
-            sb.append("Tropics");
+            sb.append(provider.getDimensionName());
         }
-        else if(player.dimension == TerreneCore.getDimensionId(1))
+        else
         {
-            sb.append("Ember");
+            sb.append("NULL");
         }
         
         sb.append("_");
@@ -65,10 +68,10 @@ public class TeleporterTropics extends Teleporter
         
         NBTTagCompound tag = player.getEntityData();
         
-        return tag.hasKey(prefix + "posX") &&
-               tag.hasKey(prefix + "posY") &&
-               tag.hasKey(prefix + "posZ") &&
-               tag.hasKey(prefix + "rotationYaw") &&
+        return tag.hasKey(prefix + "posX") && 
+               tag.hasKey(prefix + "posY") && 
+               tag.hasKey(prefix + "posZ") && 
+               tag.hasKey(prefix + "rotationYaw") && 
                tag.hasKey(prefix + "rotationPitch");
     }
     
