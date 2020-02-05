@@ -81,7 +81,7 @@ public class IndustryCore
         paintColors = cfg.get(Configuration.CATEGORY_GENERAL, "paintcolors", paintArray, "color.r.g.b").valueList;
         liquidColors = cfg.get(Configuration.CATEGORY_GENERAL, "liquidcolors", new String[]{"Liquid.255.255.255"}, "liquid.r.g.b").valueList;
         
-        drumBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "drumblockid", Defaults.BLOCK_DRUM_ID).getInt();
+        drumBlockId = cfg.get(Configuration.CATEGORY_BLOCK, "drumblockid", Defaults.BLOCK_INDUSTRY_DRUM_ID).getInt();
         
         // Individual TileEntity Sound Settings.
         int defaultVolume = 20;
