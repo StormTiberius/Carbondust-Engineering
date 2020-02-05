@@ -16,8 +16,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySource 
 {
-    private int euOutput;
-    private long previousUpdateTime;
+    private int euOutput,counter;
     private boolean isSolarDay;
     
     public TileEntitySolarPanel()
@@ -34,10 +33,14 @@ public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySo
     @Override
     protected void doWorkCycle()
     {
-        if(System.currentTimeMillis() - previousUpdateTime > 2000)
+        if(counter > 40)
         {
             isSolarDay = worldObj.isDaytime() && !worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord);
-            previousUpdateTime = System.currentTimeMillis();
+            counter = 0;
+        }
+        else
+        {
+            counter++;
         }
         
         if(isSolarDay)
