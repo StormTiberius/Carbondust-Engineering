@@ -26,7 +26,7 @@ public class TeleporterTropics extends Teleporter
         if(entity instanceof EntityPlayerMP)
         {
             EntityPlayerMP player = (EntityPlayerMP)entity;
-            String prefix = getPrefix(player);
+            String prefix = getPrefix(player.dimension);
             NBTTagCompound tag = player.getEntityData();
             
             if(hasKeys(player))
@@ -42,11 +42,11 @@ public class TeleporterTropics extends Teleporter
         }
     }
     
-    public static String getPrefix(EntityPlayerMP player)
+    public static String getPrefix(int dimension)
     {
         StringBuilder sb = new StringBuilder("CDE_");
         
-        WorldProvider provider = DimensionManager.getProvider(player.dimension);
+        WorldProvider provider = DimensionManager.getProvider(dimension);
         
         if(provider != null)
         {
@@ -64,7 +64,7 @@ public class TeleporterTropics extends Teleporter
     
     public static boolean hasKeys(EntityPlayerMP player)
     {
-        String prefix = getPrefix(player);
+        String prefix = getPrefix(player.dimension);
         
         NBTTagCompound tag = player.getEntityData();
         
@@ -77,7 +77,7 @@ public class TeleporterTropics extends Teleporter
     
     public static void setDepartureCoords(EntityPlayerMP player)
     {
-        String prefix = getPrefix(player);
+        String prefix = getPrefix(player.dimension);
         
         NBTTagCompound tag = player.getEntityData();
         
