@@ -52,7 +52,7 @@ public class CommandTPX extends CommandBase
                 if(DimensionManager.getWorld(destination) != null)
                 {
                     TeleporterTropics.setDepartureCoords(player);
-                    player.mcServer.getConfigurationManager().transferPlayerToDimension(player, destination, new TeleporterTropics((WorldServer)player.worldObj));
+                    player.mcServer.getConfigurationManager().transferPlayerToDimension(player, destination, new TeleporterTropics((WorldServer)player.worldObj, false));
                 }
             }
         }
