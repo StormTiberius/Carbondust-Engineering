@@ -11,6 +11,13 @@ public class PacketTile extends PacketCDE
     
     public PacketTile(){}
     
+    public PacketTile(int xCoord, int yCoord, int zCoord)
+    {
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+        this.zCoord = zCoord;
+    }
+    
     public PacketTile(TileEntity te)
     {
         this.xCoord = te.xCoord;
