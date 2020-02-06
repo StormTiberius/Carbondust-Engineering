@@ -470,7 +470,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         if(soundUpdateNeeded && System.currentTimeMillis() - previousSoundUpdateTime > NETWORK_UPDATE_INTERVAL)
         {
-            CDECore.proxy.sendToPlayers(new PacketTileSound(this, false, true, false).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
+            CDECore.proxy.sendToPlayers(new PacketTileSound(this, false, true).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
             previousSoundUpdateTime = System.currentTimeMillis();
             soundUpdateNeeded = false;
         }
