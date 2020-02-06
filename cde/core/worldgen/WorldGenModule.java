@@ -31,6 +31,19 @@ public class WorldGenModule
         modConfigDir = event.getModConfigurationDirectory();
     }
     
+    public static void init(FMLInitializationEvent event)
+    {
+        addWorldGenConfig("Overworld");
+        
+        for(IMCMessage message : FMLInterModComms.fetchRuntimeMessages(CDECore.instance))
+        {
+            if(message.key.contains("add-oregen-for-world") && message.isStringMessage())
+            {
+                addWorldGenConfig(message.getStringValue());
+            }
+        }
+    }
+    
     private static void addWorldGenConfig(String dimensionName)
     {
         cfg = new Configuration(new File(modConfigDir, "cde/worldgen_" + dimensionName.toLowerCase() + ".cfg"));
@@ -59,19 +72,6 @@ public class WorldGenModule
         {
             System.out.println("Adding worldgen for " + dimensionName);
             GameRegistry.registerWorldGenerator(new WorldGenManager(dimensionName, CDECore.oreBlock.blockID, array));
-        }
-    }
-    
-    public static void init(FMLInitializationEvent event) 
-    {
-        addWorldGenConfig("Overworld");
-        
-        for(IMCMessage message : FMLInterModComms.fetchRuntimeMessages(CDECore.instance))
-        {
-            if(message.key.contains("add-oregen-for-world") && message.isStringMessage())
-            {
-                addWorldGenConfig(message.getStringValue());
-            }
         }
     }
 }
