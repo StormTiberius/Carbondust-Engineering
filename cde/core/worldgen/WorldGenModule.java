@@ -8,6 +8,8 @@ package cde.core.worldgen;
 import cde.CDECore;
 import cde.core.Defaults;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.io.File;
@@ -17,16 +19,25 @@ public class WorldGenModule
 {
     private static Configuration cfg;
     private static final int ORE_ENTRIES = 12;
-    private static final int[][] ARRAY = new int[ORE_ENTRIES][5];
+    private static int[][] ARRAY;
     private static final String DESCRIPTION = "Enable,size,amount,minY,maxY";
     private static boolean enabled;
     
+    private static File modConfigDir;
+    
     public static void preInit(FMLPreInitializationEvent event)
     {
-        cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/worldgen.cfg"));
+        modConfigDir = event.getModConfigurationDirectory();
+    }
+    
+    private static void addWorldGenConfig(String dimensionName)
+    {
+        cfg = new Configuration(new File(modConfigDir, "cde/worldgen_" + dimensionName.toLowerCase() + ".cfg"));
         cfg.load();
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "worldgen", true, "Enable/Disable Worldgen").getBoolean(true);
+        
+        ARRAY = new int[ORE_ENTRIES][5];
         
         ARRAY[0] = cfg.get(Configuration.CATEGORY_GENERAL, "copper", Defaults.ORE_GEN_DEFAULTS[0], DESCRIPTION).getIntList();
         ARRAY[1] = cfg.get(Configuration.CATEGORY_GENERAL, "tin", Defaults.ORE_GEN_DEFAULTS[1], DESCRIPTION).getIntList();
@@ -42,13 +53,24 @@ public class WorldGenModule
         ARRAY[11] = cfg.get(Configuration.CATEGORY_GENERAL, "sapphire", Defaults.ORE_GEN_DEFAULTS[11], DESCRIPTION).getIntList();
         
         cfg.save();
+        
+        if(enabled)
+        {
+            System.out.println("Adding worldgen for " + dimensionName);
+            GameRegistry.registerWorldGenerator(new WorldGenManager(dimensionName, CDECore.oreBlock.blockID, ARRAY));
+        }
     }
     
     public static void init(FMLInitializationEvent event) 
     {
-        if(enabled)
+        addWorldGenConfig("Overworld");
+        
+        for(IMCMessage message : FMLInterModComms.fetchRuntimeMessages(CDECore.instance))
         {
-            GameRegistry.registerWorldGenerator(new WorldGenManager(CDECore.oreBlock.blockID, ARRAY));
+            if(message.key.contains("add-oregen-for-world") && message.isStringMessage())
+            {
+                addWorldGenConfig(message.getStringValue());
+            }
         }
     }
 }
