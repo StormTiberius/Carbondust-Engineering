@@ -167,9 +167,12 @@ public class CDECore
     {
         for(IMCMessage message : messages)
         {
-            if(message.key.contains("add-oregen-for-world") && message.isStringMessage())
+            if(message.isStringMessage())
             {
-                WorldGenModule.addWorldGenConfig(message.getStringValue());
+                if(message.key.contains("add-oregen-for-world"))
+                {
+                    WorldGenModule.addWorldGenConfig(message.getStringValue());
+                }
             }
         }
     }
