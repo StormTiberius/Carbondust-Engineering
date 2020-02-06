@@ -27,7 +27,7 @@ public class PlayerTracker implements IPlayerTracker
     @Override
     public void onPlayerChangedDimension(EntityPlayer player)
     {
-        CDECore.proxy.sendToPlayer(player, new PacketTileSound(null, false, false, true).getPacket());
+        CDECore.proxy.sendToPlayer(player, new PacketTileSound().getPacket());
     }
     
     @Override
