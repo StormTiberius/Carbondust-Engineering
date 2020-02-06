@@ -18,11 +18,14 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class WorldGenManager implements IWorldGenerator
 {
-    private final WorldGenerator copper,tin,silver,lead,uranium,sulfur,saltpeter,quartz,apatite,ruby,jade,sapphire;
     private final int[][] cfg;
+    private final String DIMENSION_NAME;
+    private final WorldGenerator copper,tin,silver,lead,uranium,sulfur,saltpeter,quartz,apatite,ruby,jade,sapphire;
     
-    public WorldGenManager(int id, int[][] config)
-    {   
+    public WorldGenManager(String dimensionName, int id, int[][] config)
+    {
+        DIMENSION_NAME = dimensionName;
+        
         cfg = config;
         
         copper = new WorldGenMinable(id, 0, cfg[0][1]);
