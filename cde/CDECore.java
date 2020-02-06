@@ -13,6 +13,7 @@ import cde.core.Defaults;
 import cde.core.EventManager;
 import cde.core.FuelManager;
 import cde.core.Namings;
+import cde.core.PlayerTracker;
 import cde.core.RecipeManager;
 import cde.core.Version;
 import cde.core.block.BlockOre;
@@ -26,6 +27,7 @@ import cde.core.speaker.SpeakerModule;
 import cde.core.worldgen.WorldGenModule;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
@@ -58,9 +60,12 @@ import net.minecraftforge.oredict.OreDictionary;
 @NetworkMod(channels = { "CDE" }, packetHandler = PacketHandler.class, clientSideRequired=true, serverSideRequired=true)
 public class CDECore
 {
-    @SidedProxy(clientSide = "cde.core.ClientProxy", serverSide = "cde.core.CommonProxy")
+    @Instance("CDE|Core")
+    public static CDECore instance;
     
+    @SidedProxy(clientSide = "cde.core.ClientProxy", serverSide = "cde.core.CommonProxy")
     public static CommonProxy proxy;
+    
     public static final int ID_SHIFT = -256;
     public static final String CDE_BLOCKS = "/cde/blocks.png";
     public static final String CDE_ITEMS = "/cde/items.png";
@@ -101,6 +106,7 @@ public class CDECore
         {
             proxy.setupSound();
             TickRegistry.registerTickHandler(new SoundTickHandler(), Side.CLIENT);
+            GameRegistry.registerPlayerTracker(new PlayerTracker());
         }
         
         SpeakerModule.preInit(event);
