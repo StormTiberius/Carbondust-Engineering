@@ -45,6 +45,14 @@ public class WorldGenManager implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
+        if(world.provider.getDimensionName().contentEquals(DIMENSION_NAME))
+        {
+            generateOres(random, chunkX, chunkZ, world);
+        }
+    }
+    
+    private void generateOres(Random random, int chunkX, int chunkZ, World world)
+    {
         int xCoord = chunkX * 16;
         int zCoord = chunkZ * 16;
         
