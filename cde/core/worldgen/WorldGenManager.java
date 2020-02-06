@@ -28,7 +28,7 @@ public class WorldGenManager implements IWorldGenerator
     private final String DIMENSION_NAME;
     private final WorldGenerator[] WORLD_GEN_MINABLES;
     
-    public WorldGenManager(String dimensionName, int id, int[][] cfg)
+    public WorldGenManager(String dimensionName, int[][] cfg, int blockId)
     {
         DIMENSION_NAME = dimensionName;
         CFG = cfg;
@@ -36,7 +36,7 @@ public class WorldGenManager implements IWorldGenerator
         
         for(int i = 0; i < WORLD_GEN_MINABLES.length; i++)
         {
-            WORLD_GEN_MINABLES[i] = new WorldGenMinable(id, i, CFG[i][SIZE]);
+            WORLD_GEN_MINABLES[i] = new WorldGenMinable(blockId, i, CFG[i][SIZE]);
         }
     }
     
