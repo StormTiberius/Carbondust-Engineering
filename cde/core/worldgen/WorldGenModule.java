@@ -17,12 +17,13 @@ import net.minecraftforge.common.Configuration;
 
 public class WorldGenModule
 {
-    private static Configuration cfg;
-    private static final int ORE_ENTRIES = 12;
-    private static int[][] ARRAY;
     private static final String DESCRIPTION = "Enable,size,amount,minY,maxY";
-    private static boolean enabled;
+    private static final int ORE_ENTRIES = 12;
+    private static final int VALUES = 5;
     
+    private static boolean enabled;
+    private static int[][] array;
+    private static Configuration cfg;
     private static File modConfigDir;
     
     public static void preInit(FMLPreInitializationEvent event)
@@ -37,27 +38,27 @@ public class WorldGenModule
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "worldgen", true, "Enable/Disable Worldgen").getBoolean(true);
         
-        ARRAY = new int[ORE_ENTRIES][5];
+        array = new int[ORE_ENTRIES][VALUES];
         
-        ARRAY[0] = cfg.get(Configuration.CATEGORY_GENERAL, "copper", Defaults.ORE_GEN_DEFAULTS[0], DESCRIPTION).getIntList();
-        ARRAY[1] = cfg.get(Configuration.CATEGORY_GENERAL, "tin", Defaults.ORE_GEN_DEFAULTS[1], DESCRIPTION).getIntList();
-        ARRAY[2] = cfg.get(Configuration.CATEGORY_GENERAL, "silver", Defaults.ORE_GEN_DEFAULTS[2], DESCRIPTION).getIntList();
-        ARRAY[3] = cfg.get(Configuration.CATEGORY_GENERAL, "lead", Defaults.ORE_GEN_DEFAULTS[3], DESCRIPTION).getIntList();
-        ARRAY[4] = cfg.get(Configuration.CATEGORY_GENERAL, "uranium", Defaults.ORE_GEN_DEFAULTS[4], DESCRIPTION).getIntList();
-        ARRAY[5] = cfg.get(Configuration.CATEGORY_GENERAL, "sulfur", Defaults.ORE_GEN_DEFAULTS[5], DESCRIPTION).getIntList();
-        ARRAY[6] = cfg.get(Configuration.CATEGORY_GENERAL, "saltpeter", Defaults.ORE_GEN_DEFAULTS[6], DESCRIPTION).getIntList();
-        ARRAY[7] = cfg.get(Configuration.CATEGORY_GENERAL, "quartz", Defaults.ORE_GEN_DEFAULTS[7], DESCRIPTION).getIntList();
-        ARRAY[8] = cfg.get(Configuration.CATEGORY_GENERAL, "apatite", Defaults.ORE_GEN_DEFAULTS[8], DESCRIPTION).getIntList();
-        ARRAY[9] = cfg.get(Configuration.CATEGORY_GENERAL, "ruby", Defaults.ORE_GEN_DEFAULTS[9], DESCRIPTION).getIntList();
-        ARRAY[10] = cfg.get(Configuration.CATEGORY_GENERAL, "jade", Defaults.ORE_GEN_DEFAULTS[10], DESCRIPTION).getIntList();
-        ARRAY[11] = cfg.get(Configuration.CATEGORY_GENERAL, "sapphire", Defaults.ORE_GEN_DEFAULTS[11], DESCRIPTION).getIntList();
+        array[0] = cfg.get(Configuration.CATEGORY_GENERAL, "copper", Defaults.ORE_GEN_DEFAULTS[0], DESCRIPTION).getIntList();
+        array[1] = cfg.get(Configuration.CATEGORY_GENERAL, "tin", Defaults.ORE_GEN_DEFAULTS[1], DESCRIPTION).getIntList();
+        array[2] = cfg.get(Configuration.CATEGORY_GENERAL, "silver", Defaults.ORE_GEN_DEFAULTS[2], DESCRIPTION).getIntList();
+        array[3] = cfg.get(Configuration.CATEGORY_GENERAL, "lead", Defaults.ORE_GEN_DEFAULTS[3], DESCRIPTION).getIntList();
+        array[4] = cfg.get(Configuration.CATEGORY_GENERAL, "uranium", Defaults.ORE_GEN_DEFAULTS[4], DESCRIPTION).getIntList();
+        array[5] = cfg.get(Configuration.CATEGORY_GENERAL, "sulfur", Defaults.ORE_GEN_DEFAULTS[5], DESCRIPTION).getIntList();
+        array[6] = cfg.get(Configuration.CATEGORY_GENERAL, "saltpeter", Defaults.ORE_GEN_DEFAULTS[6], DESCRIPTION).getIntList();
+        array[7] = cfg.get(Configuration.CATEGORY_GENERAL, "quartz", Defaults.ORE_GEN_DEFAULTS[7], DESCRIPTION).getIntList();
+        array[8] = cfg.get(Configuration.CATEGORY_GENERAL, "apatite", Defaults.ORE_GEN_DEFAULTS[8], DESCRIPTION).getIntList();
+        array[9] = cfg.get(Configuration.CATEGORY_GENERAL, "ruby", Defaults.ORE_GEN_DEFAULTS[9], DESCRIPTION).getIntList();
+        array[10] = cfg.get(Configuration.CATEGORY_GENERAL, "jade", Defaults.ORE_GEN_DEFAULTS[10], DESCRIPTION).getIntList();
+        array[11] = cfg.get(Configuration.CATEGORY_GENERAL, "sapphire", Defaults.ORE_GEN_DEFAULTS[11], DESCRIPTION).getIntList();
         
         cfg.save();
         
         if(enabled)
         {
             System.out.println("Adding worldgen for " + dimensionName);
-            GameRegistry.registerWorldGenerator(new WorldGenManager(dimensionName, CDECore.oreBlock.blockID, ARRAY));
+            GameRegistry.registerWorldGenerator(new WorldGenManager(dimensionName, CDECore.oreBlock.blockID, array));
         }
     }
     
