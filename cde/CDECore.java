@@ -25,6 +25,8 @@ import cde.core.network.PacketHandler;
 import cde.core.sound.SoundTickHandler;
 import cde.core.speaker.SpeakerModule;
 import cde.core.worldgen.WorldGenModule;
+import com.google.common.collect.ImmutableList;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -33,6 +35,8 @@ import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -45,6 +49,7 @@ import forestry.api.core.ItemInterface;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import net.minecraft.block.Block;
 import static net.minecraft.block.Block.soundMetalFootstep;
 import static net.minecraft.block.Block.soundStoneFootstep;
@@ -66,6 +71,8 @@ public class CDECore
     @SidedProxy(clientSide = "cde.core.ClientProxy", serverSide = "cde.core.CommonProxy")
     public static CommonProxy proxy;
     
+    private static final Logger LOGGER = Logger.getLogger("CDE|Core");
+    
     public static final int ID_SHIFT = -256;
     public static final String CDE_BLOCKS = "/cde/blocks.png";
     public static final String CDE_ITEMS = "/cde/items.png";
@@ -80,6 +87,11 @@ public class CDECore
     @PreInit
     public void preInit(FMLPreInitializationEvent event) 
     {
+        LOGGER.setParent(FMLLog.getLogger());
+        LOGGER.info("Starting Carbondust Engineering " + Version.VERSION);
+        LOGGER.info("Copyright (c) StormTiberius, 2018");
+        LOGGER.info("http://www.github.com/StormTiberius/Carbondust-Engineering");
+        
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/core.cfg"));
         cfg.load();
         
@@ -119,7 +131,6 @@ public class CDECore
         proxy.preloadTextures();
         
         SpeakerModule.init(event);
-        WorldGenModule.init(event);
         
         GameRegistry.registerFuelHandler(new FuelManager());
         
@@ -141,6 +152,9 @@ public class CDECore
         }
         
         RecipeManager.addRecipes();
+        
+        WorldGenModule.addWorldGenConfig("Overworld");
+        processIMCMessages(FMLInterModComms.fetchRuntimeMessages(this));
     }
 
     @ServerStarting
@@ -148,7 +162,18 @@ public class CDECore
     {
         
     }
-        
+    
+    private static void processIMCMessages(ImmutableList<FMLInterModComms.IMCMessage> messages)
+    {
+        for(IMCMessage message : messages)
+        {
+            if(message.key.contains("add-oregen-for-world") && message.isStringMessage())
+            {
+                WorldGenModule.addWorldGenConfig(message.getStringValue());
+            }
+        }
+    }
+    
     private static void initItems()
     {
         if(materialsItemId > 0)
@@ -399,5 +424,15 @@ public class CDECore
         }
         
         return null;
+    }
+    
+    public static void logInfo(String msg)
+    {
+        LOGGER.info(msg);
+    }
+    
+    public static void logWarning(String msg)
+    {
+        LOGGER.warning(msg);
     }
 }
