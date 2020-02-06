@@ -14,11 +14,11 @@ import java.io.IOException;
 public class PacketTileSound extends PacketTile
 {
     public float volume,pitch;
-    public boolean updateVolume,updatePitch;
+    public boolean updateVolume,updatePitch,playerChangedDimension;
     
     public PacketTileSound(){}
     
-    public PacketTileSound(TileEntityWithSound te, boolean updateVolume, boolean updatePitch)
+    public PacketTileSound(TileEntityWithSound te, boolean updateVolume, boolean updatePitch, boolean playerChangedDimension)
     {
         super(te);
         
@@ -26,6 +26,8 @@ public class PacketTileSound extends PacketTile
         this.pitch = te.getPitch();
         this.updateVolume = updateVolume;
         this.updatePitch = updatePitch;
+        
+        this.playerChangedDimension = playerChangedDimension;
     }
     
     @Override
@@ -44,6 +46,8 @@ public class PacketTileSound extends PacketTile
         
         data.writeBoolean(updateVolume);
         data.writeBoolean(updatePitch);
+        
+        data.writeBoolean(playerChangedDimension);
     }
 
     @Override
@@ -56,5 +60,7 @@ public class PacketTileSound extends PacketTile
         
         updateVolume = data.readBoolean();
         updatePitch = data.readBoolean();
+        
+        playerChangedDimension = data.readBoolean();
     }
 }
