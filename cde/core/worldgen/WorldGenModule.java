@@ -15,7 +15,7 @@ import net.minecraftforge.common.Configuration;
 
 public class WorldGenModule
 {
-    private static final String DESCRIPTION = "Enable,size,amount,minY,maxY";
+    private static final String DESCRIPTION = "Enable, size, amount, minY, maxY";
     
     private static final int[][] ARRAY = new int[Namings.INTERNAL_ORE_BLOCK_NAMES.length][];
     
