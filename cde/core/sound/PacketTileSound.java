@@ -16,9 +16,12 @@ public class PacketTileSound extends PacketTile
     public float volume,pitch;
     public boolean updateVolume,updatePitch,playerChangedDimension;
     
-    public PacketTileSound(){}
+    public PacketTileSound()
+    {
+        this.playerChangedDimension = true;
+    }
     
-    public PacketTileSound(TileEntityWithSound te, boolean updateVolume, boolean updatePitch, boolean playerChangedDimension)
+    public PacketTileSound(TileEntityWithSound te, boolean updateVolume, boolean updatePitch)
     {
         super(te);
         
@@ -26,8 +29,6 @@ public class PacketTileSound extends PacketTile
         this.pitch = te.getPitch();
         this.updateVolume = updateVolume;
         this.updatePitch = updatePitch;
-        
-        this.playerChangedDimension = playerChangedDimension;
     }
     
     @Override
