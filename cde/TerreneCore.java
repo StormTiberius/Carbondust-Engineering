@@ -27,6 +27,7 @@ import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -131,11 +132,15 @@ public class TerreneCore
             
             WorldChunkManagerTropics.allowedBiomes.clear();
             WorldChunkManagerTropics.allowedBiomes.add(island);
+            
+            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Tropics");
         }
         
         if(ENABLED[EMBER])
         {
             ember = (new BiomeGenEmber(emberId)).setColor(16440917).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.8F, 0.4F);
+            
+            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Ember");
         }
     }
     
@@ -217,7 +222,7 @@ public class TerreneCore
         {
             if(ENABLED[TROPICS] || ENABLED[EMBER])
             {
-                event.registerServerCommand(new CommandTPX());
+                event.registerServerCommand(new CommandTPX(DIMENSION_ID[TROPICS], DIMENSION_ID[EMBER], ENABLED[TROPICS], ENABLED[EMBER]));
             }
         }
     }
