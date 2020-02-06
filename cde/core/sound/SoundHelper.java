@@ -194,20 +194,27 @@ public class SoundHelper
     
     public static void receivePacket(PacketTileSound packet, EntityPlayer player)
     {
-        for(Object o : SOURCES)
+        if(packet.playerChangedDimension)
         {
-            TileEntityWithSound te = (TileEntityWithSound)o;
-
-            if(te.xCoord == packet.xCoord && te.yCoord == packet.yCoord && te.zCoord == packet.zCoord)
+            removeAll();
+        }
+        else
+        {
+            for(Object o : SOURCES)
             {
-                if(packet.updateVolume)
-                {
-                    sndSystem.setVolume(te.getSourceName(), packet.volume * soundVolume);
-                }
+                TileEntityWithSound te = (TileEntityWithSound)o;
 
-                if(packet.updatePitch)
+                if(te.xCoord == packet.xCoord && te.yCoord == packet.yCoord && te.zCoord == packet.zCoord)
                 {
-                    sndSystem.setPitch(te.getSourceName(), packet.pitch);
+                    if(packet.updateVolume)
+                    {
+                        sndSystem.setVolume(te.getSourceName(), packet.volume * soundVolume);
+                    }
+
+                    if(packet.updatePitch)
+                    {
+                        sndSystem.setPitch(te.getSourceName(), packet.pitch);
+                    }
                 }
             }
         }
