@@ -11,8 +11,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.OreGenEvent;
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -50,8 +48,6 @@ public class WorldGenOres implements IWorldGenerator
             
             int xPos,yPos,zPos;
             
-            MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Pre(world, random, xCoord, zCoord));
-            
             for(int i = 0; i < WORLD_GEN_MINABLES.length; i++)
             {
                 if(CFG[i][ENABLE] == 1 && TerrainGen.generateOre(world, random, WORLD_GEN_MINABLES[i], xCoord, zCoord, EventType.CUSTOM))
@@ -66,8 +62,6 @@ public class WorldGenOres implements IWorldGenerator
                     }
                 }
             }
-            
-            MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Post(world, random, xCoord, zCoord));
         }
     }
 }
