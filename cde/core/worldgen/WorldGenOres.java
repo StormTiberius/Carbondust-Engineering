@@ -16,7 +16,7 @@ import net.minecraftforge.event.terraingen.OreGenEvent;
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-public class WorldGenManager implements IWorldGenerator
+public class WorldGenOres implements IWorldGenerator
 {
     private static final int ENABLE = 0;
     private static final int SIZE = 1;
@@ -28,7 +28,7 @@ public class WorldGenManager implements IWorldGenerator
     private final String DIMENSION_NAME;
     private final WorldGenerator[] WORLD_GEN_MINABLES;
     
-    public WorldGenManager(String dimensionName, int[][] cfg, int blockId)
+    public WorldGenOres(String dimensionName, int[][] cfg, int blockId)
     {
         DIMENSION_NAME = dimensionName;
         CFG = cfg;
