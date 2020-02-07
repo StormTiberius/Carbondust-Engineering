@@ -15,9 +15,8 @@ import net.minecraftforge.common.Configuration;
 
 public class WorldGenModule
 {
+    private static final int[][] CONFIG = new int[Namings.INTERNAL_ORE_BLOCK_NAMES.length][];
     private static final String DESCRIPTION = "Enable, size, amount, minY, maxY";
-    
-    private static final int[][] ARRAY = new int[Namings.INTERNAL_ORE_BLOCK_NAMES.length][];
     
     private static boolean worldGen;
     private static Configuration cfg;
@@ -35,9 +34,9 @@ public class WorldGenModule
         
         worldGen = cfg.get(Configuration.CATEGORY_GENERAL, "worldGen", true, "Enable/Disable WorldGen").getBoolean(true);
         
-        for(int i = 0; i < Namings.INTERNAL_ORE_BLOCK_NAMES.length; i++)
+        for(int i = 0; i < CONFIG.length; i++)
         {
-            ARRAY[i] = cfg.get(Configuration.CATEGORY_GENERAL, Namings.INTERNAL_ORE_BLOCK_NAMES[i], Defaults.ORE_GEN_DEFAULTS[i], DESCRIPTION).getIntList();
+            CONFIG[i] = cfg.get(Configuration.CATEGORY_GENERAL, Namings.INTERNAL_ORE_BLOCK_NAMES[i], Defaults.ORE_GEN_DEFAULTS[i], DESCRIPTION).getIntList();
         }
         
         cfg.save();
@@ -45,7 +44,7 @@ public class WorldGenModule
         if(worldGen)
         {
             CDECore.logInfo("Adding worldgen for " + dimensionName);
-            GameRegistry.registerWorldGenerator(new WorldGenManager(dimensionName, ARRAY, CDECore.oreBlock.blockID));
+            GameRegistry.registerWorldGenerator(new WorldGenManager(dimensionName, CONFIG, CDECore.oreBlock.blockID));
         }
     }
 }
