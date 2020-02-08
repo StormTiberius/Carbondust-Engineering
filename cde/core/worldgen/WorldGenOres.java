@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType;
+import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class WorldGenOres implements IWorldGenerator
@@ -50,7 +50,7 @@ public class WorldGenOres implements IWorldGenerator
             
             for(int i = 0; i < WORLD_GEN_MINABLES.length; i++)
             {
-                if(CFG[i][ENABLE] == 1 && TerrainGen.generateOre(world, random, WORLD_GEN_MINABLES[i], xCoord, zCoord, EventType.CUSTOM))
+                if(CFG[i][ENABLE] == 1 && TerrainGen.generateOre(world, random, WORLD_GEN_MINABLES[i], xCoord, zCoord, GenerateMinable.EventType.CUSTOM))
                 {
                     for(int j = 0; j < CFG[i][AMOUNT]; j++)
                     {
