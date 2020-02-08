@@ -44,7 +44,7 @@ public class WorldGenModule
         if(worldGen)
         {
             CDECore.logInfo("Adding worldgen for " + dimensionName);
-            GameRegistry.registerWorldGenerator(new WorldGenOres(dimensionName, CONFIG, CDECore.oreBlock.blockID));
+            GameRegistry.registerWorldGenerator(new WorldGenManager(dimensionName, CONFIG, CDECore.oreBlock.blockID));
         }
     }
 }
