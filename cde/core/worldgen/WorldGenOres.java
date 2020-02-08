@@ -10,7 +10,6 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -24,13 +23,13 @@ public class WorldGenOres implements IWorldGenerator
     
     private final int[][] CFG;
     private final String DIMENSION_NAME;
-    private final WorldGenerator[] WORLD_GEN_MINABLES;
+    private final WorldGenMinable[] WORLD_GEN_MINABLES;
     
     public WorldGenOres(String dimensionName, int[][] cfg, int blockId)
     {
         DIMENSION_NAME = dimensionName;
         CFG = cfg;
-        WORLD_GEN_MINABLES = new WorldGenerator[CFG.length];
+        WORLD_GEN_MINABLES = new WorldGenMinable[CFG.length];
         
         for(int i = 0; i < WORLD_GEN_MINABLES.length; i++)
         {
