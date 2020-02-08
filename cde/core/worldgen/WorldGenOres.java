@@ -25,11 +25,9 @@ public class WorldGenOres implements IWorldGenerator
     private final int[][] CFG;
     private final String DIMENSION_NAME;
     private final WorldGenerator[] WORLD_GEN_MINABLES;
-    private final boolean flag;
     
-    public WorldGenOres(String dimensionName, int[][] cfg, int blockId, boolean flag)
+    public WorldGenOres(String dimensionName, int[][] cfg, int blockId)
     {
-        this.flag = flag;
         DIMENSION_NAME = dimensionName;
         CFG = cfg;
         WORLD_GEN_MINABLES = new WorldGenerator[CFG.length];

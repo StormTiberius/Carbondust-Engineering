@@ -18,7 +18,7 @@ public class WorldGenModule
     private static final int[][] CONFIG = new int[Namings.INTERNAL_ORE_BLOCK_NAMES.length][];
     private static final String DESCRIPTION = "Enable, size, amount, minY, maxY";
     
-    private static boolean worldGen,worldGenVanillaAugment;
+    private static boolean worldGen;
     private static Configuration cfg;
     private static File modConfigDir;
     
@@ -33,7 +33,6 @@ public class WorldGenModule
         cfg.load();
         
         worldGen = cfg.get(Configuration.CATEGORY_GENERAL, "worldGen", true, "Enable/Disable WorldGen").getBoolean(true);
-        worldGenVanillaAugment = cfg.get(Configuration.CATEGORY_GENERAL, "worldGenV", true, "Enable/Disable Vanilla WorldGen Augment").getBoolean(true);
         
         for(int i = 0; i < CONFIG.length; i++)
         {
@@ -45,7 +44,7 @@ public class WorldGenModule
         if(worldGen)
         {
             CDECore.logInfo("Adding worldgen for " + dimensionName);
-            GameRegistry.registerWorldGenerator(new WorldGenOres(dimensionName, CONFIG, CDECore.oreBlock.blockID, worldGenVanillaAugment));
+            GameRegistry.registerWorldGenerator(new WorldGenOres(dimensionName, CONFIG, CDECore.oreBlock.blockID));
         }
     }
 }
