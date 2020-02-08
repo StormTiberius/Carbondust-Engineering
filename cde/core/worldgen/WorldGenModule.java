@@ -32,7 +32,7 @@ public class WorldGenModule
         cfg = new Configuration(new File(modConfigDir, "cde/worldgen_" + dimensionName.toLowerCase() + ".cfg"));
         cfg.load();
         
-        worldGen = cfg.get(Configuration.CATEGORY_GENERAL, "worldGen", true, "Enable/Disable WorldGen").getBoolean(true);
+        worldGen = cfg.get(Configuration.CATEGORY_GENERAL, "worldGen", true, "Enable/Disable " + dimensionName + " WorldGen").getBoolean(true);
         
         for(int i = 0; i < CONFIG.length; i++)
         {
