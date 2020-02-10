@@ -143,7 +143,7 @@ public class Defaults
     public static final int BLOCK_INDUSTRY_A_ID = 186;
     public static final int BLOCK_INDUSTRY_B_ID = 187;
     public static final int BLOCK_INDUSTRY_C_ID = 188;
-    public static final int BLOCK_PORTAL_ID = 189;
+    public static final int BLOCK_INDUSTRY_D_ID = 189;
     
     // ITEM ID
     public static final int ITEM_MATERIALS_ID = 500;

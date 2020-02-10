@@ -5,7 +5,6 @@
 
 package cde;
 
-import cde.core.Defaults;
 import cde.core.Version;
 import cde.ember.BiomeGenEmber;
 import cde.ember.EmberEventManager;
@@ -55,13 +54,12 @@ public class TerreneCore
     public static final int EMBER = 1;
     
     private static int dayCycleDurationMultiplier = 1;
-    private static int islandSize,islandScarcity,islandId,beachId,oceanId,emberId,liquidId,indigoFlowerId,portalId;
+    private static int islandSize,islandScarcity,islandId,beachId,oceanId,emberId,liquidId,indigoFlowerId;
     private static int[] weatherDurations = WEATHER_DURATIONS;
     private static boolean sisterIslands;
     private static Configuration cfg;
     
     public static BiomeGenBase island,beach,ocean,ember;
-    public static Block portal;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event)
@@ -69,8 +67,6 @@ public class TerreneCore
         // Terrene
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/terrene.cfg"));
         cfg.load();
-        
-        portalId = cfg.get(Configuration.CATEGORY_BLOCK, "portalId", Defaults.BLOCK_PORTAL_ID).getInt();
         
         cfg.save();
         
