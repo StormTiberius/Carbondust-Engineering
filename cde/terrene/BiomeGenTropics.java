@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.tropics;
+package cde.terrene;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

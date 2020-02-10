@@ -1,4 +1,4 @@
-package cde.tropics;
+package cde.terrene;
 
 import cde.TerreneCore;
 import java.util.List;
