@@ -8,15 +8,15 @@ package cde;
 import cde.core.Version;
 import cde.ember.BiomeGenEmber;
 import cde.ember.EmberEventManager;
-import cde.ember.EntityBatEmber;
-import cde.ember.EntitySquidEmber;
+import cde.terrene.EntityBatTerrene;
+import cde.terrene.EntitySquidTerrene;
 import cde.ember.WorldProviderEmber;
-import cde.terrene.BiomeGenTropicsBeach;
-import cde.terrene.BiomeGenTropicsIsland;
-import cde.terrene.BiomeGenTropicsOcean;
-import cde.terrene.EventManagerTropics;
-import cde.terrene.WorldChunkManagerTropics;
-import cde.terrene.WorldProviderTropics;
+import cde.terrene.BiomeGenTerreneBeach;
+import cde.terrene.BiomeGenTerreneIsland;
+import cde.terrene.BiomeGenTerreneOcean;
+import cde.terrene.EventManagerTerrene;
+import cde.terrene.WorldChunkManagerTerrene;
+import cde.terrene.WorldProviderTerrene;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -105,12 +105,12 @@ public class TerreneCore
         
         if(ENABLED[TROPICS])
         {
-            island = (new BiomeGenTropicsIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
+            island = (new BiomeGenTerreneIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            beach = (new BiomeGenTerreneBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            ocean = (new BiomeGenTerreneOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
             
-            WorldChunkManagerTropics.allowedBiomes.clear();
-            WorldChunkManagerTropics.allowedBiomes.add(island);
+            WorldChunkManagerTerrene.allowedBiomes.clear();
+            WorldChunkManagerTerrene.allowedBiomes.add(island);
             
             FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Tropics");
         }
@@ -131,11 +131,11 @@ public class TerreneCore
             if(DIMENSION_ID[TROPICS] == 0 || DIMENSION_ID[TROPICS] == -1 || DIMENSION_ID[TROPICS] == 1)
             {
                 DimensionManager.unregisterProviderType(DIMENSION_ID[TROPICS]);
-                DimensionManager.registerProviderType(DIMENSION_ID[TROPICS], WorldProviderTropics.class, true);
+                DimensionManager.registerProviderType(DIMENSION_ID[TROPICS], WorldProviderTerrene.class, true);
             }
             else
             {
-                DimensionManager.registerProviderType(DIMENSION_ID[TROPICS], WorldProviderTropics.class, true);
+                DimensionManager.registerProviderType(DIMENSION_ID[TROPICS], WorldProviderTerrene.class, true);
                 DimensionManager.registerDimension(DIMENSION_ID[TROPICS], DIMENSION_ID[TROPICS]);
             }
             
@@ -148,7 +148,7 @@ public class TerreneCore
             
             if(MOB_SPAWN_RULES[TROPICS])
             {
-                MinecraftForge.EVENT_BUS.register(new EventManagerTropics(DIMENSION_ID[TROPICS]));
+                MinecraftForge.EVENT_BUS.register(new EventManagerTerrene(DIMENSION_ID[TROPICS]));
             }
         }
         
@@ -165,8 +165,8 @@ public class TerreneCore
                 DimensionManager.registerDimension(DIMENSION_ID[EMBER], DIMENSION_ID[EMBER]);
             }
             
-            EntityRegistry.registerModEntity(EntitySquidEmber.class, "EmberSquid", 0, this, 64, 3, true);
-            EntityRegistry.registerModEntity(EntityBatEmber.class, "EmberBat", 1, this, 80, 3, false);
+            EntityRegistry.registerModEntity(EntitySquidTerrene.class, "EmberSquid", 0, this, 64, 3, true);
+            EntityRegistry.registerModEntity(EntityBatTerrene.class, "EmberBat", 1, this, 80, 3, false);
             
             MinecraftForge.EVENT_BUS.register(new EmberEventManager(MOB_SPAWN_RULES[EMBER]));
         }
