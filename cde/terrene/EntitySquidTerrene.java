@@ -8,9 +8,9 @@ package cde.terrene;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.world.World;
 
-public class EntitySquidEmber extends EntitySquid
+public class EntitySquidTerrene extends EntitySquid
 {
-    public EntitySquidEmber(World world)
+    public EntitySquidTerrene(World world)
     {
         super(world);
     }

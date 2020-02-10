@@ -10,9 +10,9 @@ import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityBatEmber extends EntityBat
+public class EntityBatTerrene extends EntityBat
 {
-    public EntityBatEmber(World world)
+    public EntityBatTerrene(World world)
     {
         super(world);
     }
