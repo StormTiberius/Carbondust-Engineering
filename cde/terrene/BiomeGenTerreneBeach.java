@@ -9,9 +9,9 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.world.biome.SpawnListEntry;
 
-public class BiomeGenTropicsBeach extends BiomeGenTerrene
+public class BiomeGenTerreneBeach extends BiomeGenTerrene
 {
-    public BiomeGenTropicsBeach(int id)
+    public BiomeGenTerreneBeach(int id)
     {
         super(id);
         

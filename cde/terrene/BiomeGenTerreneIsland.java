@@ -13,11 +13,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 
-public class BiomeGenTropicsIsland extends BiomeGenTerrene
+public class BiomeGenTerreneIsland extends BiomeGenTerrene
 {
     private boolean flag;
     
-    public BiomeGenTropicsIsland(int id)
+    public BiomeGenTerreneIsland(int id)
     {
         super(id);
         
