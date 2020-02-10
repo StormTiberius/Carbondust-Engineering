@@ -1,6 +1,6 @@
 package cde.ember;
 
-import cde.TropicsCore;
+import cde.TerreneCore;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -512,7 +512,7 @@ public class ChunkProviderEmber implements IChunkProvider
 
             if (var13 < 127 || this.rand.nextInt(10) == 0)
             {
-                (new WorldGenLakes(TropicsCore.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
+                (new WorldGenLakes(TerreneCore.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
             }
         }
 
