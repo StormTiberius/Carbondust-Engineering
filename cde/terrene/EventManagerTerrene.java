@@ -14,9 +14,8 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 public class EventManagerTerrene
 {
     private final int[] ALLOWED_BLOCK_IDS;
-    private final int DIMENSION_ID;
     
-    public EventManagerTerrene(int dimensionId)
+    public EventManagerTerrene()
     {
         ALLOWED_BLOCK_IDS = new int[]
         {    
@@ -31,14 +30,12 @@ public class EventManagerTerrene
             Block.blockSnow.blockID,
             Block.bedrock.blockID
         };
-        
-        DIMENSION_ID = dimensionId;
     }
     
     @ForgeSubscribe
     public void lse(LivingSpawnEvent event)
     {
-        if(event.entity.dimension == DIMENSION_ID)
+        if(event.entity.dimension == 0)
         {
             if(event.entity instanceof EntityMob)
             {
