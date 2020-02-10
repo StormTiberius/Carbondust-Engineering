@@ -19,7 +19,7 @@ import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenStronghold extends MapGenStructure
 {
-    public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(TerreneCore.ember)); 
+    public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(TerreneCore.island, TerreneCore.beach, TerreneCore.ocean)); 
     private BiomeGenBase[] allowedBiomeGenBases;
 
     /**
