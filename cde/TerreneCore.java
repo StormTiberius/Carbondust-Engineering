@@ -5,7 +5,6 @@
 
 package cde;
 
-import cde.api.Blocks;
 import cde.core.Defaults;
 import cde.core.Version;
 import cde.ember.BiomeGenEmber;
@@ -19,8 +18,6 @@ import cde.tropics.BiomeGenTropicsOcean;
 import cde.tropics.EventManagerTropics;
 import cde.tropics.WorldChunkManagerTropics;
 import cde.tropics.WorldProviderTropics;
-import cde.terrene.BlockPortal;
-import cde.terrene.CommandTPX;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -33,12 +30,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
@@ -113,16 +106,6 @@ public class TerreneCore
         DIMENSION_ID[EMBER] = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 3, "Ember Dimension Id").getInt();
         
         cfg.save();
-        
-        if(portalId > 0)
-        {
-            portal = new BlockPortal(portalId).setHardness(-1.0F).setStepSound(Block.soundGlassFootstep).setLightValue(0.75F).setBlockName("dimensionalportal");
-            
-            GameRegistry.registerBlock(portal, "dimensionalportal");
-            LanguageRegistry.addName(portal, "Dimensional Portal");
-            
-            Blocks.blockPortal = new ItemStack(portal.blockID, 1, 0);
-        }
         
         if(ENABLED[TROPICS])
         {
@@ -218,13 +201,7 @@ public class TerreneCore
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
-        if(!ModLoader.isModLoaded("Mystcraft"))
-        {
-            if(ENABLED[TROPICS] || ENABLED[EMBER])
-            {
-                event.registerServerCommand(new CommandTPX(DIMENSION_ID[TROPICS], DIMENSION_ID[EMBER], ENABLED[TROPICS], ENABLED[EMBER]));
-            }
-        }
+        
     }
     
     public static int getFlowerId()
