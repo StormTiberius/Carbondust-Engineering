@@ -1,6 +1,6 @@
 package cde.tropics.layer;
 
-import cde.TerreneCore;
+import cde.TropicsCore;
 import net.minecraft.world.WorldType;
 
 import net.minecraftforge.common.*;
@@ -41,7 +41,7 @@ public abstract class GenLayer
         var10 = new GenLayerAddIsland(4L, var11);
         GenLayerAddMushroomIsland var16 = new GenLayerAddMushroomIsland(5L, var10);
         
-        byte var4 = TerreneCore.getIslandSize();
+        byte var4 = TropicsCore.getIslandSize();
 
         GenLayer var5 = GenLayerZoom.func_75915_a(1000L, var16, 0);
         GenLayerRiverInit var13 = new GenLayerRiverInit(100L, var5);

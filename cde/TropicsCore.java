@@ -42,7 +42,7 @@ import net.minecraftforge.liquids.LiquidStack;
 
 @Mod(modid="CDE|Terrene", name="Terrene", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
-public class TerreneCore
+public class TropicsCore
 {
     private static final int WORLDS = 2;
     private static final int[] DIMENSION_ID = new int[WORLDS];

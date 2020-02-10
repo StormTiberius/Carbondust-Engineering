@@ -1,6 +1,6 @@
 package cde.tropics.layer;
 
-import cde.TerreneCore;
+import cde.TropicsCore;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class GenLayerAddMushroomIsland extends GenLayer
@@ -47,7 +47,7 @@ public class GenLayerAddMushroomIsland extends GenLayer
                 {
                     var10[var12 + var11 * par3] = id;
                 }    
-                else if(TerreneCore.sisterIslands() && isValidArea && this.nextInt(TerreneCore.getIslandScarcity()) == 0)
+                else if(TropicsCore.sisterIslands() && isValidArea && this.nextInt(TropicsCore.getIslandScarcity()) == 0)
                 {
                     var10[var12 + var11 * par3] = id;
                 }
