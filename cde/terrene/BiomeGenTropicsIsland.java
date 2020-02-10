@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 
-public class BiomeGenTropicsIsland extends BiomeGenTropics
+public class BiomeGenTropicsIsland extends BiomeGenTerrene
 {
     private boolean flag;
     
