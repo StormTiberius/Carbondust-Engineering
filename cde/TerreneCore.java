@@ -6,11 +6,8 @@
 package cde;
 
 import cde.core.Version;
-import cde.ember.BiomeGenEmber;
-import cde.ember.EmberEventManager;
 import cde.terrene.EntityBatTerrene;
 import cde.terrene.EntitySquidTerrene;
-import cde.ember.WorldProviderEmber;
 import cde.terrene.BiomeGenTerreneBeach;
 import cde.terrene.BiomeGenTerreneIsland;
 import cde.terrene.BiomeGenTerreneOcean;
@@ -44,45 +41,30 @@ import net.minecraftforge.liquids.LiquidStack;
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TerreneCore
 {
-    private static final int WORLDS = 2;
-    private static final int[] DIMENSION_ID = new int[WORLDS];
-    private static final boolean[] MOB_SPAWN_RULES = new boolean[WORLDS];
-    private static final boolean[] ENABLED = new boolean[WORLDS];
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     
-    public static final int TROPICS = 0;
-    public static final int EMBER = 1;
-    
     private static int dayCycleDurationMultiplier = 1;
-    private static int islandSize,islandScarcity,islandId,beachId,oceanId,emberId,liquidId,indigoFlowerId;
+    private static int islandId,beachId,oceanId,islandSize,islandScarcity,liquidId,indigoFlowerId;
     private static int[] weatherDurations = WEATHER_DURATIONS;
-    private static boolean sisterIslands;
+    private static boolean enabled,sisterIslands,mobSpawnRules;
     private static Configuration cfg;
     
-    public static BiomeGenBase island,beach,ocean,ember;
+    public static BiomeGenBase island,beach,ocean;
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event)
     {
-        // Terrene
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/terrene.cfg"));
         cfg.load();
         
-        cfg.save();
-        
-        // Tropics
-        cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/tropics.cfg"));
-        cfg.load();
-        
-        ENABLED[TROPICS] = cfg.get(Configuration.CATEGORY_GENERAL, "tropicsDimension", true, "Enable/Disable Tropics Dimension").getBoolean(true);
+        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "terrene", false, "Enable/Disable Terrene").getBoolean(false);
         sisterIslands = cfg.get(Configuration.CATEGORY_GENERAL, "sisterIslands", true, "Sister Islands").getBoolean(true);
-        MOB_SPAWN_RULES[TROPICS] = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
+        mobSpawnRules = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
         
         islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 23, "Island Biome Id").getInt();
         beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 24, "Beach Biome Id").getInt();
         oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanBiomeId", 25, "Ocean Biome Id").getInt();
         
-        DIMENSION_ID[TROPICS] = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Tropics Dimension Id").getInt();
         weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Durations").getIntList();
         dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Duration Multiplier").getInt();
         
@@ -91,19 +73,7 @@ public class TerreneCore
         
         cfg.save();
         
-        // Ember
-        cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/ember.cfg"));
-        cfg.load();
-        
-        ENABLED[EMBER] = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", true, "Enable/Disable Ember Dimension").getBoolean(true);
-        MOB_SPAWN_RULES[EMBER] = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
-        
-        emberId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 26, "Ember Biome Id").getInt();
-        DIMENSION_ID[EMBER] = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 3, "Ember Dimension Id").getInt();
-        
-        cfg.save();
-        
-        if(ENABLED[TROPICS])
+        if(enabled)
         {
             island = (new BiomeGenTerreneIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             beach = (new BiomeGenTerreneBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
@@ -112,63 +82,28 @@ public class TerreneCore
             WorldChunkManagerTerrene.allowedBiomes.clear();
             WorldChunkManagerTerrene.allowedBiomes.add(island);
             
-            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Tropics");
-        }
-        
-        if(ENABLED[EMBER])
-        {
-            ember = (new BiomeGenEmber(emberId)).setColor(16440917).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.8F, 0.4F);
-            
-            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Ember");
+            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Terrene");
         }
     }
     
     @Init
     public void init(FMLInitializationEvent event)
     {
-        if(ENABLED[TROPICS])
+        if(enabled)
         {
-            if(DIMENSION_ID[TROPICS] == 0 || DIMENSION_ID[TROPICS] == -1 || DIMENSION_ID[TROPICS] == 1)
-            {
-                DimensionManager.unregisterProviderType(DIMENSION_ID[TROPICS]);
-                DimensionManager.registerProviderType(DIMENSION_ID[TROPICS], WorldProviderTerrene.class, true);
-            }
-            else
-            {
-                DimensionManager.registerProviderType(DIMENSION_ID[TROPICS], WorldProviderTerrene.class, true);
-                DimensionManager.registerDimension(DIMENSION_ID[TROPICS], DIMENSION_ID[TROPICS]);
-            }
-            
-            BiomeManager.addStrongholdBiome(island);
-            BiomeManager.addStrongholdBiome(beach);
-            BiomeManager.addStrongholdBiome(ocean);
+            DimensionManager.unregisterProviderType(0);
+            DimensionManager.registerProviderType(0, WorldProviderTerrene.class, true);
             
             BiomeManager.addVillageBiome(island, true);
             BiomeManager.addVillageBiome(beach, true);
             
-            if(MOB_SPAWN_RULES[TROPICS])
+            if(mobSpawnRules)
             {
-                MinecraftForge.EVENT_BUS.register(new EventManagerTerrene(DIMENSION_ID[TROPICS]));
-            }
-        }
-        
-        if(ENABLED[EMBER])
-        {
-            if(DIMENSION_ID[EMBER] == 0 || DIMENSION_ID[EMBER] == -1 || DIMENSION_ID[EMBER] == 1)
-            {
-                DimensionManager.unregisterProviderType(DIMENSION_ID[EMBER]);
-                DimensionManager.registerProviderType(DIMENSION_ID[EMBER], WorldProviderEmber.class, true);
-            }
-            else
-            {
-                DimensionManager.registerProviderType(DIMENSION_ID[EMBER], WorldProviderEmber.class, true);
-                DimensionManager.registerDimension(DIMENSION_ID[EMBER], DIMENSION_ID[EMBER]);
+                MinecraftForge.EVENT_BUS.register(new EventManagerTerrene());
             }
             
-            EntityRegistry.registerModEntity(EntitySquidTerrene.class, "EmberSquid", 0, this, 64, 3, true);
-            EntityRegistry.registerModEntity(EntityBatTerrene.class, "EmberBat", 1, this, 80, 3, false);
-            
-            MinecraftForge.EVENT_BUS.register(new EmberEventManager(MOB_SPAWN_RULES[EMBER]));
+            EntityRegistry.registerModEntity(EntitySquidTerrene.class, "TerreneSquid", 0, this, 64, 3, true);
+            EntityRegistry.registerModEntity(EntityBatTerrene.class, "TerreneBat", 1, this, 80, 3, false);
         }
     }
     
@@ -208,16 +143,6 @@ public class TerreneCore
     public static int getLiquidId()
     {
         return liquidId;
-    }
-    
-    public static int getDimensionId(int i)
-    {
-        switch(i)
-        {
-            case TROPICS: return DIMENSION_ID[TROPICS];
-            case EMBER: return DIMENSION_ID[EMBER];
-            default: return 0;
-        }
     }
     
     public static int getWeatherDuration(int index)
