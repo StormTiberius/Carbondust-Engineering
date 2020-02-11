@@ -6,9 +6,9 @@
 package cde.ember;
 
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldProviderSurface;
 
-public class WorldProviderEmber extends WorldProvider
+public class WorldProviderEmber extends WorldProviderSurface
 {
     private static final ChunkCoordinates SPAWN = new ChunkCoordinates(264,20,264);
     
@@ -97,7 +97,7 @@ public class WorldProviderEmber extends WorldProvider
             return SPAWN;
         }
         
-        return super.getSpawnPoint
+        return super.getSpawnPoint();
     }
     
     @Override
@@ -107,8 +107,10 @@ public class WorldProviderEmber extends WorldProvider
         {
             worldObj.getWorldInfo().setSpawnPosition(SPAWN.posX, SPAWN.posY, SPAWN.posZ);
         }
-        
-        return super.setSpawnPoint(x, y, z);
+        else
+        {
+            super.setSpawnPoint(x, y, z);
+        }
     }
     
     @Override
