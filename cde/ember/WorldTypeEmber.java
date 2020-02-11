@@ -8,6 +8,7 @@ package cde.ember;
 import cde.EmberCore;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -40,5 +41,11 @@ public class WorldTypeEmber extends WorldType
     public double voidFadeMagnitude()
     {
         return 1.0D;
+    }
+    
+    @Override
+    public BiomeGenBase[] getBiomesForWorldType()
+    {
+        return new BiomeGenBase[] {EmberCore.biome};
     }
 }
