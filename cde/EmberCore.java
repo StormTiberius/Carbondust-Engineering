@@ -17,6 +17,7 @@ import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -51,14 +52,16 @@ public class EmberCore
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Ember").getBoolean(false);
         mobSpawnRules = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
         
-        biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 26, "Ember Biome Id").getInt();
-        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 3, "Ember Dimension Id").getInt();
+        biomeId = cfg.get(Configuration.CATEGORY_GENERAL, "emberBiomeId", 23, "Ember Biome Id").getInt();
+        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Ember Dimension Id").getInt();
         
         cfg.save();
         
         if(enabled)
         {
             ember = (new BiomeGenEmber(biomeId)).setColor(16440917).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.8F, 0.4F);
+            
+            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Ember");
         }
     }
 
