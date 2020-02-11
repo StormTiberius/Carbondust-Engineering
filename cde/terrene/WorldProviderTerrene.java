@@ -68,13 +68,13 @@ public class WorldProviderTerrene extends WorldProviderSurface
     @Override
     public float getCloudHeight()
     {
-        return 256.0F;
+        return 242.0F;
     }
     
     @Override
     public int getAverageGroundLevel()
     {
-        return 128;
+        return 114;
     }
     
     @SideOnly(Side.CLIENT)
@@ -224,7 +224,7 @@ public class WorldProviderTerrene extends WorldProviderSurface
     @Override
     public double getHorizon()
     {
-        return 127.0D;
+        return 113.0D;
     }
     
     @Override
