@@ -129,15 +129,4 @@ public class WorldProviderEmber extends WorldProviderSurface
         
         return super.getActualHeight();
     }
-
-    @Override
-    public double getHorizon()
-    {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
-        {
-            return 127.0D;
-        }
-        
-        return super.getHorizon();
-    }
 }
