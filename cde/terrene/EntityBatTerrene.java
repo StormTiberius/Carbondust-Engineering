@@ -39,10 +39,10 @@ public class EntityBatTerrene extends EntityBat
             var5 = 7;
         }
 
-        return var4 > this.rand.nextInt(var5) ? false : getCanSpawnHereEmber();
+        return var4 > this.rand.nextInt(var5) ? false : getCanSpawnHereTerrene();
     }
     
-    private boolean getCanSpawnHereEmber()
+    private boolean getCanSpawnHereTerrene()
     {
         return this.worldObj.checkIfAABBIsClear(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox);
     }
