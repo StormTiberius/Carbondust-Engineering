@@ -18,6 +18,6 @@ public class EntitySquidTerrene extends EntitySquid
     @Override
     public boolean getCanSpawnHere()
     {
-        return this.worldObj.checkIfAABBIsClear(this.boundingBox);
+        return this.posY > 95.0D && this.posY < 113.0D && this.worldObj.checkIfAABBIsClear(this.boundingBox);
     }
 }
