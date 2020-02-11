@@ -34,10 +34,16 @@ public class WorldGenModule
         worldGen = cfg.get(Configuration.CATEGORY_GENERAL, "worldGen", true, "Enable/Disable " + dimensionName + " WorldGen").getBoolean(true);
         
         int[][] config = new int[Namings.INTERNAL_ORE_BLOCK_NAMES.length][];
+        int[][] defaults = Defaults.ORE_GEN_DEFAULTS;
+        
+        if(dimensionName.contentEquals("Ember"))
+        {
+            defaults = Defaults.ORE_GEN_DEFAULTS_EMBER;
+        }
         
         for(int i = 0; i < config.length; i++)
         {
-            config[i] = cfg.get(Configuration.CATEGORY_GENERAL, Namings.INTERNAL_ORE_BLOCK_NAMES[i], Defaults.ORE_GEN_DEFAULTS[i], DESCRIPTION).getIntList();
+            config[i] = cfg.get(Configuration.CATEGORY_GENERAL, Namings.INTERNAL_ORE_BLOCK_NAMES[i], defaults[i], DESCRIPTION).getIntList();
         }
         
         cfg.save();
