@@ -5,7 +5,6 @@
 
 package cde.ember;
 
-import cde.EmberCore;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.util.ChunkCoordinates;
@@ -38,7 +37,7 @@ public class EmberEventManager
     @ForgeSubscribe
     public void psibe(PlayerSleepInBedEvent event)
     {
-        if(!event.entityPlayer.worldObj.isRemote && event.entityPlayer.dimension == 0)
+        if(!event.entityPlayer.worldObj.isRemote && event.entity.worldObj.getWorldInfo().getTerrainType().getWorldTypeName().contentEquals("EMBER"))
         {
             event.entityPlayer.setSpawnChunk(new ChunkCoordinates(event.x, event.y, event.z), false);
         }
@@ -47,7 +46,7 @@ public class EmberEventManager
     @ForgeSubscribe
     public void lse(LivingSpawnEvent event)
     {
-        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.dimension == EmberCore.getDimensionId())
+        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.worldObj.getWorldInfo().getTerrainType().getWorldTypeName().contentEquals("EMBER"))
         {
             if(event.entity instanceof EntityMob)
             {
