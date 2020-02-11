@@ -33,7 +33,7 @@ class StructureStrongholdStart extends StructureStart
     @Override
     protected void markAvailableHeight(World par1World, Random par2Random, int par3)
     {
-        int var4 = 127 - par3;
+        int var4 = 113 - par3;
         int var5 = this.boundingBox.getYSize() + 1;
 
         if (var5 < var4)
