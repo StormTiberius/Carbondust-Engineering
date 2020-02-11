@@ -38,7 +38,7 @@ public class BiomeGenTerreneIsland extends BiomeGenTerrene
         super.decorate(par1World, par2Random, par3, par4);
         
         int x = par3 + par2Random.nextInt(16) + 8;
-        int y = par2Random.nextInt(128);
+        int y = 50 + par2Random.nextInt(128);
         int z = par4 + par2Random.nextInt(16) + 8;
 
         if(flag)
@@ -55,7 +55,7 @@ public class BiomeGenTerreneIsland extends BiomeGenTerrene
         if(id != 0)
         {
             x = par3 + par2Random.nextInt(16) + 8;
-            y = par2Random.nextInt(128);
+            y = 50 + par2Random.nextInt(128);
             z = par4 + par2Random.nextInt(16) + 8;
 
             (new WorldGenFlowers(id)).generate(par1World, par2Random, x, y, z);
