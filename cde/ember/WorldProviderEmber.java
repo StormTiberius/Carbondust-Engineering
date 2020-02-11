@@ -5,12 +5,8 @@
 
 package cde.ember;
 
-import cde.EmberCore;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldProviderEmber extends WorldProvider
 {
@@ -19,77 +15,100 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     public String getDimensionName()
     {
-        return "Ember";
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return "Ember";
+        }
+        
+        return super.getDimensionName();
     }
     
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerEmber(EmberCore.ember, 0.8F, 0.4F);
-        dimensionId = EmberCore.getDimensionId();
-        hasNoSky = true;
-    }
-    
-    @Override
-    public IChunkProvider createChunkGenerator()
-    {
-        return new ChunkProviderEmber(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+        super.registerWorldChunkManager();
+
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            hasNoSky = true;
+        }
     }
     
     @Override
     public boolean canCoordinateBeSpawn(int par1, int par2)
     {
-        return true;
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return true;
+        }
+        
+        return super.canCoordinateBeSpawn(par1, par2);
     }
     
     @Override
     public float calculateCelestialAngle(long par1, float par3)
     {
-        return 0.5F;
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return 0.5F;
+        }
+        
+        return super.calculateCelestialAngle(par1, par3);
     }
     
     @Override
     public boolean isSurfaceWorld()
     {
-        return false;
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return false;
+        }
+        
+        return super.isSurfaceWorld();
     }
     
     @Override
     public int getAverageGroundLevel()
     {
-        return 128;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean getWorldHasVoidParticles()
-    {
-        return false;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public double getVoidFogYFactor()
-    {
-        return 1.0D;
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return 128;
+        }
+        
+        return super.getAverageGroundLevel();
     }
     
     @Override
     public ChunkCoordinates getRandomizedSpawnPoint()
     {
-        return getSpawnPoint();
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return getSpawnPoint();
+        }
+        
+        return super.getRandomizedSpawnPoint();
     }
     
     @Override
     public ChunkCoordinates getSpawnPoint()
     {
-        return SPAWN;
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return SPAWN;
+        }
+        
+        return super.getSpawnPoint
     }
     
     @Override
     public void setSpawnPoint(int x, int y, int z)
     {
-        worldObj.getWorldInfo().setSpawnPosition(SPAWN.posX, SPAWN.posY, SPAWN.posZ);
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            worldObj.getWorldInfo().setSpawnPosition(SPAWN.posX, SPAWN.posY, SPAWN.posZ);
+        }
+        
+        return super.setSpawnPoint(x, y, z);
     }
     
     @Override
@@ -101,12 +120,22 @@ public class WorldProviderEmber extends WorldProvider
     @Override
     public int getActualHeight()
     {
-        return 256;
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return 256;
+        }
+        
+        return super.getActualHeight();
     }
 
     @Override
     public double getHorizon()
     {
-        return 127.0D;
+        if(terrainType.getWorldTypeName().contentEquals("EMBER"))
+        {
+            return 127.0D;
+        }
+        
+        return super.getHorizon();
     }
 }
