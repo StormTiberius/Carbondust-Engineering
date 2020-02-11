@@ -491,7 +491,7 @@ public class ChunkProviderEmber implements IChunkProvider
         int var13;
         int var14;
 
-        if(par2 == 16 && par3 == 16 && this.worldObj.provider.dimensionId == 0)
+        if(par2 == 16 && par3 == 16)
         {
             (new WorldGenSpawn()).generate(this.worldObj, this.rand, par2, par3);
         }
