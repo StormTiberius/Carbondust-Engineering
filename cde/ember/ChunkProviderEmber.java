@@ -223,7 +223,7 @@ public class ChunkProviderEmber implements IChunkProvider
                 {
                     int var17 = (var9 * 16 + var8) * 256 + var16;
 
-                    if(var16 == 0 || var16 == 255)
+                    if(var16 < 2 || var16 > 253)
                     {
                         par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
                     }
