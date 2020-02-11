@@ -172,6 +172,22 @@ public class Defaults
         new int[]{1,7,2,0,48}
     };
     
+    public static final int[][] ORE_GEN_DEFAULTS_EMBER =
+    {    
+        new int[]{1,10,30,20,140},
+        new int[]{1,6,50,0,80},
+        new int[]{1,8,8,0,64},
+        new int[]{1,8,8,20,70},        
+        new int[]{1,3,40,0,128},
+        new int[]{1,6,2,20,32},
+        new int[]{1,6,2,32,64},
+        new int[]{1,4,14,24,124},
+        new int[]{1,6,2,0,128},
+        new int[]{1,7,4,0,96},
+        new int[]{1,7,4,0,96},
+        new int[]{1,7,4,0,96}
+    };
+    
     // LIQUID DRUM CAPACITY DEFAULTS
     public static final int DRUM_CAPACITY_IRON = 100000;
     public static final int DRUM_CAPACITY_STEEL = 200000;
