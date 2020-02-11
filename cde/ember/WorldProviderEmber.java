@@ -114,12 +114,6 @@ public class WorldProviderEmber extends WorldProviderSurface
     }
     
     @Override
-    public int getHeight()
-    {
-        return 256;
-    }
-
-    @Override
     public int getActualHeight()
     {
         if(terrainType.getWorldTypeName().contentEquals("ember"))
