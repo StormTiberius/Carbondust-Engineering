@@ -24,6 +24,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.world.WorldType;
@@ -63,7 +64,9 @@ public class EmberCore
         if(enabled)
         {
             biome = (new BiomeGenEmber(biomeId)).setColor(16440917).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.8F, 0.4F);
-            ember = new WorldTypeEmber(worldTypeId, "EMBER", 0);
+            ember = new WorldTypeEmber(worldTypeId, "ember", 0);
+            
+            LanguageRegistry.instance().addStringLocalization("generator.ember", "en_US", "Ember");
             
             FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Ember");
         }
