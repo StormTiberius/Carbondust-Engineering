@@ -15,7 +15,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public String getDimensionName()
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             return "Ember";
         }
@@ -28,7 +28,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     {
         super.registerWorldChunkManager();
 
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             hasNoSky = true;
         }
@@ -37,7 +37,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public boolean canCoordinateBeSpawn(int par1, int par2)
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             return true;
         }
@@ -48,7 +48,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public float calculateCelestialAngle(long par1, float par3)
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             return 0.5F;
         }
@@ -59,7 +59,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public boolean isSurfaceWorld()
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             return false;
         }
@@ -70,7 +70,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public int getAverageGroundLevel()
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             return 128;
         }
@@ -81,7 +81,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public ChunkCoordinates getRandomizedSpawnPoint()
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             return getSpawnPoint();
         }
@@ -92,7 +92,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public ChunkCoordinates getSpawnPoint()
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             return SPAWN;
         }
@@ -103,7 +103,7 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public void setSpawnPoint(int x, int y, int z)
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             worldObj.getWorldInfo().setSpawnPosition(SPAWN.posX, SPAWN.posY, SPAWN.posZ);
         }
@@ -116,11 +116,16 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public int getActualHeight()
     {
-        if(terrainType.getWorldTypeName().contentEquals("ember"))
+        if(isEmber())
         {
             return 256;
         }
         
         return super.getActualHeight();
+    }
+    
+    private boolean isEmber()
+    {
+        return terrainType.getWorldTypeName().contentEquals("ember");
     }
 }
