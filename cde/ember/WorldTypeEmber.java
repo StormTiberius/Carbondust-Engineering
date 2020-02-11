@@ -21,7 +21,7 @@ public class WorldTypeEmber extends WorldType
     @Override
     public WorldChunkManager getChunkManager(World world)
     {
-        return new WorldChunkManagerEmber(EmberCore.ember, 0.8F, 0.4F);
+        return new WorldChunkManagerEmber(EmberCore.biome, 0.8F, 0.4F);
     }
     
     @Override
