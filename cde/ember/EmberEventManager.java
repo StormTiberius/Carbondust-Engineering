@@ -37,7 +37,7 @@ public class EmberEventManager
     @ForgeSubscribe
     public void psibe(PlayerSleepInBedEvent event)
     {
-        if(!event.entityPlayer.worldObj.isRemote && event.entity.worldObj.getWorldInfo().getTerrainType().getWorldTypeName().contentEquals("EMBER"))
+        if(!event.entityPlayer.worldObj.isRemote && event.entity.worldObj.getWorldInfo().getTerrainType().getWorldTypeName().contentEquals("ember"))
         {
             event.entityPlayer.setSpawnChunk(new ChunkCoordinates(event.x, event.y, event.z), false);
         }
@@ -46,7 +46,7 @@ public class EmberEventManager
     @ForgeSubscribe
     public void lse(LivingSpawnEvent event)
     {
-        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.worldObj.getWorldInfo().getTerrainType().getWorldTypeName().contentEquals("EMBER"))
+        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.worldObj.getWorldInfo().getTerrainType().getWorldTypeName().contentEquals("ember"))
         {
             if(event.entity instanceof EntityMob)
             {
