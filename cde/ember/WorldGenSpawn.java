@@ -5,11 +5,97 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 public class WorldGenSpawn
-{   
+{
+    private static final ChunkCoordIntPair[] SPAWN_CHUNK_ORDER = new ChunkCoordIntPair[]
+    {
+        new ChunkCoordIntPair(16, 16),
+        new ChunkCoordIntPair(17, 17),
+        new ChunkCoordIntPair(17, 16),
+        new ChunkCoordIntPair(16, 17),
+        new ChunkCoordIntPair(17, 15),
+        new ChunkCoordIntPair(15, 17),
+        new ChunkCoordIntPair(16, 15),
+        new ChunkCoordIntPair(15, 16),
+        new ChunkCoordIntPair(15, 15),
+        new ChunkCoordIntPair(18, 18),
+        new ChunkCoordIntPair(18, 17),
+        new ChunkCoordIntPair(17, 18),
+        new ChunkCoordIntPair(18, 16),
+        new ChunkCoordIntPair(16, 18),
+        new ChunkCoordIntPair(18, 15),
+        new ChunkCoordIntPair(15, 18),
+        new ChunkCoordIntPair(18, 14),
+        new ChunkCoordIntPair(14, 18),
+        new ChunkCoordIntPair(17, 14),
+        new ChunkCoordIntPair(14, 17),
+        new ChunkCoordIntPair(16, 14),
+        new ChunkCoordIntPair(14, 16),
+        new ChunkCoordIntPair(15, 14),
+        new ChunkCoordIntPair(14, 15),
+        new ChunkCoordIntPair(14, 14),
+        new ChunkCoordIntPair(19, 19),
+        new ChunkCoordIntPair(19, 18),
+        new ChunkCoordIntPair(18, 19),
+        new ChunkCoordIntPair(19, 17),
+        new ChunkCoordIntPair(17, 19),
+        new ChunkCoordIntPair(19, 16),
+        new ChunkCoordIntPair(16, 19),
+        new ChunkCoordIntPair(19, 15),
+        new ChunkCoordIntPair(15, 19),
+        new ChunkCoordIntPair(19, 14),
+        new ChunkCoordIntPair(14, 19),
+        new ChunkCoordIntPair(19, 13),
+        new ChunkCoordIntPair(13, 19),
+        new ChunkCoordIntPair(18, 13),
+        new ChunkCoordIntPair(13, 18),
+        new ChunkCoordIntPair(17, 13),
+        new ChunkCoordIntPair(13, 17),
+        new ChunkCoordIntPair(16, 13),
+        new ChunkCoordIntPair(13, 16),
+        new ChunkCoordIntPair(15, 13),
+        new ChunkCoordIntPair(13, 15),
+        new ChunkCoordIntPair(14, 13),
+        new ChunkCoordIntPair(13, 14),
+        new ChunkCoordIntPair(13, 13),
+        new ChunkCoordIntPair(20, 20),
+        new ChunkCoordIntPair(20, 19),
+        new ChunkCoordIntPair(19, 20),
+        new ChunkCoordIntPair(20, 18),
+        new ChunkCoordIntPair(18, 20),
+        new ChunkCoordIntPair(20, 17),
+        new ChunkCoordIntPair(17, 20),
+        new ChunkCoordIntPair(20, 16),
+        new ChunkCoordIntPair(16, 20),
+        new ChunkCoordIntPair(20, 15),
+        new ChunkCoordIntPair(15, 20),
+        new ChunkCoordIntPair(20, 14),
+        new ChunkCoordIntPair(14, 20),
+        new ChunkCoordIntPair(20, 13),
+        new ChunkCoordIntPair(13, 20),
+        new ChunkCoordIntPair(20, 12),
+        new ChunkCoordIntPair(12, 20),
+        new ChunkCoordIntPair(19, 12),
+        new ChunkCoordIntPair(12, 19),
+        new ChunkCoordIntPair(18, 12),
+        new ChunkCoordIntPair(12, 18),
+        new ChunkCoordIntPair(17, 12),
+        new ChunkCoordIntPair(12, 17),
+        new ChunkCoordIntPair(16, 12),
+        new ChunkCoordIntPair(12, 16),
+        new ChunkCoordIntPair(15, 12),
+        new ChunkCoordIntPair(12, 15),
+        new ChunkCoordIntPair(14, 12),
+        new ChunkCoordIntPair(12, 14),
+        new ChunkCoordIntPair(13, 12),
+        new ChunkCoordIntPair(12, 13),
+        new ChunkCoordIntPair(12, 12)
+    };
+    
     public void generate(World world, Random random, int chunkX, int chunkZ)
     {
         int spawnY = world.provider.getSpawnPoint().posY;
