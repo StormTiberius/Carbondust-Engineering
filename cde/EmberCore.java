@@ -40,6 +40,8 @@ import net.minecraftforge.liquids.LiquidStack;
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class EmberCore
 {
+    public static final String EMBER_SPAWN_LOCATION_KEYWORD = "EmberSpawnLocation";
+    
     private static Configuration cfg;
     private static boolean enabled,mobSpawnRules;
     private static int biomeId,worldTypeId,liquidId;

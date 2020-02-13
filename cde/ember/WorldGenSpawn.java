@@ -11,94 +11,83 @@ import net.minecraftforge.common.ChestGenHooks;
 
 public class WorldGenSpawn
 {
-    private static final ChunkCoordIntPair[] SPAWN_CHUNK_ORDER = new ChunkCoordIntPair[]
-    {
-        new ChunkCoordIntPair(16, 16),
-        new ChunkCoordIntPair(17, 17),
-        new ChunkCoordIntPair(17, 16),
-        new ChunkCoordIntPair(16, 17),
-        new ChunkCoordIntPair(17, 15),
-        new ChunkCoordIntPair(15, 17),
-        new ChunkCoordIntPair(16, 15),
-        new ChunkCoordIntPair(15, 16),
-        new ChunkCoordIntPair(15, 15),
-        new ChunkCoordIntPair(18, 18),
-        new ChunkCoordIntPair(18, 17),
-        new ChunkCoordIntPair(17, 18),
-        new ChunkCoordIntPair(18, 16),
-        new ChunkCoordIntPair(16, 18),
-        new ChunkCoordIntPair(18, 15),
-        new ChunkCoordIntPair(15, 18),
-        new ChunkCoordIntPair(18, 14),
-        new ChunkCoordIntPair(14, 18),
-        new ChunkCoordIntPair(17, 14),
-        new ChunkCoordIntPair(14, 17),
-        new ChunkCoordIntPair(16, 14),
-        new ChunkCoordIntPair(14, 16),
-        new ChunkCoordIntPair(15, 14),
-        new ChunkCoordIntPair(14, 15),
-        new ChunkCoordIntPair(14, 14),
-        new ChunkCoordIntPair(19, 19),
-        new ChunkCoordIntPair(19, 18),
-        new ChunkCoordIntPair(18, 19),
-        new ChunkCoordIntPair(19, 17),
-        new ChunkCoordIntPair(17, 19),
-        new ChunkCoordIntPair(19, 16),
-        new ChunkCoordIntPair(16, 19),
-        new ChunkCoordIntPair(19, 15),
-        new ChunkCoordIntPair(15, 19),
-        new ChunkCoordIntPair(19, 14),
-        new ChunkCoordIntPair(14, 19),
-        new ChunkCoordIntPair(19, 13),
-        new ChunkCoordIntPair(13, 19),
-        new ChunkCoordIntPair(18, 13),
-        new ChunkCoordIntPair(13, 18),
-        new ChunkCoordIntPair(17, 13),
-        new ChunkCoordIntPair(13, 17),
-        new ChunkCoordIntPair(16, 13),
-        new ChunkCoordIntPair(13, 16),
-        new ChunkCoordIntPair(15, 13),
-        new ChunkCoordIntPair(13, 15),
-        new ChunkCoordIntPair(14, 13),
-        new ChunkCoordIntPair(13, 14),
-        new ChunkCoordIntPair(13, 13),
-        new ChunkCoordIntPair(20, 20),
-        new ChunkCoordIntPair(20, 19),
-        new ChunkCoordIntPair(19, 20),
-        new ChunkCoordIntPair(20, 18),
-        new ChunkCoordIntPair(18, 20),
-        new ChunkCoordIntPair(20, 17),
-        new ChunkCoordIntPair(17, 20),
-        new ChunkCoordIntPair(20, 16),
-        new ChunkCoordIntPair(16, 20),
-        new ChunkCoordIntPair(20, 15),
-        new ChunkCoordIntPair(15, 20),
-        new ChunkCoordIntPair(20, 14),
-        new ChunkCoordIntPair(14, 20),
-        new ChunkCoordIntPair(20, 13),
-        new ChunkCoordIntPair(13, 20),
-        new ChunkCoordIntPair(20, 12),
-        new ChunkCoordIntPair(12, 20),
-        new ChunkCoordIntPair(19, 12),
-        new ChunkCoordIntPair(12, 19),
-        new ChunkCoordIntPair(18, 12),
-        new ChunkCoordIntPair(12, 18),
-        new ChunkCoordIntPair(17, 12),
-        new ChunkCoordIntPair(12, 17),
-        new ChunkCoordIntPair(16, 12),
-        new ChunkCoordIntPair(12, 16),
-        new ChunkCoordIntPair(15, 12),
-        new ChunkCoordIntPair(12, 15),
-        new ChunkCoordIntPair(14, 12),
-        new ChunkCoordIntPair(12, 14),
-        new ChunkCoordIntPair(13, 12),
-        new ChunkCoordIntPair(12, 13),
-        new ChunkCoordIntPair(12, 12)
-    };
+    private int yyy;
     
-    public void generate(World world, Random random, int chunkX, int chunkZ)
+    private boolean isCaveNear(World world, ChunkCoordIntPair pair)
     {
-        int spawnY = world.provider.getSpawnPoint().posY;
+        for(int i = 128; i > 20; i--)
+        {
+            if(world.getBlockId(pair.chunkXPos * 16 + 8, i, pair.chunkZPos * 16 + 8) == 0)
+            {
+                yyy = i;
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private ChunkCoordIntPair getSpawnChunk(World world, int chunkX, int chunkZ)
+    {
+        ChunkCoordIntPair pair = new ChunkCoordIntPair(chunkX, chunkZ);
+        
+        if(isCaveNear(world, pair))
+        {
+            return (new ChunkCoordIntPair(chunkX, chunkZ));
+        }
+        
+        for(int size = 2; size < 9; size+=2)
+        {   
+            int x = chunkX + size / 2;
+            int z = chunkZ + size / 2;
+                
+            for(int i = 0; i < size; i++)
+            {
+                pair = new ChunkCoordIntPair(x - i, z);
+                
+                if(isCaveNear(world, pair))
+                {
+                    return pair;
+                }
+                
+                pair = new ChunkCoordIntPair(x, z - i - 1);
+                
+                if(isCaveNear(world, pair))
+                {
+                    return pair;
+                }
+
+            }
+            
+            for(int i = 0; i < size; i++)
+            {
+                pair = new ChunkCoordIntPair(x - size, z - i);
+                
+                if(isCaveNear(world, pair))
+                {
+                    return pair;
+                }
+                
+                pair = new ChunkCoordIntPair(x - i - 1, z - size);
+                
+                if(isCaveNear(world, pair))
+                {
+                    return pair;
+                }
+            }
+        }
+        
+        return new ChunkCoordIntPair(16, 16);
+    }
+    
+    public void generate(World world, Random random, int centerChunkX, int centerChunkZ)
+    {
+        ChunkCoordIntPair pair = getSpawnChunk(world, centerChunkX, centerChunkZ);
+        
+        int chunkX = pair.chunkXPos;
+        int chunkZ = pair.chunkZPos;
+        
+        int spawnY = yyy; // world.provider.getSpawnPoint().posY;
         
         int xPos,yPos,zPos;
         
@@ -139,6 +128,8 @@ public class WorldGenSpawn
         world.setBlockWithNotify(xPos, yPos, zPos + 1, Block.torchWood.blockID);
         world.setBlockWithNotify(xPos - 1, yPos, zPos, Block.torchWood.blockID);
         world.setBlockWithNotify(xPos, yPos, zPos - 1, Block.torchWood.blockID);
+        
+        ((WorldProviderEmber)world.provider).setLocationData(xPos, yPos, zPos);
         
         int[] ra = getRandomizedArray(20, random);
         

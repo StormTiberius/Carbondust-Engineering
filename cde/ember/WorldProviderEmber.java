@@ -5,12 +5,15 @@
 
 package cde.ember;
 
+import cde.EmberCore;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProviderSurface;
+import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderEmber extends WorldProviderSurface
 {
-    private static final ChunkCoordinates SPAWN = new ChunkCoordinates(264,20,264);
+    private ChunkCoordinates spawnPoint;
+    private LocationData ld = new LocationData(EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
     
     @Override
     public String getDimensionName()
@@ -31,6 +34,13 @@ public class WorldProviderEmber extends WorldProviderSurface
         if(isEmber())
         {
             hasNoSky = true;
+            
+            LocationData data = (LocationData)worldObj.loadItemData(LocationData.class, EmberCore.EMBER_SPAWN_LOCATION_KEYWORD);
+
+            if(data != null)
+            {
+                ld = data;
+            }
         }
     }
     
@@ -92,12 +102,15 @@ public class WorldProviderEmber extends WorldProviderSurface
     @Override
     public ChunkCoordinates getSpawnPoint()
     {
-        if(isEmber())
+        ChunkCoordinates cc = ld.getSpawnLocation();
+        WorldInfo info = worldObj.getWorldInfo();
+        
+        if(cc.posX != info.getSpawnX() || cc.posY != info.getSpawnY() || cc.posZ != info.getSpawnZ())
         {
-            return SPAWN;
+            info.setSpawnPosition(cc.posX, cc.posY, cc.posZ);
         }
         
-        return super.getSpawnPoint();
+        return cc;
     }
     
     @Override
@@ -105,7 +118,8 @@ public class WorldProviderEmber extends WorldProviderSurface
     {
         if(isEmber())
         {
-            worldObj.getWorldInfo().setSpawnPosition(SPAWN.posX, SPAWN.posY, SPAWN.posZ);
+            ChunkCoordinates cc = ld.getSpawnLocation();
+            worldObj.getWorldInfo().setSpawnPosition(cc.posX, cc.posY, cc.posZ);
         }
         else
         {
@@ -127,5 +141,10 @@ public class WorldProviderEmber extends WorldProviderSurface
     private boolean isEmber()
     {
         return terrainType.getWorldTypeName().contentEquals("ember");
+    }
+    
+    public void setLocationData(int x, int y, int z)
+    {
+        ld.setSpawnLocation(x, y, z);
     }
 }

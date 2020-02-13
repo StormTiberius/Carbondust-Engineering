@@ -490,11 +490,6 @@ public class ChunkProviderEmber implements IChunkProvider
         int var12;
         int var13;
         int var14;
-
-        if(par2 == 16 && par3 == 16)
-        {
-            (new WorldGenSpawn()).generate(this.worldObj, this.rand, par2, par3);
-        }
         
         if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, var11, LAKE) && !var11 && this.rand.nextInt(2) == 0)
         {
@@ -530,6 +525,11 @@ public class ChunkProviderEmber implements IChunkProvider
                 case 2: (new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.grass.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
                 case 3: (new WorldGenDungeons(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
             }
+        }
+        
+        if(par2 == 27 && par3 == 27)
+        {
+            (new WorldGenSpawn()).generate(this.worldObj, this.rand, 16, 16);
         }
 
         var6.decorate(this.worldObj, this.rand, var4, var5);
