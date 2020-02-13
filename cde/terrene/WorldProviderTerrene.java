@@ -16,7 +16,7 @@ public class WorldProviderTerrene extends WorldProviderSurface
 {
     private static final String KEY = "EmberSpawnPoint";
     
-    private LocationData spawnPoint = new LocationData(KEY);
+    private SpawnPoint spawnPoint = new SpawnPoint(KEY);
     private long time;
     
     @Override
@@ -28,7 +28,7 @@ public class WorldProviderTerrene extends WorldProviderSurface
         {
             hasNoSky = true;
             
-            LocationData ld = (LocationData)worldObj.loadItemData(LocationData.class, KEY);
+            SpawnPoint ld = (SpawnPoint)worldObj.loadItemData(SpawnPoint.class, KEY);
             
             if(ld != null)
             {
@@ -259,7 +259,7 @@ public class WorldProviderTerrene extends WorldProviderSurface
         
         if(isEmber())
         {
-            ChunkCoordinates cc = spawnPoint.getSpawnLocation();
+            ChunkCoordinates cc = spawnPoint.getSpawnPoint();
             WorldInfo info = worldObj.getWorldInfo();
             
             if(cc.posX != info.getSpawnX() || cc.posY != info.getSpawnY() || cc.posZ != info.getSpawnZ())
@@ -278,7 +278,7 @@ public class WorldProviderTerrene extends WorldProviderSurface
     {
         if(isEmber())
         {
-            ChunkCoordinates cc = spawnPoint.getSpawnLocation();
+            ChunkCoordinates cc = spawnPoint.getSpawnPoint();
             worldObj.getWorldInfo().setSpawnPosition(cc.posX, cc.posY, cc.posZ);
         }
         
