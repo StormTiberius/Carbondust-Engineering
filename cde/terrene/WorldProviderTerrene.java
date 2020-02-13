@@ -10,34 +10,52 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProviderSurface;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderTerrene extends WorldProviderSurface
 {
-    private long time;
+    private static final String KEY = "EmberSpawnPoint";
     
-    @Override
-    public String getDimensionName()
-    {
-        return "Terrene";
-    }
+    private LocationData spawnPoint = new LocationData(KEY);
+    private long time;
     
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerTropics(worldObj);
+        super.registerWorldChunkManager();
+        
+        if(isEmber())
+        {
+            hasNoSky = true;
+            
+            LocationData ld = (LocationData)worldObj.loadItemData(LocationData.class, KEY);
+            
+            if(ld != null)
+            {
+                spawnPoint = ld;
+            }
+        }
     }
     
     @Override
-    public IChunkProvider createChunkGenerator()
+    public boolean canCoordinateBeSpawn(int par1, int par2)
     {
-        return new ChunkProviderTropics(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+        if(isEmber())
+        {
+            return true;
+        }
+        
+        return super.canCoordinateBeSpawn(par1, par2);
     }
     
     @Override
     public float calculateCelestialAngle(long par1, float par3)
     {
+        if(isEmber())
+        {
+            return 0.5F;
+        }
+        
         int var4 = (int)(par1 % (24000L * TerreneCore.getDayCycleDurationMultiplier()));
         float var5 = ((float)var4 + par3) / (24000.0F * TerreneCore.getDayCycleDurationMultiplier()) - 0.25F;
         
@@ -64,31 +82,59 @@ public class WorldProviderTerrene extends WorldProviderSurface
         return (int)(par1 / (24000L * TerreneCore.getDayCycleDurationMultiplier())) % 8;
     }
     
+    @Override
+    public boolean isSurfaceWorld()
+    {
+        if(isEmber())
+        {
+            return false;
+        }
+        
+        return super.isSurfaceWorld();
+    }
+    
     @SideOnly(Side.CLIENT)
     @Override
     public float getCloudHeight()
     {
-        return 242.0F;
+        if(isTropics())
+        {
+            return 242.0F;
+        }
+        
+        if(isEmber())
+        {
+            return 256.0F;
+        }
+        
+        return super.getCloudHeight();
     }
     
     @Override
-    public int getAverageGroundLevel()
+    public String getDimensionName()
     {
-        return 114;
+        if(isTropics())
+        {
+            return "Tropics";
+        }
+        
+        if(isEmber())
+        {
+            return "Ember";
+        }
+        
+        return "Overworld";
     }
     
-    @SideOnly(Side.CLIENT)
     @Override
-    public boolean getWorldHasVoidParticles()
+    public ChunkCoordinates getRandomizedSpawnPoint()
     {
-        return false;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public double getVoidFogYFactor()
-    {
-        return 1.0D;
+        if(isEmber())
+        {
+            getSpawnPoint();
+        }
+        
+        return super.getRandomizedSpawnPoint();
     }
     
     @Override
@@ -202,29 +248,52 @@ public class WorldProviderTerrene extends WorldProviderSurface
     @Override
     public ChunkCoordinates getSpawnPoint()
     {
-        int i = 16 << TerreneCore.getIslandSize();
+        if(isTropics())
+        {
+            int i = 16 << TerreneCore.getIslandSize();
+            
+            i += 8;
+            
+            return new ChunkCoordinates(i, worldObj.getTopSolidOrLiquidBlock(i, i), i);
+        }
         
-        i += 8;
+        if(isEmber())
+        {
+            ChunkCoordinates cc = spawnPoint.getSpawnLocation();
+            WorldInfo info = worldObj.getWorldInfo();
+            
+            if(cc.posX != info.getSpawnX() || cc.posY != info.getSpawnY() || cc.posZ != info.getSpawnZ())
+            {
+                info.setSpawnPosition(cc.posX, cc.posY, cc.posZ);
+            }
+            
+            return cc;
+        }
         
-        return new ChunkCoordinates(i, worldObj.getTopSolidOrLiquidBlock(i, i), i);
+        return super.getSpawnPoint();
     }
     
     @Override
-    public int getHeight()
+    public void setSpawnPoint(int x, int y, int z)
     {
-        return 256;
+        if(isEmber())
+        {
+            ChunkCoordinates cc = spawnPoint.getSpawnLocation();
+            worldObj.getWorldInfo().setSpawnPosition(cc.posX, cc.posY, cc.posZ);
+        }
+        
+        super.setSpawnPoint(x, y, z);
     }
     
     @Override
     public int getActualHeight()
     {
-        return 256;
-    }
-    
-    @Override
-    public double getHorizon()
-    {
-        return 113.0D;
+        if(isEmber())
+        {
+            return 256;
+        }
+        
+        return super.getActualHeight();
     }
     
     @Override
@@ -242,5 +311,20 @@ public class WorldProviderTerrene extends WorldProviderSurface
         }
         
         super.resetRainAndThunder();
+    }
+    
+    private boolean isTropics()
+    {
+        return terrainType.getWorldTypeID() == TerreneCore.getTropicsId();
+    }
+    
+    private boolean isEmber()
+    {
+        return terrainType.getWorldTypeID() == TerreneCore.getEmberId();
+    }
+    
+    public void setSpawnPoint(ChunkCoordinates ck)
+    {
+        spawnPoint.setSpawnPoint(ck.posX, ck.posY, ck.posZ);
     }
 }
