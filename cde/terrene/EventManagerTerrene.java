@@ -7,25 +7,33 @@ package cde.terrene;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.event.Event;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 
 public class EventManagerTerrene
 {
+    private final int TROPICS_ID,EMBER_ID;
+    private final boolean MOB_SPAWN_RULES;
     private final int[] ALLOWED_BLOCK_IDS;
     
-    public EventManagerTerrene()
+    public EventManagerTerrene(int tropicsId, int emberId, boolean flag)
     {
+        TROPICS_ID = tropicsId;
+        EMBER_ID = emberId;
+        MOB_SPAWN_RULES = flag;
+        
         ALLOWED_BLOCK_IDS = new int[]
-        {    
-            Block.stone.blockID, 
-            Block.cobblestone.blockID, 
-            Block.cobblestoneMossy.blockID, 
-            Block.dirt.blockID, 
-            Block.grass.blockID, 
-            Block.sand.blockID, 
-            Block.gravel.blockID, 
+        {
+            Block.stone.blockID,
+            Block.cobblestone.blockID,
+            Block.cobblestoneMossy.blockID,
+            Block.dirt.blockID,
+            Block.grass.blockID,
+            Block.sand.blockID,
+            Block.gravel.blockID,
             Block.obsidian.blockID,
             Block.blockSnow.blockID,
             Block.bedrock.blockID
@@ -33,9 +41,18 @@ public class EventManagerTerrene
     }
     
     @ForgeSubscribe
+    public void psibe(PlayerSleepInBedEvent event)
+    {
+        if(!event.entityPlayer.worldObj.isRemote && event.entity.dimension == 0 && event.entity.worldObj.getWorldInfo().getTerrainType().getWorldTypeID() == EMBER_ID)
+        {
+            event.entityPlayer.setSpawnChunk(new ChunkCoordinates(event.x, event.y, event.z), false);
+        }
+    }
+    
+    @ForgeSubscribe
     public void lse(LivingSpawnEvent event)
     {
-        if(event.entity.dimension == 0)
+        if(MOB_SPAWN_RULES && !event.entity.worldObj.isRemote && event.entity.dimension == 0)
         {
             if(event.entity instanceof EntityMob)
             {
