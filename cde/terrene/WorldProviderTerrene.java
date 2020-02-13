@@ -26,13 +26,13 @@ public class WorldProviderTerrene extends WorldProviderSurface
     @Override
     protected void registerWorldChunkManager()
     {
-        worldChunkMgr = new WorldChunkManagerTerrene(worldObj);
+        worldChunkMgr = new WorldChunkManagerTropics(worldObj);
     }
     
     @Override
     public IChunkProvider createChunkGenerator()
     {
-        return new ChunkProviderTerrene(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+        return new ChunkProviderTropics(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
     }
     
     @Override
