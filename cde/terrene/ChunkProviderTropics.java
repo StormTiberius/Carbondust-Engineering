@@ -230,7 +230,7 @@ public class ChunkProviderTropics implements IChunkProvider
         MinecraftForge.EVENT_BUS.post(event);
         if (event.getResult() == Result.DENY) return;
 
-        byte var5 = 63;
+        byte var5 = 113;
         double var6 = 0.03125D;
         this.stoneNoise = this.noiseGen4.generateNoiseOctaves(this.stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
@@ -249,7 +249,7 @@ public class ChunkProviderTropics implements IChunkProvider
                 {
                     int var17 = (var9 * 16 + var8) * 256 + var16;
 
-                    if (var16 <= 0)
+                    if (var16 < 2)
                     {
                         par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
                     }
