@@ -7,9 +7,9 @@ package cde.terrene;
 
 import net.minecraft.block.Block;
 
-public class BiomeGenTerreneOcean extends BiomeGenTerrene
+public class BiomeGenTropicsOcean extends BiomeGenTropics
 {
-    public BiomeGenTerreneOcean(int id)
+    public BiomeGenTropicsOcean(int id)
     {
         super(id);
         

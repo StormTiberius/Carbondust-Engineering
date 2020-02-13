@@ -8,11 +8,11 @@ package cde;
 import cde.core.Version;
 import cde.terrene.EntityBatTerrene;
 import cde.terrene.EntitySquidTerrene;
-import cde.terrene.BiomeGenTerreneBeach;
-import cde.terrene.BiomeGenTerreneIsland;
-import cde.terrene.BiomeGenTerreneOcean;
+import cde.terrene.BiomeGenTropicsBeach;
+import cde.terrene.BiomeGenTropicsIsland;
+import cde.terrene.BiomeGenTropicsOcean;
 import cde.terrene.EventManagerTerrene;
-import cde.terrene.WorldChunkManagerTerrene;
+import cde.terrene.WorldChunkManagerTropics;
 import cde.terrene.WorldProviderTerrene;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -75,12 +75,12 @@ public class TerreneCore
         
         if(enabled)
         {
-            island = (new BiomeGenTerreneIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            beach = (new BiomeGenTerreneBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            ocean = (new BiomeGenTerreneOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
+            island = (new BiomeGenTropicsIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
             
-            WorldChunkManagerTerrene.allowedBiomes.clear();
-            WorldChunkManagerTerrene.allowedBiomes.add(island);
+            WorldChunkManagerTropics.allowedBiomes.clear();
+            WorldChunkManagerTropics.allowedBiomes.add(island);
             
             FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Terrene");
         }
