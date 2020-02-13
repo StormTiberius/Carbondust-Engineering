@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldSavedData;
 
-public class LocationData extends WorldSavedData
+public class SpawnPoint extends WorldSavedData
 {
     public static final int SPAWN_X = 264;
     public static final int SPAWN_Y = 128;
@@ -17,7 +17,7 @@ public class LocationData extends WorldSavedData
     
     private final ChunkCoordinates c;
     
-    public LocationData(String s)
+    public SpawnPoint(String s)
     {
         super(s);
         c = new ChunkCoordinates(SPAWN_X, SPAWN_Y, SPAWN_Z);
@@ -37,12 +37,12 @@ public class LocationData extends WorldSavedData
         tag.setInteger("zPos", c.posZ);
     }
     
-    public ChunkCoordinates getSpawnLocation()
+    public ChunkCoordinates getSpawnPoint()
     {
         return c;
     }
     
-    public void setSpawnLocation(int x, int y, int z)
+    public void setSpawnPoint(int x, int y, int z)
     {
         c.set(x, y, z);
         markDirty();
