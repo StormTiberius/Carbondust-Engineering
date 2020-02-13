@@ -32,6 +32,17 @@ public class WorldTypeTropics extends WorldType
     }
     
     @Override
+    public int getMinimumSpawnHeight(World world)
+    {
+        return 114;
+    }
+    
+    @Override
+    public double getHorizon(World world)
+    {
+        return 113.0D;
+    }
+    @Override
     public boolean hasVoidParticles(boolean var1)
     {
         return false;
