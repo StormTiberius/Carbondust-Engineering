@@ -12,7 +12,6 @@ import cde.terrene.EntitySquidTerrene;
 import cde.terrene.BiomeGenTropicsBeach;
 import cde.terrene.BiomeGenTropicsIsland;
 import cde.terrene.BiomeGenTropicsOcean;
-import cde.terrene.EmberEventManager;
 import cde.terrene.EventManagerTerrene;
 import cde.terrene.WorldChunkManagerTropics;
 import cde.terrene.WorldProviderTerrene;
