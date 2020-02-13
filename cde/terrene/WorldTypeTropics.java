@@ -42,6 +42,7 @@ public class WorldTypeTropics extends WorldType
     {
         return 113.0D;
     }
+    
     @Override
     public boolean hasVoidParticles(boolean var1)
     {
