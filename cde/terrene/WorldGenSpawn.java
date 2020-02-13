@@ -129,7 +129,7 @@ public class WorldGenSpawn
         world.setBlockWithNotify(xPos - 1, yPos, zPos, Block.torchWood.blockID);
         world.setBlockWithNotify(xPos, yPos, zPos - 1, Block.torchWood.blockID);
         
-        ((WorldProviderTerrene)world.provider).setLocationData(xPos, yPos, zPos);
+        ((WorldProviderTerrene)world.provider).setSpawnPoint(new ChunkCoordinates(xPos, yPos, zPos));
         
         int[] ra = getRandomizedArray(20, random);
         
