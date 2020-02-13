@@ -7,8 +7,6 @@ package cde.terrene;
 
 import cde.EmberCore;
 import cde.ember.BiomeDecoratorEmber;
-import cde.ember.EntityBatEmber;
-import cde.ember.EntitySquidEmber;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -27,8 +25,8 @@ public class BiomeGenEmber extends BiomeGenBase
         spawnableWaterCreatureList.clear();
         field_82914_M.clear();
         
-        spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidEmber.class, 10, 4, 4));
-        field_82914_M.add(new SpawnListEntry(EntityBatEmber.class, 10, 8, 8));
+        spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTerrene.class, 10, 4, 4));
+        field_82914_M.add(new SpawnListEntry(EntityBatTerrene.class, 10, 8, 8));
     }
     
     @Override
