@@ -5,10 +5,7 @@
 
 package cde.terrene;
 
-import cde.EmberCore;
 import cde.TerreneCore;
-import cde.ember.ChunkProviderEmber;
-import cde.ember.WorldChunkManagerEmber;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -25,13 +22,13 @@ public class WorldTypeTropics extends WorldType
     @Override
     public WorldChunkManager getChunkManager(World world)
     {
-        return new WorldChunkManagerEmber(EmberCore.biome, 0.8F, 0.4F);
+        return new WorldChunkManagerTropics(world);
     }
     
     @Override
     public IChunkProvider getChunkGenerator(World world, String generatorOptions)
     {
-        return new ChunkProviderEmber(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
+        return new ChunkProviderTropics(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
     }
     
     @Override
