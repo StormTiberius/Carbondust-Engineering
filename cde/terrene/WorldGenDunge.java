@@ -1,4 +1,4 @@
-package cde.ember;
+package cde.terrene;
 
 import forestry.api.core.BlockInterface;
 import java.util.Random;
@@ -19,13 +19,13 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import net.minecraftforge.common.ChestGenHooks;
 
-public class WorldGenDungeons extends WorldGenerator
+public class WorldGenDunge extends WorldGenerator
 {
     private static final String[] DUNGEON_MOBS = {"Skeleton", "Zombie", "Spider", "Creeper", "Enderman"};
     private final String loot;
     private final int floorBlockId,wallBlockId;
     
-    public WorldGenDungeons(String loot, int floorBlockId, int wallBlockId)
+    public WorldGenDunge(String loot, int floorBlockId, int wallBlockId)
     {
         this.loot = loot;
         this.floorBlockId = floorBlockId;

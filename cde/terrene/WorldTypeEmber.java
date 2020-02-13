@@ -6,8 +6,6 @@
 package cde.terrene;
 
 import cde.EmberCore;
-import cde.ember.ChunkProviderEmber;
-import cde.ember.WorldChunkManagerEmber;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;

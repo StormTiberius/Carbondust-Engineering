@@ -6,7 +6,6 @@
 package cde.terrene;
 
 import cde.EmberCore;
-import cde.ember.BiomeDecoratorEmber;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;

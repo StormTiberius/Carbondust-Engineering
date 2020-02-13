@@ -3,8 +3,9 @@
  * @author StormTiberius
  */
 
-package cde.ember;
+package cde.terrene;
 
+import cde.terrene.LocationData;
 import cde.EmberCore;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProviderSurface;
