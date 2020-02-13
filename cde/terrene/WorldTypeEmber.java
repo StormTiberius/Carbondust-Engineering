@@ -32,6 +32,18 @@ public class WorldTypeEmber extends WorldType
     }
     
     @Override
+    public int getMinimumSpawnHeight(World world)
+    {
+        return 128;
+    }
+    
+    @Override
+    public double getHorizon(World world)
+    {
+        return 127.0D;
+    }
+    
+    @Override
     public boolean hasVoidParticles(boolean var1)
     {
         return false;
