@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProviderSurface;
+import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderTerrene extends WorldProviderSurface
@@ -28,11 +29,11 @@ public class WorldProviderTerrene extends WorldProviderSurface
         {
             hasNoSky = true;
             
-            SpawnPoint sp = (SpawnPoint)worldObj.loadItemData(SpawnPoint.class, KEY);
+            WorldSavedData wsd = worldObj.loadItemData(SpawnPoint.class, KEY);
             
-            if(sp != null)
+            if(wsd != null)
             {
-                spawnPoint = sp;
+                spawnPoint = (SpawnPoint)wsd;
             }
         }
     }
