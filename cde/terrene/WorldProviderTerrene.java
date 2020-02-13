@@ -28,11 +28,11 @@ public class WorldProviderTerrene extends WorldProviderSurface
         {
             hasNoSky = true;
             
-            SpawnPoint ld = (SpawnPoint)worldObj.loadItemData(SpawnPoint.class, KEY);
+            SpawnPoint sp = (SpawnPoint)worldObj.loadItemData(SpawnPoint.class, KEY);
             
-            if(ld != null)
+            if(sp != null)
             {
-                spawnPoint = ld;
+                spawnPoint = sp;
             }
         }
     }
