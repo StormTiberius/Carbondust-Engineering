@@ -19,7 +19,7 @@ public abstract class BiomeGenTropics extends BiomeGenBase
     {
         super(id);
         
-        theBiomeDecorator = new BiomeDecoratorTerrene(this);
+        theBiomeDecorator = new BiomeDecoratorTropics(this);
         
         spawnableWaterCreatureList.clear();
         spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTerrene.class, 10, 4, 4));
