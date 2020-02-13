@@ -5,6 +5,7 @@
 
 package cde.terrene;
 
+import cde.TerreneCore;
 import java.util.Calendar;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.util.MathHelper;
@@ -22,7 +23,14 @@ public class EntityBatTerrene extends EntityBat
     {
         int var1 = MathHelper.floor_double(this.boundingBox.minY);
 
-        if (var1 >= 113)
+        int y = 113;
+        
+        if(worldObj.getWorldInfo().getTerrainType().getWorldTypeID() == TerreneCore.getEmberId())
+        {
+            y = 253;
+        }
+        
+        if (var1 >= y)
         {
             return false;
         }
