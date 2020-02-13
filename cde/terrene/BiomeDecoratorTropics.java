@@ -51,7 +51,7 @@ public class BiomeDecoratorTropics extends BiomeDecorator
     {
         MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(currentWorld, randomGenerator, chunk_X, chunk_Z));
         
-        this.generateOres();
+        generateOres();
         
         int var1;
         int var2;
