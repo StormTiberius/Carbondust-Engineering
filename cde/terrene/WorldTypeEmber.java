@@ -5,7 +5,7 @@
 
 package cde.terrene;
 
-import cde.EmberCore;
+import cde.TerreneCore;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -22,7 +22,7 @@ public class WorldTypeEmber extends WorldType
     @Override
     public WorldChunkManager getChunkManager(World world)
     {
-        return new WorldChunkManagerEmber(EmberCore.biome, 0.8F, 0.4F);
+        return new WorldChunkManagerEmber(TerreneCore.cave, 0.8F, 0.4F);
     }
     
     @Override
@@ -46,6 +46,6 @@ public class WorldTypeEmber extends WorldType
     @Override
     public BiomeGenBase[] getBiomesForWorldType()
     {
-        return new BiomeGenBase[] {EmberCore.biome};
+        return new BiomeGenBase[] {TerreneCore.cave};
     }
 }
