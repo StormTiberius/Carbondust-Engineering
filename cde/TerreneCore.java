@@ -48,10 +48,9 @@ import net.minecraftforge.liquids.LiquidStack;
 public class TerreneCore
 {
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
-    public static final String EMBER_SPAWN_LOCATION_KEYWORD = "EmberSpawnLocation";
     
     private static int dayCycleDurationMultiplier = 1;
-    private static int islandId,beachId,oceanId,caveId,islandSize,islandScarcity,liquidId,indigoFlowerId,tropicsId,emberId;
+    private static int islandId,beachId,oceanId,caveId,tropicsId,emberId,liquidId,indigoFlowerId,islandSize,islandScarcity;
     private static int[] weatherDurations = WEATHER_DURATIONS;
     private static boolean enabled,sisterIslands,mobSpawnRules;
     private static Configuration cfg;
@@ -65,7 +64,7 @@ public class TerreneCore
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/terrene.cfg"));
         cfg.load();
         
-        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "terrene", false, "Enable/Disable Terrene").getBoolean(false);
+        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "terrene", true, "Enable/Disable Terrene").getBoolean(true);
         sisterIslands = cfg.get(Configuration.CATEGORY_GENERAL, "sisterIslands", true, "Sister Islands").getBoolean(true);
         mobSpawnRules = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
         
@@ -90,7 +89,6 @@ public class TerreneCore
             island = (new BiomeGenTropicsIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
             ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
-            
             cave = (new BiomeGenEmber(caveId)).setColor(16440917).setBiomeName("Ember").setDisableRain().setTemperatureRainfall(0.8F, 0.4F);
             
             tropics = new WorldTypeTropics(tropicsId, "tropics", 0);
@@ -102,7 +100,7 @@ public class TerreneCore
             WorldChunkManagerTropics.allowedBiomes.clear();
             WorldChunkManagerTropics.allowedBiomes.add(island);
             
-            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Terrene");
+            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Tropics");
             FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Ember");
         }
     }
@@ -118,12 +116,7 @@ public class TerreneCore
             BiomeManager.addVillageBiome(island, true);
             BiomeManager.addVillageBiome(beach, true);
             
-            if(mobSpawnRules)
-            {
-                MinecraftForge.EVENT_BUS.register(new EventManagerTerrene());
-            }
-            
-            MinecraftForge.EVENT_BUS.register(new EmberEventManager(mobSpawnRules));
+            MinecraftForge.EVENT_BUS.register(new EventManagerTerrene(tropicsId, emberId, mobSpawnRules));
             
             EntityRegistry.registerModEntity(EntitySquidTerrene.class, "TerreneSquid", 0, this, 64, 3, true);
             EntityRegistry.registerModEntity(EntityBatTerrene.class, "TerreneBat", 1, this, 80, 3, false);
@@ -217,7 +210,7 @@ public class TerreneCore
     {
         return tropicsId;
     }
-        
+    
     public static int getEmberId()
     {
         return emberId;
