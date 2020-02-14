@@ -520,10 +520,10 @@ public class ChunkProviderEmber implements IChunkProvider
 
             switch(this.rand.nextInt(4))
             {
-                case 0: (new WorldGenDunge(ChestGenHooks.PYRAMID_DESERT_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
-                case 1: (new WorldGenDunge(ChestGenHooks.PYRAMID_JUNGLE_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
-                case 2: (new WorldGenDunge(ChestGenHooks.VILLAGE_BLACKSMITH, Block.grass.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
-                case 3: (new WorldGenDunge(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
+                case 0: (new WorldGenDungeons(ChestGenHooks.PYRAMID_DESERT_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
+                case 1: (new WorldGenDungeons(ChestGenHooks.PYRAMID_JUNGLE_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
+                case 2: (new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.grass.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
+                case 3: (new WorldGenDungeons(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID)).generate(this.worldObj, this.rand, var13, var14, var15); break;
             }
         }
         
