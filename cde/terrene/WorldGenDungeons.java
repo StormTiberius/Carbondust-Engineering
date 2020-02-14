@@ -1,3 +1,8 @@
+/**
+ *
+ * @author StormTiberius
+ */
+
 package cde.terrene;
 
 import forestry.api.core.BlockInterface;
@@ -10,18 +15,14 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DungeonHooks;
-import net.minecraftforge.common.MinecraftForge;
 
 public class WorldGenDungeons extends WorldGenerator
 {
@@ -36,6 +37,7 @@ public class WorldGenDungeons extends WorldGenerator
         this.WALL_BLOCK_ID = wallBlockId;
     }
     
+    @Override
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         byte var6 = 3;
@@ -208,6 +210,10 @@ public class WorldGenDungeons extends WorldGenerator
                         }
                     }
                 }
+                else
+                {
+                    par1World.setBlockAndMetadataWithNotify(par3, par4 + 3, par5, Block.glowStone.blockID, 0);
+                }
                 
                 EntityAnimal animal;
                 
@@ -248,22 +254,6 @@ public class WorldGenDungeons extends WorldGenerator
             return false;
         }
     }
-
-    /**
-     * Picks potentially a random item to add to a dungeon chest.
-     */
-    private ItemStack pickCheckLootItem(Random par1Random)
-    {
-        return ChestGenHooks.getOneItem(LOOT, par1Random);
-    }
-
-    /**
-     * Randomly decides which spawner to use in a dungeon
-     */
-    private String pickMobSpawner(Random par1Random)
-    {
-        return DUNGEON_MOBS[par1Random.nextInt(DUNGEON_MOBS.length)];
-    }
     
     private int[] getRandomizedArray(int size, Random r)
     {
@@ -286,5 +276,74 @@ public class WorldGenDungeons extends WorldGenerator
         }
         
         return array;
+    }
+    
+    private int yyy;
+    
+    private boolean isCaveNear(World world, ChunkCoordIntPair pair)
+    {
+        for(int i = 128; i > 20; i--)
+        {
+            if(world.getBlockId(pair.chunkXPos * 16 + 8, i, pair.chunkZPos * 16 + 8) == 0)
+            {
+                yyy = i;
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private ChunkCoordIntPair getSpawnChunk(World world, int chunkX, int chunkZ)
+    {
+        ChunkCoordIntPair pair = new ChunkCoordIntPair(chunkX, chunkZ);
+        
+        if(isCaveNear(world, pair))
+        {
+            return (new ChunkCoordIntPair(chunkX, chunkZ));
+        }
+        
+        for(int size = 2; size < 9; size+=2)
+        {   
+            int x = chunkX + size / 2;
+            int z = chunkZ + size / 2;
+                
+            for(int i = 0; i < size; i++)
+            {
+                pair = new ChunkCoordIntPair(x - i, z);
+                
+                if(isCaveNear(world, pair))
+                {
+                    return pair;
+                }
+                
+                pair = new ChunkCoordIntPair(x, z - i - 1);
+                
+                if(isCaveNear(world, pair))
+                {
+                    return pair;
+                }
+
+            }
+            
+            for(int i = 0; i < size; i++)
+            {
+                pair = new ChunkCoordIntPair(x - size, z - i);
+                
+                if(isCaveNear(world, pair))
+                {
+                    return pair;
+                }
+                
+                pair = new ChunkCoordIntPair(x - i - 1, z - size);
+                
+                if(isCaveNear(world, pair))
+                {
+                    return pair;
+                }
+            }
+        }
+        
+        return new ChunkCoordIntPair(16, 16);
     }
 }
