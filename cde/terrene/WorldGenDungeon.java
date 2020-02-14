@@ -1,23 +1,33 @@
 package cde.terrene;
 
-import net.minecraft.world.gen.feature.*;
+import forestry.api.core.BlockInterface;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DungeonHooks;
-import net.minecraftforge.common.MinecraftForge;
 
-public class WorldGenDungeons extends WorldGenerator
+public class WorldGenDungeon extends WorldGenerator
 {
+    private static final String[] DUNGEON_MOBS = {"Skeleton", "Zombie", "Spider", "Creeper", "Enderman"};
+    private final String loot;
+    private final int floorBlockId,wallBlockId;
+    
+    public WorldGenDungeon(String loot, int floorBlockId, int wallBlockId)
+    {
+        this.loot = loot;
+        this.floorBlockId = floorBlockId;
+        this.wallBlockId = wallBlockId;
+    }
+    
+    @Override
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         byte var6 = 3;
@@ -72,13 +82,13 @@ public class WorldGenDungeons extends WorldGenerator
                         }
                         else if (par1World.getBlockMaterial(var10, var11, var12).isSolid())
                         {
-                            if (var11 == par4 - 1 && par2Random.nextInt(4) != 0)
+                            if (var11 == par4 - 1)
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, Block.cobblestoneMossy.blockID);
+                                par1World.setBlockWithNotify(var10, var11, var12, floorBlockId);
                             }
                             else
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, Block.cobblestone.blockID);
+                                par1World.setBlockWithNotify(var10, var11, var12, wallBlockId);
                             }
                         }
                     }
@@ -131,8 +141,29 @@ public class WorldGenDungeons extends WorldGenerator
 
                                     if (var16 != null)
                                     {
-                                        ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+                                        ChestGenHooks info = ChestGenHooks.getInfo(loot);
                                         WeightedRandomChestContent.generateChestContents(par2Random, info.getItems(par2Random), var16, info.getCount(par2Random));
+                                        
+                                        if(ModLoader.isModLoaded("Forestry"))
+                                        {
+                                            ItemStack beehives = BlockInterface.getBlock("beehives");
+                                            
+                                            if(beehives != null)
+                                            {
+                                                int chestSize = var16.getSizeInventory();
+                                                
+                                                int[] array = getRandomizedArray(chestSize, par2Random);
+                                                
+                                                for(int i = 0; i < chestSize; i++)
+                                                {
+                                                    if(var16.getStackInSlot(array[i]) == null)
+                                                    {
+                                                        var16.setInventorySlotContents(array[i], new ItemStack(beehives.itemID, 1, 1 + par2Random.nextInt(7)));
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
 
                                     break label210;
@@ -160,7 +191,7 @@ public class WorldGenDungeons extends WorldGenerator
             {
                 System.err.println("Failed to fetch mob spawner entity at (" + par3 + ", " + par4 + ", " + par5 + ")");
             }
-
+            
             return true;
         }
         else
@@ -174,7 +205,7 @@ public class WorldGenDungeons extends WorldGenerator
      */
     private ItemStack pickCheckLootItem(Random par1Random)
     {
-        return ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, par1Random);
+        return ChestGenHooks.getOneItem(loot, par1Random);
     }
 
     /**
@@ -182,6 +213,29 @@ public class WorldGenDungeons extends WorldGenerator
      */
     private String pickMobSpawner(Random par1Random)
     {
-        return DungeonHooks.getRandomDungeonMob(par1Random);
+        return DUNGEON_MOBS[par1Random.nextInt(DUNGEON_MOBS.length)];
+    }
+    
+    private int[] getRandomizedArray(int size, Random r)
+    {
+        int[] array = new int[size];
+        
+        for(int i = 0; i < size; i++)
+        {
+            array[i] = i; 
+        }
+        
+        for(int i = 0; i < size; i++)
+        {
+            int temp = array[i];
+            
+            int index = r.nextInt(size);
+            
+            array[i] = array[index];
+            
+            array[index] = temp;
+        }
+        
+        return array;
     }
 }
