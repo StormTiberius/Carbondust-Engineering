@@ -14,12 +14,12 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
-public class WorldGenSpawn
+public class WorldGenSpawnPoint
 {
     private final World WORLD;
     private final Random RANDOM;
     
-    public WorldGenSpawn(World world, Random random)
+    public WorldGenSpawnPoint(World world, Random random)
     {
         WORLD = world;
         RANDOM = random;
