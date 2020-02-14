@@ -26,11 +26,11 @@ public class WorldGenSpawn
         ChunkCoordinates spawnPoint = WORLD.provider.getSpawnPoint();
         
         int xMin = spawnPoint.posX - 4;
-        int xMax = spawnPoint.posX + 5;
+        int xMax = spawnPoint.posX + 4;
         int yMin = spawnPoint.posY - 1;
         int yMax = spawnPoint.posY + 3;
         int zMin = spawnPoint.posZ - 4;
-        int zMax = spawnPoint.posZ + 5;
+        int zMax = spawnPoint.posZ + 4;
         
         for(int y = yMin; y <= yMax; y++)
         {
@@ -44,7 +44,10 @@ public class WorldGenSpawn
                     }
                     else if(x == xMin || x == xMax || z == zMin || z == zMax)
                     {
-                        WORLD.setBlockWithNotify(x, y, z, Block.cobblestone.blockID);
+                        if(!WORLD.isAirBlock(z, z, z))
+                        {
+                            WORLD.setBlockWithNotify(x, y, z, Block.cobblestone.blockID);
+                        }
                     }
                     else
                     {
@@ -53,5 +56,12 @@ public class WorldGenSpawn
                 }
             }
         }
+        
+        WORLD.setBlockWithNotify(spawnPoint.posX + 1, spawnPoint.posY, spawnPoint.posZ, Block.torchWood.blockID);
+        WORLD.setBlockWithNotify(spawnPoint.posX, spawnPoint.posY, spawnPoint.posZ + 1, Block.torchWood.blockID);
+        WORLD.setBlockWithNotify(spawnPoint.posX - 1, spawnPoint.posY, spawnPoint.posZ, Block.torchWood.blockID);
+        WORLD.setBlockWithNotify(spawnPoint.posX, spawnPoint.posY, spawnPoint.posZ - 1, Block.torchWood.blockID);
+        
+        
     }
 }
