@@ -527,9 +527,9 @@ public class ChunkProviderEmber implements IChunkProvider
             }
         }
         
-        if(par2 == 27 && par3 == 27)
+        if(par2 == 16 && par3 == 16)
         {
-            (new WorldGenSpawn()).generate(this.worldObj, this.rand, 16, 16);
+            (new WorldGenSpawn(this.worldObj, this.rand)).generate();
         }
 
         var6.decorate(this.worldObj, this.rand, var4, var5);

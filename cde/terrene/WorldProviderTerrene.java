@@ -10,14 +10,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProviderSurface;
-import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderTerrene extends WorldProviderSurface
 {
-    private static final String KEY = "EmberSpawnPoint";
+    private static final ChunkCoordinates SPAWN_POINT = new ChunkCoordinates(264, 130, 264);
     
-    private SpawnPoint spawnPoint = new SpawnPoint(KEY);
     private long time;
     
     @Override
@@ -28,13 +26,6 @@ public class WorldProviderTerrene extends WorldProviderSurface
         if(isEmber())
         {
             hasNoSky = true;
-            
-            WorldSavedData wsd = worldObj.loadItemData(SpawnPoint.class, KEY);
-            
-            if(wsd != null)
-            {
-                spawnPoint = (SpawnPoint)wsd;
-            }
         }
     }
     
@@ -260,15 +251,7 @@ public class WorldProviderTerrene extends WorldProviderSurface
         
         if(isEmber())
         {
-            ChunkCoordinates cc = spawnPoint.getSpawnPoint();
-            WorldInfo info = worldObj.getWorldInfo();
-            
-            if(cc.posX != info.getSpawnX() || cc.posY != info.getSpawnY() || cc.posZ != info.getSpawnZ())
-            {
-                info.setSpawnPosition(cc.posX, cc.posY, cc.posZ);
-            }
-            
-            return cc;
+            return SPAWN_POINT;
         }
         
         return super.getSpawnPoint();
@@ -279,8 +262,8 @@ public class WorldProviderTerrene extends WorldProviderSurface
     {
         if(isEmber())
         {
-            ChunkCoordinates cc = spawnPoint.getSpawnPoint();
-            worldObj.getWorldInfo().setSpawnPosition(cc.posX, cc.posY, cc.posZ);
+            System.out.println(x + " " + y + " " + z);
+            worldObj.getWorldInfo().setSpawnPosition(SPAWN_POINT.posX, SPAWN_POINT.posY, SPAWN_POINT.posZ);
         }
         
         super.setSpawnPoint(x, y, z);
@@ -326,6 +309,7 @@ public class WorldProviderTerrene extends WorldProviderSurface
     
     public void setSpawnPoint(ChunkCoordinates ck)
     {
-        spawnPoint.setSpawnPoint(ck.posX, ck.posY, ck.posZ);
+        SPAWN_POINT.set(ck.posX, ck.posY, ck.posZ);
+        worldObj.getWorldInfo().setSpawnPosition(ck.posX, ck.posY, ck.posZ);
     }
 }
