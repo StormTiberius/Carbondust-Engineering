@@ -277,23 +277,7 @@ public class WorldGenDungeons extends WorldGenerator
         
         return array;
     }
-    
-    private int yyy;
-    
-    private boolean isCaveNear(World world, ChunkCoordIntPair pair)
-    {
-        for(int i = 128; i > 20; i--)
-        {
-            if(world.getBlockId(pair.chunkXPos * 16 + 8, i, pair.chunkZPos * 16 + 8) == 0)
-            {
-                yyy = i;
-                return true;
-            }
-        }
         
-        return false;
-    }
-    
     private ChunkCoordIntPair getSpawnChunk(World world, int chunkX, int chunkZ)
     {
         ChunkCoordIntPair pair = new ChunkCoordIntPair(chunkX, chunkZ);
@@ -345,5 +329,21 @@ public class WorldGenDungeons extends WorldGenerator
         }
         
         return new ChunkCoordIntPair(16, 16);
+    }
+    
+    private int yyy;
+    
+    private boolean isCaveNear(World world, ChunkCoordIntPair pair)
+    {
+        for(int i = 128; i > 20; i--)
+        {
+            if(world.getBlockId(pair.chunkXPos * 16 + 8, i, pair.chunkZPos * 16 + 8) == 0)
+            {
+                yyy = i;
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
