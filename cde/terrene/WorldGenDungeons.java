@@ -148,27 +148,6 @@ public class WorldGenDungeons extends WorldGenerator
                                     {
                                         ChestGenHooks info = ChestGenHooks.getInfo(loot);
                                         WeightedRandomChestContent.generateChestContents(par2Random, info.getItems(par2Random), var16, info.getCount(par2Random));
-                                        
-                                        if(ModLoader.isModLoaded("Forestry"))
-                                        {
-                                            ItemStack beehives = BlockInterface.getBlock("beehives");
-                                            
-                                            if(beehives != null)
-                                            {
-                                                int chestSize = var16.getSizeInventory();
-                                                
-                                                int[] array = getRandomizedArray(chestSize, par2Random);
-                                                
-                                                for(int i = 0; i < chestSize; i++)
-                                                {
-                                                    if(var16.getStackInSlot(array[i]) == null)
-                                                    {
-                                                        var16.setInventorySlotContents(array[i], new ItemStack(beehives.itemID, 1, 1 + par2Random.nextInt(7)));
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
                                     }
 
                                     break label210;
@@ -244,44 +223,5 @@ public class WorldGenDungeons extends WorldGenerator
         {
             return false;
         }
-    }
-
-    /**
-     * Picks potentially a random item to add to a dungeon chest.
-     */
-    private ItemStack pickCheckLootItem(Random par1Random)
-    {
-        return ChestGenHooks.getOneItem(loot, par1Random);
-    }
-
-    /**
-     * Randomly decides which spawner to use in a dungeon
-     */
-    private String pickMobSpawner(Random par1Random)
-    {
-        return DUNGEON_MOBS[par1Random.nextInt(DUNGEON_MOBS.length)];
-    }
-    
-    private int[] getRandomizedArray(int size, Random r)
-    {
-        int[] array = new int[size];
-        
-        for(int i = 0; i < size; i++)
-        {
-            array[i] = i; 
-        }
-        
-        for(int i = 0; i < size; i++)
-        {
-            int temp = array[i];
-            
-            int index = r.nextInt(size);
-            
-            array[i] = array[index];
-            
-            array[index] = temp;
-        }
-        
-        return array;
     }
 }
