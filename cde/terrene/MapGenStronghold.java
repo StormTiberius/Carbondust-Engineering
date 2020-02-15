@@ -1,6 +1,6 @@
 package cde.terrene;
 
-import cde.EmberCore;
+import cde.TerreneCore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +19,7 @@ import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenStronghold extends MapGenStructure
 {
-    public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(EmberCore.ember)); 
+    public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(TerreneCore.ocean, TerreneCore.beach, TerreneCore.island)); 
     private BiomeGenBase[] allowedBiomeGenBases;
 
     /**
