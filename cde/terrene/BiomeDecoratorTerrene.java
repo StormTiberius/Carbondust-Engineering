@@ -24,9 +24,9 @@ import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.Ev
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.REDSTONE;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-public class BiomeDecoratorEmber extends BiomeDecorator
+public class BiomeDecoratorTerrene extends BiomeDecorator
 {
-    public BiomeDecoratorEmber(BiomeGenBase biome)
+    public BiomeDecoratorTerrene(BiomeGenBase biome)
     {
         super(biome);
     }
