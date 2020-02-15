@@ -13,7 +13,7 @@ import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
 
-public class WorldProviderTropics extends WorldProviderSurface
+public class WorldProviderTerrene extends WorldProviderSurface
 {    
     private long time;
     
