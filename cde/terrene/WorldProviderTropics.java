@@ -33,7 +33,7 @@ public class WorldProviderTropics extends WorldProviderSurface
     @Override
     public IChunkProvider createChunkGenerator()
     {
-        return new ChunkProviderTropics(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+        return new ChunkProviderTerrene(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
     }
     
     @Override
