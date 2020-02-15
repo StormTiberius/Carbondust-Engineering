@@ -1,6 +1,6 @@
 package cde.terrene.layer;
 
-import cde.TropicsCore;
+import cde.TerreneCore;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class GenLayerShore extends GenLayer
@@ -31,30 +31,30 @@ public class GenLayerShore extends GenLayer
                 int var12;
                 int var13;
 
-                if (TropicsCore.isIsland(var9))
+                if (TerreneCore.isIsland(var9))
                 {
                     var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
                     var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
                     var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
                     var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-                    if (!TropicsCore.isOcean(var10) && !TropicsCore.isOcean(var11) && !TropicsCore.isOcean(var12) && !TropicsCore.isOcean(var13))
+                    if (!TerreneCore.isOcean(var10) && !TerreneCore.isOcean(var11) && !TerreneCore.isOcean(var12) && !TerreneCore.isOcean(var13))
                     {
                         var6[var8 + var7 * par3] = var9;
                     }
                     else
                     {
-                        var6[var8 + var7 * par3] = TropicsCore.beach.biomeID;
+                        var6[var8 + var7 * par3] = TerreneCore.beach.biomeID;
                     }
                 }
-                else if (!TropicsCore.isOcean(var9) && var9 != BiomeGenBase.river.biomeID && var9 != BiomeGenBase.swampland.biomeID && var9 != BiomeGenBase.extremeHills.biomeID)
+                else if (!TerreneCore.isOcean(var9) && var9 != BiomeGenBase.river.biomeID && var9 != BiomeGenBase.swampland.biomeID && var9 != BiomeGenBase.extremeHills.biomeID)
                 {
                     var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
                     var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
                     var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
                     var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-                    if (!TropicsCore.isOcean(var10) && !TropicsCore.isOcean(var11) && !TropicsCore.isOcean(var12) && !TropicsCore.isOcean(var13))
+                    if (!TerreneCore.isOcean(var10) && !TerreneCore.isOcean(var11) && !TerreneCore.isOcean(var12) && !TerreneCore.isOcean(var13))
                     {
                         var6[var8 + var7 * par3] = var9;
                     }
