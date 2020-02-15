@@ -36,9 +36,9 @@ public class WorldGenModule
         int[][] config = new int[Namings.INTERNAL_ORE_BLOCK_NAMES.length][];
         int[][] defaults = Defaults.ORE_GEN_DEFAULTS;
         
-        if(dimensionName.contentEquals("Ember"))
+        if(dimensionName.contentEquals("Terrene"))
         {
-            defaults = Defaults.ORE_GEN_DEFAULTS_EMBER;
+            defaults = Defaults.ORE_GEN_DEFAULTS_TERRENE;
         }
         
         for(int i = 0; i < config.length; i++)

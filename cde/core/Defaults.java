@@ -172,7 +172,7 @@ public class Defaults
         new int[]{1,7,2,0,48}
     };
     
-    public static final int[][] ORE_GEN_DEFAULTS_EMBER =
+    public static final int[][] ORE_GEN_DEFAULTS_TERRENE =
     {    
         new int[]{1,10,30,20,140},
         new int[]{1,6,50,0,80},
