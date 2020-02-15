@@ -1,6 +1,7 @@
 package cde.terrene;
 
 import cde.TerreneCore;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -15,13 +16,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.feature.MapGenScatteredFeature;
 import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
-import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
@@ -176,8 +173,8 @@ public class ChunkProviderTerrene implements IChunkProvider
 
                         for (int var42 = 0; var42 < 4; ++var42)
                         {
-                            int var43 = var42 + var10 * 4 << 11 | 0 + var11 * 4 << 7 | var12 * 8 + var31;
-                            short var44 = 128;
+                            int var43 = var42 + var10 * 4 << 12 | 0 + var11 * 4 << 8 | var12 * 8 + var31;
+                            short var44 = 256;
                             var43 -= var44;
                             double var45 = 0.25D;
                             double var49 = (var36 - var34) * var45;
@@ -185,17 +182,28 @@ public class ChunkProviderTerrene implements IChunkProvider
 
                             for (int var51 = 0; var51 < 4; ++var51)
                             {
+                                int index = var43 += var44;
+                                
                                 if ((var47 += var49) > 0.0D)
                                 {
-                                    par3ArrayOfByte[var43 += var44] = (byte)Block.stone.blockID;
+                                    par3ArrayOfByte[index + 50] = (byte)Block.stone.blockID;
                                 }
                                 else if (var12 * 8 + var31 < var6)
                                 {
-                                    par3ArrayOfByte[var43 += var44] = (byte)Block.waterStill.blockID;
+                                    par3ArrayOfByte[index + 50] = (byte)Block.waterStill.blockID;
                                 }
                                 else
                                 {
-                                    par3ArrayOfByte[var43 += var44] = 0;
+                                    par3ArrayOfByte[index + 50] = 0;
+                                }
+                                
+                                if(var12 * 8 + var31 < 50)
+                                {
+                                    par3ArrayOfByte[index] = (byte)Block.stone.blockID;
+                                }
+                                else
+                                {
+                                    par3ArrayOfByte[index + 114] = (byte)0;
                                 }
                             }
 
@@ -222,7 +230,7 @@ public class ChunkProviderTerrene implements IChunkProvider
         MinecraftForge.EVENT_BUS.post(event);
         if (event.getResult() == Result.DENY) return;
 
-        byte var5 = 63;
+        byte var5 = 113;
         double var6 = 0.03125D;
         this.stoneNoise = this.noiseGen4.generateNoiseOctaves(this.stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
@@ -237,11 +245,11 @@ public class ChunkProviderTerrene implements IChunkProvider
                 byte var14 = var10.topBlock;
                 byte var15 = var10.fillerBlock;
 
-                for (int var16 = 127; var16 >= 0; --var16)
+                for (int var16 = 255; var16 >= 0; --var16)
                 {
-                    int var17 = (var9 * 16 + var8) * 128 + var16;
+                    int var17 = (var9 * 16 + var8) * 256 + var16;
 
-                    if (var16 <= 0)
+                    if (var16 < 2)
                     {
                         par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
                     }
@@ -324,7 +332,10 @@ public class ChunkProviderTerrene implements IChunkProvider
     public Chunk provideChunk(int par1, int par2)
     {
         this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
-        byte[] var3 = new byte[32768];
+        byte[] var3 = new byte[65536];
+        short[] tData = new short[65536];
+        byte[] tMeta = new byte[65536];
+        Arrays.fill(tMeta, (byte)0);
         this.generateTerrain(par1, par2, var3);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
         this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
@@ -338,8 +349,25 @@ public class ChunkProviderTerrene implements IChunkProvider
             this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
             this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, var3);
         }
-
-        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
+        
+        // --
+        for (int x = 0; x < 16; ++x)
+        {
+            for (int z = 0; z < 16; ++z)
+            {
+                for (int y = 255; y >= 0; --y)
+                {
+                    int var17 = (z * 16 + x) * 256 + y;
+        
+                    int index = y << 8 | x << 4 | z;
+        
+                    tData[index] = var3[var17];
+                }
+            }
+        }
+        // --
+        
+        Chunk var4 = new Chunk(this.worldObj, tData, tMeta, par1, par2);
         byte[] var5 = var4.getBiomeArray();
 
         for (int var6 = 0; var6 < var5.length; ++var6)
@@ -556,10 +584,10 @@ public class ChunkProviderTerrene implements IChunkProvider
                 !var11 && this.rand.nextInt(8) == 1)
         {
             var12 = var4 + this.rand.nextInt(16) + 8;
-            var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
+            var13 = this.rand.nextInt(this.rand.nextInt(112) + 16);
             var14 = var5 + this.rand.nextInt(16) + 8;
 
-            if (var13 < 63 || this.rand.nextInt(10) == 0)
+            if (var13 < 113 || this.rand.nextInt(10) == 0)
             {
                 (new WorldGenLakes(TerreneCore.getLiquidId())).generate(this.worldObj, this.rand, var12, var13, var14);
             }
@@ -576,7 +604,7 @@ public class ChunkProviderTerrene implements IChunkProvider
             {
                 case 0: new WorldGenDungeons(ChestGenHooks.PYRAMID_DESERT_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
                 case 1: new WorldGenDungeons(ChestGenHooks.PYRAMID_JUNGLE_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
-                case 2: new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
+                case 2: new WorldGenDungeons(ChestGenHooks.VILLAGE_BLACKSMITH, Block.grass.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
                 default: new WorldGenDungeons(ChestGenHooks.DUNGEON_CHEST, Block.cobblestoneMossy.blockID, Block.cobblestone.blockID).generate(worldObj, rand, var13, var14, var15);
             }
         }
