@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.SpawnListEntry;
 
-public abstract class BiomeGenTropics extends BiomeGenBase
+public abstract class BiomeGenTerrene extends BiomeGenBase
 {
-    public BiomeGenTropics(int id)
+    public BiomeGenTerrene(int id)
     {
         super(id);
         
