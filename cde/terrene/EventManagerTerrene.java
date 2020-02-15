@@ -11,12 +11,12 @@ import net.minecraftforge.event.Event;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
-public class EventManagerTropics
+public class EventManagerTerrene
 {
     private final int[] ALLOWED_BLOCK_IDS;
     private final int DIMENSION_ID;
     
-    public EventManagerTropics(int dimensionId)
+    public EventManagerTerrene(int dimensionId)
     {
         ALLOWED_BLOCK_IDS = new int[]
         {    
