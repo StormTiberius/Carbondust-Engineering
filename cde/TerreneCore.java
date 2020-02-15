@@ -6,24 +6,31 @@
 package cde;
 
 import cde.core.Version;
-import cde.terrene.BiomeGenTropicsBeach;
-import cde.terrene.BiomeGenTropicsIsland;
-import cde.terrene.BiomeGenTropicsOcean;
-import cde.terrene.EventManagerTropics;
-import cde.terrene.WorldChunkManagerTropics;
-import cde.terrene.WorldProviderTropics;
+import cde.terrene.BiomeGenTerreneBeach;
+import cde.terrene.BiomeGenTerreneIsland;
+import cde.terrene.BiomeGenTerreneOcean;
+import cde.terrene.EntityBatTerrene;
+import cde.terrene.EntitySquidTerrene;
+import cde.terrene.EventManagerTerrene;
+import cde.terrene.WorldChunkManagerTerrene;
+import cde.terrene.WorldProviderTerrene;
+import cde.terrene.WorldTypeTerrene;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.File;
 import net.minecraft.block.Block;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.Configuration;
@@ -33,87 +40,86 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
-@Mod(modid="CDE|Tropics", name="Tropics", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
+@Mod(modid="CDE|Terrene", name="Terrene", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class TerreneCore
 {
-    private static Configuration cfg;
-    private static boolean enabled,civspawn;
-    private static int islandId,beachId,oceanId,dimensionId,islandSize,islandScarcity,liquidId,indigoFlowerId;
-    
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
-    private static int[] weatherDurations = WEATHER_DURATIONS;
     
     private static int dayCycleDurationMultiplier = 1;
+    private static int islandId,beachId,oceanId,terreneId,liquidId,indigoFlowerId,islandSize,islandScarcity;
+    private static int[] weatherDurations = WEATHER_DURATIONS;
+    private static boolean enabled,sisterIslands,mobSpawnRules;
+    private static Configuration cfg;
     
     public static BiomeGenBase island,beach,ocean;
+    public static WorldType terrene;
     
     @PreInit
-    public void preInit(FMLPreInitializationEvent event) 
+    public void preInit(FMLPreInitializationEvent event)
     {
-        cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/tropics.cfg"));
+        cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/terrene.cfg"));
         
         cfg.load();
         
-        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", false, "Enable/Disable Tropics Dimension").getBoolean(false);
-        civspawn = cfg.get(Configuration.CATEGORY_GENERAL, "civspawn", true, "Custom Spawn Rules").getBoolean(false);
+        enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", true, "Enable/Disable Terrene").getBoolean(true);
+        sisterIslands = cfg.get(Configuration.CATEGORY_GENERAL, "sisterIslands", true, "Sister Islands").getBoolean(true);
+        mobSpawnRules = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
         
-        islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandBiomeId", 23, "Island Biome Id").getInt();
-        beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachBiomeId", 24, "Beach Biome Id").getInt();
-        oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanBiomeId", 25, "Ocean Biome Id").getInt();
+        islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandId", 23, "Island Id").getInt();
+        beachId = cfg.get(Configuration.CATEGORY_GENERAL, "beachId", 24, "Beach Id").getInt();
+        oceanId = cfg.get(Configuration.CATEGORY_GENERAL, "oceanId", 25, "Ocean Id").getInt();
         
-        dimensionId = cfg.get(Configuration.CATEGORY_GENERAL, "dimensionId", 2, "Tropics Dimension Id").getInt();
+        terreneId = cfg.get(Configuration.CATEGORY_GENERAL, "terreneId", 9, "Terrene Id").getInt();
+        
         weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Durations").getIntList();
         dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Duration Multiplier").getInt();
         
         islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandSize", 4, "Island Size, 4-6 Recommended").getInt();
         islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandScarcity", 100, "Island Scarcity, 100 Default").getInt();
-
+        
         cfg.save();
-
+        
         if(enabled)
         {
-            island = (new BiomeGenTropicsIsland(islandId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            beach = (new BiomeGenTropicsBeach(beachId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
-            ocean = (new BiomeGenTropicsOcean(oceanId)).setColor(16440917).setBiomeName("Tropics").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
-
-            WorldChunkManagerTropics.allowedBiomes.clear();
-            WorldChunkManagerTropics.allowedBiomes.add(island);
+            island = (new BiomeGenTerreneIsland(islandId)).setColor(16440917).setBiomeName("Terrene").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            beach = (new BiomeGenTerreneBeach(beachId)).setColor(16440917).setBiomeName("Terrene").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
+            ocean = (new BiomeGenTerreneOcean(oceanId)).setColor(16440917).setBiomeName("Terrene").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(-1.0F, 0.1F);
+            
+            terrene = new WorldTypeTerrene(terreneId, "terrene", 0);
+            
+            LanguageRegistry.instance().addStringLocalization("generator.terrene", "en_US", "Terrene");
+            
+            WorldChunkManagerTerrene.allowedBiomes.clear();
+            WorldChunkManagerTerrene.allowedBiomes.add(island);
+            
+            FMLInterModComms.sendMessage("CDE|Core", "add-oregen-for-world", "Terrene");
         }
     }
-
+    
     @Init
-    public void init(FMLInitializationEvent event) 
-    {   
+    public void init(FMLInitializationEvent event)
+    {
         if(enabled)
         {
-            if(dimensionId == 0 || dimensionId == -1 || dimensionId == 1)
-            {
-                DimensionManager.unregisterProviderType(dimensionId);
-                DimensionManager.registerProviderType(dimensionId, WorldProviderTropics.class, true);
-            }
-            else
-            {
-                DimensionManager.registerProviderType(dimensionId, WorldProviderTropics.class, true);
-                DimensionManager.registerDimension(dimensionId, dimensionId);
-            }
-                    
-            BiomeManager.addStrongholdBiome(island);
-            BiomeManager.addStrongholdBiome(beach);
-            BiomeManager.addStrongholdBiome(ocean);
-
+            DimensionManager.unregisterProviderType(0);
+            DimensionManager.registerProviderType(0, WorldProviderTerrene.class, true);
+            
             BiomeManager.addVillageBiome(island, true);
             BiomeManager.addVillageBiome(beach, true);
-
-            if(civspawn)
+            
+            if(mobSpawnRules)
             {
-                MinecraftForge.EVENT_BUS.register(new EventManagerTropics(getDimensionId()));
+                MinecraftForge.EVENT_BUS.register(new EventManagerTerrene());
             }
+            
+            EntityRegistry.registerModEntity(EntitySquidTerrene.class, "TerreneSquid", 0, this, 64, 3, true);
+            EntityRegistry.registerModEntity(EntityBatTerrene.class, "TerreneBat", 1, this, 80, 3, false);
         }
     }
-
+    
     @PostInit
-    public void postInit(FMLPostInitializationEvent event) 
+    public void postInit(FMLPostInitializationEvent event)
     {
         Block block = CDECore.getBlockByClass("com.eloraam.redpower.world.BlockCustomFlower");
         
@@ -123,7 +129,7 @@ public class TerreneCore
         }
         
         LiquidStack oil = LiquidDictionary.getLiquid("Oil", LiquidContainerRegistry.BUCKET_VOLUME);
-
+        
         if(oil != null)
         {
             liquidId = oil.itemID;
@@ -133,26 +139,21 @@ public class TerreneCore
             liquidId = Block.lavaStill.blockID;
         }
     }
-
+    
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
         
     }
-        
+    
     public static int getFlowerId()
     {
         return indigoFlowerId;
     }
-        
+    
     public static int getLiquidId()
     {
         return liquidId;
-    }
-        
-    public static int getDimensionId()
-    {
-        return dimensionId;
     }
     
     public static int getWeatherDuration(int index)
@@ -189,9 +190,19 @@ public class TerreneCore
     {
         return id == beach.biomeID;
     }
-
+    
     public static boolean isOcean(int id)
     {
         return id == ocean.biomeID;
+    }
+    
+    public static boolean sisterIslands()
+    {
+        return sisterIslands;
+    }
+    
+    public static int getWorldTypeID()
+    {
+        return terreneId;
     }
 }
