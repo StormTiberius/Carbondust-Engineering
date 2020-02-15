@@ -10,31 +10,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldProviderSurface;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderTerrene extends WorldProviderSurface
 {    
     private long time;
-    
-    @Override
-    public String getDimensionName()
-    {
-        return "Tropics";
-    }
-    
-    @Override
-    protected void registerWorldChunkManager()
-    {
-        worldChunkMgr = new WorldChunkManagerTerrene(worldObj);
-        dimensionId = TerreneCore.getDimensionId();
-    }
-    
-    @Override
-    public IChunkProvider createChunkGenerator()
-    {
-        return new ChunkProviderTerrene(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
-    }
     
     @Override
     public float calculateCelestialAngle(long par1, float par3)
@@ -65,26 +45,8 @@ public class WorldProviderTerrene extends WorldProviderSurface
         return (int)(par1 / (24000L * TerreneCore.getDayCycleDurationMultiplier())) % 8;
     }
     
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean getWorldHasVoidParticles()
-    {
-        return false;
-    }
     
-    @SideOnly(Side.CLIENT)
-    @Override
-    public double getVoidFogYFactor()
-    {
-        return 1.0D;
-    }
     
-    @Override
-    public int getRespawnDimension(EntityPlayerMP player)
-    {
-        return dimensionId;
-    }
-
     @Override
     public void updateWeather()
     {   
