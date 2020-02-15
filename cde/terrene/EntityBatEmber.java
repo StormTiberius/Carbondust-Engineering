@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.ember;
+package cde.terrene;
 
 import java.util.Calendar;
 import net.minecraft.entity.passive.EntityBat;

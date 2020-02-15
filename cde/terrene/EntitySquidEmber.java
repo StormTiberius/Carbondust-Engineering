@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.ember;
+package cde.terrene;
 
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.world.World;

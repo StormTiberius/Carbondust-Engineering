@@ -1,4 +1,4 @@
-package cde.ember;
+package cde.terrene;
 
 import java.util.Random;
 import net.minecraft.block.Block;
