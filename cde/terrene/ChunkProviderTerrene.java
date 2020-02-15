@@ -203,7 +203,7 @@ public class ChunkProviderTerrene implements IChunkProvider
                                 }
                                 else
                                 {
-                                    par3ArrayOfByte[index + 114] = (byte)0;
+                                    par3ArrayOfByte[index + 128] = (byte)0;
                                 }
                             }
 
