@@ -14,31 +14,28 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 public class EventManagerTerrene
 {
     private final int[] ALLOWED_BLOCK_IDS;
-    private final int DIMENSION_ID;
     
-    public EventManagerTerrene(int dimensionId)
+    public EventManagerTerrene()
     {
         ALLOWED_BLOCK_IDS = new int[]
-        {    
-            Block.stone.blockID, 
-            Block.cobblestone.blockID, 
-            Block.cobblestoneMossy.blockID, 
-            Block.dirt.blockID, 
-            Block.grass.blockID, 
-            Block.sand.blockID, 
-            Block.gravel.blockID, 
+        {
+            Block.stone.blockID,
+            Block.cobblestone.blockID,
+            Block.cobblestoneMossy.blockID,
+            Block.dirt.blockID,
+            Block.grass.blockID,
+            Block.sand.blockID,
+            Block.gravel.blockID,
             Block.obsidian.blockID,
             Block.blockSnow.blockID,
             Block.bedrock.blockID
         };
-        
-        DIMENSION_ID = dimensionId;
     }
     
     @ForgeSubscribe
     public void lse(LivingSpawnEvent event)
     {
-        if(event.entity.dimension == DIMENSION_ID)
+        if(!event.world.isRemote && event.entity.dimension == 0)
         {
             if(event.entity instanceof EntityMob)
             {
