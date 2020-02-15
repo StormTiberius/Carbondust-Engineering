@@ -8,12 +8,11 @@ package cde.terrene;
 import cde.TerreneCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.storage.WorldInfo;
 
 public class WorldProviderTerrene extends WorldProviderSurface
-{    
+{
     private long time;
     
     @Override
@@ -37,7 +36,7 @@ public class WorldProviderTerrene extends WorldProviderSurface
         var5 = var6 + (var5 - var6) / 3.0F;
         return var5;
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public int getMoonPhase(long par1, float par3)
@@ -45,7 +44,28 @@ public class WorldProviderTerrene extends WorldProviderSurface
         return (int)(par1 / (24000L * TerreneCore.getDayCycleDurationMultiplier())) % 8;
     }
     
+    @SideOnly(Side.CLIENT)
+    @Override
+    public float getCloudHeight()
+    {
+        if(isTerrene())
+        {
+            return 242.0F;
+        }
+        
+        return super.getCloudHeight();
+    }
     
+    @Override
+    public String getDimensionName()
+    {
+        if(isTerrene())
+        {
+            return "Terrene";
+        }
+        
+        return super.getDimensionName();
+    }
     
     @Override
     public void updateWeather()
@@ -170,5 +190,10 @@ public class WorldProviderTerrene extends WorldProviderSurface
         }
         
         super.resetRainAndThunder();
+    }
+    
+    private boolean isTerrene()
+    {
+        return terrainType.getWorldTypeID() == TerreneCore.getWorldTypeID();
     }
 }
