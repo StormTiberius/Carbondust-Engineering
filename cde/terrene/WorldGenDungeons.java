@@ -164,7 +164,7 @@ public class WorldGenDungeons extends WorldGenerator
                 }
             }
 
-            if(loot.equals(ChestGenHooks.VILLAGE_BLACKSMITH))
+            if(LOOT.equals(ChestGenHooks.VILLAGE_BLACKSMITH))
             {
                 if(ModLoader.isModLoaded("Forestry"))
                 {
