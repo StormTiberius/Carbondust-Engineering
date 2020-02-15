@@ -22,14 +22,14 @@ import net.minecraftforge.common.ChestGenHooks;
 public class WorldGenDungeons extends WorldGenerator
 {
     private static final String[] DUNGEON_MOBS = {"Skeleton", "Zombie", "Spider", "Creeper", "Enderman"};
-    private final String loot;
-    private final int floorBlockId,wallBlockId;
+    private final String LOOT;
+    private final int FLOOR_BLOCK_ID,WALL_BLOCK_ID;
     
     public WorldGenDungeons(String loot, int floorBlockId, int wallBlockId)
     {
-        this.loot = loot;
-        this.floorBlockId = floorBlockId;
-        this.wallBlockId = wallBlockId;
+        LOOT = loot;
+        FLOOR_BLOCK_ID = floorBlockId;
+        WALL_BLOCK_ID = wallBlockId;
     }
     
     @Override
@@ -89,11 +89,11 @@ public class WorldGenDungeons extends WorldGenerator
                         {
                             if (var11 == par4 - 1)
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, floorBlockId);
+                                par1World.setBlockWithNotify(var10, var11, var12, FLOOR_BLOCK_ID);
                             }
                             else
                             {
-                                par1World.setBlockWithNotify(var10, var11, var12, wallBlockId);
+                                par1World.setBlockWithNotify(var10, var11, var12, WALL_BLOCK_ID);
                             }
                         }
                     }
@@ -146,7 +146,7 @@ public class WorldGenDungeons extends WorldGenerator
 
                                     if (var16 != null)
                                     {
-                                        ChestGenHooks info = ChestGenHooks.getInfo(loot);
+                                        ChestGenHooks info = ChestGenHooks.getInfo(LOOT);
                                         WeightedRandomChestContent.generateChestContents(par2Random, info.getItems(par2Random), var16, info.getCount(par2Random));
                                     }
 
