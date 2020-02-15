@@ -237,7 +237,7 @@ public class BiomeDecoratorTerrene extends BiomeDecorator
             for (var2 = 0; var2 < 50; ++var2)
             {
                 var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-                var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(120) + 16);
+                var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(112) + 16);
                 var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
                 (new WorldGenLiquids(Block.waterMoving.blockID)).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
             }
