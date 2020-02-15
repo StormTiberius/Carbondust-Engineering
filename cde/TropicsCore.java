@@ -6,12 +6,12 @@
 package cde;
 
 import cde.core.Version;
-import cde.tropics.BiomeGenTropicsBeach;
-import cde.tropics.BiomeGenTropicsIsland;
-import cde.tropics.BiomeGenTropicsOcean;
-import cde.tropics.EventManagerTropics;
-import cde.tropics.WorldChunkManagerTropics;
-import cde.tropics.WorldProviderTropics;
+import cde.terrene.BiomeGenTropicsBeach;
+import cde.terrene.BiomeGenTropicsIsland;
+import cde.terrene.BiomeGenTropicsOcean;
+import cde.terrene.EventManagerTropics;
+import cde.terrene.WorldChunkManagerTropics;
+import cde.terrene.WorldProviderTropics;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;

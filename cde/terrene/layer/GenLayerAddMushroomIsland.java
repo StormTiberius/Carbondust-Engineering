@@ -1,10 +1,11 @@
-package cde.tropics.layer;
+package cde.terrene.layer;
 
+import cde.TropicsCore;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class GenLayerAddSnow extends GenLayer
+public class GenLayerAddMushroomIsland extends GenLayer
 {
-    public GenLayerAddSnow(long par1, GenLayer par3GenLayer)
+    public GenLayerAddMushroomIsland(long par1, GenLayer par3GenLayer)
     {
         super(par1);
         this.parent = par3GenLayer;
@@ -27,27 +28,20 @@ public class GenLayerAddSnow extends GenLayer
         {
             for (int var12 = 0; var12 < par3; ++var12)
             {
-                int var13 = var9[var12 + 1 + (var11 + 1) * var7];
+                int var13 = var9[var12 + 0 + (var11 + 0) * var7];
+                int var14 = var9[var12 + 2 + (var11 + 0) * var7];
+                int var15 = var9[var12 + 0 + (var11 + 2) * var7];
+                int var16 = var9[var12 + 2 + (var11 + 2) * var7];
+                int var17 = var9[var12 + 1 + (var11 + 1) * var7];
                 this.initChunkSeed((long)(var12 + par1), (long)(var11 + par2));
 
-                if (var13 == 0)
+                if (var17 == 0 && var13 == 0 && var14 == 0 && var15 == 0 && var16 == 0 && this.nextInt(TropicsCore.getIslandScarcity()) == 0)
                 {
-                    var10[var12 + var11 * par3] = 0;
+                    var10[var12 + var11 * par3] = BiomeGenBase.mushroomIsland.biomeID;
                 }
                 else
                 {
-                    int var14 = this.nextInt(5);
-
-                    if (var14 == 0)
-                    {
-                        var14 = BiomeGenBase.icePlains.biomeID;
-                    }
-                    else
-                    {
-                        var14 = 1;
-                    }
-
-                    var10[var12 + var11 * par3] = var14;
+                    var10[var12 + var11 * par3] = var17;
                 }
             }
         }

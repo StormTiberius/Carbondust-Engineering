@@ -1,7 +1,7 @@
-package cde.tropics;
+package cde.terrene;
 
-import cde.tropics.layer.GenLayer;
-import cde.tropics.layer.IntCache;
+import cde.terrene.layer.GenLayer;
+import cde.terrene.layer.IntCache;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.tropics;
+package cde.terrene;
 
 import net.minecraft.block.Block;
 

@@ -1,4 +1,4 @@
-package cde.tropics.layer;
+package cde.terrene.layer;
 
 import cde.TropicsCore;
 import net.minecraft.world.WorldType;
