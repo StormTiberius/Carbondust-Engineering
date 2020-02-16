@@ -47,9 +47,9 @@ public class TerreneCore
     private static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     
     private static int dayCycleDurationMultiplier = 1;
-    private static int islandId,beachId,oceanId,terreneId,liquidId,indigoFlowerId,islandSize,islandScarcity;
+    private static int islandId,beachId,oceanId,terreneId,liquidId,indigoFlowerId;
     private static int[] weatherDurations = WEATHER_DURATIONS;
-    private static boolean enabled,sisterIslands,mobSpawnRules;
+    private static boolean enabled,mobSpawnRules;
     private static Configuration cfg;
     
     public static BiomeGenBase island,beach,ocean;
@@ -63,7 +63,6 @@ public class TerreneCore
         cfg.load();
         
         enabled = cfg.get(Configuration.CATEGORY_GENERAL, "enabled", true, "Enable/Disable Terrene").getBoolean(true);
-        sisterIslands = cfg.get(Configuration.CATEGORY_GENERAL, "sisterIslands", true, "Sister Islands").getBoolean(true);
         mobSpawnRules = cfg.get(Configuration.CATEGORY_GENERAL, "mobSpawnRules", true, "Mob Spawn Rules").getBoolean(true);
         
         islandId = cfg.get(Configuration.CATEGORY_GENERAL, "islandId", 23, "Island Id").getInt();
@@ -74,9 +73,6 @@ public class TerreneCore
         
         weatherDurations = cfg.get(Configuration.CATEGORY_GENERAL, "weatherDurations", WEATHER_DURATIONS, "Weather Durations").getIntList();
         dayCycleDurationMultiplier = cfg.get(Configuration.CATEGORY_GENERAL, "dayCycleDurationMultiplier", 1, "Day Cycle Duration Multiplier").getInt();
-        
-        islandSize = cfg.get(Configuration.CATEGORY_GENERAL, "islandSize", 4, "Island Size, 4-6 Recommended").getInt();
-        islandScarcity = cfg.get(Configuration.CATEGORY_GENERAL, "islandScarcity", 100, "Island Scarcity, 100 Default").getInt();
         
         cfg.save();
         
@@ -171,16 +167,6 @@ public class TerreneCore
         return dayCycleDurationMultiplier;
     }
     
-    public static byte getIslandSize()
-    {
-        return (byte)islandSize;
-    }
-    
-    public static int getIslandScarcity()
-    {
-        return islandScarcity;
-    }
-    
     public static boolean isIsland(int id)
     {
         return id == island.biomeID;
@@ -194,11 +180,6 @@ public class TerreneCore
     public static boolean isOcean(int id)
     {
         return id == ocean.biomeID;
-    }
-    
-    public static boolean sisterIslands()
-    {
-        return sisterIslands;
     }
     
     public static int getWorldTypeID()
