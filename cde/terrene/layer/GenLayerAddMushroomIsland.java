@@ -1,6 +1,5 @@
 package cde.terrene.layer;
 
-import cde.TerreneCore;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class GenLayerAddMushroomIsland extends GenLayer
@@ -33,9 +32,13 @@ public class GenLayerAddMushroomIsland extends GenLayer
                 int var15 = var9[var12 + 0 + (var11 + 2) * var7];
                 int var16 = var9[var12 + 2 + (var11 + 2) * var7];
                 int var17 = var9[var12 + 1 + (var11 + 1) * var7];
-                this.initChunkSeed((long)(var12 + par1), (long)(var11 + par2));
-
-                if (var17 == 0 && var13 == 0 && var14 == 0 && var15 == 0 && var16 == 0 && this.nextInt(TerreneCore.getIslandScarcity()) == 0)
+                
+                long x = (long)(var12 + par1);
+                long z = (long)(var11 + par2);
+                
+                this.initChunkSeed(x, z);
+                
+                if(x == 0 && z == 0)
                 {
                     var10[var12 + var11 * par3] = BiomeGenBase.mushroomIsland.biomeID;
                 }
