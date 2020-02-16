@@ -1,6 +1,5 @@
 package cde.terrene.layer;
 
-import cde.TerreneCore;
 import net.minecraft.world.WorldType;
 
 import net.minecraftforge.common.*;
@@ -40,8 +39,13 @@ public abstract class GenLayer
         var11 = new GenLayerZoom(2003L, var10);
         var10 = new GenLayerAddIsland(4L, var11);
         GenLayerAddMushroomIsland var16 = new GenLayerAddMushroomIsland(5L, var10);
+        byte var4 = 4;
         
-        byte var4 = TerreneCore.getIslandSize();
+        if (par2WorldType == WorldType.LARGE_BIOMES)
+        {
+            var4 = 6;
+        }
+        var4 = getModdedBiomeSize(par2WorldType, var4);
 
         GenLayer var5 = GenLayerZoom.func_75915_a(1000L, var16, 0);
         GenLayerRiverInit var13 = new GenLayerRiverInit(100L, var5);
