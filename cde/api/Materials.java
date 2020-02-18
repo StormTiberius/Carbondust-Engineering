@@ -33,11 +33,11 @@ public class Materials
     public static ItemStack dustZinc;
     public static ItemStack dustBronze;
     public static ItemStack dustBrass;
+    public static ItemStack dustSteel;
     public static ItemStack dustSulfur;
     public static ItemStack dustSaltpeter;
     public static ItemStack dustQuartz;
     public static ItemStack dustApatite;
-    public static ItemStack dustYellowcake;
     
     public static ItemStack nuggetIron;
     public static ItemStack nuggetCopper;
