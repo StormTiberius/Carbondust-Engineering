@@ -214,11 +214,11 @@ public class CDECore
                     case 19: Materials.dustZinc = is; break;
                     case 20: Materials.dustBronze = is; break;
                     case 21: Materials.dustBrass = is; break;
-                    case 22: Materials.dustSulfur = is; break;
-                    case 23: Materials.dustSaltpeter = is; break;
-                    case 24: Materials.dustQuartz = is; break;
-                    case 25: Materials.dustApatite = is; break;
-                    case 26: Materials.dustYellowcake = is; break;
+                    case 22: Materials.dustSteel = is; break;
+                    case 23: Materials.dustSulfur = is; break;
+                    case 24: Materials.dustSaltpeter = is; break;
+                    case 25: Materials.dustQuartz = is; break;
+                    case 26: Materials.dustApatite = is; break;
                     
                     case 27: Materials.nuggetIron = is; break;
                     case 28: Materials.nuggetCopper = is; break;
@@ -253,6 +253,26 @@ public class CDECore
                     case 54: Materials.gemSapphire = is; break;
                     
                     case 55: Materials.fuelCoke = is; break;
+                    
+                    case 56: Materials.plateIron = is; break;
+                    case 57: Materials.plateGold = is; break;
+                    case 58: Materials.plateCopper = is; break;
+                    case 59: Materials.plateTin = is; break;
+                    case 60: Materials.plateBronze = is; break;
+                    case 61: Materials.plateSteel = is; break;
+                    
+                    case 62: Materials.circuitBoardSingle = is; break;
+                    case 63: Materials.circuitBoardDouble = is; break;
+                    case 64: Materials.circuitBoardMulti = is; break;
+                    case 65: Materials.electricMotor = is; break;
+                    case 66: Materials.electricWire = is; break;
+                    
+                    case 67: Materials.batteryLV = is; break;
+                    case 68: Materials.batteryMV = is; break;
+                    case 69: Materials.batteryHV = is; break;
+                    case 70: Materials.capacitorLV = is; break;
+                    case 71: Materials.capacitorMV = is; break;
+                    case 72: Materials.capacitorHV = is; break;
                 }
                 
                 LanguageRegistry.addName(is, Namings.EXTERNAL_PART_ITEM_NAMES[i]);
