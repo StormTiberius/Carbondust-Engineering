@@ -32,11 +32,11 @@ public class Namings
         "dustZinc",
         "dustBronze",
         "dustBrass",
+        "dustSteel",
         "dustSulfur",
         "dustSaltpeter",
         "dustQuartz",
         "dustApatite",
-        "dustYellowcake",
         
         "nuggetIron",
         "nuggetCopper",
@@ -70,9 +70,29 @@ public class Namings
         "gemJade",
         "gemSapphire",
         
-        "fuelCoke"
+        "fuelCoke",
+        
+        "plateIron",
+        "plateGold",
+        "plateCopper",
+        "plateTin",
+        "plateBronze",
+        "plateSteel",
+        
+        "circuitBoardSingle",
+        "circuitBoardDouble",
+        "circuitBoardMulti",
+        "electricMotor",
+        "electricWire",
+        
+        "batteryLV",
+        "batteryMV",
+        "batteryHV",
+        "capacitorLV",
+        "capacitorMV",
+        "capacitorHV"
     };
-            
+    
     public static final String[] EXTERNAL_PART_ITEM_NAMES =
     {
         "Copper Ingot",
@@ -98,11 +118,11 @@ public class Namings
         "Zinc Dust",
         "Bronze Dust",
         "Brass Dust",
+        "Steel Dust",
         "Sulfur Dust",
         "Saltpeter Dust",
         "Quartz Dust",
         "Fertilizer",
-        "Yellowcake",
 
         "Iron Nugget",
         "Copper Nugget",
@@ -136,9 +156,29 @@ public class Namings
         "Jade",
         "Sapphire",
        
-        "Coal Coke"
+        "Coal Coke",
+        
+        "Iron Plate",
+        "Gold Plate",
+        "Copper Plate",
+        "Tin Plate",
+        "Bronze Plate",
+        "Steel Plate",
+        
+        "Single-Layer Circuit Board",
+        "Double-Layer Circuit Board",
+        "Multi-Layer Circuit Board",
+        "Electric Motor",
+        "Electric Wire",
+        
+        "LV-Battery",
+        "MV-Battery",
+        "HV-Battery",
+        "LV-Capacitor",
+        "MV-Capacitor",
+        "HV-Capacitor"
     };
-                        
+    
     public static final String[] INTERNAL_ORE_BLOCK_NAMES =
     {
         "oreCopper",
