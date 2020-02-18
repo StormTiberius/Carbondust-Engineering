@@ -69,6 +69,14 @@ public class Defaults
     public static final int TEXTURE_MACHINE_SMOKESTACK_TOP = 57;
     public static final int TEXTURE_MACHINE_SMOKESTACK_SIDE = 58;
     
+    public static final int TEXTURE_MACHINE_ELECTRIC_TOP = 64;
+    public static final int TEXTURE_MACHINE_ELECTRIC_SIDE = 65;
+    public static final int TEXTURE_MACHINE_ELECTRIC_INPUT = 66;
+    public static final int TEXTURE_MACHINE_ELECTRIC_OUTPUT = 67;
+    public static final int TEXTURE_MACHINE_ELECTRIC_GENERATOR = 68;
+    public static final int TEXTURE_MACHINE_ELECTRIC_FURNACE = 69;
+    public static final int TEXTURE_MACHINE_ELECTRIC_BATTERY = 70;
+    
     // ITEM TEXTURE INDEX
     public static final int TEXTURE_MATERIAL_INGOT_COPPER = 0;
     public static final int TEXTURE_MATERIAL_INGOT_TIN = 1;
@@ -93,11 +101,11 @@ public class Defaults
     public static final int TEXTURE_MATERIAL_DUST_ZINC = 24;
     public static final int TEXTURE_MATERIAL_DUST_BRONZE = 25;
     public static final int TEXTURE_MATERIAL_DUST_BRASS = 26;
-    public static final int TEXTURE_MATERIAL_DUST_SULFUR = 27;
-    public static final int TEXTURE_MATERIAL_DUST_SALTPETER = 28;
-    public static final int TEXTURE_MATERIAL_DUST_APATITE = 29;
+    public static final int TEXTURE_MATERIAL_DUST_STEEL = 27;
+    public static final int TEXTURE_MATERIAL_DUST_SULFUR = 28;
+    public static final int TEXTURE_MATERIAL_DUST_SALTPETER = 29;
     public static final int TEXTURE_MATERIAL_DUST_QUARTZ = 30;
-    public static final int TEXTURE_MATERIAL_DUST_YELLOWCAKE = 31;
+    public static final int TEXTURE_MATERIAL_DUST_APATITE = 31;
     
     public static final int TEXTURE_MATERIAL_NUGGET_IRON = 32;
     public static final int TEXTURE_MATERIAL_NUGGET_COPPER = 33;
@@ -133,6 +141,29 @@ public class Defaults
     
     public static final int TEXTURE_MATERIAL_FUEL_COKE = 96;
     
+    public static final int TEXTURE_MATERIAL_PLATE_IRON = 112;
+    public static final int TEXTURE_MATERIAL_PLATE_GOLD = 113;
+    public static final int TEXTURE_MATERIAL_PLATE_COPPER = 114;
+    public static final int TEXTURE_MATERIAL_PLATE_TIN = 115;
+    public static final int TEXTURE_MATERIAL_PLATE_BRONZE = 116;
+    public static final int TEXTURE_MATERIAL_PLATE_STEEL = 117;
+    
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_SINGLE = 128;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE = 129;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI = 130;
+    public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 131;
+    public static final int TEXTURE_MATERIAL_COPPER_WIRING = 132;
+    
+    public static final int TEXTURE_MATERIAL_BATTERY_LV = 144;
+    public static final int TEXTURE_MATERIAL_BATTERY_MV = 145;
+    public static final int TEXTURE_MATERIAL_BATTERY_HV = 146;
+    public static final int TEXTURE_MATERIAL_CAPACITOR_LV = 147;
+    public static final int TEXTURE_MATERIAL_CAPACITOR_MV = 148;
+    public static final int TEXTURE_MATERIAL_CAPACITOR_HV = 149;
+    
+    public static final int TEXTURE_TOOL_WATERING_CAN = 160;
+    public static final int TEXTURE_TOOL_WRENCH = 161;
+    
     // BLOCK ID
     public static final int BLOCK_ORE_ID = 180;
     public static final int BLOCK_STORAGE_ID = 181;
@@ -148,7 +179,7 @@ public class Defaults
     // ITEM ID
     public static final int ITEM_MATERIALS_ID = 500;
     public static final int ITEM_GOGGLES_ID = 501;
-    public static final int ITEM_INDUSTRY_ID = 502;
+    public static final int ITEM_WATERING_CAN_ID = 502;
     
     // FUEL VALUES
     public static final int PEAT_FUEL_VALUE = 2000;
