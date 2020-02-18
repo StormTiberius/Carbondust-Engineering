@@ -152,7 +152,7 @@ public class Defaults
     public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE = 129;
     public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI = 130;
     public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 131;
-    public static final int TEXTURE_MATERIAL_COPPER_WIRING = 132;
+    public static final int TEXTURE_MATERIAL_ELECTRIC_WIRE = 132;
     
     public static final int TEXTURE_MATERIAL_BATTERY_LV = 144;
     public static final int TEXTURE_MATERIAL_BATTERY_MV = 145;
