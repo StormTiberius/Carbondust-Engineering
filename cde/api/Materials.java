@@ -72,4 +72,24 @@ public class Materials
     public static ItemStack gemSapphire;
     
     public static ItemStack fuelCoke;
+    
+    public static ItemStack plateIron;
+    public static ItemStack plateGold;
+    public static ItemStack plateCopper;
+    public static ItemStack plateTin;
+    public static ItemStack plateBronze;
+    public static ItemStack plateSteel;
+    
+    public static ItemStack circuitBoardSingle;
+    public static ItemStack circuitBoardDouble;
+    public static ItemStack circuitBoardMulti;
+    public static ItemStack electricMotor;
+    public static ItemStack electricWire;
+    
+    public static ItemStack batteryLV;
+    public static ItemStack batteryMV;
+    public static ItemStack batteryHV;
+    public static ItemStack capacitorLV;
+    public static ItemStack capacitorMV;
+    public static ItemStack capacitorHV;
  }
