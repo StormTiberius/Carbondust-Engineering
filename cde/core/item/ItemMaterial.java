@@ -85,11 +85,11 @@ public class ItemMaterial extends Item
             case 19: return Defaults.TEXTURE_MATERIAL_DUST_ZINC;
             case 20: return Defaults.TEXTURE_MATERIAL_DUST_BRONZE;
             case 21: return Defaults.TEXTURE_MATERIAL_DUST_BRASS;
-            case 22: return Defaults.TEXTURE_MATERIAL_DUST_SULFUR;
-            case 23: return Defaults.TEXTURE_MATERIAL_DUST_SALTPETER;
-            case 24: return Defaults.TEXTURE_MATERIAL_DUST_QUARTZ;
-            case 25: return Defaults.TEXTURE_MATERIAL_DUST_APATITE;
-            case 26: return Defaults.TEXTURE_MATERIAL_DUST_YELLOWCAKE;
+            case 22: return Defaults.TEXTURE_MATERIAL_DUST_STEEL;
+            case 23: return Defaults.TEXTURE_MATERIAL_DUST_SULFUR;
+            case 24: return Defaults.TEXTURE_MATERIAL_DUST_SALTPETER;
+            case 25: return Defaults.TEXTURE_MATERIAL_DUST_QUARTZ;
+            case 26: return Defaults.TEXTURE_MATERIAL_DUST_APATITE;
             case 27: return Defaults.TEXTURE_MATERIAL_NUGGET_IRON;
             case 28: return Defaults.TEXTURE_MATERIAL_NUGGET_COPPER;
             case 29: return Defaults.TEXTURE_MATERIAL_NUGGET_TIN;
@@ -119,6 +119,23 @@ public class ItemMaterial extends Item
             case 53: return Defaults.TEXTURE_MATERIAL_GEM_JADE;
             case 54: return Defaults.TEXTURE_MATERIAL_GEM_SAPPHIRE;
             case 55: return Defaults.TEXTURE_MATERIAL_FUEL_COKE;
+            case 56: return Defaults.TEXTURE_MATERIAL_PLATE_IRON;
+            case 57: return Defaults.TEXTURE_MATERIAL_PLATE_GOLD;
+            case 58: return Defaults.TEXTURE_MATERIAL_PLATE_COPPER;
+            case 59: return Defaults.TEXTURE_MATERIAL_PLATE_TIN;
+            case 60: return Defaults.TEXTURE_MATERIAL_PLATE_BRONZE;
+            case 61: return Defaults.TEXTURE_MATERIAL_PLATE_STEEL;
+            case 62: return Defaults.TEXTURE_MATERIAL_CIRCUIT_BOARD_SINGLE;
+            case 63: return Defaults.TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE;
+            case 64: return Defaults.TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI;
+            case 65: return Defaults.TEXTURE_MATERIAL_ELECTRIC_MOTOR;
+            case 66: return Defaults.TEXTURE_MATERIAL_ELECTRIC_WIRE;
+            case 67: return Defaults.TEXTURE_MATERIAL_BATTERY_LV;
+            case 68: return Defaults.TEXTURE_MATERIAL_BATTERY_MV;
+            case 69: return Defaults.TEXTURE_MATERIAL_BATTERY_HV;
+            case 70: return Defaults.TEXTURE_MATERIAL_CAPACITOR_LV;
+            case 71: return Defaults.TEXTURE_MATERIAL_CAPACITOR_MV;
+            case 72: return Defaults.TEXTURE_MATERIAL_CAPACITOR_HV;
             default: return 0;
         }
     }
