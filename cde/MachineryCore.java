@@ -146,7 +146,7 @@ public class MachineryCore
             
             is = new ItemStack(goggles.itemID, 1, 0);
             
-            cde.api.Items.goggles = is;
+            cde.api.Items.equipmentUtilityHeadGoggles = is;
             
             if(CRAFTABLE[8])
             {
