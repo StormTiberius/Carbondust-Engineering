@@ -12,6 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.Ic2Recipes;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -25,6 +26,77 @@ public class RecipeManager
 {
     public static void addRecipes()
     {
+        // PCBS
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.circuitBoardSingle, 1),
+        "yzy",
+        "zxz",
+        "yzy",
+        'x', "plateCopper",
+        'y', Utils.getNewItemStackWithQuantity(Materials.electricWire, 1),
+        'z', new ItemStack(Item.redstone.itemID, 1, 0)));
+        
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.circuitBoardDouble, 1),
+        "zzz",
+        "xyx",
+        "zzz",
+        'x', "circuitBoardSingle",
+        'y', new ItemStack(Item.diamond.itemID, 1, 0),
+        'z', new ItemStack(Item.redstone.itemID, 1, 0)));
+        
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.circuitBoardMulti, 1),
+        "zzz",
+        "xyx",
+        "zzz",
+        'x', "circuitBoardDouble",
+        'y', new ItemStack(Block.blockLapis.blockID, 1, 0),
+        'z', new ItemStack(Item.ingotGold.itemID, 1, 4)));
+        
+        // Electric Motor
+        GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.electricMotor, 1),
+        "yxy",
+        "xxx",
+        "yxy",
+        'x', new ItemStack(Item.ingotIron.itemID, 1, 0),
+        'y', Utils.getNewItemStackWithQuantity(Materials.electricWire, 1));
+        
+        // Electric Wire
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.electricWire, 6),
+        "zzz",
+        "xxx",
+        "zzz",
+        'x', "ingotCopper",
+        'z', new ItemStack(Item.paper.itemID, 1, 0)));
+        
+        GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.electricWire, 6),
+        "zxz",
+        "zxz",
+        "zxz",
+        'x', "ingotCopper",
+        'z', new ItemStack(Item.paper.itemID, 1, 0)));
+        
+        // Metal Plates
+        ItemStack ingotIron = new ItemStack(Item.ingotIron.itemID, 1, 0);
+        ItemStack ingotGold = new ItemStack(Item.ingotGold.itemID, 1, 0);
+        
+        if(ModLoader.isModLoaded("Railcraft"))
+        {
+            RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 4), new Object[]{ingotIron, ingotIron, ingotIron, ingotIron});
+            RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 4), new Object[]{ingotGold, ingotGold, ingotGold, ingotGold});
+            RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 4), new Object[]{"ingotCopper", "ingotCopper", "ingotCopper", "ingotCopper"});
+            RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 4), new Object[]{"ingotTin", "ingotTin", "ingotTin", "ingotTin"});
+            RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 4), new Object[]{"ingotBronze", "ingotBronze", "ingotBronze", "ingotBronze"});
+            RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 4), new Object[]{"ingotSteel", "ingotSteel", "ingotSteel", "ingotSteel"});
+        }
+        else
+        {
+            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), ingotIron, ingotIron, ingotIron, ingotIron));
+            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1), ingotGold, ingotGold, ingotGold, ingotGold));
+            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), "ingotCopper", "ingotCopper" ,"ingotCopper" ,"ingotCopper"));
+            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), "ingotTin", "ingotTin", "ingotTin", "ingotTin"));
+            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), "ingotBronze", "ingotBronze", "ingotBronze" ,"ingotBronze"));
+            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), "ingotSteel", "ingotSteel", "ingotSteel", "ingotSteel"));
+        }
+        
         // Blocks
         FurnaceRecipes.smelting().addSmelting(Blocks.oreCopper.itemID, Blocks.oreCopper.getItemDamage(), Utils.getNewItemStackWithQuantity(Materials.ingotCopper, 1), 0.5F);
         FurnaceRecipes.smelting().addSmelting(Blocks.oreTin.itemID, Blocks.oreTin.getItemDamage(), Utils.getNewItemStackWithQuantity(Materials.ingotTin, 1), 0.5F);
