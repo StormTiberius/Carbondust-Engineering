@@ -83,14 +83,7 @@ public class Namings
         "circuitBoardDouble",
         "circuitBoardMulti",
         "electricMotor",
-        "electricWire",
-        
-        "batteryLV",
-        "batteryMV",
-        "batteryHV",
-        "capacitorLV",
-        "capacitorMV",
-        "capacitorHV"
+        "electricWire"
     };
     
     public static final String[] EXTERNAL_PART_ITEM_NAMES =
@@ -169,14 +162,7 @@ public class Namings
         "Double-Layer Circuit Board",
         "Multi-Layer Circuit Board",
         "Electric Motor",
-        "Electric Wire",
-        
-        "LV-Battery",
-        "MV-Battery",
-        "HV-Battery",
-        "LV-Capacitor",
-        "MV-Capacitor",
-        "HV-Capacitor"
+        "Electric Wire"
     };
     
     public static final String[] INTERNAL_ORE_BLOCK_NAMES =

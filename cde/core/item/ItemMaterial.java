@@ -130,12 +130,6 @@ public class ItemMaterial extends Item
             case 64: return Defaults.TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI;
             case 65: return Defaults.TEXTURE_MATERIAL_ELECTRIC_MOTOR;
             case 66: return Defaults.TEXTURE_MATERIAL_ELECTRIC_WIRE;
-            case 67: return Defaults.TEXTURE_MATERIAL_BATTERY_LV;
-            case 68: return Defaults.TEXTURE_MATERIAL_BATTERY_MV;
-            case 69: return Defaults.TEXTURE_MATERIAL_BATTERY_HV;
-            case 70: return Defaults.TEXTURE_MATERIAL_CAPACITOR_LV;
-            case 71: return Defaults.TEXTURE_MATERIAL_CAPACITOR_MV;
-            case 72: return Defaults.TEXTURE_MATERIAL_CAPACITOR_HV;
             default: return 0;
         }
     }

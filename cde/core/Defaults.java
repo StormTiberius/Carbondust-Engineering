@@ -154,13 +154,6 @@ public class Defaults
     public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 131;
     public static final int TEXTURE_MATERIAL_ELECTRIC_WIRE = 132;
     
-    public static final int TEXTURE_MATERIAL_BATTERY_LV = 144;
-    public static final int TEXTURE_MATERIAL_BATTERY_MV = 145;
-    public static final int TEXTURE_MATERIAL_BATTERY_HV = 146;
-    public static final int TEXTURE_MATERIAL_CAPACITOR_LV = 147;
-    public static final int TEXTURE_MATERIAL_CAPACITOR_MV = 148;
-    public static final int TEXTURE_MATERIAL_CAPACITOR_HV = 149;
-    
     public static final int TEXTURE_TOOL_WATERING_CAN = 160;
     public static final int TEXTURE_TOOL_WRENCH = 161;
     

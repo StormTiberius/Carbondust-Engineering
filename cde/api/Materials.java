@@ -85,11 +85,4 @@ public class Materials
     public static ItemStack circuitBoardMulti;
     public static ItemStack electricMotor;
     public static ItemStack electricWire;
-    
-    public static ItemStack batteryLV;
-    public static ItemStack batteryMV;
-    public static ItemStack batteryHV;
-    public static ItemStack capacitorLV;
-    public static ItemStack capacitorMV;
-    public static ItemStack capacitorHV;
  }

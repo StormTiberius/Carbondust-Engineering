@@ -266,13 +266,6 @@ public class CDECore
                     case 64: Materials.circuitBoardMulti = is; break;
                     case 65: Materials.electricMotor = is; break;
                     case 66: Materials.electricWire = is; break;
-                    
-                    case 67: Materials.batteryLV = is; break;
-                    case 68: Materials.batteryMV = is; break;
-                    case 69: Materials.batteryHV = is; break;
-                    case 70: Materials.capacitorLV = is; break;
-                    case 71: Materials.capacitorMV = is; break;
-                    case 72: Materials.capacitorHV = is; break;
                 }
                 
                 LanguageRegistry.addName(is, Namings.EXTERNAL_PART_ITEM_NAMES[i]);
