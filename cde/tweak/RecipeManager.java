@@ -24,6 +24,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import railcraft.common.api.core.items.ItemRegistry;
 import railcraft.common.api.crafting.RailcraftCraftingManager;
 
@@ -156,7 +157,12 @@ public class RecipeManager
                     "   ",
                     "   ", 'x', new ItemStack(Block.sand.blockID, 1, 0), 'y', new ItemStack(Block.mycelium.blockID, 1, 0)});
             }
-        }        
+        }
+        
+        if(true)
+        {
+            addOreDictionaryPlateRecipes();
+        }
     }
     
     public static void delRecipes(boolean[] flags)
@@ -314,6 +320,213 @@ public class RecipeManager
         for(ItemStack is : al)
         {
             Ic2Recipes.addCompressorRecipe(new ItemStack(is.itemID, 1, is.getItemDamage()), dcp);
+        }
+    }
+    
+    private static void removePlateRecipes()
+    {
+        rmPlateRecipe(ItemRegistry.getItem("machine.beta.tank.iron.wall", 4));
+        rmPlateRecipe(ItemRegistry.getItem("machine.beta.tank.iron.gauge", 4));
+        rmPlateRecipe(ItemRegistry.getItem("machine.beta.tank.iron.valve", 4));
+        rmPlateRecipe(ItemRegistry.getItem("machine.beta.engine.steam.low", 1));
+        rmPlateRecipe(ItemRegistry.getItem("machine.beta.boiler.tank.pressure.low", 1));
+        
+        rmPlateRecipe(ItemRegistry.getItem("machine.alpha.steam.oven", 4));
+        rmPlateRecipe(ItemRegistry.getItem("track.disposal", 16));
+        rmPlateRecipe(ItemRegistry.getItem("machine.alpha.feed.station", 1));
+        rmPlateRecipe(ItemRegistry.getItem("machine.beta.engine.steam.high", 1));
+        rmPlateRecipe(ItemRegistry.getItem("machine.beta.boiler.firebox.liquid", 1));
+        rmPlateRecipe(ItemRegistry.getItem("machine.beta.boiler.tank.pressure.high", 1));
+        rmPlateRecipe(ItemRegistry.getItem("machine.alpha.turbine", 3));
+        
+        // rmPlateRecipe(new ItemStack(ItemRegistry.getItem("rp2 paint can", 1).itemID, 32, 2));
+    }
+    
+    private static void rmPlateRecipe(ItemStack is)
+    {
+        if(is != null)
+        {
+            ArrayList rl = (ArrayList)CraftingManager.getInstance().getRecipeList();
+
+            for(int i = 0; i < rl.size(); i++)
+            {
+                IRecipe ir = (IRecipe)rl.get(i);
+                ItemStack ro = ir.getRecipeOutput();
+
+                if(ItemStack.areItemStacksEqual(is, ro))
+                {
+                    rl.remove(i);
+                }
+            }
+        }
+    }
+    
+    private static void addOreDictionaryPlateRecipes()
+    {
+        ItemStack is = ItemRegistry.getItem("machine.beta.tank.iron.wall", 4);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "xx",
+            "xx",
+            'x', "plateIron"));
+        }
+        
+        is = ItemRegistry.getItem("machine.beta.tank.iron.gauge", 4);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "yxy",
+            "xyx",
+            "yxy",
+            'x', "plateIron",
+            'y', new ItemStack(Block.thinGlass.blockID, 1, 0)));
+        }
+        
+        is = ItemRegistry.getItem("machine.beta.tank.iron.valve", 4);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "yxy",
+            "xzx",
+            "yxy",
+            'x', "plateIron",
+            'y', new ItemStack(Block.fenceIron.blockID, 1, 0),
+            'z', new ItemStack(Block.lever.blockID, 1, 0)));
+        }
+        
+        is = ItemRegistry.getItem("machine.beta.engine.steam.low", 1);
+        
+        ItemStack gearIron = ItemRegistry.getItem("part.gear.iron", 1);
+        
+        if(is != null && gearIron != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "xxx",
+            " y ",
+            "aza",
+            'x', "plateIron",
+            'y', new ItemStack(Block.fenceIron.blockID, 1, 0),
+            'z', new ItemStack(Block.lever.blockID, 1, 0),
+            'a', gearIron));
+        }
+        
+        is = ItemRegistry.getItem("machine.beta.boiler.tank.pressure.low", 1);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "x ",
+            "x ",
+            'x', "plateIron"));
+        }
+        
+        is = ItemRegistry.getItem("machine.alpha.steam.oven", 4);
+                
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "xxx",
+            "xyx",
+            "xxx",
+            'x', "plateSteel",
+            'y', new ItemStack(Block.stoneOvenIdle.blockID, 1, 0)));
+        }
+        
+        is = ItemRegistry.getItem("track.disposal", 16);
+        
+        ItemStack standardRail = ItemRegistry.getItem("part.rail.standard", 1);
+        ItemStack woodenTie = ItemRegistry.getItem("part.tie.wood", 1);
+        
+        if(is != null && standardRail != null && woodenTie != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "yzy",
+            "yxy",
+            "yzy",
+            'x', "plateSteel",
+            'y', standardRail,
+            'z', woodenTie));
+        }
+        
+        is = ItemRegistry.getItem("machine.alpha.feed.station", 1);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "yzy",
+            "zxz",
+            "yzy",
+            'x', "plateSteel",
+            'y', "plankWood",
+            'z', new ItemStack(Item.goldenCarrot.itemID, 1, 0)));
+        }
+        
+        is = ItemRegistry.getItem("machine.beta.engine.steam.high", 1);
+        
+        ItemStack gearSteel = ItemRegistry.getItem("part.gear.steel", 1);
+        
+        if(is != null && gearSteel != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "xxx",
+            " y ",
+            "aza",
+            'x', "plateSteel",
+            'y', new ItemStack(Block.glass.blockID, 1, 0),
+            'z', new ItemStack(Block.pistonBase.blockID, 1, 0),
+            'a', gearSteel));
+        }
+        
+        is = ItemRegistry.getItem("machine.beta.boiler.firebox.liquid", 1);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "xax",
+            "dbd",
+            "xcx",
+            'x', "plateSteel",
+            'a', new ItemStack(Item.bucketEmpty.itemID, 1, 0),
+            'b', new ItemStack(Item.fireballCharge.itemID, 1, 0),
+            'a', new ItemStack(Block.stoneOvenIdle.blockID, 1, 0),
+            'b', new ItemStack(Block.fenceIron.blockID, 1, 0)));
+        }
+        
+        is = ItemRegistry.getItem("machine.beta.boiler.tank.pressure.high", 1);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "x ",
+            "x ",
+            'x', "plateSteel"));
+        }
+        
+        is = ItemRegistry.getItem("machine.alpha.turbine", 3);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "yxy",
+            "x x",
+            "yxy",
+            'x', "plateSteel",
+            'y', "blockSteel"));
+        }
+        
+        is = new ItemStack(9300 - 256, 1, 0);
+        
+        if(is != null)
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(is,
+            "x x",
+            "x x",
+            "xxx",
+            'x', "plateTin"));
         }
     }
 }
