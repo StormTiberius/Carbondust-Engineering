@@ -80,27 +80,58 @@ public class RecipeManager
         
         if(ModLoader.isModLoaded("Railcraft"))
         {
-            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), new Object[]{ingotIron, ingotIron, ingotIron, ingotIron});
-            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1), new Object[]{ingotGold, ingotGold, ingotGold, ingotGold});
+            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), new Object[]
+            {
+                "xx",
+                "xx",
+                'x', ingotIron
+            });
+            
+            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1), new Object[]
+            {
+                "xx",
+                "xx",
+                'x', ingotGold
+            });
             
             for(ItemStack is : OreDictionary.getOres("ingotCopper"))
             {
-                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), new Object[]{is, is, is, is});
+                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), new Object[]
+                {
+                    "xx",
+                    "xx",
+                    'x', is
+                });
             }
             
             for(ItemStack is : OreDictionary.getOres("ingotTin"))
             {
-                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), new Object[]{is, is, is, is});
+                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), new Object[]
+                {
+                    "xx",
+                    "xx",
+                    'x', is
+                });
             }
             
             for(ItemStack is : OreDictionary.getOres("ingotBronze"))
             {
-                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), new Object[]{is, is, is, is});
+                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), new Object[]
+                {
+                    "xx",
+                    "xx",
+                    'x', is
+                });
             }
             
             for(ItemStack is : OreDictionary.getOres("ingotSteel"))
-            { 
-                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), new Object[]{is, is, is, is});
+            {
+                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), new Object[]
+                {
+                    "xx",
+                    "xx",
+                    'x', is
+                });
             }
         }
         if(true)
