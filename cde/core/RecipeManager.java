@@ -75,42 +75,67 @@ public class RecipeManager
         'z', new ItemStack(Item.paper.itemID, 1, 0)));
         
         // Metal Plates
+        ItemStack ingotIron = new ItemStack(Item.ingotIron.itemID, 1, 0);
+        ItemStack ingotGold = new ItemStack(Item.ingotGold.itemID, 1, 0);
+        
         if(ModLoader.isModLoaded("Railcraft"))
         {
-            RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), new Object[]{new ItemStack(Item.ingotIron.itemID, 4, 0)});
-            RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1), new Object[]{new ItemStack(Item.ingotGold.itemID, 4, 0)});
+            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), new Object[]{ingotIron, ingotIron, ingotIron, ingotIron});
+            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1), new Object[]{ingotGold, ingotGold, ingotGold, ingotGold});
             
             for(ItemStack is : OreDictionary.getOres("ingotCopper"))
             {
-                RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), new Object[]{Utils.getNewItemStackWithQuantity(is, 4)});
+                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), new Object[]{is, is, is, is});
             }
             
             for(ItemStack is : OreDictionary.getOres("ingotTin"))
             {
-                RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), new Object[]{Utils.getNewItemStackWithQuantity(is, 4)});
+                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), new Object[]{is, is, is, is});
             }
             
             for(ItemStack is : OreDictionary.getOres("ingotBronze"))
             {
-                RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), new Object[]{Utils.getNewItemStackWithQuantity(is, 4)});
+                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), new Object[]{is, is, is, is});
             }
             
             for(ItemStack is : OreDictionary.getOres("ingotSteel"))
             { 
-                RailcraftCraftingManager.rollingMachine.addShapelessRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), new Object[]{Utils.getNewItemStackWithQuantity(is, 4)});
+                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), new Object[]{is, is, is, is});
             }
         }
-        else
+        if(true)
         {
-            ItemStack ingotIron = new ItemStack(Item.ingotIron.itemID, 1, 0);
-            ItemStack ingotGold = new ItemStack(Item.ingotGold.itemID, 1, 0);
+
         
-            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), ingotIron, ingotIron, ingotIron, ingotIron));
-            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1), ingotGold, ingotGold, ingotGold, ingotGold));
-            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), "ingotCopper", "ingotCopper" ,"ingotCopper" ,"ingotCopper"));
-            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), "ingotTin", "ingotTin", "ingotTin", "ingotTin"));
-            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), "ingotBronze", "ingotBronze", "ingotBronze" ,"ingotBronze"));
-            GameRegistry.addRecipe(new ShapelessOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), "ingotSteel", "ingotSteel", "ingotSteel", "ingotSteel"));
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1),
+            "xx",
+            "xx",
+            'x', ingotIron));
+            
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1),
+            "xx",
+            "xx",
+            'x', ingotGold));
+            
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1),
+            "xx",
+            "xx",
+            'x', "ingotCopper"));
+            
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1),
+            "xx",
+            "xx",
+            'x', "ingotTin"));
+            
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1),
+            "xx",
+            "xx",
+            'x', "ingotBronze"));
+            
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1),
+            "xx",
+            "xx",
+            'x', "ingotSteel"));
         }
         
         // Blocks
