@@ -5,6 +5,7 @@
 
 package cde.tweak;
 
+import cde.CDECore;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import forestry.api.core.ItemInterface;
@@ -402,6 +403,14 @@ public class RecipeManager
         
         ItemStack gearIron = ItemRegistry.getItem("part.gear.iron", 1);
         
+        for(Item item : CDECore.getItemsByClass("buildcraft.core.ItemBuildCraft"))
+        {
+            if(item.getItemName().equalsIgnoreCase("item.ironGearItem"))
+            {
+                gearIron = new ItemStack(item.itemID, 1, 0);
+            }
+        }
+        
         if(is != null && gearIron != null)
         {
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
@@ -409,8 +418,8 @@ public class RecipeManager
             " y ",
             "aza",
             'x', "plateIron",
-            'y', new ItemStack(Block.fenceIron.blockID, 1, 0),
-            'z', new ItemStack(Block.lever.blockID, 1, 0),
+            'y', new ItemStack(Block.glass.blockID, 1, 0),
+            'z', new ItemStack(Block.pistonBase.blockID, 1, 0),
             'a', gearIron));
         }
         
@@ -492,8 +501,8 @@ public class RecipeManager
             'x', "plateSteel",
             'a', new ItemStack(Item.bucketEmpty.itemID, 1, 0),
             'b', new ItemStack(Item.fireballCharge.itemID, 1, 0),
-            'a', new ItemStack(Block.stoneOvenIdle.blockID, 1, 0),
-            'b', new ItemStack(Block.fenceIron.blockID, 1, 0)));
+            'c', new ItemStack(Block.stoneOvenIdle.blockID, 1, 0),
+            'd', new ItemStack(Block.fenceIron.blockID, 1, 0)));
         }
         
         is = ItemRegistry.getItem("machine.beta.boiler.tank.pressure.high", 1);
