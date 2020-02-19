@@ -527,7 +527,15 @@ public class RecipeManager
             'y', "blockSteel"));
         }
         
-        is = new ItemStack(9300 - 256, 1, 0);
+        is = null;
+        
+        for(Item item : CDECore.getItemsByClass("com.eloraam.redpower.core.ItemTextured"))
+        {
+            if(item.getItemName().equalsIgnoreCase("item.paintcan.empty"))
+            {
+                is = new ItemStack(item.itemID, 3, 0);
+            }
+        }
         
         if(is != null)
         {
