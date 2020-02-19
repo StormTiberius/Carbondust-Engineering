@@ -39,7 +39,6 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import railcraft.common.api.core.items.ItemRegistry;
 
 @Mod(modid="CDE|Industry", name="Industry", version=Version.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:CDE|Core")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
@@ -170,26 +169,11 @@ public class IndustryCore
             // Drum recipes
             Object ingotIron = new ItemStack(Item.ingotIron.itemID, 1, 0);
             Object ingotSteel = "ingotSteel";
-            ItemStack plateIron = new ItemStack(Block.trapdoor.blockID, 1, 0);
-            ItemStack plateSteel = new ItemStack(Block.trapdoor.blockID, 1, 0);
             
             if(ModLoader.isModLoaded("Railcraft"))
             {
                 ingotIron = "ingotZinc";
                 ingotSteel = "ingotZinc";
-                
-                ItemStack iron = ItemRegistry.getItem("part.plate.iron", 1);
-                ItemStack steel = ItemRegistry.getItem("part.plate.steel", 1);
-                
-                if(iron != null)
-                {
-                    plateIron = iron;
-                }
-                
-                if(steel != null)
-                {
-                    plateSteel = steel;
-                }
             }
             
             if(drumRecipeIron)
@@ -200,7 +184,7 @@ public class IndustryCore
                 "zpz",
                 'z', ingotIron,
                 'b', new ItemStack(Block.blockSteel.blockID, 1, 0),
-                'p', plateIron));
+                'p', "plateIron"));
             }
             
             if(drumRecipeSteel)
@@ -211,7 +195,7 @@ public class IndustryCore
                 "zpz",
                 'z', ingotSteel,
                 'b', "blockSteel",
-                'p', plateSteel));
+                'p', "plateSteel"));
             }
         }
         
