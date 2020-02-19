@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.src.ModLoader;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.oredict.OreDictionary;
@@ -162,7 +163,15 @@ public class RecipeManager
         
         if(flags[40])
         {
-            addOreDictionaryPlateRecipes();
+            if(ModLoader.isModLoaded("Railcraft"))
+            {
+                addOreDictionaryPlateRecipesRC();
+            }
+            
+            if(ModLoader.isModLoaded("RedPowerCore"))
+            {
+                addOreDictionaryPlateRecipesRP();
+            }
         }
     }
     
@@ -324,7 +333,7 @@ public class RecipeManager
         }
     }
     
-    private static void addOreDictionaryPlateRecipes()
+    private static void addOreDictionaryPlateRecipesRC()
     {
         ItemStack is = ItemRegistry.getItem("machine.beta.tank.iron.wall", 4);
         
@@ -512,8 +521,11 @@ public class RecipeManager
             'x', "plateSteel",
             'y', "blockSteel"));
         }
-        
-        is = null;
+    }
+    
+    private static void addOreDictionaryPlateRecipesRP()
+    {
+        ItemStack is = null;
         
         for(Item item : CDECore.getItemsByClass("com.eloraam.redpower.core.ItemTextured"))
         {
