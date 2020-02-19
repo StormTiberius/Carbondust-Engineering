@@ -160,7 +160,7 @@ public class RecipeManager
             }
         }
         
-        if(true)
+        if(flags[40])
         {
             addOreDictionaryPlateRecipes();
         }
@@ -324,50 +324,14 @@ public class RecipeManager
         }
     }
     
-    private static void removePlateRecipes()
-    {
-        rmPlateRecipe(ItemRegistry.getItem("machine.beta.tank.iron.wall", 4));
-        rmPlateRecipe(ItemRegistry.getItem("machine.beta.tank.iron.gauge", 4));
-        rmPlateRecipe(ItemRegistry.getItem("machine.beta.tank.iron.valve", 4));
-        rmPlateRecipe(ItemRegistry.getItem("machine.beta.engine.steam.low", 1));
-        rmPlateRecipe(ItemRegistry.getItem("machine.beta.boiler.tank.pressure.low", 1));
-        
-        rmPlateRecipe(ItemRegistry.getItem("machine.alpha.steam.oven", 4));
-        rmPlateRecipe(ItemRegistry.getItem("track.disposal", 16));
-        rmPlateRecipe(ItemRegistry.getItem("machine.alpha.feed.station", 1));
-        rmPlateRecipe(ItemRegistry.getItem("machine.beta.engine.steam.high", 1));
-        rmPlateRecipe(ItemRegistry.getItem("machine.beta.boiler.firebox.liquid", 1));
-        rmPlateRecipe(ItemRegistry.getItem("machine.beta.boiler.tank.pressure.high", 1));
-        rmPlateRecipe(ItemRegistry.getItem("machine.alpha.turbine", 3));
-        
-        // rmPlateRecipe(new ItemStack(ItemRegistry.getItem("rp2 paint can", 1).itemID, 32, 2));
-    }
-    
-    private static void rmPlateRecipe(ItemStack is)
-    {
-        if(is != null)
-        {
-            ArrayList rl = (ArrayList)CraftingManager.getInstance().getRecipeList();
-
-            for(int i = 0; i < rl.size(); i++)
-            {
-                IRecipe ir = (IRecipe)rl.get(i);
-                ItemStack ro = ir.getRecipeOutput();
-
-                if(ItemStack.areItemStacksEqual(is, ro))
-                {
-                    rl.remove(i);
-                }
-            }
-        }
-    }
-    
     private static void addOreDictionaryPlateRecipes()
     {
         ItemStack is = ItemRegistry.getItem("machine.beta.tank.iron.wall", 4);
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "xx",
             "xx",
@@ -378,6 +342,8 @@ public class RecipeManager
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "yxy",
             "xyx",
@@ -390,6 +356,8 @@ public class RecipeManager
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "yxy",
             "xzx",
@@ -413,6 +381,8 @@ public class RecipeManager
         
         if(is != null && gearIron != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "xxx",
             " y ",
@@ -427,6 +397,8 @@ public class RecipeManager
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "x ",
             "x ",
@@ -437,6 +409,8 @@ public class RecipeManager
                 
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "xxx",
             "xyx",
@@ -452,6 +426,8 @@ public class RecipeManager
         
         if(is != null && standardRail != null && woodenTie != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "yzy",
             "yxy",
@@ -465,6 +441,8 @@ public class RecipeManager
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "yzy",
             "zxz",
@@ -480,6 +458,8 @@ public class RecipeManager
         
         if(is != null && gearSteel != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "xxx",
             " y ",
@@ -494,6 +474,8 @@ public class RecipeManager
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "xax",
             "dbd",
@@ -509,6 +491,8 @@ public class RecipeManager
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "x ",
             "x ",
@@ -519,6 +503,8 @@ public class RecipeManager
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "yxy",
             "x x",
@@ -539,11 +525,29 @@ public class RecipeManager
         
         if(is != null)
         {
+            rmRecipe(is);
+            
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "x x",
             "x x",
             "xxx",
             'x', "plateTin"));
+        }
+    }
+    
+    private static void rmRecipe(ItemStack is)
+    {
+        ArrayList rl = (ArrayList)CraftingManager.getInstance().getRecipeList();
+
+        for(int i = 0; i < rl.size(); i++)
+        {
+            IRecipe ir = (IRecipe)rl.get(i);
+            ItemStack ro = ir.getRecipeOutput();
+
+            if(ItemStack.areItemStacksEqual(is, ro))
+            {
+                rl.remove(i);
+            }
         }
     }
 }
