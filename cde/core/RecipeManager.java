@@ -16,10 +16,12 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import railcraft.common.api.core.items.ItemRegistry;
 import railcraft.common.api.crafting.RailcraftCraftingManager;
 
 public class RecipeManager
@@ -80,6 +82,21 @@ public class RecipeManager
         
         if(ModLoader.isModLoaded("Railcraft"))
         {
+            ArrayList rl = (ArrayList)RailcraftCraftingManager.rollingMachine.getRecipeList();
+            ItemStack plateIron = ItemRegistry.getItem("part.plate.iron", 4);
+            ItemStack plateSteel = ItemRegistry.getItem("part.plate.steel", 4);
+            
+            for(int i = 0; i < rl.size(); i++)
+            {
+                IRecipe ir = (IRecipe)rl.get(i);
+                ItemStack ro = ir.getRecipeOutput();
+                
+                if(ItemStack.areItemStacksEqual(plateIron, ro) || ItemStack.areItemStacksEqual(plateSteel, ro))
+                {
+                    rl.remove(i);
+                }
+            }
+            
             RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), new Object[]
             {
                 "xx",
@@ -134,10 +151,8 @@ public class RecipeManager
                 });
             }
         }
-        if(true)
+        else
         {
-
-        
             GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1),
             "xx",
             "xx",
