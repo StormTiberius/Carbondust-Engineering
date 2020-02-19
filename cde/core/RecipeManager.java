@@ -82,19 +82,18 @@ public class RecipeManager
         
         if(ModLoader.isModLoaded("Railcraft"))
         {
-            ArrayList rl = (ArrayList)RailcraftCraftingManager.rollingMachine.getRecipeList();
             ItemStack plateIron = ItemRegistry.getItem("part.plate.iron", 4);
+            
+            if(plateIron != null)
+            {
+                removeRailcraftRollingMachineRecipe(plateIron);
+            }
+            
             ItemStack plateSteel = ItemRegistry.getItem("part.plate.steel", 4);
             
-            for(int i = 0; i < rl.size(); i++)
+            if(plateSteel != null)
             {
-                IRecipe ir = (IRecipe)rl.get(i);
-                ItemStack ro = ir.getRecipeOutput();
-                
-                if(ItemStack.areItemStacksEqual(plateIron, ro) || ItemStack.areItemStacksEqual(plateSteel, ro))
-                {
-                    rl.remove(i);
-                }
+                removeRailcraftRollingMachineRecipe(plateSteel);
             }
             
             RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), new Object[]
@@ -474,6 +473,22 @@ public class RecipeManager
         for(Object o : sapphire)
         {
             Ic2Recipes.addCompressorRecipe(Utils.getNewItemStackWithQuantity((ItemStack)o, 9), Utils.getNewItemStackWithQuantity(Blocks.blockSapphire, 1));
+        }
+    }
+    
+    public static void removeRailcraftRollingMachineRecipe(ItemStack is)
+    {
+        ArrayList rl = (ArrayList)RailcraftCraftingManager.rollingMachine.getRecipeList();
+        
+        for(int i = 0; i < rl.size(); i++)
+        {
+            IRecipe ir = (IRecipe)rl.get(i);
+            ItemStack ro = ir.getRecipeOutput();
+            
+            if(ItemStack.areItemStacksEqual(is, ro))
+            {
+                rl.remove(i);
+            }
         }
     }
 }
