@@ -96,6 +96,13 @@ public class RecipeManager
                 removeRailcraftRollingMachineRecipe(plateSteel);
             }
             
+            ItemStack plateTin = ItemRegistry.getItem("part.plate.tin", 4);
+            
+            if(plateTin != null)
+            {
+                removeRailcraftRollingMachineRecipe(plateTin);
+            }
+            
             RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), new Object[]
             {
                 "xx",
@@ -110,45 +117,41 @@ public class RecipeManager
                 'x', ingotGold
             });
             
-            for(ItemStack is : OreDictionary.getOres("ingotCopper"))
+            IRecipe recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), new Object[]
             {
-                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), new Object[]
-                {
-                    "xx",
-                    "xx",
-                    'x', is
-                });
-            }
+                "xx",
+                "xx",
+                'x', "ingotCopper"
+            });
             
-            for(ItemStack is : OreDictionary.getOres("ingotTin"))
-            {
-                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), new Object[]
-                {
-                    "xx",
-                    "xx",
-                    'x', is
-                });
-            }
+            RailcraftCraftingManager.rollingMachine.getRecipeList().add(recipe);
             
-            for(ItemStack is : OreDictionary.getOres("ingotBronze"))
+            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), new Object[]
             {
-                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), new Object[]
-                {
-                    "xx",
-                    "xx",
-                    'x', is
-                });
-            }
+                "xx",
+                "xx",
+                'x', "ingotTin"
+            });
             
-            for(ItemStack is : OreDictionary.getOres("ingotSteel"))
+            RailcraftCraftingManager.rollingMachine.getRecipeList().add(recipe);
+            
+            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), new Object[]
             {
-                RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), new Object[]
-                {
-                    "xx",
-                    "xx",
-                    'x', is
-                });
-            }
+                "xx",
+                "xx",
+                'x', "ingotBronze"
+            });
+            
+            RailcraftCraftingManager.rollingMachine.getRecipeList().add(recipe);
+            
+            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), new Object[]
+            {
+                "xx",
+                "xx",
+                'x', "ingotSteel"
+            });
+            
+            RailcraftCraftingManager.rollingMachine.getRecipeList().add(recipe);
         }
         else
         {
