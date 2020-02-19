@@ -165,11 +165,51 @@ public class RecipeManager
         {
             if(ModLoader.isModLoaded("Railcraft"))
             {
+                ItemStack is = ItemRegistry.getItem("part.plate.iron", 1);
+                
+                if(is != null)
+                {
+                    OreDictionary.registerOre("plateIron", is);
+                }
+                
+                is = ItemRegistry.getItem("part.plate.steel", 1);
+                
+                if(is != null)
+                {
+                    OreDictionary.registerOre("plateSteel", is);
+                }
+                
+                is = ItemRegistry.getItem("part.plate.tin", 1);
+                
+                if(is != null)
+                {
+                    OreDictionary.registerOre("plateTin", is);
+                }
+                
                 addOreDictionaryPlateRecipesRC();
             }
             
             if(ModLoader.isModLoaded("RedPowerCore"))
             {
+                ItemStack plateTin;
+                
+                for(Item item : CDECore.getItemsByClass("com.eloraam.redpower.core.ItemParts"))
+                {
+                    plateTin = new ItemStack(item.itemID, 1, 7);
+                    
+                    try
+                    {
+                        if(item.getItemNameIS(plateTin).contentEquals("item.tinplate"))
+                        {
+                            OreDictionary.registerOre("plateTin", plateTin);
+                        }
+                    }
+                    catch(IndexOutOfBoundsException e)
+                    {
+                        
+                    }
+                }
+                
                 addOreDictionaryPlateRecipesRP();
             }
         }
@@ -525,25 +565,22 @@ public class RecipeManager
     
     private static void addOreDictionaryPlateRecipesRP()
     {
-        ItemStack is = null;
+        ItemStack is;
         
         for(Item item : CDECore.getItemsByClass("com.eloraam.redpower.core.ItemTextured"))
         {
             if(item.getItemName().equalsIgnoreCase("item.paintcan.empty"))
             {
                 is = new ItemStack(item.itemID, 3, 0);
+                
+                rmRecipe(is);
+                
+                GameRegistry.addRecipe(new ShapedOreRecipe(is,
+                "x x",
+                "x x",
+                "xxx",
+                'x', "plateTin"));
             }
-        }
-        
-        if(is != null)
-        {
-            rmRecipe(is);
-            
-            GameRegistry.addRecipe(new ShapedOreRecipe(is,
-            "x x",
-            "x x",
-            "xxx",
-            'x', "plateTin"));
         }
     }
     
