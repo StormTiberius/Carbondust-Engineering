@@ -354,6 +354,8 @@ public class RecipeManager
             if(ir.getClass().getCanonicalName().equalsIgnoreCase("ic2.core.AdvRecipe") && ItemStack.areItemStacksEqual(is, ro))
             {
                 rl.remove(i);
+                
+                break;
             }
         }
     }
@@ -370,6 +372,8 @@ public class RecipeManager
             if(ItemStack.areItemStacksEqual(is, ro))
             {
                 rl.remove(i);
+                
+                break;
             }
         }
     }
@@ -452,6 +456,8 @@ public class RecipeManager
             if(item.getItemName().equalsIgnoreCase("item.ironGearItem"))
             {
                 gearIron = new ItemStack(item.itemID, 1, 0);
+                
+                break;
             }
         }
         
@@ -607,6 +613,8 @@ public class RecipeManager
                 "x x",
                 "xxx",
                 'x', "plateTin"));
+                
+                break;
             }
         }
     }
@@ -623,6 +631,8 @@ public class RecipeManager
             if(ItemStack.areItemStacksEqual(is, ro))
             {
                 rl.remove(i);
+                
+                break;
             }
         }
     }
