@@ -202,6 +202,7 @@ public class RecipeManager
                         if(item.getItemNameIS(plateTin).contentEquals("item.tinplate"))
                         {
                             OreDictionary.registerOre("plateTin", plateTin);
+                            break;
                         }
                     }
                     catch(IndexOutOfBoundsException e)
