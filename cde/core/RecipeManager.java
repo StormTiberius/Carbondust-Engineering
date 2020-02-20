@@ -51,7 +51,7 @@ public class RecipeManager
         "zzz",
         'x', "circuitBoardDouble",
         'y', new ItemStack(Block.blockLapis.blockID, 1, 0),
-        'z', new ItemStack(Item.ingotGold.itemID, 1, 4)));
+        'z', new ItemStack(Item.ingotGold.itemID, 1, 0)));
         
         // Electric Motor
         GameRegistry.addRecipe(Utils.getNewItemStackWithQuantity(Materials.electricMotor, 1),
@@ -103,21 +103,21 @@ public class RecipeManager
                 removeRailcraftRollingMachineRecipe(plateTin);
             }
             
-            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1), new Object[]
+            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 4), new Object[]
             {
                 "xx",
                 "xx",
                 'x', ingotIron
             });
             
-            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1), new Object[]
+            RailcraftCraftingManager.rollingMachine.addRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 4), new Object[]
             {
                 "xx",
                 "xx",
                 'x', ingotGold
             });
             
-            IRecipe recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1), new Object[]
+            IRecipe recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 4), new Object[]
             {
                 "xx",
                 "xx",
@@ -126,7 +126,7 @@ public class RecipeManager
             
             RailcraftCraftingManager.rollingMachine.getRecipeList().add(recipe);
             
-            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1), new Object[]
+            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 4), new Object[]
             {
                 "xx",
                 "xx",
@@ -135,7 +135,7 @@ public class RecipeManager
             
             RailcraftCraftingManager.rollingMachine.getRecipeList().add(recipe);
             
-            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1), new Object[]
+            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 4), new Object[]
             {
                 "xx",
                 "xx",
@@ -144,7 +144,7 @@ public class RecipeManager
             
             RailcraftCraftingManager.rollingMachine.getRecipeList().add(recipe);
             
-            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1), new Object[]
+            recipe = new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 4), new Object[]
             {
                 "xx",
                 "xx",
@@ -155,32 +155,32 @@ public class RecipeManager
         }
         else
         {
-            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 1),
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateIron, 4),
             "xx",
             "xx",
             'x', ingotIron));
             
-            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 1),
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateGold, 4),
             "xx",
             "xx",
             'x', ingotGold));
             
-            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 1),
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateCopper, 4),
             "xx",
             "xx",
             'x', "ingotCopper"));
             
-            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 1),
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateTin, 4),
             "xx",
             "xx",
             'x', "ingotTin"));
             
-            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 1),
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateBronze, 4),
             "xx",
             "xx",
             'x', "ingotBronze"));
             
-            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 1),
+            GameRegistry.addRecipe(new ShapedOreRecipe(Utils.getNewItemStackWithQuantity(Materials.plateSteel, 4),
             "xx",
             "xx",
             'x', "ingotSteel"));
