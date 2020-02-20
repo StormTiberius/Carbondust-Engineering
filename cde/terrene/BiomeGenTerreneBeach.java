@@ -6,8 +6,6 @@
 package cde.terrene;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.world.biome.SpawnListEntry;
 
 public class BiomeGenTerreneBeach extends BiomeGenTerrene
 {
@@ -19,7 +17,6 @@ public class BiomeGenTerreneBeach extends BiomeGenTerrene
         fillerBlock = (byte)Block.sand.blockID;
         
         spawnableCreatureList.clear();
-        spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
         spawnableWaterCreatureList.clear();
         
         theBiomeDecorator.treesPerChunk = 50;

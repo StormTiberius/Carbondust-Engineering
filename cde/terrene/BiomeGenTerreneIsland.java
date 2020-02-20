@@ -8,9 +8,7 @@ package cde.terrene;
 import cde.TerreneCore;
 import java.util.Random;
 import net.minecraft.block.Block;
-import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 
 public class BiomeGenTerreneIsland extends BiomeGenTerrene
@@ -23,7 +21,6 @@ public class BiomeGenTerreneIsland extends BiomeGenTerrene
         
         flag = true;
         
-        spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
         spawnableWaterCreatureList.clear();
         
         theBiomeDecorator.treesPerChunk = 0;
