@@ -170,6 +170,11 @@ public class RecipeManager
                 if(is != null)
                 {
                     OreDictionary.registerOre("plateIron", is);
+                    CDECore.logInfo("Added railcraft " + is.getItemName() + " to ore dictionary");
+                }
+                else
+                {
+                    CDECore.logWarning("Unable to add railcraft iron plate to ore dictionary!");
                 }
                 
                 is = ItemRegistry.getItem("part.plate.steel", 1);
@@ -177,6 +182,11 @@ public class RecipeManager
                 if(is != null)
                 {
                     OreDictionary.registerOre("plateSteel", is);
+                    CDECore.logInfo("Added railcraft " + is.getItemName() + " to ore dictionary");
+                }
+                else
+                {
+                    CDECore.logWarning("Unable to add railcraft steel plate to ore dictionary!");
                 }
                 
                 is = ItemRegistry.getItem("part.plate.tin", 1);
@@ -184,6 +194,11 @@ public class RecipeManager
                 if(is != null)
                 {
                     OreDictionary.registerOre("plateTin", is);
+                    CDECore.logInfo("Added railcraft " + is.getItemName() + " to ore dictionary");
+                }
+                else
+                {
+                    CDECore.logWarning("Unable to add railcraft tin plate to ore dictionary!");
                 }
                 
                 addOreDictionaryPlateRecipesRC();
@@ -191,23 +206,34 @@ public class RecipeManager
             
             if(ModLoader.isModLoaded("RedPowerCore"))
             {
-                ItemStack plateTin;
+                ItemStack is;
                 
                 for(Item item : CDECore.getItemsByClass("com.eloraam.redpower.core.ItemParts"))
                 {
-                    plateTin = new ItemStack(item.itemID, 1, 7);
+                    is = new ItemStack(item.itemID, 1, 0);
                     
                     try
                     {
-                        if(item.getItemNameIS(plateTin).contentEquals("item.tinplate"))
+                        if(is.getItemName().contentEquals("item.ingotRed"))
                         {
-                            OreDictionary.registerOre("plateTin", plateTin);
+                            is.setItemDamage(7);
+                            
+                            if(is.getItemName().contentEquals("item.tinplate"))
+                            {
+                                OreDictionary.registerOre("plateTin", is);
+                                CDECore.logInfo("Added redpower2 " + is.getItemName() + " to ore dictionary");
+                            }
+                            else
+                            {
+                                CDECore.logWarning("Unable to add redpower2 tin plate to ore dictionary!");
+                            }
+                            
                             break;
                         }
                     }
                     catch(IndexOutOfBoundsException e)
                     {
-                        
+                        CDECore.logWarning("Unable to add redpower2 tin plate to ore dictionary!");
                     }
                 }
                 
