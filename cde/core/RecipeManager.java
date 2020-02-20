@@ -491,6 +491,7 @@ public class RecipeManager
             if(ItemStack.areItemStacksEqual(is, ro))
             {
                 rl.remove(i);
+                break;
             }
         }
     }
