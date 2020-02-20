@@ -84,15 +84,12 @@ public class RecipeManager
             // Reactor vent steel recipe
             if(Loader.isModLoaded("IC2") && flags[6])
             {
-                for(ItemStack is : OreDictionary.getOres("ingotSteel"))
-                {
-                    Ic2Recipes.addCraftingRecipe(new ItemStack(Items.getItem("reactorVent").itemID, 1, 0),
-                    "xyx",
-                    "y y",
-                    "xyx",
-                    'x', is,
-                    'y', new ItemStack(Block.fenceIron.blockID, 1, 0));
-                }
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.getItem("reactorVent").itemID, 1, 0),
+                "xyx",
+                "y y",
+                "xyx",
+                'x', "ingotSteel",
+                'y', new ItemStack(Block.fenceIron.blockID, 1, 0)));
             }
         }
                 
