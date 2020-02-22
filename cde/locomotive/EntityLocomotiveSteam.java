@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 
 public class EntityLocomotiveSteam extends EntityLocomotive
 {
-    private static final String[] TEXTURES = {"/cde/locomotives/solid.nocolor.png",
-                                              "/cde/locomotives/solid.primary.png",
-                                              "/cde/locomotives/solid.secondary.png"};
+    private static final String[] TEXTURES = {"/cde/locomotive/solid.primary.png",
+                                              "/cde/locomotive/solid.secondary.png",
+                                              "/cde/locomotive/solid.nocolor.png"};
     
     public EntityLocomotiveSteam(World world)
     {
