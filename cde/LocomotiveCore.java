@@ -99,7 +99,7 @@ public class LocomotiveCore
         
         ItemStack minecart = new ItemStack(Item.minecartEmpty.itemID, 1, 0);
         ItemStack fence = new ItemStack(Block.fenceIron.blockID, 1, 0);
-        ItemStack lamp = new ItemStack(Item.minecartEmpty.itemID, 1, 0);
+        ItemStack lamp = new ItemStack(Block.redstoneLampIdle.blockID, 1, 0);
         
         if(idLocomotiveSteam > 0 && lowPressureBoiler != null && fireBoxSolid != null)
         {
