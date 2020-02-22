@@ -17,6 +17,8 @@ public abstract class EntityLocomotive extends CartBase implements ILinkableCart
         super(world);
     }
     
+    public abstract String[] getLocomotiveTextures();
+    
     @Override
     public boolean isLinkable()
     {
