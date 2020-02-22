@@ -12,9 +12,9 @@ public class ModelLocomotiveElectric extends ModelSimple
     public ModelLocomotiveElectric()
     {
         super("loco");
-
+        
         renderer.setTextureSize(128, 64);
-
+        
         setTextureOffset("loco.wheels", 1, 25);
         setTextureOffset("loco.frame", 1, 1);
         setTextureOffset("loco.engine", 67, 37);
@@ -22,18 +22,19 @@ public class ModelLocomotiveElectric extends ModelSimple
         setTextureOffset("loco.sideB", 35, 45);
         // setTextureOffset("loco.lightA", 1, 45);
         setTextureOffset("loco.lightB", 1, 55);
-
-        renderer.rotationPointX = 8F;
-        renderer.rotationPointY = 8F;
-        renderer.rotationPointZ = 8F;
-
+        
+        renderer.rotationPointX = 8.0F;
+        renderer.rotationPointY = 8.0F;
+        renderer.rotationPointZ = 8.0F;
+        
         ModelRenderer loco = renderer;
-        loco.addBox("wheels", -20F, -5F, -16F, 23, 2, 16);
-        loco.addBox("frame", -21F, -10F, -17F, 25, 5, 18);
-        loco.addBox("engine", -15F, -19F, -16F, 13, 9, 16);
-        loco.addBox("sideA", -20F, -17F, -13F, 5, 7, 10);
-        loco.addBox("sideB", -2F, -17F, -13F, 5, 7, 10);
-        // loco.addBox("lightA", -2F, -18F, -10F, 6, 4, 4);
-        loco.addBox("lightB", -21F, -18F, -10F, 6, 4, 4);
+        
+        loco.addBox("wheels", -20.0F, -5.0F, -16.0F, 23, 2, 16);
+        loco.addBox("frame", -21.0F, -10.0F, -17.0F, 25, 5, 18);
+        loco.addBox("engine", -15.0F, -19.0F, -16.0F, 13, 9, 16);
+        loco.addBox("sideA", -20.0F, -17.0F, -13.0F, 5, 7, 10);
+        loco.addBox("sideB", -2.0F, -17.0F, -13.0F, 5, 7, 10);
+        // loco.addBox("lightA", -2.0F, -18.0F, -10.0F, 6, 4, 4);
+        loco.addBox("lightB", -21.0F, -18.0F, -10.0F, 6, 4, 4);
     }
 }
