@@ -6,8 +6,6 @@
 package cde.core.network;
 
 import cde.api.ISoundSource;
-import cde.core.network.PacketCDE;
-import cde.core.network.PacketIds;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
