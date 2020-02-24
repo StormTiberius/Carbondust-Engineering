@@ -81,7 +81,7 @@ public class SoundHelper
             sndSystem.setVolume(iss.getSourceName(), iss.getVolume() * soundVolume);
         }
     }
-        
+    
     public static void setPitch(ISoundSource iss)
     {
         if(SOURCES.containsKey(iss.getSourceName()))
@@ -162,7 +162,7 @@ public class SoundHelper
                 {
                     sndSystem.setVolume(packet.sourceName, packet.volume * soundVolume);
                 }
-
+                
                 if(packet.updatePitch)
                 {
                     sndSystem.setPitch(packet.sourceName, packet.pitch);
