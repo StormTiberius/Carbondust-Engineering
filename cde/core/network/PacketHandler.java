@@ -6,7 +6,6 @@
 package cde.core.network;
 
 import cde.api.INetwork;
-import cde.core.sound.PacketSound;
 import cde.core.sound.SoundHelper;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -27,28 +26,24 @@ public class PacketHandler implements IPacketHandler
         
         try
         {
-            int packetId = data.read();
-            
             EntityPlayer ep = (EntityPlayer)player;
+            
+            int packetId = data.read();
+            PacketCDE packet = getPacketById(packetId);
+            packet.readData(data);
             
             switch(packetId)
             {
+                case PacketIds.SOUND:
+				sendPacketToSoundHelper((PacketSound)packet, ep);
+				break;
                 case PacketIds.ENTITY:
-                                PacketEntity entity = new PacketEntity();
-                                entity.readData(data);
-                                sendPacketToEntity(entity, ep);
+                                sendPacketToEntity((PacketEntity)packet, ep);
                                 break;
                 case PacketIds.TILE:
                 case PacketIds.TILE_PARTICLE:
-                                PacketTile tile = getPacket(packetId);
-                                tile.readData(data);
-                                sendPacketToTileEntity(tile, ep);
+                                sendPacketToTileEntity((PacketTile)packet, ep);
                                 break;
-                case PacketIds.SOUND:
-                                PacketSound sound = new PacketSound();
-				sound.readData(data);
-				sendPacketToSoundHelper(sound, ep);
-				break;
             }
         }
         catch(Exception e)
@@ -57,20 +52,27 @@ public class PacketHandler implements IPacketHandler
         }
     }
     
-    private PacketTile getPacket(int id)
+    private PacketCDE getPacketById(int id)
     {
         switch(id)
         {
+            case PacketIds.SOUND: return new PacketSound();
+            case PacketIds.ENTITY: return new PacketEntity();
             case PacketIds.TILE: return new PacketTile();
             case PacketIds.TILE_PARTICLE: return new PacketTileParticle();
-            default: return new PacketTile();
+            default: return null;
         }
+    }
+    
+    private void sendPacketToSoundHelper(PacketSound packet, EntityPlayer player)
+    {
+        SoundHelper.receivePacket(packet, player);
     }
     
     private void sendPacketToEntity(PacketEntity packet, EntityPlayer player)
     {
         Entity entity = player.worldObj.getEntityByID(packet.entityId);
-
+        
         if(entity instanceof INetwork)
         {
             ((INetwork)entity).receivePacket(packet, player);
@@ -80,15 +82,10 @@ public class PacketHandler implements IPacketHandler
     private void sendPacketToTileEntity(PacketTile packet, EntityPlayer player)
     {
         TileEntity te = player.worldObj.getBlockTileEntity(packet.xCoord, packet.yCoord, packet.zCoord);
-            
+        
         if(te instanceof INetwork)
         {
             ((INetwork)te).receivePacket(packet, player);
         }
-    }
-    
-    private void sendPacketToSoundHelper(PacketSound packet, EntityPlayer player)
-    {
-        SoundHelper.receivePacket(packet, player);
     }
 }
