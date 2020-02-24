@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core.sound;
+package cde.core.network;
 
 import cde.api.ISoundSource;
 import cde.core.network.PacketCDE;
