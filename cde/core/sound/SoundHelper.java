@@ -5,14 +5,16 @@
 
 package cde.core.sound;
 
-import java.util.ArrayList;
+import cde.core.network.PacketSound;
+import cde.api.ISoundSource;
+import java.util.HashMap;
 import net.minecraft.client.Minecraft;
 import static net.minecraft.client.audio.SoundManager.sndSystem;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class SoundHelper
 {
-    private static final ArrayList SOURCES = new ArrayList<TileEntityWithSound>();
+    private static final HashMap<String, ISoundSource> SOURCES = new HashMap<String, ISoundSource>();
     private static Minecraft mc;
     private static boolean init,resume;
     private static float soundVolume,masterVolume;
@@ -53,13 +55,9 @@ public class SoundHelper
     {
         if(flag)
         {
-            if(!SOURCES.isEmpty())
+            for(ISoundSource iss : SOURCES.values())
             {
-                for(Object object : SOURCES)
-                {
-                    TileEntityWithSound te = (TileEntityWithSound)object;
-                    sndSystem.setVolume(te.getSourceName(), 0.0F);
-                }
+                sndSystem.setVolume(iss.getSourceName(), 0.0F);
             }
         }
         else
@@ -70,151 +68,104 @@ public class SoundHelper
     
     private static void updateVolume()
     {
-        if(!SOURCES.isEmpty())
+        for(ISoundSource iss : SOURCES.values())
         {
-            for(Object object : SOURCES)
-            {
-                TileEntityWithSound te = (TileEntityWithSound)object;
-                sndSystem.setVolume(te.getSourceName(), te.getVolume() * soundVolume);
-            }
+            sndSystem.setVolume(iss.getSourceName(), iss.getVolume() * soundVolume);
         }
     }
     
-    public static void setVolume(TileEntityWithSound a)
+    public static void setVolume(ISoundSource iss)
     {
-        if(!SOURCES.isEmpty())
+        if(SOURCES.containsKey(iss.getSourceName()))
         {
-            for(Object object : SOURCES)
-            {
-                TileEntityWithSound b = (TileEntityWithSound)object;
-                
-                if(a.xCoord == b.xCoord && a.yCoord == b.yCoord && a.zCoord == b.zCoord)
-                {
-                    sndSystem.setVolume(a.getSourceName(), a.getVolume() * soundVolume);
-                    break;
-                }
-            }
+            sndSystem.setVolume(iss.getSourceName(), iss.getVolume() * soundVolume);
         }
     }
         
-    public static void setPitch(TileEntityWithSound a)
+    public static void setPitch(ISoundSource iss)
     {
-        if(!SOURCES.isEmpty())
+        if(SOURCES.containsKey(iss.getSourceName()))
         {
-            for(Object object : SOURCES)
-            {
-                TileEntityWithSound b = (TileEntityWithSound)object;
-                
-                if(a.xCoord == b.xCoord && a.yCoord == b.yCoord && a.zCoord == b.zCoord)
-                {
-                    sndSystem.setPitch(a.getSourceName(), a.getPitch());
-                    break;
-                }
-            }
+            sndSystem.setPitch(iss.getSourceName(), iss.getPitch());
         }
     }
     
-    public static void updateTileSound(TileEntityWithSound te, boolean active)
+    public static void updateTileSound(ISoundSource iss, boolean flag)
     {
-        if(active)
+        if(flag)
         {
-            playTileSound(te);
+            playTileSound(iss);
         }
         else
         {
-            stopTileSound(te);
+            stopTileSound(iss);
         }
     }
     
-    private static void playTileSound(TileEntityWithSound te)
+    private static void playTileSound(ISoundSource iss)
     {
-        if(!te.isPlaying())
+        if(!iss.isPlaying())
         {
-            sndSystem.play(te.getSourceName());
-            te.setPlaying(true);
+            sndSystem.play(iss.getSourceName());
+            iss.setPlaying(true);
         }
     }
     
-    private static void stopTileSound(TileEntityWithSound te)
+    private static void stopTileSound(ISoundSource iss)
     {
-        if(te.isPlaying())
+        if(iss.isPlaying())
         {
-            sndSystem.stop(te.getSourceName());
-            te.setPlaying(false);
+            sndSystem.stop(iss.getSourceName());
+            iss.setPlaying(false);
         }
     }
     
-    public static void addSource(TileEntityWithSound te)
+    public static void addSource(ISoundSource iss)
     {
-        SoundSource src = te.getSoundSource();
-        
-        sndSystem.newSource(src.priority, src.sourceName, src.url, src.identifier, src.toLoop, src.x, src.y, src.z, src.attModel, src.distOrRoll);
-        sndSystem.setVolume(src.sourceName, te.getVolume() * soundVolume);
-        sndSystem.setPitch(src.sourceName, te.getPitch());
-        SOURCES.add(te);
+        sndSystem.newSource(iss.isPriority(), iss.getSourceName(), iss.getResourceUrl(), iss.getResourceName(), iss.isLooping(), iss.getOriginX(), iss.getOriginY(), iss.getOriginZ(), iss.getAttModel(), iss.getDistOrRoll());
+        sndSystem.setVolume(iss.getSourceName(), iss.getVolume() * soundVolume);
+        sndSystem.setPitch(iss.getSourceName(), iss.getPitch());
+        SOURCES.put(iss.getSourceName(), iss);
     }
     
-    public static void removeSource(TileEntityWithSound a)
+    public static void removeSource(ISoundSource iss)
     {
-        Object temp = null;
-        
-        for(Object object : SOURCES)
+        if(SOURCES.containsKey(iss.getSourceName()))
         {
-            TileEntityWithSound b = (TileEntityWithSound)object;
-            
-            if(a.xCoord == b.xCoord && a.yCoord == b.yCoord && a.zCoord == b.zCoord)
-            {
-                temp = object;
-                break;
-            }
-        }
-        
-        if(temp != null)
-        {
-            SOURCES.remove(temp);
-            stopTileSound(a);
-            sndSystem.removeSource(a.getSourceName());
+            SOURCES.remove(iss.getSourceName());
+            stopTileSound(iss);
+            sndSystem.removeSource(iss.getSourceName());
         }
     }
     
     public static void removeAll()
     {
-        if(!SOURCES.isEmpty())
+        for(ISoundSource iss : SOURCES.values())
         {
-            for(Object object : SOURCES)
-            {
-                TileEntityWithSound te = (TileEntityWithSound)object;
-                stopTileSound(te);
-                sndSystem.removeSource(te.getSourceName());
-            }
-
-            SOURCES.clear();
+            stopTileSound(iss);
+            sndSystem.removeSource(iss.getSourceName());
+            SOURCES.remove(iss.getSourceName());
         }
     }
     
-    public static void receivePacket(PacketTileSound packet, EntityPlayer player)
+    public static void receivePacket(PacketSound packet, EntityPlayer player)
     {
-        if(packet.playerChangedDimension)
+        if(packet.sourceName.isEmpty())
         {
             removeAll();
         }
         else
         {
-            for(Object o : SOURCES)
+            if(SOURCES.containsKey(packet.sourceName))
             {
-                TileEntityWithSound te = (TileEntityWithSound)o;
-
-                if(te.xCoord == packet.xCoord && te.yCoord == packet.yCoord && te.zCoord == packet.zCoord)
+                if(packet.updateVolume)
                 {
-                    if(packet.updateVolume)
-                    {
-                        sndSystem.setVolume(te.getSourceName(), packet.volume * soundVolume);
-                    }
+                    sndSystem.setVolume(packet.sourceName, packet.volume * soundVolume);
+                }
 
-                    if(packet.updatePitch)
-                    {
-                        sndSystem.setPitch(te.getSourceName(), packet.pitch);
-                    }
+                if(packet.updatePitch)
+                {
+                    sndSystem.setPitch(packet.sourceName, packet.pitch);
                 }
             }
         }
