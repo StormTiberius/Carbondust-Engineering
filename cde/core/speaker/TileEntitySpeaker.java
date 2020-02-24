@@ -98,7 +98,7 @@ public class TileEntitySpeaker extends TileEntityWithSound
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {   
         return SpeakerModule.sounds[index];
     }

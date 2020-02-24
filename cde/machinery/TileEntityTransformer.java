@@ -137,7 +137,7 @@ public class TileEntityTransformer extends TileEntityMachine implements IEnergyS
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {
         return "fluorescent.wav";
     }

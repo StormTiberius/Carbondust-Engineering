@@ -275,7 +275,7 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {
         return "pumper.wav";
     }

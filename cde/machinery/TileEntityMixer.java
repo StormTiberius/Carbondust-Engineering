@@ -176,7 +176,7 @@ public class TileEntityMixer extends TileEntityMachine implements IEnergySink
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {
         return "boomer.wav";
     }

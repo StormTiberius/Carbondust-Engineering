@@ -176,7 +176,7 @@ public class TileEntityTurbine extends TileEntityMachine implements IEnergySourc
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {
         return "breather.wav";
     }

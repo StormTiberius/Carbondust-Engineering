@@ -165,7 +165,7 @@ public class TileEntityGenerator extends TileEntityMachine implements IEnergySou
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {
         return "rotormachine.wav";
     }

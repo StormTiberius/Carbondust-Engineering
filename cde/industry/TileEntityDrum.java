@@ -324,7 +324,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {
         return "storage-tank.ogg";
     }

@@ -91,7 +91,7 @@ public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySo
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {
         return "fluorescent.wav";
     }

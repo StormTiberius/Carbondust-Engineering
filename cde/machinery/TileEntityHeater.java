@@ -130,7 +130,7 @@ public class TileEntityHeater extends TileEntityMachine implements IEnergySink
     }
     
     @Override
-    public String getSoundFileName()
+    public String getResourceName()
     {
         return "burning3.wav";
     }
