@@ -6,7 +6,7 @@
 package cde.core.network;
 
 import cde.api.INetwork;
-import cde.core.sound.PacketTileSound;
+import cde.core.sound.PacketSound;
 import cde.core.sound.SoundHelper;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -45,7 +45,7 @@ public class PacketHandler implements IPacketHandler
                                 sendPacketToTileEntity(tile, ep);
                                 break;
                 case PacketIds.SOUND:
-                                PacketTileSound sound = new PacketTileSound();
+                                PacketSound sound = new PacketSound();
 				sound.readData(data);
 				sendPacketToSoundHelper(sound, ep);
 				break;
@@ -87,7 +87,7 @@ public class PacketHandler implements IPacketHandler
         }
     }
     
-    private void sendPacketToSoundHelper(PacketTileSound packet, EntityPlayer player)
+    private void sendPacketToSoundHelper(PacketSound packet, EntityPlayer player)
     {
         SoundHelper.receivePacket(packet, player);
     }
