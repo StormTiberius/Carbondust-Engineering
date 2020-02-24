@@ -6,28 +6,16 @@
 package cde.core.sound;
 
 import cde.CDECore;
+import cde.api.ISoundSource;
 import cde.core.TileEntityCDE;
 import java.net.URL;
 import paulscode.sound.SoundSystemConfig;
 
-public abstract class TileEntityWithSound extends TileEntityCDE
+public abstract class TileEntityWithSound extends TileEntityCDE implements ISoundSource
 {
     protected abstract boolean isWorking();
-    protected abstract String getSoundFileName();
-    protected abstract float getVolume();
-    protected abstract float getPitch();
     
     private boolean init,playing,active,flag;
-    
-    public boolean isPlaying()
-    {
-        return playing;
-    }
-        
-    public void setPlaying(boolean flag)
-    {
-        playing = flag;
-    }
     
     private void init()
     {
@@ -100,28 +88,69 @@ public abstract class TileEntityWithSound extends TileEntityCDE
         return CDECore.playSounds() && getVolume() > 0.0F;
     }
     
-    protected String getSourceName()
+    @Override
+    public boolean isPriority()
     {
-        return "cde_x" + xCoord + "_y" + yCoord + "_z" + zCoord;
+        return true;
     }
     
-    protected URL getUrl()
+    @Override
+    public boolean isLooping()
     {
-        return CDECore.class.getResource((new StringBuilder()).append("/cde/sounds/machine/").append(getSoundFileName()).toString());
+        return true;
     }
     
-    protected int getAttModel()
+    @Override
+    public boolean isPlaying()
+    {
+        return playing;
+    }
+    
+    @Override
+    public void setPlaying(boolean flag)
+    {
+        playing = flag;
+    }
+    
+    @Override
+    public int getAttModel()
     {
         return SoundSystemConfig.ATTENUATION_LINEAR;
     }
     
-    protected float getDistOrRoll()
+    @Override
+    public float getDistOrRoll()
     {
         return 16.0F;
     }
     
-    public SoundSource getSoundSource()
+    @Override
+    public float getOriginX()
     {
-        return new SoundSource(true, getSourceName(), getUrl(), getSoundFileName(), true, 0.5F + xCoord, 0.5F + yCoord, 0.5F + zCoord, getAttModel(), getDistOrRoll());
+        return 0.5F + xCoord;
+    }
+    
+    @Override
+    public float getOriginY()
+    {
+        return 0.5F + yCoord;
+    }
+    
+    @Override
+    public float getOriginZ()
+    {
+        return 0.5F + zCoord;
+    }
+    
+    @Override
+    public String getSourceName()
+    {
+        return "cde_x" + xCoord + "_y" + yCoord + "_z" + zCoord;
+    }
+    
+    @Override
+    public URL getResourceUrl()
+    {
+        return CDECore.class.getResource((new StringBuilder()).append("/cde/sounds/machine/").append(getResourceName()).toString());
     }
 }
