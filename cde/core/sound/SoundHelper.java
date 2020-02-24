@@ -132,9 +132,9 @@ public class SoundHelper
     {
         if(SOURCES.containsKey(iss.getSourceName()))
         {
-            SOURCES.remove(iss.getSourceName());
             stopTileSound(iss);
             sndSystem.removeSource(iss.getSourceName());
+            SOURCES.remove(iss.getSourceName());
         }
     }
     
@@ -142,10 +142,11 @@ public class SoundHelper
     {
         for(ISoundSource iss : SOURCES.values())
         {
-            SOURCES.remove(iss.getSourceName());
             stopTileSound(iss);
             sndSystem.removeSource(iss.getSourceName());
         }
+        
+        SOURCES.clear();
     }
     
     public static void receivePacket(PacketSound packet, EntityPlayer player)
