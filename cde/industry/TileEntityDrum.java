@@ -368,7 +368,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     }
     
     @Override
-    protected float getDistOrRoll()
+    public float getDistOrRoll()
     {
         return 8.0F;
     }
