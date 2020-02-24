@@ -142,9 +142,9 @@ public class SoundHelper
     {
         for(ISoundSource iss : SOURCES.values())
         {
+            SOURCES.remove(iss.getSourceName());
             stopTileSound(iss);
             sndSystem.removeSource(iss.getSourceName());
-            SOURCES.remove(iss.getSourceName());
         }
     }
     
