@@ -11,7 +11,7 @@ import cde.api.INetwork;
 import cde.api.IPaintableTile;
 import cde.core.Defaults;
 import cde.core.network.PacketTileParticle;
-import cde.core.sound.PacketTileSound;
+import cde.core.network.PacketSound;
 import cde.core.sound.TileEntityWithSound;
 import com.eloraam.redpower.core.IPaintable;
 import java.awt.Color;
@@ -470,7 +470,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     {
         if(soundUpdateNeeded && System.currentTimeMillis() - previousSoundUpdateTime > NETWORK_UPDATE_INTERVAL)
         {
-            CDECore.proxy.sendToPlayers(new PacketTileSound(this, false, true).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
+            CDECore.proxy.sendToPlayers(new PacketSound(this, false, true).getPacket(), worldObj, xCoord, yCoord, zCoord, 32);
             previousSoundUpdateTime = System.currentTimeMillis();
             soundUpdateNeeded = false;
         }
