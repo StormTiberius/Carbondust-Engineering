@@ -10,7 +10,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class PacketSound extends PacketCDE
+public class PacketSound extends PacketTile
 {
     public String sourceName;
     public float volume,pitch;
@@ -20,6 +20,8 @@ public class PacketSound extends PacketCDE
     
     public PacketSound(ISoundSource iss, boolean updateVolume, boolean updatePitch)
     {
+        super(iss.getSourceX(), iss.getSourceY(), iss.getSourceZ());
+        
         this.sourceName = iss.getSourceName();
         this.volume = iss.getVolume();
         this.pitch = iss.getPitch();
