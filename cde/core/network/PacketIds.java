@@ -8,7 +8,7 @@ package cde.core.network;
 public class PacketIds
 {
     public static final byte SOUND = 0;
-    public static final byte SOUND_INDUSTRIAL_CRAFT = 1;
+    public static final byte SOUND_WAVE = 1;
     public static final byte ENTITY = 2;
     public static final byte TILE = 3;
     public static final byte TILE_PARTICLE = 4;
