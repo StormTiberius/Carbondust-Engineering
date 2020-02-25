@@ -35,6 +35,7 @@ public class PacketHandler implements IPacketHandler
             switch(packetId)
             {
                 case PacketIds.SOUND:
+                case PacketIds.SOUND_WAVE:
 				sendPacketToSoundHelper((PacketSound)packet, ep);
 				break;
                 case PacketIds.ENTITY:
@@ -57,6 +58,7 @@ public class PacketHandler implements IPacketHandler
         switch(id)
         {
             case PacketIds.SOUND: return new PacketSound();
+            case PacketIds.SOUND_WAVE: return new PacketSoundWave();
             case PacketIds.ENTITY: return new PacketEntity();
             case PacketIds.TILE: return new PacketTile();
             case PacketIds.TILE_PARTICLE: return new PacketTileParticle();
