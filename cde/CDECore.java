@@ -15,6 +15,7 @@ import cde.core.FuelManager;
 import cde.core.Namings;
 import cde.core.PlayerTracker;
 import cde.core.RecipeManager;
+import cde.core.TickHandler;
 import cde.core.Version;
 import cde.core.block.BlockOre;
 import cde.core.block.BlockStorage;
@@ -117,6 +118,7 @@ public class CDECore
         if(playSounds())
         {
             proxy.setupSound();
+            TickRegistry.registerTickHandler(new TickHandler(), Side.SERVER);
             TickRegistry.registerTickHandler(new SoundTickHandler(), Side.CLIENT);
             GameRegistry.registerPlayerTracker(new PlayerTracker());
         }
