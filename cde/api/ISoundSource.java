@@ -13,6 +13,9 @@ public interface ISoundSource
     public abstract boolean isLooping();
     public abstract boolean isPlaying();
     public abstract void setPlaying(boolean flag);
+    public abstract int getSourceX();
+    public abstract int getSourceY();
+    public abstract int getSourceZ();
     public abstract int getAttModel();
     public abstract float getDistOrRoll();
     public abstract float getOriginX();
