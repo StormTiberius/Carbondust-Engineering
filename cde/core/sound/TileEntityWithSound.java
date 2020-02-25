@@ -113,6 +113,24 @@ public abstract class TileEntityWithSound extends TileEntityCDE implements ISoun
     }
     
     @Override
+    public int getSourceX()
+    {
+        return xCoord;
+    }
+    
+    @Override
+    public int getSourceY()
+    {
+        return yCoord;
+    }
+    
+    @Override
+    public int getSourceZ()
+    {
+        return zCoord;
+    }
+    
+    @Override
     public int getAttModel()
     {
         return SoundSystemConfig.ATTENUATION_LINEAR;
@@ -127,7 +145,14 @@ public abstract class TileEntityWithSound extends TileEntityCDE implements ISoun
     @Override
     public float getOriginX()
     {
-        return 0.5F + xCoord;
+        float f = 0.5F;
+        
+        if(xCoord < 0)
+        {
+            f *= -1;
+        }
+        
+        return f + xCoord;
     }
     
     @Override
@@ -139,7 +164,14 @@ public abstract class TileEntityWithSound extends TileEntityCDE implements ISoun
     @Override
     public float getOriginZ()
     {
-        return 0.5F + zCoord;
+        float f = 0.5F;
+        
+        if(zCoord < 0)
+        {
+            f *= -1;
+        }
+        
+        return f + zCoord;
     }
     
     @Override
