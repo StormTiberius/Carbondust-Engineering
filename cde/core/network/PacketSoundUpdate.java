@@ -10,15 +10,15 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class PacketSound extends PacketTile
+public class PacketSoundUpdate extends PacketTile
 {
     public String sourceName;
     public float volume,pitch;
     public boolean updateVolume,updatePitch;
     
-    public PacketSound(){}
+    public PacketSoundUpdate(){}
     
-    public PacketSound(ISoundSource iss, boolean updateVolume, boolean updatePitch)
+    public PacketSoundUpdate(ISoundSource iss, boolean updateVolume, boolean updatePitch)
     {
         super(iss.getSourceX(), iss.getSourceY(), iss.getSourceZ());
         
