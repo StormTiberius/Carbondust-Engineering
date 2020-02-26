@@ -16,17 +16,17 @@ public class PacketSoundUpdate extends PacketSound
     public static final byte ON = 1;
     public static final byte TOGGLE = 2;
     
-    public byte state = Byte.MIN_VALUE;
+    public byte action = Byte.MIN_VALUE;
     public float volume,pitch;
     public boolean updateVolume,updatePitch;
     
     public PacketSoundUpdate(){}
     
-    public PacketSoundUpdate(ISoundSource iss, byte state)
+    public PacketSoundUpdate(ISoundSource iss, byte action)
     {
         super(iss);
         
-        this.state = state;
+        this.action = action;
     }
     
     public PacketSoundUpdate(ISoundSource iss, boolean updateVolume, boolean updatePitch)
@@ -39,11 +39,11 @@ public class PacketSoundUpdate extends PacketSound
         this.updatePitch = updatePitch;
     }
     
-    public PacketSoundUpdate(ISoundSource iss, boolean updateVolume, boolean updatePitch, byte state)
+    public PacketSoundUpdate(ISoundSource iss, boolean updateVolume, boolean updatePitch, byte action)
     {
         super(iss);
         
-        this.state = state;
+        this.action = action;
         this.volume = iss.getVolume();
         this.pitch = iss.getPitch();
         this.updateVolume = updateVolume;
@@ -61,7 +61,7 @@ public class PacketSoundUpdate extends PacketSound
     {
         super.writeData(data);
         
-        data.writeByte(state);
+        data.writeByte(action);
         
         data.writeFloat(volume);
         data.writeFloat(pitch);
@@ -75,7 +75,7 @@ public class PacketSoundUpdate extends PacketSound
     {
         super.readData(data);
         
-        state = data.readByte();
+        action = data.readByte();
         
         volume = data.readFloat();
         pitch = data.readFloat();
