@@ -38,6 +38,8 @@ public class PacketSound extends PacketTile
     @Override
     public void writeData(DataOutputStream data) throws IOException
     {
+        super.writeData(data);
+        
         data.writeUTF(sourceName);
         
         data.writeFloat(volume);
@@ -50,6 +52,8 @@ public class PacketSound extends PacketTile
     @Override
     public void readData(DataInputStream data) throws IOException
     {
+        super.readData(data);
+        
         sourceName = data.readUTF();
         
         volume = data.readFloat();
