@@ -44,7 +44,7 @@ public class SoundEventManager
     @ForgeSubscribe
     public void sem(Unload event)
     {   
-        SoundHelper.removeAll();
+        SoundHelper.retireAll();
     }
     
     @ForgeSubscribe
