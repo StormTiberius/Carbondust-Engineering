@@ -234,40 +234,12 @@ public class SoundHelper
             case PacketIds.SOUND_WAVE:
                 PacketSoundWave psw = (PacketSoundWave)packet;
                 
-                System.out.println(psw.sourceName + " " + psw.eventType + " " + psw.machineType);
-                SoundWave primary = null;
-                SoundWave secondary = null;
-                
                 switch(psw.machineType)
                 {
-                        case 1:
-                        primary = new SoundWaveNuclearReactor(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType, 0);
-                        secondary = new SoundWaveNuclearReactor(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType, 1);
-                        break;
-                    
-                    case 3:
-                        primary = new SoundWaveGenerator(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType);
-                        break;
-                    
-                    case 4:
-                        primary = new SoundWaveGeothermal(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType);
-                        break;
+                    case 1: addSource(new SoundWaveNuclearReactor(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType)); break;
+                    case 3: addSource(new SoundWaveGenerator(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType)); break;
+                    case 4: addSource(new SoundWaveGeothermal(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType)); break;
                 }
-                
-                    if(primary != null)
-                    {
-                        System.out.println("LOAD PRIMARY");
-                        
-                        addSource(primary);
-                    }
-                    
-                    if(secondary != null)
-                    {
-                        System.out.println("LOAD SECONDARY");
-                        
-                        addSource(secondary);
-                    }
-                
                 break;
         }
     }
