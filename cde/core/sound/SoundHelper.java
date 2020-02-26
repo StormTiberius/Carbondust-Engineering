@@ -7,6 +7,12 @@ package cde.core.sound;
 
 import cde.core.network.PacketSound;
 import cde.api.ISoundSource;
+import cde.core.network.PacketIds;
+import cde.core.network.PacketSoundUpdate;
+import cde.core.network.PacketSoundWave;
+import cde.core.sound.waves.SoundWaveGenerator;
+import cde.core.sound.waves.SoundWaveGeothermal;
+import cde.core.sound.waves.SoundWaveNuclearReactor;
 import java.util.HashMap;
 import net.minecraft.client.Minecraft;
 import static net.minecraft.client.audio.SoundManager.sndSystem;
@@ -132,13 +138,26 @@ public class SoundHelper
     {
         if(SOURCES.containsKey(iss.getSourceName()))
         {
-            stopTileSound(iss);
-            sndSystem.removeSource(iss.getSourceName());
-            SOURCES.remove(iss.getSourceName());
+            retireSource(SOURCES.get(iss.getSourceName()));
         }
     }
     
-    public static void removeAll()
+    public static void removeSource(String name)
+    {
+        if(SOURCES.containsKey(name))
+        {
+            retireSource(SOURCES.get(name));
+        }
+    }
+    
+    private static void retireSource(ISoundSource iss)
+    {
+        stopTileSound(iss);
+        sndSystem.removeSource(iss.getSourceName());
+        SOURCES.remove(iss.getSourceName());
+    }
+    
+    public static void retireAll()
     {
         for(ISoundSource iss : SOURCES.values())
         {
@@ -151,24 +170,89 @@ public class SoundHelper
     
     public static void receivePacket(PacketSound packet, EntityPlayer player)
     {
-        if(packet.sourceName.isEmpty())
+        switch(packet.getID())
         {
-            removeAll();
-        }
-        else
-        {
-            if(SOURCES.containsKey(packet.sourceName))
-            {
-                if(packet.updateVolume)
+            case PacketIds.SOUND:
+                if(packet.sourceName.isEmpty())
                 {
-                    sndSystem.setVolume(packet.sourceName, packet.volume * soundVolume);
+                    retireAll();
+                }
+                else
+                {
+                    removeSource(packet.sourceName);
+                }
+                break;
+            case PacketIds.SOUND_UPDATE:
+                if(SOURCES.containsKey(packet.sourceName))
+                {
+                    PacketSoundUpdate psu = (PacketSoundUpdate)packet;
+                    ISoundSource iss = SOURCES.get(psu.sourceName);
+                    
+                    switch(psu.action)
+                    {
+                        case PacketSoundUpdate.OFF: stopTileSound(iss); break;
+                        case PacketSoundUpdate.ON: playTileSound(iss); break;
+                        case PacketSoundUpdate.TOGGLE:
+                            if(iss.isPlaying())
+                            {
+                                stopTileSound(iss);
+                            }
+                            else
+                            {
+                                playTileSound(iss);
+                            }
+                            break;
+                    }
+                    
+                    if(psu.updateVolume)
+                    {
+                        sndSystem.setVolume(packet.sourceName, psu.volume * soundVolume);
+                    }
+
+                    if(psu.updatePitch)
+                    {
+                        sndSystem.setPitch(packet.sourceName, psu.pitch);
+                    }
+                }
+                break;
+            case PacketIds.SOUND_WAVE:
+                PacketSoundWave psw = (PacketSoundWave)packet;
+                
+                System.out.println(psw.sourceName + " " + psw.eventType + " " + psw.machineType);
+                SoundWave primary = null;
+                SoundWave secondary = null;
+                
+                switch(psw.machineType)
+                {
+                        case 1:
+                        primary = new SoundWaveNuclearReactor(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType, 0);
+                        secondary = new SoundWaveNuclearReactor(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType, 1);
+                        break;
+                    
+                    case 3:
+                        primary = new SoundWaveGenerator(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType);
+                        break;
+                    
+                    case 4:
+                        primary = new SoundWaveGeothermal(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType);
+                        break;
                 }
                 
-                if(packet.updatePitch)
-                {
-                    sndSystem.setPitch(packet.sourceName, packet.pitch);
-                }
-            }
+                    if(primary != null)
+                    {
+                        System.out.println("LOAD PRIMARY");
+                        
+                        addSource(primary);
+                    }
+                    
+                    if(secondary != null)
+                    {
+                        System.out.println("LOAD SECONDARY");
+                        
+                        addSource(secondary);
+                    }
+                
+                break;
         }
     }
 }
