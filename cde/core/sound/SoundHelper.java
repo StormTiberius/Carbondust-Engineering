@@ -88,11 +88,27 @@ public class SoundHelper
         }
     }
     
+    public static void setVolume(String key, float volume)
+    {
+        if(SOURCES.containsKey(key))
+        {
+            sndSystem.setVolume(key, volume * soundVolume);
+        }
+    }
+    
     public static void setPitch(ISoundSource iss)
     {
         if(SOURCES.containsKey(iss.getSourceName()))
         {
             sndSystem.setPitch(iss.getSourceName(), iss.getPitch());
+        }
+    }
+    
+    public static void setPitch(String key, float pitch)
+    {
+        if(SOURCES.containsKey(key))
+        {
+            sndSystem.setPitch(key, pitch);
         }
     }
     
@@ -206,12 +222,12 @@ public class SoundHelper
                     
                     if(psu.updateVolume)
                     {
-                        sndSystem.setVolume(packet.sourceName, psu.volume * soundVolume);
+                        setVolume(packet.sourceName, psu.volume);
                     }
 
                     if(psu.updatePitch)
                     {
-                        sndSystem.setPitch(packet.sourceName, psu.pitch);
+                        setPitch(packet.sourceName, psu.pitch);
                     }
                 }
                 break;
