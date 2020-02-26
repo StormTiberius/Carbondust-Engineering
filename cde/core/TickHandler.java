@@ -21,6 +21,7 @@ public class TickHandler implements ITickHandler
         if(System.currentTimeMillis() - previousUpdateTime > timeUntilUpdate)
         {
             SoundWave.updateSources();
+            previousUpdateTime = System.currentTimeMillis();
         }
     }
     
