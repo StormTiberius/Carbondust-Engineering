@@ -23,7 +23,6 @@ import cde.core.item.ItemOre;
 import cde.core.item.ItemMaterial;
 import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
-import cde.core.sound.EntitySoundWave;
 import cde.core.sound.SoundTickHandler;
 import cde.core.speaker.SpeakerModule;
 import cde.core.worldgen.WorldGenModule;
@@ -139,11 +138,6 @@ public class CDECore
         GameRegistry.registerFuelHandler(new FuelManager());
         
         MinecraftForge.EVENT_BUS.register(new EventManager());
-        
-        if(playSounds())
-        {
-            EntityRegistry.registerModEntity(EntitySoundWave.class, "cdeSoundWave", 0, instance, 160, Integer.MAX_VALUE, false);
-        }
     }
     
     @PostInit
