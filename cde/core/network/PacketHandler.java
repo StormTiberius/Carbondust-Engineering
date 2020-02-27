@@ -36,8 +36,7 @@ public class PacketHandler implements IPacketHandler
             {
                 case PacketIds.SOUND:
                 case PacketIds.SOUND_UPDATE:
-                case PacketIds.SOUND_WAVE:
-				sendPacketToSoundHelper((PacketSoundUpdate)packet, ep);
+				sendPacketToSoundHelper((PacketSound)packet, ep);
 				break;
                 case PacketIds.ENTITY:
                                 sendPacketToEntity((PacketEntity)packet, ep);
@@ -60,7 +59,6 @@ public class PacketHandler implements IPacketHandler
         {
             case PacketIds.SOUND: return new PacketSound();
             case PacketIds.SOUND_UPDATE: return new PacketSoundUpdate();
-            case PacketIds.SOUND_WAVE: return new PacketSoundWave();
             case PacketIds.ENTITY: return new PacketEntity();
             case PacketIds.TILE: return new PacketTile();
             case PacketIds.TILE_PARTICLE: return new PacketTileParticle();
@@ -68,7 +66,7 @@ public class PacketHandler implements IPacketHandler
         }
     }
     
-    private void sendPacketToSoundHelper(PacketSoundUpdate packet, EntityPlayer player)
+    private void sendPacketToSoundHelper(PacketSound packet, EntityPlayer player)
     {
         SoundHelper.receivePacket(packet, player);
     }
