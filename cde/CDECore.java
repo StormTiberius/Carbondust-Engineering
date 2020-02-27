@@ -23,6 +23,7 @@ import cde.core.item.ItemOre;
 import cde.core.item.ItemMaterial;
 import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
+import cde.core.sound.EntitySoundWave;
 import cde.core.sound.SoundTickHandler;
 import cde.core.speaker.SpeakerModule;
 import cde.core.worldgen.WorldGenModule;
@@ -42,6 +43,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -137,8 +139,13 @@ public class CDECore
         GameRegistry.registerFuelHandler(new FuelManager());
         
         MinecraftForge.EVENT_BUS.register(new EventManager());
+        
+        if(playSounds())
+        {
+            EntityRegistry.registerModEntity(EntitySoundWave.class, "cdeSoundWave", 0, instance, 160, Integer.MAX_VALUE, false);
+        }
     }
-
+    
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
