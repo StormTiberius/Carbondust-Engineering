@@ -9,10 +9,6 @@ import cde.core.network.PacketSound;
 import cde.api.ISoundSource;
 import cde.core.network.PacketIds;
 import cde.core.network.PacketSoundUpdate;
-import cde.core.network.PacketSoundWave;
-import cde.core.sound.waves.SoundWaveGenerator;
-import cde.core.sound.waves.SoundWaveGeothermal;
-import cde.core.sound.waves.SoundWaveNuclearReactor;
 import java.util.HashMap;
 import net.minecraft.client.Minecraft;
 import static net.minecraft.client.audio.SoundManager.sndSystem;
@@ -229,16 +225,6 @@ public class SoundHelper
                     {
                         setPitch(packet.sourceName, psu.pitch);
                     }
-                }
-                break;
-            case PacketIds.SOUND_WAVE:
-                PacketSoundWave psw = (PacketSoundWave)packet;
-                
-                switch(psw.machineType)
-                {
-                    case 1: addSource(new SoundWaveNuclearReactor(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType)); break;
-                    case 3: addSource(new SoundWaveGenerator(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType)); break;
-                    case 4: addSource(new SoundWaveGeothermal(psw.xCoord, psw.yCoord, psw.zCoord, psw.machineType)); break;
                 }
                 break;
         }
