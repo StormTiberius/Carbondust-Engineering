@@ -5,7 +5,7 @@
 
 package cde.industry;
 
-import cde.industry.drum.ModuleDrum;
+import cde.industry.drum.DrumModule;
 import cde.industry.drum.RenderBlockDrum;
 import cde.industry.drum.RenderItemBlockDrum;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -16,11 +16,11 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerRenderers()
     {
-        if(ModuleDrum.isDrumEnabled())
+        if(DrumModule.isDrumEnabled())
         {
-            ModuleDrum.setDrumRenderId(RenderingRegistry.getNextAvailableRenderId());
-            RenderingRegistry.registerBlockHandler(ModuleDrum.getDrumRenderId(), new RenderBlockDrum());
-            MinecraftForgeClient.registerItemRenderer(ModuleDrum.blockDrum.blockID, new RenderItemBlockDrum());
+            DrumModule.setDrumRenderId(RenderingRegistry.getNextAvailableRenderId());
+            RenderingRegistry.registerBlockHandler(DrumModule.getDrumRenderId(), new RenderBlockDrum());
+            MinecraftForgeClient.registerItemRenderer(DrumModule.blockDrum.blockID, new RenderItemBlockDrum());
         }
     }
 }

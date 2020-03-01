@@ -27,7 +27,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class ModuleDrum
+public class DrumModule
 {
     public static final CreativeTabs TAB_DRUMS = new CreativeTabDrums("industrydrums");
     
