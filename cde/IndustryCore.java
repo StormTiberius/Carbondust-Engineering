@@ -60,8 +60,6 @@ public class IndustryCore
     @Init
     public void init(FMLInitializationEvent event)
     {
-        proxy.registerRenderers();
-        
         if(drumModuleEnabled)
         {
             DrumModule.init(event);
@@ -71,6 +69,8 @@ public class IndustryCore
         {
             MachineModule.init(event);
         }
+        
+        proxy.registerRenderers();
     }
     
     @PostInit

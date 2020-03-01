@@ -318,12 +318,12 @@ public class MachineModule
             }
             
             // Pump
-            is = new ItemStack(blockMachineGamma.blockID, 1, 12);
+            is = new ItemStack(blockMachineAlpha.blockID, 1, 12);
             
-            cde.api.Blocks.machineBatteryStationHV = is;
+            cde.api.Blocks.machinePump = is;
             
-            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[12]);
-            // GameRegistry.registerTileEntity(TileEntityMachineChargingBench.class, "cdeChargingBench");
+            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[12]);
+            GameRegistry.registerTileEntity(TileEntityPump.class, "cdePump");
             
             if(craftable[12])
             {
@@ -491,7 +491,7 @@ public class MachineModule
             cde.api.Blocks.machineElectricDynamo = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[6]);
-            GameRegistry.registerTileEntity(TileEntityDynamo.class, "cdeDynamo");
+            GameRegistry.registerTileEntity(TileEntityDynamo.class, "cdeElectricDynamo");
             
             if(craftable[19])
             {
@@ -512,7 +512,7 @@ public class MachineModule
             cde.api.Blocks.machineSteamTurbine = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[7]);
-            GameRegistry.registerTileEntity(TileEntitySteamTurbine.class, "cdeDynamo");
+            GameRegistry.registerTileEntity(TileEntitySteamTurbine.class, "cdeSteamTurbine");
             
             if(craftable[20])
             {
