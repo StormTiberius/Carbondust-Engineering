@@ -27,7 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import railcraft.common.api.core.items.ItemRegistry;
 
-public class ModuleMachine
+public class MachineModule
 {
     private static final int ENTRIES = 35;
     

@@ -24,8 +24,8 @@ public class TileEntityInductionCharger extends TileEntityEnergyBase implements 
     
     public TileEntityInductionCharger()
     {
-        batteryEmptyId = ModuleMachine.getItemId(0);
-        batteryFullId = ModuleMachine.getItemId(1);
+        batteryEmptyId = MachineModule.getItemId(0);
+        batteryFullId = MachineModule.getItemId(1);
     }
         
     @Override

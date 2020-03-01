@@ -8,7 +8,7 @@ package cde;
 import cde.core.Version;
 import cde.industry.CommonProxy;
 import cde.industry.drum.DrumModule;
-import cde.industry.machines.ModuleMachine;
+import cde.industry.machines.MachineModule;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -53,7 +53,7 @@ public class IndustryCore
         
         if(machineModuleEnabled)
         {
-            ModuleMachine.preInit(event);
+            MachineModule.preInit(event);
         }
     }
     
@@ -69,7 +69,7 @@ public class IndustryCore
         
         if(machineModuleEnabled)
         {
-            ModuleMachine.init(event);
+            MachineModule.init(event);
         }
     }
     
@@ -83,7 +83,7 @@ public class IndustryCore
         
         if(machineModuleEnabled)
         {
-            ModuleMachine.postInit(event);
+            MachineModule.postInit(event);
         }
     }
 }
