@@ -8,7 +8,7 @@ package cde;
 import cde.core.Version;
 import cde.industry.CommonProxy;
 import cde.industry.drum.DrumModule;
-import cde.industry.machines.MachineModule;
+import cde.industry.machine.MachineModule;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
