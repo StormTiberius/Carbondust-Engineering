@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.industry;
+package cde.industry.drum;
 
 import cde.CDECore;
 import cde.IndustryCore;

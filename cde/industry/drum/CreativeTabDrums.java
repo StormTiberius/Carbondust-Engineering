@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.industry;
+package cde.industry.drum;
 
 import cde.IndustryCore;
 import net.minecraft.creativetab.CreativeTabs;

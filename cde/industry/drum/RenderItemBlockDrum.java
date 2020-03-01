@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.industry.render;
+package cde.industry.drum;
 
 import cde.IndustryCore;
 import net.minecraft.block.Block;
