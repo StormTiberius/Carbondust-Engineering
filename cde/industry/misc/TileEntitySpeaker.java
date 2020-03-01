@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core.speaker;
+package cde.industry.misc;
 
 import cde.core.sound.SoundHelper;
 import cde.core.sound.TileEntityWithSound;
