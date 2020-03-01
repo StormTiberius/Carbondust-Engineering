@@ -5,7 +5,6 @@
 
 package cde.industry.drum;
 
-import cde.IndustryCore;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -19,7 +18,7 @@ public class CreativeTabDrums extends CreativeTabs
     @Override
     public ItemStack getIconItemStack()
     {
-        return IndustryCore.getTabIcon();
+        return DrumModule.getTabIcon();
     }
 	
     @Override

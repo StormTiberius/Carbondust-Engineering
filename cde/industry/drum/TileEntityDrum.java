@@ -6,7 +6,6 @@
 package cde.industry.drum;
 
 import cde.CDECore;
-import cde.IndustryCore;
 import cde.api.INetwork;
 import cde.api.IPaintableTile;
 import cde.core.Defaults;
@@ -43,7 +42,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         counter = new int[2];
         counter[0] = 70; // 3.5 Seconds
         counter[1] = 24; // 1.2 Seconds
-        color = IndustryCore.getPaintColor().getRGB();
+        color = DrumModule.getPaintColor().getRGB();
         paint = -1;
     }
     
@@ -332,15 +331,15 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * IndustryCore.getDrumVolume();
+        return 1.0F / 100 * DrumModule.getDrumVolume();
     }
     
     @Override
     public float getPitch()
     {   
-        if(IndustryCore.getDrumPitch() != 100)
+        if(DrumModule.getDrumPitch() != 100)
         {
-            return (float)IndustryCore.getDrumPitch() / 100;
+            return (float)DrumModule.getDrumPitch() / 100;
         }
         
         int amount = 0;

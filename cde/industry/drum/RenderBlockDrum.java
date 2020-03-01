@@ -5,7 +5,6 @@
 
 package cde.industry.drum;
 
-import cde.IndustryCore;
 import cde.core.Defaults;
 import cde.core.util.Utils;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -84,7 +83,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     @Override
     public int getRenderId()
     {
-        return IndustryCore.getDrumRenderId();
+        return DrumModule.getDrumRenderId();
     }
     
     private void renderSides(Tessellator t, int xCoord, int yCoord, int zCoord, double[] uv, Color color)
@@ -953,7 +952,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
     
     private static void setColor(double i, double p)
     {
-        setColor(i, p, IndustryCore.getPaintColor());
+        setColor(i, p, DrumModule.getPaintColor());
     }
     
     private static Color getColor(ItemStack is)
@@ -963,7 +962,7 @@ public class RenderBlockDrum implements ISimpleBlockRenderingHandler
             return new Color(is.getTagCompound().getInteger("color"));
         }
         
-        return IndustryCore.getPaintColor();
+        return DrumModule.getPaintColor();
     }
     
     private static int getType(ItemStack is)

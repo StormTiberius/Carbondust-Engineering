@@ -7,7 +7,6 @@ package cde.industry.drum;
 
 import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
-import cde.IndustryCore;
 import cde.core.Defaults;
 import ic2.api.IPaintableBlock;
 import java.util.ArrayList;
@@ -88,7 +87,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                     {
                         return taskLabel(player, held, ted);
                     }
-                    else if(held.itemID == IndustryCore.getSealant().itemID)
+                    else if(held.itemID == DrumModule.getSealant().itemID)
                     {
                         return taskSealant(player, held, ted);
                     }
@@ -305,7 +304,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     {
         LiquidStack liquid = ted.getTank(ForgeDirection.UP, null).getLiquid();
         
-        if(liquid != null && ted.applyPaintCoating(IndustryCore.getLiquidColor(liquid.itemID)))
+        if(liquid != null && ted.applyPaintCoating(DrumModule.getLiquidColor(liquid.itemID)))
         {
             if(!player.capabilities.isCreativeMode)
             {
@@ -411,7 +410,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
     @Override
     public int getRenderType()
     {
-        return IndustryCore.getDrumRenderId();
+        return DrumModule.getDrumRenderId();
     }
     
     @Override
@@ -424,7 +423,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
             return ((TileEntityDrum)te).getDrumColor().getRGB();
         }
         
-        return IndustryCore.getPaintColor().getRGB();
+        return DrumModule.getPaintColor().getRGB();
     }
     
     @Override
@@ -455,7 +454,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                                 tag.removeTag("liquid");
                             }
                             
-                            tag.setInteger("color", IndustryCore.getPaintColor().getRGB());
+                            tag.setInteger("color", DrumModule.getPaintColor().getRGB());
                             tag.setInteger("paint", -1);
                             tag.setBoolean("sealant", false);
                             
@@ -566,7 +565,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
                 }
                 
                 drum.getTagCompound().setInteger("capacity", capacity);
-                drum.getTagCompound().setInteger("color", IndustryCore.getPaintColor(j).getRGB());
+                drum.getTagCompound().setInteger("color", DrumModule.getPaintColor(j).getRGB());
                 drum.getTagCompound().setInteger("paint", j);
                 drum.getTagCompound().setBoolean("sealant", true);
 
@@ -599,7 +598,7 @@ public class BlockDrum extends BlockContainer implements IPaintableBlock
   
                     drum.getTagCompound().setInteger("capacity", capacity);
                     drum.getTagCompound().setTag("liquid", tag);
-                    drum.getTagCompound().setInteger("color", IndustryCore.getLiquidColor(liquid.itemID).getRGB());
+                    drum.getTagCompound().setInteger("color", DrumModule.getLiquidColor(liquid.itemID).getRGB());
                     drum.getTagCompound().setInteger("paint", -2);
                     drum.getTagCompound().setBoolean("sealant", true);
 

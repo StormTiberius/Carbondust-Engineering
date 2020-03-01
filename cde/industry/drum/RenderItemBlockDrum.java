@@ -5,7 +5,6 @@
 
 package cde.industry.drum;
 
-import cde.IndustryCore;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
@@ -39,7 +38,7 @@ public class RenderItemBlockDrum implements IItemRenderer
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
-        if(item != null && item.itemID == IndustryCore.blockDrum.blockID)
+        if(item != null && item.itemID == DrumModule.blockDrum.blockID)
         {
             Block block = Block.blocksList[item.itemID];
         
