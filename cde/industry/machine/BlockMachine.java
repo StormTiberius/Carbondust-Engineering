@@ -21,6 +21,18 @@ public abstract class BlockMachine extends BlockContainer
     }
     
     @Override
+    public int damageDropped(int md)
+    {
+        return md;
+    }
+    
+    @Override
+    public TileEntity createNewTileEntity(World world)
+    {
+        return null;
+    }
+    
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
     {
         if(entityplayer.isSneaking())
@@ -32,7 +44,7 @@ public abstract class BlockMachine extends BlockContainer
         
         if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolWrench && te instanceof TileEntityEnergyBase)
         {
-            TileEntityEnergyBase tem = (TileEntityEnergyBase)te;
+            TileEntityEnergyBase teeb = (TileEntityEnergyBase)te;
             
             IToolWrench tool = (IToolWrench)entityplayer.getCurrentEquippedItem().getItem();
             
@@ -40,13 +52,13 @@ public abstract class BlockMachine extends BlockContainer
             {
                 if(!world.isRemote)
                 {
-                    if(tem.isPowered())
+                    if(teeb.isPowered())
                     {
-                        entityplayer.sendChatToPlayer(tem.useWrench(false));
+                        entityplayer.sendChatToPlayer(teeb.useWrench(false));
                     }
                     else
                     {
-                        entityplayer.sendChatToPlayer(tem.useWrench(true));
+                        entityplayer.sendChatToPlayer(teeb.useWrench(true));
                     }
                 }
                 

@@ -46,6 +46,8 @@ public class MachineModule
     
     public static void preInit(FMLPreInitializationEvent event) 
     {
+        Arrays.fill(craftable, true);
+        Arrays.fill(sound, true);
         Arrays.fill(volume, 100);
         Arrays.fill(pitch, 100);
         
@@ -491,7 +493,7 @@ public class MachineModule
             cde.api.Blocks.machineElectricDynamo = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[6]);
-            GameRegistry.registerTileEntity(TileEntityDynamo.class, "cdeElectricDynamo");
+            GameRegistry.registerTileEntity(TileEntityElectricDynamo.class, "cdeElectricDynamo");
             
             if(craftable[19])
             {

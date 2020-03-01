@@ -19,14 +19,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 
-public class TileEntityDynamo extends TileEntityEnergyBase implements IEnergySource, IPowerReceptor 
+public class TileEntityElectricDynamo extends TileEntityEnergyBase implements IEnergySource, IPowerReceptor 
 {
     public IPowerProvider powerProvider;
     private int euOutput;
     private float euBuffer;
     private final float MJ_MULTIPLIER = 0.4F;
     
-    public TileEntityDynamo()
+    public TileEntityElectricDynamo()
     {
         powerProvider = PowerFramework.currentFramework.createPowerProvider();
         powerProvider.configure(20, 1, 820, 13, 16400);
