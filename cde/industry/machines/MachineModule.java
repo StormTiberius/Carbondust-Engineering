@@ -6,7 +6,6 @@
 package cde.industry.machines;
 
 import cde.CDECore;
-import static cde.IndustryCore.TAB_MACHINES;
 import cde.api.Blocks;
 import cde.api.Materials;
 import cde.core.Defaults;
@@ -20,6 +19,7 @@ import ic2.api.Items;
 import java.io.File;
 import java.util.Arrays;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -29,6 +29,8 @@ import railcraft.common.api.core.items.ItemRegistry;
 
 public class MachineModule
 {
+    public static final CreativeTabs TAB_MACHINES = new CreativeTabMachines("industrymachines");
+    
     private static final int ENTRIES = 35;
     
     private static boolean[] craftable = new boolean[ENTRIES];
