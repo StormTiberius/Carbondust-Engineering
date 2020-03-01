@@ -5,7 +5,6 @@
 
 package cde.industry.machines;
 
-import cde.MachineryCore;
 import ic2.api.Direction;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergyTile;
@@ -25,8 +24,8 @@ public class TileEntityInductionCharger extends TileEntityEnergyBase implements 
     
     public TileEntityInductionCharger()
     {
-        batteryEmptyId = MachineryCore.getItemId(0);
-        batteryFullId = MachineryCore.getItemId(1);
+        batteryEmptyId = ModuleMachine.getItemId(0);
+        batteryFullId = ModuleMachine.getItemId(1);
     }
         
     @Override
@@ -145,12 +144,12 @@ public class TileEntityInductionCharger extends TileEntityEnergyBase implements 
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * MachineryCore.transformerVolume;
+        return 1.0F / 100 * 100;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * MachineryCore.transformerPitch;
+        return 1.0F / 100 * 100;
     }
 }

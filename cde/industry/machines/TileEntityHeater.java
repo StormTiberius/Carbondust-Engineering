@@ -5,7 +5,6 @@
 
 package cde.industry.machines;
 
-import cde.MachineryCore;
 import ic2.api.Direction;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergyTile;
@@ -138,12 +137,12 @@ public class TileEntityHeater extends TileEntityEnergyBase implements IEnergySin
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * MachineryCore.heaterVolume;
+        return 1.0F / 100 * 100;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * MachineryCore.heaterPitch;
+        return 1.0F / 100 * 100;
     }
 }

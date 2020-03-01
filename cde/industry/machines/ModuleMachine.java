@@ -29,7 +29,7 @@ import railcraft.common.api.core.items.ItemRegistry;
 
 public class ModuleMachine
 {
-    private static final int ENTRIES = 34;
+    private static final int ENTRIES = 35;
     
     private static boolean[] craftable = new boolean[ENTRIES];
     private static boolean[] sound = new boolean[ENTRIES];
@@ -197,7 +197,7 @@ public class ModuleMachine
             // Canning Machine
             is = new ItemStack(blockMachineAlpha.blockID, 1, 6);
             
-            cde.api.Blocks.machineCanning = is;
+            cde.api.Blocks.machineCanningMachine = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[6]);
             GameRegistry.registerTileEntity(TileEntityCanningMachine.class, "cdeCanningMachine");
@@ -216,7 +216,7 @@ public class ModuleMachine
             // Rolling Machine
             is = new ItemStack(blockMachineAlpha.blockID, 1, 7);
             
-            cde.api.Blocks.machineRolling = is;
+            cde.api.Blocks.machineRollingMachine = is;
             
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[7]);
             GameRegistry.registerTileEntity(TileEntityRollingMachine.class, "cdeRollingMachine");
@@ -232,15 +232,36 @@ public class ModuleMachine
                 'c', new ItemStack(Block.workbench.blockID, 1, 0)));
             }
             
-            // Recycler
+            // Assembling Machine
             is = new ItemStack(blockMachineAlpha.blockID, 1, 8);
+            
+            cde.api.Blocks.machineAssemblingMachine = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[8]);
+            GameRegistry.registerTileEntity(TileEntityAssemblingMachine.class, "cdeAssemblingMachine");
+            
+            if(craftable[8])
+            {
+                GameRegistry.addRecipe(new ShapedOreRecipe(is,
+                "dad",
+                "ebe",
+                "ece",
+                'a', Materials.circuitBoardMulti.copy(),
+                'b', new ItemStack(Block.workbench.blockID, 1, 0),
+                'c', new ItemStack(Block.chest.blockID, 1, 0),
+                'd', "bronzeGear",
+                'e', "plankWood"));
+            }
+            
+            // Recycler
+            is = new ItemStack(blockMachineAlpha.blockID, 1, 9);
             
             cde.api.Blocks.machineRecycler = is;
             
-            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[8]);
+            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[9]);
             GameRegistry.registerTileEntity(TileEntityRecycler.class, "cdeRecycler");
             
-            if(craftable[8])
+            if(craftable[9])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 " a ",
@@ -253,14 +274,14 @@ public class ModuleMachine
             }
             
             // Sawmill
-            is = new ItemStack(blockMachineAlpha.blockID, 1, 9);
+            is = new ItemStack(blockMachineAlpha.blockID, 1, 10);
             
             cde.api.Blocks.machineSawmill = is;
             
-            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[9]);
+            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[10]);
             GameRegistry.registerTileEntity(TileEntitySawmill.class, "cdeSawmill");
             
-            if(craftable[9])
+            if(craftable[10])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 " a ",
@@ -274,14 +295,14 @@ public class ModuleMachine
             }
             
             // Heater
-            is = new ItemStack(blockMachineAlpha.blockID, 1, 10);
+            is = new ItemStack(blockMachineAlpha.blockID, 1, 11);
             
             cde.api.Blocks.machineHeater = is;
             
-            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[10]);
+            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES[11]);
             GameRegistry.registerTileEntity(TileEntityHeater.class, "cdeHeater");
             
-            if(craftable[10])
+            if(craftable[11])
             {
                 GameRegistry.addRecipe(is,
                 "aaa",
@@ -295,14 +316,14 @@ public class ModuleMachine
             }
             
             // Pump
-            is = new ItemStack(blockMachineGamma.blockID, 1, 11);
+            is = new ItemStack(blockMachineGamma.blockID, 1, 12);
             
             cde.api.Blocks.machineBatteryStationHV = is;
             
-            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[11]);
+            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[12]);
             // GameRegistry.registerTileEntity(TileEntityMachineChargingBench.class, "cdeChargingBench");
             
-            if(craftable[11])
+            if(craftable[12])
             {
                 GameRegistry.addRecipe(is,
                 "aaa",
@@ -331,7 +352,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[0]);
             GameRegistry.registerTileEntity(TileEntityStirlingGenerator.class, "cdeStirlingGenerator");
             
-            if(craftable[12])
+            if(craftable[13])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 " a ",
@@ -374,7 +395,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[1]);
             GameRegistry.registerTileEntity(TileEntityGeothermalGenerator.class, "cdeGeothermalGenerator");
             
-            if(craftable[13])
+            if(craftable[14])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aba",
@@ -394,7 +415,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[2]);
             GameRegistry.registerTileEntity(TileEntityTidalGenerator.class, "cdeTidalGenerator");
             
-            if(craftable[14])
+            if(craftable[15])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aba",
@@ -413,7 +434,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[3]);
             GameRegistry.registerTileEntity(TileEntityWindGenerator.class, "cdeWindGenerator");
             
-            if(craftable[15])
+            if(craftable[16])
             {
                 GameRegistry.addRecipe(is,
                 "a a",
@@ -431,7 +452,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[4]);
             GameRegistry.registerTileEntity(TileEntitySolarPanel.class, "cdeSolarPanel");
             
-            if(craftable[16])
+            if(craftable[17])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aba",
@@ -451,7 +472,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[5]);
             GameRegistry.registerTileEntity(TileEntityNuclearReactor.class, "cdeNuclearReactor");
             
-            if(craftable[17])
+            if(craftable[18])
             {
                 GameRegistry.addRecipe(is,
                 " a ",
@@ -470,7 +491,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[6]);
             GameRegistry.registerTileEntity(TileEntityDynamo.class, "cdeDynamo");
             
-            if(craftable[18])
+            if(craftable[19])
             {
                 GameRegistry.addRecipe(is,
                 "xxx",
@@ -491,7 +512,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES[7]);
             GameRegistry.registerTileEntity(TileEntitySteamTurbine.class, "cdeDynamo");
             
-            if(craftable[19])
+            if(craftable[20])
             {
                 GameRegistry.addRecipe(is,
                 "aaa",
@@ -520,7 +541,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[0]);
             GameRegistry.registerTileEntity(TileEntityEnergyStorageUnit.class, "cdeEnergyStorageUnit");
             
-            if(craftable[20])
+            if(craftable[21])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "xyx",
@@ -539,7 +560,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[1]);
             // GameRegistry.registerTileEntity(TileEntityMachineEnergyStorageUnit.class, "cdeEnergyStorageUnit");
             
-            if(craftable[21])
+            if(craftable[22])
             {
                 GameRegistry.addRecipe(is,
                 "zyz",
@@ -558,7 +579,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[2]);
             // GameRegistry.registerTileEntity(TileEntityMachineEnergyStorageUnit.class, "cdeEnergyStorageUnit");
             
-            if(craftable[22])
+            if(craftable[23])
             {
                 GameRegistry.addRecipe(is,
                 "axa",
@@ -578,7 +599,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[3]);
             GameRegistry.registerTileEntity(TileEntityTransformer.class, "cdeTransformer");
             
-            if(craftable[23])
+            if(craftable[24])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "xzx",
@@ -597,7 +618,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[4]);
             // GameRegistry.registerTileEntity(TileEntityMachineTransformer.class, "cdeEnergyStorageUnit");
             
-            if(craftable[24])
+            if(craftable[25])
             {
                 GameRegistry.addRecipe(is,
                 " y ",
@@ -615,7 +636,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[5]);
             // GameRegistry.registerTileEntity(TileEntityMachineTransformer.class, "cdeEnergyStorageUnit");
             
-            if(craftable[25])
+            if(craftable[26])
             {
                 GameRegistry.addRecipe(is,
                 " a ",
@@ -635,7 +656,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[6]);
             GameRegistry.registerTileEntity(TileEntityChargingBench.class, "cdeChargingBench");
             
-            if(craftable[26])
+            if(craftable[27])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aaa",
@@ -655,7 +676,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[7]);
             // GameRegistry.registerTileEntity(TileEntityMachineChargingBench.class, "cdeChargingBench");
             
-            if(craftable[27])
+            if(craftable[28])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aaa",
@@ -675,7 +696,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[8]);
             // GameRegistry.registerTileEntity(TileEntityMachineChargingBench.class, "cdeChargingBench");
             
-            if(craftable[28])
+            if(craftable[29])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aaa",
@@ -695,7 +716,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[9]);
             GameRegistry.registerTileEntity(TileEntityBatteryStation.class, "cdeBatteryStation");
             
-            if(craftable[29])
+            if(craftable[30])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aaa",
@@ -715,7 +736,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[10]);
             // GameRegistry.registerTileEntity(TileEntityMachineChargingBench.class, "cdeChargingBench");
             
-            if(craftable[30])
+            if(craftable[31])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aaa",
@@ -735,7 +756,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[11]);
             // GameRegistry.registerTileEntity(TileEntityMachineChargingBench.class, "cdeChargingBench");
             
-            if(craftable[31])
+            if(craftable[32])
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(is,
                 "aaa",
@@ -755,7 +776,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[12]);
             GameRegistry.registerTileEntity(TileEntityInductionCharger.class, "cdeInductionCharger");
             
-            if(craftable[32])
+            if(craftable[33])
             {
                 GameRegistry.addRecipe(is,
                 "aaa",
@@ -776,7 +797,7 @@ public class ModuleMachine
             LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES[13]);
             GameRegistry.registerTileEntity(TileEntityElectrolyzer.class, "cdeElectrolyzer");
             
-            if(craftable[33])
+            if(craftable[34])
             {
                 GameRegistry.addRecipe(is,
                 "a a",

@@ -5,7 +5,6 @@
 
 package cde.industry.machines;
 
-import cde.MachineryCore;
 import ic2.api.Direction;
 import ic2.api.energy.event.EnergyTileSourceEvent;
 import ic2.api.energy.tile.IEnergySource;
@@ -99,12 +98,12 @@ public class TileEntitySolarPanel extends TileEntityEnergyBase implements IEnerg
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * MachineryCore.solarVolume;
+        return 1.0F / 100 * 100;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * MachineryCore.solarPitch;
+        return 1.0F / 100 * 100;
     }
 }

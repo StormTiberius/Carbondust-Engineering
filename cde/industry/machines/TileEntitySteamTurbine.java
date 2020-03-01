@@ -6,7 +6,6 @@
 package cde.industry.machines;
 
 import cde.CDECore;
-import cde.MachineryCore;
 import cde.core.particles.ParticleSteam;
 import ic2.api.Direction;
 import ic2.api.energy.event.EnergyTileSourceEvent;
@@ -184,12 +183,12 @@ public class TileEntitySteamTurbine extends TileEntityEnergyBase implements IEne
     @Override
     public float getVolume()
     {
-        return 1.0F / 100 * MachineryCore.turbineVolume;
+        return 1.0F / 100 * 100;
     }
     
     @Override
     public float getPitch()
     {
-        return 1.0F / 100 * MachineryCore.turbinePitch;
+        return 1.0F / 100 * 100;
     }
 }
