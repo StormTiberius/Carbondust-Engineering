@@ -45,7 +45,7 @@ public class BlockMachineBeta extends BlockMachine
         }
     }
     
-        @SideOnly(Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     @Override
     public int getBlockTexture(IBlockAccess iba, int x, int y, int z, int side)
     {
@@ -116,12 +116,12 @@ public class BlockMachineBeta extends BlockMachine
                     case 4:
                         switch(side)
                         {
-                            case 0: return 0;
-                            case 1: return 0;
-                            case 2: return 0;
-                            case 3: return 0;
-                            case 4: return 0;
-                            case 5: return 0;
+                            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                            case 1: return Defaults.TEXTURE_MACHINE_SOLAR_PANEL_TOP;
+                            case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 5: return Defaults.TEXTURE_MACHINE_SIDE;
                             default: return 0;
                         }
                     
@@ -140,24 +140,24 @@ public class BlockMachineBeta extends BlockMachine
                     case 6:
                         switch(side)
                         {
-                            case 0: return 0;
-                            case 1: return 0;
-                            case 2: return 0;
-                            case 3: return 0;
-                            case 4: return 0;
-                            case 5: return 0;
+                            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                            case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 2: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_ON;
+                            case 3: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_ON;
+                            case 4: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_ON;
+                            case 5: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_ON;
                             default: return 0;
                         }
                     
                     case 7:
                         switch(side)
                         {
-                            case 0: return 0;
-                            case 1: return 0;
-                            case 2: return 0;
-                            case 3: return 0;
-                            case 4: return 0;
-                            case 5: return 0;
+                            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                            case 1: return Defaults.TEXTURE_MACHINE_TURBINE_TOP_ON;
+                            case 2: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                            case 3: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                            case 4: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                            case 5: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
                             default: return 0;
                         }
                     
@@ -321,12 +321,12 @@ public class BlockMachineBeta extends BlockMachine
             case 4:
                 switch(side)
                 {
-                    case 0: return 0;
-                    case 1: return 0;
-                    case 2: return 0;
-                    case 3: return 0;
-                    case 4: return 0;
-                    case 5: return 0;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_SOLAR_PANEL_TOP;
+                    case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 5: return Defaults.TEXTURE_MACHINE_SIDE;
                     default: return 0;
                 }
             
@@ -345,24 +345,24 @@ public class BlockMachineBeta extends BlockMachine
             case 6:
                 switch(side)
                 {
-                    case 0: return 0;
-                    case 1: return 0;
-                    case 2: return 0;
-                    case 3: return 0;
-                    case 4: return 0;
-                    case 5: return 0;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 2: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_OFF;
+                    case 3: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_OFF;
+                    case 4: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_OFF;
+                    case 5: return Defaults.TEXTURE_MACHINE_GENERATOR_SIDE_OFF;
                     default: return 0;
                 }
             
             case 7:
                 switch(side)
                 {
-                    case 0: return 0;
-                    case 1: return 0;
-                    case 2: return 0;
-                    case 3: return 0;
-                    case 4: return 0;
-                    case 5: return 0;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_TURBINE_TOP_OFF;
+                    case 2: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                    case 3: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                    case 4: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
+                    case 5: return Defaults.TEXTURE_MACHINE_TURBINE_SIDE;
                     default: return 0;
                 }
             

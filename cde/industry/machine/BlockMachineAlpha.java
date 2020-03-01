@@ -200,24 +200,24 @@ public class BlockMachineAlpha extends BlockMachine
                     case 11:
                         switch(side)
                         {
-                            case 0: return 0;
-                            case 1: return 0;
-                            case 2: return 0;
-                            case 3: return 0;
-                            case 4: return 0;
-                            case 5: return 0;
+                            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                            case 1: return Defaults.TEXTURE_MACHINE_HEATER_TOP;
+                            case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 5: return Defaults.TEXTURE_MACHINE_SIDE;
                             default: return 0;
                         }
                     
                     case 12:
                         switch(side)
                         {
-                            case 0: return 0;
-                            case 1: return 0;
-                            case 2: return 0;
-                            case 3: return 0;
-                            case 4: return 0;
-                            case 5: return 0;
+                            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                            case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 2: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_ON;
+                            case 3: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_ON;
+                            case 4: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_ON;
+                            case 5: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_ON;
                             default: return 0;
                         }
                     
@@ -405,24 +405,24 @@ public class BlockMachineAlpha extends BlockMachine
             case 11:
                 switch(side)
                 {
-                    case 0: return 0;
-                    case 1: return 0;
-                    case 2: return 0;
-                    case 3: return 0;
-                    case 4: return 0;
-                    case 5: return 0;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_HEATER_TOP;
+                    case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 5: return Defaults.TEXTURE_MACHINE_SIDE;
                     default: return 0;
                 }
             
             case 12:
                 switch(side)
                 {
-                    case 0: return 0;
-                    case 1: return 0;
-                    case 2: return 0;
-                    case 3: return 0;
-                    case 4: return 0;
-                    case 5: return 0;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 2: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_OFF;
+                    case 3: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_OFF;
+                    case 4: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_OFF;
+                    case 5: return Defaults.TEXTURE_MACHINE_PUMP_SIDE_OFF;
                     default: return 0;
                 }
             

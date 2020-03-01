@@ -212,12 +212,12 @@ public class BlockMachineGamma extends BlockMachine
                     case 12:
                         switch(side)
                         {
-                            case 0: return 0;
-                            case 1: return 0;
-                            case 2: return 0;
-                            case 3: return 0;
-                            case 4: return 0;
-                            case 5: return 0;
+                            case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                            case 1: return Defaults.TEXTURE_MACHINE_TRANSFORMER_TOP_ON;
+                            case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                            case 5: return Defaults.TEXTURE_MACHINE_SIDE;
                             default: return 0;
                         }
                     
@@ -417,12 +417,12 @@ public class BlockMachineGamma extends BlockMachine
             case 12:
                 switch(side)
                 {
-                    case 0: return 0;
-                    case 1: return 0;
-                    case 2: return 0;
-                    case 3: return 0;
-                    case 4: return 0;
-                    case 5: return 0;
+                    case 0: return Defaults.TEXTURE_MACHINE_BOTTOM;
+                    case 1: return Defaults.TEXTURE_MACHINE_TRANSFORMER_TOP_OFF;
+                    case 2: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 3: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 4: return Defaults.TEXTURE_MACHINE_SIDE;
+                    case 5: return Defaults.TEXTURE_MACHINE_SIDE;
                     default: return 0;
                 }
             

@@ -34,7 +34,7 @@ public class SoundHelper
         {
             masterVolume = mc.gameSettings.soundVolume;
             
-            if(soundVolume != masterVolume)
+            if(!resume && soundVolume != masterVolume)
             {
                 soundVolume = masterVolume;
                 updateVolume();

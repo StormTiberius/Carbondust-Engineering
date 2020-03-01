@@ -69,6 +69,8 @@ public class MachineModule
     
     public static void init(FMLInitializationEvent event) 
     {
+        setupItemIds();
+        
         ItemStack is;
         
         if(blockMachineAlphaId > 0)
@@ -376,7 +378,7 @@ public class MachineModule
                 
                 GameRegistry.addRecipe(is,
                 " a ",
-                "bbb",
+                " b ",
                 " c ",
                 'a', new ItemStack(Items.getItem("reBattery").itemID, 1, 0),
                 'b', new ItemStack(Items.getItem("machine").itemID, 1, 0),
@@ -384,7 +386,7 @@ public class MachineModule
                 
                 GameRegistry.addRecipe(is,
                 " a ",
-                "bbb",
+                " b ",
                 " c ",
                 'a', new ItemStack(Items.getItem("chargedReBattery").itemID, 1, 0),
                 'b', new ItemStack(Items.getItem("machine").itemID, 1, 0),
@@ -572,7 +574,7 @@ public class MachineModule
                 "zyz",
                 'x', new ItemStack(Items.getItem("machine").itemID, 1, 0),
                 'y', new ItemStack(Items.getItem("energyCrystal").itemID, 1, 0),
-                'z', new ItemStack(Items.getItem("doubleInsulatedGoldCableItem").itemID, 1, 0));
+                'z', new ItemStack(Items.getItem("doubleInsulatedGoldCableItem").itemID, 1, 4));
             }
             
             // HV Energy Storage Unit
@@ -592,7 +594,7 @@ public class MachineModule
                 'a', new ItemStack(Items.getItem("lapotronCrystal").itemID, 1, 0),
                 'x', Materials.circuitBoardMulti.copy(),
                 'y', Blocks.machineEnergyStorageUnitMV.copy(),
-                'z', new ItemStack(Items.getItem("advancedMachine").itemID, 1, 0));
+                'z', new ItemStack(Items.getItem("advancedMachine").itemID, 1, 12));
             }
             
             // LV Transformer
@@ -629,7 +631,7 @@ public class MachineModule
                 " x ",
                 " y ",
                 'x', new ItemStack(Items.getItem("machine").itemID, 1, 0),
-                'y', new ItemStack(Items.getItem("doubleInsulatedGoldCableItem").itemID, 1, 0));
+                'y', new ItemStack(Items.getItem("doubleInsulatedGoldCableItem").itemID, 1, 4));
             }
             
             // HV Transformer
@@ -646,7 +648,7 @@ public class MachineModule
                 " a ",
                 "xyz",
                 " a ",
-                'a', new ItemStack(Items.getItem("trippleInsulatedIronCableItem").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("trippleInsulatedIronCableItem").itemID, 1, 8),
                 'x', Materials.circuitBoardDouble.copy(),
                 'y', Blocks.machineTransformerMV.copy(),
                 'z', new ItemStack(Items.getItem("energyCrystal").itemID, 1, 0));
@@ -686,7 +688,7 @@ public class MachineModule
                 "aaa",
                 "dbd",
                 "dcd",
-                'a', new ItemStack(Items.getItem("doubleInsulatedGoldCableItem").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("doubleInsulatedGoldCableItem").itemID, 1, 4),
                 'b', Materials.circuitBoardDouble.copy(),
                 'c', Blocks.machineEnergyStorageUnitMV.copy(),
                 'd', "plankWood"));
@@ -706,7 +708,7 @@ public class MachineModule
                 "aaa",
                 "dbd",
                 "dcd",
-                'a', new ItemStack(Items.getItem("trippleInsulatedIronCableItem").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("trippleInsulatedIronCableItem").itemID, 1, 8),
                 'b', Materials.circuitBoardMulti.copy(),
                 'c', Blocks.machineEnergyStorageUnitHV.copy(),
                 'd', "plankWood"));
@@ -746,7 +748,7 @@ public class MachineModule
                 "aaa",
                 "dbd",
                 "dcd",
-                'a', new ItemStack(Items.getItem("doubleInsulatedGoldCableItem").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("doubleInsulatedGoldCableItem").itemID, 1, 4),
                 'b', Materials.circuitBoardDouble.copy(),
                 'c', Blocks.machineTransformerMV.copy(),
                 'd', "plankWood"));
@@ -766,7 +768,7 @@ public class MachineModule
                 "aaa",
                 "dbd",
                 "dcd",
-                'a', new ItemStack(Items.getItem("trippleInsulatedIronCableItem").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("trippleInsulatedIronCableItem").itemID, 1, 8),
                 'b', Materials.circuitBoardMulti.copy(),
                 'c', Blocks.machineTransformerHV.copy(),
                 'd', "plankWood"));
@@ -786,7 +788,7 @@ public class MachineModule
                 "aaa",
                 "dbd",
                 "ece",
-                'a', new ItemStack(Items.getItem("tinCableItem").itemID, 1, 0),
+                'a', new ItemStack(Items.getItem("tinCableItem").itemID, 1, 10),
                 'b', new ItemStack(Items.getItem("machine").itemID, 1, 0),
                 'c', Materials.circuitBoardMulti.copy(),
                 'd', new ItemStack(Items.getItem("reBattery").itemID, 1, 0),
@@ -828,8 +830,10 @@ public class MachineModule
         
     }
     
-    private void setupItemIds()
+    private static void setupItemIds()
     {
+        ironGearId = Item.ingotIron.itemID;
+        
         for(Item item : CDECore.getItemsByClass("buildcraft.core.ItemBuildCraft"))
         {
             if(item.getItemName().equalsIgnoreCase("item.ironGearItem"))
@@ -837,6 +841,8 @@ public class MachineModule
                 ironGearId = item.itemID;
             }
         }
+        
+        tankBlockId = Block.glass.blockID;
         
         Block block = CDECore.getBlockByClass("buildcraft.factory.BlockTank");
         
@@ -854,6 +860,7 @@ public class MachineModule
         }
         
         Item item = CDECore.getItemByClass("com.eloraam.redpower.machine.ItemBattery");
+        
         if(item != null && item.getItemName().equalsIgnoreCase("item.btbattery"))
         {
             batteryFullId = item.itemID;
