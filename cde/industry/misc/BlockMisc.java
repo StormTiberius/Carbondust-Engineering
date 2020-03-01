@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core.speaker;
+package cde.industry.misc;
 
 import cde.CDECore;
 import cde.core.Defaults;
@@ -13,9 +13,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockSpeaker extends BlockContainer
+public class BlockMisc extends BlockContainer
 {   
-    public BlockSpeaker(int par1)
+    public BlockMisc(int par1)
     {
         super(par1, Material.wood);
     }

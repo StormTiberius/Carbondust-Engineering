@@ -117,62 +117,42 @@ public class Defaults
     public static final int TEXTURE_MATERIAL_NUGGET_BRASS = 39;
     public static final int TEXTURE_MATERIAL_NUGGET_STEEL = 40;
     
-    public static final int TEXTURE_MATERIAL_WASHED_IRON = 48;
-    public static final int TEXTURE_MATERIAL_WASHED_GOLD = 49;
-    public static final int TEXTURE_MATERIAL_WASHED_COPPER = 50;
-    public static final int TEXTURE_MATERIAL_WASHED_TIN = 51;
-    public static final int TEXTURE_MATERIAL_WASHED_SILVER = 52;
-    public static final int TEXTURE_MATERIAL_WASHED_LEAD = 53;
-    public static final int TEXTURE_MATERIAL_WASHED_URANIUM = 54;
+    public static final int TEXTURE_MATERIAL_GEM_RUBY = 48;
+    public static final int TEXTURE_MATERIAL_GEM_JADE = 49;
+    public static final int TEXTURE_MATERIAL_GEM_SAPPHIRE = 50;
+    public static final int TEXTURE_MATERIAL_GEM_QUARTZ = 51;
+    public static final int TEXTURE_MATERIAL_GEM_APATITE = 52;
     
-    public static final int TEXTURE_MATERIAL_CRUSHED_IRON = 64;
-    public static final int TEXTURE_MATERIAL_CRUSHED_GOLD = 65;
-    public static final int TEXTURE_MATERIAL_CRUSHED_COPPER = 66;
-    public static final int TEXTURE_MATERIAL_CRUSHED_TIN = 67;
-    public static final int TEXTURE_MATERIAL_CRUSHED_SILVER = 68;
-    public static final int TEXTURE_MATERIAL_CRUSHED_LEAD = 69;
-    public static final int TEXTURE_MATERIAL_CRUSHED_URANIUM = 70;
+    public static final int TEXTURE_MATERIAL_FUEL_COKE = 64;
     
-    public static final int TEXTURE_MATERIAL_GEM_RUBY = 80;
-    public static final int TEXTURE_MATERIAL_GEM_JADE = 81;
-    public static final int TEXTURE_MATERIAL_GEM_SAPPHIRE = 82;
-    public static final int TEXTURE_MATERIAL_GEM_QUARTZ = 83;
-    public static final int TEXTURE_MATERIAL_GEM_APATITE = 84;
+    public static final int TEXTURE_MATERIAL_PLATE_IRON = 80;
+    public static final int TEXTURE_MATERIAL_PLATE_GOLD = 81;
+    public static final int TEXTURE_MATERIAL_PLATE_COPPER = 82;
+    public static final int TEXTURE_MATERIAL_PLATE_TIN = 83;
+    public static final int TEXTURE_MATERIAL_PLATE_BRONZE = 84;
+    public static final int TEXTURE_MATERIAL_PLATE_STEEL = 85;
     
-    public static final int TEXTURE_MATERIAL_FUEL_COKE = 96;
-    
-    public static final int TEXTURE_MATERIAL_PLATE_IRON = 112;
-    public static final int TEXTURE_MATERIAL_PLATE_GOLD = 113;
-    public static final int TEXTURE_MATERIAL_PLATE_COPPER = 114;
-    public static final int TEXTURE_MATERIAL_PLATE_TIN = 115;
-    public static final int TEXTURE_MATERIAL_PLATE_BRONZE = 116;
-    public static final int TEXTURE_MATERIAL_PLATE_STEEL = 117;
-    
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_SINGLE = 128;
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE = 129;
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI = 130;
-    public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 131;
-    public static final int TEXTURE_MATERIAL_ELECTRIC_WIRE = 132;
-    
-    public static final int TEXTURE_TOOL_WATERING_CAN = 160;
-    public static final int TEXTURE_TOOL_WRENCH = 161;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_SINGLE = 96;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE = 97;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI = 98;
+    public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 99;
+    public static final int TEXTURE_MATERIAL_ELECTRIC_WIRE = 100;
     
     // BLOCK ID
     public static final int BLOCK_ORE_ID = 180;
     public static final int BLOCK_STORAGE_ID = 181;
-    public static final int BLOCK_MACHINERY_ALPHA_ID = 182;
-    public static final int BLOCK_GRATE_ID = 183;
-    public static final int BLOCK_SPEAKER_ID = 184;
-    public static final int BLOCK_INDUSTRY_DRUM_ID = 185;
-    public static final int BLOCK_INDUSTRY_A_ID = 186;
-    public static final int BLOCK_INDUSTRY_B_ID = 187;
-    public static final int BLOCK_INDUSTRY_C_ID = 188;
-    public static final int BLOCK_INDUSTRY_D_ID = 189;
+    public static final int BLOCK_A_ID = 182;
+    public static final int BLOCK_B_ID = 183;
+    public static final int BLOCK_INDUSTRY_DRUM_ID = 184;
+    public static final int BLOCK_INDUSTRY_ALPHA_ID = 185;
+    public static final int BLOCK_INDUSTRY_BETA_ID = 186;
+    public static final int BLOCK_INDUSTRY_GAMMA_ID = 187;
+    public static final int BLOCK_INDUSTRY_DELTA_ID = 188;
+    public static final int BLOCK_INDUSTRY_MISC_ID = 189;
     
     // ITEM ID
     public static final int ITEM_MATERIALS_ID = 500;
     public static final int ITEM_GOGGLES_ID = 501;
-    public static final int ITEM_WATERING_CAN_ID = 502;
     
     // FUEL VALUES
     public static final int PEAT_FUEL_VALUE = 2000;

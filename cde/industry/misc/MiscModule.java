@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core.speaker;
+package cde.industry.misc;
 
 import cde.CDECore;
 import cde.core.Defaults;
@@ -19,7 +19,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class SpeakerModule
+public class MiscModule
 {
     private static Configuration cfg;
     
@@ -49,15 +49,15 @@ public class SpeakerModule
     protected static String[] sounds;
     protected static int[] volumes,pitchs;
     
-    private static int speakerId;
-    public static Block speaker;
+    private static int miscId;
+    public static Block misc;
     
     public static void preInit(FMLPreInitializationEvent event) 
     {
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/speaker.cfg"));
         cfg.load();
         
-        speakerId = cfg.get(Configuration.CATEGORY_BLOCK, "speaker", Defaults.BLOCK_SPEAKER_ID).getInt();
+        miscId = cfg.get(Configuration.CATEGORY_BLOCK, "misc", Defaults.BLOCK_INDUSTRY_MISC_ID).getInt();
         
         sounds = cfg.get(Configuration.CATEGORY_GENERAL, "sounds", DEFAULT_SOUNDS, "Sound File Names").valueList;
         volumes = cfg.get(Configuration.CATEGORY_GENERAL, "volumes", DEFAULT_VOLUMES, "Sound Volumes").getIntList();
@@ -68,17 +68,17 @@ public class SpeakerModule
 
     public static void init(FMLInitializationEvent event) 
     {   
-        if(speakerId > 0)
+        if(miscId > 0)
         {
-            speaker = new BlockSpeaker(speakerId).setBlockName("cdeSpeaker").setCreativeTab(CDECore.TAB_CDE).setHardness(2.0F);
-            GameRegistry.registerBlock(speaker, "cdeSpeaker");
-            LanguageRegistry.addName(speaker, "Speaker");
-            GameRegistry.registerTileEntity(TileEntitySpeaker.class, "cdeSpeakerTile");
-            MinecraftForge.setBlockHarvestLevel(speaker, "axe", 1);
+            misc = new BlockMisc(miscId).setBlockName("cdeMisc").setCreativeTab(CDECore.TAB_CDE).setHardness(2.0F);
+            GameRegistry.registerBlock(misc, "cdeMisc");
+            LanguageRegistry.addName(misc, "Speaker");
+            GameRegistry.registerTileEntity(TileEntitySpeaker.class, "cdeSpeaker");
+            MinecraftForge.setBlockHarvestLevel(misc, "axe", 1);
             
-            ItemStack is = new ItemStack(speaker.blockID, 1, 0);
+            ItemStack is = new ItemStack(misc.blockID, 1, 0);
             
-            cde.api.Blocks.machineSpeaker = is;
+            cde.api.Blocks.industryAmbience = is;
             
             GameRegistry.addRecipe(new ShapedOreRecipe(is,
             "xxx",

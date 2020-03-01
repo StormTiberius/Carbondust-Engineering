@@ -18,19 +18,19 @@ public class TileEntitySpeaker extends TileEntityWithSound
     
     protected String getSound()
     {
-        return index + 1 + ". " + SpeakerModule.sounds[index]; 
+        return index + 1 + ". " + MiscModule.sounds[index]; 
     }
     
     protected String setSound()
     {
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         
-        return index + 1 + ". " + SpeakerModule.sounds[index];
+        return index + 1 + ". " + MiscModule.sounds[index];
     }
     
     protected String nextSound()
     {
-        if(index >= SpeakerModule.sounds.length - 1 || index >= SpeakerModule.volumes.length - 1 || index >= SpeakerModule.pitchs.length - 1)
+        if(index >= MiscModule.sounds.length - 1 || index >= MiscModule.volumes.length - 1 || index >= MiscModule.pitchs.length - 1)
         {
             index = 0;
         }
@@ -39,7 +39,7 @@ public class TileEntitySpeaker extends TileEntityWithSound
             index++;
         }
 
-        return index + 1 + ". " + SpeakerModule.sounds[index];
+        return index + 1 + ". " + MiscModule.sounds[index];
     }
     
     @Override
@@ -74,7 +74,7 @@ public class TileEntitySpeaker extends TileEntityWithSound
         
         int i = par1NBTTagCompound.getInteger("index");
         
-        if(i >= SpeakerModule.sounds.length || i >= SpeakerModule.volumes.length || i >= SpeakerModule.pitchs.length)
+        if(i >= MiscModule.sounds.length || i >= MiscModule.volumes.length || i >= MiscModule.pitchs.length)
         {
             index = 0;
         }
@@ -100,18 +100,18 @@ public class TileEntitySpeaker extends TileEntityWithSound
     @Override
     public String getResourceName()
     {   
-        return SpeakerModule.sounds[index];
+        return MiscModule.sounds[index];
     }
     
     @Override
     public float getVolume()
     {   
-        return 1.0F / 100 * SpeakerModule.volumes[index];
+        return 1.0F / 100 * MiscModule.volumes[index];
     }
     
     @Override
     public float getPitch()
     {        
-        return 1.0F / 100 * SpeakerModule.pitchs[index];
+        return 1.0F / 100 * MiscModule.pitchs[index];
     }
 }

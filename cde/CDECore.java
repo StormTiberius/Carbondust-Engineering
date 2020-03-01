@@ -15,7 +15,6 @@ import cde.core.FuelManager;
 import cde.core.Namings;
 import cde.core.PlayerTracker;
 import cde.core.RecipeManager;
-import cde.core.TickHandler;
 import cde.core.Version;
 import cde.core.block.BlockOre;
 import cde.core.block.BlockStorage;
@@ -24,7 +23,6 @@ import cde.core.item.ItemMaterial;
 import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
 import cde.core.sound.SoundTickHandler;
-import cde.core.speaker.SpeakerModule;
 import cde.core.worldgen.WorldGenModule;
 import com.google.common.collect.ImmutableList;
 import cpw.mods.fml.common.FMLLog;
@@ -42,7 +40,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -119,12 +116,10 @@ public class CDECore
         if(playSounds())
         {
             proxy.setupSound();
-            TickRegistry.registerTickHandler(new TickHandler(), Side.SERVER);
             TickRegistry.registerTickHandler(new SoundTickHandler(), Side.CLIENT);
             GameRegistry.registerPlayerTracker(new PlayerTracker());
         }
         
-        SpeakerModule.preInit(event);
         WorldGenModule.preInit(event);
     }
     
@@ -132,8 +127,6 @@ public class CDECore
     public void init(FMLInitializationEvent event) 
     {   
         proxy.preloadTextures();
-        
-        SpeakerModule.init(event);
         
         GameRegistry.registerFuelHandler(new FuelManager());
         
@@ -233,42 +226,26 @@ public class CDECore
                     case 34: Materials.nuggetBrass = is; break;
                     case 35: Materials.nuggetSteel = is; break;
                     
-                    case 36: Materials.washedIron = is; break;
-                    case 37: Materials.washedGold = is; break;
-                    case 38: Materials.washedCopper = is; break;
-                    case 39: Materials.washedTin = is; break;
-                    case 40: Materials.washedSilver = is; break;
-                    case 41: Materials.washedLead = is; break;
-                    case 42: Materials.washedUranium = is; break;
+                    case 36: Materials.gemQuartz = is; break;
+                    case 37: Materials.gemApatite = is; break;
+                    case 38: Materials.gemRuby = is; break;
+                    case 39: Materials.gemJade = is; break;
+                    case 40: Materials.gemSapphire = is; break;
                     
-                    case 43: Materials.crushedIron = is; break;
-                    case 44: Materials.crushedGold = is; break;
-                    case 45: Materials.crushedCopper = is; break;
-                    case 46: Materials.crushedTin = is; break;
-                    case 47: Materials.crushedSilver = is; break;
-                    case 48: Materials.crushedLead = is; break;
-                    case 49: Materials.crushedUranium = is; break;
+                    case 41: Materials.fuelCoke = is; break;
                     
-                    case 50: Materials.gemQuartz = is; break;
-                    case 51: Materials.gemApatite = is; break;
-                    case 52: Materials.gemRuby = is; break;
-                    case 53: Materials.gemJade = is; break;
-                    case 54: Materials.gemSapphire = is; break;
+                    case 42: Materials.plateIron = is; break;
+                    case 43: Materials.plateGold = is; break;
+                    case 44: Materials.plateCopper = is; break;
+                    case 45: Materials.plateTin = is; break;
+                    case 46: Materials.plateBronze = is; break;
+                    case 47: Materials.plateSteel = is; break;
                     
-                    case 55: Materials.fuelCoke = is; break;
-                    
-                    case 56: Materials.plateIron = is; break;
-                    case 57: Materials.plateGold = is; break;
-                    case 58: Materials.plateCopper = is; break;
-                    case 59: Materials.plateTin = is; break;
-                    case 60: Materials.plateBronze = is; break;
-                    case 61: Materials.plateSteel = is; break;
-                    
-                    case 62: Materials.circuitBoardSingle = is; break;
-                    case 63: Materials.circuitBoardDouble = is; break;
-                    case 64: Materials.circuitBoardMulti = is; break;
-                    case 65: Materials.electricMotor = is; break;
-                    case 66: Materials.electricWire = is; break;
+                    case 48: Materials.circuitBoardSingle = is; break;
+                    case 49: Materials.circuitBoardDouble = is; break;
+                    case 50: Materials.circuitBoardMulti = is; break;
+                    case 51: Materials.electricMotor = is; break;
+                    case 52: Materials.electricWire = is; break;
                 }
                 
                 LanguageRegistry.addName(is, Namings.EXTERNAL_PART_ITEM_NAMES[i]);
@@ -276,7 +253,6 @@ public class CDECore
             }
             
             OreDictionary.registerOre("ingotQuartz", Materials.gemQuartz);
-            OreDictionary.registerOre("dropUranium", Materials.washedUranium);
             OreDictionary.registerOre("brickPeat", Materials.fuelPeat);
         }
     }

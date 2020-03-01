@@ -49,22 +49,6 @@ public class Materials
     public static ItemStack nuggetBrass;
     public static ItemStack nuggetSteel;
     
-    public static ItemStack washedIron;
-    public static ItemStack washedGold;
-    public static ItemStack washedCopper;
-    public static ItemStack washedTin;
-    public static ItemStack washedSilver;
-    public static ItemStack washedLead;
-    public static ItemStack washedUranium;
-    
-    public static ItemStack crushedIron;
-    public static ItemStack crushedGold;
-    public static ItemStack crushedCopper;
-    public static ItemStack crushedTin;
-    public static ItemStack crushedSilver;
-    public static ItemStack crushedLead;
-    public static ItemStack crushedUranium;
-    
     public static ItemStack gemQuartz;
     public static ItemStack gemApatite;
     public static ItemStack gemRuby;
@@ -85,4 +69,4 @@ public class Materials
     public static ItemStack circuitBoardMulti;
     public static ItemStack electricMotor;
     public static ItemStack electricWire;
- }
+}
