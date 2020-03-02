@@ -9,10 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityTransformer extends TileEntityMachine
 {
-    @Override
-    protected boolean isPowered()
+    public TileEntityTransformer(int machineType, int machineTier)
     {
-        return false;
+        super(machineType, machineTier);
     }
     
     @Override
@@ -39,28 +38,10 @@ public class TileEntityTransformer extends TileEntityMachine
         super.writeToNBT(tag);
     }
     
-    // Ambient Sounds
-    @Override
-    public boolean isWorking()
-    {
-        return isPowered();
-    }
-    
+    // CDE Sound
     @Override
     public String getResourceName()
     {
-        return "fluorescent.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 1;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 1;
+        return "";
     }
 }

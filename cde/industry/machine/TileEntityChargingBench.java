@@ -9,19 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityChargingBench extends TileEntityMachine
 {
-    private int cde;
-    private int tier;
-    
-    public TileEntityChargingBench(int cde, int tier)
+    public TileEntityChargingBench(int machineId, int machineTier)
     {
-        this.cde = cde;
-        this.tier = tier;
-    }
-    
-    @Override
-    protected boolean isPowered()
-    {
-        return false;
+        super(machineId,machineTier);
     }
     
     @Override
@@ -33,54 +23,31 @@ public class TileEntityChargingBench extends TileEntityMachine
     @Override
     public String useWrench(boolean flag)
     {    
-        return "Industry";
+        return "Charging Bench by CDE";
     }
     
     @Override
     public void readFromNBT(NBTTagCompound tag)
     {
         super.readFromNBT(tag);
-        cde = tag.getInteger("cde");
-        tier = tag.getInteger("tier");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag)
     {
         super.writeToNBT(tag);
-        tag.setInteger("cde", cde);
-        tag.setInteger("tier", tier);
     }
     
-    // Ambient Sounds
+    // CDE Sound
     @Override
-    public boolean isWorking()
+    public boolean isActive()
     {
-        return isPowered();
+        return false;
     }
     
     @Override
     public String getResourceName()
     {
-        return "fluorescent.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        switch(tier)
-        {
-            case 1: return 0.01F * tier;
-            case 2: break;
-            case 3: break;
-        }
-        
-        return 1.0F / 100 * 1;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 1;
+        return "";
     }
 }

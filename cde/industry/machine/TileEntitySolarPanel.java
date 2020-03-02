@@ -18,15 +18,10 @@ public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySo
     private int euOutput,counter;
     private boolean isSolarDay;
     
-    public TileEntitySolarPanel()
+    public TileEntitySolarPanel(int machineId)
     {
+        super(machineId);
         euOutput = 1;
-    }
-    
-    @Override
-    protected boolean isPowered()
-    {
-        return true;
     }
     
     @Override
@@ -82,28 +77,16 @@ public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySo
         return euOutput;
     }
         
-    // Ambient Sounds
+    // CDE Sound
     @Override
-    public boolean isWorking()
+    public boolean isActive()
     {
-        return isPowered();
+        return true;
     }
     
     @Override
     public String getResourceName()
     {
-        return "fluorescent.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 100;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 100;
+        return "";
     }
 }

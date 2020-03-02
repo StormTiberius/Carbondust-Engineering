@@ -113,10 +113,23 @@ public abstract class TileEntityMachine extends TileEntityWithSound implements I
         super.onChunkUnload();
     }
     
+    // CDE Sound
     @Override
     public boolean isActive()
     {
         return isActive;
+    }
+    
+    @Override
+    public float getVolume()
+    {
+        return 0.01F * MachineModule.VOLUME[machineId];
+    }
+    
+    @Override
+    public float getPitch()
+    {
+        return 0.01F * MachineModule.PITCH[machineId];
     }
     
     // IC2 Method

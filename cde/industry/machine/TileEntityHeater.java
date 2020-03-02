@@ -16,6 +16,11 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityHeater extends TileEntityMachine implements IEnergySink
 {
+    public TileEntityHeater(int machineId)
+    {
+        super(machineId);
+    }
+    
     private int euBuffer,counter;
     private final int BUFFER_SIZE = 4000;
     private final String BLAST_FURNACE = "railcraft.common.blocks.machine.alpha.TileBlastFurnace";
@@ -88,7 +93,7 @@ public class TileEntityHeater extends TileEntityMachine implements IEnergySink
     @Override
     public int demandsEnergy()
     {
-        if(isPowered() && euBuffer < BUFFER_SIZE)
+        if(isActive() && euBuffer < BUFFER_SIZE)
         {
             return BUFFER_SIZE - euBuffer;
         }
@@ -121,28 +126,10 @@ public class TileEntityHeater extends TileEntityMachine implements IEnergySink
         return 2048;
     }
         
-    // Ambient Sounds
-    @Override
-    public boolean isWorking()
-    {
-        return isPowered();
-    }
-    
+    // CDE Sound
     @Override
     public String getResourceName()
     {
         return "burning3.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 100;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 100;
     }
 }

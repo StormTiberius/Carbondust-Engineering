@@ -9,17 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityBatteryStation extends TileEntityMachine
 {
-    private int cde,tier;
-    
-    public TileEntityBatteryStation(int cde, int tier)
+    public TileEntityBatteryStation(int machineId, int machineTier)
     {
-        this.cde = cde;
-        this.tier = tier;
-    }
-    @Override
-    protected boolean isPowered()
-    {
-        return false;
+        super(machineId,machineTier);
     }
     
     @Override
@@ -38,40 +30,24 @@ public class TileEntityBatteryStation extends TileEntityMachine
     public void readFromNBT(NBTTagCompound tag)
     {
         super.readFromNBT(tag);
-        cde = tag.getInteger("cde");
-        tier = tag.getInteger("tier");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag)
     {
         super.writeToNBT(tag);
-        tag.setInteger("cde", cde);
-        tag.setInteger("tier", tier);
     }
     
     // Ambient Sounds
     @Override
-    public boolean isWorking()
+    public boolean isActive()
     {
-        return isPowered();
+        return false;
     }
     
     @Override
     public String getResourceName()
     {
         return "fluorescent.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 1;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 1;
     }
 }

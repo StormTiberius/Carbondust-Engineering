@@ -34,8 +34,9 @@ public class TileEntitySteamTurbine extends TileEntityMachine implements IEnergy
     private final String BOILER_LP = "railcraft.common.blocks.machine.beta.TileBoilerTankLow";
     private final String BOILER_HP = "railcraft.common.blocks.machine.beta.TileBoilerTankHigh";
     
-    public TileEntitySteamTurbine()
+    public TileEntitySteamTurbine(int machineId)
     {
+        super(machineId);
         euOutput = 32;
         STEAM = LiquidDictionary.getLiquid("Steam", LiquidContainerRegistry.BUCKET_VOLUME);
     }
@@ -73,7 +74,7 @@ public class TileEntitySteamTurbine extends TileEntityMachine implements IEnergy
     {
         super.updateEntity();
         
-        if(worldObj.isRemote && CDECore.particlesEnabled() && isPowered())
+        if(worldObj.isRemote && CDECore.particlesEnabled() && isActive())
         {
             makeSteamParticle();
         }
@@ -167,28 +168,10 @@ public class TileEntitySteamTurbine extends TileEntityMachine implements IEnergy
         return euOutput;
     }
         
-    // Ambient Sounds
-    @Override
-    public boolean isWorking()
-    {
-        return isPowered();
-    }
-    
+    // CDE Sound
     @Override
     public String getResourceName()
     {
         return "breather.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 100;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 100;
     }
 }

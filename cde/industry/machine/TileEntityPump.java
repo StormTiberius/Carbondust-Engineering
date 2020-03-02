@@ -33,8 +33,9 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
     private final LiquidStack WATER;
     private int counter, flags;
     
-    public TileEntityPump()
+    public TileEntityPump(int machineId)
     {
+        super(machineId);
         TANK = new LiquidTank(TANK_SIZE);
         WATER = LiquidDictionary.getLiquid("Water", TANK_SIZE);
     }
@@ -166,19 +167,19 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
     @Override    
     protected boolean isConnected(ForgeDirection side)
     {
-        tec = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
+        TileEntity te = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
             
-        if(tec instanceof IPipeConnection)
+        if(te instanceof IPipeConnection)
         {
-            return ((IPipeConnection)tec).isPipeConnected(side.getOpposite());
+            return ((IPipeConnection)te).isPipeConnected(side.getOpposite());
         }
 
-        if(tec != null && tec.getClass().getCanonicalName().equalsIgnoreCase("buildcraft.factory.TileTank"))
+        if(te != null && te.getClass().getCanonicalName().equalsIgnoreCase("buildcraft.factory.TileTank"))
         {
             return side.equals(ForgeDirection.UP);
         }        
         
-        return tec instanceof IEnergyConductor;
+        return te instanceof IEnergyConductor;
     }
     
     // IC2 Methods
@@ -191,7 +192,7 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
     @Override
     public int demandsEnergy()
     {
-        if(isPowered() && euBuffer < BUFFER_SIZE)
+        if(isActive() && euBuffer < BUFFER_SIZE)
         {
             return BUFFER_SIZE - euBuffer;
         }
@@ -266,28 +267,10 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
         return null;
     }
         
-    // Ambient Sounds
-    @Override
-    public boolean isWorking()
-    {
-        return isPowered();
-    }
-    
+    // CDE Sound
     @Override
     public String getResourceName()
     {
         return "pumper.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 100;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 100;
     }
 }

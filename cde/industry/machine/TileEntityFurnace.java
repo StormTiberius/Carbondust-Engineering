@@ -9,10 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityFurnace extends TileEntityMachine
 {
-    @Override
-    protected boolean isPowered()
+    public TileEntityFurnace(int machineId, int machineTier)
     {
-        return false;
+        super(machineId,machineTier);
     }
     
     @Override
@@ -24,7 +23,7 @@ public class TileEntityFurnace extends TileEntityMachine
     @Override
     public String useWrench(boolean flag)
     {    
-        return "Industry";
+        return "Furnace by CDE";
     }
     
     @Override
@@ -39,28 +38,10 @@ public class TileEntityFurnace extends TileEntityMachine
         super.writeToNBT(tag);
     }
     
-    // Ambient Sounds
-    @Override
-    public boolean isWorking()
-    {
-        return isPowered();
-    }
-    
+    // CDE Sound
     @Override
     public String getResourceName()
     {
-        return "fluorescent.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 1;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 1;
+        return "";
     }
 }

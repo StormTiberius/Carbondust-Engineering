@@ -22,8 +22,9 @@ public class TileEntityInductionCharger extends TileEntityMachine implements IEn
     private IInventory ii;
     private int batteryEmptyId,batteryFullId;
     
-    public TileEntityInductionCharger()
+    public TileEntityInductionCharger(int machineId)
     {
+        super(machineId);
         batteryEmptyId = MachineModule.getItemId(0);
         batteryFullId = MachineModule.getItemId(1);
     }
@@ -79,12 +80,6 @@ public class TileEntityInductionCharger extends TileEntityMachine implements IEn
         par1NBTTagCompound.setInteger("batteryFullId", batteryFullId);
     }
     
-    @Override
-    protected boolean isPowered()
-    {
-        return !isRedstonePowered;
-    }
-        
     // IC2 Methods
     @Override
     public boolean acceptsEnergyFrom(TileEntity emitter, Direction direction)
@@ -95,7 +90,7 @@ public class TileEntityInductionCharger extends TileEntityMachine implements IEn
     @Override
     public int demandsEnergy()
     {
-        if(isPowered() && euBuffer < BUFFER_SIZE)
+        if(isActive() && euBuffer < BUFFER_SIZE)
         {
             return BUFFER_SIZE - euBuffer;
         }
@@ -128,28 +123,16 @@ public class TileEntityInductionCharger extends TileEntityMachine implements IEn
         return 2048;
     }
         
-    // Ambient Sounds
+    // CDE Sound
     @Override
-    public boolean isWorking()
+    public boolean isActive()
     {
-        return isPowered();
+        return !super.isActive();
     }
     
     @Override
     public String getResourceName()
     {
         return "fluorescent.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 100;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 100;
     }
 }

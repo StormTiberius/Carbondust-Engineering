@@ -20,14 +20,14 @@ public class BlockMachineBeta extends BlockMachine
     {
         switch(md)
         {
-            case 0: return new TileEntityStirlingGenerator();
-            case 1: return new TileEntityGeothermalGenerator();
-            case 2: return new TileEntityTidalGenerator();
-            case 3: return new TileEntityWindGenerator();
-            case 4: return new TileEntitySolarPanel();
-            case 5: return new TileEntityNuclearReactor();
-            case 6: return new TileEntityElectricDynamo();
-            case 7: return new TileEntitySteamTurbine();
+            case 0: return new TileEntityStirlingGenerator(13);
+            case 1: return new TileEntityGeothermalGenerator(14);
+            case 2: return new TileEntityTidalGenerator(15);
+            case 3: return new TileEntityWindGenerator(16);
+            case 4: return new TileEntitySolarPanel(17);
+            case 5: return new TileEntityNuclearReactor(18);
+            case 6: return new TileEntityElectricDynamo(19);
+            case 7: return new TileEntitySteamTurbine(20);
             default: return null;
         }
     }

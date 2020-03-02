@@ -9,10 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityCanningMachine extends TileEntityMachine
 {
-    @Override
-    protected boolean isPowered()
+    public TileEntityCanningMachine(int machineId)
     {
-        return false;
+        super(machineId);
     }
     
     @Override
@@ -24,7 +23,7 @@ public class TileEntityCanningMachine extends TileEntityMachine
     @Override
     public String useWrench(boolean flag)
     {    
-        return "Industry";
+        return "Canning Machine by CDE";
     }
     
     @Override
@@ -39,28 +38,16 @@ public class TileEntityCanningMachine extends TileEntityMachine
         super.writeToNBT(tag);
     }
     
-    // Ambient Sounds
+    // CDE Sound
     @Override
-    public boolean isWorking()
+    public boolean isActive()
     {
-        return isPowered();
+        return false;
     }
     
     @Override
     public String getResourceName()
     {
-        return "fluorescent.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 1;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 1;
+        return "";
     }
 }

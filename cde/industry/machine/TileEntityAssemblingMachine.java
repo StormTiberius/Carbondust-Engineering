@@ -6,15 +6,15 @@
 package cde.industry.machine;
 
 import ic2.api.Direction;
+import ic2.api.energy.tile.IEnergySink;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityAssemblingMachine extends TileEntityMachine
+public class TileEntityAssemblingMachine extends TileEntityMachine implements IEnergySink
 {
-    @Override
-    protected boolean isPowered()
+    public TileEntityAssemblingMachine(int machineId)
     {
-        return false;
+        super(machineId);
     }
     
     @Override
@@ -41,32 +41,20 @@ public class TileEntityAssemblingMachine extends TileEntityMachine
         super.writeToNBT(tag);
     }
     
-    // Ambient Sounds
+    // CDE Sound
     @Override
-    public boolean isWorking()
+    public boolean isActive()
     {
-        return isPowered();
+        return false;
     }
     
     @Override
     public String getResourceName()
     {
-        return "fluorescent.wav";
+        return "";
     }
     
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 1;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 1;
-    }
-    
-    // IC2
+    // IC2 Energy
     @Override
     public int demandsEnergy()
     {

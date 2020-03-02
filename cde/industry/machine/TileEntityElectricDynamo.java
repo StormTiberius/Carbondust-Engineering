@@ -11,7 +11,6 @@ import buildcraft.api.power.PowerFramework;
 import buildcraft.api.transport.IPipeConnection;
 import ic2.api.Direction;
 import ic2.api.energy.event.EnergyTileSourceEvent;
-import ic2.api.energy.tile.IEnergyConductor;
 import ic2.api.energy.tile.IEnergySource;
 import ic2.api.energy.tile.IEnergyTile;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,8 +25,9 @@ public class TileEntityElectricDynamo extends TileEntityMachine implements IEner
     private float euBuffer;
     private final float MJ_MULTIPLIER = 0.4F;
     
-    public TileEntityElectricDynamo()
+    public TileEntityElectricDynamo(int machineId)
     {
+        super(machineId);
         powerProvider = PowerFramework.currentFramework.createPowerProvider();
         powerProvider.configure(20, 1, 820, 13, 16400);
         euOutput = 32;
@@ -103,14 +103,14 @@ public class TileEntityElectricDynamo extends TileEntityMachine implements IEner
     @Override
     protected boolean isConnected(ForgeDirection side)
     {
-        tec = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
+        TileEntity te = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
         
-        if(tec instanceof IPipeConnection)
+        if(te instanceof IPipeConnection)
         {
-            return ((IPipeConnection)tec).isPipeConnected(side.getOpposite());
+            return ((IPipeConnection)te).isPipeConnected(side.getOpposite());
         }
 
-        return tec instanceof IEnergyConductor;
+        return super.isConnected(side);
     }
 
     // IC2 Methods
@@ -148,7 +148,7 @@ public class TileEntityElectricDynamo extends TileEntityMachine implements IEner
     @Override
     public int powerRequest()
     {
-        if (isPowered())
+        if (isActive())
         {		
             return (int) Math.ceil(Math.min(getPowerProvider().getMaxEnergyReceived(), getPowerProvider().getMaxEnergyStored() - getPowerProvider().getEnergyStored()));
         }
@@ -156,28 +156,10 @@ public class TileEntityElectricDynamo extends TileEntityMachine implements IEner
         return 0;
     }
     
-    // Ambient Sounds
-    @Override
-    public boolean isWorking()
-    {
-        return isPowered();
-    }
-    
+    // CDE Sound
     @Override
     public String getResourceName()
     {
         return "rotormachine.wav";
-    }
-    
-    @Override
-    public float getVolume()
-    {
-        return 1.0F / 100 * 100;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        return 1.0F / 100 * 100;
     }
 }
