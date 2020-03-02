@@ -122,25 +122,25 @@ public class SoundHelper
     
     private static void playTileSound(ISoundSource iss)
     {
-        if(!iss.isPlaying())
+        if(!iss.getIsPlaying())
         {
             sndSystem.play(iss.getSourceName());
-            iss.setPlaying(true);
+            iss.setIsPlaying(true);
         }
     }
     
     private static void stopTileSound(ISoundSource iss)
     {
-        if(iss.isPlaying())
+        if(iss.getIsPlaying())
         {
             sndSystem.stop(iss.getSourceName());
-            iss.setPlaying(false);
+            iss.setIsPlaying(false);
         }
     }
     
     public static void addSource(ISoundSource iss)
     {
-        sndSystem.newSource(iss.isPriority(), iss.getSourceName(), iss.getResourceUrl(), iss.getResourceName(), iss.isLooping(), iss.getOriginX(), iss.getOriginY(), iss.getOriginZ(), iss.getAttModel(), iss.getDistOrRoll());
+        sndSystem.newSource(iss.getIsPriority(), iss.getSourceName(), iss.getResourceUrl(), iss.getResourceName(), iss.getIsLooping(), iss.getOriginX(), iss.getOriginY(), iss.getOriginZ(), iss.getAttModel(), iss.getDistOrRoll());
         sndSystem.setVolume(iss.getSourceName(), iss.getVolume() * soundVolume);
         sndSystem.setPitch(iss.getSourceName(), iss.getPitch());
         SOURCES.put(iss.getSourceName(), iss);
@@ -205,7 +205,7 @@ public class SoundHelper
                         case PacketSoundUpdate.OFF: stopTileSound(iss); break;
                         case PacketSoundUpdate.ON: playTileSound(iss); break;
                         case PacketSoundUpdate.TOGGLE:
-                            if(iss.isPlaying())
+                            if(iss.getIsPlaying())
                             {
                                 stopTileSound(iss);
                             }
