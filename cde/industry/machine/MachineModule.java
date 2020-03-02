@@ -70,10 +70,10 @@ public class MachineModule
         {
             String s = list.get(i);
             
-            CRAFTABLE[i] = cfg.get(Configuration.CATEGORY_GENERAL, s, true, "Enable/Disable Crafting Recipe").getBoolean(true);
-            SOUND[i] = cfg.get(Configuration.CATEGORY_GENERAL, s, true, "Enable/Disable Machine Sound").getBoolean(true);
-            VOLUME[i] = cfg.get(Configuration.CATEGORY_GENERAL, s, 20, "Machine Volume, 0-100").getInt();
-            PITCH[i] = cfg.get(Configuration.CATEGORY_GENERAL, s, 100, "Machine Pitch, 0-100").getInt();
+            CRAFTABLE[i] = cfg.get(Configuration.CATEGORY_GENERAL, s + "C", true, "Enable/Disable Crafting Recipe").getBoolean(true);
+            SOUND[i] = cfg.get(Configuration.CATEGORY_GENERAL, s + "S", true, "Enable/Disable Machine Sound").getBoolean(true);
+            VOLUME[i] = cfg.get(Configuration.CATEGORY_GENERAL, s + "V", 20, "Machine Volume, 0-100").getInt();
+            PITCH[i] = cfg.get(Configuration.CATEGORY_GENERAL, s + "P", 100, "Machine Pitch, 0-100").getInt();
         }
         
         cfg.save();
@@ -269,7 +269,7 @@ public class MachineModule
                 'a', Materials.circuitBoardMulti.copy(),
                 'b', new ItemStack(Block.workbench.blockID, 1, 0),
                 'c', new ItemStack(Block.chest.blockID, 1, 0),
-                'd', "bronzeGear",
+                'd', "gearBronze",
                 'e', "plankWood"));
             }
             
@@ -348,7 +348,7 @@ public class MachineModule
                 GameRegistry.addRecipe(is,
                 "aaa",
                 "dbd",
-                "dcd",
+                "ece",
                 'a', new ItemStack(tankBlockId, 1, 0),
                 'b', new ItemStack(Items.getItem("machine").itemID, 1, 0),
                 'c', Materials.circuitBoardSingle.copy(),
