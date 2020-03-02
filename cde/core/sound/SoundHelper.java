@@ -21,14 +21,14 @@ public class SoundHelper
     private static boolean init,resume;
     private static float soundVolume,masterVolume;
     
-    public static void initSoundHelper()
+    protected static void initSoundHelper()
     {
         mc = Minecraft.getMinecraft();
         soundVolume = mc.gameSettings.soundVolume;
         init = true;
     }
     
-    public static void onUpdate()
+    protected static void onUpdate()
     {
         if(init)
         {
@@ -76,7 +76,7 @@ public class SoundHelper
         }
     }
     
-    public static void setVolume(ISoundSource iss)
+    protected static void setVolume(ISoundSource iss)
     {
         if(SOURCES.containsKey(iss.getSourceName()))
         {
@@ -84,7 +84,7 @@ public class SoundHelper
         }
     }
     
-    public static void setVolume(String key, float volume)
+    protected static void setVolume(String key, float volume)
     {
         if(SOURCES.containsKey(key))
         {
@@ -92,7 +92,7 @@ public class SoundHelper
         }
     }
     
-    public static void setPitch(ISoundSource iss)
+    protected static void setPitch(ISoundSource iss)
     {
         if(SOURCES.containsKey(iss.getSourceName()))
         {
@@ -100,7 +100,7 @@ public class SoundHelper
         }
     }
     
-    public static void setPitch(String key, float pitch)
+    protected static void setPitch(String key, float pitch)
     {
         if(SOURCES.containsKey(key))
         {
@@ -108,7 +108,7 @@ public class SoundHelper
         }
     }
     
-    public static void updateTileSound(ISoundSource iss, boolean flag)
+    protected static void updateTileSound(ISoundSource iss, boolean flag)
     {
         if(flag)
         {
@@ -120,7 +120,7 @@ public class SoundHelper
         }
     }
     
-    private static void playTileSound(ISoundSource iss)
+    protected static void playTileSound(ISoundSource iss)
     {
         if(!iss.getIsPlaying())
         {
@@ -129,7 +129,7 @@ public class SoundHelper
         }
     }
     
-    private static void stopTileSound(ISoundSource iss)
+    protected static void stopTileSound(ISoundSource iss)
     {
         if(iss.getIsPlaying())
         {
@@ -138,7 +138,7 @@ public class SoundHelper
         }
     }
     
-    public static void addSource(ISoundSource iss)
+    protected static void addSource(ISoundSource iss)
     {
         sndSystem.newSource(iss.getIsPriority(), iss.getSourceName(), iss.getResourceUrl(), iss.getResourceName(), iss.getIsLooping(), iss.getOriginX(), iss.getOriginY(), iss.getOriginZ(), iss.getAttModel(), iss.getDistOrRoll());
         sndSystem.setVolume(iss.getSourceName(), iss.getVolume() * soundVolume);
@@ -146,7 +146,7 @@ public class SoundHelper
         SOURCES.put(iss.getSourceName(), iss);
     }
     
-    public static void removeSource(ISoundSource iss)
+    protected static void removeSource(ISoundSource iss)
     {
         if(SOURCES.containsKey(iss.getSourceName()))
         {
@@ -154,7 +154,7 @@ public class SoundHelper
         }
     }
     
-    public static void removeSource(String name)
+    protected static void removeSource(String name)
     {
         if(SOURCES.containsKey(name))
         {
@@ -162,14 +162,14 @@ public class SoundHelper
         }
     }
     
-    private static void retireSource(ISoundSource iss)
+    protected static void retireSource(ISoundSource iss)
     {
         stopTileSound(iss);
         sndSystem.removeSource(iss.getSourceName());
         SOURCES.remove(iss.getSourceName());
     }
     
-    public static void retireAll()
+    protected static void retireAll()
     {
         for(ISoundSource iss : SOURCES.values())
         {

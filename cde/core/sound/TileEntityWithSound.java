@@ -7,23 +7,38 @@ package cde.core.sound;
 
 import cde.CDECore;
 import cde.api.ISoundSource;
-import cde.core.TileEntityCDE;
+import cde.api.SoundSourceEvent;
+import cde.core.TileEntityCde;
 import java.net.URL;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
 import paulscode.sound.SoundSystemConfig;
 
-public abstract class TileEntityWithSound extends TileEntityCDE implements ISoundSource
+public abstract class TileEntityWithSound extends TileEntityCde implements ISoundSource
 {
-    protected abstract boolean isWorking();
+    protected abstract boolean getIsActive();
     
-    private boolean init,playing,active,flag;
+    protected int volume,pitch;
+    private boolean init,active,flag,isMuted,isPlaying;
+    
+    TileEntityWithSound(int volume, int pitch)
+    {
+        this.volume = volume;
+        this.pitch = pitch;
+    }
+    
+    private boolean getIsTileSoundEnabled()
+    {
+        return CDECore.playSounds() && !getResourceName().isEmpty();
+    }
     
     private void init()
     {
         if(worldObj.isRemote)
         {
-            if(tileSoundsEnabled())
+            if(getIsTileSoundEnabled())
             {
-                SoundHelper.addSource(this);
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.LOAD));
             }
         }
         
@@ -37,14 +52,26 @@ public abstract class TileEntityWithSound extends TileEntityCDE implements ISoun
         {   
             if(worldObj.isRemote)
             {
-                if(tileSoundsEnabled())
+                if(getIsTileSoundEnabled())
                 {
-                    flag = isWorking();
+                    flag = getIsActive();
 
                     if(active != flag)
                     {
                         active = flag;
-                        SoundHelper.updateTileSound(this, active);
+                        
+                        SoundSourceEvent event;
+                        
+                        if(active)
+                        {
+                            event = new SoundSourceEvent(this, SoundSourceEvent.PLAY);
+                        }
+                        else
+                        {
+                            event = new SoundSourceEvent(this, SoundSourceEvent.STOP);
+                        }
+                        
+                        MinecraftForge.EVENT_BUS.post(event);
                     }
                 }
             }
@@ -60,9 +87,9 @@ public abstract class TileEntityWithSound extends TileEntityCDE implements ISoun
     {
         if(worldObj.isRemote)
         {
-            if(tileSoundsEnabled())
+            if(getIsTileSoundEnabled())
             {
-                SoundHelper.removeSource(this);
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.UNLOAD));
             }
         }
                 
@@ -74,42 +101,71 @@ public abstract class TileEntityWithSound extends TileEntityCDE implements ISoun
     {
         if(worldObj.isRemote)
         {
-            if(tileSoundsEnabled())
+            if(getIsTileSoundEnabled())
             {
-                SoundHelper.removeSource(this);
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.UNLOAD));
             }
         }
         
         super.onChunkUnload();
     }
     
-    private boolean tileSoundsEnabled()
+    @Override
+    public void readFromNBT(NBTTagCompound tag)
     {
-        return CDECore.playSounds() && getVolume() > 0.0F;
+        super.readFromNBT(tag);
+        volume = tag.getInteger("volume");
+        pitch = tag.getInteger("pitch");
+        isMuted = tag.getBoolean("muted");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag)
+    {
+        super.writeToNBT(tag);
+        tag.setInteger("volume", volume);
+        tag.setInteger("pitch", pitch);
+        tag.setBoolean("muted", isMuted);
     }
     
     @Override
-    public boolean isPriority()
+    public boolean getIsMuted()
     {
-        return true;
+        return isMuted;
     }
     
     @Override
-    public boolean isLooping()
+    public void setIsMuted(boolean flag)
     {
-        return true;
+        if(flag != isMuted)
+        {
+            SoundSourceEvent event;
+            
+            if(flag)
+            {
+                event = new SoundSourceEvent(this, SoundSourceEvent.UNLOAD);
+            }
+            else
+            {
+                event = new SoundSourceEvent(this, SoundSourceEvent.LOAD);
+            }
+            
+            MinecraftForge.EVENT_BUS.post(event);
+            
+            isMuted = flag;
+        }
     }
     
     @Override
-    public boolean isPlaying()
+    public boolean getIsPlaying()
     {
-        return playing;
+        return isPlaying;
     }
     
     @Override
-    public void setPlaying(boolean flag)
+    public void setIsPlaying(boolean flag)
     {
-        playing = flag;
+        isPlaying = flag;
     }
     
     @Override
@@ -131,6 +187,48 @@ public abstract class TileEntityWithSound extends TileEntityCDE implements ISoun
     }
     
     @Override
+    public boolean getIsPriority()
+    {
+        return true;
+    }
+    
+    @Override
+    public String getSourceName()
+    {
+        return "cde_x" + getSourceX() + "_y" + getSourceY() + "_z" + getSourceZ();
+    }
+    
+    @Override
+    public URL getResourceUrl()
+    {
+        return CDECore.class.getResource((new StringBuilder()).append("/cde/sounds/machine/").append(getResourceName()).toString());
+    }
+    
+    @Override
+    public boolean getIsLooping()
+    {
+        return true;
+    }
+    
+    @Override
+    public float getOriginX()
+    {
+        return 0.5F + getSourceX();
+    }
+    
+    @Override
+    public float getOriginY()
+    {
+        return 0.5F + getSourceY();
+    }
+    
+    @Override
+    public float getOriginZ()
+    {
+        return 0.5F + getSourceZ();
+    }
+        
+    @Override
     public int getAttModel()
     {
         return SoundSystemConfig.ATTENUATION_LINEAR;
@@ -143,46 +241,14 @@ public abstract class TileEntityWithSound extends TileEntityCDE implements ISoun
     }
     
     @Override
-    public float getOriginX()
+    public float getVolume()
     {
-        float f = 0.5F;
-        
-        if(xCoord < 0)
-        {
-            f *= -1;
-        }
-        
-        return f + xCoord;
+        return 0.01F * volume;
     }
     
     @Override
-    public float getOriginY()
+    public float getPitch()
     {
-        return 0.5F + yCoord;
-    }
-    
-    @Override
-    public float getOriginZ()
-    {
-        float f = 0.5F;
-        
-        if(zCoord < 0)
-        {
-            f *= -1;
-        }
-        
-        return f + zCoord;
-    }
-    
-    @Override
-    public String getSourceName()
-    {
-        return "cde_x" + xCoord + "_y" + yCoord + "_z" + zCoord;
-    }
-    
-    @Override
-    public URL getResourceUrl()
-    {
-        return CDECore.class.getResource((new StringBuilder()).append("/cde/sounds/machine/").append(getResourceName()).toString());
+        return 0.01F * pitch;
     }
 }
