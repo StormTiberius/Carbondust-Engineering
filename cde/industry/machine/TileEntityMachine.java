@@ -5,51 +5,60 @@
 
 package cde.industry.machine;
 
+import cde.api.IWrenchable;
 import cde.core.sound.TileEntityWithSound;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyConductor;
 import ic2.api.energy.tile.IEnergyTile;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 
-public abstract class TileEntityMachine extends TileEntityWithSound implements IEnergyTile
+public abstract class TileEntityMachine extends TileEntityWithSound implements IEnergyTile, IWrenchable
 {
-    protected int cde,tier,volume,pitch;
-    
-    protected abstract String useWrench(boolean flag);
     protected abstract void doWorkCycle();
-    protected TileEntity tec;
-    protected boolean isAddedToEnergyNet = false;
-    protected boolean isRedstonePowered = false;
-    private boolean flag = false;
+    protected int machineId,machineTier;
+    private boolean isActive,isAddedToEnergyNet;
     
-    public TileEntityMachine(int cde, int tier)
+    public TileEntityMachine(int machineId)
     {
-        this.cde = cde;
-        this.tier = tier;
-        this.volume = MachineModule.VOLUME[cde];
-        this.pitch = MachineModule.PITCH[cde];
+        this.machineId = machineId;
+        this.volume = MachineModule.VOLUME[machineId];
+        this.pitch = MachineModule.PITCH[machineId];
+    }
+    
+    public TileEntityMachine(int machineId, int machineTier)
+    {
+        this(machineId);
+        this.machineTier = machineTier;
+    }
+    
+    protected boolean isConnected(ForgeDirection side)
+    {
+        return worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ) instanceof IEnergyConductor;
+    }
+    
+    @Override
+    protected boolean isTileSoundEnabled()
+    {
+        return MachineModule.SOUND[machineId] && super.isTileSoundEnabled();
     }
     
     @Override
     public void readFromNBT(NBTTagCompound tag)
     {
         super.readFromNBT(tag);
-        cde = tag.getInteger("cde");
-        tier = tag.getInteger("tier");
-        volume = tag.getInteger("volume");
-        pitch = tag.getInteger("pitch");
+        machineId = tag.getInteger("machineId");
+        machineTier = tag.getInteger("machineTier");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag)
     {
         super.writeToNBT(tag);
-        tag.setInteger("cde", cde);
-        tag.setInteger("tier", tier);
+        tag.setInteger("machineId", machineId);
+        tag.setInteger("machineTier", machineTier);
     }
     
     @Override
@@ -57,11 +66,11 @@ public abstract class TileEntityMachine extends TileEntityWithSound implements I
     {
         super.updateEntity();
         
-        flag = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
+        boolean flag = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
         
-        if(isRedstonePowered != flag)
+        if(isActive != flag)
         {
-            isRedstonePowered = flag;
+            isActive = flag;
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
         
@@ -71,9 +80,12 @@ public abstract class TileEntityMachine extends TileEntityWithSound implements I
             isAddedToEnergyNet = true;
         }
         
-        if(!worldObj.isRemote && isPowered())
+        if(isActive())
         {
-            doWorkCycle();
+            if(!worldObj.isRemote)
+            {
+                doWorkCycle();
+            }
         }
     }
     
@@ -101,16 +113,10 @@ public abstract class TileEntityMachine extends TileEntityWithSound implements I
         super.onChunkUnload();
     }
     
-    protected boolean isPowered()
+    @Override
+    public boolean isActive()
     {
-        return isRedstonePowered;
-    }
-    
-    protected boolean isConnected(ForgeDirection side)
-    {
-        tec = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
-        
-        return tec instanceof IEnergyConductor;
+        return isActive;
     }
     
     // IC2 Method

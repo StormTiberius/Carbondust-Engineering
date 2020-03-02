@@ -31,7 +31,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
     private long previousSoundUpdateTime;
-    private boolean isWorking,soundUpdateNeeded,hasSealant;
+    private boolean isActive,soundUpdateNeeded,hasSealant;
     private int color,paint;
     private int[] counter;
     
@@ -55,12 +55,12 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             if(counter[0] == 0)
             {
-                isWorking = true;
+                isActive = true;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
             else if(counter[0] == 69)
             {
-                isWorking = false;
+                isActive = false;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
 
@@ -127,9 +127,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             paint = tag.getInteger("paint");
         }
         
-        if(tag.hasKey("isworking"))
+        if(tag.hasKey("isActive"))
         {
-            isWorking = tag.getBoolean("isworking");
+            isActive = tag.getBoolean("isActive");
         }
         
         if(tag.hasKey("counter"))
@@ -164,7 +164,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         tag.setInteger("color", color);
         tag.setInteger("paint", paint);
         
-        tag.setBoolean("isworking", isWorking);
+        tag.setBoolean("isActive", isActive);
         
         tag.setIntArray("counter", counter);
         
@@ -317,9 +317,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         
     // Ambient Sounds
     @Override
-    public boolean isWorking()
+    public boolean isActive()
     {
-        return isWorking;
+        return isActive;
     }
     
     @Override

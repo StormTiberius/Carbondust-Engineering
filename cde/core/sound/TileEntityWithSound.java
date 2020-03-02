@@ -16,33 +16,43 @@ import paulscode.sound.SoundSystemConfig;
 
 public abstract class TileEntityWithSound extends TileEntityCde implements ISoundSource
 {
-    protected abstract boolean getIsActive();
-    
     protected int volume,pitch;
-    private boolean init,active,flag,isMuted,isPlaying;
-    
-    TileEntityWithSound(int volume, int pitch)
-    {
-        this.volume = volume;
-        this.pitch = pitch;
-    }
-    
-    private boolean getIsTileSoundEnabled()
-    {
-        return CDECore.playSounds() && !getResourceName().isEmpty();
-    }
+    private boolean init,isMuted,isPlaying;
     
     private void init()
     {
         if(worldObj.isRemote)
         {
-            if(getIsTileSoundEnabled())
+            if(isTileSoundEnabled())
             {
                 MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.LOAD));
             }
         }
         
         init = true;
+    }
+    
+    protected boolean isTileSoundEnabled()
+    {
+        return CDECore.playSounds() && !getResourceName().isEmpty();
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound tag)
+    {
+        super.readFromNBT(tag);
+        volume = tag.getInteger("volume");
+        pitch = tag.getInteger("pitch");
+        isMuted = tag.getBoolean("isMuted");
+    }
+    
+    @Override
+    public void writeToNBT(NBTTagCompound tag)
+    {
+        super.writeToNBT(tag);
+        tag.setInteger("volume", volume);
+        tag.setInteger("pitch", pitch);
+        tag.setBoolean("isMuted", isMuted);
     }
     
     @Override
@@ -52,17 +62,17 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
         {   
             if(worldObj.isRemote)
             {
-                if(getIsTileSoundEnabled())
+                if(isTileSoundEnabled())
                 {
-                    flag = getIsActive();
-
-                    if(active != flag)
+                    boolean flag = isActive();
+                    
+                    if(flag != isPlaying())
                     {
-                        active = flag;
+                        // isPlaying() is set in SoundHelper so no need to set it here.
                         
                         SoundSourceEvent event;
                         
-                        if(active)
+                        if(flag)
                         {
                             event = new SoundSourceEvent(this, SoundSourceEvent.PLAY);
                         }
@@ -81,13 +91,13 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
             init();
         }
     }
-
+    
     @Override
     public void invalidate()
     {
         if(worldObj.isRemote)
         {
-            if(getIsTileSoundEnabled())
+            if(isTileSoundEnabled())
             {
                 MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.UNLOAD));
             }
@@ -95,13 +105,13 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
                 
         super.invalidate();
     }
-
+    
     @Override
     public void onChunkUnload()
     {
         if(worldObj.isRemote)
         {
-            if(getIsTileSoundEnabled())
+            if(isTileSoundEnabled())
             {
                 MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.UNLOAD));
             }
@@ -111,31 +121,13 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
     }
     
     @Override
-    public void readFromNBT(NBTTagCompound tag)
-    {
-        super.readFromNBT(tag);
-        volume = tag.getInteger("volume");
-        pitch = tag.getInteger("pitch");
-        isMuted = tag.getBoolean("muted");
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound tag)
-    {
-        super.writeToNBT(tag);
-        tag.setInteger("volume", volume);
-        tag.setInteger("pitch", pitch);
-        tag.setBoolean("muted", isMuted);
-    }
-    
-    @Override
-    public boolean getIsMuted()
+    public boolean isMuted()
     {
         return isMuted;
     }
     
     @Override
-    public void setIsMuted(boolean flag)
+    public void setMuted(boolean flag)
     {
         if(flag != isMuted)
         {
@@ -157,13 +149,13 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
     }
     
     @Override
-    public boolean getIsPlaying()
+    public boolean isPlaying()
     {
         return isPlaying;
     }
     
     @Override
-    public void setIsPlaying(boolean flag)
+    public void setPlaying(boolean flag)
     {
         isPlaying = flag;
     }
@@ -187,7 +179,7 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
     }
     
     @Override
-    public boolean getIsPriority()
+    public boolean isPriority()
     {
         return true;
     }
@@ -205,7 +197,7 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
     }
     
     @Override
-    public boolean getIsLooping()
+    public boolean isLooping()
     {
         return true;
     }
@@ -227,7 +219,7 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
     {
         return 0.5F + getSourceZ();
     }
-        
+    
     @Override
     public int getAttModel()
     {

@@ -6,7 +6,6 @@
 package cde.industry.machine;
 
 import buildcraft.api.tools.IToolWrench;
-import cde.CDECore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -48,7 +47,7 @@ public abstract class BlockMachine extends BlockContainer
         
         if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolWrench && te instanceof TileEntityMachine)
         {
-            TileEntityMachine teeb = (TileEntityMachine)te;
+            TileEntityMachine tem = (TileEntityMachine)te;
             
             IToolWrench tool = (IToolWrench)entityplayer.getCurrentEquippedItem().getItem();
             
@@ -56,13 +55,13 @@ public abstract class BlockMachine extends BlockContainer
             {
                 if(!world.isRemote)
                 {
-                    if(teeb.isPowered())
+                    if(tem.isActive())
                     {
-                        entityplayer.sendChatToPlayer(teeb.useWrench(false));
+                        entityplayer.sendChatToPlayer(tem.useWrench(false));
                     }
                     else
                     {
-                        entityplayer.sendChatToPlayer(teeb.useWrench(true));
+                        entityplayer.sendChatToPlayer(tem.useWrench(true));
                     }
                 }
                 
@@ -91,7 +90,7 @@ public abstract class BlockMachine extends BlockContainer
                 return 255;
             }
             
-            if(tem.isPowered())
+            if(tem.isActive())
             {
                 return 16 * (side + 6) + md;
             }

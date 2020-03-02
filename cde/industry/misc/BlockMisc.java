@@ -33,11 +33,11 @@ public class BlockMisc extends BlockContainer
         {
             TileEntity te = par1World.getBlockTileEntity(x, y, z);
             
-            if(te != null)
+            if(te instanceof TileEntitySpeaker)
             {
                 TileEntitySpeaker tes = (TileEntitySpeaker)te;
 
-                if(!tes.isWorking())
+                if(!tes.isActive())
                 {
                     if(par5EntityPlayer.isSneaking())
                     {

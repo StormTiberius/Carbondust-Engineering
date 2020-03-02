@@ -5,12 +5,13 @@
 
 package cde.industry.misc;
 
-import cde.core.sound.SoundHelper;
+import cde.api.SoundSourceEvent;
 import cde.core.sound.TileEntityWithSound;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraftforge.common.MinecraftForge;
 
 public class TileEntitySpeaker extends TileEntityWithSound
 {
@@ -53,8 +54,8 @@ public class TileEntitySpeaker extends TileEntityWithSound
             
             if(i != index)
             {
-                SoundHelper.removeSource(this);
-                SoundHelper.addSource(this);
+                MinecraftForge.EVENT_BUS.post((new SoundSourceEvent(this, SoundSourceEvent.UNLOAD)));
+                MinecraftForge.EVENT_BUS.post((new SoundSourceEvent(this, SoundSourceEvent.LOAD)));
             }
         }
     }
@@ -62,9 +63,9 @@ public class TileEntitySpeaker extends TileEntityWithSound
     @Override
     public Packet getDescriptionPacket()
     {
-        NBTTagCompound var1 = new NBTTagCompound();
-        writeToNBT(var1);
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 4, var1);
+        NBTTagCompound tag = new NBTTagCompound();
+        writeToNBT(tag);
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 4, tag);
     }
     
     @Override
@@ -92,7 +93,7 @@ public class TileEntitySpeaker extends TileEntityWithSound
     }
     
     @Override
-    public boolean isWorking()
+    public boolean isActive()
     {
         return worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
     }
@@ -106,12 +107,12 @@ public class TileEntitySpeaker extends TileEntityWithSound
     @Override
     public float getVolume()
     {   
-        return 1.0F / 100 * MiscModule.volumes[index];
+        return 0.01F * MiscModule.volumes[index];
     }
     
     @Override
     public float getPitch()
     {        
-        return 1.0F / 100 * MiscModule.pitchs[index];
+        return 0.01F * MiscModule.pitchs[index];
     }
 }
