@@ -5,7 +5,6 @@
 
 package cde.core;
 
-import cde.CDECore;
 import cde.core.sound.SoundEventManager;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.particle.EntityFX;
@@ -18,10 +17,9 @@ import net.minecraftforge.common.MinecraftForge;
 public class ClientProxy extends CommonProxy
 {
     @Override
-    public void preloadTextures()
+    public void preloadTexture(String resource)
     {
-        MinecraftForgeClient.preloadTexture(CDECore.CDE_BLOCKS);
-        MinecraftForgeClient.preloadTexture(CDECore.CDE_ITEMS);
+        MinecraftForgeClient.preloadTexture(resource);
     }
     
     @Override

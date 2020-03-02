@@ -21,7 +21,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
-public class TileEntityPump extends TileEntityEnergyBase implements IEnergySink, ITankContainer
+public class TileEntityPump extends TileEntityMachine implements IEnergySink, ITankContainer
 {
     private int euBuffer;
     private final int BUFFER_SIZE = 25;

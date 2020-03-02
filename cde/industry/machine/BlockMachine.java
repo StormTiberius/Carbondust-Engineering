@@ -7,11 +7,15 @@ package cde.industry.machine;
 
 import buildcraft.api.tools.IToolWrench;
 import cde.CDECore;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 public abstract class BlockMachine extends BlockContainer
 {
@@ -42,9 +46,9 @@ public abstract class BlockMachine extends BlockContainer
         
         TileEntity te = world.getBlockTileEntity(x, y, z);
         
-        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolWrench && te instanceof TileEntityEnergyBase)
+        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolWrench && te instanceof TileEntityMachine)
         {
-            TileEntityEnergyBase teeb = (TileEntityEnergyBase)te;
+            TileEntityMachine teeb = (TileEntityMachine)te;
             
             IToolWrench tool = (IToolWrench)entityplayer.getCurrentEquippedItem().getItem();
             
@@ -71,9 +75,34 @@ public abstract class BlockMachine extends BlockContainer
         return false;
     }
     
+    @SideOnly(Side.CLIENT)
     @Override
-    public String getTextureFile()
+    public int getBlockTexture(IBlockAccess iba, int x, int y, int z, int side)
     {
-        return CDECore.CDE_BLOCKS;
+        int md = iba.getBlockMetadata(x, y, z);
+        TileEntity te = iba.getBlockTileEntity(x, y, z);
+        
+        if(te instanceof TileEntityMachine)
+        {
+            TileEntityMachine tem = (TileEntityMachine)te;
+            
+            if(tem.isConnected(ForgeDirection.getOrientation(side)))
+            {
+                return 255;
+            }
+            
+            if(tem.isPowered())
+            {
+                return 16 * (side + 6) + md;
+            }
+        }
+        
+        return getBlockTextureFromSideAndMetadata(side, md);
+    }
+    
+    @Override
+    public int getBlockTextureFromSideAndMetadata(int side, int md)
+    {
+        return 16 * side + md;
     }
 }

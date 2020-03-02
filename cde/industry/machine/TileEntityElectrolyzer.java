@@ -7,7 +7,7 @@ package cde.industry.machine;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityElectrolyzer extends TileEntityEnergyBase
+public class TileEntityElectrolyzer extends TileEntityMachine
 {
     @Override
     protected boolean isPowered()

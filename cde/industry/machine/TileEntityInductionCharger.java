@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityInductionCharger extends TileEntityEnergyBase implements IEnergySink
+public class TileEntityInductionCharger extends TileEntityMachine implements IEnergySink
 {
     private int euBuffer;
     private final int BUFFER_SIZE = 4000;

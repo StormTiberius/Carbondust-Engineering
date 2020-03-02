@@ -5,9 +5,11 @@
 
 package cde.industry.machine;
 
+import ic2.api.Direction;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityAssemblingMachine extends TileEntityEnergyBase
+public class TileEntityAssemblingMachine extends TileEntityMachine
 {
     @Override
     protected boolean isPowered()
@@ -24,7 +26,7 @@ public class TileEntityAssemblingMachine extends TileEntityEnergyBase
     @Override
     public String useWrench(boolean flag)
     {    
-        return "Industry";
+        return "Assembling Machine by CDE";
     }
     
     @Override
@@ -62,5 +64,30 @@ public class TileEntityAssemblingMachine extends TileEntityEnergyBase
     public float getPitch()
     {
         return 1.0F / 100 * 1;
+    }
+    
+    // IC2
+    @Override
+    public int demandsEnergy()
+    {
+        return 0;
+    }
+
+    @Override
+    public int injectEnergy(Direction directionFrom, int amount)
+    {
+        return 0;
+    }
+
+    @Override
+    public int getMaxSafeInput()
+    {
+        return 128;
+    }
+
+    @Override
+    public boolean acceptsEnergyFrom(TileEntity emitter, Direction direction)
+    {
+        return true;
     }
 }

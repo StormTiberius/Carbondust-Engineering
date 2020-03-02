@@ -21,7 +21,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class TileEntitySteamTurbine extends TileEntityEnergyBase implements IEnergySource 
+public class TileEntitySteamTurbine extends TileEntityMachine implements IEnergySource 
 {
     private int euOutput;
     private int steamBuffer;

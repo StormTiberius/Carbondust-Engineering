@@ -7,7 +7,7 @@ package cde.industry.machine;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityExtractor extends TileEntityEnergyBase
+public class TileEntityExtractor extends TileEntityMachine
 {
     @Override
     protected boolean isPowered()

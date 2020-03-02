@@ -7,8 +7,15 @@ package cde.industry.machine;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityBatteryStation extends TileEntityEnergyBase
+public class TileEntityBatteryStation extends TileEntityMachine
 {
+    private int cde,tier;
+    
+    public TileEntityBatteryStation(int cde, int tier)
+    {
+        this.cde = cde;
+        this.tier = tier;
+    }
     @Override
     protected boolean isPowered()
     {
@@ -31,12 +38,16 @@ public class TileEntityBatteryStation extends TileEntityEnergyBase
     public void readFromNBT(NBTTagCompound tag)
     {
         super.readFromNBT(tag);
+        cde = tag.getInteger("cde");
+        tier = tag.getInteger("tier");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag)
     {
         super.writeToNBT(tag);
+        tag.setInteger("cde", cde);
+        tag.setInteger("tier", tier);
     }
     
     // Ambient Sounds

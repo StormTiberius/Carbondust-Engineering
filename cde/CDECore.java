@@ -126,7 +126,8 @@ public class CDECore
     @Init
     public void init(FMLInitializationEvent event) 
     {   
-        proxy.preloadTextures();
+        proxy.preloadTexture(CDE_BLOCKS);
+        proxy.preloadTexture(CDE_ITEMS);
         
         GameRegistry.registerFuelHandler(new FuelManager());
         

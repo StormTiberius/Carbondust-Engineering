@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 public class CommonProxy
 {
-    public void preloadTextures(){}
+    public void preloadTexture(String resource){}
     public void setupSound(){}
     public void spawnParticle(EntityFX effect){}
     public void sendToServer(Packet packet){}

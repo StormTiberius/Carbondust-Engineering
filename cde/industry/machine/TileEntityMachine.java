@@ -10,18 +10,47 @@ import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyConductor;
 import ic2.api.energy.tile.IEnergyTile;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 
-public abstract class TileEntityEnergyBase extends TileEntityWithSound implements IEnergyTile
+public abstract class TileEntityMachine extends TileEntityWithSound implements IEnergyTile
 {
+    protected int cde,tier,volume,pitch;
+    
     protected abstract String useWrench(boolean flag);
     protected abstract void doWorkCycle();
     protected TileEntity tec;
     protected boolean isAddedToEnergyNet = false;
     protected boolean isRedstonePowered = false;
     private boolean flag = false;
+    
+    public TileEntityMachine(int cde, int tier)
+    {
+        this.cde = cde;
+        this.tier = tier;
+        this.volume = MachineModule.VOLUME[cde];
+        this.pitch = MachineModule.PITCH[cde];
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound tag)
+    {
+        super.readFromNBT(tag);
+        cde = tag.getInteger("cde");
+        tier = tag.getInteger("tier");
+        volume = tag.getInteger("volume");
+        pitch = tag.getInteger("pitch");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag)
+    {
+        super.writeToNBT(tag);
+        tag.setInteger("cde", cde);
+        tag.setInteger("tier", tier);
+    }
     
     @Override
     public void updateEntity()

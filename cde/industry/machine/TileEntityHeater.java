@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityHeater extends TileEntityEnergyBase implements IEnergySink
+public class TileEntityHeater extends TileEntityMachine implements IEnergySink
 {
     private int euBuffer,counter;
     private final int BUFFER_SIZE = 4000;

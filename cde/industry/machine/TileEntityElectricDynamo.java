@@ -19,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 
-public class TileEntityElectricDynamo extends TileEntityEnergyBase implements IEnergySource, IPowerReceptor 
+public class TileEntityElectricDynamo extends TileEntityMachine implements IEnergySource, IPowerReceptor 
 {
     public IPowerProvider powerProvider;
     private int euOutput;

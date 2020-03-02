@@ -13,7 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 
-public class TileEntitySolarPanel extends TileEntityEnergyBase implements IEnergySource 
+public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySource 
 {
     private int euOutput,counter;
     private boolean isSolarDay;
