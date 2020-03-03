@@ -108,18 +108,6 @@ public class SoundManager
         }
     }
     
-    protected static void updateTileSound(ISoundSource iss, boolean flag)
-    {
-        if(flag)
-        {
-            playTileSound(iss);
-        }
-        else
-        {
-            stopTileSound(iss);
-        }
-    }
-    
     protected static void playTileSound(ISoundSource iss)
     {
         if(!iss.isPlaying())
