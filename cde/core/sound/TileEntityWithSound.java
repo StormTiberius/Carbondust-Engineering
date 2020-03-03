@@ -16,6 +16,7 @@ import paulscode.sound.SoundSystemConfig;
 
 public abstract class TileEntityWithSound extends TileEntityCde implements ISoundSource
 {
+    protected abstract boolean getEmitSound();
     protected int volume,pitch;
     private boolean init,isMuted,isPlaying;
     
@@ -64,7 +65,7 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
             {
                 if(isTileSoundEnabled())
                 {
-                    boolean flag = isActive();
+                    boolean flag = getEmitSound();
                     
                     if(flag != isPlaying())
                     {

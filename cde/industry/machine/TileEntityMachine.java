@@ -39,6 +39,17 @@ public abstract class TileEntityMachine extends TileEntityWithSound implements I
         return worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ) instanceof IEnergyConductor;
     }
     
+    public boolean isActive()
+    {
+        return isActive;
+    }
+    
+    @Override
+    protected boolean getEmitSound()
+    {
+        return isActive();
+    }
+    
     @Override
     protected boolean isTileSoundEnabled()
     {
@@ -114,12 +125,6 @@ public abstract class TileEntityMachine extends TileEntityWithSound implements I
     }
     
     // CDE Sound
-    @Override
-    public boolean isActive()
-    {
-        return isActive;
-    }
-    
     @Override
     public float getVolume()
     {
