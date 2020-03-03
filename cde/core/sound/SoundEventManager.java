@@ -21,12 +21,12 @@ public class SoundEventManager
         {
             switch(event.type)
             {
-                case SoundSourceEvent.STOP: SoundHelper.stopTileSound(event.iss); break;
-                case SoundSourceEvent.PLAY: SoundHelper.playTileSound(event.iss); break;
-                case SoundSourceEvent.VOLUME: SoundHelper.setVolume(event.iss); break;
-                case SoundSourceEvent.PITCH: SoundHelper.setPitch(event.iss); break;
-                case SoundSourceEvent.LOAD: SoundHelper.addSource(event.iss); break;
-                case SoundSourceEvent.UNLOAD: SoundHelper.removeSource(event.iss); break;
+                case SoundSourceEvent.STOP: SoundManager.stopTileSound(event.iss); break;
+                case SoundSourceEvent.PLAY: SoundManager.playTileSound(event.iss); break;
+                case SoundSourceEvent.VOLUME: SoundManager.setVolume(event.iss); break;
+                case SoundSourceEvent.PITCH: SoundManager.setPitch(event.iss); break;
+                case SoundSourceEvent.LOAD: SoundManager.addSource(event.iss); break;
+                case SoundSourceEvent.UNLOAD: SoundManager.removeSource(event.iss); break;
             }
         }
     }
@@ -34,13 +34,13 @@ public class SoundEventManager
     @ForgeSubscribe
     public void sem(Unload event)
     {
-        SoundHelper.retireAll();
+        SoundManager.retireAll();
     }
     
     @ForgeSubscribe
     public void sem(SoundLoadEvent event)
     {
-        SoundHelper.initSoundHelper();
+        SoundManager.initSoundHelper();
         
         if(CDECore.altRainSounds())
         {

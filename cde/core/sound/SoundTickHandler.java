@@ -14,7 +14,7 @@ public class SoundTickHandler implements ITickHandler
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData)
     {
-        SoundHelper.onUpdate();
+        SoundManager.onUpdate();
     }
 
     @Override

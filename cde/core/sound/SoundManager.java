@@ -14,7 +14,7 @@ import net.minecraft.client.Minecraft;
 import static net.minecraft.client.audio.SoundManager.sndSystem;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class SoundHelper
+public class SoundManager
 {
     private static final HashMap<String, ISoundSource> SOURCES = new HashMap<String, ISoundSource>();
     private static Minecraft mc;

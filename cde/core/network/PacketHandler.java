@@ -6,7 +6,7 @@
 package cde.core.network;
 
 import cde.api.INetwork;
-import cde.core.sound.SoundHelper;
+import cde.core.sound.SoundManager;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import java.io.ByteArrayInputStream;
@@ -68,7 +68,7 @@ public class PacketHandler implements IPacketHandler
     
     private void sendPacketToSoundHelper(PacketSound packet, EntityPlayer player)
     {
-        SoundHelper.receivePacket(packet, player);
+        SoundManager.receivePacket(packet, player);
     }
     
     private void sendPacketToEntity(PacketEntity packet, EntityPlayer player)
