@@ -152,7 +152,7 @@ public class Defaults
     
     // ITEM ID
     public static final int ITEM_MATERIALS_ID = 500;
-    public static final int ITEM_GOGGLES_ID = 501;
+    public static final int ITEM_NIGHT_VISION_GOGGLES_ID = 501;
     
     // FUEL VALUES
     public static final int PEAT_FUEL_VALUE = 2000;

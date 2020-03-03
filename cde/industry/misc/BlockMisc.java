@@ -37,7 +37,7 @@ public class BlockMisc extends BlockContainer
             {
                 TileEntitySpeaker tes = (TileEntitySpeaker)te;
 
-                if(!tes.isActive())
+                if(!tes.getEmitSound())
                 {
                     if(par5EntityPlayer.isSneaking())
                     {

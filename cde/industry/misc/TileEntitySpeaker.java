@@ -92,12 +92,14 @@ public class TileEntitySpeaker extends TileEntityWithSound
         par1NBTTagCompound.setInteger("index", index);
     }
     
+    // TileEntityWithSound
     @Override
-    public boolean isActive()
+    public boolean getEmitSound()
     {
         return worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
     }
     
+    // ISoundSource
     @Override
     public String getResourceName()
     {   
