@@ -35,7 +35,7 @@ public class Blocks
     public static ItemStack blockJade;
     public static ItemStack blockSapphire;
     
-    public static ItemStack industryAmbience;
+    public static ItemStack industrySpeaker;
     public static ItemStack industrySmokestack;
     public static ItemStack industryDrumIron;
     public static ItemStack industryDrumSteel;

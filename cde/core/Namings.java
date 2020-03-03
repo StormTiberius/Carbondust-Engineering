@@ -197,11 +197,11 @@ public class Namings
         "Block of Sapphire"
     };
     
-    public static final String[] INTERNAL_MISC_BLOCK_NAMES =
+    public static final String[] INTERNAL_INDUSTRY_MISC_BLOCK_NAMES =
     {
         "cdeSpeaker",
         "cdeSmokestack",
-        "cdeGrate",
+        // "cdeGrate",
     };
     
     public static final String[] INTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES =
@@ -256,11 +256,11 @@ public class Namings
         
     };
     
-    public static final String[] EXTERNAL_MISC_BLOCK_NAMES =
+    public static final String[] EXTERNAL_INDUSTRY_MISC_BLOCK_NAMES =
     {
         "Speaker",
         "Smokestack",
-        "Grate",
+        // "Grate",
     };
     
     public static final String[] EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES =

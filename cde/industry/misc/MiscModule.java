@@ -5,9 +5,11 @@
 
 package cde.industry.misc;
 
-import cde.CDECore;
 import cde.core.Defaults;
+import cde.core.Namings;
+import cde.industry.machine.MachineModule;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -49,43 +51,77 @@ public class MiscModule
     protected static String[] sounds;
     protected static int[] volumes,pitchs;
     
-    private static int miscId;
-    public static Block misc;
+    private static int blockMiscId;
+    public static Block blockMisc;
+    
+    private static final boolean[] CRAFTABLE = new boolean[2];
     
     public static void preInit(FMLPreInitializationEvent event) 
     {
         cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/speaker.cfg"));
         cfg.load();
         
-        miscId = cfg.get(Configuration.CATEGORY_BLOCK, "misc", Defaults.BLOCK_INDUSTRY_MISC_ID).getInt();
+        blockMiscId = cfg.get(Configuration.CATEGORY_BLOCK, "misc", Defaults.BLOCK_INDUSTRY_MISC_ID).getInt();
         
         sounds = cfg.get(Configuration.CATEGORY_GENERAL, "sounds", DEFAULT_SOUNDS, "Sound File Names").valueList;
         volumes = cfg.get(Configuration.CATEGORY_GENERAL, "volumes", DEFAULT_VOLUMES, "Sound Volumes").getIntList();
         pitchs = cfg.get(Configuration.CATEGORY_GENERAL, "pitchs", DEFAULT_PITCHS, "Sound Pitchs").getIntList();
+        
+        CRAFTABLE[0] = cfg.get(Configuration.CATEGORY_GENERAL, "speaker", true, "Enable/Disable Crafting Recipe").getBoolean(true);
+        CRAFTABLE[1] = cfg.get(Configuration.CATEGORY_GENERAL, "smokestack", true, "Enable/Disable Crafting Recipe").getBoolean(true);
         
         cfg.save();
     }
 
     public static void init(FMLInitializationEvent event) 
     {   
-        if(miscId > 0)
+        if(blockMiscId > 0)
         {
-            misc = new BlockMisc(miscId).setBlockName("cdeMisc").setCreativeTab(CDECore.TAB_CDE).setHardness(2.0F);
-            GameRegistry.registerBlock(misc, "cdeMisc");
-            LanguageRegistry.addName(misc, "Speaker");
+            blockMisc = new BlockMisc(blockMiscId).setBlockName("cdeMisc").setCreativeTab(MachineModule.TAB_MACHINES).setHardness(2.0F);
+            GameRegistry.registerBlock(blockMisc, ItemBlockMisc.class, "cdeMisc");
+            MinecraftForge.setBlockHarvestLevel(blockMisc, "axe", 1);
+            
+            // Speaker
+            ItemStack is = new ItemStack(blockMisc.blockID, 1, 0);
+            
+            cde.api.Blocks.industrySpeaker = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MISC_BLOCK_NAMES[0]);
             GameRegistry.registerTileEntity(TileEntitySpeaker.class, "cdeSpeaker");
-            MinecraftForge.setBlockHarvestLevel(misc, "axe", 1);
             
-            ItemStack is = new ItemStack(misc.blockID, 1, 0);
+            if(CRAFTABLE[0])
+            {
+                GameRegistry.addRecipe(new ShapedOreRecipe(is,
+                "xxx",
+                "xyx",
+                "xxx",
+                'x', "plankWood",
+                'y', new ItemStack(Item.emerald.itemID, 1, 0)));
+            }
             
-            cde.api.Blocks.industryAmbience = is;
+            // Smokestack
+            is = new ItemStack(blockMisc.blockID, 1, 1);
             
-            GameRegistry.addRecipe(new ShapedOreRecipe(is,
-            "xxx",
-            "xyx",
-            "xxx",
-            'x', "plankWood",
-            'y', new ItemStack(Item.emerald.itemID, 1, 0)));
+            cde.api.Blocks.industrySmokestack = is;
+            
+            LanguageRegistry.addName(is, Namings.EXTERNAL_INDUSTRY_MISC_BLOCK_NAMES[1]);
+            GameRegistry.registerTileEntity(TileEntitySmokestack.class, "cdeSmokestack");
+            
+            if(CRAFTABLE[1])
+            {
+                GameRegistry.addRecipe(is,
+                " x ",
+                "zyz",
+                "   ",
+                'x', new ItemStack(Block.netherrack.blockID, 1, 10),
+                'y', new ItemStack(Item.cauldron.itemID, 1, 0),
+                'z', new ItemStack(Item.redstone.itemID, 1, 0));
+            }
         }
+    }
+    
+    public static void postInit(FMLPostInitializationEvent event) 
+    {   
+        
     }
 }

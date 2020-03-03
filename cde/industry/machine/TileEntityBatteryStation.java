@@ -40,7 +40,7 @@ public class TileEntityBatteryStation extends TileEntityMachine
         super.writeToNBT(tag);
     }
     
-    // Ambient Sounds
+    // CDE Sound
     @Override
     public boolean isActive()
     {

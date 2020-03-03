@@ -12,6 +12,7 @@ import cde.industry.CommonProxy;
 import cde.industry.drum.DrumModule;
 import cde.industry.equipment.ItemGoggles;
 import cde.industry.machine.MachineModule;
+import cde.industry.misc.MiscModule;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -44,7 +45,7 @@ public class IndustryCore
     @SidedProxy(clientSide = "cde.industry.ClientProxy", serverSide = "cde.industry.CommonProxy")
     public static CommonProxy proxy;
     
-    private static boolean drumModuleEnabled,machineModuleEnabled;
+    private static boolean drumModuleEnabled,machineModuleEnabled,miscModuleEnabled;
     private static Configuration cfg;
     
     private static int nightVisionGogglesId;
@@ -59,6 +60,7 @@ public class IndustryCore
         
         drumModuleEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "drumModuleEnabled", true, "Enable/Disable Drum Module").getBoolean(true);
         machineModuleEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "machineModuleEnabled", true, "Enable/Disable Machine Module").getBoolean(true);
+        miscModuleEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "miscModuleEnabled", true, "Enable/Disable Misc Module").getBoolean(true);
         
         nightVisionGogglesId = cfg.get(Configuration.CATEGORY_ITEM, "nightVisionGogglesId", Defaults.ITEM_NIGHT_VISION_GOGGLES_ID).getInt() + CDECore.ID_SHIFT;
         nightVisionGogglesCraftable = cfg.get(Configuration.CATEGORY_GENERAL, "nightVisionGogglesCraftable", true, "Enable/Disable Crafting Recipe").getBoolean(true);
@@ -74,6 +76,11 @@ public class IndustryCore
         {
             MachineModule.preInit(event);
         }
+        
+        if(miscModuleEnabled)
+        {
+            MiscModule.preInit(event);
+        }
     }
     
     @Init
@@ -87,6 +94,11 @@ public class IndustryCore
         if(machineModuleEnabled)
         {
             MachineModule.init(event);
+        }
+        
+        if(miscModuleEnabled)
+        {
+            MiscModule.init(event);
         }
         
         if(nightVisionGogglesId > 0 && machineModuleEnabled)
@@ -150,6 +162,11 @@ public class IndustryCore
         if(machineModuleEnabled)
         {
             MachineModule.postInit(event);
+        }
+        
+        if(miscModuleEnabled)
+        {
+            MiscModule.postInit(event);
         }
     }
 }
