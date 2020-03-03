@@ -5,9 +5,10 @@
 
 package cde.api;
 
-import net.minecraftforge.event.Event;
+import net.minecraft.world.World;
+import net.minecraftforge.event.world.WorldEvent;
 
-public class SoundSourceEvent extends Event
+public class SoundSourceEvent extends WorldEvent
 {
     public static final int PLAY = 0;
     public static final int STOP = 1;
@@ -16,11 +17,12 @@ public class SoundSourceEvent extends Event
     public static final int LOAD = 4;
     public static final int UNLOAD = 5;
     
-    public ISoundSource iss;
-    public int type;
+    public final ISoundSource iss;
+    public final int type;
     
-    public SoundSourceEvent(ISoundSource iss, int type)
+    public SoundSourceEvent(World world, ISoundSource iss, int type)
     {
+        super(world);
         this.iss = iss;
         this.type = type;
     }

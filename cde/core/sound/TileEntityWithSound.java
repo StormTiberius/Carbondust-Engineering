@@ -25,7 +25,7 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
         {
             if(isTileSoundEnabled())
             {
-                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.LOAD));
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.LOAD));
             }
         }
         
@@ -74,11 +74,11 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
                         
                         if(flag)
                         {
-                            event = new SoundSourceEvent(this, SoundSourceEvent.PLAY);
+                            event = new SoundSourceEvent(worldObj, this, SoundSourceEvent.PLAY);
                         }
                         else
                         {
-                            event = new SoundSourceEvent(this, SoundSourceEvent.STOP);
+                            event = new SoundSourceEvent(worldObj, this, SoundSourceEvent.STOP);
                         }
                         
                         MinecraftForge.EVENT_BUS.post(event);
@@ -99,7 +99,7 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
         {
             if(isTileSoundEnabled())
             {
-                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.UNLOAD));
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.UNLOAD));
             }
         }
                 
@@ -113,7 +113,7 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
         {
             if(isTileSoundEnabled())
             {
-                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.UNLOAD));
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.UNLOAD));
             }
         }
         
@@ -135,11 +135,11 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
             
             if(flag)
             {
-                event = new SoundSourceEvent(this, SoundSourceEvent.UNLOAD);
+                event = new SoundSourceEvent(worldObj, this, SoundSourceEvent.UNLOAD);
             }
             else
             {
-                event = new SoundSourceEvent(this, SoundSourceEvent.LOAD);
+                event = new SoundSourceEvent(worldObj, this, SoundSourceEvent.LOAD);
             }
             
             MinecraftForge.EVENT_BUS.post(event);

@@ -17,14 +17,17 @@ public class SoundEventManager
     @ForgeSubscribe
     public void sem(SoundSourceEvent event)
     {
-        switch(event.type)
+        if(event.world.isRemote)
         {
-            case SoundSourceEvent.STOP: SoundHelper.stopTileSound(event.iss); break;
-            case SoundSourceEvent.PLAY: SoundHelper.playTileSound(event.iss); break;
-            case SoundSourceEvent.VOLUME: SoundHelper.setVolume(event.iss); break;
-            case SoundSourceEvent.PITCH: SoundHelper.setPitch(event.iss); break;
-            case SoundSourceEvent.LOAD: SoundHelper.addSource(event.iss); break;
-            case SoundSourceEvent.UNLOAD: SoundHelper.removeSource(event.iss); break;
+            switch(event.type)
+            {
+                case SoundSourceEvent.STOP: SoundHelper.stopTileSound(event.iss); break;
+                case SoundSourceEvent.PLAY: SoundHelper.playTileSound(event.iss); break;
+                case SoundSourceEvent.VOLUME: SoundHelper.setVolume(event.iss); break;
+                case SoundSourceEvent.PITCH: SoundHelper.setPitch(event.iss); break;
+                case SoundSourceEvent.LOAD: SoundHelper.addSource(event.iss); break;
+                case SoundSourceEvent.UNLOAD: SoundHelper.removeSource(event.iss); break;
+            }
         }
     }
     

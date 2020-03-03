@@ -54,8 +54,8 @@ public class TileEntitySpeaker extends TileEntityWithSound
             
             if(i != index)
             {
-                MinecraftForge.EVENT_BUS.post((new SoundSourceEvent(this, SoundSourceEvent.UNLOAD)));
-                MinecraftForge.EVENT_BUS.post((new SoundSourceEvent(this, SoundSourceEvent.LOAD)));
+                MinecraftForge.EVENT_BUS.post((new SoundSourceEvent(worldObj, this, SoundSourceEvent.UNLOAD)));
+                MinecraftForge.EVENT_BUS.post((new SoundSourceEvent(worldObj, this, SoundSourceEvent.LOAD)));
             }
         }
     }
