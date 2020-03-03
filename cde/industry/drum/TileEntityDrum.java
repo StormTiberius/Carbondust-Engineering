@@ -31,7 +31,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
     private final LiquidTank TANK;
     private final long NETWORK_UPDATE_INTERVAL;
     private long previousSoundUpdateTime;
-    private boolean isActive,soundUpdateNeeded,hasSealant;
+    private boolean emitSound,soundUpdateNeeded,hasSealant;
     private int color,paint;
     private int[] counter;
     
@@ -55,12 +55,12 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         {
             if(counter[0] == 0)
             {
-                isActive = true;
+                emitSound = true;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
             else if(counter[0] == 69)
             {
-                isActive = false;
+                emitSound = false;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
 
@@ -127,9 +127,9 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
             paint = tag.getInteger("paint");
         }
         
-        if(tag.hasKey("isActive"))
+        if(tag.hasKey("emitSound"))
         {
-            isActive = tag.getBoolean("isActive");
+            emitSound = tag.getBoolean("emitSound");
         }
         
         if(tag.hasKey("counter"))
@@ -164,7 +164,7 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         tag.setInteger("color", color);
         tag.setInteger("paint", paint);
         
-        tag.setBoolean("isActive", isActive);
+        tag.setBoolean("emitSound", emitSound);
         
         tag.setIntArray("counter", counter);
         
@@ -315,11 +315,11 @@ public class TileEntityDrum extends TileEntityWithSound implements ITankContaine
         return null;
     }
         
-    // Ambient Sounds
+    // CDE Sound
     @Override
-    public boolean isActive()
+    public boolean getEmitSound()
     {
-        return isActive;
+        return emitSound;
     }
     
     @Override
