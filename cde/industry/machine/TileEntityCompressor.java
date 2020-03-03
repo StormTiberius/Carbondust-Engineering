@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityCompressor extends TileEntityMachine
 {
+    public TileEntityCompressor(){}
+    
     public TileEntityCompressor(int machineId)
     {
         super(machineId);

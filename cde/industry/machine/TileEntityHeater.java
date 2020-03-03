@@ -16,6 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityHeater extends TileEntityMachine implements IEnergySink
 {
+    public TileEntityHeater(){}
+    
     public TileEntityHeater(int machineId)
     {
         super(machineId);

@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityCanningMachine extends TileEntityMachine
 {
+    public TileEntityCanningMachine(){}
+    
     public TileEntityCanningMachine(int machineId)
     {
         super(machineId);

@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityTidalGenerator extends TileEntityMachine
 {
+    public TileEntityTidalGenerator(){}
+    
     public TileEntityTidalGenerator(int machineType)
     {
         super(machineType);

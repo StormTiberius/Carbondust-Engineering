@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntitySawmill extends TileEntityMachine
 {
+    public TileEntitySawmill(){}
+    
     public TileEntitySawmill(int machineId)
     {
         super(machineId);

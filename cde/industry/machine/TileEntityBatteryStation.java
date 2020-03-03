@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityBatteryStation extends TileEntityMachine
 {
+    public TileEntityBatteryStation(){}
+    
     public TileEntityBatteryStation(int machineId, int machineTier)
     {
         super(machineId,machineTier);

@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityNuclearReactor extends TileEntityMachine
 {
+    public TileEntityNuclearReactor(){}
+    
     public TileEntityNuclearReactor(int machineId)
     {
         super(machineId);

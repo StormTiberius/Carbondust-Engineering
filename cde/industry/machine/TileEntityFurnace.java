@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityFurnace extends TileEntityMachine
 {
+    public TileEntityFurnace(){}
+    
     public TileEntityFurnace(int machineId, int machineTier)
     {
         super(machineId,machineTier);

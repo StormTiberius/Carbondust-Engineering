@@ -18,6 +18,8 @@ public class TileEntitySolarPanel extends TileEntityMachine implements IEnergySo
     private int euOutput,counter;
     private boolean isSolarDay;
     
+    public TileEntitySolarPanel(){}
+    
     public TileEntitySolarPanel(int machineId)
     {
         super(machineId);

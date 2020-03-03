@@ -25,6 +25,13 @@ public class TileEntityElectricDynamo extends TileEntityMachine implements IEner
     private float euBuffer;
     private final float MJ_MULTIPLIER = 0.4F;
     
+    public TileEntityElectricDynamo()
+    {
+        powerProvider = PowerFramework.currentFramework.createPowerProvider();
+        powerProvider.configure(20, 1, 820, 13, 16400);
+        euOutput = 32;
+    }
+    
     public TileEntityElectricDynamo(int machineId)
     {
         super(machineId);

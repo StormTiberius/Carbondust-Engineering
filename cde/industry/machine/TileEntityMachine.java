@@ -21,6 +21,8 @@ public abstract class TileEntityMachine extends TileEntityWithSound implements I
     protected int machineId,machineTier;
     private boolean isActive,isAddedToEnergyNet;
     
+    public TileEntityMachine(){}
+    
     public TileEntityMachine(int machineId)
     {
         this.machineId = machineId;

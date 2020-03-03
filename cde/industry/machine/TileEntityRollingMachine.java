@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityRollingMachine extends TileEntityMachine
 {
+    public TileEntityRollingMachine(){}
+    
     public TileEntityRollingMachine(int machineId)
     {
         super(machineId);

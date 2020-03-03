@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityGeothermalGenerator extends TileEntityMachine
 {
+    public TileEntityGeothermalGenerator(){}
+    
     public TileEntityGeothermalGenerator(int machineId)
     {
         super(machineId);

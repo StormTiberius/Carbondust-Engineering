@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityTransformer extends TileEntityMachine
 {
+    public TileEntityTransformer(){}
+    
     public TileEntityTransformer(int machineType, int machineTier)
     {
         super(machineType, machineTier);

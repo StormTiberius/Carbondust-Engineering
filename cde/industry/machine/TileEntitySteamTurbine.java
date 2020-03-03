@@ -34,6 +34,12 @@ public class TileEntitySteamTurbine extends TileEntityMachine implements IEnergy
     private final String BOILER_LP = "railcraft.common.blocks.machine.beta.TileBoilerTankLow";
     private final String BOILER_HP = "railcraft.common.blocks.machine.beta.TileBoilerTankHigh";
     
+    public TileEntitySteamTurbine()
+    {
+        euOutput = 32;
+        STEAM = LiquidDictionary.getLiquid("Steam", LiquidContainerRegistry.BUCKET_VOLUME);
+    }
+    
     public TileEntitySteamTurbine(int machineId)
     {
         super(machineId);

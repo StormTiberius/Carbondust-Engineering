@@ -60,7 +60,7 @@ public class IndustryCore
         drumModuleEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "drumModuleEnabled", true, "Enable/Disable Drum Module").getBoolean(true);
         machineModuleEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "machineModuleEnabled", true, "Enable/Disable Machine Module").getBoolean(true);
         
-        nightVisionGogglesId = cfg.get(Configuration.CATEGORY_ITEM, "nightVisionGogglesId", Defaults.ITEM_NIGHT_VISION_GOGGLES_ID).getInt();
+        nightVisionGogglesId = cfg.get(Configuration.CATEGORY_ITEM, "nightVisionGogglesId", Defaults.ITEM_NIGHT_VISION_GOGGLES_ID).getInt() + CDECore.ID_SHIFT;
         nightVisionGogglesCraftable = cfg.get(Configuration.CATEGORY_GENERAL, "nightVisionGogglesCraftable", true, "Enable/Disable Crafting Recipe").getBoolean(true);
         
         cfg.save();

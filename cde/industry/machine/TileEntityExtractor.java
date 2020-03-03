@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityExtractor extends TileEntityMachine
 {
+    public TileEntityExtractor(){}
+    
     public TileEntityExtractor(int machineId)
     {
         super(machineId);

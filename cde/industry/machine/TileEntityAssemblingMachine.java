@@ -12,6 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAssemblingMachine extends TileEntityMachine implements IEnergySink
 {
+    public TileEntityAssemblingMachine(){}
+    
     public TileEntityAssemblingMachine(int machineId)
     {
         super(machineId);

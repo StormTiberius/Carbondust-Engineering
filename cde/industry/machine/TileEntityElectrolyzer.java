@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityElectrolyzer extends TileEntityMachine
 {
+    public TileEntityElectrolyzer(){}
+    
     public TileEntityElectrolyzer(int machineId)
     {
         super(machineId);

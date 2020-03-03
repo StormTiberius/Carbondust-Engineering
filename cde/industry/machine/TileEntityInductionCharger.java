@@ -22,6 +22,8 @@ public class TileEntityInductionCharger extends TileEntityMachine implements IEn
     private IInventory ii;
     private int batteryEmptyId,batteryFullId;
     
+    public TileEntityInductionCharger(){}
+    
     public TileEntityInductionCharger(int machineId)
     {
         super(machineId);

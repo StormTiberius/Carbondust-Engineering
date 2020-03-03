@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityRecycler extends TileEntityMachine
 {
+    public TileEntityRecycler(){}
+    
     public TileEntityRecycler(int machineId)
     {
         super(machineId);

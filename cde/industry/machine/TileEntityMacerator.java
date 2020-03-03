@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityMacerator extends TileEntityMachine
 {
+    public TileEntityMacerator(){}
+    
     public TileEntityMacerator(int machineId)
     {
         super(machineId);

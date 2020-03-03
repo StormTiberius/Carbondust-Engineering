@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityWindGenerator extends TileEntityMachine
 {
+    public TileEntityWindGenerator(){}
+    
     public TileEntityWindGenerator(int machineType)
     {
         super(machineType);

@@ -33,6 +33,12 @@ public class TileEntityPump extends TileEntityMachine implements IEnergySink, IT
     private final LiquidStack WATER;
     private int counter, flags;
     
+    public TileEntityPump()
+    {
+        TANK = new LiquidTank(TANK_SIZE);
+        WATER = LiquidDictionary.getLiquid("Water", TANK_SIZE);
+    }
+    
     public TileEntityPump(int machineId)
     {
         super(machineId);

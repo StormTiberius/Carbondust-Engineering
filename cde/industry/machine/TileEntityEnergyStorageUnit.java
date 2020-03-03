@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityEnergyStorageUnit extends TileEntityMachine
 {
+    public TileEntityEnergyStorageUnit(){}
+    
     public TileEntityEnergyStorageUnit(int machineId, int machineTier)
     {
         super(machineId,machineTier);

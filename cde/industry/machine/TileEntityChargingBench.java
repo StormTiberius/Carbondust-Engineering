@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityChargingBench extends TileEntityMachine
 {
+    public TileEntityChargingBench(){}
+    
     public TileEntityChargingBench(int machineId, int machineTier)
     {
         super(machineId,machineTier);

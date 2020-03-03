@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityStirlingGenerator extends TileEntityMachine
 {
+    public TileEntityStirlingGenerator(){}
+    
     public TileEntityStirlingGenerator(int machineId)
     {
         super(machineId);
