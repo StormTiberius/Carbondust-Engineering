@@ -36,7 +36,7 @@ public class PacketHandler implements IPacketHandler
             {
                 case PacketIds.SOUND:
                 case PacketIds.SOUND_UPDATE:
-				sendPacketToSoundHelper((PacketSound)packet, ep);
+				sendPacketToSoundManager((PacketSound)packet, ep);
 				break;
                 case PacketIds.ENTITY:
                                 sendPacketToEntity((PacketEntity)packet, ep);
@@ -66,7 +66,7 @@ public class PacketHandler implements IPacketHandler
         }
     }
     
-    private void sendPacketToSoundHelper(PacketSound packet, EntityPlayer player)
+    private void sendPacketToSoundManager(PacketSound packet, EntityPlayer player)
     {
         SoundManager.receivePacket(packet, player);
     }
