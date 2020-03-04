@@ -197,13 +197,6 @@ public class Namings
         "Block of Sapphire"
     };
     
-    public static final String[] INTERNAL_INDUSTRY_MISC_BLOCK_NAMES =
-    {
-        "cdeSpeaker",
-        "cdeSmokestack",
-        // "cdeGrate",
-    };
-    
     public static final String[] INTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES =
     {
         "cdeIronFurnace",
@@ -221,6 +214,23 @@ public class Namings
         "cdePump",
     };
     
+    public static final String[] EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES =
+    {
+        "Iron Furnace",
+        "Electric Furnace",
+        "Induction Furnace",
+        "Macerator",
+        "Compressor",
+        "Extractor",
+        "Canning Machine",
+        "Rolling Machine",
+        "Assembling Machine",
+        "Recycler",
+        "Sawmill",
+        "Heater",
+        "Pump",
+    };
+    
     public static final String[] INTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES =
     {
         "cdeStirlingGenerator",
@@ -231,6 +241,18 @@ public class Namings
         "cdeNuclearReactor",
         "cdeElectricDynamo",
         "cdeSteamTurbine",
+    };
+    
+    public static final String[] EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES =
+    {
+        "Stirling Generator",
+        "Geothermal Generator",
+        "Tidal Generator",
+        "Wind Generator",
+        "Solar Panel",
+        "Nuclear Reactor",
+        "Electric Dynamo",
+        "Steam Turbine",
     };
     
     public static final String[] INTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES =
@@ -251,47 +273,6 @@ public class Namings
         "cdeElectrolyzer",
     };
     
-    public static final String[] INTERNAL_INDUSTRY_MACHINE_DELTA_BLOCK_NAMES =
-    {
-        
-    };
-    
-    public static final String[] EXTERNAL_INDUSTRY_MISC_BLOCK_NAMES =
-    {
-        "Speaker",
-        "Smokestack",
-        // "Grate",
-    };
-    
-    public static final String[] EXTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES =
-    {
-        "Iron Furnace",
-        "Electric Furnace",
-        "Induction Furnace",
-        "Macerator",
-        "Compressor",
-        "Extractor",
-        "Canning Machine",
-        "Rolling Machine",
-        "Assembling Machine",
-        "Recycler",
-        "Sawmill",
-        "Heater",
-        "Pump",
-    };
-    
-    public static final String[] EXTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES =
-    {
-        "Stirling Generator",
-        "Geothermal Generator",
-        "Tidal Generator",
-        "Wind Generator",
-        "Solar Panel",
-        "Nuclear Reactor",
-        "Electric Dynamo",
-        "Steam Turbine",
-    };
-    
     public static final String[] EXTERNAL_INDUSTRY_MACHINE_GAMMA_BLOCK_NAMES =
     {
         "LV-Energy Storage Unit",
@@ -310,9 +291,28 @@ public class Namings
         "Electrolyzer",
     };
     
+    public static final String[] INTERNAL_INDUSTRY_MACHINE_DELTA_BLOCK_NAMES =
+    {
+        
+    };
+    
     public static final String[] EXTERNAL_INDUSTRY_MACHINE_DELTA_BLOCK_NAMES =
     {
         
+    };
+    
+    public static final String[] INTERNAL_INDUSTRY_MISC_BLOCK_NAMES =
+    {
+        "cdeSpeaker",
+        "cdeSmokestack",
+        // "cdeGrate",
+    };
+    
+    public static final String[] EXTERNAL_INDUSTRY_MISC_BLOCK_NAMES =
+    {
+        "Speaker",
+        "Smokestack",
+        // "Grate",
     };
     
     public static final String INTERNAL_GOGGLES_NAME = "cdeGoggles";
