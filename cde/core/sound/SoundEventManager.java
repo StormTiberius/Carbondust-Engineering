@@ -21,8 +21,8 @@ public class SoundEventManager
         {
             switch(event.type)
             {
-                case SoundSourceEvent.STOP: SoundManager.stopTileSound(event.iss); break;
                 case SoundSourceEvent.PLAY: SoundManager.playTileSound(event.iss); break;
+                case SoundSourceEvent.STOP: SoundManager.stopTileSound(event.iss); break;
                 case SoundSourceEvent.VOLUME: SoundManager.setVolume(event.iss); break;
                 case SoundSourceEvent.PITCH: SoundManager.setPitch(event.iss); break;
                 case SoundSourceEvent.LOAD: SoundManager.addSource(event.iss); break;
