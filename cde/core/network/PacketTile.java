@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import net.minecraft.tileentity.TileEntity;
 
-public class PacketTile extends PacketCDE
+public class PacketTile extends PacketCde
 {
     public int xCoord,yCoord,zCoord;
     

@@ -10,40 +10,17 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class PacketSoundUpdate extends PacketSound
+public class PacketTileSound extends PacketSound
 {
-    public static final byte OFF = 0;
-    public static final byte ON = 1;
-    public static final byte TOGGLE = 2;
-    
-    public byte action = Byte.MIN_VALUE;
     public float volume,pitch;
     public boolean updateVolume,updatePitch;
     
-    public PacketSoundUpdate(){}
+    public PacketTileSound(){}
     
-    public PacketSoundUpdate(ISoundSource iss, byte action)
+    public PacketTileSound(ISoundSource iss, boolean updateVolume, boolean updatePitch)
     {
         super(iss);
         
-        this.action = action;
-    }
-    
-    public PacketSoundUpdate(ISoundSource iss, boolean updateVolume, boolean updatePitch)
-    {
-        super(iss);
-        
-        this.volume = iss.getVolume();
-        this.pitch = iss.getPitch();
-        this.updateVolume = updateVolume;
-        this.updatePitch = updatePitch;
-    }
-    
-    public PacketSoundUpdate(ISoundSource iss, boolean updateVolume, boolean updatePitch, byte action)
-    {
-        super(iss);
-        
-        this.action = action;
         this.volume = iss.getVolume();
         this.pitch = iss.getPitch();
         this.updateVolume = updateVolume;
@@ -53,15 +30,13 @@ public class PacketSoundUpdate extends PacketSound
     @Override
     public byte getID()
     {
-        return PacketIds.SOUND_UPDATE;
+        return PacketIds.TILE_SOUND;
     }
     
     @Override
     public void writeData(DataOutputStream data) throws IOException
     {
         super.writeData(data);
-        
-        data.writeByte(action);
         
         data.writeFloat(volume);
         data.writeFloat(pitch);
@@ -74,8 +49,6 @@ public class PacketSoundUpdate extends PacketSound
     public void readData(DataInputStream data) throws IOException
     {
         super.readData(data);
-        
-        action = data.readByte();
         
         volume = data.readFloat();
         pitch = data.readFloat();

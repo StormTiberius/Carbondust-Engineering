@@ -6,19 +6,24 @@
 package cde.core.sound;
 
 import cde.CDECore;
+import cde.api.INetwork;
 import cde.api.ISoundSource;
 import cde.api.SoundSourceEvent;
 import cde.core.TileEntityCde;
+import cde.core.network.PacketTileSound;
 import java.net.URL;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import paulscode.sound.SoundSystemConfig;
 
-public abstract class TileEntityWithSound extends TileEntityCde implements ISoundSource
+public abstract class TileEntityWithSound extends TileEntityCde implements ISoundSource, INetwork
 {
     protected abstract boolean getEmitSound();
-    protected int volume,pitch;
-    private boolean init,isMuted,isPlaying;
+    
+    private boolean init,isMuted,isPlaying,defaultVolume,defaultPitch;
+    protected int volumePercent,pitchPercent;
+    protected float volume,pitch;
     
     private void init()
     {
@@ -42,18 +47,28 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
     public void readFromNBT(NBTTagCompound tag)
     {
         super.readFromNBT(tag);
-        volume = tag.getInteger("volume");
-        pitch = tag.getInteger("pitch");
+        
         isMuted = tag.getBoolean("isMuted");
+        defaultVolume = tag.getBoolean("defaultVolume");
+        defaultPitch = tag.getBoolean("defaultPitch");
+        volumePercent = tag.getInteger("volumePercent");
+        pitchPercent = tag.getInteger("pitchPercent");
+        volume = tag.getFloat("volume");
+        pitch = tag.getFloat("pitch");
     }
     
     @Override
     public void writeToNBT(NBTTagCompound tag)
     {
         super.writeToNBT(tag);
-        tag.setInteger("volume", volume);
-        tag.setInteger("pitch", pitch);
+        
         tag.setBoolean("isMuted", isMuted);
+        tag.setBoolean("defaultVolume", defaultVolume);
+        tag.setBoolean("defaultPitch", defaultPitch);
+        tag.setInteger("volumePercent", volumePercent);
+        tag.setInteger("pitchPercent", pitchPercent);
+        tag.setFloat("volume", volume);
+        tag.setFloat("pitch", pitch);
     }
     
     @Override
@@ -69,7 +84,7 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
                     
                     if(flag != isPlaying())
                     {
-                        // isPlaying() is set in SoundHelper so no need to set it here.
+                        // isPlaying() is set in SoundManager so no need to set it here.
                         
                         SoundSourceEvent event;
                         
@@ -236,12 +251,55 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
     @Override
     public float getVolume()
     {
-        return 0.01F * volume;
+        if(defaultVolume)
+        {
+            return 0.01F * volumePercent;
+        }
+        
+        return volume;
     }
     
     @Override
     public float getPitch()
     {
-        return 0.01F * pitch;
+        if(defaultPitch)
+        {
+            return 0.01F * pitchPercent;
+        }
+        
+        return pitch;
+    }
+    
+    @Override
+    public void receivePacket(Object packet, EntityPlayer player)
+    {
+        if(packet instanceof PacketTileSound)
+        {
+            PacketTileSound pts = (PacketTileSound)packet;
+            
+            if(pts.updateVolume)
+            {
+                volume = pts.volume;
+                
+                if(defaultVolume)
+                {
+                    defaultVolume = false;
+                }
+                
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.VOLUME));
+            }
+            
+            if(pts.updatePitch)
+            {
+                pitch = pts.pitch;
+                
+                if(defaultPitch)
+                {
+                    defaultPitch = false;
+                }
+                
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.PITCH));
+            }
+        }
     }
 }

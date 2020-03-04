@@ -29,19 +29,19 @@ public class PacketHandler implements IPacketHandler
             EntityPlayer ep = (EntityPlayer)player;
             
             int packetId = data.read();
-            PacketCDE packet = getPacketById(packetId);
+            PacketCde packet = getPacketById(packetId);
             packet.readData(data);
             
             switch(packetId)
             {
                 case PacketIds.SOUND:
-                case PacketIds.SOUND_UPDATE:
 				sendPacketToSoundManager((PacketSound)packet, ep);
 				break;
                 case PacketIds.ENTITY:
                                 sendPacketToEntity((PacketEntity)packet, ep);
                                 break;
                 case PacketIds.TILE:
+                case PacketIds.TILE_SOUND:
                 case PacketIds.TILE_PARTICLE:
                                 sendPacketToTileEntity((PacketTile)packet, ep);
                                 break;
@@ -53,14 +53,14 @@ public class PacketHandler implements IPacketHandler
         }
     }
     
-    private PacketCDE getPacketById(int id)
+    private PacketCde getPacketById(int id)
     {
         switch(id)
         {
             case PacketIds.SOUND: return new PacketSound();
-            case PacketIds.SOUND_UPDATE: return new PacketSoundUpdate();
             case PacketIds.ENTITY: return new PacketEntity();
             case PacketIds.TILE: return new PacketTile();
+            case PacketIds.TILE_SOUND: return new PacketTileSound();
             case PacketIds.TILE_PARTICLE: return new PacketTileParticle();
             default: return null;
         }

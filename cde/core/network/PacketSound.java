@@ -14,7 +14,10 @@ public class PacketSound extends PacketTile
 {
     public String sourceName;
     
-    public PacketSound(){}
+    public PacketSound()
+    {
+        this.sourceName = "";
+    }
     
     public PacketSound(ISoundSource iss)
     {

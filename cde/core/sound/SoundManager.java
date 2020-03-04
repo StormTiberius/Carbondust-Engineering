@@ -8,7 +8,6 @@ package cde.core.sound;
 import cde.core.network.PacketSound;
 import cde.api.ISoundSource;
 import cde.core.network.PacketIds;
-import cde.core.network.PacketSoundUpdate;
 import java.util.HashMap;
 import net.minecraft.client.Minecraft;
 import static net.minecraft.client.audio.SoundManager.sndSystem;
@@ -172,49 +171,7 @@ public class SoundManager
     {
         switch(packet.getID())
         {
-            case PacketIds.SOUND:
-                if(packet.sourceName.isEmpty())
-                {
-                    retireAll();
-                }
-                else
-                {
-                    removeSource(packet.sourceName);
-                }
-                break;
-            case PacketIds.SOUND_UPDATE:
-                if(SOURCES.containsKey(packet.sourceName))
-                {
-                    PacketSoundUpdate psu = (PacketSoundUpdate)packet;
-                    ISoundSource iss = SOURCES.get(psu.sourceName);
-                    
-                    switch(psu.action)
-                    {
-                        case PacketSoundUpdate.OFF: stopTileSound(iss); break;
-                        case PacketSoundUpdate.ON: playTileSound(iss); break;
-                        case PacketSoundUpdate.TOGGLE:
-                            if(iss.isPlaying())
-                            {
-                                stopTileSound(iss);
-                            }
-                            else
-                            {
-                                playTileSound(iss);
-                            }
-                            break;
-                    }
-                    
-                    if(psu.updateVolume)
-                    {
-                        setVolume(packet.sourceName, psu.volume);
-                    }
-
-                    if(psu.updatePitch)
-                    {
-                        setPitch(packet.sourceName, psu.pitch);
-                    }
-                }
-                break;
+            case PacketIds.SOUND: retireAll(); break;
         }
     }
 }
