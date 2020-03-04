@@ -25,6 +25,13 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
     protected int volumePercent,pitchPercent;
     protected float volume,pitch;
     
+    public TileEntityWithSound()
+    {
+        super();
+        this.defaultVolume = true;
+        this.defaultPitch = true;
+    }
+    
     private void init()
     {
         if(worldObj.isRemote)

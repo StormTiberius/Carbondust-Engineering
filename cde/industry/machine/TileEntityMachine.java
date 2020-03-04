@@ -21,13 +21,17 @@ public abstract class TileEntityMachine extends TileEntityWithSound implements I
     protected int machineId,machineTier;
     private boolean isActive,isAddedToEnergyNet;
     
-    public TileEntityMachine(){}
+    public TileEntityMachine()
+    {
+        super();
+    }
     
     public TileEntityMachine(int machineId)
     {
+        this();
         this.machineId = machineId;
-        this.volume = MachineModule.VOLUME[machineId];
-        this.pitch = MachineModule.PITCH[machineId];
+        this.volumePercent = MachineModule.VOLUME[machineId];
+        this.pitchPercent = MachineModule.PITCH[machineId];
     }
     
     public TileEntityMachine(int machineId, int machineTier)
