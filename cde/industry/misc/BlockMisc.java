@@ -21,6 +21,12 @@ public class BlockMisc extends BlockContainer
     }
     
     @Override
+    public int damageDropped(int md)
+    {
+        return md;
+    }
+    
+    @Override
     public TileEntity createNewTileEntity(World world)
     {
         return null;
