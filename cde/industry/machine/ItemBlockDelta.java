@@ -39,7 +39,7 @@ public class ItemBlockDelta extends ItemBlock
     @Override
     public String getItemNameIS(ItemStack is)
     {
-        if(is.getItemDamage() > Namings.INTERNAL_INDUSTRY_MACHINE_DELTA_BLOCK_NAMES.length)
+        if(is.getItemDamage() > Namings.INTERNAL_INDUSTRY_MACHINE_DELTA_BLOCK_NAMES.length - 1)
         {
             return "NONAME";
         }

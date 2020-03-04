@@ -39,7 +39,7 @@ public class ItemBlockBeta extends ItemBlock
     @Override
     public String getItemNameIS(ItemStack is)
     {
-        if(is.getItemDamage() > Namings.INTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES.length)
+        if(is.getItemDamage() > Namings.INTERNAL_INDUSTRY_MACHINE_BETA_BLOCK_NAMES.length - 1)
         {
             return "NONAME";
         }
