@@ -117,11 +117,11 @@ public class Defaults
     public static final int TEXTURE_MATERIAL_NUGGET_BRASS = 39;
     public static final int TEXTURE_MATERIAL_NUGGET_STEEL = 40;
     
-    public static final int TEXTURE_MATERIAL_GEM_RUBY = 48;
-    public static final int TEXTURE_MATERIAL_GEM_JADE = 49;
-    public static final int TEXTURE_MATERIAL_GEM_SAPPHIRE = 50;
-    public static final int TEXTURE_MATERIAL_GEM_QUARTZ = 51;
-    public static final int TEXTURE_MATERIAL_GEM_APATITE = 52;
+    public static final int TEXTURE_MATERIAL_GEM_QUARTZ = 48;
+    public static final int TEXTURE_MATERIAL_GEM_APATITE = 49;
+    public static final int TEXTURE_MATERIAL_GEM_RUBY = 50;
+    public static final int TEXTURE_MATERIAL_GEM_JADE = 51;
+    public static final int TEXTURE_MATERIAL_GEM_SAPPHIRE = 52;
     
     public static final int TEXTURE_MATERIAL_FUEL_COKE = 64;
     
