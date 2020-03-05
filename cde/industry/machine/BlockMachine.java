@@ -90,9 +90,21 @@ public abstract class BlockMachine extends BlockContainer
                 return 255;
             }
             
+            int facing = tem.getFacing();
+            int offset = side + facing;
+            
+            if(offset > 5)
+            {
+                offset -= 5;
+            }
+            
             if(tem.isActive())
             {
-                return 16 * (side + 6) + md;
+                return 16 * (offset + 6) + md;
+            }
+            else
+            {
+                return 16 * offset + md;
             }
         }
         

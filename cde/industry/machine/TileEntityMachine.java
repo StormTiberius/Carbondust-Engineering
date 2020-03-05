@@ -6,7 +6,6 @@
 package cde.industry.machine;
 
 import cde.api.IWrenchable;
-import cde.core.sound.TileEntityWithSound;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyConductor;
@@ -15,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 
-public abstract class TileEntityMachine extends TileEntityWithSound implements IEnergyTile, IWrenchable
+public abstract class TileEntityMachine extends TileEntityRotateable implements IEnergyTile, IWrenchable
 {
     protected abstract void doWorkCycle();
     protected int machineId,machineTier;
