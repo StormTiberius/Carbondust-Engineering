@@ -13,14 +13,18 @@ public class Blocks
     public static ItemStack oreTin;
     public static ItemStack oreSilver;
     public static ItemStack oreLead;
+    public static ItemStack oreZinc;
     public static ItemStack oreUranium;
+    public static ItemStack oreBitumen;
     public static ItemStack oreSulfur;
     public static ItemStack oreSaltpeter;
-    public static ItemStack oreQuartz;
+    public static ItemStack oreApatite;
     public static ItemStack oreRuby;
     public static ItemStack oreJade;
     public static ItemStack oreSapphire;
-    public static ItemStack oreApatite;
+    public static ItemStack oreOnyx;
+    public static ItemStack orePhoenixite;
+    public static ItemStack oreQuartz;
     
     public static ItemStack blockCopper;
     public static ItemStack blockTin;

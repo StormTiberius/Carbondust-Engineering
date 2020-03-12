@@ -267,7 +267,7 @@ public class CDECore
             GameRegistry.registerBlock(oreBlock, ItemOre.class, "cdeOreBlock");
             
             for(int i = 0; i < Namings.EXTERNAL_ORE_BLOCK_NAMES.length; i++)
-            {              
+            {
                 ItemStack is = new ItemStack(oreBlock.blockID, 1, i);
                 
                 switch(i)
@@ -276,14 +276,18 @@ public class CDECore
                     case 1: Blocks.oreTin = is; break;
                     case 2: Blocks.oreSilver = is; break;
                     case 3: Blocks.oreLead = is; break;
-                    case 4: Blocks.oreUranium = is; break;
-                    case 5: Blocks.oreSulfur = is; break;
-                    case 6: Blocks.oreSaltpeter = is; break;
-                    case 7: Blocks.oreQuartz = is; break;
-                    case 8: Blocks.oreApatite = is; break;
-                    case 9: Blocks.oreRuby = is; break;
-                    case 10: Blocks.oreJade = is; break;
-                    case 11: Blocks.oreSapphire = is; break;
+                    case 4: Blocks.oreZinc = is; break;
+                    case 5: Blocks.oreUranium = is; break;
+                    case 6: Blocks.oreBitumen = is; break;
+                    case 7: Blocks.oreSulfur = is; break;
+                    case 8: Blocks.oreSaltpeter = is; break;
+                    case 9: Blocks.oreApatite = is; break;
+                    case 10: Blocks.oreRuby = is; break;
+                    case 11: Blocks.oreJade = is; break;
+                    case 12: Blocks.oreSapphire = is; break;
+                    case 13: Blocks.oreOnyx = is; break;
+                    case 14: Blocks.orePhoenixite = is; break;
+                    case 15: Blocks.oreQuartz = is; break;
                 }
                 
                 LanguageRegistry.addName(is, Namings.EXTERNAL_ORE_BLOCK_NAMES[i]);
@@ -294,14 +298,18 @@ public class CDECore
             MinecraftForge.setBlockHarvestLevel(oreBlock, 1, "pickaxe", 1); // Tin
             MinecraftForge.setBlockHarvestLevel(oreBlock, 2, "pickaxe", 1); // Silver
             MinecraftForge.setBlockHarvestLevel(oreBlock, 3, "pickaxe", 2); // Lead
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 4, "pickaxe", 2); // Uranium
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 5, "pickaxe", 2); // Sulfur
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 6, "pickaxe", 2); // Saltpeter
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 7, "pickaxe", 0); // Quartz
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 8, "pickaxe", 1); // Apatite
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 9, "pickaxe", 2); // Ruby
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 10, "pickaxe", 2); // Jade
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 11, "pickaxe", 2); // Sapphire
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 4, "pickaxe", 2); // Zinc
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 5, "pickaxe", 2); // Uranium
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 6, "pickaxe", 0); // Bitumen
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 7, "pickaxe", 2); // Sulfur
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 8, "pickaxe", 2); // Saltpeter
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 9, "pickaxe", 1); // Apatite
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 10, "pickaxe", 2); // Ruby
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 11, "pickaxe", 2); // Jade
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 12, "pickaxe", 2); // Sapphire
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 13, "pickaxe", 2); // Onyx
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 14, "pickaxe", 2); // Phoenixite
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 15, "pickaxe", 2); // Quartz
         }
         
         if(storageBlockId > 0)
@@ -313,7 +321,7 @@ public class CDECore
             MinecraftForge.setBlockHarvestLevel(storageBlock, "pickaxe", 1);
             
             for(int i = 0; i < Namings.EXTERNAL_STORAGE_BLOCK_NAMES.length; i++)
-            {                
+            {
                 ItemStack is = new ItemStack(storageBlock.blockID, 1, i);
                 
                 switch(i)
@@ -322,8 +330,8 @@ public class CDECore
                     case 1: Blocks.blockTin = is; break;
                     case 2: Blocks.blockSilver = is; break;
                     case 3: Blocks.blockLead = is; break;
-                    case 4: Blocks.blockUranium = is; break;
-                    case 5: Blocks.blockZinc = is; break;
+                    case 4: Blocks.blockZinc = is; break;
+                    case 5: Blocks.blockUranium = is; break;
                     case 6: Blocks.blockBronze = is; break;
                     case 7: Blocks.blockBrass = is; break;
                     case 8: Blocks.blockSteel = is; break;

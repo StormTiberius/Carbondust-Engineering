@@ -139,14 +139,18 @@ public class Namings
         "oreTin",
         "oreSilver",
         "oreLead",
+        "oreZinc",
         "oreUranium",
+        "oreBitumen",
         "oreSulfur",
         "oreSaltpeter",
-        "oreQuartz",
         "oreApatite",
         "oreRuby",
         "oreJade",
-        "oreSapphire"
+        "oreSapphire",
+        "oreOnyx",
+        "orePhoenixite",
+        "oreQuartz",
     };
         
     public static final String[] EXTERNAL_ORE_BLOCK_NAMES =
@@ -155,14 +159,18 @@ public class Namings
         "Tin Ore",
         "Silver Ore",
         "Lead Ore",
+        "Zinc Ore",
         "Uranium Ore",
+        "Bitumen Ore",
         "Sulfur Ore",
         "Saltpeter Ore",
-        "Quartz Ore",
         "Apatite Ore",
         "Ruby Ore",
         "Jade Ore",
-        "Sapphire Ore"
+        "Sapphire Ore",
+        "Onyx Ore",
+        "Phoenixite Ore",
+        "Quartz Ore",
     };
     
     public static final String[] INTERNAL_STORAGE_BLOCK_NAMES =
@@ -171,14 +179,14 @@ public class Namings
         "blockTin",
         "blockSilver",
         "blockLead",
-        "blockUranium",
         "blockZinc",
+        "blockUranium",
         "blockBronze",
         "blockBrass",
         "blockSteel",
         "blockRuby",
         "blockJade",
-        "blockSapphire"
+        "blockSapphire",
     };
         
     public static final String[] EXTERNAL_STORAGE_BLOCK_NAMES =
@@ -187,14 +195,14 @@ public class Namings
         "Block of Tin",
         "Block of Silver",
         "Block of Lead",
-        "Block of Uranium",
         "Block of Zinc",
+        "Block of Uranium",
         "Block of Bronze",
         "Block of Brass",
         "Block of Steel",
         "Block of Ruby",
         "Block of Jade",
-        "Block of Sapphire"
+        "Block of Sapphire",
     };
     
     public static final String[] INTERNAL_INDUSTRY_MACHINE_ALPHA_BLOCK_NAMES =
