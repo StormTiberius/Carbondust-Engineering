@@ -6,7 +6,6 @@
 package cde.core.sound;
 
 import cde.CDECore;
-import cde.api.SoundSourceEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -15,32 +14,9 @@ import net.minecraftforge.event.world.WorldEvent.Unload;
 public class SoundEventManager
 {
     @ForgeSubscribe
-    public void sem(SoundSourceEvent event)
-    {
-        if(event.world.isRemote)
-        {
-            switch(event.type)
-            {
-                case SoundSourceEvent.PLAY: SoundManager.playTileSound(event.iss); break;
-                case SoundSourceEvent.STOP: SoundManager.stopTileSound(event.iss); break;
-                case SoundSourceEvent.VOLUME: SoundManager.setVolume(event.iss); break;
-                case SoundSourceEvent.PITCH: SoundManager.setPitch(event.iss); break;
-                case SoundSourceEvent.LOAD: SoundManager.addSource(event.iss); break;
-                case SoundSourceEvent.UNLOAD: SoundManager.removeSource(event.iss); break;
-            }
-        }
-    }
-    
-    @ForgeSubscribe
-    public void sem(Unload event)
-    {
-        SoundManager.retireAll();
-    }
-    
-    @ForgeSubscribe
     public void sem(SoundLoadEvent event)
     {
-        SoundManager.initSoundHelper();
+        SoundHelper.initSoundHelper();
         
         if(CDECore.altRainSounds())
         {
@@ -63,6 +39,12 @@ public class SoundEventManager
                 event.manager.soundPoolSounds.addSound(name, CDECore.class.getResource((new StringBuilder()).append(path).toString()));
             }
         }
+    }
+    
+    @ForgeSubscribe
+    public void sem(Unload event)
+    {   
+        SoundHelper.removeAll();
     }
     
     @ForgeSubscribe

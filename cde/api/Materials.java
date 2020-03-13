@@ -13,8 +13,8 @@ public class Materials
     public static ItemStack ingotTin;
     public static ItemStack ingotSilver;
     public static ItemStack ingotLead;
-    public static ItemStack ingotZinc;
     public static ItemStack ingotUranium;
+    public static ItemStack ingotZinc;
     public static ItemStack ingotBronze;
     public static ItemStack ingotBrass;
     public static ItemStack ingotSteel;
@@ -49,17 +49,29 @@ public class Materials
     public static ItemStack nuggetBrass;
     public static ItemStack nuggetSteel;
     
+    public static ItemStack washedIron;
+    public static ItemStack washedGold;
+    public static ItemStack washedCopper;
+    public static ItemStack washedTin;
+    public static ItemStack washedSilver;
+    public static ItemStack washedLead;
+    public static ItemStack washedUranium;
+    
+    public static ItemStack crushedIron;
+    public static ItemStack crushedGold;
+    public static ItemStack crushedCopper;
+    public static ItemStack crushedTin;
+    public static ItemStack crushedSilver;
+    public static ItemStack crushedLead;
+    public static ItemStack crushedUranium;
+    
+    public static ItemStack gemQuartz;
+    public static ItemStack gemApatite;
     public static ItemStack gemRuby;
     public static ItemStack gemJade;
     public static ItemStack gemSapphire;
-    public static ItemStack gemOnyx;
-    public static ItemStack gemPhoenixite;
-    public static ItemStack gemQuartz;
-    public static ItemStack gemApatite;
     
     public static ItemStack fuelCoke;
-    
-    public static ItemStack clodBitumen;
     
     public static ItemStack plateIron;
     public static ItemStack plateGold;
@@ -73,4 +85,4 @@ public class Materials
     public static ItemStack circuitBoardMulti;
     public static ItemStack electricMotor;
     public static ItemStack electricWire;
-}
+ }

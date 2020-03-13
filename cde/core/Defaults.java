@@ -12,141 +12,48 @@ import java.util.Map;
 public class Defaults
 {
     // BLOCK TEXTURE INDEX
-    public static final int TEXTURE_BLOCK_ORE_RUBY = 0;
-    public static final int TEXTURE_BLOCK_ORE_JADE = 1;
-    public static final int TEXTURE_BLOCK_ORE_SAPPHIRE = 2;
-    public static final int TEXTURE_BLOCK_ORE_COPPER = 3;
-    public static final int TEXTURE_BLOCK_ORE_TIN = 4;
-    public static final int TEXTURE_BLOCK_ORE_SILVER = 5;
-    public static final int TEXTURE_BLOCK_ORE_LEAD = 6;
-    public static final int TEXTURE_BLOCK_ORE_ZINC = 7;
-    public static final int TEXTURE_BLOCK_ORE_URANIUM = 8;
-    public static final int TEXTURE_BLOCK_ORE_APATITE = 9;
-    public static final int TEXTURE_BLOCK_ORE_BITUMEN = 10;
-    public static final int TEXTURE_BLOCK_ORE_SULFUR = 11;
-    public static final int TEXTURE_BLOCK_ORE_SALTPETER = 12;
-    public static final int TEXTURE_BLOCK_ORE_ONYX = 13;
-    public static final int TEXTURE_BLOCK_ORE_PHOENIXITE = 14;
-    public static final int TEXTURE_BLOCK_ORE_QUARTZ = 15;
+    public static final int TEXTURE_ORE_RUBY = 0;
+    public static final int TEXTURE_ORE_JADE = 1;
+    public static final int TEXTURE_ORE_SAPPHIRE = 2;
+    public static final int TEXTURE_ORE_COPPER = 3;
+    public static final int TEXTURE_ORE_TIN = 4;
+    public static final int TEXTURE_ORE_SILVER = 5;
+    public static final int TEXTURE_ORE_LEAD = 6;
+    public static final int TEXTURE_ORE_URANIUM = 7;
+    public static final int TEXTURE_ORE_SULFUR = 8;
+    public static final int TEXTURE_ORE_SALTPETER = 9;
+    public static final int TEXTURE_ORE_APATITE = 10;
+    public static final int TEXTURE_ORE_QUARTZ = 11;
     
-    public static final int TEXTURE_BLOCK_STORAGE_RUBY = 16;
-    public static final int TEXTURE_BLOCK_STORAGE_JADE = 17;
-    public static final int TEXTURE_BLOCK_STORAGE_SAPPHIRE = 18;
-    public static final int TEXTURE_BLOCK_STORAGE_COPPER = 19;
-    public static final int TEXTURE_BLOCK_STORAGE_TIN = 20;
-    public static final int TEXTURE_BLOCK_STORAGE_SILVER = 21;
-    public static final int TEXTURE_BLOCK_STORAGE_LEAD = 22;
-    public static final int TEXTURE_BLOCK_STORAGE_ZINC = 23;
-    public static final int TEXTURE_BLOCK_STORAGE_URANIUM = 24;
-    public static final int TEXTURE_BLOCK_STORAGE_BRONZE = 25;
-    public static final int TEXTURE_BLOCK_STORAGE_BRASS = 26;
-    public static final int TEXTURE_BLOCK_STORAGE_STEEL = 27;
-    public static final int TEXTURE_MACHINE_SOLAR_PANEL = 28;
-    public static final int TEXTURE_BLOCK_SMOKE_STACK_BOTTOM = 29;
-    public static final int TEXTURE_BLOCK_SMOKE_STACK_TOP = 30;
-    public static final int TEXTURE_BLOCK_SMOKE_STACK_SIDE = 31;
+    public static final int TEXTURE_STORAGE_RUBY = 16;
+    public static final int TEXTURE_STORAGE_JADE = 17;
+    public static final int TEXTURE_STORAGE_SAPPHIRE = 18;
+    public static final int TEXTURE_STORAGE_COPPER = 19;
+    public static final int TEXTURE_STORAGE_TIN = 20;
+    public static final int TEXTURE_STORAGE_SILVER = 21;
+    public static final int TEXTURE_STORAGE_LEAD = 22;
+    public static final int TEXTURE_STORAGE_URANIUM = 23;
+    public static final int TEXTURE_STORAGE_ZINC = 24;
+    public static final int TEXTURE_STORAGE_BRONZE = 25;
+    public static final int TEXTURE_STORAGE_BRASS = 26;
+    public static final int TEXTURE_STORAGE_STEEL = 27;
     
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_00 = 32;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_01 = 33;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_02 = 34;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_03 = 35;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_04 = 36;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_05 = 37;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_06 = 38;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_07 = 39;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_08 = 40;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_09 = 41;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_10 = 42;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_11 = 43;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_OFF_12 = 44;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_TOP = 45;
-    public static final int TEXTURE_MACHINE_BATTERY_STATION_LV_OFF = 46;
-    public static final int TEXTURE_MACHINE_BATTERY_STATION_LV_ON = 47;
-    
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_00 = 48;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_01 = 49;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_02 = 50;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_03 = 51;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_04 = 52;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_05 = 53;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_06 = 54;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_07 = 55;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_08 = 56;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_09 = 57;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_10 = 58;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_11 = 59;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_LV_ON_12 = 60;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_LV_0 = 61;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_LV_1 = 62;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_LV_2 = 63;
-    
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_00 = 64;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_01 = 65;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_02 = 66;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_03 = 67;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_04 = 68;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_05 = 69;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_06 = 70;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_07 = 71;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_08 = 72;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_09 = 73;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_10 = 74;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_11 = 75;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_OFF_12 = 76;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_TOP = 77;
-    public static final int TEXTURE_MACHINE_BATTERY_STATION_MV_OFF = 78;
-    public static final int TEXTURE_MACHINE_BATTERY_STATION_MV_ON = 79;
-    
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_00 = 80;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_01 = 81;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_02 = 82;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_03 = 83;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_04 = 84;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_05 = 85;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_06 = 86;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_07 = 87;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_08 = 88;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_09 = 89;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_10 = 90;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_11 = 91;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_MV_ON_12 = 92;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_MV_0 = 93;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_MV_1 = 94;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_MV_2 = 95;
-    
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_00 = 96;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_01 = 97;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_02 = 98;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_03 = 99;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_04 = 100;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_05 = 101;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_06 = 102;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_07 = 103;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_08 = 104;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_09 = 105;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_10 = 106;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_11 = 107;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_OFF_12 = 108;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_TOP = 109;
-    public static final int TEXTURE_MACHINE_BATTERY_STATION_HV_OFF = 110;
-    public static final int TEXTURE_MACHINE_BATTERY_STATION_HV_ON = 111;
-    
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_00 = 112;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_01 = 113;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_02 = 114;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_03 = 115;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_04 = 116;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_05 = 117;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_06 = 118;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_07 = 119;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_08 = 120;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_09 = 121;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_10 = 122;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_11 = 123;
-    public static final int TEXTURE_MACHINE_CHARGING_BENCH_HV_ON_12 = 124;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_HV_0 = 125;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_HV_1 = 126;
-    public static final int TEXTURE_MACHINE_ELECTRIC_CONNECTOR_HV_2 = 127;
+    public static final int TEXTURE_MACHINE_SIDE = 32;
+    public static final int TEXTURE_MACHINE_BOTTOM = 33;
+    public static final int TEXTURE_MACHINE_CONNECTED = 34;
+    public static final int TEXTURE_MACHINE_GENERATOR_SIDE_OFF = 35;
+    public static final int TEXTURE_MACHINE_GENERATOR_SIDE_ON = 36;
+    public static final int TEXTURE_MACHINE_TURBINE_SIDE = 37;
+    public static final int TEXTURE_MACHINE_TURBINE_TOP_OFF = 38;
+    public static final int TEXTURE_MACHINE_TURBINE_TOP_ON = 39;
+    public static final int TEXTURE_MACHINE_HEATER_TOP = 40;
+    public static final int TEXTURE_MACHINE_PUMP_SIDE_OFF = 41;
+    public static final int TEXTURE_MACHINE_PUMP_SIDE_ON = 42;
+    public static final int TEXTURE_MACHINE_MIXER_SIDE_OFF = 43;
+    public static final int TEXTURE_MACHINE_MIXER_SIDE_ON = 44;
+    public static final int TEXTURE_MACHINE_SOLAR_PANEL_TOP = 45;
+    public static final int TEXTURE_MACHINE_TRANSFORMER_TOP_OFF = 46;
+    public static final int TEXTURE_MACHINE_TRANSFORMER_TOP_ON = 47;
     
     public static final int TEXTURE_MACHINE_GRATE_SIDE = 48;
     public static final int TEXTURE_MACHINE_GRATE_BOTTOM_TOP = 49;
@@ -210,42 +117,62 @@ public class Defaults
     public static final int TEXTURE_MATERIAL_NUGGET_BRASS = 39;
     public static final int TEXTURE_MATERIAL_NUGGET_STEEL = 40;
     
-    public static final int TEXTURE_MATERIAL_GEM_QUARTZ = 48;
-    public static final int TEXTURE_MATERIAL_GEM_APATITE = 49;
-    public static final int TEXTURE_MATERIAL_GEM_RUBY = 50;
-    public static final int TEXTURE_MATERIAL_GEM_JADE = 51;
-    public static final int TEXTURE_MATERIAL_GEM_SAPPHIRE = 52;
+    public static final int TEXTURE_MATERIAL_WASHED_IRON = 48;
+    public static final int TEXTURE_MATERIAL_WASHED_GOLD = 49;
+    public static final int TEXTURE_MATERIAL_WASHED_COPPER = 50;
+    public static final int TEXTURE_MATERIAL_WASHED_TIN = 51;
+    public static final int TEXTURE_MATERIAL_WASHED_SILVER = 52;
+    public static final int TEXTURE_MATERIAL_WASHED_LEAD = 53;
+    public static final int TEXTURE_MATERIAL_WASHED_URANIUM = 54;
     
-    public static final int TEXTURE_MATERIAL_FUEL_COKE = 64;
+    public static final int TEXTURE_MATERIAL_CRUSHED_IRON = 64;
+    public static final int TEXTURE_MATERIAL_CRUSHED_GOLD = 65;
+    public static final int TEXTURE_MATERIAL_CRUSHED_COPPER = 66;
+    public static final int TEXTURE_MATERIAL_CRUSHED_TIN = 67;
+    public static final int TEXTURE_MATERIAL_CRUSHED_SILVER = 68;
+    public static final int TEXTURE_MATERIAL_CRUSHED_LEAD = 69;
+    public static final int TEXTURE_MATERIAL_CRUSHED_URANIUM = 70;
     
-    public static final int TEXTURE_MATERIAL_PLATE_IRON = 80;
-    public static final int TEXTURE_MATERIAL_PLATE_GOLD = 81;
-    public static final int TEXTURE_MATERIAL_PLATE_COPPER = 82;
-    public static final int TEXTURE_MATERIAL_PLATE_TIN = 83;
-    public static final int TEXTURE_MATERIAL_PLATE_BRONZE = 84;
-    public static final int TEXTURE_MATERIAL_PLATE_STEEL = 85;
+    public static final int TEXTURE_MATERIAL_GEM_RUBY = 80;
+    public static final int TEXTURE_MATERIAL_GEM_JADE = 81;
+    public static final int TEXTURE_MATERIAL_GEM_SAPPHIRE = 82;
+    public static final int TEXTURE_MATERIAL_GEM_QUARTZ = 83;
+    public static final int TEXTURE_MATERIAL_GEM_APATITE = 84;
     
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_SINGLE = 96;
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE = 97;
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI = 98;
-    public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 99;
-    public static final int TEXTURE_MATERIAL_ELECTRIC_WIRE = 100;
+    public static final int TEXTURE_MATERIAL_FUEL_COKE = 96;
+    
+    public static final int TEXTURE_MATERIAL_PLATE_IRON = 112;
+    public static final int TEXTURE_MATERIAL_PLATE_GOLD = 113;
+    public static final int TEXTURE_MATERIAL_PLATE_COPPER = 114;
+    public static final int TEXTURE_MATERIAL_PLATE_TIN = 115;
+    public static final int TEXTURE_MATERIAL_PLATE_BRONZE = 116;
+    public static final int TEXTURE_MATERIAL_PLATE_STEEL = 117;
+    
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_SINGLE = 128;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE = 129;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI = 130;
+    public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 131;
+    public static final int TEXTURE_MATERIAL_ELECTRIC_WIRE = 132;
+    
+    public static final int TEXTURE_TOOL_WATERING_CAN = 160;
+    public static final int TEXTURE_TOOL_WRENCH = 161;
     
     // BLOCK ID
     public static final int BLOCK_ORE_ID = 180;
     public static final int BLOCK_STORAGE_ID = 181;
-    public static final int BLOCK_A_ID = 182;
-    public static final int BLOCK_B_ID = 183;
-    public static final int BLOCK_INDUSTRY_DRUM_ID = 184;
-    public static final int BLOCK_INDUSTRY_ALPHA_ID = 185;
-    public static final int BLOCK_INDUSTRY_BETA_ID = 186;
-    public static final int BLOCK_INDUSTRY_GAMMA_ID = 187;
-    public static final int BLOCK_INDUSTRY_DELTA_ID = 188;
-    public static final int BLOCK_INDUSTRY_MISC_ID = 189;
+    public static final int BLOCK_MACHINERY_ALPHA_ID = 182;
+    public static final int BLOCK_GRATE_ID = 183;
+    public static final int BLOCK_SPEAKER_ID = 184;
+    public static final int BLOCK_INDUSTRY_DRUM_ID = 185;
+    public static final int BLOCK_INDUSTRY_A_ID = 186;
+    public static final int BLOCK_INDUSTRY_B_ID = 187;
+    public static final int BLOCK_INDUSTRY_C_ID = 188;
+    public static final int BLOCK_INDUSTRY_D_ID = 189;
     
     // ITEM ID
     public static final int ITEM_MATERIALS_ID = 500;
-    public static final int ITEM_NIGHT_VISION_GOGGLES_ID = 501;
+    public static final int ITEM_GOGGLES_ID = 501;
+    public static final int ITEM_WATERING_CAN_ID = 502;
     
     // FUEL VALUES
     public static final int PEAT_FUEL_VALUE = 2000;
@@ -255,42 +182,34 @@ public class Defaults
     // WORLD GEN DEFAULTS
     public static final int[][] ORE_GEN_DEFAULTS =
     {    
-        new int[]{1,10,15,10,70}, // Copper
-        new int[]{1,6,25,0,40}, // Tin
-        new int[]{1,8,4,0,32}, // Silver
-        new int[]{1,8,4,10,35}, // Lead
-        new int[]{1,8,4,10,35}, // Zinc
-        new int[]{1,3,20,0,64}, // Uranium
-        new int[]{1,3,20,0,64}, // Bitumen
-        new int[]{1,6,1,10,16}, // Sulfur
-        new int[]{1,6,1,16,32}, // Saltpeter
-        new int[]{1,6,1,0,64}, // Apatite
-        new int[]{1,7,2,0,48}, // Ruby
-        new int[]{1,7,2,0,48}, // Jade
-        new int[]{1,7,2,0,48}, // Sapphire
-        new int[]{1,4,7,12,62}, // Onyx
-        new int[]{1,4,7,12,62}, // Phoenixite
-        new int[]{1,4,7,12,62}, // Quartz
+        new int[]{1,10,15,10,70},
+        new int[]{1,6,25,0,40},
+        new int[]{1,8,4,0,32},
+        new int[]{1,8,4,10,35},        
+        new int[]{1,3,20,0,64},
+        new int[]{1,6,1,10,16},
+        new int[]{1,6,1,16,32},
+        new int[]{1,4,7,12,62},
+        new int[]{1,6,1,0,64},
+        new int[]{1,7,2,0,48},
+        new int[]{1,7,2,0,48},
+        new int[]{1,7,2,0,48}
     };
     
     public static final int[][] ORE_GEN_DEFAULTS_TERRENE =
     {    
-        new int[]{1,10,30,20,140}, // Copper
-        new int[]{1,6,50,0,80}, // Tin
-        new int[]{1,8,8,0,64}, // Silver
-        new int[]{1,8,8,20,70}, // Lead
-        new int[]{1,8,8,20,70}, // Zinc
-        new int[]{1,3,40,0,128}, // Uranium
-        new int[]{1,3,40,0,128}, // Bitumen
-        new int[]{1,6,2,20,32}, // Sulfur
-        new int[]{1,6,2,32,64}, // Saltpeter
-        new int[]{1,6,2,0,128}, // Apatite
-        new int[]{1,7,4,0,96}, // Ruby
-        new int[]{1,7,4,0,96}, // Jade
-        new int[]{1,7,4,0,96}, // Sapphire
-        new int[]{1,4,14,24,124}, // Onyx
-        new int[]{1,4,14,24,124}, // Phoenixite
-        new int[]{1,4,14,24,124}, // Quartz
+        new int[]{1,10,30,20,140},
+        new int[]{1,6,50,0,80},
+        new int[]{1,8,8,0,64},
+        new int[]{1,8,8,20,70},        
+        new int[]{1,3,40,0,128},
+        new int[]{1,6,2,20,32},
+        new int[]{1,6,2,32,64},
+        new int[]{1,4,14,24,124},
+        new int[]{1,6,2,0,128},
+        new int[]{1,7,4,0,96},
+        new int[]{1,7,4,0,96},
+        new int[]{1,7,4,0,96}
     };
     
     // LIQUID DRUM CAPACITY DEFAULTS

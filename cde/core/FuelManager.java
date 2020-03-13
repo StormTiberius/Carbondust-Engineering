@@ -20,7 +20,7 @@ public class FuelManager implements IFuelHandler
             {
                 case 9: return Defaults.PEAT_FUEL_VALUE;
                 case 10: return Defaults.BITUMINOUS_PEAT_FUEL_VALUE;
-                case 41: return Defaults.COKE_FUEL_VALUE;
+                case 55: return Defaults.COKE_FUEL_VALUE;
             }
         }
         

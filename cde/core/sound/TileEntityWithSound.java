@@ -6,76 +6,40 @@
 package cde.core.sound;
 
 import cde.CDECore;
-import cde.api.INetwork;
-import cde.api.ISoundSource;
-import cde.api.SoundSourceEvent;
-import cde.core.TileEntityCde;
-import cde.core.network.PacketTileSound;
+import cde.core.TileEntityCDE;
 import java.net.URL;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.MinecraftForge;
 import paulscode.sound.SoundSystemConfig;
 
-public abstract class TileEntityWithSound extends TileEntityCde implements ISoundSource, INetwork
+public abstract class TileEntityWithSound extends TileEntityCDE
 {
-    protected abstract boolean getEmitSound();
+    protected abstract boolean isWorking();
+    protected abstract String getSoundFileName();
+    protected abstract float getVolume();
+    protected abstract float getPitch();
     
-    private boolean init,isMuted,isPlaying,defaultVolume,defaultPitch;
-    protected int volumePercent,pitchPercent;
-    protected float volume,pitch;
+    private boolean init,playing,active,flag;
     
-    public TileEntityWithSound()
+    public boolean isPlaying()
     {
-        super();
-        this.defaultVolume = true;
-        this.defaultPitch = true;
+        return playing;
+    }
+        
+    public void setPlaying(boolean flag)
+    {
+        playing = flag;
     }
     
     private void init()
     {
         if(worldObj.isRemote)
         {
-            if(isTileSoundEnabled())
+            if(tileSoundsEnabled())
             {
-                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.LOAD));
+                SoundHelper.addSource(this);
             }
         }
         
         init = true;
-    }
-    
-    protected boolean isTileSoundEnabled()
-    {
-        return CDECore.playSounds() && !getResourceName().isEmpty();
-    }
-    
-    @Override
-    public void readFromNBT(NBTTagCompound tag)
-    {
-        super.readFromNBT(tag);
-        
-        isMuted = tag.getBoolean("isMuted");
-        defaultVolume = tag.getBoolean("defaultVolume");
-        defaultPitch = tag.getBoolean("defaultPitch");
-        volumePercent = tag.getInteger("volumePercent");
-        pitchPercent = tag.getInteger("pitchPercent");
-        volume = tag.getFloat("volume");
-        pitch = tag.getFloat("pitch");
-    }
-    
-    @Override
-    public void writeToNBT(NBTTagCompound tag)
-    {
-        super.writeToNBT(tag);
-        
-        tag.setBoolean("isMuted", isMuted);
-        tag.setBoolean("defaultVolume", defaultVolume);
-        tag.setBoolean("defaultPitch", defaultPitch);
-        tag.setInteger("volumePercent", volumePercent);
-        tag.setInteger("pitchPercent", pitchPercent);
-        tag.setFloat("volume", volume);
-        tag.setFloat("pitch", pitch);
     }
     
     @Override
@@ -85,26 +49,14 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
         {   
             if(worldObj.isRemote)
             {
-                if(isTileSoundEnabled())
+                if(tileSoundsEnabled())
                 {
-                    boolean flag = getEmitSound();
-                    
-                    if(flag != isPlaying())
+                    flag = isWorking();
+
+                    if(active != flag)
                     {
-                        // isPlaying() is set in SoundManager so no need to set it here.
-                        
-                        SoundSourceEvent event;
-                        
-                        if(flag)
-                        {
-                            event = new SoundSourceEvent(worldObj, this, SoundSourceEvent.PLAY);
-                        }
-                        else
-                        {
-                            event = new SoundSourceEvent(worldObj, this, SoundSourceEvent.STOP);
-                        }
-                        
-                        MinecraftForge.EVENT_BUS.post(event);
+                        active = flag;
+                        SoundHelper.updateTileSound(this, active);
                     }
                 }
             }
@@ -114,199 +66,62 @@ public abstract class TileEntityWithSound extends TileEntityCde implements ISoun
             init();
         }
     }
-    
+
     @Override
     public void invalidate()
     {
         if(worldObj.isRemote)
         {
-            if(isTileSoundEnabled())
+            if(tileSoundsEnabled())
             {
-                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.UNLOAD));
+                SoundHelper.removeSource(this);
             }
         }
                 
         super.invalidate();
     }
-    
+
     @Override
     public void onChunkUnload()
     {
         if(worldObj.isRemote)
         {
-            if(isTileSoundEnabled())
+            if(tileSoundsEnabled())
             {
-                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.UNLOAD));
+                SoundHelper.removeSource(this);
             }
         }
         
         super.onChunkUnload();
     }
     
-    @Override
-    public boolean isMuted()
+    private boolean tileSoundsEnabled()
     {
-        return isMuted;
+        return CDECore.playSounds() && getVolume() > 0.0F;
     }
     
-    @Override
-    public void setMuted(boolean flag)
+    protected String getSourceName()
     {
-        if(flag != isMuted)
-        {
-            SoundSourceEvent event;
-            
-            if(flag)
-            {
-                event = new SoundSourceEvent(worldObj, this, SoundSourceEvent.UNLOAD);
-            }
-            else
-            {
-                event = new SoundSourceEvent(worldObj, this, SoundSourceEvent.LOAD);
-            }
-            
-            MinecraftForge.EVENT_BUS.post(event);
-            
-            isMuted = flag;
-        }
+        return "cde_x" + xCoord + "_y" + yCoord + "_z" + zCoord;
     }
     
-    @Override
-    public boolean isPlaying()
+    protected URL getUrl()
     {
-        return isPlaying;
+        return CDECore.class.getResource((new StringBuilder()).append("/cde/sounds/machine/").append(getSoundFileName()).toString());
     }
     
-    @Override
-    public void setPlaying(boolean flag)
-    {
-        isPlaying = flag;
-    }
-    
-    @Override
-    public int getSourceX()
-    {
-        return xCoord;
-    }
-    
-    @Override
-    public int getSourceY()
-    {
-        return yCoord;
-    }
-    
-    @Override
-    public int getSourceZ()
-    {
-        return zCoord;
-    }
-    
-    @Override
-    public boolean isPriority()
-    {
-        return true;
-    }
-    
-    @Override
-    public String getSourceName()
-    {
-        return "cde_x" + getSourceX() + "_y" + getSourceY() + "_z" + getSourceZ();
-    }
-    
-    @Override
-    public URL getResourceUrl()
-    {
-        return CDECore.class.getResource((new StringBuilder()).append("/cde/sounds/machine/").append(getResourceName()).toString());
-    }
-    
-    @Override
-    public boolean isLooping()
-    {
-        return true;
-    }
-    
-    @Override
-    public float getOriginX()
-    {
-        return 0.5F + getSourceX();
-    }
-    
-    @Override
-    public float getOriginY()
-    {
-        return 0.5F + getSourceY();
-    }
-    
-    @Override
-    public float getOriginZ()
-    {
-        return 0.5F + getSourceZ();
-    }
-    
-    @Override
-    public int getAttModel()
+    protected int getAttModel()
     {
         return SoundSystemConfig.ATTENUATION_LINEAR;
     }
     
-    @Override
-    public float getDistOrRoll()
+    protected float getDistOrRoll()
     {
         return 16.0F;
     }
     
-    @Override
-    public float getVolume()
+    public SoundSource getSoundSource()
     {
-        if(defaultVolume)
-        {
-            return 0.01F * volumePercent;
-        }
-        
-        return volume;
-    }
-    
-    @Override
-    public float getPitch()
-    {
-        if(defaultPitch)
-        {
-            return 0.01F * pitchPercent;
-        }
-        
-        return pitch;
-    }
-    
-    @Override
-    public void receivePacket(Object packet, EntityPlayer player)
-    {
-        if(packet instanceof PacketTileSound)
-        {
-            PacketTileSound pts = (PacketTileSound)packet;
-            
-            if(pts.updateVolume)
-            {
-                volume = pts.volume;
-                
-                if(defaultVolume)
-                {
-                    defaultVolume = false;
-                }
-                
-                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.VOLUME));
-            }
-            
-            if(pts.updatePitch)
-            {
-                pitch = pts.pitch;
-                
-                if(defaultPitch)
-                {
-                    defaultPitch = false;
-                }
-                
-                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(worldObj, this, SoundSourceEvent.PITCH));
-            }
-        }
+        return new SoundSource(true, getSourceName(), getUrl(), getSoundFileName(), true, 0.5F + xCoord, 0.5F + yCoord, 0.5F + zCoord, getAttModel(), getDistOrRoll());
     }
 }

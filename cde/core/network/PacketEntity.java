@@ -4,7 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class PacketEntity extends PacketCde
+public class PacketEntity extends PacketCDE
 {
     public int entityId;
 

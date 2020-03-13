@@ -12,7 +12,7 @@ import java.io.IOException;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 
-public abstract class PacketCde
+public abstract class PacketCDE
 {
     protected boolean isChunkDataPacket = false;
     protected String channel = "CDE";

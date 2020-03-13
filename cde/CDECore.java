@@ -23,6 +23,7 @@ import cde.core.item.ItemMaterial;
 import cde.core.item.ItemStorage;
 import cde.core.network.PacketHandler;
 import cde.core.sound.SoundTickHandler;
+import cde.core.speaker.SpeakerModule;
 import cde.core.worldgen.WorldGenModule;
 import com.google.common.collect.ImmutableList;
 import cpw.mods.fml.common.FMLLog;
@@ -120,20 +121,22 @@ public class CDECore
             GameRegistry.registerPlayerTracker(new PlayerTracker());
         }
         
+        SpeakerModule.preInit(event);
         WorldGenModule.preInit(event);
     }
     
     @Init
     public void init(FMLInitializationEvent event) 
     {   
-        proxy.preloadTexture(CDE_BLOCKS);
-        proxy.preloadTexture(CDE_ITEMS);
+        proxy.preloadTextures();
+        
+        SpeakerModule.init(event);
         
         GameRegistry.registerFuelHandler(new FuelManager());
         
         MinecraftForge.EVENT_BUS.register(new EventManager());
     }
-    
+
     @PostInit
     public void postInit(FMLPostInitializationEvent event) 
     {
@@ -227,26 +230,42 @@ public class CDECore
                     case 34: Materials.nuggetBrass = is; break;
                     case 35: Materials.nuggetSteel = is; break;
                     
-                    case 36: Materials.gemQuartz = is; break;
-                    case 37: Materials.gemApatite = is; break;
-                    case 38: Materials.gemRuby = is; break;
-                    case 39: Materials.gemJade = is; break;
-                    case 40: Materials.gemSapphire = is; break;
+                    case 36: Materials.washedIron = is; break;
+                    case 37: Materials.washedGold = is; break;
+                    case 38: Materials.washedCopper = is; break;
+                    case 39: Materials.washedTin = is; break;
+                    case 40: Materials.washedSilver = is; break;
+                    case 41: Materials.washedLead = is; break;
+                    case 42: Materials.washedUranium = is; break;
                     
-                    case 41: Materials.fuelCoke = is; break;
+                    case 43: Materials.crushedIron = is; break;
+                    case 44: Materials.crushedGold = is; break;
+                    case 45: Materials.crushedCopper = is; break;
+                    case 46: Materials.crushedTin = is; break;
+                    case 47: Materials.crushedSilver = is; break;
+                    case 48: Materials.crushedLead = is; break;
+                    case 49: Materials.crushedUranium = is; break;
                     
-                    case 42: Materials.plateIron = is; break;
-                    case 43: Materials.plateGold = is; break;
-                    case 44: Materials.plateCopper = is; break;
-                    case 45: Materials.plateTin = is; break;
-                    case 46: Materials.plateBronze = is; break;
-                    case 47: Materials.plateSteel = is; break;
+                    case 50: Materials.gemQuartz = is; break;
+                    case 51: Materials.gemApatite = is; break;
+                    case 52: Materials.gemRuby = is; break;
+                    case 53: Materials.gemJade = is; break;
+                    case 54: Materials.gemSapphire = is; break;
                     
-                    case 48: Materials.circuitBoardSingle = is; break;
-                    case 49: Materials.circuitBoardDouble = is; break;
-                    case 50: Materials.circuitBoardMulti = is; break;
-                    case 51: Materials.electricMotor = is; break;
-                    case 52: Materials.electricWire = is; break;
+                    case 55: Materials.fuelCoke = is; break;
+                    
+                    case 56: Materials.plateIron = is; break;
+                    case 57: Materials.plateGold = is; break;
+                    case 58: Materials.plateCopper = is; break;
+                    case 59: Materials.plateTin = is; break;
+                    case 60: Materials.plateBronze = is; break;
+                    case 61: Materials.plateSteel = is; break;
+                    
+                    case 62: Materials.circuitBoardSingle = is; break;
+                    case 63: Materials.circuitBoardDouble = is; break;
+                    case 64: Materials.circuitBoardMulti = is; break;
+                    case 65: Materials.electricMotor = is; break;
+                    case 66: Materials.electricWire = is; break;
                 }
                 
                 LanguageRegistry.addName(is, Namings.EXTERNAL_PART_ITEM_NAMES[i]);
@@ -254,6 +273,7 @@ public class CDECore
             }
             
             OreDictionary.registerOre("ingotQuartz", Materials.gemQuartz);
+            OreDictionary.registerOre("dropUranium", Materials.washedUranium);
             OreDictionary.registerOre("brickPeat", Materials.fuelPeat);
         }
     }
@@ -267,7 +287,7 @@ public class CDECore
             GameRegistry.registerBlock(oreBlock, ItemOre.class, "cdeOreBlock");
             
             for(int i = 0; i < Namings.EXTERNAL_ORE_BLOCK_NAMES.length; i++)
-            {
+            {              
                 ItemStack is = new ItemStack(oreBlock.blockID, 1, i);
                 
                 switch(i)
@@ -276,18 +296,14 @@ public class CDECore
                     case 1: Blocks.oreTin = is; break;
                     case 2: Blocks.oreSilver = is; break;
                     case 3: Blocks.oreLead = is; break;
-                    case 4: Blocks.oreZinc = is; break;
-                    case 5: Blocks.oreUranium = is; break;
-                    case 6: Blocks.oreBitumen = is; break;
-                    case 7: Blocks.oreSulfur = is; break;
-                    case 8: Blocks.oreSaltpeter = is; break;
-                    case 9: Blocks.oreApatite = is; break;
-                    case 10: Blocks.oreRuby = is; break;
-                    case 11: Blocks.oreJade = is; break;
-                    case 12: Blocks.oreSapphire = is; break;
-                    case 13: Blocks.oreOnyx = is; break;
-                    case 14: Blocks.orePhoenixite = is; break;
-                    case 15: Blocks.oreQuartz = is; break;
+                    case 4: Blocks.oreUranium = is; break;
+                    case 5: Blocks.oreSulfur = is; break;
+                    case 6: Blocks.oreSaltpeter = is; break;
+                    case 7: Blocks.oreQuartz = is; break;
+                    case 8: Blocks.oreApatite = is; break;
+                    case 9: Blocks.oreRuby = is; break;
+                    case 10: Blocks.oreJade = is; break;
+                    case 11: Blocks.oreSapphire = is; break;
                 }
                 
                 LanguageRegistry.addName(is, Namings.EXTERNAL_ORE_BLOCK_NAMES[i]);
@@ -298,18 +314,14 @@ public class CDECore
             MinecraftForge.setBlockHarvestLevel(oreBlock, 1, "pickaxe", 1); // Tin
             MinecraftForge.setBlockHarvestLevel(oreBlock, 2, "pickaxe", 1); // Silver
             MinecraftForge.setBlockHarvestLevel(oreBlock, 3, "pickaxe", 2); // Lead
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 4, "pickaxe", 2); // Zinc
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 5, "pickaxe", 2); // Uranium
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 6, "pickaxe", 0); // Bitumen
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 7, "pickaxe", 2); // Sulfur
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 8, "pickaxe", 2); // Saltpeter
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 9, "pickaxe", 1); // Apatite
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 10, "pickaxe", 2); // Ruby
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 11, "pickaxe", 2); // Jade
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 12, "pickaxe", 2); // Sapphire
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 13, "pickaxe", 2); // Onyx
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 14, "pickaxe", 2); // Phoenixite
-            MinecraftForge.setBlockHarvestLevel(oreBlock, 15, "pickaxe", 2); // Quartz
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 4, "pickaxe", 2); // Uranium
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 5, "pickaxe", 2); // Sulfur
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 6, "pickaxe", 2); // Saltpeter
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 7, "pickaxe", 0); // Quartz
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 8, "pickaxe", 1); // Apatite
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 9, "pickaxe", 2); // Ruby
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 10, "pickaxe", 2); // Jade
+            MinecraftForge.setBlockHarvestLevel(oreBlock, 11, "pickaxe", 2); // Sapphire
         }
         
         if(storageBlockId > 0)
@@ -321,7 +333,7 @@ public class CDECore
             MinecraftForge.setBlockHarvestLevel(storageBlock, "pickaxe", 1);
             
             for(int i = 0; i < Namings.EXTERNAL_STORAGE_BLOCK_NAMES.length; i++)
-            {
+            {                
                 ItemStack is = new ItemStack(storageBlock.blockID, 1, i);
                 
                 switch(i)
@@ -330,8 +342,8 @@ public class CDECore
                     case 1: Blocks.blockTin = is; break;
                     case 2: Blocks.blockSilver = is; break;
                     case 3: Blocks.blockLead = is; break;
-                    case 4: Blocks.blockZinc = is; break;
-                    case 5: Blocks.blockUranium = is; break;
+                    case 4: Blocks.blockUranium = is; break;
+                    case 5: Blocks.blockZinc = is; break;
                     case 6: Blocks.blockBronze = is; break;
                     case 7: Blocks.blockBrass = is; break;
                     case 8: Blocks.blockSteel = is; break;

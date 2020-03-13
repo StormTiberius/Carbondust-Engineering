@@ -5,6 +5,7 @@
 
 package cde.core;
 
+import cde.CDECore;
 import cde.core.sound.SoundEventManager;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.particle.EntityFX;
@@ -13,11 +14,18 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
-{
+{   
     @Override
-    public void preloadTexture(String resource)
+    public void preloadTextures()
     {
-        MinecraftForgeClient.preloadTexture(resource);
+        MinecraftForgeClient.preloadTexture(CDECore.CDE_BLOCKS);
+        MinecraftForgeClient.preloadTexture(CDECore.CDE_ITEMS);
+    }
+    
+    @Override
+    public void sendToServer(Packet packet)
+    {
+        FMLClientHandler.instance().getClient().getSendQueue().addToSendQueue(packet);
     }
     
     @Override
@@ -30,11 +38,5 @@ public class ClientProxy extends CommonProxy
     public void spawnParticle(EntityFX effect)
     {
         FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
-    }
-    
-    @Override
-    public void sendToServer(Packet packet)
-    {
-        FMLClientHandler.instance().getClient().getSendQueue().addToSendQueue(packet);
     }
 }
