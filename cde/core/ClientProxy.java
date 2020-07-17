@@ -17,8 +17,8 @@ public class ClientProxy extends CommonProxy
     @Override
     public void preloadTextures()
     {
-        MinecraftForgeClient.preloadTexture(Defaults.CDE_BLOCKS);
-        MinecraftForgeClient.preloadTexture(Defaults.CDE_ITEMS);
+        MinecraftForgeClient.preloadTexture(Info.CDE_BLOCKS);
+        MinecraftForgeClient.preloadTexture(Info.CDE_ITEMS);
     }
     
     @Override
