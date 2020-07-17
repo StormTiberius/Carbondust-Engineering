@@ -17,7 +17,7 @@ public class WeightedRandom
         
         for(WeightedObject object : array)
         {
-            weightValue += object.objectWeight; 
+            weightValue += object.objectWeight;
         }
         
         return weightValue;
@@ -35,7 +35,7 @@ public class WeightedRandom
         
         return weightValue;
     }
-
+    
     public static WeightedObject getRandomObject(Random random, WeightedObject[] array, int weightValue)
     {
         int i = random.nextInt(weightValue);
@@ -60,7 +60,7 @@ public class WeightedRandom
         WeightedObject object;
         
         do
-        {   
+        {
             object = (WeightedObject)iterator.next();
             i -= object.objectWeight;
         }
