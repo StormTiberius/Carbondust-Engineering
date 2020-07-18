@@ -6,7 +6,6 @@
 package cde.network;
 
 import cde.api.INetwork;
-import cde.sound.PacketTileSound;
 import cde.sound.SoundHelper;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;

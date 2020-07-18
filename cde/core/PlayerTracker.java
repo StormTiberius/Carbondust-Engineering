@@ -6,7 +6,7 @@
 package cde.core;
 
 import cde.Carbon;
-import cde.sound.PacketTileSound;
+import cde.network.PacketTileSound;
 import cpw.mods.fml.common.IPlayerTracker;
 import net.minecraft.entity.player.EntityPlayer;
 
