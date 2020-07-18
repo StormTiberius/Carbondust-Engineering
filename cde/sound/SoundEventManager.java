@@ -6,6 +6,7 @@
 package cde.sound;
 
 import cde.Carbon;
+import cde.api.SoundSourceEvent;
 import cde.core.Config;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
@@ -14,6 +15,20 @@ import net.minecraftforge.event.world.WorldEvent.Unload;
 
 public class SoundEventManager
 {
+    @ForgeSubscribe
+    public void sem(SoundSourceEvent event)
+    {
+        switch(event.action)
+        {
+            case ADD: SoundHelper.addSoundSource(event.iss); break;
+            case REMOVE: SoundHelper.removeSoundSource(event.iss); break;
+            case PLAY: SoundHelper.playSoundSource(event.iss); break;
+            case STOP: SoundHelper.stopSoundSource(event.iss); break;
+            case MUTE: SoundHelper.muteSoundSource(event.iss); break;
+            case UNMUTE: SoundHelper.unmuteSoundSource(event.iss); break;
+        }
+    }
+    
     @ForgeSubscribe
     public void sem(Unload event)
     {
