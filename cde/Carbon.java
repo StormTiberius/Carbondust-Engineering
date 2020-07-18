@@ -7,6 +7,7 @@ package cde;
 
 import cde.network.PacketHandler;
 import cde.core.CommonProxy;
+import cde.core.Config;
 import cde.core.Info;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -33,16 +34,10 @@ public class Carbon
     @SidedProxy(clientSide = "cde.core.ClientProxy", serverSide = "cde.core.CommonProxy")
     public static CommonProxy proxy;
     
-    private static Configuration cfg;
-    
     @PreInit
     public void preInit(FMLPreInitializationEvent event)
     {
-        cfg = new Configuration(new File(event.getModConfigurationDirectory(), "cde/base.cfg"));
-        
-        cfg.load();
-        
-        cfg.save();
+        Config.initConfig(event);
     }
     
     @Init
