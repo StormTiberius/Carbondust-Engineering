@@ -16,6 +16,8 @@ public class SoundSourceEvent extends WorldEvent
         REMOVE,
         PLAY,
         STOP,
+        VOLUME,
+        PITCH,
         MUTE,
         UNMUTE,
     }
