@@ -24,6 +24,8 @@ public class SoundEventManager
             case REMOVE: SoundHelper.removeSoundSource(event.iss); break;
             case PLAY: SoundHelper.playSoundSource(event.iss); break;
             case STOP: SoundHelper.stopSoundSource(event.iss); break;
+            case VOLUME: SoundHelper.updateSoundSourceVolume(event.iss); break;
+            case PITCH: SoundHelper.updateSoundSourcePitch(event.iss); break;
             case MUTE: SoundHelper.muteSoundSource(event.iss); break;
             case UNMUTE: SoundHelper.unmuteSoundSource(event.iss); break;
         }
