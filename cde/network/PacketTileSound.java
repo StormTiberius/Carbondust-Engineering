@@ -5,13 +5,14 @@
 
 package cde.network;
 
-import cde.tile.TileEntityWithSound;
+import cde.api.ISoundSource;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class PacketTileSound extends PacketTile
 {
+    public String sourceName;
     public float volume,pitch;
     public boolean updateVolume,updatePitch,playerChangedDimension;
     
@@ -20,12 +21,13 @@ public class PacketTileSound extends PacketTile
         this.playerChangedDimension = true;
     }
     
-    public PacketTileSound(TileEntityWithSound te, boolean updateVolume, boolean updatePitch)
+    public PacketTileSound(ISoundSource iss, boolean updateVolume, boolean updatePitch)
     {
-        super(te);
+        super(iss.getSourceX(), iss.getSourceY(), iss.getSourceZ());
         
-        this.volume = te.getVolume();
-        this.pitch = te.getPitch();
+        this.sourceName = iss.getSourceName();
+        this.volume = iss.getVolume();
+        this.pitch = iss.getPitch();
         this.updateVolume = updateVolume;
         this.updatePitch = updatePitch;
     }
@@ -41,6 +43,8 @@ public class PacketTileSound extends PacketTile
     {
         super.writeData(data);
         
+        data.writeUTF(sourceName);
+        
         data.writeFloat(volume);
         data.writeFloat(pitch);
         
@@ -54,6 +58,8 @@ public class PacketTileSound extends PacketTile
     public void readData(DataInputStream data) throws IOException
     {
         super.readData(data);
+        
+        sourceName = data.readUTF();
         
         volume = data.readFloat();
         pitch = data.readFloat();
