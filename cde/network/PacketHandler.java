@@ -44,7 +44,7 @@ public class PacketHandler implements IPacketHandler
                                 sendPacketToTileEntity(tile, ep);
                                 break;
                 case PacketIds.SOUND:
-                                PacketTileSound sound = new PacketTileSound();
+                                PacketSound sound = new PacketSound();
 				sound.readData(data);
 				sendPacketToSoundHelper(sound, ep);
 				break;
@@ -86,7 +86,7 @@ public class PacketHandler implements IPacketHandler
         }
     }
     
-    private void sendPacketToSoundHelper(PacketTileSound packet, EntityPlayer player)
+    private void sendPacketToSoundHelper(PacketSound packet, EntityPlayer player)
     {
         SoundHelper.onNetworkPacketArrival(packet, player);
     }
