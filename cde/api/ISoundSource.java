@@ -9,8 +9,6 @@ import java.net.URL;
 
 public interface ISoundSource
 {
-    public abstract boolean isMuted();
-    public abstract void setMuted(boolean flag);
     public abstract boolean isPlaying();
     public abstract void setPlaying(boolean flag);
     public abstract boolean isPriority();
