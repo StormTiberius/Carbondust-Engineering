@@ -80,7 +80,7 @@ public class SoundHelper
         SoundManager.sndSystem.newSource(iss.isPriority(), iss.getSourceName(), iss.getResourceUrl(), iss.getResourceName(), iss.isLooping(), iss.getOriginX(), iss.getOriginY(), iss.getOriginZ(), iss.getAttModel(), iss.getDistOrRoll());
         SoundManager.sndSystem.setVolume(iss.getSourceName(), iss.getVolume() * soundVolume);
         SoundManager.sndSystem.setPitch(iss.getSourceName(), iss.getPitch());
-        SOURCES.put(iss.getResourceName(), iss);
+        SOURCES.put(iss.getSourceName(), iss);
     }
     
     protected static void removeSoundSource(ISoundSource iss)
