@@ -13,9 +13,6 @@ public interface ISoundSource
     public abstract void setMuted(boolean flag);
     public abstract boolean isPlaying();
     public abstract void setPlaying(boolean flag);
-    public abstract int getSourceX();
-    public abstract int getSourceY();
-    public abstract int getSourceZ();
     public abstract boolean isPriority();
     public abstract String getSourceName();
     public abstract URL getResourceUrl();
