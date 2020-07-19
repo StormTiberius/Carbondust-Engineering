@@ -138,33 +138,6 @@ public abstract class TileEntitySound extends TileEntityBase implements ISoundSo
     }
     
     @Override
-    public boolean isMuted()
-    {
-        return isMuted;
-    }
-    
-    @Override
-    public void setMuted(boolean flag)
-    {
-        if(worldObj.isRemote)
-        {
-            if(isTileAudioEnabled())
-            {
-                if(flag)
-                {
-                    MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.Type.MUTE));
-                }
-                else
-                {
-                    MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.Type.UNMUTE));
-                }
-            }
-        }
-        
-        isMuted = flag;
-    }
-    
-    @Override
     public boolean isPlaying()
     {
         return isPlaying;
