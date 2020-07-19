@@ -10,13 +10,14 @@ import cde.api.ISoundSource;
 import cde.api.SoundSourceEvent;
 import cde.core.Config;
 import java.net.URL;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import paulscode.sound.SoundSystemConfig;
 
 public abstract class TileEntitySound extends TileEntityBase implements ISoundSource
 {
     protected abstract boolean emitSound();
-        
+    
     private boolean isPlaying,isMuted,isEmitting,flag,init;
     
     private boolean isTileAudioEnabled()
@@ -41,13 +42,13 @@ public abstract class TileEntitySound extends TileEntityBase implements ISoundSo
     public void updateEntity()
     {
         if(init)
-        {   
+        {
             if(worldObj.isRemote)
             {
                 if(isTileAudioEnabled())
                 {
                     flag = emitSound();
-
+                    
                     if(isEmitting != flag)
                     {
                         isEmitting = flag;
@@ -69,7 +70,7 @@ public abstract class TileEntitySound extends TileEntityBase implements ISoundSo
             init();
         }
     }
-
+    
     @Override
     public void invalidate()
     {
@@ -83,7 +84,7 @@ public abstract class TileEntitySound extends TileEntityBase implements ISoundSo
         
         super.invalidate();
     }
-
+    
     @Override
     public void onChunkUnload()
     {
@@ -96,6 +97,22 @@ public abstract class TileEntitySound extends TileEntityBase implements ISoundSo
         }
         
         super.onChunkUnload();
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound tag)
+    {
+        super.readFromNBT(tag);
+        
+        isMuted = tag.getBoolean("isMuted");
+    }
+    
+    @Override
+    public void writeToNBT(NBTTagCompound tag)
+    {
+        super.writeToNBT(tag);
+        
+        tag.setBoolean("isMuted", isMuted);
     }
     
     @Override
