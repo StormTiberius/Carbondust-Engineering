@@ -7,7 +7,7 @@ package cde.tile;
 
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileEntityCdeBase extends TileEntity
+public abstract class TileEntityBase extends TileEntity
 {
     
 }
