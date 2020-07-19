@@ -5,12 +5,11 @@
 
 package cde.api;
 
-import net.minecraft.world.World;
-import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.event.Event;
 
-public class SoundSourceEvent extends WorldEvent
+public class SoundSourceEvent extends Event
 {
-    public static enum Action
+    public static enum Type
     {
         ADD,
         REMOVE,
@@ -23,13 +22,11 @@ public class SoundSourceEvent extends WorldEvent
     }
     
     public ISoundSource iss;
-    public Action action;
+    public Type type;
     
-    public SoundSourceEvent(World world, ISoundSource iss, Action action)
+    public SoundSourceEvent(ISoundSource iss, Type type)
     {
-        super(world);
-        
         this.iss = iss;
-        this.action = action;
+        this.type = type;
     }
 }
