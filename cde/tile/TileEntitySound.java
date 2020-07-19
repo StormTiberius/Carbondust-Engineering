@@ -11,6 +11,9 @@ import cde.api.SoundSourceEvent;
 import cde.core.Config;
 import java.net.URL;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraftforge.common.MinecraftForge;
 import paulscode.sound.SoundSystemConfig;
 
@@ -113,6 +116,25 @@ public abstract class TileEntitySound extends TileEntityBase implements ISoundSo
         super.writeToNBT(tag);
         
         tag.setBoolean("isMuted", isMuted);
+    }
+    
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound tag = new NBTTagCompound();
+        
+        writeToNBT(tag);
+        
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 4, tag);
+    }
+    
+    @Override
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
+    {
+        if(worldObj.isRemote)
+        {
+            readFromNBT(pkt.customParam1);
+        }
     }
     
     @Override
