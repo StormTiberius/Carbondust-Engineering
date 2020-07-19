@@ -18,7 +18,7 @@ public class SoundEventManager
     @ForgeSubscribe
     public void sem(SoundSourceEvent event)
     {
-        switch(event.action)
+        switch(event.type)
         {
             case ADD: SoundHelper.addSoundSource(event.iss); break;
             case REMOVE: SoundHelper.removeSoundSource(event.iss); break;
