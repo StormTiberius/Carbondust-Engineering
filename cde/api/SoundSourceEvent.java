@@ -17,8 +17,6 @@ public class SoundSourceEvent extends Event
         STOP,
         VOLUME,
         PITCH,
-        MUTE,
-        UNMUTE,
     }
     
     public ISoundSource iss;
