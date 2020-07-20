@@ -34,4 +34,7 @@ public class Blocks
     public static ItemStack blockRuby;
     public static ItemStack blockJade;
     public static ItemStack blockSapphire;
+    
+    public static ItemStack drumIron;
+    public static ItemStack drumSteel;
 }
