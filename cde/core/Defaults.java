@@ -18,5 +18,7 @@ public class Defaults
     public static final int BLOCK_ID_G = 188;
     public static final int BLOCK_ID_H = 189;
     
+    public static final int ITEM_ID_MATERIAL = 500;
+    
     public static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
 }
