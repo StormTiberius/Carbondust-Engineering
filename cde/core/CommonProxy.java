@@ -15,7 +15,7 @@ public class CommonProxy
 {
     public void preloadTextures(){}
     public void sendToServer(Packet packet){}
-    public void setupSound(){}
+    public void initSound(){}
     public void spawnParticle(EntityFX effect){}
     
     public void sendNetworkPacketToPlayer(EntityPlayer entityPlayer, Packet packet)
