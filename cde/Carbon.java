@@ -21,8 +21,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import java.io.File;
-import net.minecraftforge.common.Configuration;
 
 @Mod(modid="CDE", name="CarbonDustEngineering", version=Info.VERSION, dependencies = "required-after:Forge@[6.6.2.534,);required-after:IC2;required-after:BuildCraft|Core;required-after:Forestry;required-after:Railcraft;required-after:RedPowerCore;required-after:AppliedEnergistics")
 @NetworkMod(channels = { "CDE" }, packetHandler = PacketHandler.class, clientSideRequired=true, serverSideRequired=true)
@@ -37,7 +35,7 @@ public class Carbon
     @PreInit
     public void preInit(FMLPreInitializationEvent event)
     {
-        Config.initConfig(event);
+        Config.initConfig(event.getModConfigurationDirectory());
     }
     
     @Init
