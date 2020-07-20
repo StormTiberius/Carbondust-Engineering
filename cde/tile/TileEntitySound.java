@@ -25,7 +25,7 @@ public abstract class TileEntitySound extends TileEntityBase implements ISoundSo
     
     private boolean isTileAudioEnabled()
     {
-        return Config.isAudioEnabled() && !getResourceName().isEmpty();
+        return Config.isAudioEnabled() && !getResourceName().isEmpty() && !isMuted();
     }
     
     private void init()
@@ -134,6 +134,39 @@ public abstract class TileEntitySound extends TileEntityBase implements ISoundSo
         if(worldObj.isRemote)
         {
             readFromNBT(pkt.customParam1);
+        }
+    }
+    
+    @Override
+    public boolean isMuted()
+    {
+        return isMuted;
+    }
+    
+    @Override
+    public void setMuted(boolean flag)
+    {
+        isMuted = flag;
+        
+        if(worldObj.isRemote)
+        {
+            if(flag)
+            {
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.Type.REMOVE));
+            }
+            else
+            {
+                MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.Type.ADD));
+
+                if(emitSound())
+                {
+                    MinecraftForge.EVENT_BUS.post(new SoundSourceEvent(this, SoundSourceEvent.Type.PLAY));
+                }
+            }
+        }
+        else
+        {
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
     }
     
