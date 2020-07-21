@@ -7,7 +7,7 @@ package cde.core;
 
 public class Namings
 {
-        public static final String[] INTERNAL_PART_ITEM_NAMES =
+    public static final String[] INTERNAL_PART_ITEM_NAMES =
     {
         "ingotCopper",
         "ingotTin",
@@ -83,7 +83,7 @@ public class Namings
         "circuitBoardDouble",
         "circuitBoardMulti",
         "electricMotor",
-        "electricWire"
+        "electricWire",
     };
     
     public static final String[] EXTERNAL_PART_ITEM_NAMES =
@@ -116,7 +116,7 @@ public class Namings
         "Saltpeter Dust",
         "Quartz Dust",
         "Fertilizer",
-
+        
         "Iron Nugget",
         "Copper Nugget",
         "Tin Nugget",
@@ -126,7 +126,7 @@ public class Namings
         "Bronze Nugget",
         "Brass Nugget",
         "Steel Nugget",
-
+        
         "Washed Iron Ore",
         "Washed Gold Ore",
         "Washed Copper Ore",
@@ -148,7 +148,7 @@ public class Namings
         "Ruby",
         "Jade",
         "Sapphire",
-       
+        
         "Coal Coke",
         
         "Iron Plate",
@@ -162,7 +162,7 @@ public class Namings
         "Double-Layer Circuit Board",
         "Multi-Layer Circuit Board",
         "Electric Motor",
-        "Electric Wire"
+        "Electric Wire",
     };
     
     public static final String[] INTERNAL_ORE_BLOCK_NAMES =
@@ -178,9 +178,9 @@ public class Namings
         "oreApatite",
         "oreRuby",
         "oreJade",
-        "oreSapphire"
+        "oreSapphire",
     };
-        
+    
     public static final String[] EXTERNAL_ORE_BLOCK_NAMES =
     {
         "Copper Ore",
@@ -194,7 +194,7 @@ public class Namings
         "Apatite Ore",
         "Ruby Ore",
         "Jade Ore",
-        "Sapphire Ore"
+        "Sapphire Ore",
     };
     
     public static final String[] INTERNAL_STORAGE_BLOCK_NAMES =
@@ -210,9 +210,9 @@ public class Namings
         "blockSteel",
         "blockRuby",
         "blockJade",
-        "blockSapphire"
+        "blockSapphire",
     };
-        
+    
     public static final String[] EXTERNAL_STORAGE_BLOCK_NAMES =
     {
         "Block of Copper",
@@ -226,17 +226,17 @@ public class Namings
         "Block of Steel",
         "Block of Ruby",
         "Block of Jade",
-        "Block of Sapphire"
+        "Block of Sapphire",
     };
     
     public static final String[] INTERNAL_BUILD_BLOCK_NAMES =
     {
-        "blockConcrete"
+        "blockConcrete",
     };
-            
+    
     public static final String[] EXTERNAL_BUILD_BLOCK_NAMES =
     {
-        "Block of Concrete"
+        "Block of Concrete",
     };
     
     public static final String[] INTERNAL_MACHINE_ALPHA_BLOCK_NAMES =
@@ -248,7 +248,7 @@ public class Namings
         "cdeMachineMixer",
         "cdeMachineSolarPanel",
         "cdeMachineTransformer",
-        "cdeMachineSmokestack"
+        "cdeMachineSmokestack",
     };
     
     public static final String[] EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES =
@@ -260,7 +260,7 @@ public class Namings
         "Mixer",
         "Solar Panel",
         "Transformer",
-        "Smokestack"
+        "Smokestack",
     };
     
     public static final String INTERNAL_GOGGLES_NAME = "cdeGoggles";
