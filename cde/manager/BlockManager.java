@@ -12,7 +12,7 @@ import cde.core.Namings;
 import cde.core.block.BlockOre;
 import cde.core.block.BlockResource;
 import cde.core.item.ItemOre;
-import cde.core.item.ItemStorage;
+import cde.core.item.ItemResource;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
@@ -78,7 +78,7 @@ public class BlockManager
         {
             resourceBlock = (new BlockResource(id)).setHardness(3.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setBlockName("cdeResourceBlock").setCreativeTab(Carbon.TAB_RESOURCES);
             
-            GameRegistry.registerBlock(resourceBlock, ItemStorage.class, "cdeResourceBlock");
+            GameRegistry.registerBlock(resourceBlock, ItemResource.class, "cdeResourceBlock");
             
             MinecraftForge.setBlockHarvestLevel(resourceBlock, "pickaxe", 1);
             
