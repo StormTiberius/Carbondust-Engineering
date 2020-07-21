@@ -10,10 +10,12 @@ import cde.core.ClientTickHandler;
 import cde.network.PacketHandler;
 import cde.core.CommonProxy;
 import cde.core.Config;
-import cde.core.EventManager;
-import cde.core.FuelManager;
+import cde.manager.EventManager;
+import cde.manager.FuelManager;
 import cde.core.Info;
 import cde.core.PlayerTracker;
+import cde.manager.BlockManager;
+import cde.manager.ItemManager;
 import cde.tab.CreativeTabResources;
 import cde.tab.CreativeTabDrums;
 import cde.tab.CreativeTabMachines;
@@ -73,8 +75,8 @@ public class Carbon
         
         Config.initConfig(event.getModConfigurationDirectory());
         
-        // initBlocks();
-        // initItems();
+        BlockManager.init();
+        ItemManager.init();
         
         if(Config.isAudioEnabled())
         {
