@@ -9,7 +9,7 @@ import cde.Carbon;
 import cde.api.Materials;
 import cde.core.Config;
 import cde.core.Namings;
-import cde.core.item.ItemMaterial;
+import cde.item.ItemMaterial;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.Item;
