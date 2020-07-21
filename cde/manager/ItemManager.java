@@ -31,7 +31,7 @@ public class ItemManager
             GameRegistry.registerItem(materialItem, "cdeMaterialItem");
             
             for(int i = 0; i < Namings.EXTERNAL_PART_ITEM_NAMES.length; i++)
-            {              
+            {
                 ItemStack is = new ItemStack(materialItem.itemID, 1, i);
                 
                 switch(i)
