@@ -49,13 +49,14 @@ public class Materials
     public static ItemStack nuggetBrass;
     public static ItemStack nuggetSteel;
     
+    public static ItemStack fuelCoke;
+    public static ItemStack fuelUranium;
+    
     public static ItemStack gemQuartz;
     public static ItemStack gemApatite;
     public static ItemStack gemRuby;
     public static ItemStack gemJade;
     public static ItemStack gemSapphire;
-    
-    public static ItemStack fuelCoke;
     
     public static ItemStack plateIron;
     public static ItemStack plateGold;
