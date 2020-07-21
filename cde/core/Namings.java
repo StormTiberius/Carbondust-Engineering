@@ -18,6 +18,7 @@ public class Namings
         "ingotBronze",
         "ingotBrass",
         "ingotSteel",
+        
         "fuelPeat",
         "fuelBituminousPeat",
         
@@ -48,29 +49,14 @@ public class Namings
         "nuggetBrass",
         "nuggetSteel",
         
-        "washedIron",
-        "washedGold",
-        "washedCopper",
-        "washedTin",
-        "washedSilver",
-        "washedLead",
-        "washedUranium",
-        
-        "crushedIron",
-        "crushedGold",
-        "crushedCopper",
-        "crushedTin",
-        "crushedSilver",
-        "crushedLead",
-        "crushedUranium",
+        "fuelCoke",
+        "fuelUranium",
         
         "gemQuartz",
         "gemApatite",
         "gemRuby",
         "gemJade",
         "gemSapphire",
-        
-        "fuelCoke",
         
         "plateIron",
         "plateGold",
@@ -97,6 +83,7 @@ public class Namings
         "Bronze Ingot",
         "Brass Ingot",
         "Steel Ingot",
+        
         "Peat",
         "Bituminous Peat",
         
@@ -127,29 +114,14 @@ public class Namings
         "Brass Nugget",
         "Steel Nugget",
         
-        "Washed Iron Ore",
-        "Washed Gold Ore",
-        "Washed Copper Ore",
-        "Washed Tin Ore",
-        "Washed Silver Ore",
-        "Washed Lead Ore",
-        "Washed Uranium Ore",
-        
-        "Crushed Iron Ore",
-        "Crushed Gold Ore",
-        "Crushed Copper Ore",
-        "Crushed Tin Ore",
-        "Crushed Silver Ore",
-        "Crushed Lead Ore",
-        "Crushed Uranium Ore",
+        "Coal Coke",
+        "Uranium Ore",
         
         "Quartz",
         "Apatite",
         "Ruby",
         "Jade",
         "Sapphire",
-        
-        "Coal Coke",
         
         "Iron Plate",
         "Gold Plate",
@@ -229,26 +201,14 @@ public class Namings
         "Block of Sapphire",
     };
     
-    public static final String[] INTERNAL_BUILD_BLOCK_NAMES =
-    {
-        "blockConcrete",
-    };
-    
-    public static final String[] EXTERNAL_BUILD_BLOCK_NAMES =
-    {
-        "Block of Concrete",
-    };
-    
     public static final String[] INTERNAL_MACHINE_ALPHA_BLOCK_NAMES =
     {
         "cdeMachineGenerator",
         "cdeMachineTurbine",
         "cdeMachineHeater",
         "cdeMachinePump",
-        "cdeMachineMixer",
         "cdeMachineSolarPanel",
         "cdeMachineTransformer",
-        "cdeMachineSmokestack",
     };
     
     public static final String[] EXTERNAL_MACHINE_ALPHA_BLOCK_NAMES =
@@ -257,15 +217,19 @@ public class Namings
         "Turbine",
         "Heater",
         "Pump",
-        "Mixer",
         "Solar Panel",
         "Transformer",
-        "Smokestack",
     };
-    
-    public static final String INTERNAL_GOGGLES_NAME = "cdeGoggles";
-    public static final String EXTERNAL_GOGGLES_NAME = "Nightvision Goggles";
     
     public static final String INTERNAL_GRATE_NAME = "cdeGrate";
     public static final String EXTERNAL_GRATE_NAME= "Grate";
+    
+    public static final String INTERNAL_SPEAKER_NAME = "cdeSpeaker";
+    public static final String EXTERNAL_SPEAKER_NAME= "Speaker";
+    
+    public static final String INTERNAL_SMOKESTACK_NAME = "cdeSmokestack";
+    public static final String EXTERNAL_SMOKESTACK_NAME= "Smokestack";
+    
+    public static final String INTERNAL_GOGGLES_NAME = "cdeGoggles";
+    public static final String EXTERNAL_GOGGLES_NAME = "Nightvision Goggles";
 }
