@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core;
+package cde.manager;
 
 import java.util.Random;
 import net.minecraft.block.Block;
