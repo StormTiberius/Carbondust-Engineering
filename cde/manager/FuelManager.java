@@ -3,7 +3,7 @@
  * @author StormTiberius
  */
 
-package cde.core;
+package cde.manager;
 
 import cpw.mods.fml.common.IFuelHandler;
 import net.minecraft.item.ItemStack;
