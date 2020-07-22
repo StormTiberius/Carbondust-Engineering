@@ -11,8 +11,6 @@ import java.util.Map;
 
 public class Defaults
 {
-    public static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
-    
     // BLOCK IDS
     public static final int BLOCK_ID_ORES = 180;
     public static final int BLOCK_ID_RESOURCES = 181;
@@ -152,11 +150,11 @@ public class Defaults
     
     // WORLD GEN DEFAULTS
     public static final int[][] ORE_GEN_DEFAULTS =
-    {    
+    {
         new int[]{1,10,15,10,70},
         new int[]{1,6,25,0,40},
         new int[]{1,8,4,0,32},
-        new int[]{1,8,4,10,35},        
+        new int[]{1,8,4,10,35},
         new int[]{1,3,20,0,64},
         new int[]{1,6,1,10,16},
         new int[]{1,6,1,16,32},
@@ -164,15 +162,15 @@ public class Defaults
         new int[]{1,6,1,0,64},
         new int[]{1,7,2,0,48},
         new int[]{1,7,2,0,48},
-        new int[]{1,7,2,0,48}
+        new int[]{1,7,2,0,48},
     };
     
     public static final int[][] ORE_GEN_DEFAULTS_TERRENE =
-    {    
+    {
         new int[]{1,10,30,20,140},
         new int[]{1,6,50,0,80},
         new int[]{1,8,8,0,64},
-        new int[]{1,8,8,20,70},        
+        new int[]{1,8,8,20,70},
         new int[]{1,3,40,0,128},
         new int[]{1,6,2,20,32},
         new int[]{1,6,2,32,64},
@@ -180,64 +178,75 @@ public class Defaults
         new int[]{1,6,2,0,128},
         new int[]{1,7,4,0,96},
         new int[]{1,7,4,0,96},
-        new int[]{1,7,4,0,96}
+        new int[]{1,7,4,0,96},
     };
+    
+    public static final int[] WEATHER_DURATIONS = {12000, 3600, 168000, 12000, 12000, 12000, 168000, 12000, 0, 0};
     
     // LIQUID DRUM CAPACITY DEFAULTS
     public static final int DRUM_CAPACITY_IRON = 100000;
     public static final int DRUM_CAPACITY_STEEL = 200000;
     
-    public static final String[] PAINT_BRUSH_NAMES = {"Black Paint Brush",
-                                                      "Red Paint Brush",
-                                                      "Green Paint Brush",
-                                                      "Brown Paint Brush",
-                                                      "Blue Paint Brush",
-                                                      "Purple Paint Brush",
-                                                      "Cyan Paint Brush",
-                                                      "Light Gray Paint Brush",
-                                                      "Gray Paint Brush",
-                                                      "Pink Paint Brush",
-                                                      "Lime Paint Brush",
-                                                      "Yellow Paint Brush",
-                                                      "Light Blue Paint Brush",
-                                                      "Magenta Paint Brush",
-                                                      "Orange Paint Brush",
-                                                      "White Paint Brush"};
+    public static final String[] PAINT_BRUSH_NAMES =
+    {
+        "Black Paint Brush",
+        "Red Paint Brush",
+        "Green Paint Brush",
+        "Brown Paint Brush",
+        "Blue Paint Brush",
+        "Purple Paint Brush",
+        "Cyan Paint Brush",
+        "Light Gray Paint Brush",
+        "Gray Paint Brush",
+        "Pink Paint Brush",
+        "Lime Paint Brush",
+        "Yellow Paint Brush",
+        "Light Blue Paint Brush",
+        "Magenta Paint Brush",
+        "Orange Paint Brush",
+        "White Paint Brush",
+    };
     
-    public static final String[] COLOR_NAMES = {"Black",
-                                                "Red",
-                                                "Green",
-                                                "Brown",
-                                                "Blue",
-                                                "Purple",
-                                                "Cyan",
-                                                "Light Gray",
-                                                "Gray",
-                                                "Pink",
-                                                "Lime",
-                                                "Yellow",
-                                                "Light Blue",
-                                                "Magenta",
-                                                "Orange",
-                                                "White"};
+    public static final String[] COLOR_NAMES =
+    {
+        "Black",
+        "Red",
+        "Green",
+        "Brown",
+        "Blue",
+        "Purple",
+        "Cyan",
+        "Light Gray",
+        "Gray",
+        "Pink",
+        "Lime",
+        "Yellow",
+        "Light Blue",
+        "Magenta",
+        "Orange",
+        "White",
+    };
     
-    public static final String[] DYE_ORE_DICTIONARY_NAMES = {"dyeBlack",
-                                                             "dyeRed",
-                                                             "dyeGreen",   
-                                                             "dyeBrown",                                    
-                                                             "dyeBlue",                                            
-                                                             "dyePurple",
-                                                             "dyeCyan",
-                                                             "dyeLightGray",
-                                                             "dyeGray",
-                                                             "dyePink",
-                                                             "dyeLime",
-                                                             "dyeYellow",
-                                                             "dyeLightBlue",
-                                                             "dyeMagenta",
-                                                             "dyeOrange",
-                                                             "dyeWhite"};
-
+    public static final String[] DYE_ORE_DICTIONARY_NAMES =
+    {
+        "dyeBlack",
+        "dyeRed",
+        "dyeGreen",
+        "dyeBrown",
+        "dyeBlue",
+        "dyePurple",
+        "dyeCyan",
+        "dyeLightGray",
+        "dyeGray",
+        "dyePink",
+        "dyeLime",
+        "dyeYellow",
+        "dyeLightBlue",
+        "dyeMagenta",
+        "dyeOrange",
+        "dyeWhite",
+    };
+    
     public static final Color COLOR_BLACK = new Color(26, 26, 26);
     public static final Color COLOR_RED = new Color(153, 51, 51);
     public static final Color COLOR_GREEN = new Color(102, 128, 51);
@@ -255,41 +264,45 @@ public class Defaults
     public static final Color COLOR_ORANGE = new Color(217, 128, 51);
     public static final Color COLOR_WHITE = new Color(255, 255, 255);
     
-    public static final Color[] MINECRAFT_COLORS = {COLOR_BLACK,
-                                                    COLOR_RED,
-                                                    COLOR_GREEN,
-                                                    COLOR_BROWN,
-                                                    COLOR_BLUE,
-                                                    COLOR_PURPLE,
-                                                    COLOR_CYAN,
-                                                    COLOR_LIGHT_GRAY,
-                                                    COLOR_GRAY,
-                                                    COLOR_PINK,
-                                                    COLOR_LIME,
-                                                    COLOR_YELLOW,
-                                                    COLOR_LIGHT_BLUE,
-                                                    COLOR_MAGENTA,
-                                                    COLOR_ORANGE,
-                                                    COLOR_WHITE};
+    public static final Color[] MINECRAFT_COLORS =
+    {
+        COLOR_BLACK,
+        COLOR_RED,
+        COLOR_GREEN,
+        COLOR_BROWN,
+        COLOR_BLUE,
+        COLOR_PURPLE,
+        COLOR_CYAN,
+        COLOR_LIGHT_GRAY,
+        COLOR_GRAY,
+        COLOR_PINK,
+        COLOR_LIME,
+        COLOR_YELLOW,
+        COLOR_LIGHT_BLUE,
+        COLOR_MAGENTA,
+        COLOR_ORANGE,
+        COLOR_WHITE,
+    };
     
     public static final Map<String, Color> MC_COLORS = ImmutableMap.<String, Color>builder()
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[0], COLOR_BLACK)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[1], COLOR_RED)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[2], COLOR_GREEN)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[3], COLOR_BROWN)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[4], COLOR_BLUE)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[5], COLOR_PURPLE)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[6], COLOR_CYAN)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[7], COLOR_LIGHT_GRAY)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[8], COLOR_GRAY)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[9], COLOR_PINK)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[10], COLOR_LIME)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[11], COLOR_YELLOW)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[12], COLOR_LIGHT_BLUE)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[13], COLOR_MAGENTA)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[14], COLOR_ORANGE)
-                                                                                            .put(DYE_ORE_DICTIONARY_NAMES[15], COLOR_WHITE).build();
-
+        .put(DYE_ORE_DICTIONARY_NAMES[0], COLOR_BLACK)
+        .put(DYE_ORE_DICTIONARY_NAMES[1], COLOR_RED)
+        .put(DYE_ORE_DICTIONARY_NAMES[2], COLOR_GREEN)
+        .put(DYE_ORE_DICTIONARY_NAMES[3], COLOR_BROWN)
+        .put(DYE_ORE_DICTIONARY_NAMES[4], COLOR_BLUE)
+        .put(DYE_ORE_DICTIONARY_NAMES[5], COLOR_PURPLE)
+        .put(DYE_ORE_DICTIONARY_NAMES[6], COLOR_CYAN)
+        .put(DYE_ORE_DICTIONARY_NAMES[7], COLOR_LIGHT_GRAY)
+        .put(DYE_ORE_DICTIONARY_NAMES[8], COLOR_GRAY)
+        .put(DYE_ORE_DICTIONARY_NAMES[9], COLOR_PINK)
+        .put(DYE_ORE_DICTIONARY_NAMES[10], COLOR_LIME)
+        .put(DYE_ORE_DICTIONARY_NAMES[11], COLOR_YELLOW)
+        .put(DYE_ORE_DICTIONARY_NAMES[12], COLOR_LIGHT_BLUE)
+        .put(DYE_ORE_DICTIONARY_NAMES[13], COLOR_MAGENTA)
+        .put(DYE_ORE_DICTIONARY_NAMES[14], COLOR_ORANGE)
+        .put(DYE_ORE_DICTIONARY_NAMES[15], COLOR_WHITE)
+        .build();
+    
     public static final Color COLOR_MEAD = new Color(220,190,115);
     public static final Color COLOR_COOLANT = new Color(50,210,255);
     public static final Color COLOR_BIOMASS = new Color(105,200,60);
