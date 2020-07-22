@@ -5,6 +5,9 @@
 
 package cde;
 
+import cde.api.Blocks;
+import cde.api.Items;
+import cde.api.Materials;
 import cde.command.CommandCarbon;
 import cde.core.ClientTickHandler;
 import cde.network.PacketHandler;
@@ -97,6 +100,11 @@ public class Carbon
     @PostInit
     public void postInit(FMLPostInitializationEvent event)
     {
+        // Remove these when no longer null
+        Blocks.drumIron = Blocks.oreApatite;
+        Blocks.machineGenerator = Blocks.oreCopper;
+        Items.equipmentUtilityHeadGoggles = Materials.dustBrass;
+        
         processIMCMessages(FMLInterModComms.fetchRuntimeMessages(this));
     }
     
@@ -114,7 +122,7 @@ public class Carbon
             {
                 if(message.key.contains("add-oregen-for-world"))
                 {
-                    // WorldGenModule.addWorldGenConfig(message.getStringValue());
+                    Config.addWorldGen(message.getStringValue());
                 }
             }
         }
