@@ -27,7 +27,7 @@ public class Config
     private static boolean isParticlesEnabled;
     private static int networkUpdateRate;
     
-    public static void initConfig(File file)
+    public static void init(File file)
     {
         modConfigDir = file;
         
@@ -127,5 +127,10 @@ public class Config
     public static int getNetworkUpdateRate()
     {
         return networkUpdateRate;
+    }
+    
+    public static long getNetworkUpdateTime()
+    {
+        return getNetworkUpdateRate() * 1000 / 20;
     }
 }
