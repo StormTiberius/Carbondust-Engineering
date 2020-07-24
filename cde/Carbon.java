@@ -19,6 +19,7 @@ import cde.core.Info;
 import cde.core.PlayerTracker;
 import cde.manager.BlockManager;
 import cde.manager.ItemManager;
+import cde.manager.RecipeManager;
 import cde.tab.CreativeTabResources;
 import cde.tab.CreativeTabDrums;
 import cde.tab.CreativeTabMachines;
@@ -76,7 +77,7 @@ public class Carbon
         LOGGER.info("Copyright (c) StormTiberius, 2018");
         LOGGER.info("http://www.github.com/StormTiberius/Carbondust-Engineering");
         
-        Config.initConfig(event.getModConfigurationDirectory());
+        Config.init(event.getModConfigurationDirectory());
         
         BlockManager.init();
         ItemManager.init();
@@ -105,6 +106,9 @@ public class Carbon
         Blocks.machineGenerator = Blocks.oreCopper;
         Items.equipmentUtilityHeadGoggles = Materials.dustBrass;
         
+        RecipeManager.init();
+        
+        Config.addWorldGen("Overworld");
         processIMCMessages(FMLInterModComms.fetchRuntimeMessages(this));
     }
     
