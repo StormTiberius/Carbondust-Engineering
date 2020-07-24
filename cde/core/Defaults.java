@@ -121,27 +121,27 @@ public class Defaults
     public static final int TEXTURE_MATERIAL_NUGGET_BRASS = 39;
     public static final int TEXTURE_MATERIAL_NUGGET_STEEL = 40;
     
-    public static final int TEXTURE_MATERIAL_FUEL_COKE = 96;
-    public static final int TEXTURE_MATERIAL_FUEL_URANIUM = 96;
+    public static final int TEXTURE_MATERIAL_FUEL_COKE = 48;
+    public static final int TEXTURE_MATERIAL_FUEL_URANIUM = 49;
     
-    public static final int TEXTURE_MATERIAL_GEM_QUARTZ = 83;
-    public static final int TEXTURE_MATERIAL_GEM_APATITE = 84;
-    public static final int TEXTURE_MATERIAL_GEM_RUBY = 80;
-    public static final int TEXTURE_MATERIAL_GEM_JADE = 81;
-    public static final int TEXTURE_MATERIAL_GEM_SAPPHIRE = 82;
+    public static final int TEXTURE_MATERIAL_GEM_QUARTZ = 64;
+    public static final int TEXTURE_MATERIAL_GEM_APATITE = 65;
+    public static final int TEXTURE_MATERIAL_GEM_RUBY = 66;
+    public static final int TEXTURE_MATERIAL_GEM_JADE = 67;
+    public static final int TEXTURE_MATERIAL_GEM_SAPPHIRE = 68;
     
-    public static final int TEXTURE_MATERIAL_PLATE_IRON = 112;
-    public static final int TEXTURE_MATERIAL_PLATE_GOLD = 113;
-    public static final int TEXTURE_MATERIAL_PLATE_COPPER = 114;
-    public static final int TEXTURE_MATERIAL_PLATE_TIN = 115;
-    public static final int TEXTURE_MATERIAL_PLATE_BRONZE = 116;
-    public static final int TEXTURE_MATERIAL_PLATE_STEEL = 117;
+    public static final int TEXTURE_MATERIAL_PLATE_IRON = 80;
+    public static final int TEXTURE_MATERIAL_PLATE_GOLD = 81;
+    public static final int TEXTURE_MATERIAL_PLATE_COPPER = 82;
+    public static final int TEXTURE_MATERIAL_PLATE_TIN = 83;
+    public static final int TEXTURE_MATERIAL_PLATE_BRONZE = 84;
+    public static final int TEXTURE_MATERIAL_PLATE_STEEL = 85;
     
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_SINGLE = 128;
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE = 129;
-    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI = 130;
-    public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 131;
-    public static final int TEXTURE_MATERIAL_ELECTRIC_WIRE = 132;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_SINGLE = 96;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_DOUBLE = 97;
+    public static final int TEXTURE_MATERIAL_CIRCUIT_BOARD_MULTI = 98;
+    public static final int TEXTURE_MATERIAL_ELECTRIC_MOTOR = 99;
+    public static final int TEXTURE_MATERIAL_ELECTRIC_WIRE = 100;
     
     // FUEL VALUES
     public static final int PEAT_FUEL_VALUE = 2000;
