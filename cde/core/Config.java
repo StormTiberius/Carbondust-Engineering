@@ -23,6 +23,10 @@ public class Config
     
     private static File modConfigDir;
     
+    private static boolean isAudioEnabled,isAlternateRainSoundsEnabled,isAlternateExplosionSoundsEnabled;
+    private static boolean isParticlesEnabled;
+    private static int networkUpdateRate;
+    
     public static void initConfig(File file)
     {
         modConfigDir = file;
@@ -35,9 +39,19 @@ public class Config
         ITEM_IDS.put("Materials", cfg.get(Configuration.CATEGORY_ITEM, "Materials", Defaults.ITEM_ID_MATERIALS).getInt());
         cfg.save();
         
-        // TERRENE
-        cfg = new Configuration(new File(file, "cde/terrene.cfg"));
+        // CORE
+        cfg = new Configuration(new File(file, "cde/core.cfg"));
         cfg.load();
+        networkUpdateRate = cfg.get(Configuration.CATEGORY_GENERAL, "networkUpdateRate", 40, "Network Update Rate").getInt();
+        cfg.save();
+        
+        // OPTIONS
+        cfg = new Configuration(new File(file, "cde/options.cfg"));
+        cfg.load();
+        isAudioEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "Audio", true, "Enable/Disable CDE Audio").getBoolean(true);
+        isAlternateRainSoundsEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "rain", true, "MC 1.9 Rain Sounds").getBoolean(true);
+        isAlternateExplosionSoundsEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "explosion", true, "Alternate Explosion Sounds").getBoolean(true);
+        isParticlesEnabled = cfg.get(Configuration.CATEGORY_GENERAL, "particles", true, "Enable/Disable CDE Particles").getBoolean(true);
         cfg.save();
     }
     
@@ -92,16 +106,26 @@ public class Config
     
     public static boolean isAudioEnabled()
     {
-        return true;
+        return isAudioEnabled;
     }
     
     public static boolean isAlternateRainSoundsEnabled()
     {
-        return true;
+        return isAlternateRainSoundsEnabled;
     }
     
     public static boolean isAlternateExplosionSoundsEnabled()
     {
-        return true;
+        return isAlternateExplosionSoundsEnabled;
+    }
+    
+    public static boolean isParticlesEneabled()
+    {
+        return isParticlesEnabled;
+    }
+    
+    public static int getNetworkUpdateRate()
+    {
+        return networkUpdateRate;
     }
 }
